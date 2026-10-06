@@ -4,7 +4,10 @@
     {"name": "weather", "cron": "7 0 * * *", "estimatedSubrequests": 29, "members": ["weather.alerts", "forecast.bucuresti", "events.odeon", "cinema.bucuresti.today"]},
     {"name": "news", "cron": "14 0 * * *", "estimatedSubrequests": 35, "members": ["feed.munca", "feed.stiri", "feed.sanatate", "feed.educatie", "feed.justitie"]},
     {"name": "legislation", "cron": "21 0 * * *", "estimatedSubrequests": 33, "members": ["law.search.default", "law.search.codcivil", "lawyers.default", "knowledge.company.default"]},
-    {"name": "registers", "cron": "28 0 * * *", "estimatedSubrequests": 31, "members": ["directory.schools.page0", "catalog.category.bani", "catalog.category.sanatate", "feed.agricultura"]}
+    {"name": "registers", "cron": "28 0 * * *", "estimatedSubrequests": 30, "members": ["directory.schools.page0", "catalog.category.bani", "catalog.category.sanatate"]}
+  ],
+  "ghRelayed": [
+    {"family": "feed.agricultura", "reason": "Sursa afir.ro respinge conexiunile venite din rețeaua Cloudflare Workers; reîmprospătarea o face un intermediar extern care preia fluxul și articolele cerute de ruta /api/seed/afir și le predă stocării D1, în afara tururilor Worker."}
   ],
   "seedBacked": [
     {"family": "transport", "reason": "Arhiva GTFS a transportului public se parsează integral la pornire; reîmprospătarea ei zilnică ar depăși plafonul gratuit de subrequest-uri și de CPU pe invocare."},

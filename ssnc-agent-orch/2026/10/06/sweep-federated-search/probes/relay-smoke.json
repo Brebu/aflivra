@@ -1,0 +1,26 @@
+{
+ "startedAt": "2026-10-06T19:03:38.057Z",
+ "authGate": "401 fără token / cu token greșit; 400 pe JSON invalid",
+ "firstWant": [
+  "https://www.afir.ro/comunicate/170-de-milioane-euro-pentru-exploatatiile-tinerilor-fermieri/",
+  "https://www.afir.ro/comunicate/model-sgb-pentru-acordarea-unei-prefinantari-beneficiarilor-privati-ai-schemei-de-energie/",
+  "https://www.afir.ro/comunicate/depunere-in-curs-a-proiectelor-in-energie-a-entitatilor-publice/",
+  "https://www.afir.ro/comunicate/650-milioane-euro-pentru-producerea-si-stocarea-energiei-regenerabile-de-catre-entitatile-publice/",
+  "https://www.afir.ro/comunicate/informatii-sesiune-energie-regenerabila-solicitanti-publici/",
+  "https://www.afir.ro/comunicate/finantare-nerambursabila-pentru-tineri-fermieri/",
+  "https://www.afir.ro/comunicate/consultare-publica-privind-finantarea-investitiilor-dr-21/",
+  "https://www.afir.ro/comunicate/conditiile-finantarii-acordate-entitatilor-publice-pentru-producerea-si-stocarea-energiei-electrice/"
+ ],
+ "articlesStored": [
+  "https://www.afir.ro/comunicate/170-de-milioane-euro-pentru-exploatatiile-tinerilor-fermieri/",
+  "https://www.afir.ro/comunicate/model-sgb-pentru-acordarea-unei-prefinantari-beneficiarilor-privati-ai-schemei-de-energie/",
+  "https://www.afir.ro/comunicate/depunere-in-curs-a-proiectelor-in-energie-a-entitatilor-publice/",
+  "https://www.afir.ro/comunicate/650-milioane-euro-pentru-producerea-si-stocarea-energiei-regenerabile-de-catre-entitatile-publice/",
+  "https://www.afir.ro/comunicate/informatii-sesiune-energie-regenerabila-solicitanti-publici/",
+  "https://www.afir.ro/comunicate/finantare-nerambursabila-pentru-tineri-fermieri/",
+  "https://www.afir.ro/comunicate/consultare-publica-privind-finantarea-investitiilor-dr-21/",
+  "https://www.afir.ro/comunicate/conditiile-finantarii-acordate-entitatilor-publice-pentru-producerea-si-stocarea-energiei-electrice/"
+ ],
+ "readerServe": "cached / 2026-10-06T19:03:38.479Z",
+ "feedServe": "cached · 8 comunicate"
+}

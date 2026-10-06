@@ -3,7 +3,7 @@ import {env} from 'cloudflare:workers';
 import {withLiveContext} from './request-context';
 import {bnrLoader,weatherLoader,companyLoader,catalogLoader} from './adapters';
 import {alertsLoader,forecastLoader} from './weather';
-import {feedLoader,afirLoader} from './feeds';
+import {feedLoader} from './feeds';
 import {lawLoader,codeTopics} from './legal';
 import {lawyerLoader} from './lawyers';
 import {knowledgeLoader} from './knowledge';
@@ -36,7 +36,6 @@ const memberLoaders:Record<string,()=>Loader>={
  'feed.sanatate':()=>feedLoader('sanatate'),
  'feed.educatie':()=>feedLoader('educatie'),
  'feed.justitie':()=>feedLoader('justitie'),
- 'feed.agricultura':()=>afirLoader,
  'law.search.default':()=>lawLoader({title:'',text:'',number:'',year:'',page:0}),
  'law.search.codcivil':()=>lawLoader({title:codeTopics[0].title,text:'',number:'',year:'',page:0}),
  'lawyers.default':()=>lawyerLoader('',0,'recent'),
