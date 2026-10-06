@@ -1,0 +1,16 @@
+name: AFIR egress diagnostic
+on:
+  workflow_dispatch: {}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Isolate block mechanism (header vs datacenter IP)
+        run: |
+          U='https://www.afir.ro/comunicate/170-de-milioane-euro-pentru-exploatatiile-tinerilor-fermieri/'
+          UA_AFIR='Aflivra/1.0 public-data-source-check'
+          UA_BROWSER='Mozilla/5.0 (iPhone; CPU iPhone OS 17_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6.1 Mobile/15E148 Safari/604.1'
+          echo "dc-ip_plain:           $(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "$U")"
+          echo "dc-ip_afir-ua:         $(curl -s -o /dev/null -w '%{http_code}' --max-time 30 -A "$UA_AFIR" -H 'Accept: application/json, application/rss+xml, application/xml, text/xml, text/html;q=0.8' "$U")"
+          echo "dc-ip_cf-worker-hdr:   $(curl -s -o /dev/null -w '%{http_code}' --max-time 30 -H 'CF-Worker: aflivra.brebu.workers.dev' "$U")"
+          echo "dc-ip_browser-ua:      $(curl -s -o /dev/null -w '%{http_code}' --max-time 30 -A "$UA_BROWSER" -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' "$U")"
