@@ -57,11 +57,12 @@ jobs:
           node scripts/verify-catalog.mjs
           node scripts/verify-snapshot-transport.mjs
           node scripts/verify-refresh-sweep.mjs
+          node scripts/verify-ro-text.mjs
+          node scripts/verify-source-errors.mjs
       - name: verify-legal-pdf — needs pypdf, not on the runner image
         continue-on-error: true
         run: node scripts/verify-legal-pdf.mjs
-      - name: verify-downloads — rev-35 sandbox drift, Wave-3 follow-up
-        continue-on-error: true
+      - name: verify-downloads
         run: node scripts/verify-downloads.mjs
       - name: verify-legal-records — rev-35 sandbox drift, Wave-3 follow-up
         continue-on-error: true

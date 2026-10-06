@@ -9,4 +9,8 @@ export function searchIndex<T>(index:SearchEntry<T>[],query:string):T[]{const te
 const collator=new Intl.Collator('ro',{numeric:true});
 export const compareNames=(a:unknown,b:unknown)=>collator.compare(String(a??''),String(b??''));
 export function paginate<T>(rows:T[],page=0,size=20){const pages=Math.max(1,Math.ceil(rows.length/size)),current=Math.min(Math.max(0,page),pages-1);return{items:rows.slice(current*size,(current+1)*size),total:rows.length,page:current,pageSize:size,pages}}
+/* Romanian count agreement: counts ending in digit 1 (except 11) keep the singular without "de" (1, 21, 101); 2-19 take the plain plural; every other count (20-99 and exact hundreds/thousands) takes "de" + plural. */
+const countFormat=new Intl.NumberFormat('ro-RO');
+export const countNoun=(n:number,singular:string,plural:string)=>{const lastTwo=n%100,unit=n%10;return unit===1&&lastTwo!==11?singular:n===0||(lastTwo>=2&&lastTwo<=19)?plural:'de '+plural};
+export const countText=(n:number,singular:string,plural:string)=>countFormat.format(n)+' '+countNoun(n,singular,plural);
 export function compareValues(a:unknown,b:unknown){const numeric=(v:unknown)=>{const s=String(v??'').trim().replace(/[\s\u00a0]/g,'');return s&&/^-?\d+(?:[.,]\d+)?$/.test(s)?Number(s.replace(',','.')):null};const left=numeric(a),right=numeric(b);return left!==null&&right!==null?left-right:compareNames(a,b)}

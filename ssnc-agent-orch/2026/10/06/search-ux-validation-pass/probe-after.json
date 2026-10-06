@@ -1,0 +1,1242 @@
+[
+ {
+  "name": "home-390",
+  "checks": {
+   "map": {
+    "labels": [
+     {
+      "text": "UCRAINA",
+      "x": 270,
+      "advance": 48.202247619628906,
+      "bb": {
+       "x": 270,
+       "y": 59.01123046875,
+       "w": 48.202247619628906,
+       "h": 10.786517143249512
+      },
+      "rect": {
+       "left": 167.1875,
+       "top": 49543.48046875,
+       "right": 194,
+       "bottom": 49549.48046875,
+       "width": 26.8125,
+       "height": 6
+      },
+      "svg": {
+       "left": 17,
+       "top": 49501.9375,
+       "w": 356,
+       "h": 290
+      },
+      "scale": 0.55625
+     },
+     {
+      "text": "UNGARIA",
+      "x": 53,
+      "advance": 48.14606857299805,
+      "bb": {
+       "x": 53,
+       "y": 141.01124572753906,
+       "w": 48.14606475830078,
+       "h": 10.786517143249512
+      },
+      "rect": {
+       "left": 46.48125076293945,
+       "top": 49589.09375,
+       "right": 73.26249694824219,
+       "bottom": 49595.09375,
+       "width": 26.781246185302734,
+       "height": 6
+      },
+      "svg": {
+       "left": 17,
+       "top": 49501.9375,
+       "w": 356,
+       "h": 290
+      },
+      "scale": 0.55625
+     },
+     {
+      "text": "BULGARIA",
+      "x": 310,
+      "advance": 53.14606857299805,
+      "bb": {
+       "x": 310,
+       "y": 446.01123046875,
+       "w": 53.14606857299805,
+       "h": 10.786517143249512
+      },
+      "rect": {
+       "left": 189.4375,
+       "top": 49758.75,
+       "right": 219,
+       "bottom": 49764.75,
+       "width": 29.5625,
+       "height": 6
+      },
+      "svg": {
+       "left": 17,
+       "top": 49501.9375,
+       "w": 356,
+       "h": 290
+      },
+      "scale": 0.55625
+     },
+     {
+      "text": "MAREA",
+      "x": 574,
+      "advance": 32.9775276184082,
+      "bb": {
+       "x": 574,
+       "y": 330.8089904785156,
+       "w": 32.9775276184082,
+       "h": 8.988763809204102
+      },
+      "rect": {
+       "left": 336.2875061035156,
+       "top": 49694.66796875,
+       "right": 354.6312561035156,
+       "bottom": 49699.66796875,
+       "width": 18.34375,
+       "height": 5
+      },
+      "svg": {
+       "left": 17,
+       "top": 49501.9375,
+       "w": 356,
+       "h": 290
+      },
+      "scale": 0.55625
+     },
+     {
+      "text": "NEAGRĂ",
+      "x": 574,
+      "advance": 38.42696762084961,
+      "bb": {
+       "x": 574,
+       "y": 346.4778747558594,
+       "w": 38.42696762084961,
+       "h": 9.319863319396973
+      },
+      "rect": {
+       "left": 336.2875061035156,
+       "top": 49703.3828125,
+       "right": 357.6624755859375,
+       "bottom": 49708.5703125,
+       "width": 21.374969482421875,
+       "height": 5.1875
+      },
+      "svg": {
+       "left": 17,
+       "top": 49501.9375,
+       "w": 356,
+       "h": 290
+      },
+      "scale": 0.55625
+     }
+    ],
+    "credit": {
+     "position": "static",
+     "fontSize": "12px",
+     "rect": {
+      "left": 17,
+      "top": 49791.9375,
+      "right": 363,
+      "bottom": 49811.125,
+      "width": 346,
+      "height": 19.1875
+     },
+     "topOverlapSvg": 290,
+     "withinRomap": true
+    },
+    "romap": {
+     "left": 17,
+     "top": 49501.9375,
+     "w": 356,
+     "h": 317.1875
+    }
+   },
+   "chips": {
+    "row": {
+     "left": 36,
+     "right": 354,
+     "top": 734,
+     "bottom": 824.78125,
+     "width": 318,
+     "height": 90.78125,
+     "midY": 779.390625
+    },
+    "buttons": [
+     {
+      "label": "Castelul Peleș",
+      "left": 36,
+      "right": 166.03125,
+      "width": 130.03125,
+      "height": 40.390625,
+      "midY": 754.1953125,
+      "inViewport": true
+     },
+     {
+      "label": "Brașov",
+      "left": 176.03125,
+      "right": 260.984375,
+      "width": 84.953125,
+      "height": 40.390625,
+      "midY": 754.1953125,
+      "inViewport": true
+     },
+     {
+      "label": "Monitorul Oficial RA",
+      "left": 36,
+      "right": 202.1875,
+      "width": 166.1875,
+      "height": 40.390625,
+      "midY": 804.5859375,
+      "inViewport": true
+     }
+    ]
+   },
+   "global": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ },
+ {
+  "name": "map-390",
+  "checks": {
+   "map": {
+    "labels": [
+     {
+      "text": "UCRAINA",
+      "x": 270,
+      "advance": 48.2122917175293,
+      "bb": {
+       "x": 270,
+       "y": 59.06145477294922,
+       "w": 48.2122917175293,
+       "h": 10.72625732421875
+      },
+      "rect": {
+       "left": 167.03125,
+       "top": 674.2093505859375,
+       "right": 194,
+       "bottom": 680.2093505859375,
+       "width": 26.96875,
+       "height": 6
+      },
+      "svg": {
+       "left": 16,
+       "top": 618.21875,
+       "w": 358,
+       "h": 320
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "UNGARIA",
+      "x": 53,
+      "advance": 48.15642547607422,
+      "bb": {
+       "x": 53,
+       "y": 141.06146240234375,
+       "w": 48.15642547607422,
+       "h": 10.72625732421875
+      },
+      "rect": {
+       "left": 45.646873474121094,
+       "top": 720.078125,
+       "right": 72.58438110351562,
+       "bottom": 726.078125,
+       "width": 26.93750762939453,
+       "height": 6
+      },
+      "svg": {
+       "left": 16,
+       "top": 618.21875,
+       "w": 358,
+       "h": 320
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "BULGARIA",
+      "x": 310,
+      "advance": 53.18436050415039,
+      "bb": {
+       "x": 310.0000305175781,
+       "y": 446.06146240234375,
+       "w": 53.18436050415039,
+       "h": 10.72625732421875
+      },
+      "rect": {
+       "left": 189.40626525878906,
+       "top": 890.6875,
+       "right": 219.15626525878906,
+       "bottom": 896.6875,
+       "width": 29.75,
+       "height": 6
+      },
+      "svg": {
+       "left": 16,
+       "top": 618.21875,
+       "w": 358,
+       "h": 320
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "MAREA",
+      "x": 574,
+      "advance": 33.016761779785156,
+      "bb": {
+       "x": 574,
+       "y": 330.8491516113281,
+       "w": 33.016761779785156,
+       "h": 8.93854808807373
+      },
+      "rect": {
+       "left": 337.08123779296875,
+       "top": 826.2406005859375,
+       "right": 355.5500183105469,
+       "bottom": 831.2406005859375,
+       "width": 18.468780517578125,
+       "height": 5
+      },
+      "svg": {
+       "left": 16,
+       "top": 618.21875,
+       "w": 358,
+       "h": 320
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "NEAGRĂ",
+      "x": 574,
+      "advance": 38.463687896728516,
+      "bb": {
+       "x": 574,
+       "y": 346.4693908691406,
+       "w": 38.463687896728516,
+       "h": 9.318343162536621
+      },
+      "rect": {
+       "left": 337.08123779296875,
+       "top": 834.9782104492188,
+       "right": 358.59686279296875,
+       "bottom": 840.1906127929688,
+       "width": 21.515625,
+       "height": 5.21240234375
+      },
+      "svg": {
+       "left": 16,
+       "top": 618.21875,
+       "w": 358,
+       "h": 320
+      },
+      "scale": 0.559375
+     }
+    ],
+    "credit": {
+     "position": "absolute",
+     "fontSize": "12px",
+     "rect": {
+      "left": 87.046875,
+      "top": 907.03125,
+      "right": 366,
+      "bottom": 930.21875,
+      "width": 278.953125,
+      "height": 23.1875
+     },
+     "topOverlapSvg": 288.8125,
+     "withinRomap": true
+    },
+    "romap": {
+     "left": 16,
+     "top": 618.21875,
+     "w": 358,
+     "h": 320
+    }
+   },
+   "global": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ },
+ {
+  "name": "place-390",
+  "checks": {
+   "map": {
+    "labels": [
+     {
+      "text": "UCRAINA",
+      "x": 270,
+      "advance": 48.2122917175293,
+      "bb": {
+       "x": 270,
+       "y": 59.06145477294922,
+       "w": 48.2122917175293,
+       "h": 10.72625732421875
+      },
+      "rect": {
+       "left": 167.03125,
+       "top": 2972.17822265625,
+       "right": 194,
+       "bottom": 2978.17822265625,
+       "width": 26.96875,
+       "height": 6
+      },
+      "svg": {
+       "left": 16,
+       "top": 2917.59375,
+       "w": 358,
+       "h": 317.1875
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "UNGARIA",
+      "x": 53,
+      "advance": 48.15642547607422,
+      "bb": {
+       "x": 53,
+       "y": 141.06146240234375,
+       "w": 48.15642547607422,
+       "h": 10.72625732421875
+      },
+      "rect": {
+       "left": 45.646873474121094,
+       "top": 3018.046875,
+       "right": 72.58438110351562,
+       "bottom": 3024.046875,
+       "width": 26.93750762939453,
+       "height": 6
+      },
+      "svg": {
+       "left": 16,
+       "top": 2917.59375,
+       "w": 358,
+       "h": 317.1875
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "BULGARIA",
+      "x": 310,
+      "advance": 53.18436050415039,
+      "bb": {
+       "x": 310.0000305175781,
+       "y": 446.06146240234375,
+       "w": 53.18436050415039,
+       "h": 10.72625732421875
+      },
+      "rect": {
+       "left": 189.40626525878906,
+       "top": 3188.65625,
+       "right": 219.15626525878906,
+       "bottom": 3194.65625,
+       "width": 29.75,
+       "height": 6
+      },
+      "svg": {
+       "left": 16,
+       "top": 2917.59375,
+       "w": 358,
+       "h": 317.1875
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "MAREA",
+      "x": 574,
+      "advance": 33.016761779785156,
+      "bb": {
+       "x": 574,
+       "y": 330.8491516113281,
+       "w": 33.016761779785156,
+       "h": 8.93854808807373
+      },
+      "rect": {
+       "left": 337.08123779296875,
+       "top": 3124.20947265625,
+       "right": 355.5500183105469,
+       "bottom": 3129.20947265625,
+       "width": 18.468780517578125,
+       "height": 5
+      },
+      "svg": {
+       "left": 16,
+       "top": 2917.59375,
+       "w": 358,
+       "h": 317.1875
+      },
+      "scale": 0.559375
+     },
+     {
+      "text": "NEAGRĂ",
+      "x": 574,
+      "advance": 38.463687896728516,
+      "bb": {
+       "x": 574,
+       "y": 346.4693908691406,
+       "w": 38.463687896728516,
+       "h": 9.318343162536621
+      },
+      "rect": {
+       "left": 337.08123779296875,
+       "top": 3132.947021484375,
+       "right": 358.59686279296875,
+       "bottom": 3138.159423828125,
+       "width": 21.515625,
+       "height": 5.21240234375
+      },
+      "svg": {
+       "left": 16,
+       "top": 2917.59375,
+       "w": 358,
+       "h": 317.1875
+      },
+      "scale": 0.559375
+     }
+    ],
+    "credit": {
+     "position": "static",
+     "fontSize": "12px",
+     "rect": {
+      "left": 16,
+      "top": 3234.78125,
+      "right": 364,
+      "bottom": 3253.96875,
+      "width": 348,
+      "height": 19.1875
+     },
+     "topOverlapSvg": 317.1875,
+     "withinRomap": false
+    },
+    "romap": {
+     "left": 16,
+     "top": 2917.59375,
+     "w": 358,
+     "h": 317.1875
+    }
+   },
+   "tabs": [
+    {
+     "cw": 358,
+     "sw": 495,
+     "triggers": [
+      {
+       "label": "Povestea locului",
+       "right": 121.203125,
+       "listRight": 374,
+       "withinList": true
+      },
+      {
+       "label": "Galerie",
+       "right": 190.015625,
+       "listRight": 374,
+       "withinList": true
+      },
+      {
+       "label": "Date & perspective",
+       "right": 334.15625,
+       "listRight": 374,
+       "withinList": true
+      },
+      {
+       "label": "Planifică vizita",
+       "right": 448.8125,
+       "listRight": 374,
+       "withinList": false
+      },
+      {
+       "label": "Surse",
+       "right": 509.46875,
+       "listRight": 374,
+       "withinList": false
+      }
+     ]
+    }
+   ],
+   "global": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ },
+ {
+  "name": "about-390",
+  "checks": {
+   "guides": {
+    "cards": [
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 35,
+       "top": 12601.71875,
+       "right": 355,
+       "bottom": 12742.78125,
+       "width": 320,
+       "height": 141.0625
+      },
+      "linkRect": {
+       "left": 149.15625,
+       "right": 240.84375,
+       "height": 44,
+       "midY": 12703.78125,
+       "inCard": true
+      },
+      "cardMidY": 12672.25
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 35,
+       "top": 12754.78125,
+       "right": 355,
+       "bottom": 12916.3125,
+       "width": 320,
+       "height": 161.53125
+      },
+      "linkRect": {
+       "left": 149.15625,
+       "right": 240.84375,
+       "height": 44,
+       "midY": 12877.3125,
+       "inCard": true
+      },
+      "cardMidY": 12835.546875
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 35,
+       "top": 12928.3125,
+       "right": 355,
+       "bottom": 13069.375,
+       "width": 320,
+       "height": 141.0625
+      },
+      "linkRect": {
+       "left": 149.15625,
+       "right": 240.84375,
+       "height": 44,
+       "midY": 13030.375,
+       "inCard": true
+      },
+      "cardMidY": 12998.84375
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 35,
+       "top": 13081.375,
+       "right": 355,
+       "bottom": 13222.4375,
+       "width": 320,
+       "height": 141.0625
+      },
+      "linkRect": {
+       "left": 149.15625,
+       "right": 240.84375,
+       "height": 44,
+       "midY": 13183.4375,
+       "inCard": true
+      },
+      "cardMidY": 13151.90625
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 35,
+       "top": 13234.4375,
+       "right": 355,
+       "bottom": 13375.5,
+       "width": 320,
+       "height": 141.0625
+      },
+      "linkRect": {
+       "left": 149.15625,
+       "right": 240.84375,
+       "height": 44,
+       "midY": 13336.5,
+       "inCard": true
+      },
+      "cardMidY": 13304.96875
+     }
+    ],
+    "kickerStyle": {
+     "fontSize": "12px",
+     "letterSpacing": "1.68px"
+    },
+    "columns": "320px",
+    "gridRight": 355
+   },
+   "global": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ },
+ {
+  "name": "justitie-390",
+  "checks": {
+   "global": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ },
+ {
+  "name": "map-1280",
+  "checks": {
+   "map": {
+    "labels": [
+     {
+      "text": "UCRAINA",
+      "x": 270,
+      "advance": 48.24390411376953,
+      "bb": {
+       "x": 270,
+       "y": 59.41463088989258,
+       "w": 48.243900299072266,
+       "h": 10.926828384399414
+      },
+      "rect": {
+       "left": 757.9375,
+       "top": 638.953125,
+       "right": 819.75,
+       "bottom": 652.953125,
+       "width": 61.8125,
+       "height": 14
+      },
+      "svg": {
+       "left": 412,
+       "top": 562.828125,
+       "w": 820,
+       "h": 627.8125
+      },
+      "scale": 1.28125
+     },
+     {
+      "text": "UNGARIA",
+      "x": 53,
+      "advance": 48.182926177978516,
+      "bb": {
+       "x": 52.999996185302734,
+       "y": 141.4146270751953,
+       "w": 48.182926177978516,
+       "h": 10.926828384399414
+      },
+      "rect": {
+       "left": 479.90625,
+       "top": 744.015625,
+       "right": 541.640625,
+       "bottom": 758.015625,
+       "width": 61.734375,
+       "height": 14
+      },
+      "svg": {
+       "left": 412,
+       "top": 562.828125,
+       "w": 820,
+       "h": 627.8125
+      },
+      "scale": 1.28125
+     },
+     {
+      "text": "BULGARIA",
+      "x": 310,
+      "advance": 53.20731735229492,
+      "bb": {
+       "x": 310,
+       "y": 446.41461181640625,
+       "w": 53.207313537597656,
+       "h": 10.926828384399414
+      },
+      "rect": {
+       "left": 809.1875,
+       "top": 1134.796875,
+       "right": 877.359375,
+       "bottom": 1148.796875,
+       "width": 68.171875,
+       "height": 14
+      },
+      "svg": {
+       "left": 412,
+       "top": 562.828125,
+       "w": 820,
+       "h": 627.8125
+      },
+      "scale": 1.28125
+     },
+     {
+      "text": "MAREA",
+      "x": 574,
+      "advance": 33.024391174316406,
+      "bb": {
+       "x": 574,
+       "y": 330.1950988769531,
+       "w": 33.02438735961914,
+       "h": 9.365853309631348
+      },
+      "rect": {
+       "left": 1147.4375,
+       "top": 985.890625,
+       "right": 1189.75,
+       "bottom": 997.890625,
+       "width": 42.3125,
+       "height": 12
+      },
+      "svg": {
+       "left": 412,
+       "top": 562.828125,
+       "w": 820,
+       "h": 627.8125
+      },
+      "scale": 1.28125
+     },
+     {
+      "text": "NEAGRĂ",
+      "x": 574,
+      "advance": 38.4878044128418,
+      "bb": {
+       "x": 574,
+       "y": 346.1950988769531,
+       "w": 38.4878044128418,
+       "h": 9.365853309631348
+      },
+      "rect": {
+       "left": 1147.4375,
+       "top": 1006.390625,
+       "right": 1196.75,
+       "bottom": 1018.390625,
+       "width": 49.3125,
+       "height": 12
+      },
+      "svg": {
+       "left": 412,
+       "top": 562.828125,
+       "w": 820,
+       "h": 627.8125
+      },
+      "scale": 1.28125
+     }
+    ],
+    "credit": {
+     "position": "absolute",
+     "fontSize": "12px",
+     "rect": {
+      "left": 943.046875,
+      "top": 1159.453125,
+      "right": 1222,
+      "bottom": 1182.640625,
+      "width": 278.953125,
+      "height": 23.1875
+     },
+     "topOverlapSvg": 596.625,
+     "withinRomap": true
+    },
+    "romap": {
+     "left": 412,
+     "top": 562.828125,
+     "w": 820,
+     "h": 627.8125
+    }
+   },
+   "global": {
+    "scrollWidth": 1280,
+    "innerWidth": 1280,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ },
+ {
+  "name": "about-1280",
+  "checks": {
+   "guides": {
+    "cards": [
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 77,
+       "top": 5359.34375,
+       "right": 349.5,
+       "bottom": 5520.875,
+       "width": 272.5,
+       "height": 161.53125
+      },
+      "linkRect": {
+       "left": 167.40625,
+       "right": 259.09375,
+       "height": 44,
+       "midY": 5481.875,
+       "inCard": true
+      },
+      "cardMidY": 5440.109375
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 361.5,
+       "top": 5359.34375,
+       "right": 634,
+       "bottom": 5520.875,
+       "width": 272.5,
+       "height": 161.53125
+      },
+      "linkRect": {
+       "left": 451.90625,
+       "right": 543.59375,
+       "height": 44,
+       "midY": 5481.875,
+       "inCard": true
+      },
+      "cardMidY": 5440.109375
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 646,
+       "top": 5359.34375,
+       "right": 918.5,
+       "bottom": 5520.875,
+       "width": 272.5,
+       "height": 161.53125
+      },
+      "linkRect": {
+       "left": 736.40625,
+       "right": 828.09375,
+       "height": 44,
+       "midY": 5481.875,
+       "inCard": true
+      },
+      "cardMidY": 5440.109375
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 930.5,
+       "top": 5359.34375,
+       "right": 1203,
+       "bottom": 5520.875,
+       "width": 272.5,
+       "height": 161.53125
+      },
+      "linkRect": {
+       "left": 1020.90625,
+       "right": 1112.59375,
+       "height": 44,
+       "midY": 5481.875,
+       "inCard": true
+      },
+      "cardMidY": 5440.109375
+     },
+     {
+      "borderColor": "rgb(220, 225, 232)",
+      "backgroundColor": "rgb(255, 255, 255)",
+      "borderRadius": "12px",
+      "fontSize": "16px",
+      "rect": {
+       "left": 77,
+       "top": 5532.875,
+       "right": 349.5,
+       "bottom": 5673.9375,
+       "width": 272.5,
+       "height": 141.0625
+      },
+      "linkRect": {
+       "left": 167.40625,
+       "right": 259.09375,
+       "height": 44,
+       "midY": 5634.9375,
+       "inCard": true
+      },
+      "cardMidY": 5603.40625
+     }
+    ],
+    "kickerStyle": {
+     "fontSize": "12px",
+     "letterSpacing": "1.68px"
+    },
+    "columns": "272.5px 272.5px 272.5px 272.5px",
+    "gridRight": 1203
+   },
+   "global": {
+    "scrollWidth": 1280,
+    "innerWidth": 1280,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ },
+ {
+  "name": "home-1280",
+  "checks": {
+   "map": {
+    "labels": [
+     {
+      "text": "UCRAINA",
+      "x": 270,
+      "advance": 48.242366790771484,
+      "bb": {
+       "x": 270,
+       "y": 59.297882080078125,
+       "w": 48.24237060546875,
+       "h": 10.44254207611084
+      },
+      "rect": {
+       "left": 805.800537109375,
+       "top": 23674.171875,
+       "right": 861.238037109375,
+       "bottom": 23686.171875,
+       "width": 55.4375,
+       "height": 12
+      },
+      "svg": {
+       "left": 495.53125,
+       "top": 23592.4375,
+       "w": 735.453125,
+       "h": 590.265625
+      },
+      "scale": 1.1491455078125
+     },
+     {
+      "text": "UNGARIA",
+      "x": 53,
+      "advance": 48.17438507080078,
+      "bb": {
+       "x": 53,
+       "y": 141.29788208007812,
+       "w": 48.17438507080078,
+       "h": 10.44254207611084
+      },
+      "rect": {
+       "left": 556.4359741210938,
+       "top": 23768.40234375,
+       "right": 611.7953491210938,
+       "bottom": 23780.40234375,
+       "width": 55.359375,
+       "height": 12
+      },
+      "svg": {
+       "left": 495.53125,
+       "top": 23592.4375,
+       "w": 735.453125,
+       "h": 590.265625
+      },
+      "scale": 1.1491455078125
+     },
+     {
+      "text": "BULGARIA",
+      "x": 310,
+      "advance": 53.19169998168945,
+      "bb": {
+       "x": 310,
+       "y": 446.2978820800781,
+       "w": 53.19169998168945,
+       "h": 10.44254207611084
+      },
+      "rect": {
+       "left": 851.766357421875,
+       "top": 24118.890625,
+       "right": 912.891357421875,
+       "bottom": 24130.890625,
+       "width": 61.125,
+       "height": 12
+      },
+      "svg": {
+       "left": 495.53125,
+       "top": 23592.4375,
+       "w": 735.453125,
+       "h": 590.265625
+      },
+      "scale": 1.1491455078125
+     },
+     {
+      "text": "MAREA",
+      "x": 574,
+      "advance": 33.0136604309082,
+      "bb": {
+       "x": 574,
+       "y": 330.1680908203125,
+       "w": 33.0136604309082,
+       "h": 9.572330474853516
+      },
+      "rect": {
+       "left": 1155.1407470703125,
+       "top": 23985.44140625,
+       "right": 1193.078369140625,
+       "bottom": 23996.44140625,
+       "width": 37.9376220703125,
+       "height": 11
+      },
+      "svg": {
+       "left": 495.53125,
+       "top": 23592.4375,
+       "w": 735.453125,
+       "h": 590.265625
+      },
+      "scale": 1.1491455078125
+     },
+     {
+      "text": "NEAGRĂ",
+      "x": 574,
+      "advance": 38.479679107666016,
+      "bb": {
+       "x": 574,
+       "y": 346.1681213378906,
+       "w": 38.479679107666016,
+       "h": 9.572330474853516
+      },
+      "rect": {
+       "left": 1155.1407470703125,
+       "top": 24003.828125,
+       "right": 1199.3594970703125,
+       "bottom": 24014.828125,
+       "width": 44.21875,
+       "height": 11
+      },
+      "svg": {
+       "left": 495.53125,
+       "top": 23592.4375,
+       "w": 735.453125,
+       "h": 590.265625
+      },
+      "scale": 1.1491455078125
+     }
+    ],
+    "credit": {
+     "position": "static",
+     "fontSize": "12px",
+     "rect": {
+      "left": 495.53125,
+      "top": 24182.703125,
+      "right": 1220.984375,
+      "bottom": 24201.890625,
+      "width": 725.453125,
+      "height": 19.1875
+     },
+     "topOverlapSvg": 590.265625,
+     "withinRomap": false
+    },
+    "romap": {
+     "left": 495.53125,
+     "top": 23592.4375,
+     "w": 735.453125,
+     "h": 590.265625
+    }
+   },
+   "chips": {
+    "row": {
+     "left": 48,
+     "right": 1232,
+     "top": 824,
+     "bottom": 864.390625,
+     "width": 1184,
+     "height": 40.390625,
+     "midY": 844.1953125
+    },
+    "buttons": [
+     {
+      "label": "Castelul Peleș",
+      "left": 112.921875,
+      "right": 245.953125,
+      "width": 133.03125,
+      "height": 40.390625,
+      "midY": 844.1953125,
+      "inViewport": true
+     },
+     {
+      "label": "Brașov",
+      "left": 255.953125,
+      "right": 343.90625,
+      "width": 87.953125,
+      "height": 40.390625,
+      "midY": 844.1953125,
+      "inViewport": true
+     },
+     {
+      "label": "Monitorul Oficial RA",
+      "left": 353.90625,
+      "right": 523.09375,
+      "width": 169.1875,
+      "height": 40.390625,
+      "midY": 844.1953125,
+      "inViewport": true
+     }
+    ]
+   },
+   "global": {
+    "scrollWidth": 1280,
+    "innerWidth": 1280,
+    "overflowX": 0,
+    "brokenImages": 0,
+    "fontsLoaded": 1,
+    "contentTiny": []
+   }
+  },
+  "consoleErrors": []
+ }
+]

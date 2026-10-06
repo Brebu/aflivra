@@ -2,6 +2,7 @@
 import {useState} from 'react';
 import {Button} from '@/components/ui/button';
 import {courtHistoryText,type CourtHistory} from '@/lib/court-history';
+import {countText} from '@/lib/live/query';
 import {dateText} from './live-data';
 import {ExportActions} from './export-actions';
 
@@ -11,7 +12,7 @@ export function CourtHistoryPanel({history,onOpenRecord,onSearchNumber}:{history
   <h3>Parcursul dosarului {history.number}</h3>
   <div className="court-history-stages">{history.stages.map(stage=><article className="court-stage" key={stage.id}>
    <h4>{stage.label}</h4><p>{stage.courtLabel}</p>
-   <p className="court-stage-status">{stage.availability==='record'?stage.recordIds.length+' fișe disponibile · '+stage.hearingCount+' ședințe publicate':'Confirmat prin trimitere oficială'}</p>
+    <p className="court-stage-status">{stage.availability==='record'?countText(stage.recordIds.length,'fișă disponibilă','fișe disponibile')+' · '+countText(stage.hearingCount,'ședință publicată','ședințe publicate'):'Confirmat prin trimitere oficială'}</p>
    {stage.availability==='reference'&&<p className="field-help">Fișa și ședințele de la această etapă nu sunt disponibile în răspunsul portalului.</p>}
    {stage.evidence.map(reference=><p key={reference.id}>{reference.document} {reference.documentNumber} · {dateText(reference.documentDate)}</p>)}
    <div className="court-stage-actions">{stage.recordIds.map((id,index)=><Button key={id} variant="outline" onClick={()=>onOpenRecord(id)}>Vezi fișa de {stage.label.toLowerCase()}{stage.recordIds.length>1?' ('+(index+1)+')':''}</Button>)}

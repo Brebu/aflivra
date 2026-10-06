@@ -65,4 +65,22 @@ test.describe('Explore → place → gallery → saved', () => {
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  test('a typed region query surfaces places from that region and a no-match query shows the generic empty state', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    await waitForClientReady(page);
+    await page.getByLabel('Caută un loc, o firmă sau un subiect').fill('Brașov');
+    await page.locator('form.hero-search').getByRole('button', {name: 'Explorează', exact: true}).click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'explore');
+    // The gallery search string includes the place region, so the Brașov region
+    // surfaces Bran alongside the city's own Piața Sfatului.
+    await expect(page.locator('.exploration-gallery .place-card', {hasText: 'Castelul Bran'})).toBeVisible();
+
+    // A genuine no-match query renders the generic empty state with its explanatory copy.
+    await page.getByLabel('Caută în locuri și domenii').fill('zzqxv');
+    await page.locator('form.explore-search').getByRole('button', {name: 'Caută', exact: true}).click();
+    await expect(page.getByRole('heading', {level: 2, name: 'Niciun rezultat în selecția editorială'})).toBeVisible();
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });
