@@ -5,11 +5,14 @@ import {tmpdir} from 'node:os';import {join,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';import {createRequire} from 'node:module';
 import ts from 'typescript';
 
-// Modul --live face exact un singur acces la ruta locală per familie și, doar pentru stările de
+// Modul --live face exact un singur acces la ruta locală și unul la ruta workerului publicat
+// (infrastructura noastră, în afara bugetului de surse) per familie și, doar pentru stările de
 // eroare ale sursei, maximum două verificări directe ale aceleiași adrese prin același contract
-// de încărcare; familiile servite corect nu se reinteroghează. Regula de buget orară este
-// respectată prin construcție: costul maxim este o vizită normală per familie.
+// de încărcare; familiile servite corect nu se reinteroghează. Familiile preclasificate
+// (AFIR: sursa blochează egress-ul Workers) nu cheltuiesc acces direct când tiparul se confirmă.
 const root=resolve(import.meta.dirname,'..'),require=createRequire(import.meta.url),live=process.argv.includes('--live'),base=process.env.AFLIVRA_VERIFY_SOURCE_BASE||'http://127.0.0.1:5173';
+const deployedArg=process.env.AFLIVRA_VERIFY_DEPLOYED_BASE,deployedBase=deployedArg===undefined?'https://aflivra.brebu.workers.dev':deployedArg;
+const todayIso=()=>new Date().toISOString().slice(0,10);
 const temp=await mkdtemp(join(tmpdir(),'aflivra-source-errors-')),sqlite=live?null:new DatabaseSync(':memory:');
 if(!live)sqlite.exec(await readFile(join(root,'drizzle/0000_thin_demogoblin.sql'),'utf8'));
 const db=live?null:{prepare(sql){let args=[];const wrapper={bind(...values){for(const v of values)if(typeof v==='string'&&Buffer.byteLength(v)>2_000_000)throw Error('D1 row bound exceeded');args=values;return wrapper},async first(){return sqlite.prepare(sql).get(...args)||null},async all(){return{results:sqlite.prepare(sql).all(...args)}},async run(){const result=sqlite.prepare(sql).run(...args);return{meta:{changes:Number(result.changes)}}}};return wrapper},async batch(statements){const results=[];for(const statement of statements)results.push(await statement.run());return results}};
@@ -28,7 +31,7 @@ for(const name of ['court-history','court-query','location-context','geographic-
  await writeFile(join(temp,name+'.mjs'),output);
 }
 const liveSeeds=await readFile(join(root,'lib/live/seed.json'),'utf8');
-for(const name of ['records','text','media','query','source-xml','source-html','catalog-categories','adapters','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge']){
+for(const name of ['records','text','media','query','source-xml','source-html','catalog-categories','catalog-metadata','adapters','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','transit-realtime','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge','lawyers','directories','resources','events','cinema','stories']){
  let source=await readFile(join(root,'lib/live',name+'.ts'),'utf8');
  source=source
   .replace("from '../court-history'","from './court-history'").replace("from '../court-query'","from './court-query'")
@@ -40,60 +43,87 @@ for(const name of ['records','text','media','query','source-xml','source-html','
   .replace("import resourceCopies from './resource-seed.json';",'const resourceCopies=globalThis.__aflivraResourceCopies;')
   .replace("import confirmed from '@/public/courts/confirmed-references.json';",'const confirmed='+await readFile(join(root,'public/courts/confirmed-references.json'),'utf8')+';')
   .replace("import courtInstitutions from '@/public/courts/institutions.json';",'const courtInstitutions='+await readFile(join(root,'public/courts/institutions.json'),'utf8')+';')
-  .replace("import codes from '@/public/legal-snapshots/manifest.json';",'const codes='+await readFile(join(root,'public/legal-snapshots/manifest.json'),'utf8')+';');
+  .replace("import codes from '@/public/legal-snapshots/manifest.json';",'const codes='+await readFile(join(root,'public/legal-snapshots/manifest.json'),'utf8')+';')
+  .replace("import cinemaCatalog from '@/public/cinema/cinemas.json';",'const cinemaCatalog='+await readFile(join(root,'public/cinema/cinemas.json'),'utf8')+';')
+  .replace("import audit from '@/public/catalog/audit.json';",'const audit='+await readFile(join(root,'public/catalog/audit.json'),'utf8')+';');
  let output=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;
- output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace("from 'fflate'","from '"+fflateUrl+"'").replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
+ output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace("from 'fflate'","from '"+fflateUrl+"'");output=output.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");for(const pkg of ['xlsx','gtfs-realtime-bindings'])output=output.replace("from '"+pkg+"'","from '"+pathToFileURL(require.resolve(pkg)).href+"'");
  await writeFile(join(temp,name+'.mjs'),output);
 }
-const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs')));
+const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs')));
 const feedHosts=Object.entries(feedsModule.feedConfigs).map(([key])=>new URL(feedsModule.feedConfigs[key].url).host);
+const lawQuery={title:'CODUL CIVIL',text:'',number:'',year:'',page:0,full:false};
 const families=[
  {family:'weather/open-meteo',routeName:'weather',route:'/api/weather?lat=44.43&lon=26.1',host:'api.open-meteo.com',allowed:['api.open-meteo.com'],key:()=>weatherModule.forecastLoader(44.43,26.1).key,loader:()=>weatherModule.forecastLoader(44.43,26.1)},
  {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org'],key:()=>adapters.companyLoader('427282').key,loader:()=>adapters.companyLoader('427282')},
  {family:'courts/portal.just',routeName:'legal',route:'/api/legal',method:'POST',body:{kind:'court',number:'1/2/2026'},host:'portalquery.just.ro',allowed:['portalquery.just.ro'],key:()=>legalModule.courtLoader({number:'1/2/2026',name:'',subject:'',institution:'',from:'',to:''}).key,loader:()=>legalModule.courtLoader({number:'1/2/2026',name:'',subject:'',institution:'',from:'',to:''})},
  {family:'feeds/stiri',routeName:'domain',route:'/api/domain?kind=stiri',host:new URL(feedsModule.feedConfigs.stiri.url).host,allowed:feedHosts,key:()=>feedsModule.feedLoader('stiri').key,loader:()=>feedsModule.feedLoader('stiri')},
  {family:'catalog/ckan',routeName:'catalog',route:'/api/catalog',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>adapters.catalogLoader().key,loader:()=>adapters.catalogLoader()},
- {family:'transport/tpbi',routeName:'transport',route:'/api/transport',host:'gtfs.tpbi.ro',allowed:['gtfs.tpbi.ro'],key:()=>transportModule.transportLoader.key,loader:()=>transportModule.transportLoader}];
+ {family:'transport/tpbi',routeName:'transport',route:'/api/transport',host:'gtfs.tpbi.ro',allowed:['gtfs.tpbi.ro'],key:()=>transportModule.transportLoader.key,loader:()=>transportModule.transportLoader},
+ {family:'directory/schools',routeName:'directory',route:'/api/directory?kind=schools',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>directoriesModule.directoryLoader('schools','',0).key,loader:()=>directoriesModule.directoryLoader('schools','',0)},
+ {family:'directory/health',routeName:'directory',route:'/api/directory?kind=health',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>directoriesModule.directoryLoader('health').key,loader:()=>directoriesModule.directoryLoader('health')},
+ {family:'directory/pharmacies',routeName:'directory',route:'/api/directory?kind=pharmacies',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>directoriesModule.directoryLoader('pharmacies').key,loader:()=>directoriesModule.directoryLoader('pharmacies')},
+ {family:'directory/hospitals',routeName:'directory',route:'/api/directory?kind=hospitals',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>directoriesModule.directoryLoader('hospitals').key,loader:()=>directoriesModule.directoryLoader('hospitals')},
+ {family:'localities/siruta',routeName:'localities',route:'/api/localities',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>directoriesModule.sirutaLoader.key,loader:()=>directoriesModule.sirutaLoader},
+ {family:'lawyers/ifep',routeName:'lawyers',route:'/api/lawyers',host:'www.ifep.ro',allowed:['www.ifep.ro'],key:()=>lawyersModule.lawyerLoader('',0,'recent').key,loader:()=>lawyersModule.lawyerLoader('',0,'recent')},
+ {family:'legal/law',routeName:'legal',route:'/api/legal',method:'POST',body:{kind:'law',title:'CODUL CIVIL'},host:'legislatie.just.ro',allowed:['legislatie.just.ro'],key:()=>legalModule.lawLoader(lawQuery).key,loader:()=>legalModule.lawLoader(lawQuery)},
+ {family:'feeds/agricultura',routeName:'domain',route:'/api/domain?kind=agricultura',host:'www.afir.ro',allowed:['www.afir.ro'],known:'source-blocks-egress',key:()=>feedsModule.afirLoader.key,loader:()=>feedsModule.afirLoader},
+ {family:'feeds/filme',routeName:'domain',route:'/api/domain?kind=filme',host:'query.wikidata.org',allowed:['query.wikidata.org'],key:()=>feedsModule.filmsLoader.key,loader:()=>feedsModule.filmsLoader},
+ {family:'events/odeon',routeName:'events',route:'/api/events',host:'teatrul-odeon.ro',allowed:['teatrul-odeon.ro'],key:()=>eventsModule.odeonLoader.key,loader:()=>eventsModule.odeonLoader},
+ {family:'cinema/cinemacity',routeName:'cinema',route:'/api/cinema?id=1824&date='+todayIso(),host:'www.cinemacity.ro',allowed:['www.cinemacity.ro'],key:()=>cinemaModule.cinemaLoader('1824',todayIso()).key,loader:()=>cinemaModule.cinemaLoader('1824',todayIso())},
+ {family:'stories/wikisource',routeName:'story',route:'/api/story?id=29611',host:'ro.wikisource.org',allowed:['ro.wikisource.org'],key:()=>storiesModule.storyLoader('29611').key,loader:()=>storiesModule.storyLoader('29611')},
+ {family:'transport/realtime',routeName:'transport-live',route:'/api/transport-live?kind=vehicles',host:'gtfs.tpbi.ro',allowed:['gtfs.tpbi.ro'],key:()=>realtimeModule.realtimeLoader('vehicles').key,loader:()=>realtimeModule.realtimeLoader('vehicles')}];
 if(live){
  let routes=null;
  try{routes=await Promise.all(families.map(async family=>[family.family,await (async()=>{const init=family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};return fetch(base+family.route,{...init,signal:AbortSignal.timeout(60000)})})()]))}catch(error){console.error('Serverul local de dezvoltare nu răspunde la '+base+' — pornit cu „npm start” înainte de --live. Detaliu: '+error.message);process.exitCode=2}
  if(routes!==null&&routes.every(([,response])=>response!==null)){
   const verdicts=[];let ourBug=false;
-  for(const [familyName,response] of routes){
-   const family=families.find(entry=>entry.family===familyName);let payload=null;
-   try{payload=await response.json()}catch{}
-   const states=[];
-   const push=state=>{if(state&&String(state.error||'').length)states.push({key:state.key||familyName,status:state.status,error:String(state.error),lastAttemptAt:state.lastAttemptAt||null,nextAttemptAt:state.nextAttemptAt||null})};
+  const initFor=family=>family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};
+  const readStates=async(family,response)=>{
+   let payload=null;try{payload=await response.json()}catch{}
+   const states=[];const push=state=>{if(state&&String(state.error||'').length)states.push({key:state.key||family.family,status:state.status,error:String(state.error),lastAttemptAt:state.lastAttemptAt||null,nextAttemptAt:state.nextAttemptAt||null})};
    push(payload);
    if(family.family==='company/anaf')for(const state of payload?.data?.sources||[])if(String(state?.key||'').startsWith('company:'))push(state);
    if(family.family==='feeds/stiri')for(const state of payload?.data?.sources||[])if(state?.key==='feed:stiri')push(state);
    const sampled=family.family==='feeds/stiri'?{sampledSource:'feed:stiri',allFeedStates:(payload?.data?.sources||[]).map(state=>({key:state.key,status:state.status,error:String(state.error||'').slice(0,200)}))}:null;
-   const surfaced=response.status>=500?[{key:familyName,status:'HTTP '+response.status,error:'Ruta locală a răspuns cu HTTP '+response.status+'.',lastAttemptAt:null,nextAttemptAt:null}]:states;
-   const budget=surfaced.some(state=>/Limit[ăa] temporar/.test(state.error));
-   let verdict='ok',direct=null;
-   if(surfaced.length&&budget)verdict='budget';
-   else if(surfaced.length){
-    let loads=0,loaded=null,failed=null;
-    while(loads<2&&!loaded){loads++;try{const result=await family.loader().load();if(result.data!==null&&result.data!==undefined)loaded=result;else failed=result}catch(error){failed=error;if(!/timeout|connection|dns/i.test(String(error?.diagnostic?.category||error?.message||'')))break}}
-    direct={loads,outcome:loaded?'ok':'failed',category:failed?.diagnostic?.category||null,httpStatus:failed?.diagnostic?.httpStatus||null,message:String(failed?.message||'').slice(0,200)};
-    if(!loaded)verdict='source';
+   const surfaced=response.status>=500?[{key:family.family,status:'HTTP '+response.status,error:'Ruta a răspuns cu HTTP '+response.status+'.',lastAttemptAt:null,nextAttemptAt:null}]:states;
+   return{payload,surfaced,sampled}};
+  const probeDirect=async(family)=>{let loads=0,loaded=null,failed=null;
+   while(loads<2&&!loaded){loads++;try{const result=await family.loader().load();if(result.data!==null&&result.data!==undefined)loaded=result;else failed=result}catch(error){failed=error;if(!/timeout|connection|dns/i.test(String(error?.diagnostic?.category||error?.message||'')))break}}
+   return{loads,outcome:loaded?'ok':'failed',category:failed?.diagnostic?.category||null,httpStatus:failed?.diagnostic?.httpStatus||null,message:String(failed?.message||'').slice(0,200)}};
+  for(const [familyName,response] of routes){
+   const family=families.find(entry=>entry.family===familyName);const dev=await readStates(family,response);
+   let deployed=null;
+   if(deployedBase==='')deployed={skipped:'legătura către workerul publicat este oprită prin AFLIVRA_VERIFY_DEPLOYED_BASE gol'};
+   else{try{const deployedResponse=await fetch(deployedBase+family.route,{...initFor(family),signal:AbortSignal.timeout(60000)});const parsed=await readStates(family,deployedResponse);deployed={http:deployedResponse.status,status:parsed.payload?.status??null,error:String(parsed.payload?.error||'').slice(0,200),surfaced:parsed.surfaced}}catch(error){deployed={unreachable:error instanceof Error?error.message:String(error)}}}
+   const budget=dev.surfaced.some(state=>/Limit[ăa] temporar/.test(state.error));
+   let verdict='ok',direct=null;const notes=[];
+   if(dev.surfaced.length&&budget)verdict='budget';
+   else if(dev.surfaced.length){
+    direct=await probeDirect(family);
+    if(direct.outcome!=='ok')verdict='source-down';
     else{
-     const pauseLike=surfaced.some(state=>/429|pauz[ăa]/i.test(state.error))||surfaced.some(state=>/tempor|indisponibil|Structura|structur/i.test(state.error)&&(state.status==='stale'||payload?.data));
+     const pauseLike=dev.surfaced.some(state=>/429|pauz[ăa]/i.test(state.error))||dev.surfaced.some(state=>/tempor|indisponibil|Structura|structur/i.test(state.error)&&(state.status==='stale'||dev.payload?.data));
      verdict=pauseLike?'recovered':'our-bug';
      if(verdict==='our-bug')ourBug=true;
     }
-   }
-   verdicts.push({family:familyName,route:family.route,app:{http:response.status,status:payload?.status??null,error:String(payload?.error||'').slice(0,200),lastAttemptAt:payload?.lastAttemptAt??null,nextAttemptAt:payload?.nextAttemptAt??null,surfaced,...(sampled?{sampled:{sampledSource:sampled.sampledSource,allFeedStates:sampled.allFeedStates}}:{})},direct,verdict});
+   }else if(deployed&&Number(deployed.http)>=500){verdict='our-bug';ourBug=true;notes.push('workerul publicat răspunde HTTP '+deployed.http+' fără degradare în-band')}
+   else if(deployed&&Array.isArray(deployed.surfaced)&&deployed.surfaced.length){
+    if(family.known&&deployed.surfaced.some(state=>/HTTP 5\d\d|429/i.test(state.error))){verdict=family.known;notes.push('familie preclasificată — sursa blochează egress-ul Workers (stabilit la campania de probe 2026-10-06); fără acces direct cheltuit')}
+    else{direct=await probeDirect(family);verdict=direct.outcome==='ok'?'source-blocks-egress':'source-down'}
+   }else if(deployed&&deployed.unreachable)notes.push('workerul publicat nu a răspuns ('+deployed.unreachable+') — clasificare pe dev și sursă directă');
+   verdicts.push({family:familyName,route:family.route,app:{http:response.status,status:dev.payload?.status??null,error:String(dev.payload?.error||'').slice(0,200),lastAttemptAt:dev.payload?.lastAttemptAt??null,nextAttemptAt:dev.payload?.nextAttemptAt??null,surfaced:dev.surfaced,...(dev.sampled?{sampled:{sampledSource:dev.sampled.sampledSource,allFeedStates:dev.sampled.allFeedStates}}:{})},deployed,direct,verdict,...(notes.length?{notes}:{})});
   }
-  for(const verdict of verdicts)console.log('['+verdict.family+'] verdict: '+verdict.verdict+' — app HTTP '+verdict.app.http+', stare '+(verdict.app.status||'–')+', eroare: „'+(verdict.app.error||'niciuna')+'”'+(verdict.direct?' → sursă directă: '+verdict.direct.outcome+(verdict.direct.httpStatus?' (HTTP '+verdict.direct.httpStatus+')':'')+' în '+verdict.direct.loads+' acces(e)':' → fără reinterogarea sursei'));
-  console.log(JSON.stringify({result:ourBug?'our-bug':'ok',mode:'--live',base,families:verdicts.length,verdicts}));
-  if(ourBug){console.error('Verdict our-bug: sursa răspunde corect direct, dar ruta locală raportează eroarea sursei. Diferențele de mai sus sunt bug-ul nostru.');process.exitCode=1}
+  for(const verdict of verdicts)console.log('['+verdict.family+'] verdict: '+verdict.verdict+' — app HTTP '+verdict.app.http+', stare '+(verdict.app.status||'–')+', eroare: „'+(verdict.app.error||'niciuna')+'”'+(verdict.deployed&&verdict.deployed.http?', worker publicat HTTP '+verdict.deployed.http+', stare '+(verdict.deployed.status||'–')+', eroare: „'+(verdict.deployed.error||'niciuna')+'”':'')+(verdict.direct?' → sursă directă: '+verdict.direct.outcome+(verdict.direct.httpStatus?' (HTTP '+verdict.direct.httpStatus+')':'')+' în '+verdict.direct.loads+' acces(e)':' → fără reinterogarea sursei'));
+  console.log(JSON.stringify({result:ourBug?'our-bug':'ok',mode:'--live',base,deployedBase:deployedBase===''?'oprită prin configurație':deployedBase,families:verdicts.length,verdicts}));
+  if(ourBug){console.error('Verdict our-bug: sursa răspunde corect direct sau workerul nostru publicat eșuează, dar ruta raportează eroarea sursei. Diferențele de mai sus sunt bug-ul nostru.');process.exitCode=1}
  }
 }else{
- for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts']]){
+ for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts']]){
   let source=await readFile(join(root,file),'utf8');
   source=source
    .replace("import network from '@/public/transit/network.json';",'const network='+await readFile(join(root,'public/transit/network.json'),'utf8')+';')
+   .replace("import transit from '@/public/transit/manifest.json';",'const transit='+await readFile(join(root,'public/transit/manifest.json'),'utf8')+';')
    .replace("import proofs from '@/public/data/snapshot-transport.json';",'const proofs='+await readFile(join(root,'public/data/snapshot-transport.json'),'utf8')+';')
    .replace("import institutions from '@/public/courts/institutions.json';",'const institutions='+await readFile(join(root,'public/courts/institutions.json'),'utf8')+';')
    .replace("import {env} from 'cloudflare:workers';",'const env=globalThis.__aflivraTestEnv;')
@@ -102,7 +132,7 @@ if(live){
   output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
   await writeFile(join(temp,'route-'+name+'.mjs'),output);
  }
- const routes={};for(const name of ['weather','company','legal','domain','catalog','transport'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
+ const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
  const {zipSync,strToU8}=require('fflate');
  const gtfsBytes=()=>{const rows=(head,list)=>head+'\n'+list.join('\n')+'\n';const stops=Array.from({length:12},(_,i)=>'S'+i+',Stația de verificare '+i+',Descriere publică,'+(44.40+i/100)+','+(26.10+i/100)),routeRows=Array.from({length:12},(_,i)=>'R'+i+',A0,'+(100+i)+',Linia de verificare '+i+','+(i%2?'3':'0'));
   return zipSync({'agency.txt':strToU8(rows('agency_id,agency_name,agency_url',['A0,Operatorul de test,https://example.test'])),'stops.txt':strToU8(rows('stop_id,stop_name,stop_desc,stop_lat,stop_lon',stops)),'routes.txt':strToU8(rows('route_id,agency_id,route_short_name,route_long_name,route_type',routeRows)),'calendar.txt':strToU8(rows('service_id,monday,tuesday,start_date,end_date',['A0,1,1,20260101,20261231']))})};
@@ -113,14 +143,41 @@ if(live){
  const soap=inner=>'<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body>'+inner+'</s:Body></s:Envelope>';
  const courtResponse=operation=>{const record='<Dosar><numar>1/2/2026</numar><institutie>PJ-CURTE-DE-TEST</institutie><data>2025-12-01</data><obiect>Verificare publică</obiect><stadiuProcesual>Fond</stadiuProcesual><dataModificare>2026-10-01</dataModificare><parti><DosarParte><nume>Parte publică</nume><calitateParte>Reclamant</calitateParte></DosarParte></parti><sedinte><DosarSedinta><data>2026-11-02</data><ora>10:00</ora><solutieSumar>Soluție publică integrală</solutieSumar></DosarSedinta></sedinte></Dosar>';
   return new Response(soap('<'+operation+'Response><'+operation+'Result>'+record+'</'+operation+'Result></'+operation+'Response>'),{headers:{'content-type':'text/xml'}})};
+ const lawSoapResponse=body=>String(body).includes('<GetToken ')?new Response(soap('<GetTokenResult>test-token</GetTokenResult>'),{headers:{'content-type':'text/xml'}}):new Response(soap('<SearchResult><a:Legi><a:Titlu>LEGE de verificare</a:Titlu><a:TipAct>lege</a:TipAct><a:LinkHtml>https://legislatie.just.ro/Public/DetaliiDocument/70001</a:LinkHtml><a:Text>Text SOAP recent preluat.</a:Text></a:Legi></SearchResult>'),{headers:{'content-type':'text/xml'}});
  const rssFixture=host=>{const item=n=>'<item><title>Anunț public '+(n+1)+' — '+host+'</title><link>https://'+host+'/anunt-'+n+'</link><pubDate>Tue, 06 Oct 2026 08:0'+n+':00 GMT</pubDate><description>Descriere integrală.</description><content:encoded><![CDATA[<p>Conținut complet '+host+'.</p>]]></content:encoded></item>';return new Response('<rss><channel>'+item(0)+item(1)+'</channel></rss>',{headers:{'content-type':'application/rss+xml'}})};
  const ckanBody={success:true,result:{count:1,results:[{id:'ckan-verificare',name:'dataset-verificare',title:'Set de date de verificare',organization:{title:'Organizația publică de test'},metadata_modified:'2026-10-01T00:00:00',license_title:'Date deschise',num_resources:0,resources:[],notes:'Descriere completă.'}],search_facets:{organization:{items:[{name:'org-test',display_name:'Organizația publică de test'}]},res_format:{items:[{name:'csv',display_name:'CSV'}]}}}};
+ const schoolsBody=()=>({success:true,result:{total:22,fields:[{id:'_id'},{id:'Numarul'},{id:'Nume scola'},{id:'Localitate unitate'},{id:'Judet PJ'}],records:Array.from({length:20},(_,i)=>({'_id':i,'Numarul':19561300+i,'Nume scola':'Școala Gimnazială de Verificare '+i,'Localitate unitate':'București','Judet PJ':'București'}))}});
+ const cnasResource={health:'CLINIC',pharmacies:'FARM',hospitals:'SPITAL'};
+ const cnasBody=family=>({success:true,result:{resources:[{name:'Lista furnizori cu drept de decont '+cnasResource[family.split('/')[1]]+' 31.03.2026',url:'https://data.gov.ro/dataset/lista-furnizori/resource/export-de-verificare.xlsx',format:'XLSX',last_modified:'2026-04-01T00:00:00'}]}});
+ const cnasXlsx=()=>{const XLSX=require('xlsx');const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet([['Nume furnizor','CUI cod','Localitate','Judet'],['Furnizor public de verificare 1','12345','București','București'],['Furnizor public de verificare 2','12456','Cluj-Napoca','Cluj']]),'CLINIC');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
+ const sirutaMeta=()=>({success:true,result:{resources:[{name:'SIRUTA 2026 semestrul I',url:'https://data.gov.ro/dataset/siruta_s1-2026/resource/siruta-de-verificare.csv',format:'CSV',last_modified:'2026-03-01T00:00:00'}]}});
+ const sirutaCsv=()=>{const rows=['SIRUTA;DENLOC;NIV;JUD;SIRSUP;CODP;MED','40;București;1;40;0;0;1'];for(let i=1;i<=1001;i++)rows.push(String(10000+i)+';Localitatea de verificare '+i+';3;40;40;'+String(100000+i).slice(-6)+';'+(i%2?'1':'2'));return rows.join('\r\n')};
+ const ifepPage=()=>{const rights='Drept de concluzii la: Judecătorii, Tribunale, Curți de Apel';const card='<a href=\'LawyerFile.aspx?RecordId=fixture-1&Panel=public\'><p><span title="Ultima actualizare"><em>05-10-2026 12:12</em></span><span class="pop" data-html="true" data-content=\'<p>'+rights+'</p>\'><img src="level.gif"></span><span>Fișă</span></p><h4>Avocat definitiv <font>POPESCU Ana</font>, Baroul Cluj [inactiv]</h4><p>Sediu principal: Cluj-Napoca, Strada Exemplu nr. 3</p><p>0700 000 000</p></a>';
+  return new Response('<html><body><span id="MainContent_PagerTop_lblRecords">Înregistrări 1–1 din 40000</span><span id="MainContent_PagerTop_lblPages">Pagina 1 din 2</span>'+card+'</body></html>',{headers:{'content-type':'text/html'}})};
+ const afirPage=()=>new Response('<html><body>'+('<div class="card-body news-content"><h4><a href="/comunicate/anunt-public-de-verificare">Anunț public de verificare AFIR</a></h4><p class="item-date">06 octombrie 2026</p></div><div class="news-border"></div>').repeat(3)+'</body></html>',{headers:{'content-type':'text/html'}});
+ const filmsBody=()=>({results:{bindings:[{film:{type:'uri',value:'http://www.wikidata.org/entity/Q100001'},filmLabel:{type:'literal',value:'Film românesc de verificare'},date:{type:'literal',value:'2000-01-01'},directorLabel:{type:'literal',value:'Regizor de verificare'}}]}});
+ const odeonPage=()=>new Response('<html><head><script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Spectacol de verificare","startDate":"2026-10-06T19:30:00","url":"https://teatrul-odeon.ro/spectacol/verificare","location":{"@type":"Place","name":"Sala Mare"}}</script></head><body></body></html>',{headers:{'content-type':'text/html'}});
+ const cinemaBody=()=>({body:{films:[{id:'f-verificare',name:'Filmul de verificare',link:'https://www.cinemacity.ro/ro/cinema/filmul-de-verificare',posterLink:'https://www.cinemacity.ro/ro/poster-de-verificare.jpg'}],events:[{filmId:'f-verificare',businessDay:todayIso(),eventDateTime:todayIso()+'T19:30:00'}]}});
+ const storyBody=()=>({parse:{pageid:29611,title:'Aflatul',text:{'*':'<p>Povestea de verificare conține un text integral suficient de lung pentru cititorul public de povestiri.</p>'},links:[],revid:87065}});
+ const realtimeBytes=()=>{const FeedMessage=require('gtfs-realtime-bindings').transit_realtime.FeedMessage;const now=Math.floor(Date.now()/1000);
+  return new Uint8Array(FeedMessage.encode(FeedMessage.fromObject({header:{gtfsRealtimeVersion:'2.0',timestamp:now},entity:[{id:'v-verificare',vehicle:{trip:{routeId:'R1',tripId:'T1'},position:{latitude:44.43,longitude:26.1,speed:8,bearing:90},vehicle:{label:'Tramvaiul de verificare'},currentStatus:'IN_TRANSIT_TO',stopId:'S1',timestamp:now}}]})).finish())};
  const successFor=(family,href,host,init)=>{
   if(family.family==='weather/open-meteo')return Response.json(openMeteoBody());
   if(family.family==='company/anaf')return Response.json(href.includes('/api/PlatitorTvaRest/')?anafRegistry:anafBalance(href));
   if(family.family==='courts/portal.just')return courtResponse(String(init?.headers?.SOAPAction||'').includes('CautareDosare2')?'CautareDosare2':'CautareDosare');
   if(family.family==='feeds/stiri')return rssFixture(host);
   if(family.family==='catalog/ckan')return Response.json(ckanBody);
+  if(family.family==='directory/schools')return Response.json(schoolsBody());
+  if(family.family.startsWith('directory/'))return href.includes('package_show')?Response.json(cnasBody(family.family)):new Response(cnasXlsx(),{headers:{'content-type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}});
+  if(family.family==='localities/siruta')return href.includes('package_show')?Response.json(sirutaMeta()):new Response(sirutaCsv(),{headers:{'content-type':'text/csv'}});
+  if(family.family==='lawyers/ifep')return ifepPage();
+  if(family.family==='legal/law')return lawSoapResponse(init?.body);
+  if(family.family==='feeds/agricultura')return afirPage();
+  if(family.family==='feeds/filme')return Response.json(filmsBody());
+  if(family.family==='events/odeon')return odeonPage();
+  if(family.family==='cinema/cinemacity')return Response.json(cinemaBody());
+  if(family.family==='stories/wikisource')return Response.json(storyBody());
+  if(family.family==='transport/realtime')return new Response(realtimeBytes(),{headers:{'content-type':'application/octet-stream'}});
   return new Response(gtfsBytes(),{headers:{'last-modified':new Date().toUTCString()}})};
  const failureFor=(scenario,init)=>{
   if(scenario==='http500')return new Response(null,{status:500});
@@ -214,6 +271,105 @@ if(live){
     if(scenario==='http429')assert.match(e,/Exportul TPBI răspunde cu HTTP 429/,label+': codul sursei păstrat');
     if(scenario==='timeout'||scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată/,label+': plicul de eroare standard');
     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='directory/schools'){
+   const attempts=hostCount('data.gov.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.total,22,label+': registrul școlar servit');assert.equal(payload.data.records.length,20,label+': pagina de registru servită integral');assert(payload.data.fields.includes('Nume scola'),label+': câmpurile publicate se păstrează');assert.equal(attempts,1,label+': un singur acces la tabelul public')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.records.length,20,label+': copia validă se păstrează');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără înregistrări inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată/,label+': plicul de eroare standard');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family.startsWith('directory/')&&family.family!=='directory/schools'){
+   const attempts=hostCount('data.gov.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.records.length,2,label+': registrul CNAS servit integral');assert(payload.data.fields.includes('Nume furnizor'),label+': câmpurile oficiale ale registrului');assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.records.length,2,label+': registrul se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără înregistrări inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată/,label+': plicul de eroare standard');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='localities/siruta'){
+   const attempts=hostCount('data.gov.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.total,1001,label+': registrul localităților servit integral');assert.equal(payload.data.items.length,40,label+': pagina de localități servită');assert(payload.data.items.every(item=>item.name.startsWith('Localitatea de verificare')),label+': numele localităților păstrate');assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.total,1001,label+': registrul se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără localități inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată/,label+': plicul de eroare standard');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='lawyers/ifep'){
+   const attempts=hostCount('www.ifep.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.total,40000,label+': registru național declarat');assert.equal(payload.data.items.length,1,label+': fișa de avocat servită');assert.equal(payload.data.items[0].name,'POPESCU Ana',label+': numele avocatului păstrat');assert(payload.data.items[0].url.startsWith('https://www.ifep.ro/Justice/Lawyers/LawyerFile.aspx?'),label+': adresa oficială a fișei');assert.equal(attempts,1,label+': un singur acces la registru')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.items.length,1,label+': fișa se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără avocați inventați');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Registrul nu a oferit numărul rezultatelor/,label+': structura registrului respinsă în română');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='legal/law'){
+   const attempts=hostCount('legislatie.just.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.items.length,1,label+': actul legislativ servit');assert.equal(payload.data.items[0].id,'https://legislatie.just.ro/Public/DetaliiDocument/70001',label+': identitatea oficială a actului');assert.equal(attempts,2,label+': tokenul și căutarea SOAP oficiale')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.items.length,1,label+': actul se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără acte inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Structura serviciului juridic/,label+': structura SOAP respinsă în română');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de operații')}}
+  if(family.family==='feeds/agricultura'||family.family==='feeds/filme'){
+   const host=hostCount(family.host);
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert(payload.data.items.length>0,label+': articolele sursei servite');assert(payload.data.items.every(item=>item.url&&item.title),label+': identitatea fiecărui articol se păstrează');assert.equal(host,1,label+': un singur acces la sursă')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert(payload.data.items.length>0,label+': articolele se păstrează din copie');assert.equal(host,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără articole inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,family.family==='feeds/agricultura'?/Structura comunicatelor AFIR/:/Sursa nu a putut fi verificată/,label+': structura nevalidă respinsă în română');
+    assert.equal(host,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='events/odeon'){
+   const attempts=hostCount('teatrul-odeon.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.items.length,1,label+': spectacolul servit');assert.equal(payload.data.items[0].start,'2026-10-06T19:30',label+': data spectacolului păstrată în formatul calendarului');assert(payload.data.items[0].url.startsWith('https://teatrul-odeon.ro/'),label+': adresa oficială a spectacolului');assert.equal(attempts,1,label+': un singur acces la calendarul public')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.items.length,1,label+': spectacolul se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără spectacole inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Calendarul teatrului nu a transmis/,label+': calendarul nevalid respins în română');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='cinema/cinemacity'){
+   const attempts=hostCount('www.cinemacity.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.filmCount,1,label+': filmul servit');assert.equal(payload.data.eventCount,1,label+': proiecția zilei servită');assert.equal(payload.data.date,todayIso(),label+': ziua programului păstrată');assert.equal(attempts,1,label+': un singur acces la programul operatorului')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.eventCount,1,label+': programul se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără programe inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată/,label+': plicul de eroare standard');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='stories/wikisource'){
+   const attempts=hostCount('ro.wikisource.org');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.id,'29611',label+': povestea servită');assert(payload.data.content.length>=40,label+': textul integral servit');assert.equal(payload.data.textComplete,true,label+': textul declarat integral');assert(payload.data.url.startsWith('https://ro.wikisource.org/wiki/'),label+': adresa oficială a povestirii');assert.equal(attempts,1,label+': un singur acces la sursă')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.id,'29611',label+': povestea se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără povestiri inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată/,label+': plicul de eroare standard');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='transport/realtime'){
+   const attempts=hostCount('gtfs.tpbi.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.items.length,1,label+': poziția vehiculului servită');assert.equal(payload.data.items[0].vehicleName,'Tramvaiul de verificare',label+': numele vehiculului păstrat');assert(payload.data.isLive,label+': fluxul marcat live');assert.equal(attempts,1,label+': un singur acces la fluxul live')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/Fluxul TPBI răspunde cu HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.items.length,1,label+': poziția se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără poziții inventate');
+    if(scenario==='http500')assert.match(e,/Fluxul TPBI răspunde cu HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/Fluxul TPBI răspunde cu HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout'||scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată|Fluxul TPBI nu poate fi decodat/,label+': plicul de eroare documentat');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
  };
  const runCell=(family,scenario)=>{const label=family.family+' / '+scenario,mock=scenario==='warm-http500'?'http500':scenario;
   return withMocks(family,mock,async(counts,unexpected)=>{
@@ -230,6 +386,6 @@ if(live){
  }
  console.log('Matricea de avarie a trecut: pentru fiecare familie de surse, HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes — ruta locală răspunde mereu 200, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
  console.log(JSON.stringify({result:'ok',mode:'mock',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
-}
+ }
 escapes.length=0;process.off('unhandledRejection',recordEscape);process.off('uncaughtExceptionMonitor',recordEscape);}
 finally{delete globalThis.__aflivraTestEnv;delete globalThis.__aflivraResourceCopies;if(!live)sqlite.close();await rm(temp,{recursive:true,force:true})}

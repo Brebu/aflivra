@@ -1,0 +1,4673 @@
+{
+ "ssr": [
+  {
+   "name": "home",
+   "url": "/",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "explore",
+   "url": "/#view=explore",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "map",
+   "url": "/#view=map",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "place",
+   "url": "/#view=place&id=peles",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "dashboard",
+   "url": "/#view=dashboard",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "company",
+   "url": "/#view=company",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "money",
+   "url": "/#view=money",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "domain",
+   "url": "/#view=domain&id=local",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "compare",
+   "url": "/#view=compare",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "recommendations",
+   "url": "/#view=recommendations",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "saved",
+   "url": "/#view=saved",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "planner",
+   "url": "/#view=planner",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "about",
+   "url": "/#view=about",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": true,
+    "brand": true,
+    "footer": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "catalog",
+   "url": "/catalog",
+   "status": 200,
+   "title": "Aflivra — România la îndemână",
+   "markers": {
+    "shellMain": false,
+    "brand": false,
+    "footer": false,
+    "catalogHome": true
+   },
+   "errorDoc": false
+  },
+  {
+   "name": "design",
+   "url": "/design.html",
+   "status": 200,
+   "title": "Aflivra",
+   "markers": {
+    "shellMain": false,
+    "brand": false,
+    "footer": false,
+    "metaRedirect": true
+   },
+   "errorDoc": false
+  }
+ ],
+ "results": [
+  {
+   "label": "home",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [
+     {
+      "el": "button.city-story",
+      "text": "DESCOPERĂ ORAȘULBrașovPiața Sfatului, patrimon",
+      "sw": 379,
+      "cw": 358,
+      "tov": "clip"
+     },
+     {
+      "el": "button.city-story",
+      "text": "DESCOPERĂ ORAȘULBucureștiArhitectură, cultură ",
+      "sw": 379,
+      "cw": 358,
+      "tov": "clip"
+     }
+    ],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din "
+    ],
+    "caps": [
+     "BV14C_02"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "static",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 30406
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Ce ai nevoie să afli?\nÎncepe de aici."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "explore",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 21479
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Explorează. Conectează. Înțelege."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "map",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "absolute",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2597
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "România, dintr-o privire."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "dashboard",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din "
+    ],
+    "caps": [
+     "BV14C_02"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 27136
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Ce vrei să afli astăzi?"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "company",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 29750
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Verifică o firmă după CUI."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "money",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2120
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Cifrele devin mai clare."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "recommendations",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6770
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "O lume întreagă.\nUn pic mai aproape de tine."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "saved",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 771
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Colecția ta de repere."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "planner",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "static",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1061
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Planul tău de explorare."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "about",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "datastore_search ⋯ 026-10-04 Catalogul descrie resurse. datastore_search se aplică numai r",
+     "datastore_active ⋯ _search se aplică numai resurselor cu datastore_active=true. Nu toate ce",
+     "OD_FIRME ⋯ pshot ONRC din 02.09.2026. Selectează OD_FIRME și nomenclatoarel"
+    ],
+    "caps": [
+     "OD_FIRME"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 8285
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Informație verificabilă."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "catalog",
+   "vp": "390",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": false,
+    "activeEmpty": false,
+    "textLen": 13368
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": null
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/overview",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "static",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2360
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/gallery",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1236
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/insights",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 9713
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/visit",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1966
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/sources",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1544
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "compare/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1744
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "compare/firms",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 679
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "compare/cities",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3534
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 5987
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Orașul tău"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/weather",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3590
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/transport",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4411
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/registry",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6171
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "SIRUTA_s1 ⋯ l de Statistică Acoperire națională SIRUTA_s1 2026 Registrul u"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 41472
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "vreme/weather",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3544
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Vreme și prognoză"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "vreme/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 33335
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4882
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Sănătate aproape"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/health",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2410
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/pharmacies",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2243
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/hospitals",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2434
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6767
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 14300
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4420
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Educație & viitor"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/schools",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2108
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "24_08_2026_dosar_presa_rezultate_finale_bacalaureat_S2 ⋯ egorie Comunicate de presă fisiere 24_08_2026_dosar_presa_rezultate_finale_bacalaureat_S2."
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [
+     {
+      "text": "2026 rezultate",
+      "n": 2026,
+      "exp": "de",
+      "actual": "pl"
+     },
+     {
+      "text": "2026 rezultate",
+      "n": 2026,
+      "exp": "de",
+      "actual": "pl"
+     },
+     {
+      "text": "2026 rezultate",
+      "n": 2026,
+      "exp": "de",
+      "actual": "pl"
+     }
+    ],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6809
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "Plati_ianuarie ⋯ l „Școli sigure și sănătoase” (PNSS)_ Plati_ianuarie 2026 Programul n",
+     "Plati_ianuarie ⋯ l „Școli sigure și sănătoase” (PNSS)_ Plati_ianuarie 2026 XLSX 1 resu"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 37365
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/network",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4427
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "În mișcare"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/vehicles",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 8142
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/arrivals",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 8135
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/alerts",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 17269
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1595
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6662
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 34364
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4505
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Cultură și turism"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/events",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2322
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/selection",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 5426
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 13341
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/cinema",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3958
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Filme și cinematografe"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4376
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/films",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2288
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 9469
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "povesti/stories",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2733
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Povești și lectură"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "povesti/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 13305
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "bani/currency",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2225
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Bani & economie"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "bani/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4612
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "bani/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 15069
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/companies",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3362
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Firme, pe înțeles"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4571
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/compare",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 726
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 26782
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "munca/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [
+     {
+      "text": "34.128 locuri",
+      "n": 34128,
+      "exp": "de",
+      "actual": "pl"
+     },
+     {
+      "text": "34.352 locuri",
+      "n": 34352,
+      "exp": "de",
+      "actual": "pl"
+     }
+    ],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4919
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Muncă & oportunități"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "munca/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4711
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "munca/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 35226
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/legal",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1195
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Lege & administrație"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/lawyers",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 7484
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4361
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 8611
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 13040
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/calculator",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 861
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Energie & consum"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4543
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 5656
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 15687
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "agricultura/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3194
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Pământ & agricultură"
+   },
+   "consoleErrs": [
+    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden"
+   ]
+  },
+  {
+   "label": "agricultura/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4480
+   },
+   "consoleErrs": [
+    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden"
+   ]
+  },
+  {
+   "label": "agricultura/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 51242
+   },
+   "consoleErrs": [
+    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden"
+   ]
+  },
+  {
+   "label": "mediu/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4265
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Natură și mediu"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "mediu/weather",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3572
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "mediu/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 33363
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "stiri/news",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din "
+    ],
+    "caps": [
+     "BV14C_02"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 7609
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Știri & actualitate"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "stiri/places",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4565
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "stiri/data",
+   "vp": "390",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "decizională_BolintinDeal ⋯ iu Raport anual privind transparența decizională_BolintinDeal 2025 Raport anua",
+     "decizională_BolintinDeal ⋯ 25 Raport anual privind transparența decizională_BolintinDeal pentru anul 2025 ",
+     "publice_BolintinDeal ⋯ t anual privind accesul la informatii publice_BolintinDeal 2025 Raport anua",
+     "publice_BolintinDeal ⋯ t anual privind accesul la informatii publice_BolintinDeal 2025 XLSX 1 resu"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 42341
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "home",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [
+     {
+      "el": "button.city-story",
+      "text": "DESCOPERĂ ORAȘULBrașovPiața Sfatului, patrimon",
+      "sw": 615,
+      "cw": 580,
+      "tov": "clip"
+     },
+     {
+      "el": "button.city-story",
+      "text": "DESCOPERĂ ORAȘULBucureștiArhitectură, cultură ",
+      "sw": 615,
+      "cw": 580,
+      "tov": "clip"
+     }
+    ],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "xulescu_g ⋯ AI Munții Bucegi După o fotografie de xulescu_g · CC BY-SA 2.0. F",
+     "BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din "
+    ],
+    "caps": [
+     "BV14C_02"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "static",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 30964
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Ce ai nevoie să afli?\nÎncepe de aici."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "explore",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 21524
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Explorează. Conectează. Înțelege."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "map",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "absolute",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2642
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "România, dintr-o privire."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "dashboard",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din "
+    ],
+    "caps": [
+     "BV14C_02"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 27181
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Ce vrei să afli astăzi?"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "company",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 29795
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Verifică o firmă după CUI."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "money",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2195
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Cifrele devin mai clare."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "recommendations",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6815
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "O lume întreagă.\nUn pic mai aproape de tine."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "saved",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 816
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Colecția ta de repere."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "planner",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "static",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1106
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Planul tău de explorare."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "about",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "datastore_search ⋯ 026-10-04 Catalogul descrie resurse. datastore_search se aplică numai r",
+     "datastore_active ⋯ _search se aplică numai resurselor cu datastore_active=true. Nu toate ce",
+     "OD_FIRME ⋯ pshot ONRC din 02.09.2026. Selectează OD_FIRME și nomenclatoarel"
+    ],
+    "caps": [
+     "OD_FIRME"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 8330
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Informație verificabilă."
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "catalog",
+   "vp": "1280",
+   "surface": {
+    "tabbed": false,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": false,
+    "activeEmpty": false,
+    "textLen": 13368
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": null
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/overview",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": {
+     "position": "static",
+     "totalOcclusion": 0,
+     "worst": null,
+     "withinRomap": true
+    },
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2423
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/gallery",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1298
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/insights",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 9782
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/visit",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2028
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "place/sources",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1606
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "compare/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1789
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "compare/firms",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 724
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "compare/cities",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3579
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6032
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Orașul tău"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/weather",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3635
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/transport",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4456
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/registry",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6223
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "local/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "SIRUTA_s1 ⋯ l de Statistică Acoperire națională SIRUTA_s1 2026 Registrul u"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 41517
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "vreme/weather",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3589
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Vreme și prognoză"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "vreme/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 33380
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4927
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Sănătate aproape"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/health",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2447
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/pharmacies",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2280
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/hospitals",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2471
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6812
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "sanatate/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 14345
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4465
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Educație & viitor"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/schools",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2153
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "24_08_2026_dosar_presa_rezultate_finale_bacalaureat_S2 ⋯ egorie Comunicate de presă fisiere 24_08_2026_dosar_presa_rezultate_finale_bacalaureat_S2."
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [
+     {
+      "text": "2026 rezultate",
+      "n": 2026,
+      "exp": "de",
+      "actual": "pl"
+     },
+     {
+      "text": "2026 rezultate",
+      "n": 2026,
+      "exp": "de",
+      "actual": "pl"
+     },
+     {
+      "text": "2026 rezultate",
+      "n": 2026,
+      "exp": "de",
+      "actual": "pl"
+     }
+    ],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6854
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "educatie/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "Plati_ianuarie ⋯ l „Școli sigure și sănătoase” (PNSS)_ Plati_ianuarie 2026 Programul n",
+     "Plati_ianuarie ⋯ l „Școli sigure și sănătoase” (PNSS)_ Plati_ianuarie 2026 XLSX 1 resu"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 37410
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/network",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4472
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "În mișcare"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/vehicles",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 14781
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/arrivals",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 41591
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/alerts",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 17368
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4323
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 6707
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "transport/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 34409
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4550
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Cultură și turism"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/events",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2359
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/selection",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 5471
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "cultura/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 13386
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/cinema",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4003
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Filme și cinematografe"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4421
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/films",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2325
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "filme/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 9514
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "povesti/stories",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2778
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Povești și lectură"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "povesti/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 13350
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "bani/currency",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 2270
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Bani & economie"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "bani/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4657
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "bani/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 15114
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/companies",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3407
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Firme, pe înțeles"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4616
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/compare",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 771
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "firme/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 26827
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "munca/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [
+     {
+      "text": "34.128 locuri",
+      "n": 34128,
+      "exp": "de",
+      "actual": "pl"
+     },
+     {
+      "text": "34.352 locuri",
+      "n": 34352,
+      "exp": "de",
+      "actual": "pl"
+     }
+    ],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4964
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Muncă & oportunități"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "munca/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4756
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "munca/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 35271
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/legal",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 1240
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Lege & administrație"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/lawyers",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 7631
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4406
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 8656
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "justitie/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 13085
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/calculator",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 906
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Energie & consum"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4588
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 5732
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "energie/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 15732
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "agricultura/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3239
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Pământ & agricultură"
+   },
+   "consoleErrs": [
+    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden"
+   ]
+  },
+  {
+   "label": "agricultura/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4525
+   },
+   "consoleErrs": [
+    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden"
+   ]
+  },
+  {
+   "label": "agricultura/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 51287
+   },
+   "consoleErrs": [
+    "Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden"
+   ]
+  },
+  {
+   "label": "mediu/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4310
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Natură și mediu"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "mediu/weather",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 3617
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "mediu/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 33408
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "stiri/news",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din "
+    ],
+    "caps": [
+     "BV14C_02"
+    ],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 7654
+   },
+   "meta": {
+    "title": "Aflivra — România la îndemână",
+    "h1": "Știri & actualitate"
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "stiri/places",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 4610
+   },
+   "consoleErrs": []
+  },
+  {
+   "label": "stiri/data",
+   "vp": "1280",
+   "surface": {
+    "tabbed": true,
+    "overflowX": 0,
+    "brokenImgs": [],
+    "oddSrcImgs": [],
+    "smallInSlot": [],
+    "noImgCards": [],
+    "cutoff": [],
+    "zeroSize": [],
+    "gaps": [],
+    "snake": [
+     "decizională_BolintinDeal ⋯ iu Raport anual privind transparența decizională_BolintinDeal 2025 Raport anua",
+     "decizională_BolintinDeal ⋯ 25 Raport anual privind transparența decizională_BolintinDeal pentru anul 2025 ",
+     "publice_BolintinDeal ⋯ t anual privind accesul la informatii publice_BolintinDeal 2025 Raport anua",
+     "publice_BolintinDeal ⋯ t anual privind accesul la informatii publice_BolintinDeal 2025 XLSX 1 resu"
+    ],
+    "caps": [],
+    "tokens": [],
+    "grammar": [],
+    "mapCredit": null,
+    "vbottomOverlap": [],
+    "busy": true,
+    "activeEmpty": false,
+    "textLen": 42386
+   },
+   "consoleErrs": []
+  }
+ ]
+}

@@ -59,20 +59,21 @@ jobs:
           node scripts/verify-refresh-sweep.mjs
           node scripts/verify-ro-text.mjs
           node scripts/verify-source-errors.mjs
-      - name: verify-legal-pdf — needs pypdf, not on the runner image
-        continue-on-error: true
-        run: node scripts/verify-legal-pdf.mjs
+          node scripts/verify-sweep-inventory.mjs
+          node scripts/verify-model-contracts.mjs
+          node scripts/verify-federated-search.mjs
+          node scripts/verify-legal-records.mjs
+          node scripts/verify-expanded.mjs
+          node scripts/audit-controls.mjs
       - name: verify-downloads
         run: node scripts/verify-downloads.mjs
-      - name: verify-legal-records — rev-35 sandbox drift, Wave-3 follow-up
-        continue-on-error: true
-        run: node scripts/verify-legal-records.mjs
-      - name: verify-expanded — rev-35 sandbox drift, Wave-3 follow-up
-        continue-on-error: true
-        run: node scripts/verify-expanded.mjs
-      - name: audit-controls — rev-35 sandbox drift, Wave-3 follow-up
-        continue-on-error: true
-        run: node scripts/audit-controls.mjs
+      - name: verify-legal-pdf — runs where pypdf is installed; recorded skip otherwise
+        run: |
+          if python3 -c 'import pypdf' 2>/dev/null; then
+            node scripts/verify-legal-pdf.mjs
+          else
+            echo 'SKIP înregistrat: pypdf lipsește de pe imaginea runner-ului — verificarea PDF rulează integral doar unde pypdf este instalat.'
+          fi
 
   build-restore:
     name: Build, restore seed churn, deploy dry-run, D1 idempotency

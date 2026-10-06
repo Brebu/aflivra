@@ -1,0 +1,356 @@
+{
+ "conditions": [
+  {
+   "vp": "390",
+   "condition": "rain",
+   "scene": "weather-scene weather-scene-rain",
+   "kicker": "BUCUREȘTI",
+   "temp": "11,6°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-rain-far",
+    "after": "aflivra-weather-rain-near",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "390",
+   "condition": "snow",
+   "scene": "weather-scene weather-scene-snow",
+   "kicker": "BUCUREȘTI",
+   "temp": "-2,3°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-snow-far",
+    "after": "aflivra-weather-snow-near",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "390",
+   "condition": "clear",
+   "scene": "weather-scene weather-scene-sunny",
+   "kicker": "BUCUREȘTI",
+   "temp": "24,8°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "aflivra-weather-glow",
+    "before": "none",
+    "after": "none",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "390",
+   "condition": "night",
+   "scene": "weather-scene weather-scene-night",
+   "kicker": "BUCUREȘTI",
+   "temp": "14,2°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-twinkle, aflivra-weather-night-drift",
+    "after": "aflivra-weather-twinkle, aflivra-weather-night-drift",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "390",
+   "condition": "cloudy",
+   "scene": "weather-scene weather-scene-cloudy",
+   "kicker": "BUCUREȘTI",
+   "temp": "9,5°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-drift-far",
+    "after": "aflivra-weather-drift-near",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "1280",
+   "condition": "rain",
+   "scene": "weather-scene weather-scene-rain",
+   "kicker": "BUCUREȘTI",
+   "temp": "11,6°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-rain-far",
+    "after": "aflivra-weather-rain-near",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "1280",
+   "condition": "snow",
+   "scene": "weather-scene weather-scene-snow",
+   "kicker": "BUCUREȘTI",
+   "temp": "-2,3°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-snow-far",
+    "after": "aflivra-weather-snow-near",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "1280",
+   "condition": "clear",
+   "scene": "weather-scene weather-scene-sunny",
+   "kicker": "BUCUREȘTI",
+   "temp": "24,8°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "aflivra-weather-glow",
+    "before": "none",
+    "after": "none",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "1280",
+   "condition": "night",
+   "scene": "weather-scene weather-scene-night",
+   "kicker": "BUCUREȘTI",
+   "temp": "14,2°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-twinkle, aflivra-weather-night-drift",
+    "after": "aflivra-weather-twinkle, aflivra-weather-night-drift",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  },
+  {
+   "vp": "1280",
+   "condition": "cloudy",
+   "scene": "weather-scene weather-scene-cloudy",
+   "kicker": "BUCUREȘTI",
+   "temp": "9,5°C",
+   "metrics": 3,
+   "grid": 15,
+   "motionOn": {
+    "ambientAnim": "none",
+    "before": "aflivra-weather-drift-far",
+    "after": "aflivra-weather-drift-near",
+    "img": "aflivra-weather-sky",
+    "chipIcon": "aflivra-weather-icon",
+    "gridIcon": "aflivra-weather-icon"
+   },
+   "overflowX": 0,
+   "errors": [],
+   "pass": true
+  }
+ ],
+ "reducedMotion": [
+  {
+   "vp": "390",
+   "condition": "rain",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "390",
+   "condition": "snow",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "390",
+   "condition": "clear",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "390",
+   "condition": "night",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "390",
+   "condition": "cloudy",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "1280",
+   "condition": "rain",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "1280",
+   "condition": "snow",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "1280",
+   "condition": "clear",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "1280",
+   "condition": "night",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  },
+  {
+   "vp": "1280",
+   "condition": "cloudy",
+   "animations": {
+    "ambient": "none",
+    "before": "none",
+    "after": "none",
+    "img": "none",
+    "chipIcon": "none",
+    "gridIcon": "none"
+   },
+   "ambientStillRendered": true,
+   "sceneIntact": true,
+   "ok": true
+  }
+ ]
+}
