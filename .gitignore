@@ -1,0 +1,15 @@
+node_modules/
+.sites-runtime/
+.wrangler/
+dist/
+.next/
+*.tsbuildinfo
+.env*
+.dev.vars
+.dev.vars.*
+.playwright-mcp/
+archives/
+public/downloads/Aflivra_*.zip
+playwright-report/
+test-results/
+.DS_Store

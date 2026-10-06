@@ -153,8 +153,22 @@ Localizarea este cerută la apăsarea butonului. Prognoza primește coordonate r
 
 Node >=22.13; pnpm din `packageManager`. Binding D1: `DB`; schema: `db/schema.ts`; migrații: `drizzle`. Aplicați migrațiile înaintea testării persistenței. Schema nu se creează în handler-ele de runtime.
 
+### Rulare locală rapidă (macOS / Linux)
+
+Clona conține toate datele publicate (`public/`); nu trebuie dezarhivat nimic. Cerințe: Node >= 22.13 (vezi `.nvmrc`), pnpm prin Corepack, Python 3 pentru build și verificări.
+
+```sh
+corepack pnpm install      # NU `pnpm run install:ci` — acel script este pentru sandbox-ul Linux al platformei de origine și eșuează pe macOS
+pnpm dev                   # http://127.0.0.1:5173 — vinext + workerd, binding-uri D1/ASSETS locale
+pnpm lint && pnpm exec tsc --noEmit
+pnpm build && pnpm start   # paritate de producție pe :8787 (wrangler; necesită `pnpm build` înainte)
+```
+
+Arhivele originale ale exportului sunt păstrate în `archives/`, exclud din git și se regenerează oricând cu `python3 scripts/package-source.py`.
+
 ```sh
 pnpm run install:ci
+
 pnpm exec tsc --noEmit
 node scripts/verify-live.mjs
 node scripts/verify-cache.mjs
