@@ -3,5 +3,6 @@ declare namespace Cloudflare {
     ASSETS?: Fetcher;
     DB?: D1Database;
     BUCKET?: R2Bucket;
+    REFRESH_TOKEN?: string;
   }
 }
