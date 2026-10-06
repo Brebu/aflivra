@@ -310,3 +310,71 @@ Co-authored-by: Ciprian-Alexandru-Lucian Brebu + opencode/opus,sonnet <Ciprian-A
 - VERDICT: our loader code is CORRECT (proven fresh from residential egress); the SOURCE (afir.ro WAF) blocks requests originating from Cloudflare Workers datacenter egress. Class: source-blocks-our-egress (distinct from our-bug and from source-down).
 - Product fix applied (honest UX for the user's exact discovery): the reader error state now adds "Sursa nu răspunde acum la cererea serverului nostru. Publicația poate fi deschisă direct la sursă în browser." + a direct "Deschide direct la sursă" link above the retry button (app/experience.tsx ContentReader).
 - wrangler remote D1 read failed (OAuth token expired mid-session, code 10000) — verdict established empirically without it; refresh token if remote reads are needed later.
+
+## DevOps Findings (T3.1 — full local verification chain)
+
+- [devops] DevOps: starting T3.1 — verification-only pass on fix/search-ux-validation-v1 @ 5adbe0e (waves 1-2 complete). Contract: run the chain in order, stop-and-report on failure, FIX NOTHING. AFIR parity context in force: source 500s are Workers-egress-only (orchestrator verdict) — 'local route works + direct source works' classifies OUR-CODE-FINE; the egress dimension is already classified for AFIR.
+- [devops] Env pre-checks: dev server on 127.0.0.1:5173 responds 200 — pre-existing `node scripts/run-framework.mjs dev` PID 3764 (NOT started by me, left alive per contract). pypdf absent (`ModuleNotFoundError: No module named 'pypdf'`) → verify-legal-pdf SKIP confirmed. CI continue-on-error set (pr-validation.yml): verify-legal-pdf (env) + the drift trio verify-legal-records / verify-expanded / audit-controls ("rev-35 sandbox drift, Wave-3 follow-up"); verify-downloads is a HARD gate since the wave-2 fix.
+- [devops] Step 1 — `corepack pnpm exec tsc --noEmit` → **exit 0, 0 errors** (zero output).
+- [devops] Step 2 — `corepack pnpm lint` → **exit 0: `✖ 114 problems (0 errors, 114 warnings)`** — 0 errors, exactly the 114-warning baseline, unchanged from waves 1-2.
+- [devops] Step 3 — verify battery, one run, real exit codes:
+  | Script | Exit | Result |
+  |--------|------|--------|
+  | verify-cache.mjs | 0 | ✅ atomic weather concurrency, shared 429 cooldown, D1 row bounds, adapter recovery |
+  | verify-refresh-sweep.mjs | 0 | ✅ 5 groups / 21 members, isolated 503, hourly budget caps |
+  | verify-ro-text.mjs | 0 | ✅ Academy rule matrix (1/21/101 singular, "de" at 20+) |
+  | verify-source-errors.mjs (DEFAULT mock) | 0 | ✅ `{"result":"ok","mode":"mock","families":6,"cells":36}` — full avarie matrix, ~37 s class |
+  | verify-lawyers.mjs | 0 | ✅ wave-2 resolver fix holds (geographic-scope compiled behind the route) |
+  | verify-downloads.mjs | 0 | ✅ wave-2 fixes hold: bidirectional guides manifest (5=5) + heavy harness end-to-end |
+  | verify-live.mjs | 0 | ✅ SOAP contracts, legal/RSS text, ANAF contacts, raw 1,000-record boundary |
+  | verify-catalog.mjs | 0 | ✅ 16 editorial covers, checksums, initial CSV/PDF copies |
+  | verify-expanded.mjs | 1 | ⚠️ KNOWN DRIFT (CI continue-on-error) — `ERR_MODULE_NOT_FOUND: …/source-html.mjs` in temp transpile from lawyers.mjs |
+  | verify-snapshot-transport.mjs | 0 | ✅ 6534 snapshots / 676,679,112 bytes, SHA-256 proofs, one-shard Worker API |
+  | verify-legal-records.mjs | 1 | ⚠️ KNOWN DRIFT (CI continue-on-error) — `ERR_MODULE_NOT_FOUND: …/source-xml.mjs` in temp transpile from legal.mjs |
+  | verify-legal-refresh.mjs | 0 | ✅ shared source pauses defer safely, isolated failures don't block consolidations |
+  | audit-controls.mjs | 1 | ⚠️ KNOWN DRIFT (CI continue-on-error) — `AssertionError` falsy pin (rev-35 sandbox drift) |
+  | verify-legal-pdf.mjs | 1 → **SKIP RECORDED** | env: `ModuleNotFoundError: No module named 'pypdf'` (confirmed independently) — not on this machine, same as the CI runner image |
+  Hard gates (the 10 exit-0 scripts): **ALL GREEN**. The 3 continue-on-error drift scripts still fail exactly as CI registers them ("rev-35 sandbox drift, Wave-3 follow-up" — unchanged by waves 1-2; report-only, per verification contract).
+- [devops] Step 4 — **THE parity pass**: `node scripts/verify-source-errors.mjs --live` vs http://127.0.0.1:5173 → **exit 0**. Full verdict table:
+  | Family | App route state | Direct source | Class |
+  |--------|----------------|---------------|-------|
+  | weather/open-meteo | 200, fresh, error „niciuna” | not queried (no failure surfaced) | **ok** |
+  | company/anaf | 200, cached, error „niciuna” | not queried | **ok** |
+  | courts/portal.just | 200, fresh, error „niciuna” | not queried | **ok** |
+  | feeds/stiri | 200, stale, surfaced „7 surse au copii vechi sau sunt temporar indisponibile…” | OK în 1 acces | **recovered** (source-side, informational — pause honored, source recovered) |
+  | catalog/ckan | 200, cached, error „niciuna” | not queried | **ok** |
+  | transport/tpbi | 200, stale, error „niciuna” | not queried | **ok** |
+  **our-bug: 0 · budget-exhausted: 0 · source-blocked-direct: 0.** The "expect degraded states" forecast did not materialize: D1 has refreshed since the earlier budget-burning session (lastAttemptAt 2026-10-06T12:49Z throughout) — the only family that surfaced an error (feeds/stiri) verified its source OK directly in a single fetch, exactly the ≤2-fetch cap, and the script returned `{"result":"ok","mode":"--live"}` with exit 0 (exit 1 fires only on our-bug). App never returned a 5xx on any of the 6 routes — the degrade-never-fail contract holds live, not just in mock.
+- [devops] Step 5 — `corepack pnpm test:e2e` → **28 passed (15.7s), 0 failed, exit 0** — exactly the 19 wave-1 baseline + 9 wave-2 (locality-instant.spec.ts incl. the R1 company-intent coherence leg and the 5 Romanian-count sites), no wave-2 additions beyond; staged against the pre-existing dev server per `reuseExistingServer`.
+- [devops] Step 6 — build chain: `corepack pnpm build` → **exit 0** ("Build complete", 89 modules, 11,686.42 KiB SSR bundle) · `git checkout -- lib/live/seed-snapshots.json` → **exit 0** (the build had rewritten 1 line — the recorded timestamp churn; working tree back to only STATUS.md dirty) · `node scripts/deploy.mjs --dry-run` → **exit 0** ("wrangler deploy --dry-run exit 0"; read 6839 asset files, total upload 12,283.01 KiB / gzip 4,210.62 KiB, bindings env.DB → D1 aflivra + env.ASSETS) · `node scripts/db-migrate.mjs --local` **×2 → both exit 0, byte-identical output** ("Migrația local … este deja aplicată — nimic de făcut. Tabele: source_budget, source_cache") — **idempotency proven** (second run is a clean no-op).
+
+### T3.1 consolidated evidence table
+
+| Check | Exit / status | Verdict |
+|-------|---------------|---------|
+| `corepack pnpm exec tsc --noEmit` | 0 (zero output) | ✅ PASSED — 0 errors |
+| `corepack pnpm lint` | 0 — `✖ 114 problems (0 errors, 114 warnings)` | ✅ PASSED — 0 errors, warnings = exact 114 baseline |
+| `verify-cache.mjs` | 0 | ✅ PASSED |
+| `verify-refresh-sweep.mjs` | 0 | ✅ PASSED |
+| `verify-ro-text.mjs` | 0 | ✅ PASSED |
+| `verify-source-errors.mjs` (mock, CI mode) | 0 — 6 families × 36 cells | ✅ PASSED |
+| `verify-lawyers.mjs` | 0 | ✅ PASSED (wave-2 fix holds) |
+| `verify-downloads.mjs` | 0 | ✅ PASSED (wave-2 fixes hold; hard gate justified) |
+| `verify-live.mjs` | 0 | ✅ PASSED |
+| `verify-catalog.mjs` | 0 | ✅ PASSED |
+| `verify-expanded.mjs` | 1 | ⚠️ KNOWN-DRIFT — CI continue-on-error ("rev-35 sandbox drift"), unchanged by waves 1-2 |
+| `verify-snapshot-transport.mjs` | 0 | ✅ PASSED |
+| `verify-legal-records.mjs` | 1 | ⚠️ KNOWN-DRIFT — CI continue-on-error, unchanged |
+| `verify-legal-refresh.mjs` | 0 | ✅ PASSED |
+| `audit-controls.mjs` | 1 | ⚠️ KNOWN-DRIFT — CI continue-on-error, unchanged |
+| `verify-legal-pdf.mjs` | 1 | ⏭️ SKIP RECORDED — pypdf absent on this machine (confirmed: `ModuleNotFoundError`), same class as the CI runner registration |
+| `verify-source-errors.mjs --live` (parity) | 0 — 5× ok + 1× recovered | ✅ PASSED — **0 our-bug, 0 budget-exhaustion, 0 direct-source-block**; all 6 app routes 200, degrade-never-fail holds live |
+| `corepack pnpm test:e2e` | 0 — 28 passed / 0 failed (15.7s) | ✅ PASSED |
+| `corepack pnpm build` | 0 | ✅ PASSED |
+| `git checkout -- lib/live/seed-snapshots.json` | 0 | ✅ PASSED — tree restored (only STATUS.md dirty, as allowed) |
+| `deploy.mjs --dry-run` | 0 | ✅ PASSED |
+| `db-migrate.mjs --local` run 1 | 0 | ✅ PASSED |
+| `db-migrate.mjs --local` run 2 | 0 (identical no-op) | ✅ PASSED — idempotent |
+
+- [devops] Server custody: no server was started by me this session — the :5173 dev server (PID 3764, `run-framework.mjs dev`) pre-existed from earlier sessions and was reused (e2e, parity pass) and left running per the pre-exists rule. Nothing to kill.
+- [devops] **T3.1: PASSED** — every hard gate green (tsc, lint, 10/10 hard-gate verify scripts, live parity 0 our-bug, e2e 28/28, build/dry-run/migrate chain incl. idempotency); the 3 continue-on-error drift scripts and the pypdf env SKIP recorded exactly as CI classifies them (report-only, no fixes per the verification contract). Ready for T3.2 (PR, merge, deploy, live single-load verification).
