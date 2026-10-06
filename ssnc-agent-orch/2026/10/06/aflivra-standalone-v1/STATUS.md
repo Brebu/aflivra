@@ -675,3 +675,97 @@ Mode: read-only compliance audit against PLAN.md Requirements 1-7 (frozen contra
 - Gap 2 (PR open state) CLOSED by authenticated orchestrator check: gh pr view 1 --repo Brebu/aflivra → {"number":1,"state":"OPEN","title":"Aflivra v1 bootstrap: rev 35 import + verified local baseline","headRefName":"feat/aflivra-v1-standalone"} (PAR the spec-reviewer's CANNOT-VERIFY; subagents hold no github.com token by design).
 - Gap 1 (missing „Instalare pe telefon" README section) FIXED by orchestrator edit (bounded, PLAN T2.2 frozen deliverable): section inserted between the deploy runbook and „## Disponibilitate și reutilizare", matching file voice (iOS Safari/Android Chrome/desktop install steps, HTTPS requirement, icon inventory, same-data/same-cron statement).
 - New deviation registered per Stage 1: PLAN spec 5's "PDF/CSV/XLSX" wording is PDF-only in the rev-35 law reader (pre-existing product shape; e2e asserts what exists).
+
+## Spec Reviewer (Stage 1 re-run)
+
+Focused re-verification of the two Stage 1 gaps after commit 541e80b, plus a delta-scan of that commit only. Read-only; all claims below re-derived from code/filesystem/git this turn (README + manifest + icons + sw.js read directly; git show/status/rev-parse/reflog run fresh).
+
+### Gap 1 — PLAN T2.2 „Instalare pe telefon" README section — CLOSED (Confidence: HIGH)
+
+- **Section exists, correct placement:** README.md:309-317, `### Instalare pe telefon`, inserted between the production-deploy paragraph (:307) and „## Disponibilitate și reutilizare" (:319) — the placement prescribed in the Stage 1 fix note. Added by 541e80b as a single purely-additive +10 hunk (`@@ -306,6 +306,16`); no existing README line was modified.
+- **Platform coverage present:** iOS/iPad Safari „Adaugă la ecranul de start" via „Distribuie" (:313), Android Chrome „Instalează aplicația"/banner (:314), Desktop Chrome/Edge address-bar install icon (:315).
+- **HTTPS/workers.dev requirement present and grounded:** :317 „Instalarea cere HTTPS, îndeplinit de adresa `workers.dev`"; the URL pattern `https://aflivra.<subdomeniul-tău>.workers.dev` (:313) matches the runbook's own post-deploy URL claim (README:305) and deploy.mjs's frozen worker name `aflivra`.
+- **Icon inventory matches ground truth (read directly):** `public/apple-touch-icon.png` = `PNG image data, 180 x 180, 8-bit/color RGB` (README claims `apple-touch-icon`, 180×180 ✓); `public/manifest.webmanifest` declares `/icon-192.png` 192x192 + `/icon-512.png` 512x512, both `purpose: "any maskable"` (files on disk verified 192×192 / 512×512 ✓; head wiring in app/layout.tsx:5-23: manifest link, `icons.apple`, `appleWebApp capable/title/statusBarStyle`, `mobile-web-app-capable` + `apple-mobile-web-app-capable` ✓).
+- **No invented capabilities — every functional claim checked against code:** „aplicație de sine stătătoare" ← manifest `display: "standalone"` + start_url/scope `/`; „fără barele Safari" ← `apple-mobile-web-app-capable: yes`; installability on Android/desktop ← service worker is REAL (public/sw.js: install/activate/fetch handlers, cache `aflivra-static-v18`) and REGISTERED (app/page.tsx:68), so the criteria are met rather than claimed-only; „cu propriile date incluse" ← `public/` bundled via the frozen deploy shape (assets + no_bundle); „aceleași date și [aceeași] reîmprospătare programată" ← same worker, the five crons wired in `triggers` from refresh-groups.json; „legăturile se deschid în browserul sistemului" ← external anchors verified with `target="_blank"` rel `noreferrer`/`noopener` for maps (public-map.tsx OSM attribution), trailers (embedded-video.tsx:53 „Deschide trailerul pe YouTube") and documentation/provenance (courts-workspace.tsx:29,43; lawyers-workspace.tsx:8; visit-info.tsx:5; category-photo.tsx:11; experience.tsx:26,28) — under standalone display these open the system browser.
+- **Voice:** Romanian, declarative, factual, no marketing — matches the file's established voice.
+- LOW notes (cosmetic, non-blocking): (a) :317 typo „aceeați reîmprospătare" → „aceeași"; (b) :313 „în ecran complet" is loose for iOS — `statusBarStyle: "default"` keeps the OS status bar, so standalone removes Safari chrome but is not true fullscreen. Optional one-word softener; not a compliance failure.
+
+### Gap 2 — PR #1 open state — CLOSED (corroborated locally, remote state per orchestrator evidence)
+
+- **Local corroboration (re-derived):** working tree clean (0 modified files); branch `feat/aflivra-v1-standalone`; HEAD = 541e80b; `git rev-parse origin/feat/aflivra-v1-standalone` = 541e80b (local == remote-tracking ref); `git reflog show origin/feat/aflivra-v1-standalone` @{0} = 541e80b „update by push" — the remediation commit itself went out via a push from this session, so the remote branch head is the remediation commit, consistent with PR #1's head being this branch.
+- **Remote PR state (PR #1 OPEN, head `feat/aflivra-v1-standalone`):** taken from the orchestrator's recorded authenticated `gh pr view 1 --repo Brebu/aflivra` output (remediation entry, STATUS.md:675). Subagents hold no github.com token by design, so the remote PR state is accepted as orchestrator evidence — recorded here explicitly as such.
+
+### Delta-scan of commit 541e80b — CLEAN, no scope cream
+
+- `git show 541e80b --stat`: exactly 2 files, 58 insertions, 0 deletions — `README.md` (+10) and this STATUS.md (+48). No production code, config, script, spec YAML, or other docs touched.
+- README.md: single hunk, purely additive — only the new section.
+- STATUS.md: purely additive hunks — the previously-uncommitted „## Spec Reviewer (Stage 1)" report (this reviewer's own prior findings, riding along in the remediation commit as the single-sink audit trail) + the „### Stage 1 gap remediation (orchestrator)" entry. The prior report riding along is the review audit trail itself, not unrequested scope.
+- Commit message documents both remediations and carries the AI: + Human: + Co-authored-by attribution trailers.
+
+### Stage 1 re-run verdict
+
+All 7/7 requirements remain verified (prior per-requirement table stands); both blocking gaps from the FAILED verdict are now closed — Gap 1 fixed in the README with claims grounded against manifest/icons/sw.js (HIGH confidence, two LOW cosmetic notes), Gap 2 corroborated locally with the remote PR state accepted per orchestrator evidence — and the remediation commit contains exactly the two remediation artifacts plus the reviewer audit trail, with no scope cream.
+
+**Spec Compliance - PASSED** — proceed to Code Quality Review (Stage 2).
+
+## Quality Reviewer (Stage 2)
+
+Mode: read-only quality review of everything this branch ADDED since 08e6048 (the pre-existing rev-35 export is frozen upstream and out of scope; its 113 warnings / 4 broken verify scripts / pypdf skip are pre-registered). Stage 1 re-run PASSED confirmed at :709 before starting. All gates re-run independently this turn (no servers, no install, no file edits outside this append): `corepack pnpm exec tsc --noEmit` exit 0 · `corepack pnpm lint` exit 0 — "✖ 113 problems (0 errors, 113 warnings)", byte-identical to the documented baseline · `node scripts/verify-refresh-sweep.mjs` exit 0 (isolation/budget/summary-row battery) · git status residue before/after: only the pre-existing mid-session pair (README.md LOW-cosmetic fixes + the Stage-1 re-run's own STATUS entry — coherent, rides the T3.3 commit).
+
+### Constitution / house-standards compliance
+
+| Standard | Status | Evidence (read/verified this turn) |
+|---|---|---|
+| Dense one-line style matching the export | ✅ PASS | routes mirror app/api/live/route.ts exactly (force-dynamic, Response.json+no-store on every path, {error:'Ro'} bodies, hand-rolled validation, no zod); .mjs scripts match scripts/verify-*.mjs posture (fail-loud, argv validation, exit codes, Romanian console output); `as any` casts match the export's own idiom (cache.ts uses `any` liberally) |
+| env from 'cloudflare:workers', process.env only in scripts | ✅ PASS | grep: app/lib/build code imports env from 'cloudflare:workers' only; process.env only in scripts/*.mjs (deploy.mjs argv/env, db-migrate.mjs) + playwright.config.ts (CI detection, a config file, not app code) |
+| No comments except business rules, no ticket IDs | ⚠️ LOW×2 | business-rule comments only (subrequest ceiling refresh-sweep.ts:20-23, per-source isolation :58, isolate-per-group route.ts:15, SHA-256 gate rationale, corrupt-row guard status:12, eslint downgrade rationale) — **except** e2e/home-smoke.spec.ts:37 carries "(T1.4)" and playwright.config.ts:5 carries "(Advocate D5: …)" — session-plan references, not Jira IDs, but meaningless to a reader outside the committed session docs |
+| Secrets never literal | ✅ PASS | `git grep dev-refresh-token :!ssnc-agent-orch` → 0 hits; .dev.vars NOT tracked (ls-files), .dev.vars.example tracked + placeholder-only ("change-me-local-dev") + prod runbook line; CI seeds via `cp .dev.vars.example .dev.vars` (placeholder into sandbox only); production via `wrangler secret put` documented in README + deploy.mjs:34 output text |
+| Logs free of tokens/bodies | ✅ PASS | routes log {event,group,message}/{event,message}; sweep module logs identifiers only (sweep.ts:55,63,67,71); scheduled handler logs {event:'sweep_completed',group,ok,failed,durationMs} (sites-worker.ts:34,39) — no auth header, token or payload ever reaches a log path |
+| Degrade-never-fail | ✅ PASS | per-source try/catch (refresh-sweep.ts:59-60), summary-write best-effort (:63), unknown group/cron/trigger → structured warn + null (:55,67,71; sites-worker.ts:33-36), status route corrupt-row skip + empty-DB → lastSweepAt:null (status:12,14), catch in route loop keeps other groups (route.ts:15-17) |
+| Timestamps / status semantics | ✅ PASS | ISO strings throughout; ok=fresh|cached, failed=stale|unavailable — consistent with the 4-state contract; e2e asserts the valid set (never specific states, never raw 200s) |
+
+### Per-dimension verdicts
+
+**1. Pattern consistency — PASS.** Timing-safe Bearer gate (SHA-256 both sides → 32-byte digests, no length oracle, `!token` fail-closed short-circuit, `Bearer ` prefix checked before hashing) is a correct constant-time shape and matches the D4 ruling; key-range SELECT `key>? AND key<?` with bound params exact-matches the legal-registry.ts:12 precedent (';'=':'+1). deploy patch algorithm is assert-then-patch-copy: shape assertions exit before writeFileSync on drift; unresolved-id non-dry-run exits before write (Database specialist PROOF A: sha256/mtime unchanged after failed run); the build output `dist/server/wrangler.json` is never written — only the same-dir copy. db-migrate guard: sqlite_master check → whole-file --file only when both tables missing, per-statement --command healing on partial apply, post-apply re-guard; idempotent ×2 proven live + encoded as CI runs 1+2. use-mobile.ts useSyncExternalStore (registered deviation from PLAN's useState sketch): `max-width: 767px` ≡ NOT `min-width: 768px`, serverSnapshot:false ≡ original `!!undefined` first render — identical semantics for the single consumer, lint-mandated, canonical rule-recommended remedy.
+
+**2. Maintainability — PASS.** refresh-groups.json is provably the single source of truth: consumed by refresh-sweep.ts (members, import-time unknown-member guard), deploy.mjs (crons, ≤5/one-cron-one-group/non-empty guards), both routes (names + seedBacked), README tables (byte-for-byte quote, verified against the JSON), verify-refresh-sweep.mjs (frozen contract pin). No group name or cron is hardcoded outside it except deliberate test pins (e2e spec 15 + verify script 18 — regression pinning of the deploy contract, not drift). Test quality: assertions pin real behavior — retry count exactly 3, budget-cap no-new-fetch, object key sets deep-equal, key derivations pinned to the app's first-load keys (forecast: '@' rounding verified against forecastConfig Math.round(lat*100)/100 → 44.43:26.1 = defaultCity 44.4268/26.1025 = /api/weather first load), no-defer assertion on ctx.waitUntil, echo cap live-proven at exactly 200. T2.7 e2e realignment strengthened (not weakened) assertions; every debug iteration was test-side locator/widening, zero greenification — honest log. LOW residues below (#2-#4).
+
+**3. Security — PASS.** Verified: env-only token source; unset/empty token ⇒ always 401; six live 401 probes (same-length first/last-byte tamper + length tamper) identical generic bodies; ?source allowlist validation at the boundary before any sweep work, echo capped `.slice(0,200)`; parameterized D1 (zero concatenated SQL); no API keys in upstream URLs; POST per-source error strings are public-portal messages. CI `.dev.vars` seeding correct (template → gitignored sandbox file, placeholder only, never committed — .gitignore:10-12 ordering verified working, file IS tracked).
+
+**4. Correctness — PASS.** waitForRefresh path verified in cache.ts:61 — same budgets/locks/429-backoff as the UI, no bypass; sweep sits inside the 03:00-Bucharest revalidation window by construction. Scheduled handler: awaits in-handler (never pushes the sweep via ctx.waitUntil — matches fetch's own wrap semantics), env.DB passed explicitly, unknown cron live-proven no-op with row isolation (5/5 cron→group + 1 unknown, timestamps pair per invocation). All-groups POST deterministically exceeds the free-plan 50-subrequest cap (161 estimated) — documented in README as local-dev/Workers-Paid path with per-group as the production manual path; per-source isolation keeps the response 200 with honest failed counts (adjudicated by T2.7 #5, README line landed). e2e waitForClientReady: robust, not flaky-prone — the `reper.v2.preferences` mount-effect write is a deterministic client-interactive marker; failure mode is a loud poll timeout (test fails), never a silent pass; 30s budget is generous vs ~10s boot.
+
+**5. Docs coherence — PASS (3+ commands spot-checked).** `pnpm test:e2e` ↔ package.json:18 ✓; `cp .dev.vars.example .dev.vars` ↔ tracked template ✓; `corepack pnpm db:migrate:local`/"prod" ↔ package.json:16-17 + live idempotency proofs ✓; TOKEN grep/cut extraction valid ✓; deploy runbook flags (`--dry-run`, `--database-id`) are exactly what deploy.mjs:15 accepts ✓; cron-sim curl uses the live-proven `/cdn-cgi/handler/scheduled?cron=` and explicitly corrects the nonexistent `/cdn-cgi/local/scheduled` ✓; README says 400 for unknown ?source ↔ route.ts:12 is 400 (the Scribe coordination note resolved by T2.7-apply — no desync) ✓; 401-on-:8787 (.dev.vars resolved relative to dist/server/) documented and live-proven fail-closed ✓. STATUS.md audit trail complete: entry present for every dispatched task, including the honest Scribe re-dispatch failure note (:539-540) and every plan deviation (use-mobile rewrite, Codul penal, .dev.vars.example value override, deploy no-build/no-auto-create supersession, 404→400).
+
+### Issues
+
+All findings LOW/INFO — none block approval; safe to fold into the T3.3 final commit or defer.
+
+| ID | Severity | Category | Issue | Location |
+|---|---|---|---|---|
+| QR-001 | LOW (Confidence: HIGH) | House rule | Session-plan references in code comments — "(T1.4)" and "(Advocate D5: …)" are planning-doc IDs, meaningless outside the committed ssnc-agent-orch tree; keep the business text, drop the parentheticals | e2e/home-smoke.spec.ts:37, playwright.config.ts:5 |
+| QR-002 | LOW (Confidence: HIGH) | Duplication | `tokenValid` duplicated identically in both refresh routes — a future edit to one gate drifts the pair; today both are pinned by the shared 401-pair e2e test. Optional: hoist to a lib/live gate module (2-line import per route) | app/api/refresh/route.ts:9, status/route.ts:7 |
+| QR-003 | LOW (Confidence: HIGH) | Dead-ish surface | refresh-sweep.ts's `listGroups/listSeedBacked/listOnDemand` accessors are consumed only by the verify battery — both routes read the JSON directly (the frozen single-source decision, STATUS:151). Two read paths for one map; either route the status endpoint through the accessors (also fixing QR-004) or accept the accessor as test surface | lib/live/refresh-sweep.ts:49-51 |
+| QR-004 | LOW (Confidence: HIGH) | Typing | `sweepMap as any` in both routes discards the module's typed view — a malformed refresh-groups.json fails at runtime/import + verify battery, but not at tsc on the route path. Routing through the typed accessors (QR-003) removes the cast | route.ts:11, status/route.ts:13-14 |
+| QR-005 | LOW (Confidence: MEDIUM) | Docs/register | PLAN T2.4 names `.github/workflows/ci.yml`; landed `pr-validation.yml` — described at STATUS:474 but never name-checked against the plan (the way the deploy no-build supersession is at STATUS:194). Cosmetic register gap only | .github/workflows/pr-validation.yml |
+| QR-006 | INFO | Accepted risk | Committed session-doc prose names the local dev token sample — localhost-only convention value, adjudicated ACCEPTED by T2.5; production secret enters only via `wrangler secret put` | ssnc-agent-orch/** |
+| QR-007 | INFO | Accepted debt | eslint scoped downgrades (6 rules → warn on 23 frozen-export surfaces + 2 in scripts/) and the 5 CI continue-on-error verify steps — both in-file commented, registered as Wave-3 follow-ups, all 113 warnings stay visible; no silent greenify | eslint.config.mjs:44-63, pr-validation.yml:60-74 |
+
+### Verification summary (this turn's fresh evidence)
+
+| Gate | Result |
+|---|---|
+| `corepack pnpm exec tsc --noEmit` | exit 0 |
+| `corepack pnpm lint` | exit 0 — 0 errors / 113 warnings (baseline-identical) |
+| `node scripts/verify-refresh-sweep.mjs` | exit 0 — isolation ✓ budget cap ✓ summary row ✓ 5 groups/21 members ✓ |
+| Scaffold scan (TODO/FIXME/stub/placeholder-code) | clean — the only "placeholder" hits are the D1 refusal messages (business rule) |
+| Secrets scan (tracked files) | no token literal; .dev.vars untracked; template placeholder-only |
+| Residue | zero new (two dentry pre-existing mid-session changes documented above) |
+
+**Code Quality Review - APPROVED** — no CRITICAL/HIGH/MEDIUM findings; QR-001…QR-005 are bounded LOW cleanups, safe to fold into the final commit; pattern, security, correctness and docs dimensions all verified against the actual code and fresh gate runs. Ready for T3.2/T3.3.
+
+### Stage 2 follow-up register (orchestrator — per quality-reviewer fix list)
+- FIXED (LOW #1): session-plan references removed from e2e/home-smoke.spec.ts:37 + playwright.config.ts:5 (business text kept).
+- DEFERRED (LOW #2): tokenValid gate duplicated across the two refresh routes — hoisting to a shared module deferred as post-merge follow-up (verified-working code; drift risk noted).
+- DEFERRED (LOW #3): routes read refresh-groups.json via `as any` while typed accessors exist — routing the status endpoint through lib/live/refresh-sweep.ts accessors deferred as post-merge follow-up (removes cast + dual read-path).
+- REGISTERED (LOW #4): CI workflow filename is .github/workflows/pr-validation.yml (PLAN said ci.yml) — deviation registered here; content matches the T2.4 contract.
+- STANDING pre-existing follow-ups (rev-35 frozen upstream): 4 broken verify scripts (tabular-geography/source-xml/source-html imports + audit-controls stale assert), pypdf-dependent verify-legal-pdf (CI continue-on-error), 113 scoped lint warnings.

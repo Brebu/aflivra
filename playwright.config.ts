@@ -2,7 +2,7 @@ import {defineConfig, devices} from '@playwright/test';
 
 // The vinext/workerd dev server cold-starts slowly and the live loaders budget 6-18s
 // per upstream call, so the readiness and per-action budgets stay generous
-// (Advocate D5: never weaken an assertion to green — widen the timeout instead).
+// Never weaken an assertion to green — widen the timeout instead.
 export default defineConfig({
   testDir: './e2e',
   outputDir: './test-results/',

@@ -310,11 +310,11 @@ Declanșarea manuală în producție se face per grup: `POST /api/refresh?source
 
 Aflivra este o aplicație web instalabilă (PWA): se adaugă pe ecranul de start ca aplicație de sine stătătoare, cu propriile date incluse, fără magazin de aplicații.
 
-- **iPhone / iPad (Safari):** deschide `https://aflivra.<subdomeniul-tău>.workers.dev`, apoi „Distribuie" (pătratul cu săgeata în sus) → „Adaugă la ecranul de start". Iconița Aflivra apare între aplicații, iar aplicația pornește fără barele Safari, în ecran complet.
+- **iPhone / iPad (Safari):** deschide `https://aflivra.<subdomeniul-tău>.workers.dev`, apoi „Distribuie" (pătratul cu săgeata în sus) → „Adaugă la ecranul de start". Iconița Aflivra apare între aplicații, iar aplicația pornește fără barele Safari.
 - **Android (Chrome):** deschide adresa, apoi meniul (trei puncte) → „Instalează aplicația" (sau banner-ul „Adaugă la ecranul de start"). Aplicația apare în lista de aplicații a sistemului.
 - **Desktop (Chrome/Edge):** bara de adrese afișează iconița de instalare din dreapta; click → „Instalează". Aplicația se deschide în propria fereastră.
 
-Instalarea cere HTTPS, îndeplinit de adresa `workers.dev`. Iconițele pentru iOS (`apple-touch-icon`, 180×180) și pentru Android/desktop (`manifest.webmanifest`, 192 și 512, cu variante `maskable` pentru decupările lansatorului) sunt incluse în `public/`. Aplicația instalată folosește aceleași date și aceeați reîmprospătare programată ca și în browser; pentru conținutul extern — hărți, trailere, documentație — legăturile se deschid în browserul sistemului.
+Instalarea cere HTTPS, îndeplinit de adresa `workers.dev`. Iconițele pentru iOS (`apple-touch-icon`, 180×180) și pentru Android/desktop (`manifest.webmanifest`, 192 și 512, cu variante `maskable` pentru decupările lansatorului) sunt incluse în `public/`. Aplicația instalată folosește aceleași date și aceeași reîmprospătare programată ca și în browser; pentru conținutul extern — hărți, trailere, documentație — legăturile se deschid în browserul sistemului.
 
 ## Disponibilitate și reutilizare
 

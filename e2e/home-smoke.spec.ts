@@ -34,7 +34,7 @@ test.describe('Home smoke', () => {
     await expect(page.locator('.pulse-row', {hasText: 'Curs de referință'})).toBeVisible();
     await expect(page.locator('.pulse-row', {hasText: 'Prognoză locală'})).toBeVisible();
 
-    // PWA head wiring (T1.4): manifest with cache-bust, apple-touch-icon, theme-color,
+    // PWA head wiring: manifest with cache-bust, apple-touch-icon, theme-color,
     // mobile-web-app-capable — the installability contract, not just markup presence.
     await expect(page.locator('head link[rel="manifest"]')).toHaveAttribute('href', /\/manifest\.webmanifest\?v=/);
     await expect(page.locator('head link[rel="apple-touch-icon"]')).toHaveAttribute('href', /apple-touch-icon\.png$/);
