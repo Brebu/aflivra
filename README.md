@@ -161,6 +161,7 @@ Clona conține toate datele publicate (`public/`); nu trebuie dezarhivat nimic. 
 corepack pnpm install      # NU `pnpm run install:ci` — acel script este pentru sandbox-ul Linux al platformei de origine și eșuează pe macOS
 pnpm dev                   # http://127.0.0.1:5173 — vinext + workerd, binding-uri D1/ASSETS locale
 pnpm lint && pnpm exec tsc --noEmit
+pnpm test:e2e              # Playwright (Chromium; browserul se instalează o singură dată: corepack pnpm exec playwright install chromium) — pornește singur serverul pe :5173; 8 fișiere de specificații
 pnpm build && pnpm start   # paritate de producție pe :8787 (wrangler; necesită `pnpm build` înainte)
 ```
 
@@ -180,14 +181,130 @@ node scripts/verify-legal-pdf.mjs
 node scripts/verify-catalog.mjs
 node scripts/verify-expanded.mjs
 node scripts/verify-snapshot-transport.mjs
+node scripts/verify-refresh-sweep.mjs
 node scripts/audit-controls.mjs
 python3 scripts/package-source.py
 pnpm build
 ```
 
-`verify-live.mjs` verifică parser-ele, cererile SOAP, selecția actelor, importurile fără vechile limite de rânduri/coloane, căutarea, media și textele codificate. `verify-legal-refresh.mjs` verifică separat pauza globală și continuarea după un eșec izolat, cu fixture-uri controlate. Opțiunea `--legal-responses <director>` folosește răspunsuri upstream reale păstrate separat, fără arhivarea numelor părților. `verify-legal-records.mjs` verifică selectarea formelor consolidate, excluderea versiunilor viitoare, respingerea cache-ului SOAP vechi, integralitatea anexelor și fragmentelor mari, ora locală și blocarea textului neverificat la HTTP 502. Folosește fixture-uri de contract în memorie și nu certifică actualitatea unor acte reale. `verify-cache.mjs` folosește o bază în memorie și verifică erori, date mari, concurență și actualizare în fundal; aceste fixture-uri nu ajung în aplicație. `verify-catalog.mjs` recitește toate metadatele, fotografiile și cele șase coduri. `audit-controls.mjs` verifică structural controalele, etichetele și stările dialogurilor. `verify-legal-pdf.mjs` generează PDF-uri din trei articole reale și verifică prin pypdf păstrarea tuturor caracterelor din textul articolului, inclusiv peste limitele de pagină; necesită Python cu pypdf. Opțiunea `--out <director>` păstrează documentele pentru randare și verificare vizuală cu Poppler.
+`verify-live.mjs` verifică parser-ele, cererile SOAP, selecția actelor, importurile fără vechile limite de rânduri/coloane, căutarea, media și textele codificate. `verify-legal-refresh.mjs` verifică separat pauza globală și continuarea după un eșec izolat, cu fixture-uri controlate. Opțiunea `--legal-responses <director>` folosește răspunsuri upstream reale păstrate separat, fără arhivarea numelor părților. `verify-legal-records.mjs` verifică selectarea formelor consolidate, excluderea versiunilor viitoare, respingerea cache-ului SOAP vechi, integralitatea anexelor și fragmentelor mari, ora locală și blocarea textului neverificat la HTTP 502. Folosește fixture-uri de contract în memorie și nu certifică actualitatea unor acte reale. `verify-cache.mjs` folosește o bază în memorie și verifică erori, date mari, concurență și actualizare în fundal; aceste fixture-uri nu ajung în aplicație. `verify-catalog.mjs` recitește toate metadatele, fotografiile și cele șase coduri. `audit-controls.mjs` verifică structural controalele, etichetele și stările dialogurilor. `verify-legal-pdf.mjs` generează PDF-uri din trei articole reale și verifică prin pypdf păstrarea tuturor caracterelor din textul articolului, inclusiv peste limitele de pagină; necesită Python cu pypdf. Opțiunea `--out <director>` păstrează documentele pentru randare și verificare vizuală cu Poppler. `verify-refresh-sweep.mjs` verifică harta grupurilor din `lib/live/refresh-groups.json` — maximum cinci crons, un singur cron per grup, estimări de maximum 40 de subrequest-uri per grup, toți membrii rezolvați prin încărcători — izolarea unei surse căzute, respectarea bugetelor orare și rândul de rezumat al turei (`sweep:group:`), totul cu fetch controlat, fără rețea reală.
 
 Auditul structural și compilarea **nu înlocuiesc verificarea vizuală și apăsarea fiecărui control pe dispozitive reale**. Verificările responsive sunt efectuate în Chrome prin previzualizarea Sites; testarea pe un iPhone fizic rămâne distinctă.
+
+### Reîmprospătarea programată a surselor
+
+Reîmprospătarea de noapte rulează ca cinci ture Cron Triggers — câte o tură pentru fiecare grup de surse — pe fusul UTC. Fiecare tură reîmprospătează integral membrii grupului prin același mecanism `readSource` cu revalidare la cerere folosit și de interfață; o sursă căzută este izolată, restul grupului își continuă tura, iar bugetele orare pe sursă (ANAF, Open-Meteo, legislație, instanțe, CKAN) rămân în vigoare și în tură. Definiția completă — grupuri, expresii cron, estimări de subrequest-uri, familiile exceptate — stă în `lib/live/refresh-groups.json`, fișierul unic citit de modulul de tură, de rutele API, de scriptul de publicare și de acest tabel.
+
+| Grup | Expresie cron (UTC) | Surse reîmprospătate (membrii exacți) | Subrequest-uri estimate |
+| --- | --- | --- | --- |
+| live | `0 0 * * *` | `bnr`, `weather.anm`, `company.default`, `catalog.default` | 33 |
+| weather | `7 0 * * *` | `weather.alerts`, `forecast.bucuresti`, `events.odeon`, `cinema.bucuresti.today` | 29 |
+| news | `14 0 * * *` | `feed.munca`, `feed.stiri`, `feed.sanatate`, `feed.educatie`, `feed.justitie` | 35 |
+| legislation | `21 0 * * *` | `law.search.default`, `law.search.codcivil`, `lawyers.default`, `knowledge.company.default` | 33 |
+| registers | `28 0 * * *` | `directory.schools.page0`, `catalog.category.bani`, `catalog.category.sanatate`, `feed.agricultura` | 31 |
+
+Turele pornesc la minutele 0, 7, 14, 21 și 28 ale orei 00:00 UTC — adică 03:00–03:28 ora Bucureștiului (EEST) — exact pe fereastra de dimineață a revalidării: expirarea forțată de la 03:00 Europe/Bucharest (vezi „Conectori, cache și localizare”) face ca rândurile zilei precedente să fie reîmprospătate la prima citire de după tură. Estimările stau sub 40 de subrequest-uri per grup, cu rezervă față de plafonul planului gratuit Cloudflare de 50 de subrequest-uri per invocare, iar cele cinci ture folosesc exact cinci crons — plafonul planului gratuit. Totalul estimat pe cele cinci grupuri este 161 de subrequest-uri.
+
+Familiile grele nu intră în tură; ele rămân pe copiile verificate incluse în aplicație (`seedBacked`):
+
+| Familie | Motiv |
+| --- | --- |
+| `transport` | Arhiva GTFS a transportului public se parsează integral la pornire; reîmprospătarea ei zilnică ar depăși plafonul gratuit de subrequest-uri și de CPU pe invocare. |
+| `siruta` | Registrul SIRUTA se publică ca fișier CSV voluminos; se servește din copia verificată inclusă în aplicație. |
+| `films` | Catalogul Wikidata al filmelor românești este stabil și voluminos; se servește din copia verificată inclusă în aplicație. |
+| `directory.health` | Registrul clinicilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare. |
+| `directory.pharmacies` | Registrul farmaciilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare. |
+| `directory.hospitals` | Registrul spitalelor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare. |
+| `law.consolidated.full` | Consolidarea integrală a unui act poate depăși 1,4 MB de text și se stochează în fragmente; se verifică la deschiderea actului, nu pe tură de noapte. |
+| `catalog.organizations-formats` | Paginile de organizator și de format ale catalogului sunt combinatorii; se verifică la cerere. |
+| `resource.datastores` | Resursele și depozitele de date ale catalogului se verifică la deschiderea fiecărui set de date. |
+
+Familiile verificate la cerere (`onDemand`) nu sunt niciodată în tură:
+
+| Familie | Motiv |
+| --- | --- |
+| `transport.realtime` | Pozițiile, sesizările și disfuncționalitățile în timp real au un TTL de 30 de secunde și nu pot fi pre-împrospătate. |
+| `courts` | Dosarele se verifică la cerere după număr, cu un TTL de 5 minute. |
+| `forecast` | Prognoza se calculează pentru coordonatele alese; doar orașul implicit este pre-împrospătat. |
+| `company-knowledge` | Identitatea și cunoștințele despre firme se verifică pentru CUI-ul explorat; doar CUI-ul implicit este pre-împrospătat. |
+| `articles-stories-cinema` | Articolele, povestirile și programele cinema se verifică pentru cheia și ziua aleasă; azi se pre-împrospătează doar varianta implicită București. |
+| `feeds.energie-transport` | Fluxurile ministerelor de energie și transport se verifică la cerere. |
+| `datastore.pages` | Paginile dincolo de prima ale fiecărui registru și filtrările geografice se verifică la cerere. |
+| `law.search` | Căutările legislative se verifică la cerere; varianta implicită și Codul civil se pre-împrospătează zilnic. |
+
+### API-ul de reîmprospătare și tokenul local
+
+Declanșarea manuală și starea turelor sunt două rute protejate prin token: `POST /api/refresh` și `GET /api/refresh/status`. Tokenul vine exclusiv din variabila de mediu `REFRESH_TOKEN` — niciodată din parametri sau corpul cererii — și este comparat în timp constant pe rezumatul SHA-256, fără să divulge lungimea sau poziția primei diferențe. Pentru dezvoltare, copiază șablonul și alege propria valoare; fișierul `.dev.vars` este ignorat de git, iar în producție valoarea reală ajunge doar prin `wrangler secret`:
+
+```sh
+cp .dev.vars.example .dev.vars
+```
+
+Verificarea cu token se face pe serverul de dezvoltare `pnpm dev` (:5173), unde `.dev.vars` este încărcat automat. Antetul `Authorization: Bearer` este cerut pe ambele rute:
+
+```sh
+TOKEN="$(grep -m1 '^REFRESH_TOKEN=' .dev.vars | cut -d= -f2-)"
+
+curl -s -X POST "http://127.0.0.1:5173/api/refresh?source=live" -H "Authorization: Bearer $TOKEN"
+curl -s -X POST "http://127.0.0.1:5173/api/refresh" -H "Authorization: Bearer $TOKEN"
+curl -s "http://127.0.0.1:5173/api/refresh/status" -H "Authorization: Bearer $TOKEN"
+```
+
+Semantica răspunsurilor:
+
+- 401 cu `{"error":"Acces interzis."}` la lipsa tokenului, token greșit sau `REFRESH_TOKEN` nedefinit în mediul de execuție — comportament fail-closed.
+- 405 la metoda greșită pe oricare rută (`GET` pe `/api/refresh`, `POST` pe `/api/refresh/status`), generat de platformă.
+- 400 la `?source=` cu valoare necunoscută; mesajul de eroare listează cele cinci grupuri valide.
+- 200 la declanșarea unei ture, cu același înveliș `{groups:[...], servedAt}` în ambele moduri: `?source=<grup>` reîmprospătează un singur grup, iar lipsa parametrului rulează cele cinci grupuri secvențial.
+
+`GET /api/refresh/status` raportează cele cinci grupuri cu numele, expresia cron, ultima tură (`lastSweepAt` — `null` înainte de prima tură) și starea fiecărei surse (cheie, stare din `fresh`/`cached`/`stale`/`unavailable`, ultima reușită), plus familiile `seedBacked` cu motivele lor. Registrul turelor se scrie în tabela `source_cache` existentă, în rândurile `sweep:group:<grup>` — fără schemă nouă — și se citește printr-o singură interogare pe interval de chei.
+
+Declanșarea fără `?source` este sincronă: durează 20+ secunde, cu 21 de reîmprospătări consecutive la sursele de date, și însumează cele 161 de subrequest-uri estimate — peste plafonul de 50 per invocare al planului gratuit. Pe planul gratuit în producție, o tură completă epuizează bugetul de subrequest-uri pe parcurs; izolarea per sursă păstrează răspunsul 200, cu numărători reale ale surselor eșuate. De aceea declanșarea manuală în producție se face per grup (`?source=<grup>`), iar declanșarea completă rămâne calea de dezvoltare locală și a planului cu plată.
+
+`pnpm start` pe :8787 nu încarcă `.dev.vars` din rădăcina depozitului: serverul de paritate de producție rulează wrangler cu `--config dist/server/wrangler.json`, iar wrangler rezolvă `.dev.vars` relativ la directorul configurației — `dist/server/` — nu la rădăcină. `REFRESH_TOKEN` rămâne nedefinit și rutele de reîmprospătare răspund 401 pe :8787; este fail-closed, poziția corectă de securitate, iar verificarea cu token se face pe :5173. Dacă vrei testarea cu token pe :8787, copiază `.dev.vars` în `dist/server/` imediat după build: acolo este output regenerat la fiecare build și ignorat de git, deci niciodată versionat.
+
+### Simularea locală a turelor cron
+
+Pe serverul de dezvoltare, o tură programată se declanșează manual cu câte un curl per expresie cron către endpoint-ul intern al stivei Cloudflare. Calea corectă este `/cdn-cgi/handler/scheduled` cu parametrul `?cron=`; calea `/cdn-cgi/local/scheduled` nu există în wrangler 4.92:
+
+```sh
+curl 'http://127.0.0.1:5173/cdn-cgi/handler/scheduled?cron=0%200%20*%20*%20*'   # live
+curl 'http://127.0.0.1:5173/cdn-cgi/handler/scheduled?cron=7%200%20*%20*%20*'   # weather
+curl 'http://127.0.0.1:5173/cdn-cgi/handler/scheduled?cron=14%200%20*%20*%20*'  # news
+curl 'http://127.0.0.1:5173/cdn-cgi/handler/scheduled?cron=21%200%20*%20*%20*'  # legislation
+curl 'http://127.0.0.1:5173/cdn-cgi/handler/scheduled?cron=28%200%20*%20*%20*'  # registers
+```
+
+Fiecare apel rulează exact grupul mapat expresiei și scrie rândul `sweep:group:<grup>`; răspunsul este 200 cu corpul `ok`. O expresie nemapată nu este eroare: tura este un no-op, semnalat în jurnalul serverului cu evenimentul `sweep_unknown_cron`.
+
+### Migrările D1
+
+Migrațiile din `drizzle/` se aplică local cu o comandă gardată și idempotentă: verifică tabelele existente înainte de aplicare, aplică doar ce lipsește, iar la re-rulare raportează „deja aplicată — nimic de făcut”:
+
+```sh
+corepack pnpm db:migrate:local
+```
+
+Local, un singur fișier sqlite este întreaga bază D1 — sub `.wrangler/state/v3/d1/miniflare-D1DatabaseObject/` — partajat de toate suprafețele locale: `pnpm dev` pe :5173, `pnpm start` pe :8787 și migrația locală folosesc același `database_id` cu placeholder din configurația de build și același director `.wrangler/state`. O singură `db:migrate:local` le acoperă pe toate. Resetarea completă a datelor locale este `rm -rf .wrangler/state && corepack pnpm db:migrate:local`; producția nu citește niciodată acest fișier — rulează pe baza D1 remote, cu id-ul rezolvat la publicare — deci resetarea locală este întotdeauna sigură. Baza de producție se migrează cu `corepack pnpm db:migrate:prod`, pas din runbook-ul de publicare de mai jos.
+
+### Publicarea pe Cloudflare (runbook de o singură dată)
+
+`scripts/deploy.mjs` nu construiește: cere `corepack pnpm build` deja rulat, verifică forma output-ului de build (`dist/server/wrangler.json`) și patch-uiește o copie — `dist/server/wrangler.deploy.json` — cu numele worker-ului `aflivra`, cu numele și id-ul bazei D1 și cu lista completă `triggers.crons` din `lib/live/refresh-groups.json`. Scriptul refuză publicarea cu exit 1 dacă forma output-ului s-a schimbat, dacă id-ul bazei rămâne placeholder sau dacă fișierul de grupuri lipsește: un deploy Cloudflare înlocuiește toate crons-urile, deci fără lista completă s-ar dezarma toate grupurile.
+
+```sh
+corepack pnpm exec wrangler login
+corepack pnpm exec wrangler d1 create aflivra        # notează database_id din răspuns
+export AFLIVRA_D1_DATABASE_ID=<id>                    # sau trimite --database-id <id> fiecărui script
+corepack pnpm build
+node scripts/deploy.mjs --dry-run                     # revizuiește planul: name, database_name, database_id, triggers.crons
+corepack pnpm db:migrate:prod
+corepack pnpm exec wrangler secret put REFRESH_TOKEN --name aflivra   # valoare secretă, niciodată în cod
+corepack pnpm deploy
+```
+
+Deploy-ul aplică din nou migrația remote cu aceeași gardă — un no-op dacă este deja aplicată — apoi publică. URL-ul rezultat este `https://aflivra.<subdomeniul-tău>.workers.dev`, cu subdomeniul contului din output-ul wrangler; crons-urile celor cinci ture se activează odată cu publicarea, iar valoarea `REFRESH_TOKEN` intră exclusiv prin `wrangler secret put` — niciodată în fișiere versionate, cod sau parametri.
+
+Declanșarea manuală în producție se face per grup: `POST /api/refresh?source=<grup>` cu tokenul de producție. Declanșarea completă, fără `?source`, este sincronă și depășește plafonul de subrequest-uri per invocare pe planul gratuit; rămâne calea de dezvoltare locală și a planului cu plată (detalii în „API-ul de reîmprospătare și tokenul local”). Starea turelor programate se citește cu `GET /api/refresh/status`: `lastSweepAt` per grup confirmă că tura de noapte a rulat.
 
 ## Disponibilitate și reutilizare
 

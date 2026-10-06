@@ -11,5 +11,5 @@ export async function GET(request:Request){const token=env.REFRESH_TOKEN||'';if(
   const last=new Map<string,any>();
   for(const row of rows){try{const record=JSON.parse(row.data);if(record&&typeof record.group==='string')last.set(record.group,record)}catch{/* A corrupt sweep row cannot certify an execution. */}}
   const map=sweepMap as any;
-  return Response.json({groups:map.groups.map((group:any)=>{const record=last.get(group.name);return{name:group.name,cron:group.cron,seedBacked:map.seedBacked,lastSweepAt:record?.startedAt||null,perSource:Array.isArray(record?.sources)?record.sources.map((source:any)=>({key:source.key,status:source.status,lastSuccessAt:source.lastSuccessAt||null})):[]}}),servedAt:new Date().toISOString()},{headers:{'Cache-Control':'no-store'}})
+  return Response.json({groups:map.groups.map((group:any)=>{const record=last.get(group.name);return{name:group.name,cron:group.cron,lastSweepAt:record?.startedAt||null,sources:Array.isArray(record?.sources)?record.sources:[]}}),seedBacked:map.seedBacked,servedAt:new Date().toISOString()},{headers:{'Cache-Control':'no-store'}})
 }

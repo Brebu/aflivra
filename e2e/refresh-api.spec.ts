@@ -12,6 +12,7 @@ const devToken = (() => {
 })();
 
 const groupNames = ['live', 'weather', 'news', 'legislation', 'registers'];
+const seedBackedFamilies = ['transport', 'siruta', 'films', 'directory.health', 'directory.pharmacies', 'directory.hospitals', 'law.consolidated.full', 'catalog.organizations-formats', 'resource.datastores'];
 const validSourceStatuses = new Set(['fresh', 'cached', 'stale', 'unavailable']);
 
 test.describe('Refresh API', () => {
@@ -32,14 +33,15 @@ test.describe('Refresh API', () => {
     expect(statusWrongToken.status()).toBe(401);
   });
 
-  test('an unknown group is rejected with 404 listing the valid groups', async ({request}) => {
+  test('an unknown group is rejected with 400 listing the valid groups', async ({request}) => {
     const response = await request.post('/api/refresh?source=inexistent', {headers: {authorization: `Bearer ${devToken}`}});
-    expect(response.status()).toBe(404);
+    expect(response.status()).toBe(400);
     const body = await response.json();
+    expect(body.error).toContain('Grupul de surse „inexistent”');
     expect(body.error).toContain('Grupuri valide: live, weather, news, legislation, registers.');
   });
 
-  test('status with the dev token returns all five groups with the summary shape', async ({request}) => {
+  test('status with the dev token returns hoisted seedBacked families and stored per-source detail', async ({request}) => {
     const response = await request.get('/api/refresh/status', {headers: {authorization: `Bearer ${devToken}`}});
     expect(response.status()).toBe(200);
     const body = await response.json();
@@ -47,11 +49,20 @@ test.describe('Refresh API', () => {
     expect(body.groups.map((group: any) => group.name)).toEqual(groupNames);
     for (const group of body.groups) {
       expect(typeof group.cron, `cron for ${group.name}`).toBe('string');
-      expect(Array.isArray(group.seedBacked), `seedBacked for ${group.name}`).toBe(true);
+      expect(group.seedBacked, `seedBacked must not be nested in group ${group.name}`).toBeUndefined();
       expect(group.lastSweepAt === null || typeof group.lastSweepAt === 'string', `lastSweepAt for ${group.name}`).toBe(true);
-      expect(Array.isArray(group.perSource), `perSource for ${group.name}`).toBe(true);
-      for (const source of group.perSource) expect(validSourceStatuses.has(source.status), `invalid status: ${source.status}`).toBe(true);
+      expect(Array.isArray(group.sources), `sources for ${group.name}`).toBe(true);
+      for (const source of group.sources) {
+        expect(typeof source.key, `key in ${group.name}`).toBe('string');
+        expect(typeof source.name, `name in ${group.name}`).toBe('string');
+        expect(validSourceStatuses.has(source.status), `invalid status in ${group.name}: ${source.status}`).toBe(true);
+        expect(source.lastSuccessAt === null || typeof source.lastSuccessAt === 'string', `lastSuccessAt in ${group.name}`).toBe(true);
+        expect(source.error === null || typeof source.error === 'string', `error in ${group.name}`).toBe(true);
+      }
     }
+    expect(Array.isArray(body.seedBacked)).toBe(true);
+    expect(body.seedBacked.map((entry: any) => entry.family)).toEqual(seedBackedFamilies);
+    for (const entry of body.seedBacked) expect(typeof entry.reason, `reason for ${entry.family}`).toBe('string');
     expect(typeof body.servedAt).toBe('string');
   });
 
