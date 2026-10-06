@@ -21,10 +21,13 @@ export function FederatedResults({term,gallery,onNavigate,onReset}:{term:string;
  // recompute from the current props every render, so a late-arriving corpus can never
  // be shadowed by a mount-time snapshot.
  const [responses,setResponses]=useState<readonly CollectedResponse[]>([]);
+ // The network plan is a pure function of the settled term alone — a later corpus or gallery arrival changes eager results but never the pending requests, so the fan-out is not re-fired for it.
+ const planTerm=settled.trim();
+ const requestPlan=useMemo(()=>federatedSearch(planTerm).requests,[planTerm]);
  useEffect(()=>{
-  const runs=base.requests.map(request=>{const c=new AbortController();return{c,promise:fetchWithServerRetry(request.url,{signal:c.signal,cache:'no-store'}).then(r=>r.json()).then(payload=>{if(c.signal.aborted)return;setResponses(prev=>[...prev.filter(r=>r.term===base.term),{term:base.term,family:request.family,payload}])}).catch(()=>{})}});
+  const runs=requestPlan.map(request=>{const c=new AbortController();return{c,promise:fetchWithServerRetry(request.url,{signal:c.signal,cache:'no-store'}).then(r=>r.json()).then(payload=>{if(c.signal.aborted)return;setResponses(prev=>[...prev.filter(r=>r.term===planTerm),{term:planTerm,family:request.family,payload}])}).catch(()=>{})}});
   return()=>{runs.forEach(run=>run.c.abort())};
- },[base]);
+ },[requestPlan,planTerm]);
  const result=useMemo(()=>{let current=base;for(const response of responses){if(response.term!==base.term)continue;current=federatedCollect(current,response.family,response.payload)}return current},[base,responses]);
  const trimmed=term.trim();
  if(!trimmed)return null;

@@ -7,10 +7,7 @@ import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';
 import ts from 'typescript';
 
-// Poarta de inventar: enumeră integral suprafața aplicației din registre (domenii, secțiuni,
-// categorii de catalog, categorii și subcategorii de locuri, familii de surse) și refuză orice
-// familie de sursă din refresh-groups.json pe care nici paritatea (verify-source-errors.mjs),
-// nici un harness numit nu o acoperă. Offline, fără rețea, rapid.
+// Inventory gate: enumerate the app's full surface from the registries (offline) and refuse any refresh-groups source family that neither parity nor a named harness covers.
 const root=resolve(import.meta.dirname,'..');
 const temp=await mkdtemp(join(tmpdir(),'aflivra-sweep-inventory-'));
 try{

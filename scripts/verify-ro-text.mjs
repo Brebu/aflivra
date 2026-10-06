@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdtemp,rm} from 'node:fs/promises';
+import {existsSync,readdirSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -27,3 +28,33 @@ assert.equal(countNoun(100,'rezultat','rezultate'),'de rezultate');
 assert.equal(countNoun(178868,'rezultat','rezultate'),'de rezultate');
 console.log('Romanian count agreement verified: counts ending in 1 (1, 21, 101) take the singular; 0 and 2-19 the plain plural; the rest (20-99 and exact hundreds such as 100 or 1.000) take "de" + plural, with full-phrase agreement for adjectives and verbs and ro-RO thousands separators.');
 }finally{await rm(temp,{recursive:true,force:true})}
+
+const registries=readdirSync(join(root,'public'),{withFileTypes:true}).filter(e=>e.isDirectory()&&existsSync(join(root,'public',e.name,'sources.json'))).map(e=>e.name+'/sources.json');
+if(!registries.length){console.error('verify-ro-text: niciun registru de surse public/*/sources.json — verificația nu mai are ce proba.');process.exit(1)}
+/* User-facing source-registry prose must never leak internal ops language: raw API/field identifiers, imperative import instructions or project-phase wording. Endpoint/evidence stay inside the labeled full-inventory disclosure panel; addresses (urls) are not prose. */
+const opsTokens=[['fază internă de proiect',/\bmvp\b/i],['instrucțiune internă de import',/\bnu importa(?:ți)?\b/i],['identificator intern de parametru SOAP',/\b(?:numeParte|numarDosar|obiectDosar)\b/i],['identificator intern de câmp/API',/\b[A-Z][A-Z0-9]*(?:_[A-Za-z0-9]+)+\b/],['identificator intern de câmp/API (minuscule)',/\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b/]];
+const stripAddresses=text=>String(text??'').replace(/https?:\/\/\S+/g,'');
+const proseHits=[];
+const scanProse=(registry,where,text)=>{
+  const prose=stripAddresses(text);
+  for(const [label,pattern] of opsTokens){const global=new RegExp(pattern.source,pattern.flags.includes('g')?pattern.flags:pattern.flags+'g');for(const m of prose.matchAll(global))proseHits.push(`${registry} ${where} [${label}]: „${m[0]}" în „${prose.slice(0,120)}"`)}
+};
+for(const registry of registries){
+  const data=JSON.parse(await readFile(join(root,'public',registry),'utf8'));
+  for(const s of data.sources||[])for(const [field,value] of Object.entries(s)){
+    if(field==='endpoint'||field==='evidence'||field==='url')continue;
+    if(typeof value==='string'&&value)scanProse(registry,s.id+'.'+field,value);
+  }
+  if(typeof data.scopeNote==='string'&&data.scopeNote)scanProse(registry,'scopeNote',data.scopeNote);
+  for(const [index,entry] of (data.personal||[]).entries()){
+    if(typeof entry==='string'){scanProse(registry,'personal['+index+']',entry);continue}
+    const pairs=Array.isArray(entry)?entry.map((v,slot)=>[String(slot),v]):Object.entries(entry);
+    for(const [slot,value] of pairs)if(typeof value==='string'&&value&&!/^https?:\/\//.test(value))scanProse(registry,'personal['+index+']['+slot+']',value);
+  }
+}
+console.log('Registrele de surse ('+registries.join(', ')+') scanate după limbaj intern de operare: câmpurile vizibile utilizatorului (nume, note, acces, licență, personal) rămân în română pentru cetățean; endpoint-urile și dovezile rămân în panoul etichetat de inventar detaliat.');
+if(proseHits.length){
+  console.error('verify-ro-text: '+proseHits.length+' scăpări de limbaj intern în registrul de surse:');
+  for(const hit of proseHits)console.error('  '+hit);
+  process.exit(1);
+}

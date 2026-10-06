@@ -65,6 +65,32 @@ test.describe('Home smoke', () => {
     // The app must load without uncaught page errors.
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  test('home hero shows no inline provenance; the licenses panel keeps the hero credit', async ({page}) => {
+    // The hero was decluttered by design: image, heading, subtitle, search and chips stay,
+    // every attribution string and the provenance export widget were taken out of it.
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    const hero = page.locator('section.hero');
+    await expect(hero).toBeVisible();
+    for (const removed of ['ILUSTRAȚIE EDITORIALĂ', 'Fotografia originală', 'Proveniență și transformări', 'xulescu_g']) {
+      await expect(hero).not.toContainText(removed);
+    }
+    // Attribution moves, it doesn't disappear: the CategoryDirectory footer still exports
+    // "Surse și licențe", and the manifest behind that export carries the hero credit
+    // (author, license, link to the original photograph on Wikimedia Commons).
+    const footer = page.locator('.category-directory-footer');
+    await expect(footer.getByRole('combobox', {name: 'Format pentru surse și licențe'})).toBeVisible();
+    await expect(footer.getByRole('button', {name: 'Surse și licențe', exact: true})).toBeVisible();
+    const response = await page.request.get('/media/category-manifest.json');
+    expect(response.status()).toBe(200);
+    const manifest = (await response.json()) as unknown as Record<string, string>[];
+    const heroCredit = manifest.find(entry => entry.category === 'editorial-hero');
+    expect(heroCredit?.credit).toContain('xulescu_g');
+    expect(heroCredit?.license).toBe('CC BY-SA 2.0');
+    expect(heroCredit?.sourceUrl).toContain('commons.wikimedia.org');
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });
 
 test.describe('Hero suggestion chips route semantically', () => {

@@ -566,3 +566,361 @@ Totals: **17 ok + 2 source-blocks-egress · 0 our-bug · direct-fetch spending 1
 - Environment: node v24.19.0; pdftotext present; pypdf absent (guarded-skip parity with the CI runner); .dev.vars present for the gated refresh API specs.
 
 **Final line: T4.1: PASSED — all seven chain steps green: tsc 0 errors · lint 0 errors / 114 warnings (exact baseline) · battery 17/17 (incl. the guarded recorded skip) · e2e 48/48 · live parity ok (17 ok + 2 honest egress classes, 1 direct probe of the ≤2/family cap) · build + seed-restore + deploy-dry-run + db-migrate ×2 byte-identical idempotent.**
+
+## Spec Reviewer Findings
+
+Stage 1 spec-compliance review (independent, distrust-first): every claim re-derived from the tree at HEAD 74b2917 (`git status` clean — the entire session is in 9f4d332 + 74b2917); all mandated re-runs executed locally this review.
+
+**Verdict: Spec Compliance - FAILED — 3 gaps, 0 scope creep. R2 (federated search) and R4 (no regressions) FULLY VERIFIED; the three gaps are small, precisely located, and each has a one-line-ish fix.**
+
+### Per-requirement evidence table
+
+| Req | Status | Evidence (file:line) | Confidence |
+|---|---|---|---|
+| R1a sweep-inventory gate | ✅ VERIFIED | scripts/verify-sweep-inventory.mjs:24-123 — 16 domains/46 sections ( :24-35), DomainWorkspace content() coverage incl. RecordBrowser 4-kind literal (:36-42), catalogTopic↔catalogCategories both directions (:43-48), places manifest categories↔domains-with-places-section + local-all==178,868==count (:49-57), subcategory master list (:58-63), feeds/afirLoader/filmsLoader (:64-74), transit/directories/cinema/courts/refresh-groups (:75-89), coverage gate reading the parity table LIVE from verify-source-errors.mjs (:90-92, 111-122); wired pr-validation.yml:62 + README.md:187; re-run exit 0 | HIGH |
+| R1b source-errors 19 families + classifier + deployed leg | ✅ VERIFIED | verify-source-errors.mjs:59-78 — 19 families enumerated (6 original + directory×4, siruta, lawyers, legal/law, feeds/agricultura `known:'source-blocks-egress'` :73, feeds/filme, odeon, cinema, wikisource, transport/realtime); deployed leg `AFLIVRA_VERIFY_DEPLOYED_BASE` :13-14, skip-when-empty :100, known-class without direct fetch :115; verdict classes ok/our-bug(only exit-1)/source-blocks-egress/source-down/budget/recovered :104-117; mock matrix 6 scenarios × 19 families :387-391 (114 cells) incl. ASSETS shim :19-22 + V2 catalog category cell pins :261/263; re-run `{"result":"ok","families":19,"cells":114}` exit 0 | HIGH |
+| R1c model-contracts harness | ✅ exists/wired/green — but narrower than PLAN T1.4 (gap G3) | verify-model-contracts.mjs: LEG1 places :24-141 (full 178,868 walk, 848 sha256 proofs, index↔record parity ×13, spatial exact-once, cities, P1 STRICT gate :96-102 — auto-flips when the runtime normalizer handles all marks), LEG2 dosar :143-199 (fond<apel<recurs + evidence-only + 3 negative extraction probes), LEG3 CKAN :201-276 (raw keys confined, seed pool), LEG4 live corpora :278-414; pr-validation.yml:63 + README.md:188; re-run exit 0 — "acord integral pe 724858 intrări" | HIGH (existence) — gap G3 below |
+| R1d-P1 normalizer unification | ✅ VERIFIED | lib/live/query.ts:2-3 (enumerated ccc≠0 class, business-rule pairing comment) vs scripts/finalize-places.py norm() (`unicodedata.combining(c)!=0` + contract comment). **Independent verification this review: Python enumeration of the shipped regex = 934 codepoints, exactly equal to the Python ccc≠0 set (Unicode 16.0) — 0 missing, 0 extra.** Model-contracts strict gate confirms live ("acord integral") | HIGH |
+| R1d-F1 AFIR dedupe | ✅ VERIFIED | lib/live/feeds.ts parseAfir flatMap + `uniqueRecords(items, canonicalUrl)`; app/api/domain/route.ts — the `if(state.data)` mapping now routes EVERY kind through `uniqueRecords(...canonicalUrl)`; app/record-workspace.tsx `data-testid="feed-article"`; e2e sweep-regressions leg (unique titles + zero duplicate-key errors) green in the 48/48 run | HIGH |
+| R1d-F2 sources-registry copy | ⚠️ PARTIAL (gap G2) | S01/S08/S12 notes + S19.name rewritten in BOTH public/catalog/sources.json and public/data/sources.json (datastore_search/OD_FIRME/SIRUTA_s1/numeParte-family gone — grep 0 hits); BUT residual same-class ops language remains (G2) | HIGH |
+| R1d-F3 /catalog h1 | ✅ VERIFIED | app/catalog/page.tsx: `<h1>Catalogul de date publice ale României</h1>` on the .page-intro kicker; e2e sweep-regressions h1 leg green | HIGH |
+| R2 federated layer | ✅ VERIFIED | lib/live/federated.ts: 13 families (:81-94: places, catalog, lawyers, directory×4, stiri, agricultura, stories, gallery, cui, dosare); exclusions documented with rationale in the module head (cinema/events locality-day-scoped, transport București-Ilfov coverage gate, SIRUTA reference-lookup, notaries = places subcategory „Notari" only per flag #1); validDomainTab :96-99 (topicSections + 'data'); courtNumberTerm :100-103 (regex gates + slash normalize); federatedSearch >200 cap + honest note, min/max char gates; federatedCollect immutable + duplicate/late drop :204-218; assembleGroups registry order. verify-federated-search.mjs 6 legs re-run exit 0 | HIGH |
+| R2 grouped UI + navigation + seeds | ✅ VERIFIED | app/search-results.tsx:14-61 — ONE grouped list in federatedGroups order, headers = label + countText(count,'rezultat','rezultate'), per-group busy/gate/unavailable notes, total>shown "N rezultate găsite la sursă — afișăm primele m", global honest empty + reset, external La sursă link for article/dataset/story, keys family:id:index; V1 fix structure verified (:23-28: term-keyed response overlay + per-render useMemo — no mount-time snapshot, no effect-setState). app/page.tsx:119 FederatedResults above gallery when q≠''; :140 DomainWorkspace key={domain+':'+domainTab} + initialTab/initialQuery/initialSub/initialCourtNumber; go() writes `tab` ONLY for domain AND after validDomainTab; sync() accepts tab only domain+registry+valid; openFederated per target kind (place/company/domain+sub+courtNumber). Seeds: LawyersWorkspace({initialQuery}), RecordBrowser({kind,initialQuery}), LegalWorkspace({initialQuery,initialCourtNumber}→Courts({initialNumber}) prefills the dosar-number form, tab defaultValue 'courts'), StoriesWorkspace({initialQuery}), PlacesWorkspace initialSub. Federated e2e legs 7/8/9/10/11/12 (click-throughs + dosar seed-No-submit + CUI shortcut) green | HIGH |
+| R3 weather animations | ⚠️ 10/11 animations real (gap G1) | app/workspaces.css:56-89: all 5 conditions (rain far/near, snow far/near, sunny glow, night twinkle+drift ×2, cloudy drift ×2) + icon pops; every DEFINED keyframe is transform/opacity-only; all selectors `.v2`-scoped → covered by BOTH blanket gates (modern.css `@media(prefers-reduced-motion:reduce){.v2 *,.v2 *:before,.v2 *:after{animation:none!important…}}` + `.v2.no-motion *`); palette reuse verified (#d9eaff/#f3f7ff = pre-existing scene text colors workspaces.css:51/53, #ffffff55 chip border pre-existing, hover #afbcce + 0 8px 24px #1532470a = exact modern.css:9 values — no new hue); weather-workspace.tsx changes are key={background}/key={d.current.time} + aria-hidden ambient span only — zero JS timers, zero libraries (no dependency change in the diff). BUT the 11th animation is dead (G1) | HIGH |
+| R4 no regressions | ✅ VERIFIED | e2e legs COUNTED from spec files: federated-search 15 + weather-motion 3 + sweep-regressions 2 + baseline 28 (9 specs) = **48**; re-run: **48 passed (39.2s), exit 0**; `tsc --noEmit` exit 0; `pnpm lint` exit 0 — 0 errors / 114 warnings exact baseline; battery steps in the workflow: 15-script block + verify-downloads + guarded verify-legal-pdf = **17**, zero continue-on-error (grep); drift trio re-run: verify-expanded / verify-legal-records / audit-controls all exit 0 | HIGH |
+| T4.1 runtime tails (--live parity table, build, deploy --dry-run, db-migrate ×2) | ⚠️ CANNOT VERIFY | Recorded in T4.1's table; deliberately not re-run by Stage 1 — a second `--live` pass would spend direct source fetches against the user's ≤2/family/session budget; build/dry-run/migrate are re-proved by CI on push (pr-validation.yml:78-103 encodes build + seed-restore + deploy-dry-run + migrate ×2 idempotency). The verdict-ENGINE code itself is verified under R1b. | — |
+
+### Gaps (numbered fix tasks — do NOT proceed to Stage 2 until resolved)
+
+1. **G1 — missing `@keyframes aflivra-weather-sky` (Confidence: HIGH).** app/workspaces.css:57 references `animation:aflivra-weather-sky .55s ease both` on the scene `<img>`; no `@keyframes aflivra-weather-sky` exists in ANY css file, source or dist (repo-wide grep: 10 defined weather keyframes — rain-far/near, snow-far/near, glow, twinkle, night-drift, drift-far/near, icon — vs 11 referenced; dist live-data chunk likewise carries icon but no sky). The claimed condition-change crossfade (STATUS T3.1/T3.2: "scene img fade-in aflivra-weather-sky (.55s, opacity) on every condition change" / "Sky transitions between conditions… gentle crossfade") is INERT — the `key={background}` remount exists but nothing animates. The e2e pin is vacuous for this element: e2e/weather-motion.spec.ts:58 asserts computed `animationName === 'aflivra-weather-sky'`, which returns the declared ident even with no matching keyframes rule — every automated gate passes while the effect never runs. Fix (Builder, app/workspaces.css): add `@keyframes aflivra-weather-sky{from{opacity:0}to{opacity:1}}` beside the other weather keyframes (opacity-only, inherits both blanket gates); optionally strengthen the e2e img assertion to a keyframed property so a missing rule fails CI.
+2. **G2 — F2 ops-language cleanup incomplete (Confidence: HIGH).** The T1.5-F2 rewrite fixed the named leaks (S01 data.gov.ro note, S08 ONRC note, S12 portal-just note, S19 name — all verified clean) but the SAME class remains in the user-facing registries, both files: `sources[].note` S44 „Rețeaua școlară 2024-2025" → "…Nu importa date nominale de elevi." (imperative import instruction, exactly the F2 class) and the `personal` ROeID entry → "…nu este sursă universală de date și nu este cerință a MVP-ului." (internal project-phase language). probes/probe-f2-sources-copy.mjs reports GREEN honestly for its scope but UNDER-SCOPES the finding: its 8-token list has no "Nu importa" and it never scans `data.personal`. Fix (Builder): rewrite both strings in user-facing Romanian; extend the probe (add the Nu-importa/MVP-inflected tokens + scan the personal section) so the class is gated, not the 13 original instances.
+3. **G3 — permanent model-contracts harness narrower than PLAN T1.4's corpus list (Confidence: HIGH).** PLAN T1.4 and the exhaustive-vs-sampled rule name the model-contract harness corpora as: places ✅, catalog ✅, CNAS ×3 ✅, **SIRUTA ❌, legal snapshots (consolidation asOf/verified shape) ❌, stories corpus ❌**, transport GTFS ✅, cinema ✅ — plus T1.4's "forecast current/hourly/daily+units shape" ❌ and "events corpus shape" ❌ (grep of scripts/verify-model-contracts.mjs: 0 hits siruta/forecast; story/event hits are courtHistory/eventCount). Those corpora WERE fully audited once, offline, by the T1.4 register (13.755 SIRUTA items, forecast 0 unlabeled variables, 233 stories, 19 events — STATUS table) and siblings re-gate slices (stories text sha256 via verify-snapshot-transport; served shapes via source-errors fixtures; legislative mechanics via verify-legal-records on fixtures rather than the real snapshots) — but the STATUS T1.4c phrase "the Validator's T1.4 register made permanent" overstates: 4-5 register legs are not in any permanent gate over the REAL corpora. Fix (DevOps): fold the SIRUTA-items, forecast-labels, stories-corpus and events-corpus legs from the probe register into verify-model-contracts.mjs LEG 4 (all data already on disk; all offline).
+
+### Scope creep: NONE
+Every file in `git diff main...HEAD` maps to R1-R4, a justified fix finding (P1/F1/F2/F3, V1/V2), or the sanctioned session-dir artifacts. Noted deviations, not gaps: federated row styles live in app/experience.css rather than the PLAN T2.2-listed workspaces.css ("only if tokens demand" — workspaces.css was the weather agents' serialized partition this session); session probe files/screenshots ARE committed on the branch (sanctioned review artifacts — the T1.3/T3.2 "not committed" prose predates the session-wrap commits).
+
+### Stage 1 re-runs (executed this review, dev server :5173 left untouched)
+| Check | Exit | Result |
+|---|---|---|
+| corepack pnpm exec tsc --noEmit | 0 | 0 errors |
+| corepack pnpm lint | 0 | 0 errors / 114 warnings — exact baseline |
+| corepack pnpm test:e2e | 0 | **48 passed (39.2s)** |
+| node scripts/verify-sweep-inventory.mjs | 0 | full inventory coherent, 38 registry families covered |
+| node scripts/verify-model-contracts.mjs | 0 | 4 legs; "acord integral pe 724858 intrări" (strict post-P1) |
+| node scripts/verify-federated-search.mjs | 0 | 6 legs |
+| node scripts/verify-source-errors.mjs (mock) | 0 | {"families":19,"cells":114} |
+| verify-expanded / verify-legal-records / audit-controls | 0 ×3 | drift trio green |
+
+**Spec Compliance - FAILED — 3 gaps (G1 missing weather-sky keyframes at app/workspaces.css:57; G2 residual ops language + under-scoped probe in the two public/*/sources.json; G3 model-contracts permanent coverage vs PLAN T1.4 corpus list), 0 scope creep. R2 and R4 fully verified. Stage 2 blocked until G1-G3 land.**
+
+## Builder-B Findings (G1/G2)
+
+**Status: DONE — both spec-review gaps fixed exactly as prescribed, failing-first probe evidence; 11/11 keyframes consistency; tsc 0 errors; lint 0 errors / 114 warnings (exact baseline); full e2e suite 48/48 with the weather-motion legs 3/3 green on real keyframes.**
+
+### G1 — missing `@keyframes aflivra-weather-sky` (fixed, RED→GREEN)
+
+- **Fix:** `app/workspaces.css` gained exactly one line — `@keyframes aflivra-weather-sky{from{opacity:0}to{opacity:1}}` — inserted directly after the referencing rule `.v2 .weather-scene>img{animation:aflivra-weather-sky .55s ease both}`, matching the file's usage→keyframes adjacency pattern of the other ten weather keyframes. Opacity-only (the transform/opacity token rule), exactly the reviewer's prescribed shape; implements the declared condition-change crossfade on the scene img (`key={background}` remount restarts the fade). Top-level `@keyframes` like its ten siblings — the *referencing rule* is `.v2`-scoped, so both blanket gates (modern.css `prefers-reduced-motion:reduce` + `.v2.no-motion`) freeze it; e2e reduce leg re-proven (img computes `none`).
+- **11/11 proof (grep + paren-aware probe):** 11 unique `animation:` idents referenced in workspaces.css (sky, rain-far/near, snow-far/near, glow, twinkle, night-drift, drift-far/near, icon — comma-combined night lists counted once; `cubic-bezier(.2,.8,.3,1.2)` commas are NOT list separators, handled paren-aware) vs 11 `@keyframes` defined in the file, `missing: 0` — was 10/11 before (sky dead).
+
+### G2 — residual ops language in the sources registries (fixed, RED→GREEN)
+
+Surgical string replacements in BOTH `public/catalog/sources.json` and `public/data/sources.json` (compact-JSON formatting preserved, both files re-parse post-edit):
+- **S44.note** „Rețea de unități. Verifică anul fiecărei resurse. ~~Nu importa date nominale de elevi.~~" → **„…Nu conține date nominale despre elevi."** — the imperative import instruction becomes a factual statement of what the source does not contain.
+- **`personal[5]` ROeID entry (4th element)** ~~„Opțional ulterior; nu este sursă universală de date și nu este cerință a MVP-ului."~~ → **„Acoperire parțială a companiilor din România; nu este un registru complet."** — project-phase language dropped; the data-limit information („nu este sursă universală") kept, in the sibling entries' short factual style.
+
+### TDD evidence
+
+Session probe `probes/probe-g1g2-fix.mjs` (the F2 probe's class, extended per the reviewer's under-scoping note: token list + /Nu importa/i; scans `data.personal` — both elements and both files):
+- **RED (pre-fix, exit 1):** exactly the reviewer's two findings — `G1: 10/11 referenced animation idents have @keyframes rules` + `FAIL … animation 'aflivra-weather-sky' is referenced with no @keyframes rule in any shipped css file` (definitions collected across every shipped app css file — the reviewer's repo-wide form) + 4 G2 hits (S44.note ×2 files, personal[5][3] ×2 files).
+- **GREEN (post-fix, exit 0) ×2 (idempotent):** `G1: 11/11 referenced animation idents have @keyframes rules` + `G1+G2 GREEN`, zero failures.
+
+### Verification (all run this dispatch, dev server :5173 untouched)
+
+| Check | Exit | Result |
+|---|---|---|
+| `node probes/probe-g1g2-fix.mjs` (RED → GREEN, GREEN ×2) | 1 → 0, 0 | ✅ both reviewer findings reproduced pre-fix; 11/11 + 0 ops hits post-fix, stable on re-run |
+| grep proof: `@keyframes` in workspaces.css vs referenced idents | — | ✅ **11 defined / 11 referenced / 0 missing** (full ident list enumerated above) |
+| `corepack pnpm exec tsc --noEmit` | 0 | ✅ 0 errors |
+| `corepack pnpm lint` | 0 | ✅ 0 errors / 114 warnings — exact pre-existing baseline |
+| `corepack pnpm test:e2e` (full suite) | 0 | ✅ **48 passed (39.7s)** — zero regressions |
+| `playwright test e2e/weather-motion.spec.ts` alone | 0 | ✅ 3/3 — the motion-on contract leg (img = `aflivra-weather-sky`), the reduce leg (img = `none`, blanket gates hold with the new keyframes) and the readability leg all green |
+
+### Files touched (mine, this dispatch)
+
+`app/workspaces.css` (1 line: the missing @keyframes), `public/catalog/sources.json` + `public/data/sources.json` (2 string rewrites each), `ssnc-agent-orch/…/probes/probe-g1g2-fix.mjs` (session probe, failing-first evidence), this STATUS append. **NOT touched, per dispatch:** e2e specs, scripts/, CI, README — the permanent gates for the G1/G2 classes (a keyframed-property e2e assertion so a missing rule fails CI; the committed F2 probe's "Nu importa" token + personal[] scan) belong to the parallel DevOps agent.
+
+### Self-review (four lenses)
+
+- **Completeness:** both gaps fixed exactly as the reviewer prescribed, nothing else; no scaffolding. The 11th animation now genuinely runs (the `key={background}` remount was already in weather-workspace.tsx — only the keyframes rule was dead).
+- **Quality:** the keyframes is the ten-sibling pattern (opacity-only, adjacent to its referencing rule, gate-inheriting); the rewrites keep the informational value (data limits: no nominal pupil data; partial company coverage, not a complete registry) in clean user-facing Romanian matching the sibling registry prose.
+- **Discipline:** minimal diff — 1 CSS line + 4 string replacements; no git commits/branch ops; dev server never restarted; zero external fetches (all verification local); stayed inside the dispatch partition (permanent-gate work explicitly left to DevOps).
+- **Testing:** failing-first probe reproduced BOTH reviewer findings before any change; green and idempotent after; full battery of the dispatch's verify commands re-run at the final tree.
+- **Known limits (honest):** e2e's `animationName` assertions (weather-motion.spec.ts:58) still read the declared ident rather than a keyframed property — a missing keyframes rule would not fail THAT leg even now (the reviewer's vacuous-pin note); my session probe gate closes it locally, the permanent form is DevOps's per dispatch.
+
+**Final line: DONE — G1 + G2 fixed and verified (11/11 keyframes, registries clean, tsc 0, lint baseline, e2e 48/48 incl. weather-motion 3/3).**
+
+## DevOps Findings (G3/gates)
+
+**Status: PASSED — G3 corpora folded into verify-model-contracts LEG 4 (exit 0 ×2 idempotent, ~5.2 s, fully offline); the G1 class gated permanently by a NEW scripts/verify-css-keyframes.mjs (exit 0 ×2, 5 negative/positive scratch proofs incl. the exact G1 regression shape); the G2 class gated permanently inside verify-ro-text.mjs (exit 0 ×2 on the Builder's post-fix registries, every token class proven to bite on a scratch registry); full battery in workflow order green ×1 (17 verify steps incl. the guarded skip); tsc --noEmit 0; lint 0 errors / 114 warnings (exact baseline); YAML valid, zero continue-on-error.**
+
+### G3 complete — verify-model-contracts.mjs LEG 4 extended with the corpora the PLAN named but the harness omitted
+
+LEG 4 banner now reads "…transport network, SIRUTA localities, legal snapshots, stories, events, forecast labels"; distill source: the T1.4 register (probe-legal.mjs / probe-live.mjs — session artifacts, never permanent). Per-corpus counts printed (new "Corpuri de referință" line):
+- **SIRUTA** (server-seed `siruta`, full walk): **13.755 localități** — item shape (id/name, parent/postal string-when-present, environment ∈ Urban|Rural), non-empty corpus, period present → exit-1 classes; ~0 without county (register's data-gap noted), 13.755/13.755 without `details` → `siruta-details-dropped=13.755` known-state line (the documented seed-copy drop, LocalitySearch falls back to the row).
+- **Legal snapshots** (public/legal-snapshots manifest.json + historical-manifest.json, 12 items): stored fileSha256/fileBytes + decompressed content sha256/bytes proofs (**24 dovezi**), characters-count agreement, textProvided non-empty, consolidation contract via the REAL `verifiedConsolidation` (transpiled live from lib/live/legal-consolidation.ts + its text.ts import — not a copied predicate) + explicit versionDate ≤ asOf — **1 cu consolidare asOf** (CODUL PENAL 2026-07-23 ≤ 2026-10-05). Matches the register's clean row exactly.
+- **Stories corpus** (public/stories/index.json.gz, full): **233 povestiri, 233 dovezi text** — index shape (id/title/url/characters integer >40/file), every text file present, every sha256/bytes proof verified.
+- **Events corpus** (server-seed `events:odeon`, full): **19 spectacole** — parsed contract (id/title/start & end `YYYY-MM-DDTHH:mm` — the ODEON seconds-dropped normalize rule, url valid, media array, content string, sourceName) + global start-sorted.
+- **Forecast labels**: every variable in currentVariables/hourlyVariables/dailyVariables (transpiled live from lib/live/forecast.ts) must carry a Romanian label in app/weather-workspace.tsx (**60 variabile ceruse, toate cu etichete** — raw-key leak gate) + parseForecast round-trip envelope (current/hourly/daily/units/timezone; parsed rows stay within the requested variables).
+- Idempotence + auto-discovery: exit 0 ×2 back-to-back; every corpus read from disk paths that live with the repo (new seeds/snapshots flow in without harness edits). Register corrections inherited from T1.4c remain the harness's headers (13.971 cities etc.).
+
+**Negative proofs (scratch scaffold under the sanctioned temp dir, repo untouched, cleaned after):** baseline green, then 5 mutations each exit 1 with the exact check name — SIRUTA environment='Oraș' → `siruta-item-shape`; CODUL PENAL versionDate→2026-12-31 (> asOf) → `legal-snapshot-consolidation`; a story proof sha256 zeroed → `stories-text-proof`; events[0].start moved later → `events-order`; `temperature_2m:` label renamed in a scratch weather-workspace copy → `forecast-raw-label-leak`. Restored baseline green after each.
+
+### G1 gate — scripts/verify-css-keyframes.mjs (NEW, own script — static source analysis is a different class than the data-contract corpora)
+
+- Every `animation:`/`animation-name:` declaration in EVERY `app/*.css` (13 files, auto-discovered) is tokenized paren-depth-aware (comma- and space-safe inside `var()`/`cubic-bezier()`); CSS-wide + animation keywords, times, iteration counts and timing functions are dropped per the spec's animation-name ident space; **every remaining custom ident must have a `@keyframes` definition in the app css set** (cross-file). `var()` in an animation value must resolve from the stylesheets or carry a literal fallback (the runtime inline-style side of the contract — motion.ts sets `--reveal-delay`, whose `0ms` fallback resolves to the time class). Definitions-only or references-only drift both visible; per-file definition counts printed in Romanian.
+- Current state: **22 referințe / 16 definiții / toate conforme** — the Builder's landed `@keyframes aflivra-weather-sky` (workspaces.css:58) is now a gated fact, not a review observation. The vacuous-e2e class can never land again: a referenced-but-undefined ident fails CI at the static layer, independent of the `animationName` computed-style read.
+- **Negative/positive proofs (scratch scaffold, cleaned after):** undefined ident appended → exit 1 `[app/workspaces.css:103] [aflivra-weather-sky-x] animation referențiază @keyframes nedefinit`; unresolved `var()` without fallback → exit 1; `var(--x,.2s)` with time fallback → green; cross-file + `animation-name:` longhand + comma-combined night lists → green; the exact original G1 shape (sky definition deleted, reference kept) → exit 1 at `app/workspaces.css:57 [aflivra-weather-sky]` — the reviewer's finding location reproduced. Repo runs ×2 green.
+- Real-bug fixes made while proving it: (1) the function-stripping regex ate `var(...)` before the var branch ever ran (dead code — caught by the unresolved-var scratch mutation); (2) top-level comma splitting broke `var(--reveal-delay,0ms)` into two bogus idents — replaced with the paren-depth tokenizer.
+
+### G2 gate — verify-ro-text.mjs extended into the permanent ops-language gate
+
+- The countText battery is untouched; a second section discovers **every** `public/*/sources.json` registry (currently catalog + data; auto-discovers future ones) and scans the user-visible string fields for the internal-ops token class: sources[].name/note/access/refresh/license/integration/checked/domain + every other string field EXCEPT `endpoint`/`evidence`/`url` (the sanctioned „Toate detaliile inventarului" labeled disclosure + address fields), top-level scopeNote, and every personal[] entry (strings and [name,url,label,note] arrays — the ROeID row where the Builder's MVP residual lived). Embedded and standalone urls are stripped before tokenizing (the CNPP `intrebari_frecvente` address path is not prose).
+- **Token list (T1.3 findings + G2 residuals + the F2 probe's originals):** `/\bmvp\b/i` (project-phase), `/\bnu importa(?:ți)?\b/i` (imperative import instructions — the S44 residual class; first-person privacy statements do not match), the SOAP camel idents `numeParte|numarDosar|obiectDosar`, ALL-CAPS snake `\b[A-Z][A-Z0-9]*(_[A-Za-z0-9]+)+\b` (OD_FIRME/SIRUTA_s1 class), lowercase snake `\b[a-z][a-z0-9]*(_[a-z0-9]+)+\b` (datastore_search/datastore_active class). Per-token regex flags — the snake classes stay case-sensitive (an /i there double-reports the same token, found and fixed in the scratch run).
+- **Timing note (the dispatch's wait-state branch, resolved):** the Builder's G1/G2 fixes landed on the tree BEFORE my gates were first run (S44 note and personal[5] already in user-facing Romanian; `@keyframes aflivra-weather-sky` present at workspaces.css:58) — both gates were green from their first run; re-run green again after their STATUS section appeared (dispatch protocol).
+- **Negative proofs (scratch registry `scratchreg/sources.json`, temp dir, cleaned after):** all 5 token classes bite with exit 1 + one hit per token with its label (OD_FIRME name, MVP + Nu importa note, datastore_search/datastore_active, numeParte scopeNote, MVP in personal[0][3]); the deliberate non-hits hold — `endpoint`/`evidence` carrying raw ops language NOT flagged (labeled disclosure), the CNPP url snake path NOT flagged, clean Romanian variant exit 0.
+
+### Battery + README wiring (same change as the scripts)
+
+- `.github/workflows/pr-validation.yml`: verify battery block 15 → **16 scripts** (+ `node scripts/verify-css-keyframes.mjs` after audit-controls.mjs); total verify steps 17 → **18** (block + verify-downloads + guarded verify-legal-pdf). Zero continue-on-error (grep 0; unchanged).
+- `README.md`: the sh pipeline block gains the same `node scripts/verify-css-keyframes.mjs` line (after audit-controls, matching the workflow position); verify paragraph gains the verify-css-keyframes blurb + the verify-ro-text registry-scan sentence + the verify-model-corpus extension (SIRUTA, legal snapshots asOf, stories proofs, events order, forecast labels) — docs and code in the same change per repo rule.
+
+### Verification (all run this dispatch, final tree)
+
+| Check | Exit | Result |
+|-------|------|--------|
+| `node scripts/verify-model-contracts.mjs` ×2 (+post-STATUS confirm) | 0, 0, 0 | ✅ PASS — idempotent; "Corpuri de referință: SIRUTA 13755 localități, 12 copii legale verificate (24 dovezi sha256, 1 cu consolidare asOf), 233 povestiri cu 233 dovezi text, 19 spectacole ordonate cronologic, prognoză: 60 variabile cerute, toate cu etichete românești"; 5.223 ms offline |
+| `node scripts/verify-css-keyframes.mjs` ×2 (+confirm) | 0, 0, 0 | ✅ PASS — 22 referințe / 13 foi / 16 definiții, toate cu definiție prezentă; 5 scratch proofs (incl. the exact G1 shape at workspaces.css:57) |
+| `node scripts/verify-ro-text.mjs` ×2 (+confirm) | 0, 0, 0 | ✅ PASS — count grammar + "Registrele de surse (catalog/sources.json, data/sources.json) scanate…"; every token class proven to bite |
+| Full CI battery, workflow order (18 verify steps incl. guarded legal-pdf) | 0 ×18 | ✅ live · cache · export-formats · legal-refresh · catalog · snapshot-transport · refresh-sweep · ro-text · source-errors · sweep-inventory · model-contracts · federated-search · legal-records · expanded · audit-controls · **css-keyframes** · downloads · legal-pdf (SKIP înregistrat — pypdf absent, same guard as the CI image) |
+| Scratch negative mutations (G3 ×5, G1 ×5, G2 ×3) | 1 ×13 | ✅ every gate bites with the exact check name; restored baselines green after each |
+| `corepack pnpm exec tsc --noEmit` | 0 | ✅ PASS |
+| `corepack pnpm lint` | 0 | ✅ 0 errors / 114 warnings — exact pre-existing baseline; targeted eslint on the 3 touched scripts: 0 problems |
+| `ruby -ryaml` workflow parse + continue-on-error grep | OK / 0 | ✅ PASS |
+
+- [devops] Files touched (exactly the dispatch set): scripts/verify-model-contracts.mjs (LEG 4 extension), scripts/verify-css-keyframes.mjs (NEW), scripts/verify-ro-text.mjs (G2 section), .github/workflows/pr-validation.yml (battery line), README.md (pipeline line + 3 blurb edits), this STATUS append. No app/ or public/ file touched (the G1/G2 app-side prose/keyframes edits observed on the tree belong to the parallel Builder-B dispatch, confirmed by their STATUS section above).
+- [devops] **G3 + G1 gate + G2 gate: PASSED — all checks successful.**
+
+## Debugger Findings (image reload loop)
+
+**Issue (user report, Romanian):** „la explorare locuri, la cele cu imagine se încarcă prin refresh imaginea în continuu" — on the Explore view, the place cards' images keep reloading continuously after a page refresh.
+
+**Root cause:** `app/page.tsx:95-96` (pre-fix lines) declared **`SaveButton` and `PlaceCard` inside the `Aflivra` function body** — the "component defined during render" anti-pattern. Every Aflivra render produced new function identities, so the reconciler treated `<PlaceCard>` / `<SaveButton>` as a *different component type* at the same tree position and **unmounted + remounted the whole card subtree — every `<img>` destroyed and re-created, restarting its load**. The recurring re-render drivers present after every refresh, with zero interaction: **`useLiveData`'s 60-second interval refresh** (`app/live-data.tsx:16`: `setInterval(60000)` → `setBusy(true)` + `setData`/`setBusy(false)` = two back-to-back renders per tick), the initial `/api/live` + local-weather + cities arrivals in the first seconds, and (with device location saved, `aflivra.location.v1 mode:device`) every `watchPosition` fix. Re-created `loading="lazy"` imgs re-request or cache-decode + flash on every tick → the visible "image loads forever" loop. Both definitions (and the drivers) date from v1 (`69ae6c9`, git -S verified); not introduced by this session's changes.
+
+### Phase 1 — reproduce + isolate (probe scripts in the session dir, evidence JSONs in `probes/`)
+
+Instrumentation: Playwright + dev-server probes tracking (1) every network request (timestamp + resourceType), (2) img element identity via MutationObserver serials (added/removed elements + `src` attribute mutations), sampled per 5s. Rate discipline held: local dev server only, observation windows capped 66-75s, no scripted external fetches.
+
+- **Run 1** (`probe-image-reload.mjs` → `probes/image-reload-run1.json`, default geo, photos filter, reload): network silent after settle — but the DOM observer was blind (attached to `documentElement` too early — lesson learned); run 2's observer attaches to `document`.
+- **Run 2** (`probe-image-reload2.mjs` → `probes/image-reload-run2.json`, mobile 390×844, `mode:device` saved, refresh + 66s drift window): **12 gallery `<img>`s destroyed and re-created en masse, twice within 109ms** (serials 116-127 at t=60234, 128-139 at t=60343 on the post-reload page clock) — gallery-only; the PlacesWorkspace entity grid (module-level memo'd components) untouched. Earlier same-signature bursts at t=4432/4482 (50ms apart) when the filter response + live data settled; initial SSR→hydrate→explore swap at t=237/706.
+- **Run 3** (`probe-image-reload3.mjs` → `probes/image-reload-run3.json`) — deterministic isolation, no geolocation, no interaction: **at exactly the 60s `useLiveData` tick: 24 gallery img adds / 24 removes / 24 src sets at t=60232 & t=60337 (two renders ~105ms apart = `setBusy(true)` then `setData`/`setBusy(false)` of one refresh tick)**. CONTROL: a PlacesWorkspace-internal state change (sort select) → gallery churn **0** (churn requires an Aflivra-scope render). One Aflivra-scope state change (search `setQ`) re-created the whole visible gallery. Post-reload gallery img creations total: **96** (pre-fix).
+
+Alternatives from the dispatch list, ruled out with the probe evidence: (a) same-img src churn — src values identical, churn only on *creation*, zero value churn on kept elements (control run); (b) **remount loop — CONFIRMED as the mechanism**; (c) onError→retry — gallery imgs have no onError, EntityCard's failed-flag is one-shot per mount and the entity grid never churned; (d) state/poll loop → **CONFIRMED as the driver damage-wise** (60s interval + arrivals; `/api/places` itself serves `status:'cached'` with no `sources` array → no useSource polling was involved — entity grid add-count 0 at the tick); (e) useSource/poll re-keying — not involved (previous point; `key={item.id||item.url}` in ContentReader is on a different surface and stable across responses); (f) CSS animation flicker — DOM nodes literally replaced, not animated (all card CSS is transitions/one-shot reveals); (g) federated overlay / go() / sync() / geo.key — the repro reproduces with zero interaction, no query, default geo.
+
+### Phase 2 — root cause (file:line + mechanism)
+
+`app/page.tsx:95` `const SaveButton=…` and `:96` `const PlaceCard=…` (pre-fix) — inline component definitions → per-render type identity → unmount/remount of every PlaceCard (explore gallery, home recommended, place-detail suggestions, recommendations, saved) and the hero SaveButton; every `<img>` re-created on every Aflivra re-render; the 60s `useLiveData` tick (live-data.tsx:16) + initial data arrivals (+ geo fixes with device mode) make it recur "continuously" after a refresh. eslint's own `react-hooks/static-components` rule was already flagging exactly this (HEAD warnings at old lines 123/128/143: SaveButton + 2× CompanyCard).
+
+### Phase 3 — RED spec first (permanent e2e leg)
+
+`e2e/place-image-stability.spec.ts` (NEW, 1 test): tags every `.exploration-gallery img` with `data-stab` serials in the live DOM, then (1) an Aflivra-scope re-render with unchanged gallery content ('Locuri cu galerii' chip) must keep the same DOM img elements; (2) a 64s still window containing the 60s live-refresh tick must keep the same elements AND re-fetch zero `/media` images (`page.on('request')` counting); zero page errors.
+**RED (pre-fix run):** `Expected: 12, Received: 0` — one chip click replaced all 12 tagged gallery images. **GREEN (post-fix):** 1 passed (1.3m) — both parts, zero re-fetches.
+
+### Phase 4 — fix at the root (minimal, no refactor beyond it)
+
+`app/page.tsx`: `SaveButton` + `PlaceCard` **hoisted to module scope** beside the sibling helper components (Badge/SectionHead/Stat/Empty pattern), with explicit props threading exactly what the bodies used to close over: PlaceCard gains `{p, onOpen, savedIds, onToggle, compareIds, onCompare, position}`, SaveButton gains `{id, name, saved, onToggle, withText}`; all user-facing strings/classes/aria byte-identical to the originals. `openPlace=(id)=>go('place',id)` added inside Aflivra; all 6 PlaceCard call sites + the hero SaveButton call site pass the props. The dead `wide` prop dropped with the shape change (zero call sites used it — verified). `CompanyCard` stays inline (uses Aflivra-scope `go`/`latest`/`financial`, imageless — outside the defect's blast radius; its 2 `react-hooks/static-components` warnings remain, noted here, not silently fixed).
+**Post-fix probe** (`probes/image-reload-run3-postfix.json`): identical census — **all-zero deltas through the full 75s window incl. the 60s tick** (was 24/24/24); total gallery img creations after reload **12** (the initial render only; was 96); setQ now diffs only the legit content change.
+
+### Verification (final tree)
+
+| Check | Exit | Result |
+|-------|------|--------|
+| RED: `playwright test e2e/place-image-stability.spec.ts` (pre-fix) | 1 | 🔴 `Expected: 12, Received: 0` — the failing-first pin |
+| GREEN: same spec (post-fix) | 0 | ✅ 1 passed (1.3m) — both assertions |
+| `corepack pnpm test:e2e` (full suite) | 0 | ✅ **49 passed** (48 baseline + 1 new), zero regressions |
+| `corepack pnpm exec tsc --noEmit` | 0 | ✅ 0 errors |
+| `corepack pnpm lint` | 0 | ✅ **0 errors / 113 warnings** — baseline 114 minus ONE resolved `react-hooks/static-components` warning (the old inline `<SaveButton id={place.id} withText/>`, HEAD page.tsx:128; page.tsx 19→18). No new warnings. |
+| `node scripts/audit-controls.mjs` (pins page.tsx) | 0 | ✅ 347 controls |
+| `node scripts/verify-exploration-media.mjs` (pins explore gallery wiring) | 0 | ✅ 28 destinations / explorer navigation |
+| Post-fix DOM probe census incl. the 60s tick | 0 | ✅ zero img remounts, zero re-fetches (was 24/24/24 per tick) |
+
+CSS not touched (`verify-css-keyframes` N/A), no lib/live or data change (`verify-model-contracts` N/A), no new lib module (closed stub resolvers N/A — confirmed against conventions).
+
+### Conventions Applied
+
+**Source:** `ssnc-agent-orch/2026/10/06/sweep-federated-search/conventions.md` (read before coding).
+
+- No comments in code except business rules — the fix adds none; the spec file documents itself in the existing spec-comment style (explore-place.spec.ts precedent).
+- Romanian user strings preserved byte-identical; no new user strings.
+- e2e RED spec first against the unmodified tree; suite green (49/49).
+- Source budget discipline: zero direct upstream fetches (all probes local dev server; windows capped; page's own `<img>` tags only).
+- macOS discipline: `corepack pnpm` only, dev server reused (:5173 never restarted), no git commits/branch ops.
+
+### Files touched (this dispatch)
+
+`app/page.tsx` (hoist + props threading + openPlace), `e2e/place-image-stability.spec.ts` (NEW, permanent regression leg), this STATUS append. Session-dir evidence (untracked): `probe-image-reload.mjs`, `probe-image-reload2.mjs`, `probe-image-reload3.mjs`, `probes/image-reload-run1.json`, `probes/image-reload-run2.json`, `probes/image-reload-run3.json`, `probes/image-reload-run3-postfix.json`.
+
+**RESOLVED — root cause: SaveButton/PlaceCard components defined inside the Aflivra render body (app/page.tsx, pre-fix lines 95-96) gave every re-render new component identities, unmounting/remounting all place-card `<img>`s; the 60s useLiveData tick (and data arrivals / geo fixes) made the churn recur continuously after refresh. Fixed by hoisting to module scope with explicit props; regression-pinned by e2e/place-image-stability.spec.ts (RED 12→0, GREEN, suite 49/49).**
+
+## Spec Reviewer Findings
+
+Stage 1 spec-compliance **re-verification (round 2, post-remediation)**: all six mandated checks independently re-derived from the remediated tree; every gate re-executed by this review (distrust-first — no Builder/DevOps/Debugger claim accepted without independent execution or code reading). Verdict below supersedes round 1's FAILED (G1/G2/G3).
+
+**Verdict: Spec Compliance - PASSED — 0 gaps, 0 scope creep. Stage 2 (Code Quality Review) UNBLOCKED.**
+
+### Per-check evidence (all re-run/re-derived this review)
+
+| Check | Status | Evidence (file:line) | Confidence |
+|---|---|---|---|
+| G1 — keyframes | ✅ VERIFIED | `node scripts/verify-css-keyframes.mjs` → exit 0 ("22 referințe / 16 definiții, toate conforme"); reviewer's independent paren-aware cross-derivation over every app/*.css: 16 referenced custom idents = 16 defined, 0 missing, 0 orphaned; `aflivra-weather-sky` referenced app/workspaces.css:57, `@keyframes aflivra-weather-sky{from{opacity:0}to{opacity:1}}` :58 (opacity-only, the prescribed shape); all 11 weather idents grep-verified (rain-far/near, snow-far/near, glow, twinkle, night-drift, drift-far/near, icon, sky — each ref+def) | HIGH |
+| G2 — ops language | ✅ VERIFIED | `node scripts/verify-ro-text.mjs` → exit 0; reviewer grep (both files, all fields): 0 hits for Nu importa/MVP/SIRUTA_s1/OD_FIRME/datastore_search/datastore_active/numeParte-family; glob confirms exactly 2 registries (public/catalog/sources.json + public/data/sources.json); the two residual strings rewritten in BOTH: S44.note "…Nu conține date nominale despre elevi." + ROeID personal entry "Acoperire parțială a companiilor din România; nu este un registru complet."; gate scope read in script: personal[] scan (verify-ro-text.mjs:49-53) + scopeNote (:48) + 5 token classes incl. /nu importa(?:ți)?/i + /\bmvp\b/i (:35) — under-scoping closed; reviewer regex-proof: every token class bites on the old G2 strings, clean on the rewrites | HIGH |
+| G3 — model-contracts coverage | ✅ VERIFIED | scripts/verify-model-contracts.mjs LEG 4 extended with every PLAN-named corpus the harness omitted: SIRUTA (:416-431 shape incl. environment ∈ Urban\|Rural + period), legal snapshots with the REAL transpiled `verifiedConsolidation` + versionDate ≤ asOf (:437-453), stories index + text sha256/bytes proofs (:459-470), events parsed contract + global start-sorted (:474-489), forecast labels live-transpiled from lib/live/forecast.ts + parseForecast envelope (:492-507); re-run → exit 0: "SIRUTA 13755 localități, 12 copii legale verificate (24 dovezi sha256, 1 cu consolidare asOf), 233 povestiri cu 233 dovezi text, 19 spectacole ordonate cronologic, prognoză: 60 variabile cerute, toate cu etichete românești" — counts match the T1.4 register; data sources all real repo corpora (lib/live/server-seed.json :279, public/legal-snapshots, public/stories/index.json.gz) | HIGH |
+| NEW — image-reload fix (R1 rendering correctness) | ✅ VERIFIED | app/page.tsx:44 SaveButton + :45 PlaceCard hoisted to module scope, explicit props, zero Aflivra-scope closures (bodies reference only module imports + props — read line-by-line); all 6 PlaceCard call sites (:111, :121, :136, :141, :143, :144) + hero SaveButton (:129) thread the props; `openPlace` :77; dropped `wide` prop passes nowhere (verified against every call site); e2e/place-image-stability.spec.ts is a genuine element-identity oracle (data-stab serials + chip re-render part 1 + 64s window over the 60s tick + zero /media re-fetch + zero page errors, :25-67) — green in the 49/49 run; CompanyCard stays inline as disclosed (imageless, 2 acknowledged static-components warnings — deliberate, not a gap) | HIGH |
+| Battery integrity | ✅ VERIFIED | Full battery re-run this review in pr-validation.yml workflow order: 17 steps — live · cache · export-formats · legal-refresh · catalog · snapshot-transport · refresh-sweep · ro-text · source-errors · sweep-inventory · model-contracts · federated-search · legal-records · expanded · audit-controls · css-keyframes · downloads — **all exit 0** (source-errors: `{"result":"ok","mode":"mock","families":19,"cells":114}`); `grep -r continue-on-error .github/workflows/` → **0 hits**; battery block order 1:1 with the workflow (:53-70) incl. verify-css-keyframes at :68; guarded verify-legal-pdf skips-with-record locally (pypdf absent — same guard as the CI runner image, the recorded T1.6 design) | HIGH |
+| Suite + tsc + lint | ✅ VERIFIED | `corepack pnpm test:e2e` → exit 0, **49 passed (1.3m)** including e2e/place-image-stability.spec.ts green (both assertions) and all 28 baseline + federated 15 + weather-motion 3 + sweep-regressions 2 legs; `corepack pnpm exec tsc --noEmit` → exit 0; `corepack pnpm lint` → exit 0, **0 errors / 113 warnings** ≤ 114 — the −1 is the hoist-resolved `react-hooks/static-components` warning (page.tsx module-scope :44 verified = the claim's mechanism) | HIGH |
+
+### Standing requirements (round 1, remediation-independent — unchanged)
+R1a sweep-inventory gate, R1b source-errors 19 families + deployed-worker leg, R1c model-contracts harness wired, R1d-P1 normalizer unification (934-codepoint ccc≠0 class, strict gate "acord integral" re-confirmed in this review's battery run), R1d-F1 AFIR dedupe, R1d-F3 /catalog h1, R2 federated layer + grouped UI + navigation + seeds, R4 no regressions — all VERIFIED HIGH in round 1; the three remediated gaps (G1/G2/G3) are closed per the table above. The Debugger's mid-session image-reload fix is in-scope via R1's rendering-correctness mandate (user-reported defect, latent since v1 — not scope creep) and R4 (suite green, zero regressions). T4.1 runtime tails (--live parity pass, build, deploy --dry-run, db-migrate ×2) remain recorded-not-re-run by Stage 1 per round 1's budget rationale — CI re-proves build/restore/dry-run/migrate on every push (pr-validation.yml:79-104).
+
+### Gaps: NONE. Scope creep: NONE (round 1 assessment stands).
+
+**Spec Compliance - PASSED — 0 gaps, 0 scope creep. All requirements verified through code inspection and re-executed gates; all six mandated re-verification checks hold. Stage 2 unblocked.**
+
+## Quality Reviewer Findings
+
+Stage 2 code quality review over the full shipping state (`git diff main...HEAD` = commits 9f4d332 + 74b2917 + the dirty working tree incl. G1/G2/G3 remediation + the image-reload fix + place-image-stability spec). Prerequisite verified: Stage 1 round-2 PASSED stands (line 796). Independent verification re-run by this review (not inherited): `verify-css-keyframes` ✓ exit 0 (22 referințe / 16 definiții — G1 fix in tree), `verify-ro-text` ✓ (both registries clean incl. the new ops-language prose scan), `verify-sweep-inventory` ✓ (16 domenii / 46 secțiuni / 73 subcategorii / 178.868 locuri / 38 familii toate acoperite), `verify-federated-search` ✓ (6 LEGs), `verify-model-contracts` ✓ exit 0 (SIRUTA 13.755 / 12 copii legale cu 24 dovezi / 233 povestiri / 60 variabile prognoză), `tsc --noEmit` ✓ 0 errors, `lint` ✓ 0 errors / 113 warnings (≤ 114, −1 = the hoist), fresh e2e spot-runs on the live dev server: federated-search 15/15 (31.2s), weather-motion 3/3, sweep-regressions 2/2. Stage 1's fresh full-battery (17 gates exit 0) and 49/49 suite run from today accepted as the remaining evidence.
+
+**Verdict: Code Quality Review - APPROVED — 0 CRITICAL, 0 HIGH, 2 MEDIUM, 6 LOW. Ship it.** The MEDIUMs are polish (a dead conditional that reads like a bug; a once-per-mount double fan-out), neither blocks.
+
+### Findings
+
+| ID | Severity | Confidence | Location | Finding |
+|---|---|---|---|---|
+| QR-1 | MEDIUM | HIGH | lib/live/federated.ts:152 | `asObjects(family==='places'?data.items:data.items)` — both branches identical; the ternary reads like an intended shape difference that isn't there. Collapse to `asObjects(data.items)`. |
+| QR-2 | MEDIUM | HIGH (mechanism) | app/search-results.tsx:24-27 | Fan-out effect keys on the whole `base` object; the async stories-corpus load (null→items) re-creates `base`, so the first search of every mount fires the 9-family fan-out twice (abort+refetch; duplicates dropped by `federatedCollect`, so correctness holds — only duplicated requests against our own no-store routes). Key the effect on the request plan (settled term + URLs). |
+| QR-3 | LOW | HIGH | lib/live/federated.ts:197-199 | `courtNumberTerm(text)` re-derived inside `if(dosar)` plus a `!` assertion — `dosar` already holds the value; `const number=dosar`. |
+| QR-4 | LOW | HIGH | lib/live/federated.ts:190 | Local `text` shadows the module-level `text()` helper inside `federatedSearch`; harmless (helper unused in that scope) but a hazard for the next reader — rename. |
+| QR-5 | LOW | HIGH | app/search-results.tsx:29-31 | During the 300 ms settle window after a term change, the section renders the NEW term's heading over the OLD term's settled groups with no busy marker (busy appears only while families are pending). Show busy while `settled !== term.trim()`. |
+| QR-6 | LOW | MEDIUM | app/api/catalog/route.ts:14-20 | `enrichCatalogClasses` swallows the inventory integrity failure with `catch{}` while the geographic branch 503s on the same corruption; serving unclassified rows is the right degrade for live search, but the deliberate asymmetry deserves a one-line business-rule comment. |
+| QR-7 | LOW | HIGH | lib/live/federated.ts:1-45 | Header cites session/plan task references (T2.2/T2.3/T2.4, conventions.md) that rot after the session; keep the v1-exclusion rationale (genuine business rules) but reference consumers by module name (FederatedResults, page.tsx, verify-federated-search.mjs). |
+| QR-8 | LOW | HIGH | scripts/verify-sweep-inventory.mjs:8-10 | New Romanian multi-line comment vs conventions.md "comments in English, one line" (repo majority is English: query.ts, federated.ts, verify-css-keyframes). verify-source-errors.mjs:8-13 keeps its pre-existing Romanian comment (main precedent) — align on English for new comments. |
+
+### Verified clean (review's own checks)
+
+- **House rules**: no scaffold/TODO/FIXME markers in the diff ("placeholder" hits are the React input prop only); no secrets (registries carry URLs and honest copyleft notes only); Romanian user-facing copy correct with diacritics, counts via countText everywhere incl. the independently re-derived parity grammar in e2e/federated-search.spec.ts:13-17 (matches countNoun exactly: 1/21/101 singular, 0 & 2-19 plural, 20+ „de"+plural).
+- **YAGNI**: no dead exports (every new federated.ts export consumed by page.tsx / search-results.tsx / the harness); dropped `wide` prop passes nowhere; seed props added are all threaded.
+- **Federated layer**: immutable collect confirmed (LEG 5 asserts the input never mutates); registry-order invariance under late responses gated (LEG 6); the federatedGroups mirror of v2-model.domains is deliberate (closed-resolver constraint — v2-model imports a public JSON asset) and drift-gated, not silent duplication; honest degrade on every path (unavailable/malformed/stale-with-data/late-duplicate/unknown-family, all assert-covered).
+- **Derived-state overlay (search-results.tsx)**: no effect-setState loops, responses array bounded (per-term filter + one entry per family per run; duplicates dropped on collect) — no memory growth; gallery prop is the stable module constant.
+- **Weather CSS**: transform/opacity-only keyframes on composited layers inside `isolation:isolate` (no z-fighting with map credit/labels — separate stacking contexts), palette drawn from the scene's existing token family, double gating (matchMedia + `.v2.no-motion` + media blankets) proven by the emulated reduced-motion legs; scene/metric re-mount re-keys (`key={background}`, `key={d.current.time}`) replace effect-driven animation resets. G1 fixed in tree (definition beside its reference, opacity-only).
+- **/api/catalog enrichment join**: id-join failure degrades honestly — uncategorized rows keep the reserved local group (assert-covered in both harness LEG 5 and the e2e „școli" leg); stale-copied rows carry their own category (the 74b2917 fix, pinned).
+- **page.tsx hoist**: module-scope SaveButton/PlaceCard with explicit props at all 6 PlaceCard + 1 hero call sites, `openPlace` helper, zero Aflivra-scope closures (read line-by-line); CompanyCard stays inline (imageless, disclosed, acceptable); regression-pinned by e2e/place-image-stability.spec.ts (identity oracle + zero /media re-fetch over the 60 s tick — the 64 s window is the oracle, not an anti-pattern).
+- **Harness scripts**: all honest-failure (no silent-pass classes — empty corpus exit 1, per-violation file:line, buckets→exit 1, internalError→exit 1); LEG 4b verifies the real transpiled modules (verifiedConsolidation, parseForecast, workspace labels) instead of hand-copied shapes; the 934-codepoint ccc≠0 normalizer parity is corpus-proven both directions (index↔runtime) — the enumerate-in-TS vs unicodedata-in-Python asymmetry is documented at both sites.
+- **Workflow/README**: 4 `continue-on-error` crutches removed; verify-legal-pdf records an explicit skip; battery block and README runbook list the same 17 steps in order incl. verify-css-keyframes; README prose matches the code (19 families, deployed-leg default, our-bug-only non-zero exit, 73 subcategories).
+- **Tests**: 21 new legs assert behavior (labels, hash params, honest states, element identity) not brittle selectors (data-testid used sparingly: feed-article, federated-*); countText parity assertions re-derive the grammar instead of importing it — meaningful.
+
+**Code Quality Review - APPROVED.**
+
+## Builder-B Findings (QR polish)
+
+**Status: DONE — exactly the three dispatched findings applied (QR-1, QR-2, QR-8; the remaining LOWs QR-3–QR-7 stay registered, untouched per dispatch); QR-2 has failing-first probe evidence (RED 9×2 → GREEN 9×1); tsc 0 errors; lint 0 errors / 113 warnings (exact baseline, zero new); e2e 49/49; verify-federated-search ×1 exit 0; verify-sweep-inventory ×1 exit 0 — all re-run at the final tree.**
+
+### QR-1 — dead ternary in mapFamily (lib/live/federated.ts:152)
+
+Collapsed `asObjects(family==='places'?data.items:data.items)` → **`asObjects(data.items)`** (reviewer's note, both branches identical). The sibling mapping ternary `family==='places'?placeItem:r=>lawyerItem(r,term)` is real and untouched. Behavior-identical by construction (a refactor, not a behavior change) — proven by `verify-federated-search` LEG 5 mapping places + lawyers rows against the collapsed expression (exit 0) and the full e2e suite.
+
+### QR-2 — first-search double fan-out (app/search-results.tsx effect re-key)
+
+- **Root cause (reviewer-confirmed, reproduced this dispatch):** the fan-out effect keyed on `[base]` — the whole `federatedSearch` result object — and the async stories-corpus arrival (`null → items`, ~1s after mount) re-creates `base`, re-triggering the effect: the first search of a fresh mount fired the 9-family fan-out twice (wave 1 aborted + wave 2 re-issued; duplicates dropped by `federatedCollect`, so only duplicated requests remained).
+- **Fix (identity semantics only — overlay/derived-state architecture untouched):** the effect now keys on **what it actually consumes**: `deps:[requestPlan,planTerm]`, where `planTerm=settled.trim()` and `requestPlan=useMemo(()=>federatedSearch(planTerm).requests,[planTerm])` — a term-derived plan that is content- and identity-stable across corpus/gallery arrivals. The effect body no longer reads `base`; responses are tagged with `planTerm` (= `base.term`, both the trimmed settled term, so the V1 derive memo's `response.term!==base.term` filter still folds every response). The `base` memo, the response overlay state, the derive memo and all render markup are byte-unchanged.
+- **Load-bearing invariant, pinned as session evidence:** planned requests are a pure function of the settled term alone — options (gallery/stories corpora) never influence request planning (eager families never produce requests; gates+builders are term-only). Probe LEG 0 transpile-imports the shipped federated.ts and asserts bare-vs-full-options `requests` are identical for 'harap'/'ab'/blank.
+- **TDD evidence (`probe-qr2-fanout.mjs`, evidence `probes/qr2-fanout.json`):** **RED (pre-fix, exit 1):** deep-link `#view=explore&q=harap` on a fresh mount → all 9 family URLs fired **2×** each (timeline: corpus `/stories/index.json.gz` at t≈800ms, second wave t≈1110–1308ms — the exact mechanism, recorded in the evidence log). **GREEN (post-fix, exit 0):** every family URL fired **1×**, corpus arrival still inside the window (the trigger case exercised, not avoided), federated rows still render (V1 fold preserved — stories flow through the `base` recompute, never through the effect). Term changes still refire and abort correctly (requestPlan content changes with the term).
+- Lint-clean re-key by construction: the effect reads only `requestPlan`, `planTerm` and the stable setState/import identifiers — `react-hooks/exhaustive-deps` fully satisfied, zero new findings on a file where compiler rules run at error severity.
+
+### QR-8 — Romanian multi-line comment (scripts/verify-sweep-inventory.mjs:10-13)
+
+The 4-line Romanian block replaced with the one-line English business rule: **"Inventory gate: enumerate the app's full surface from the registries (offline) and refuse any refresh-groups source family that neither parity nor a named harness covers."** — detail-list dropped (it restated the code's own asserts), the two actual rules kept. Comment-only change; `verify-sweep-inventory` re-run exit 0 (16 domenii / 46 secțiuni / 73 subcategorii / 178.868 locuri / 38 familii toate acoperite).
+
+### Verification (all run at the final tree, dev server :5173 untouched)
+
+| Check | Exit | Result |
+|---|---|---|
+| `node probes/../probe-qr2-fanout.mjs` (RED pre-fix → GREEN post-fix) | 1 → 0 | ✅ 9 family URLs ×2 each → ×1 each; corpus arrival in-window both runs; LEG 0 plan-invariance green |
+| `corepack pnpm exec tsc --noEmit` | 0 | ✅ 0 errors |
+| `corepack pnpm lint` | 0 | ✅ 0 errors / 113 warnings — exact baseline, zero new (targeted eslint on the 3 touched files: 0 findings) |
+| `corepack pnpm test:e2e` (full suite) | 0 | ✅ **49 passed (1.4m)** — incl. federated leg 11 (stories first-search, the V1 pin) and all weather/sweep/image-stability legs; zero regressions |
+| `node scripts/verify-federated-search.mjs` ×1 | 0 | ✅ 6 legs — LEG 5 maps places+lawyers over the collapsed `asObjects(data.items)` |
+| `node scripts/verify-sweep-inventory.mjs` ×1 | 0 | ✅ full inventory coherent, 38 registry families covered bidirectionally |
+
+### Files touched (mine, this dispatch)
+
+`lib/live/federated.ts` (QR-1: 1 line), `app/search-results.tsx` (QR-2: effect re-key + term-derived plan memo + 1 business-rule comment), `scripts/verify-sweep-inventory.mjs` (QR-8: comment), session probe `probe-qr2-fanout.mjs` + evidence `probes/qr2-fanout.json`, this STATUS append. NOT touched: the other QR findings' targets (QR-3/QR-4 `lib/live/federated.ts` low-polish lines, QR-5 settle-window busy, QR-6 catalog-route comment, QR-7 module-header refs — all stay registered for the orchestrator), e2e specs, CI, README.
+
+### Self-review (four lenses)
+
+- **Completeness:** exactly the dispatch's three findings, no more (QR-3–QR-7 deliberately left registered), no scaffolding; the probe's RED was captured against the unmodified tree before any edit.
+- **Quality:** house compact indent preserved (a +1-space drift my first edit introduced was caught against `git show HEAD` and normalized); the new comment is one line, English, business-rule; effect deps exactly cover its reads.
+- **Discipline:** no git commits/branch ops; dev server never restarted; zero external fetches (probe = localhost dev routes + offline transpile-import; all 9 fan-out URLs are the app's own cached local routes).
+- **Testing:** the one behavioral fix (QR-2) has failing-first browser evidence incl. the corpus-arrival timeline; the two behavior-identical fixes are proven by their existing gates + the full suite re-run at the final tree.
+- **Known limits (honest):** the plan-invariance invariant (requests never depend on options) is pinned at session level (probe LEG 0), not as a permanent harness leg — the permanent gate lives in verify-federated-search LEG 4's per-term request contract; promoting the options-independence assertion there is a DevOps/scripts-owner decision, recorded here so it is a choice rather than an omission.
+
+## Builder-B Findings (hero provenance hidden)
+
+**Task**: Hide the homepage hero's inline provenance (user: "ascunde astea sau fă să nu mai fie acoperite") — the caption stack, the "Fotografia originală" button and the per-image "Proveniență și transformări" export widget — while the CC BY-SA 2.0 attribution stays available in the existing "Surse și licențe" panel.
+
+### What was removed (app/page.tsx, hero section, one JSX div)
+
+The entire `<div className="hero-side">` block: `ILUSTRAȚIE EDITORIALĂ · STILIZARE AI` kicker, the `Munții Bucegi / După o fotografie de xulescu_g · CC BY-SA 2.0.` caption stack, the "Fotografia originală" lightbox button and the `AssetExport path="/media/hero-style.json" title="Proveniență și transformări"` widget (combobox "Format pentru proveniență și transformări" + PDF + "Salvează fișierul PDF"). The hero keeps: image (unchanged, `hero-graphite-blue.webp`), gradient, heading, subtitle, search, suggestion chips, DERULEAZĂ scroll hint. Untouched: the ROMÂNIA ÎN IMAGINI area and the CategoryDirectory footer "Surse și licențe" export (different widget, kept), `hero-style.json` (canonical provenance record, sha-checked by the battery), the About-page manifest export, the shared lightbox/photo-credit code.
+
+### Where the credit lives now
+
+`public/media/category-manifest.json` — the manifest the "Surse și licențe" export in the CategoryDirectory footer serves — gained an `editorial-hero` entry: caption "Munții Bucegi — ilustrație editorială derivată…", credit `xulescu_g / Wikimedia Commons`, license `CC BY-SA 2.0` (+ licenseUrl), `sourceUrl` (Commons file page) and `originalUrl` (original photograph) — attribution moved, it didn't disappear. The `category: "editorial-hero"` value is outside `CategoryPhoto`'s mapping, so no new banner renders. README's "Fotografia originală rămâne disponibilă în galerie." (true only via the removed button) now states the credit lives in the licenses export.
+
+### TDD cycle (RED → GREEN → REFACTOR)
+
+- **RED**: added e2e leg `home-smoke.spec.ts:69` ("home hero shows no inline provenance; the licenses panel keeps the hero credit") + `verify-catalog.mjs` invariants (manifest length 29, hero-credit field assertions, 14×2 category-photo invariant scoped to category photos). Verified failing: `node scripts/verify-catalog.mjs` → `AssertionError: 28 !== 29`; the e2e leg failed on `Expected substring: not "ILUSTRAȚIE EDITORIALĂ"` against the live hero.
+- **GREEN**: hero-side removal + manifest entry + README wording. Re-ran: verify-catalog exit 0; home-smoke 5/5.
+- **REFACTOR**: no orphaned imports (`Mountain`, `AssetExport` still used elsewhere); `.hero-side` CSS rules left in place (inert — no matching element; pre-existing code I did not write), recorded here as a deliberate keep.
+
+### Tests / battery / gates (all this dispatch's final tree)
+
+| Check | Exit | Result |
+|---|---|---|
+| `corepack pnpm exec tsc --noEmit` | 0 | ✅ |
+| `corepack pnpm lint` | 0 | ✅ 0 errors / 113 warnings — exact documented baseline, zero new |
+| `corepack pnpm test:e2e` (full suite) | 0 | ✅ **50 passed (1.3m)** — 49 pre-existing legs + the new hero-provenance leg; zero regressions |
+| `node scripts/verify-ro-text.mjs` | 0 | ✅ count agreement + sources-registry language scan |
+| `node scripts/verify-sweep-inventory.mjs` | 0 | ✅ full inventory coherent |
+| `node scripts/verify-catalog.mjs` | 0 | ✅ 29 attributed photos (28 category + hero credit incl. original-photograph link); 14×2 category coverage intact |
+| `node scripts/audit-controls.mjs` | 0 | ✅ hero-graphite-blue.webp + CategoryDirectory×2 asserts still hold |
+| `node scripts/verify-css-keyframes.mjs` | 0 | ✅ |
+| `node probe-hero-provenance.mjs probes/hero-provenance.json` | 0 | ✅ verdict PASS |
+
+### Probe proof lines (probes/hero-provenance.json)
+
+```
+PASS — hero provenance hidden; credit exported in the licenses panel
+ssrProvenanceLeaks: []
+domHeroLeaks: []
+heroSideElements: 0
+licensesSelect: "Format pentru surse și licențe"
+manifestEntries: 29
+heroCredit: credit "xulescu_g / Wikimedia Commons", license "CC BY-SA 2.0",
+  sourceUrl https://commons.wikimedia.org/wiki/File:Bucegi_…,
+  originalUrl https://upload.wikimedia.org/…Bucegi_….jpg
+```
+SSR HTML (status 200) contains zero removed strings and both licenses-panel strings; rendered DOM: hero essentials intact (image + h1 + search label `Caută în Aflivra` + 3 chips + scroll hint), 0 page errors.
+
+### Files touched (this dispatch only)
+
+`app/page.tsx` (hero-side div removed), `public/media/category-manifest.json` (+1 editorial-hero credit entry), `scripts/verify-catalog.mjs` (invariants for the new state — strengthened, not weakened: hero-credit fields asserted, 14×2 scoped), `e2e/home-smoke.spec.ts` (+1 leg), `README.md` (1 sentence made true again), session `probe-hero-provenance.mjs` + `probes/hero-provenance.json`. Pre-existing uncommitted work in `page.tsx`/`README.md` from the earlier session left as found.
+
+**Status: DONE** — hero provenance UI removed, CC BY-SA 2.0 attribution preserved and pinned (e2e + battery + probe), 50/50 e2e, 0 lint errors/113 baseline warnings, tsc clean.

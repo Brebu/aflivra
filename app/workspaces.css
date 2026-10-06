@@ -55,6 +55,7 @@
 .v2 .weather-source-block[hidden]{display:none!important}.v2 .weather-navigation{margin:24px 0}
 /* Weather scene life: ambient condition layers on the decorative .weather-ambient span — transform/opacity only, seamless tile loops; the modern.css blanket gates freeze every keyframe under prefers-reduced-motion and .v2.no-motion, leaving a static, legible scene. */
 .v2 .weather-scene>img{animation:aflivra-weather-sky .55s ease both}
+@keyframes aflivra-weather-sky{from{opacity:0}to{opacity:1}}
 .v2 .weather-ambient{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .v2 .weather-scene-rain .weather-ambient:before,.v2 .weather-scene-rain .weather-ambient:after,.v2 .weather-scene-snow .weather-ambient:before,.v2 .weather-scene-snow .weather-ambient:after,.v2 .weather-scene-cloudy .weather-ambient:before,.v2 .weather-scene-cloudy .weather-ambient:after,.v2 .weather-scene-night .weather-ambient:before,.v2 .weather-scene-night .weather-ambient:after{content:'';position:absolute}
 .v2 .weather-scene-rain .weather-ambient:before{inset:-80% -40%;background-image:repeating-linear-gradient(90deg,transparent 0 26px,#d9eaff0d 26px 27px,transparent 27px 48px);transform:rotate(18deg) translateY(-46%);animation:aflivra-weather-rain-far .95s linear infinite}

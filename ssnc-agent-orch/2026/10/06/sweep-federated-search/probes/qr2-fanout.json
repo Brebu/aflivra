@@ -1,0 +1,134 @@
+{
+ "term": "harap",
+ "corpusArrived": true,
+ "rows": 3,
+ "counts": {
+  "/api/places?category=local-all&q=harap&scope=all&sort=name&page=0": 1,
+  "/api/catalog?q=harap&page=0&geoScope=national": 1,
+  "/api/lawyers?q=harap&page=0&sort=recent&geoScope=national": 1,
+  "/api/directory?kind=schools&q=harap&page=0&geoScope=national": 1,
+  "/api/directory?kind=health&q=harap&page=0&geoScope=national": 1,
+  "/api/directory?kind=pharmacies&q=harap&page=0&geoScope=national": 1,
+  "/api/directory?kind=hospitals&q=harap&page=0&geoScope=national": 1,
+  "/api/domain?kind=stiri&q=harap&page=0&sort=recent&geoScope=national": 1,
+  "/api/domain?kind=agricultura&q=harap&page=0&sort=recent&geoScope=national": 1
+ },
+ "failures": [],
+ "log": [
+  {
+   "t": 1447,
+   "type": "fetch",
+   "url": "/catalog/index.json.gz"
+  },
+  {
+   "t": 1447,
+   "type": "fetch",
+   "url": "/api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county="
+  },
+  {
+   "t": 1447,
+   "type": "fetch",
+   "url": "/places/manifest.json"
+  },
+  {
+   "t": 1447,
+   "type": "fetch",
+   "url": "/data/v2/map.json"
+  },
+  {
+   "t": 1447,
+   "type": "fetch",
+   "url": "/api/live"
+  },
+  {
+   "t": 1450,
+   "type": "fetch",
+   "url": "/media/manifest.json"
+  },
+  {
+   "t": 1451,
+   "type": "fetch",
+   "url": "/api/weather?lat=44.43&lon=26.10"
+  },
+  {
+   "t": 1459,
+   "type": "fetch",
+   "url": "/places/manifest.json"
+  },
+  {
+   "t": 1464,
+   "type": "fetch",
+   "url": "/stories/manifest.json"
+  },
+  {
+   "t": 1469,
+   "type": "fetch",
+   "url": "/api/places?category=local-all&q=harap&scope=all&sort=name&page=0"
+  },
+  {
+   "t": 1490,
+   "type": "fetch",
+   "url": "/api/catalog?q=harap&page=0&geoScope=national"
+  },
+  {
+   "t": 1530,
+   "type": "fetch",
+   "url": "/api/lawyers?q=harap&page=0&sort=recent&geoScope=national"
+  },
+  {
+   "t": 1530,
+   "type": "fetch",
+   "url": "/api/directory?kind=schools&q=harap&page=0&geoScope=national"
+  },
+  {
+   "t": 1612,
+   "type": "fetch",
+   "url": "/api/directory?kind=health&q=harap&page=0&geoScope=national"
+  },
+  {
+   "t": 1612,
+   "type": "fetch",
+   "url": "/api/directory?kind=pharmacies&q=harap&page=0&geoScope=national"
+  },
+  {
+   "t": 1666,
+   "type": "fetch",
+   "url": "/api/directory?kind=hospitals&q=harap&page=0&geoScope=national"
+  },
+  {
+   "t": 1686,
+   "type": "fetch",
+   "url": "/api/domain?kind=stiri&q=harap&page=0&sort=recent&geoScope=national"
+  },
+  {
+   "t": 1724,
+   "type": "fetch",
+   "url": "/api/domain?kind=agricultura&q=harap&page=0&sort=recent&geoScope=national"
+  },
+  {
+   "t": 1746,
+   "type": "fetch",
+   "url": "/places/manifest.json"
+  },
+  {
+   "t": 1747,
+   "type": "fetch",
+   "url": "/catalog/index.json.gz"
+  },
+  {
+   "t": 1750,
+   "type": "fetch",
+   "url": "/places/cities.json"
+  },
+  {
+   "t": 1756,
+   "type": "fetch",
+   "url": "/stories/index.json.gz"
+  },
+  {
+   "t": 1769,
+   "type": "fetch",
+   "url": "/api/places?category=cultura&q=harap&sub=&contact=&scope=all&radius=15&sort=name&photos=false&page=0&lat=44.427&lon=26.102"
+  }
+ ]
+}

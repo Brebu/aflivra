@@ -1,0 +1,6503 @@
+{
+ "events": {
+  "requests": [
+   {
+    "t": 2,
+    "type": "document",
+    "method": "GET",
+    "url": "http://localhost:5173/"
+   },
+   {
+    "t": 36,
+    "type": "font",
+    "method": "GET",
+    "url": "http://localhost:5173/fonts/InterVariable.woff2"
+   },
+   {
+    "t": 37,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/hero-graphite-blue.webp"
+   },
+   {
+    "t": 37,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/app/globals.css"
+   },
+   {
+    "t": 37,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/app/aflivra.css"
+   },
+   {
+    "t": 37,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/app/header.module.css"
+   },
+   {
+    "t": 37,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/leaflet@1.9.4/node_modules/leaflet/dist/leaflet.css"
+   },
+   {
+    "t": 37,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/entry-browser"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-local.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-vreme-v30.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-bani.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-firme.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-mediu.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-transport.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-sanatate.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-educatie.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-cultura.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-munca.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-justitie.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-energie.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-agricultura.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-filme.webp"
+   },
+   {
+    "t": 435,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-stiri.webp"
+   },
+   {
+    "t": 435,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@vite/client"
+   },
+   {
+    "t": 435,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@react-refresh"
+   },
+   {
+    "t": 455,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vite@8.0.13_@types+node@22.19.19_esbuild@0.28.0_jiti@2.7.0_terser@5.47.1_tsx@4.22.1/node_modules/vite/dist/client/env.mjs"
+   },
+   {
+    "t": 457,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vinext-app-browser-entry"
+   },
+   {
+    "t": 459,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 459,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 459,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 461,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 461,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react.js?v=1955c75e"
+   },
+   {
+    "t": 461,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 466,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/chunk-CYJPkc-J.js?v=9f8fda29"
+   },
+   {
+    "t": 466,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 466,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 466,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 466,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react-dom.js?v=1955c75e"
+   },
+   {
+    "t": 467,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=1955c75e"
+   },
+   {
+    "t": 468,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 468,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vinext-app-capabilities"
+   },
+   {
+    "t": 468,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 469,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 469,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 469,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 469,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 469,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 470,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 470,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react_jsx-runtime.js?v=1955c75e"
+   },
+   {
+    "t": 471,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 471,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 471,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 471,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 472,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 472,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 473,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 473,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 474,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 477,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 477,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 477,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 478,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 478,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 479,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 481,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 483,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 487,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 487,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 487,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-references"
+   },
+   {
+    "t": 488,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 492,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 495,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 495,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 495,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 495,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 496,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 496,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 497,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=1955c75e"
+   },
+   {
+    "t": 498,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__vinext:async-hooks-stub"
+   },
+   {
+    "t": 498,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 514,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 516,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 516,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/tooltip.tsx"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/page.tsx?t=1791301400747"
+   },
+   {
+    "t": 525,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/remove-duplicate-server-css"
+   },
+   {
+    "t": 530,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/radix-ui.js?v=14fd8d5b"
+   },
+   {
+    "t": 530,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/utils.ts"
+   },
+   {
+    "t": 530,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=1955c75e"
+   },
+   {
+    "t": 530,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 531,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/search-input.tsx"
+   },
+   {
+    "t": 531,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/http-retry.mjs"
+   },
+   {
+    "t": 531,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/lucide-react.js?v=45f18d2e"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/aflivra.css?t=1791303620260"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/header.module.css"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/button.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/input.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/tabs.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/dialog.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/sheet.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/switch.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/select.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/sonner.js?v=7cab0ea6"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/demo-data.json?import"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/v2-real.json?import"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/v2-model.ts"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/v2-charts.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/live-data.tsx?t=1791297608716"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/live-company.tsx?t=1791297608716"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/control-hints.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/experience.tsx?t=1791297608716"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/motion.ts"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/visit-info.tsx?t=1791297608716"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/geographic-scope.ts?t=1791296535417"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/location.tsx?t=1791296535417"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/currency.ts"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/local-weather.tsx?t=1791296535417"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/places-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/pagination.tsx?t=1791296535417"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/query.ts?t=1791296535417"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/export-actions.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/import-preferences.ts"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/category-photo.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/category-directory.tsx?t=1791296535417"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/domain-workspace.tsx?t=1791297788252"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/source-packages.tsx"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/public-source.ts"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/sources-registry.tsx?t=1791296535417"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/search-results.tsx?t=1791301400747"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/federated.ts?t=1791301301191"
+   },
+   {
+    "t": 532,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/page.tsx?t=1791303620260"
+   },
+   {
+    "t": 533,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/clsx.js?v=b9b1cd3a"
+   },
+   {
+    "t": 533,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/tailwind-merge.js?v=203c00d9"
+   },
+   {
+    "t": 536,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/class-variance-authority.js?v=790d0dc3"
+   },
+   {
+    "t": 541,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/places/exploration.json?import"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/date.ts"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/seed.json?import"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/use-source.ts"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/catalog-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/weather-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/record-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/popover.tsx"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/draft-form.tsx"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/contacts-panel.tsx"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/contacts.ts"
+   },
+   {
+    "t": 542,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/company-provenance.tsx?t=1791297608716"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/search-form.tsx"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/location-scope.tsx?t=1791296535417"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/public-media.tsx"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/metadata-fields.tsx?t=1791296535417"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/text.ts"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/snapshot-store.ts"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/recharts.js?v=444ca19b"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/chart.tsx"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/visit-data.json?import"
+   },
+   {
+    "t": 545,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/location-context.ts?t=1791296535417"
+   },
+   {
+    "t": 546,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/data/locality-counties.json?import"
+   },
+   {
+    "t": 546,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/data/geographic-localities.json?import"
+   },
+   {
+    "t": 546,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/forecast.ts"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/select-field.tsx"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/media.ts"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/places-view.ts"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/public-map.tsx"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/media/category-illustrations.json?import"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/data-export.ts"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/download-file.ts"
+   },
+   {
+    "t": 547,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/dashboard-topics.ts"
+   },
+   {
+    "t": 548,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/lawyers-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 548,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/transit-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 548,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/cinema-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 548,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/stories-workspace.tsx?t=1791297614753"
+   },
+   {
+    "t": 548,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/events-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 548,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/legal-workspace.tsx?t=1791297788252"
+   },
+   {
+    "t": 548,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/media/category-manifest.json?import"
+   },
+   {
+    "t": 556,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/catalog-categories.ts"
+   },
+   {
+    "t": 557,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-location.ts?t=1791296535417"
+   },
+   {
+    "t": 557,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/embedded-video.tsx"
+   },
+   {
+    "t": 558,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/lazy-details.tsx"
+   },
+   {
+    "t": 558,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/snapshot-transport.ts"
+   },
+   {
+    "t": 558,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/snapshot-cache.ts"
+   },
+   {
+    "t": 558,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/snapshot-checksum.ts"
+   },
+   {
+    "t": 578,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/leaflet@1.9.4/node_modules/leaflet/dist/leaflet.css"
+   },
+   {
+    "t": 582,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/resource-download.ts"
+   },
+   {
+    "t": 582,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-view.ts"
+   },
+   {
+    "t": 582,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-export.ts"
+   },
+   {
+    "t": 582,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-csv.ts"
+   },
+   {
+    "t": 583,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/courts-workspace.tsx?t=1791297788252"
+   },
+   {
+    "t": 583,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/legal-reader.ts"
+   },
+   {
+    "t": 583,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/legal-selection.ts"
+   },
+   {
+    "t": 583,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/legal-consolidation.ts"
+   },
+   {
+    "t": 583,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/legal-snapshots/manifest.json?import"
+   },
+   {
+    "t": 584,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/transit/coverage.json?import"
+   },
+   {
+    "t": 585,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/cinema/cinemas.json?import"
+   },
+   {
+    "t": 585,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/fflate.js?v=2518bf87"
+   },
+   {
+    "t": 587,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/courts/institutions.json?import"
+   },
+   {
+    "t": 587,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/court-query.ts"
+   },
+   {
+    "t": 587,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/court-history.ts"
+   },
+   {
+    "t": 587,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/court-history-panel.tsx?t=1791297608716"
+   },
+   {
+    "t": 739,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/catalog/index.json.gz"
+   },
+   {
+    "t": 740,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county="
+   },
+   {
+    "t": 740,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/manifest.json"
+   },
+   {
+    "t": 740,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/data/v2/map.json"
+   },
+   {
+    "t": 740,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/live"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/peles-main.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/bran-main.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/turda-main.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/ateneu-main.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/brasov-main.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-n2295517581.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/delta-main.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w122651438.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w178140424.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w780297975.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w74463768.webp"
+   },
+   {
+    "t": 742,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-n2634651894.webp"
+   },
+   {
+    "t": 742,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/media/manifest.json"
+   },
+   {
+    "t": 743,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/weather?lat=44.43&lon=26.10"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/peles-main.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/bran-main.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/turda-main.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/delta-main.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/ateneu-main.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/brasov-main.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w122651438.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w178140424.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w780297975.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w74463768.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-n2634651894.webp"
+   },
+   {
+    "t": 768,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-n2295517581.webp"
+   },
+   {
+    "t": 769,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/manifest.json"
+   },
+   {
+    "t": 776,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/manifest.json"
+   },
+   {
+    "t": 782,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/catalog/index.json.gz"
+   },
+   {
+    "t": 802,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/cities.json"
+   },
+   {
+    "t": 849,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/places?category=cultura&q=&sub=&contact=&scope=all&radius=15&sort=name&photos=false&page=0&lat=44.427&lon=26.102"
+   },
+   {
+    "t": 1143,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-cultura.webp"
+   },
+   {
+    "t": 1616,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/places?category=cultura&q=&sub=&contact=&scope=all&radius=15&sort=name&photos=true&page=0&lat=44.427&lon=26.102"
+   },
+   {
+    "t": 1656,
+    "type": "image",
+    "method": "GET",
+    "url": "https://i.ibb.co/pxxZQ0Q/342996786-250172410843297-9217146074122745525-n.jpg"
+   },
+   {
+    "t": 5620,
+    "type": "document",
+    "method": "GET",
+    "url": "http://localhost:5173/"
+   },
+   {
+    "t": 5669,
+    "type": "font",
+    "method": "GET",
+    "url": "http://localhost:5173/fonts/InterVariable.woff2"
+   },
+   {
+    "t": 5669,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/hero-graphite-blue.webp"
+   },
+   {
+    "t": 5669,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/app/globals.css"
+   },
+   {
+    "t": 5669,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/app/aflivra.css"
+   },
+   {
+    "t": 5669,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/app/header.module.css"
+   },
+   {
+    "t": 5669,
+    "type": "stylesheet",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/leaflet@1.9.4/node_modules/leaflet/dist/leaflet.css"
+   },
+   {
+    "t": 5669,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/entry-browser"
+   },
+   {
+    "t": 5673,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@vite/client"
+   },
+   {
+    "t": 5673,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@react-refresh"
+   },
+   {
+    "t": 5693,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vite@8.0.13_@types+node@22.19.19_esbuild@0.28.0_jiti@2.7.0_terser@5.47.1_tsx@4.22.1/node_modules/vite/dist/client/env.mjs"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-cultura.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-local.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-vreme-v30.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-bani.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-firme.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-mediu.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-transport.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-sanatate.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-educatie.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-munca.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-justitie.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-energie.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-agricultura.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-filme.webp"
+   },
+   {
+    "t": 5705,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/illustration-stiri.webp"
+   },
+   {
+    "t": 5705,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vinext-app-browser-entry"
+   },
+   {
+    "t": 5708,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5709,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5709,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5709,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5709,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react.js?v=1955c75e"
+   },
+   {
+    "t": 5709,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5710,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/chunk-CYJPkc-J.js?v=9f8fda29"
+   },
+   {
+    "t": 5711,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5711,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5711,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5711,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5711,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5712,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react-dom.js?v=1955c75e"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=1955c75e"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vinext-app-capabilities"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5713,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5714,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5714,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5714,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5714,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5714,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react_jsx-runtime.js?v=1955c75e"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5715,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5716,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5717,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5717,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5718,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5718,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 5718,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 5718,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-references"
+   },
+   {
+    "t": 5719,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5719,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5719,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5722,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5722,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5722,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5722,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5722,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5722,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/@vitejs+plugin-rsc@0.5.26_react-dom@19.2.6_react@19.2.6__react-server-dom-webpack@19.2._1ae2c705480040ec0642e5016c99713b/node_modules/@vite"
+   },
+   {
+    "t": 5723,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react-server-dom-webpack_client__browser.js?v=1955c75e"
+   },
+   {
+    "t": 5724,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5724,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5724,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5724,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5724,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__vinext:async-hooks-stub"
+   },
+   {
+    "t": 5725,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5727,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5729,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5729,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5731,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/tooltip.tsx"
+   },
+   {
+    "t": 5731,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 5732,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 5732,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 5732,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 5732,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/client-in-server-package-proxy/%2FUsers%2Fcbrebu%2FProjects%2Falfivra%2Fnode_modules%2F.pnpm%2Fvinext%401.0.0-beta.5_%40vitejs%2Bp"
+   },
+   {
+    "t": 5732,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/page.tsx?t=1791301400747"
+   },
+   {
+    "t": 5732,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/@id/__x00__virtual:vite-rsc/remove-duplicate-server-css"
+   },
+   {
+    "t": 5733,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/radix-ui.js?v=14fd8d5b"
+   },
+   {
+    "t": 5733,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/utils.ts"
+   },
+   {
+    "t": 5733,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=1955c75e"
+   },
+   {
+    "t": 5733,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/vinext@1.0.0-beta.5_@vitejs+plugin-react@6.0.2_vite@8.0.13_@types+node@22.19.19_esbuild_9ae7cc546efe8b53d91e012c0b8d38b1/node_modules/vinex"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/search-input.tsx"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/http-retry.mjs"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/lucide-react.js?v=45f18d2e"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/aflivra.css?t=1791303620260"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/header.module.css"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/button.tsx"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/input.tsx"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/tabs.tsx"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/dialog.tsx"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/sheet.tsx"
+   },
+   {
+    "t": 5735,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/switch.tsx"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/select.tsx"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/sonner.js?v=7cab0ea6"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/demo-data.json?import"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/v2-real.json?import"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/v2-model.ts"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/v2-charts.tsx"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/live-data.tsx?t=1791297608716"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/live-company.tsx?t=1791297608716"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/control-hints.tsx"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/experience.tsx?t=1791297608716"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/motion.ts"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/visit-info.tsx?t=1791297608716"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/geographic-scope.ts?t=1791296535417"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/location.tsx?t=1791296535417"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/currency.ts"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/local-weather.tsx?t=1791296535417"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/places-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/pagination.tsx?t=1791296535417"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/query.ts?t=1791296535417"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/export-actions.tsx"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/import-preferences.ts"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/category-photo.tsx"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/category-directory.tsx?t=1791296535417"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/domain-workspace.tsx?t=1791297788252"
+   },
+   {
+    "t": 5736,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/source-packages.tsx"
+   },
+   {
+    "t": 5737,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/public-source.ts"
+   },
+   {
+    "t": 5737,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/sources-registry.tsx?t=1791296535417"
+   },
+   {
+    "t": 5737,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/search-results.tsx?t=1791301400747"
+   },
+   {
+    "t": 5737,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/federated.ts?t=1791301301191"
+   },
+   {
+    "t": 5737,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/page.tsx?t=1791303620260"
+   },
+   {
+    "t": 5737,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/clsx.js?v=b9b1cd3a"
+   },
+   {
+    "t": 5737,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/tailwind-merge.js?v=203c00d9"
+   },
+   {
+    "t": 5738,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/class-variance-authority.js?v=790d0dc3"
+   },
+   {
+    "t": 5742,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/places/exploration.json?import"
+   },
+   {
+    "t": 5742,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/recharts.js?v=444ca19b"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/chart.tsx"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/date.ts"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/seed.json?import"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/use-source.ts"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/catalog-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/weather-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/record-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/components/ui/popover.tsx"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/draft-form.tsx"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/contacts-panel.tsx"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/contacts.ts"
+   },
+   {
+    "t": 5743,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/company-provenance.tsx?t=1791297608716"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/search-form.tsx"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/location-scope.tsx?t=1791296535417"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/public-media.tsx"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/metadata-fields.tsx?t=1791296535417"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/text.ts"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/snapshot-store.ts"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/visit-data.json?import"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/location-context.ts?t=1791296535417"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/data/locality-counties.json?import"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/data/geographic-localities.json?import"
+   },
+   {
+    "t": 5744,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/forecast.ts"
+   },
+   {
+    "t": 5745,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/select-field.tsx"
+   },
+   {
+    "t": 5745,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/data-export.ts"
+   },
+   {
+    "t": 5745,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/download-file.ts"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/media.ts"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/places-view.ts"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/public-map.tsx"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/media/category-illustrations.json?import"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/media/category-manifest.json?import"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/dashboard-topics.ts"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/lawyers-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/transit-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/cinema-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/stories-workspace.tsx?t=1791297614753"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/events-workspace.tsx?t=1791297608716"
+   },
+   {
+    "t": 5746,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/legal-workspace.tsx?t=1791297788252"
+   },
+   {
+    "t": 5748,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/catalog-categories.ts"
+   },
+   {
+    "t": 5749,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-location.ts?t=1791296535417"
+   },
+   {
+    "t": 5750,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/embedded-video.tsx"
+   },
+   {
+    "t": 5750,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/lazy-details.tsx"
+   },
+   {
+    "t": 5750,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/snapshot-transport.ts"
+   },
+   {
+    "t": 5750,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/snapshot-cache.ts"
+   },
+   {
+    "t": 5750,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/snapshot-checksum.ts"
+   },
+   {
+    "t": 5752,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/resource-download.ts"
+   },
+   {
+    "t": 5752,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.pnpm/leaflet@1.9.4/node_modules/leaflet/dist/leaflet.css"
+   },
+   {
+    "t": 5753,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-view.ts"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/cinema/cinemas.json?import"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-export.ts"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/transit-csv.ts"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/courts-workspace.tsx?t=1791297788252"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/legal-reader.ts"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/legal-selection.ts"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/live/legal-consolidation.ts"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/legal-snapshots/manifest.json?import"
+   },
+   {
+    "t": 5754,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/transit/coverage.json?import"
+   },
+   {
+    "t": 5755,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/node_modules/.vite/deps/fflate.js?v=2518bf87"
+   },
+   {
+    "t": 5759,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/public/courts/institutions.json?import"
+   },
+   {
+    "t": 5759,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/court-query.ts"
+   },
+   {
+    "t": 5759,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/lib/court-history.ts"
+   },
+   {
+    "t": 5759,
+    "type": "script",
+    "method": "GET",
+    "url": "http://localhost:5173/app/court-history-panel.tsx?t=1791297608716"
+   },
+   {
+    "t": 5872,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/catalog/index.json.gz"
+   },
+   {
+    "t": 5872,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county="
+   },
+   {
+    "t": 5872,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/manifest.json"
+   },
+   {
+    "t": 5872,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/data/v2/map.json"
+   },
+   {
+    "t": 5872,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/live"
+   },
+   {
+    "t": 5872,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/media/manifest.json"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/peles-main.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/bran-main.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/turda-main.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/delta-main.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/ateneu-main.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/brasov-main.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w122651438.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w178140424.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w780297975.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-w74463768.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-n2634651894.webp"
+   },
+   {
+    "t": 5875,
+    "type": "image",
+    "method": "GET",
+    "url": "http://localhost:5173/media/explore-n2295517581.webp"
+   },
+   {
+    "t": 5875,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/weather?lat=44.43&lon=26.10"
+   },
+   {
+    "t": 5876,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/manifest.json"
+   },
+   {
+    "t": 5878,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/manifest.json"
+   },
+   {
+    "t": 5904,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/catalog/index.json.gz"
+   },
+   {
+    "t": 5917,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/places/cities.json"
+   },
+   {
+    "t": 5932,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/places?category=cultura&q=&sub=&contact=&scope=all&radius=15&sort=name&photos=false&page=0&lat=44.427&lon=26.102"
+   },
+   {
+    "t": 65822,
+    "type": "fetch",
+    "method": "GET",
+    "url": "http://localhost:5173/api/live"
+   }
+  ],
+  "imgAdded": [],
+  "imgRemoved": [],
+  "srcChanged": [],
+  "apiPlaces": [
+   {
+    "t": 1130,
+    "status": "cached",
+    "dataStatus": null,
+    "nextAttemptAt": null,
+    "err": null
+   },
+   {
+    "t": 1648,
+    "status": "cached",
+    "dataStatus": null,
+    "nextAttemptAt": null,
+    "err": null
+   },
+   {
+    "t": 6210,
+    "status": "cached",
+    "dataStatus": null,
+    "nextAttemptAt": null,
+    "err": null
+   }
+  ]
+ },
+ "probe": {
+  "serial": 0,
+  "added": [],
+  "removed": [],
+  "srcChanged": []
+ },
+ "summary": {
+  "settleT": 9213,
+  "beforeReload": {
+   "serial": 0,
+   "added": 0
+  },
+  "requestTotals": {
+   "all": 572,
+   "images": 70,
+   "api": 10
+  },
+  "apiPlaces": [
+   {
+    "t": 1130,
+    "status": "cached",
+    "dataStatus": null,
+    "nextAttemptAt": null,
+    "err": null
+   },
+   {
+    "t": 1648,
+    "status": "cached",
+    "dataStatus": null,
+    "nextAttemptAt": null,
+    "err": null
+   },
+   {
+    "t": 6210,
+    "status": "cached",
+    "dataStatus": null,
+    "nextAttemptAt": null,
+    "err": null
+   }
+  ],
+  "imgAddedInWindow": [],
+  "imgRemovedInWindow": [],
+  "srcChanged": [],
+  "imgAddedAll": [],
+  "imgRemovedTail": [],
+  "duplicateImageRequests": [
+   [
+    "http://localhost:5173/media/illustration-cultura.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/peles-main.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/bran-main.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/turda-main.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/ateneu-main.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/brasov-main.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/explore-n2295517581.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/delta-main.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/explore-w122651438.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/explore-w178140424.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/explore-w780297975.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/explore-w74463768.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/explore-n2634651894.webp",
+    3
+   ],
+   [
+    "http://localhost:5173/media/hero-graphite-blue.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-local.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-vreme-v30.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-bani.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-firme.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-mediu.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-transport.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-sanatate.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-educatie.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-munca.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-justitie.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-energie.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-agricultura.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-filme.webp",
+    2
+   ],
+   [
+    "http://localhost:5173/media/illustration-stiri.webp",
+    2
+   ]
+  ],
+  "apiRequestTimeline": [
+   {
+    "t": 740,
+    "url": "http://localhost:5173/api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county"
+   },
+   {
+    "t": 740,
+    "url": "http://localhost:5173/api/live"
+   },
+   {
+    "t": 743,
+    "url": "http://localhost:5173/api/weather?lat=44.43&lon=26.10"
+   },
+   {
+    "t": 849,
+    "url": "http://localhost:5173/api/places?category=cultura&q=&sub=&contact=&scope=all&radius=15&sort=name&photos=false&page=0&lat"
+   },
+   {
+    "t": 1616,
+    "url": "http://localhost:5173/api/places?category=cultura&q=&sub=&contact=&scope=all&radius=15&sort=name&photos=true&page=0&lat="
+   },
+   {
+    "t": 5872,
+    "url": "http://localhost:5173/api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county"
+   },
+   {
+    "t": 5872,
+    "url": "http://localhost:5173/api/live"
+   },
+   {
+    "t": 5875,
+    "url": "http://localhost:5173/api/weather?lat=44.43&lon=26.10"
+   },
+   {
+    "t": 5932,
+    "url": "http://localhost:5173/api/places?category=cultura&q=&sub=&contact=&scope=all&radius=15&sort=name&photos=false&page=0&lat"
+   },
+   {
+    "t": 65822,
+    "url": "http://localhost:5173/api/live"
+   }
+  ],
+  "samples": [
+   {
+    "t": 14217,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 19220,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 24225,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 29227,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 34231,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 39234,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 44238,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 49241,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 54245,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 59248,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 64252,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 69255,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 74259,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 79264,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   },
+   {
+    "t": 84268,
+    "gallery": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/peles-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/bran-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/turda-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/delta-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/ateneu-main.webp",
+      "w": 1400,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/brasov-main.webp",
+      "w": 1280,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w122651438.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w178140424.webp",
+      "w": 603,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w780297975.webp",
+      "w": 768,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-w74463768.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2634651894.webp",
+      "w": 1024,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/explore-n2295517581.webp",
+      "w": 1024,
+      "ok": true
+     }
+    ],
+    "entity": [
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     },
+     {
+      "s": "?",
+      "src": "http://localhost:5173/media/illustration-cultura.webp",
+      "w": 1672,
+      "ok": true
+     }
+    ],
+    "cards": 18,
+    "busy": false
+   }
+  ]
+ }
+}

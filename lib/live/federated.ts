@@ -149,7 +149,7 @@ function storyItem(story:FederatedStory):FederatedItem{
 type Mapped={items:FederatedItem[];total:number}|null;
 function mapFamily(family:FederatedFamilyId,data:Record<string,unknown>,term:string,cap:number):Mapped{
  if(family==='places'||family==='lawyers'){
-  const rows=asObjects(family==='places'?data.items:data.items);
+  const rows=asObjects(data.items);
   if(!rows)return null;
   return {items:rows.slice(0,cap).map(family==='places'?placeItem:r=>lawyerItem(r,term)),total:numberOr(data.total,rows.length)};
  }

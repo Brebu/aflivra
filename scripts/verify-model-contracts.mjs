@@ -275,7 +275,7 @@ try{
   note('ckan-license-null',licenseNull);note('ckan-resource-last-modified-null',lastModifiedNull);note('ckan-resource-nameless',nameless);note('ckan-resource-formatless',formatless);note('ckan-resource-non-http',nonHttpUrls);note('ckan-resource-leading-dot-format',leadingDotFormats);note('ckan-seed-num-resources-overstated',p2Overstated);note('ckan-dataset-empty-resources',emptyResources);
   console.log('Catalog: '+inventory.items.length+' seturi în inventar, '+detailFiles+' fișiere detalii, '+ids.size+' id-uri unice; categorii acoperite: '+Object.keys(catDist).length+' din '+validCategories.length+' (alte: '+alte+'); cheile brute rămân în contractul etichetat; pool de rezervă: '+seedPool.length+' intrări ('+seedRecent+' recente, '+p2Overstated+' în clasa documentată num_resources > payload).');
 
-  console.log('LEG 4 — live corpora shapes: feeds, weather stations, directories, cinema sites, transport network');
+  console.log('LEG 4 — live corpora shapes: feeds, weather stations, directories, cinema sites, transport network, SIRUTA localities, legal snapshots, stories, events, forecast labels');
   const server=JSON.parse(await readFile(join(root,'lib/live/server-seed.json'),'utf8'));
   const seed=JSON.parse(await readFile(join(root,'lib/live/seed.json'),'utf8'));
   const demo=JSON.parse(await readFile(join(root,'app/demo-data.json'),'utf8'));
@@ -411,7 +411,104 @@ try{
       if(bytes.length!==proof.bytes||sha256(bytes)!==proof.sha256)bucket('transport-route-proof','route file fails its sha256/bytes proof',routeId);
     }catch(error){bucket('transport-route-proof','manifest route file missing',routeId)}
   }
+  const leg4b={siruta:0,legalItems:0,legalProofs:0,legalConsolidated:0,stories:0,storyProofs:0,events:0,forecastVars:0};
+  {
+    const data=server['siruta']?.data,items=data?.items||[];
+    leg4b.siruta=items.length;
+    let noCounty=0,noDetails=0;
+    for(const x of items){
+      if(typeof x.id!=='string'||!x.id||typeof x.name!=='string'||!x.name.trim())bucket('siruta-item-shape','locality rows must carry id and name',x.id||x.name);
+      if(x.parent!==undefined&&typeof x.parent!=='string')bucket('siruta-item-shape','parent must be a string when present',x.name+'.parent');
+      if(x.postal!==undefined&&typeof x.postal!=='string')bucket('siruta-item-shape','postal code must be a string when present',x.name+'.postal');
+      if(x.environment!=='Urban'&&x.environment!=='Rural')bucket('siruta-item-shape','environment must be Urban or Rural',x.name+' '+(x.environment||''));
+      if(!x.county)noCounty++;
+      if(x.details===undefined)noDetails++;
+      else if(!x.details||typeof x.details!=='object')bucket('siruta-item-shape','locality details must be a non-empty object when present',x.name+'.details');
+    }
+    if(!items.length)bucket('siruta-item-shape','the SIRUTA corpus must not be empty','siruta');
+    if(!data?.period)bucket('siruta-item-shape','the SIRUTA corpus must expose its reference period','siruta');
+    if(noCounty)note('siruta-county-missing',noCounty);
+    if(items.length&&noDetails===items.length)note('siruta-details-dropped',items.length);
+  }
+  {
+    await compile('text','lib/live/text.ts');
+    const consolidationModule=await compile('legal-consolidation','lib/live/legal-consolidation.ts');
+    for(const mf of ['manifest.json','historical-manifest.json']){
+      const m=JSON.parse(await readFile(join(root,'public/legal-snapshots',mf),'utf8'));
+      for(const item of m.items){
+        leg4b.legalItems++;
+        if(!item.file){bucket('legal-snapshot-shape','snapshot manifest entries must name their file',item.id||mf);continue}
+        let gz;
+        try{gz=await readFile(join(root,'public',item.file))}catch{bucket('legal-snapshot-shape','snapshot file missing from the corpus',item.file);continue}
+        leg4b.legalProofs++;
+        if(item.fileSha256&&(gz.length!==item.fileBytes||sha256(gz)!==item.fileSha256))bucket('legal-snapshot-proof','stored snapshot fails its compressed sha256/bytes proof',item.file);
+        const textContent=gunzipSync(gz).toString('utf8'),contentBytes=Buffer.from(textContent,'utf8');
+        leg4b.legalProofs++;
+        if(contentBytes.length!==item.bytes||sha256(contentBytes)!==item.sha256)bucket('legal-snapshot-proof','decompressed snapshot fails its content sha256/bytes proof',item.file);
+        if(item.characters!==undefined&&item.characters!==textContent.length)bucket('legal-snapshot-proof','declared character count disagrees with the snapshot text',item.file+' '+item.characters+' vs '+textContent.length);
+        if(item.textProvided===true&&!textContent.trim())bucket('legal-snapshot-shape','provided text must not be empty',item.file);
+        if(item.consolidation){
+          leg4b.legalConsolidated++;
+          if(!consolidationModule.verifiedConsolidation(item))bucket('legal-snapshot-consolidation','the asOf/verified consolidation contract must hold for consolidated snapshots',item.id||item.file);
+          if(!(item.consolidation.versionDate<=item.consolidation.asOf))bucket('legal-snapshot-consolidation','consolidation versionDate must not exceed asOf',item.id||item.file);
+        }
+      }
+    }
+  }
+  {
+    const idx=JSON.parse(gunzipSync(await readFile(join(root,'public/stories/index.json.gz'))).toString('utf8'));
+    leg4b.stories=idx.items.length;
+    for(const it of idx.items){
+      if(typeof it.id!=='string'||!it.id||typeof it.title!=='string'||!it.title.trim())bucket('stories-item-shape','story index entries must carry id and title',it.id||it.title);
+      if(!validUrl(it.url))bucket('stories-item-shape','story index entries must carry a source url',it.id||'');
+      if(!Number.isInteger(it.characters)||it.characters<=40)bucket('stories-item-shape','declared character count must be an integer above the minimum story length',it.id+' '+it.characters);
+      if(!it.file){bucket('stories-item-shape','story index entries must name their text file',it.id);continue}
+      let raw;
+      try{raw=await readFile(join(root,'public/stories',it.file+'.gz'))}catch{bucket('stories-text-file','the story text file is missing from the corpus',it.id+' '+it.file);continue}
+      leg4b.storyProofs++;
+      const text=gunzipSync(raw);
+      if(it.proof&&(text.length!==it.proof.bytes||sha256(text)!==it.proof.sha256))bucket('stories-text-proof','story text fails its sha256/bytes proof',it.id);
+    }
+  }
+  {
+    const events=server['events:odeon']?.data?.items||[];
+    leg4b.events=events.length;
+    let startSorted=true;
+    for(let i=0;i<events.length;i++){
+      const it=events[i];
+      if(typeof it.id!=='string'||!it.id||typeof it.title!=='string'||!it.title.trim())bucket('events-item-shape','event entries must carry id and title',it.id||it.title);
+      if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(String(it.start||'')))bucket('events-item-shape','event start must be a local time without seconds',it.id+' '+it.start);
+      if(it.end!==undefined&&!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(String(it.end||'')))bucket('events-item-shape','event end must be a local time without seconds',it.id);
+      if(!validUrl(it.url))bucket('events-item-shape','event entries must carry a source url',it.id);
+      if(!Array.isArray(it.media))bucket('events-item-shape','event media must be an array',it.id);
+      if(typeof it.content!=='string')bucket('events-item-shape','event entries must carry content text',it.id);
+      if(!it.sourceName||typeof it.sourceName!=='string')bucket('events-item-shape','event entries must name their source institution',it.id);
+      if(i&&String(events[i-1].start)>String(it.start))startSorted=false;
+    }
+    if(!events.length)bucket('events-item-shape','the events corpus must not be empty','events:odeon');
+    if(!startSorted)bucket('events-order','event entries must stay ordered by start time','events:odeon');
+  }
+  {
+    const forecast=await compile('forecast','lib/live/forecast.ts');
+    const workspaceSource=await readFile(join(root,'app/weather-workspace.tsx'),'utf8');
+    const labelKeys=new Set([...workspaceSource.matchAll(/([a-z_0-9]+):'[^']+'/g)].map(m=>m[1]));
+    const variables=[...forecast.currentVariables,...forecast.hourlyVariables,...forecast.dailyVariables];
+    const uniqueVariables=new Set(variables);
+    leg4b.forecastVars=uniqueVariables.size;
+    const unlabeled=[...uniqueVariables].filter(k=>!labelKeys.has(k));
+    if(unlabeled.length)bucket('forecast-raw-label-leak','every Open-Meteo variable the API requests must carry a Romanian label in the workspace table',unlabeled.join(', '));
+    const payload={latitude:44.42,longitude:26.1,elevation:90,timezone:'Europe/Bucharest',current_units:{},hourly_units:{temperature_2m:'°C'},daily_units:{weather_code:'wmo'},current:{time:1759706400,interval:900},hourly:{time:[1759706400]},daily:{time:[1759706400]}};
+    for(const k of forecast.currentVariables)payload.current[k]=1;
+    for(const k of forecast.hourlyVariables)payload.hourly[k]=[1];
+    for(const k of forecast.dailyVariables)payload.daily[k]=[1];
+    payload.hourly.sunrise=[1759706400];payload.daily.sunrise=[1759800000];payload.daily.sunset=[1759843200];
+    const d=forecast.parseForecast(JSON.stringify(payload)).data;
+    if(!d.current||!d.hourly.length||!d.daily.length||!d.hourlyUnits||!d.dailyUnits||d.timezone!=='Europe/Bucharest')bucket('forecast-parse-contract','the parsed forecast must keep the current/hourly/daily/units envelope','parseForecast');
+    for(const k of Object.keys(d.hourly[0]||{}))if(k!=='time'&&!forecast.hourlyVariables.includes(k))bucket('forecast-parse-contract','parsed hourly rows must stay within the requested variables',k);
+    for(const k of Object.keys(d.daily[0]||{}))if(k!=='time'&&!forecast.dailyVariables.includes(k))bucket('forecast-parse-contract','parsed daily rows must stay within the requested variables',k);
+  }
   console.log('Corpuri live: fluxuri '+feedItems+' elemente (7 surse + AFIR + filme), '+stations+' stații ANM, '+directoryRecords+' înregistrări în directore (CNAS ×3 + școli), '+cinemaKeys.length+' cinematografe ('+cinemas.items.length+' în registru), transport: '+stops.length+' opriri și '+routes.length+' rute cu '+routeFiles+' fișiere de rută probate.');
+  console.log('Corpuri de referință: SIRUTA '+leg4b.siruta+' localități, '+leg4b.legalItems+' copii legale verificate ('+leg4b.legalProofs+' dovezi sha256, '+leg4b.legalConsolidated+' cu consolidare asOf), '+leg4b.stories+' povestiri cu '+leg4b.storyProofs+' dovezi text, '+leg4b.events+' spectacole ordonate cronologic, prognoză: '+leg4b.forecastVars+' variabile cerute, toate cu etichete românești.');
 }catch(error){internalError=error}finally{await rm(temp,{recursive:true,force:true})}
 if(internalError){console.error('verify-model-contracts: '+(internalError instanceof Error?internalError.message:String(internalError)));if(internalError instanceof Error&&internalError.stack)console.error(internalError.stack);process.exit(1)}
 if(buckets.size){
@@ -421,4 +518,4 @@ if(buckets.size){
 }
 const knownList=Object.entries(known).map(([k,v])=>k+'='+v).join(', ');
 console.log('Stări cunoscute, documentate în registrul T1.4 (degrade onest, nu eșecuri): '+(knownList||'niciuna')+'.');
-console.log('Contractele de model verificate integral, offline: locuri cu paritate index↔runtime pe căutare, dosar cu fond<apel<recurs probat pe istorice, catalog CKAN acoperit în cele 14 categorii cu cheile brute limitate la panoul etichetat, și corpurile live verificate ca formă (fluxuri, stații ANM, directore, cinematografe, transport). Fără rețea ('+(Number(process.hrtime.bigint()-started)/1e6).toFixed(0)+' ms).');
+console.log('Contractele de model verificate integral, offline: locuri cu paritate index↔runtime pe căutare, dosar cu fond<apel<recurs probat pe istorice, catalog CKAN acoperit în cele 14 categorii cu cheile brute limitate la panoul etichetat, corpurile live verificate ca formă (fluxuri, stații ANM, directore, cinematografe, transport) și corpurile de referință (SIRUTA, copiile legale cu dovezi și consolidare asOf, povestiri, spectacole, etichetele prognozei). Fără rețea ('+(Number(process.hrtime.bigint()-started)/1e6).toFixed(0)+' ms).');
