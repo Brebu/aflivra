@@ -1,0 +1,40 @@
+name: afir-refresh
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: afir-refresh
+  cancel-in-progress: true
+
+jobs:
+  relay:
+    name: Relay AFIR feed and articles to the seed store
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Relay (exit 2 = afir.ro itself errored this tour, recorded as a warning; our own infrastructure failures stay red)
+        env:
+          AFLIVRA_SEED_BASE: ${{ vars.AFLIVRA_SEED_BASE }}
+          AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}
+        run: |
+          set +e
+          node scripts/relay-afir.mjs
+          code=$?
+          set -e
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::afir.ro a răspuns cu eroare în această tură (relaia nu a livrat articole) — reîmprospătarea reia la următoarea tură programată."
+            exit 0
+          fi
+          exit "$code"

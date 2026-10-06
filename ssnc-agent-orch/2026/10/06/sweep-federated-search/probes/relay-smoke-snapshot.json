@@ -1,0 +1,44 @@
+{
+ "rows": [
+  {
+   "key": "feed:agricultura",
+   "data": "{\"items\":[{\"id\":\"/comunicate/fondurile-alocate-interventiei-dr-14-pentru-componenta-achizitii-simple-au-fost-epuizate/\",\"title\":\"Fondurile alocate intervenției DR-14 pentru componenta achiziții simple au fost epuizate\",\"url\":\"https://www.afir.ro/comunicate/fondurile-alocate-interventiei-dr-14-pentru-componenta-achizitii-simple-au-fost-epuizate/\",\"publishedAt\":\"2026-10-06\"},{\"id\":\"/comunicate/stadiu-depuneri-proiecte-energie-stocare-si-autoconsum-beneficiari-publici/\",\"title\":\"Stadiu depuneri proiecte Energie stocare și autoconsum beneficiari publici\",\"url\":\"https://www.afir.ro/comunicate/stadiu-depuneri-proiecte-energie-stocare-si-autoconsum-beneficiari-publici/\",\"publishedAt\":\"2026-10-05\"},{\"id\":\"/comunicate/170-de-milioane-euro-pentru-exploatatiile-tinerilor-fermieri/\",\"title\":\"170 de milioane euro pentru exploatațiile tinerilor fermieri\",\"url\":\"https://www.afir.ro/comunicate/170-de-milioane-euro-pentru-exploatatiile-tinerilor-fermieri/\",\"publishedAt\":\"2026-10-01\"},{\"id\":\"/comunicate/model-sgb-pentru-acordarea-unei-prefinantari-beneficiarilor-privati-ai-schemei-de-energie/\",\"title\":\"Model SGB pentru acordarea unei prefinanțări beneficiarilor privați ai Schemei de energie\",\"url\":\"https://www.afir.ro/comunicate/model-sgb-pentru-acordarea-unei-prefinantari-beneficiarilor-privati-ai-schemei-de-energie/\",\"publishedAt\":\"2026-09-30\"},{\"id\":\"/comunicate/depunere-in-curs-a-proiectelor-in-energie-a-entitatilor-publice/\",\"title\":\"Depunere în curs a proiectelor în energie a entităților publice\",\"url\":\"https://www.afir.ro/comunicate/depunere-in-curs-a-proiectelor-in-energie-a-entitatilor-publice/\",\"publishedAt\":\"2026-09-29\"},{\"id\":\"/comunicate/650-milioane-euro-pentru-producerea-si-stocarea-energiei-regenerabile-de-catre-entitatile-publice/\",\"title\":\"650  milioane euro pentru producerea și stocarea energiei regenerabile de către entitățile publice\",\"url\":\"https://www.afir.ro/comunicate/650-milioane-euro-pentru-producerea-si-stocarea-energiei-regenerabile-de-catre-entitatile-publice/\",\"publishedAt\":\"2026-09-25\"},{\"id\":\"/comunicate/informatii-sesiune-energie-regenerabila-solicitanti-publici/\",\"title\":\"Informații sesiune energie regenerabilă – Solicitanți PUBLICI\",\"url\":\"https://www.afir.ro/comunicate/informatii-sesiune-energie-regenerabila-solicitanti-publici/\",\"publishedAt\":\"2026-09-22\"},{\"id\":\"/comunicate/finantare-nerambursabila-pentru-tineri-fermieri/\",\"title\":\"Finanțare nerambursabilă pentru tineri fermieri\",\"url\":\"https://www.afir.ro/comunicate/finantare-nerambursabila-pentru-tineri-fermieri/\",\"publishedAt\":\"2026-09-18\"},{\"id\":\"/comunicate/consultare-publica-privind-finantarea-investitiilor-dr-21/\",\"title\":\"Consultare publică privind finanțarea investițiilor DR-21\",\"url\":\"https://www.afir.ro/comunicate/consultare-publica-privind-finantarea-investitiilor-dr-21/\",\"publishedAt\":\"2026-09-18\"}]}",
+   "published_at": "2026-10-06",
+   "last_success_at": "2026-10-06T18:01:27.018Z",
+   "last_attempt_at": "2026-10-06T18:01:26.078Z",
+   "expires_at": 1791313287018,
+   "next_attempt_at": 0,
+   "failures": 0,
+   "lock_until": 0,
+   "error": null,
+   "adapter_version": "afir.headlines.v1"
+  }
+ ],
+ "budget": [
+  {
+   "key": "anaf",
+   "window_start": 1791270000000,
+   "used": 1
+  },
+  {
+   "key": "ckan",
+   "window_start": 1791306000000,
+   "used": 19
+  },
+  {
+   "key": "open-meteo",
+   "window_start": 1791309600000,
+   "used": 7
+  },
+  {
+   "key": "legislation",
+   "window_start": 1791306000000,
+   "used": 2
+  },
+  {
+   "key": "courts",
+   "window_start": 1791302400000,
+   "used": 1
+  }
+ ]
+}

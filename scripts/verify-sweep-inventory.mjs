@@ -83,7 +83,8 @@ try{
  assert.equal(groups.groups.length,5,'cinci ture de reîmprospătare zilnică');
  const members=groups.groups.flatMap(group=>group.members);
  assert.equal(new Set(members).size,members.length,'fiecare membru de tură apare o singură dată');
- for(const list of [groups.seedBacked,groups.onDemand])for(const entry of list)assert(entry.family&&entry.reason,'fiecare familie exceptată are nume și motiv publicat');
+  for(const list of [groups.seedBacked,groups.onDemand,groups.ghRelayed])for(const entry of list)assert(entry.family&&entry.reason,'fiecare familie exceptată are nume și motiv publicat');
+  for(const family of groups.ghRelayed.map(entry=>entry.family))assert.ok(!members.includes(family),'familia '+family+' este reîmprospătată de intermediar, nu și de tură');
  const paritySource=await readFile(join(root,'scripts/verify-source-errors.mjs'),'utf8');
  const parityFamilies=new Set([...paritySource.matchAll(/\{family:'([^']+)',routeName/g)].map(match=>match[1]));
  assert.ok(parityFamilies.size>=19,'tabela de paritate acoperă universul de familii');
@@ -92,12 +93,12 @@ try{
   'company.default':{parity:'company/anaf'},'knowledge.company.default':{parity:'company/anaf'},
   'catalog.default':{parity:'catalog/ckan'},'catalog.category.bani':{parity:'catalog/ckan'},'catalog.category.sanatate':{parity:'catalog/ckan'},
   'forecast.bucuresti':{parity:'weather/open-meteo'},'events.odeon':{parity:'events/odeon'},'cinema.bucuresti.today':{parity:'cinema/cinemacity'},
-  'feed.munca':{parity:'feeds/stiri'},'feed.stiri':{parity:'feeds/stiri'},'feed.sanatate':{parity:'feeds/stiri'},'feed.educatie':{parity:'feeds/stiri'},'feed.justitie':{parity:'feeds/stiri'},
-  'feed.agricultura':{parity:'feeds/agricultura'},
-  'law.search.default':{parity:'legal/law'},'law.search.codcivil':{parity:'legal/law'},'lawyers.default':{parity:'lawyers/ifep'},'directory.schools.page0':{parity:'directory/schools'}};
- const familyCoverage={
-  ...Object.fromEntries(members.map(member=>[member,coverage[member]])),
-  'transport':{parity:'transport/tpbi'},'siruta':{parity:'localities/siruta'},'films':{parity:'feeds/filme'},
+   'feed.munca':{parity:'feeds/stiri'},'feed.stiri':{parity:'feeds/stiri'},'feed.sanatate':{parity:'feeds/stiri'},'feed.educatie':{parity:'feeds/stiri'},'feed.justitie':{parity:'feeds/stiri'},
+   'law.search.default':{parity:'legal/law'},'law.search.codcivil':{parity:'legal/law'},'lawyers.default':{parity:'lawyers/ifep'},'directory.schools.page0':{parity:'directory/schools'}};
+  const familyCoverage={
+   ...Object.fromEntries(members.map(member=>[member,coverage[member]])),
+   'transport':{parity:'transport/tpbi'},'siruta':{parity:'localities/siruta'},'films':{parity:'feeds/filme'},
+   'feed.agricultura':{harness:'verify-afir-relay.mjs',parity:'feeds/agricultura'},
   'directory.health':{parity:'directory/health'},'directory.pharmacies':{parity:'directory/pharmacies'},'directory.hospitals':{parity:'directory/hospitals'},
   'law.consolidated.full':{harness:'verify-legal-records.mjs'},
   'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs'},
@@ -105,7 +106,7 @@ try{
   'company-knowledge':{parity:'company/anaf'},
   'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
   'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:'legal/law'}};
- const registryKeys=[...members,...groups.seedBacked.map(entry=>entry.family),...groups.onDemand.map(entry=>entry.family)];
+  const registryKeys=[...members,...groups.seedBacked.map(entry=>entry.family),...groups.onDemand.map(entry=>entry.family),...groups.ghRelayed.map(entry=>entry.family)];
  const uncovered=[];
  for(const key of new Set(registryKeys)){
   const entry=familyCoverage[key];

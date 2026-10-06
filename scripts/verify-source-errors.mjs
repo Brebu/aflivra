@@ -8,8 +8,12 @@ import ts from 'typescript';
 // Modul --live face exact un singur acces la ruta locală și unul la ruta workerului publicat
 // (infrastructura noastră, în afara bugetului de surse) per familie și, doar pentru stările de
 // eroare ale sursei, maximum două verificări directe ale aceleiași adrese prin același contract
-// de încărcare; familiile servite corect nu se reinteroghează. Familiile preclasificate
-// (AFIR: sursa blochează egress-ul Workers) nu cheltuiesc acces direct când tiparul se confirmă.
+// de încărcare; familiile servite corect nu se reinteroghează. Familiile preclasificate nu
+// cheltuiesc acces direct când tiparul se confirmă. AFIR rămâne preclasificată ca egress blocat
+// la nivelul conectorului; tura GitHub Actions „afir-refresh” reîmprospătează copia D1 din
+// exterior, deci ambele stări legitime sunt informaționale: legătură publicată curată (relaia
+// e la zi — verdict ok, fără ramură declanșată) sau plic de eroare cu copia veche (relaia a
+// îmbătrânit peste TTL și accesul din worker a lovit egress-ul blocat — clasa cunoscută).
 const root=resolve(import.meta.dirname,'..'),require=createRequire(import.meta.url),live=process.argv.includes('--live'),base=process.env.AFLIVRA_VERIFY_SOURCE_BASE||'http://127.0.0.1:5173';
 const deployedArg=process.env.AFLIVRA_VERIFY_DEPLOYED_BASE,deployedBase=deployedArg===undefined?'https://aflivra.brebu.workers.dev':deployedArg;
 const todayIso=()=>new Date().toISOString().slice(0,10);
@@ -112,7 +116,7 @@ if(live){
     }
    }else if(deployed&&Number(deployed.http)>=500){verdict='our-bug';ourBug=true;notes.push('workerul publicat răspunde HTTP '+deployed.http+' fără degradare în-band')}
    else if(deployed&&Array.isArray(deployed.surfaced)&&deployed.surfaced.length){
-    if(family.known&&deployed.surfaced.some(state=>/HTTP 5\d\d|429/i.test(state.error))){verdict=family.known;notes.push('familie preclasificată — sursa blochează egress-ul Workers (stabilit la campania de probe 2026-10-06); fără acces direct cheltuit')}
+     if(family.known&&deployed.surfaced.some(state=>/HTTP 5\d\d|429/i.test(state.error))){verdict=family.known;notes.push('familie preclasificată — sursa blochează egress-ul Workers (stabilit la campania de probe 2026-10-06), iar tura de relaie GitHub Actions reîmprospătează copia D1 din exterior; fără acces direct cheltuit')}
     else{direct=await probeDirect(family);verdict=direct.outcome==='ok'?'source-blocks-egress':'source-down'}
    }else if(deployed&&deployed.unreachable)notes.push('workerul publicat nu a răspuns ('+deployed.unreachable+') — clasificare pe dev și sursă directă');
    verdicts.push({family:familyName,route:family.route,app:{http:response.status,status:dev.payload?.status??null,error:String(dev.payload?.error||'').slice(0,200),lastAttemptAt:dev.payload?.lastAttemptAt??null,nextAttemptAt:dev.payload?.nextAttemptAt??null,surfaced:dev.surfaced,...(dev.sampled?{sampled:{sampledSource:dev.sampled.sampledSource,allFeedStates:dev.sampled.allFeedStates}}:{})},deployed,direct,verdict,...(notes.length?{notes}:{})});
