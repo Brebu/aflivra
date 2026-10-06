@@ -31,7 +31,7 @@ const tablesFor=(baseArgs)=>{const guard=runWrangler([...baseArgs,'--command',GU
 
 const applyTo=(baseArgs,args,label)=>{const applied=runWrangler([...baseArgs,...args,'--yes']);if(applied.status!==0)throw new Error(`Aplicarea migrației ${label} a eșuat (exit ${applied.status??'?'}).`)};
 
-export function migrateRemote(databaseId){return migrate(['d1','execute',databaseId,'--remote'],`remote (D1 ${D1_DATABASE_NAME})`)}
+export function migrateRemote(databaseId){return migrate(['d1','execute',D1_DATABASE_NAME,'--remote'],`remote (D1 ${D1_DATABASE_NAME}${databaseId?' '+databaseId:''})`)}
 export function migrateLocal(){return migrate(localExecuteArgs(),'local (.wrangler/state, id placeholder din build)')}
 
 function migrate(baseArgs,label){
