@@ -1,0 +1,30 @@
+{
+  "groups": [
+    {"name": "live", "cron": "0 0 * * *", "estimatedSubrequests": 33, "members": ["bnr", "weather.anm", "company.default", "catalog.default"]},
+    {"name": "weather", "cron": "7 0 * * *", "estimatedSubrequests": 29, "members": ["weather.alerts", "forecast.bucuresti", "events.odeon", "cinema.bucuresti.today"]},
+    {"name": "news", "cron": "14 0 * * *", "estimatedSubrequests": 35, "members": ["feed.munca", "feed.stiri", "feed.sanatate", "feed.educatie", "feed.justitie"]},
+    {"name": "legislation", "cron": "21 0 * * *", "estimatedSubrequests": 33, "members": ["law.search.default", "law.search.codcivil", "lawyers.default", "knowledge.company.default"]},
+    {"name": "registers", "cron": "28 0 * * *", "estimatedSubrequests": 31, "members": ["directory.schools.page0", "catalog.category.bani", "catalog.category.sanatate", "feed.agricultura"]}
+  ],
+  "seedBacked": [
+    {"family": "transport", "reason": "Arhiva GTFS a transportului public se parsează integral la pornire; reîmprospătarea ei zilnică ar depăși plafonul gratuit de subrequest-uri și de CPU pe invocare."},
+    {"family": "siruta", "reason": "Registrul SIRUTA se publică ca fișier CSV voluminos; se servește din copia verificată inclusă în aplicație."},
+    {"family": "films", "reason": "Catalogul Wikidata al filmelor românești este stabil și voluminos; se servește din copia verificată inclusă în aplicație."},
+    {"family": "directory.health", "reason": "Registrul clinicilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."},
+    {"family": "directory.pharmacies", "reason": "Registrul farmaciilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."},
+    {"family": "directory.hospitals", "reason": "Registrul spitalelor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."},
+    {"family": "law.consolidated.full", "reason": "Consolidarea integrală a unui act poate depăși 1,4 MB de text și se stochează în fragmente; se verifică la deschiderea actului, nu pe tură de noapte."},
+    {"family": "catalog.organizations-formats", "reason": "Paginile de organizator și de format ale catalogului sunt combinatorii; se verifică la cerere."},
+    {"family": "resource.datastores", "reason": "Resursele și depozitele de date ale catalogului se verifică la deschiderea fiecărui set de date."}
+  ],
+  "onDemand": [
+    {"family": "transport.realtime", "reason": "Pozițiile, sesizările și disfuncționalitățile în timp real au un TTL de 30 de secunde și nu pot fi pre-împrospătate."},
+    {"family": "courts", "reason": "Dosarele se verifică la cerere după număr, cu un TTL de 5 minute."},
+    {"family": "forecast", "reason": "Prognoza se calculează pentru coordonatele alese; doar orașul implicit este pre-împrospătat."},
+    {"family": "company-knowledge", "reason": "Identitatea și cunoștințele despre firme se verifică pentru CUI-ul explorat; doar CUI-ul implicit este pre-împrospătat."},
+    {"family": "articles-stories-cinema", "reason": "Articolele, povestirile și programele cinema se verifică pentru cheia și ziua aleasă; azi se pre-împrospătează doar varianta implicită București."},
+    {"family": "feeds.energie-transport", "reason": "Fluxurile ministerelor de energie și transport se verifică la cerere."},
+    {"family": "datastore.pages", "reason": "Paginile dincolo de prima ale fiecărui registru și filtrările geografice se verifică la cerere."},
+    {"family": "law.search", "reason": "Căutările legislative se verifică la cerere; varianta implicită și Codul civil se pre-împrospătează zilnic."}
+  ]
+}

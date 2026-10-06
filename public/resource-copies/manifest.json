@@ -1,0 +1,45 @@
+{
+  "copies": [
+    {
+      "id": "1088e792-54f4-43ad-8e4c-9b351b82d31c",
+      "datasetId": "15cb96b0-984f-4d89-9d04-cd500ba9fd22",
+      "fetchedAt": "2026-10-05T00:03:55.561117+00:00",
+      "publishedAt": "2026-09-16T07:09:26.033854",
+      "sourceUrl": "https://data.gov.ro/dataset/15cb96b0-984f-4d89-9d04-cd500ba9fd22/resource/1088e792-54f4-43ad-8e4c-9b351b82d31c/download/tour-nights-m-01-data.csv",
+      "file": "/resource-copies/1088e792-54f4-43ad-8e4c-9b351b82d31c.csv",
+      "fileSha256": "5924fbbfaee62b3373fe6ff54833ff00305a34d247fd4b532abe0c61be94837b",
+      "bytes": 275,
+      "dataSha256": "5ad8a82ba63883e5cc87610f41bbebe8058dd75bb7777c7434decfad16488d56"
+    },
+    {
+      "id": "0bfeb08b-73ce-49cb-8f50-dd7a63b9aa27",
+      "datasetId": "fa2fee98-7345-450a-8ad9-572d243ebde2",
+      "fetchedAt": "2026-10-05T00:04:03.521321+00:00",
+      "publishedAt": "2026-05-06T11:19:50.793114",
+      "sourceUrl": "https://data.gov.ro/dataset/fa2fee98-7345-450a-8ad9-572d243ebde2/resource/0bfeb08b-73ce-49cb-8f50-dd7a63b9aa27/download/20251130_fxb-exb-900_trez701_4283422_46414469_01_109406365.pdf",
+      "file": "/resource-copies/0bfeb08b-73ce-49cb-8f50-dd7a63b9aa27.pdf",
+      "fileSha256": "7c3f7ddbee5cb8a71deee4023407f2ef406c8eb45e44c4a5dcb00d6d08a84b83",
+      "bytes": 37488,
+      "dataSha256": "37ac6d06595e85c20a6adf42bd6f3cb0a38d14d12818d3fcdbfc48a0a049da9d"
+    }
+  ],
+  "checks": [
+    {
+      "id": "1088e792-54f4-43ad-8e4c-9b351b82d31c",
+      "status": "verified",
+      "kind": "table",
+      "bytes": 275,
+      "rows": [
+        6
+      ],
+      "fileSha256": "5924fbbfaee62b3373fe6ff54833ff00305a34d247fd4b532abe0c61be94837b"
+    },
+    {
+      "id": "0bfeb08b-73ce-49cb-8f50-dd7a63b9aa27",
+      "status": "verified",
+      "kind": "pdf",
+      "bytes": 37488,
+      "fileSha256": "7c3f7ddbee5cb8a71deee4023407f2ef406c8eb45e44c4a5dcb00d6d08a84b83"
+    }
+  ]
+}

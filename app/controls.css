@@ -1,0 +1,53 @@
+/* Shared controls and page edges across workspaces. */
+.v2{--page-gutter:48px;--control-height:48px;--control-gap:12px}
+.v2 .vwrap,.v2 .hero-content,.v2 .place-hero-inner{width:min(1280px,calc(100% - 2 * var(--page-gutter)));margin-inline:auto}
+.v2 [data-slot=button]{height:auto;min-height:var(--control-height);max-width:100%;min-width:0;white-space:normal;overflow-wrap:normal;word-break:normal;line-height:1.5;gap:8px;padding-block:10px;text-align:center}
+.v2 [data-slot=button][data-size=icon]{height:48px;width:48px;padding:0;flex:none}
+.v2 [data-slot=button]>svg{flex:none}
+.v2 input[data-slot=input],.v2 input[type=date]{min-height:var(--control-height);height:auto;min-width:0;max-width:100%;box-sizing:border-box}
+.v2 input[type=date]{width:100%}
+.v2 .select-field,.v2 [data-slot=select-trigger]{position:relative;display:flex;align-items:center;gap:8px;width:100%;min-width:0;max-width:100%;min-height:var(--control-height);height:auto;padding:10px 14px;border:1px solid #d5d9e2;border-radius:10px;background:#fff;line-height:1.5;color:#273d55;box-sizing:border-box;white-space:normal;overflow-wrap:normal}
+.v2 .select-field .select-field-control{position:absolute;inset:0;width:100%;height:100%;min-width:0;margin:0;opacity:0;cursor:pointer;z-index:1}
+.v2 .select-field-label,.v2 [data-slot=select-value]{flex:1;min-width:0;max-width:100%;white-space:normal;overflow-wrap:break-word;word-break:normal;-webkit-line-clamp:unset;line-clamp:unset}
+.v2 .select-field-arrow,.v2 [data-slot=select-trigger]>svg{flex:none}
+.v2 .select-field:focus-within{outline:2px solid #0071e3;outline-offset:2px}
+.v2 .select-field[data-disabled]{opacity:.5}
+.v2 .select-field[data-disabled] .select-field-control{cursor:not-allowed}
+[data-slot=select-content]{max-width:calc(100vw - 32px)}
+[data-slot=select-item], [data-slot=select-item] span{white-space:normal;overflow-wrap:break-word;word-break:normal;line-height:1.5}
+.v2 .panel-top [data-slot=select-trigger]{width:auto;flex:0 1 14rem}
+.v2 .control-label{display:flex;align-items:center;gap:6px;min-width:0;min-height:1.5em;line-height:1.5}
+.v2 .control-label>svg{flex:none}
+.v2 .control-label .field-label{margin:0;font:inherit}
+.v2 .entity-filters,.v2 .catalog-filters,.v2 .law-search-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;align-items:stretch}
+.v2 .law-search-form{grid-template-columns:repeat(2,minmax(0,1fr))}
+.v2 .entity-filters>label,.v2 .catalog-filters>label,.v2 .law-search-form>label{display:grid;grid-template-rows:auto 1fr;gap:8px;min-width:0;margin:0;align-items:start;align-content:start}
+.v2 .entity-filters>label>input,.v2 .entity-filters>label>.select-field,.v2 .catalog-filters>label>.select-field,.v2 .law-search-form>label>input{align-self:stretch;height:100%}
+.v2 .control-action{display:grid;grid-template-rows:auto 1fr;gap:8px;min-width:0}
+.v2 .control-action>button{grid-row:2;align-self:stretch;width:100%;height:100%}
+@supports(grid-template-rows:subgrid){.v2 .entity-filters>label,.v2 .catalog-filters>label,.v2 .law-search-form>label,.v2 .entity-filters>.control-action,.v2 .catalog-filters>.control-action{grid-row:span 2;grid-template-rows:subgrid}}
+.v2 .export-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:var(--control-gap);align-items:stretch;min-width:0;width:100%}
+.v2 .export-actions>.select-field,.v2 .export-actions>[data-slot=button]{width:100%;max-width:100%;min-width:0;flex:unset;align-self:stretch}
+.v2 .export-actions>p,.v2 .export-actions>span:not(.select-field),.v2 .export-actions>a{grid-column:1/-1;min-width:0;overflow-wrap:anywhere}
+.v2 .export-actions>[data-slot=button]:only-child{width:auto;justify-self:start}
+.v2 .prefs-data{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:stretch}
+.v2 .prefs-data>.export-actions,.v2 .prefs-data>.import-label{min-width:0;width:100%;max-width:100%}
+.v2 .prefs-data>.import-label{display:flex;align-items:center;justify-content:center;min-height:48px;height:auto;padding:12px 16px;line-height:1.5}
+.v2 .location-city-input{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:stretch;min-width:0}
+.v2 .location-city-input input,.v2 .location-city-input button{width:100%;min-width:0;flex:unset}
+.v2 .live-search,.v2 .hero-search,.v2 .explore-search{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;min-width:0}
+.v2 .live-search>input,.v2 .hero-search>input,.v2 .explore-search>input{min-width:0;width:100%}
+.v2 .table-filter{display:flex;flex-wrap:wrap;gap:12px;align-items:center;min-width:0}
+.v2 .table-filter>input{flex:1 1 180px;min-width:0}
+.v2 .dataset-toolbar>label{display:grid;gap:8px;min-width:0}
+.v2 .filter-chips button,.v2 .catalog-category-tabs button,.v2 [data-slot=tabs-trigger]{white-space:normal;word-break:normal;overflow-wrap:normal;height:auto;min-height:44px;line-height:1.5}
+.v2 .preference-switch{align-items:flex-start;gap:16px}
+.v2 .preference-switch>span{min-width:0;flex:1}
+.v2 .preference-switch>[data-slot=switch]{flex:none;margin-top:.2em}
+.v2 .interest-selector button{min-width:0;min-height:48px;height:auto;white-space:normal;overflow-wrap:normal;line-height:1.5}
+.v2-large .v2 .interest-selector{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.v2 .category-directory .domain-card{height:100%;display:flex;flex-direction:column}
+.v2 .category-directory .domain-card>.domain-card-content{display:flex;flex-direction:column;flex:1}
+.v2 .category-directory .domain-card .category-card-action{margin-top:auto}
+@media(max-width:1100px){.v2{--page-gutter:32px}}
+@media(max-width:640px){.v2{--page-gutter:16px}.v2 .entity-filters,.v2 .catalog-filters,.v2 .law-search-form,.v2 .location-city-input{grid-template-columns:minmax(0,1fr)}.v2 .live-search,.v2 .hero-search,.v2 .explore-search{grid-template-columns:auto minmax(0,1fr)}.v2 .live-search>button,.v2 .hero-search>button,.v2 .explore-search>button{grid-column:1/-1;width:100%;margin:0}.v2 .table-filter>button{width:100%}.v2 .panel-top [data-slot=select-trigger]{width:100%;flex-basis:100%}}

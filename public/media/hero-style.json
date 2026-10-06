@@ -1,0 +1,26 @@
+{
+  "file": "hero-graphite-blue.webp",
+  "width": 1864,
+  "height": 843,
+  "aspectRatio": 2.2112,
+  "bytes": 318302,
+  "caption": "Ilustrație editorială stilizată, derivată din panorama Munților Bucegi văzută de pe Clăbucetul Taurului.",
+  "sourcePhoto": "/media/hero.webp",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bucegi_Mountains_seen_from_the_Cl%C4%83bucetul_Taurului_peak_(51121408743).jpg",
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Bucegi_Mountains_seen_from_the_Cl%C4%83bucetul_Taurului_peak_%2851121408743%29.jpg",
+  "credit": "xulescu_g / Wikimedia Commons",
+  "license": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "changes": "AI-assisted editorial stylization: graphite and midnight-navy shadows, electric-blue duotone, luminous cool snowy highlights, cinematic atmospheric depth and approximately 2.2:1 reframing. Derived illustration; not a current factual observation.",
+  "changesRo": "Stilizare editorială asistată de AI: tonuri de grafit și albastru închis, tratament duoton albastru electric, accente reci luminoase, profunzime atmosferică și reîncadrare la aproximativ 2,2:1. Ilustrație derivată; nu reprezintă o observație factuală a condițiilor actuale.",
+  "generationMode": "Built-in imagegen edit; one generation, no variants or retries.",
+  "webpExport": {
+    "file": "hero-graphite-blue.webp",
+    "width": 1864,
+    "height": 843,
+    "bytes": 318302,
+    "quality": 90,
+    "sha256": "8335200fce91a0f13f0fa8202920e89fd58a81403083fdc3c80ab8a6307681c6",
+    "changes": "WebP encoding only; dimensions, aspect ratio and framing preserved. No additional creative edits."
+  }
+}

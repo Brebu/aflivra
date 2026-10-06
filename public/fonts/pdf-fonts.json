@@ -1,0 +1,25 @@
+{
+  "source": "InterVariable.woff2",
+  "sourceSha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+  "license": "SIL Open Font License 1.1",
+  "items": [
+    {
+      "file": "Inter-Regular.ttf",
+      "weight": 400,
+      "bytes": 341996,
+      "sha256": "1a07b0b0d6284819ba2d59f2dd0755bd42f47603cdf9ff4b387f41efe7689150",
+      "additionalGlyphs": [
+        "U+2500 horizontal line separator"
+      ]
+    },
+    {
+      "file": "Inter-Semibold.ttf",
+      "weight": 600,
+      "bytes": 343224,
+      "sha256": "ba708183d4a30d32243d268dc9bf128aba805474bd3ff5f3c7dcf4abeea96cd3",
+      "additionalGlyphs": [
+        "U+2500 horizontal line separator"
+      ]
+    }
+  ]
+}

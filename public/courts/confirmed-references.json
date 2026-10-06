@@ -1,0 +1,24 @@
+{
+  "provenance": "Metadate extrase din răspunsul oficial CautareDosare; fără nume de părți sau textul complet al soluției.",
+  "items": [
+    {
+      "id": "6236/111/2017|TribunalulBIHOR|Fond|476/LM/2023|2023-05-12|2403/111/2025|TribunalulBIHOR|2026-06-25T00:00:00",
+      "number": "6236/111/2017",
+      "stage": "Fond",
+      "court": "TribunalulBIHOR",
+      "courtLabel": "Tribunalul Bihor",
+      "document": "Sentință civilă",
+      "documentNumber": "476/LM/2023",
+      "documentDate": "2023-05-12",
+      "verifiedAt": "2026-10-05T17:29:38.526Z",
+      "source": {
+        "number": "2403/111/2025",
+        "court": "TribunalulBIHOR",
+        "courtLabel": "Tribunalul Bihor",
+        "hearingDate": "2026-06-25T00:00:00",
+        "url": "https://portal.just.ro/SitePages/dosare.aspx",
+        "responseSha256": "6cef51ace440b078e1ee4387a1cd6dbd420be56495223c94423570fefb4e0034"
+      }
+    }
+  ]
+}

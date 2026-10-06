@@ -1,0 +1,4 @@
+import {readSource} from '@/lib/live/cache';import {odeonLoader} from '@/lib/live/events';
+import {readGeographicContext,nearbyRecord} from '@/lib/geographic-scope';
+export const dynamic='force-dynamic';
+export async function GET(request:Request){const context=readGeographicContext(new URL(request.url).searchParams);if(!context)return Response.json({error:'Locație invalidă.'},{status:400});if(context.active&&(!context.point||!nearbyRecord({lat:44.43667,lon:26.09738},context.point)))return Response.json({key:'events:outside-coverage',name:'Calendarul spectacolelor',url:'https://teatrul-odeon.ro/',adapterVersion:'events.geographic.v1',status:'cached',data:{items:[],outOfCoverage:true,note:'Nu avem un calendar validat în această zonă.'},publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:3600});return Response.json(await readSource(odeonLoader),{headers:{'Cache-Control':'no-store'}})}

@@ -1,0 +1,51 @@
+/* One shared stylesheet keeps the cascade stable across routes and bundles. */
+@import './v2.css';
+@import './readability.css';
+@import './live.css';
+@import './experience.css';
+@import './modern.css';
+@import './polish.css';
+@import './legal.css';
+@import './complete-data.css';
+@import './workspaces.css';
+@import './controls.css';
+
+.v2 .location-city-picker{display:grid;gap:.5rem;min-width:0}.v2 .location-city-picker small{font-size:.875rem;line-height:1.5;color:#64748b}.v2 .weather-interpretation{max-width:75ch;padding:1rem;border-left:3px solid #0879ef;background:#f3f8ff;border-radius:.5rem;line-height:1.65}
+
+/* Keep page overflow separate from the intentional scrolling inside tables,
+   tabs and maps. Clipping does not create a scroll container for the header. */
+html{overflow-x:hidden}
+.v2.app-shell{width:100%;max-width:100%;min-width:0}
+.v2.app-shell>main,.v2.app-shell>footer{min-width:0;max-width:100%}
+@supports(overflow:clip){
+ html{overflow-x:clip}
+ .v2.app-shell{overflow-x:clip;overflow-y:visible}
+}
+
+/* Paint the rings inside their panels instead of positioning oversized
+   pseudo-elements outside them, including on Safari's composited layers. */
+.v2 .domain-hero::after,.v2 .weather-feature::after{content:none}
+.v2 .domain-hero{
+ background-image:radial-gradient(circle at 100% 130%,transparent 173px,#d2d9e3 174px 175px,transparent 176px),linear-gradient(115deg,#fff,#edf5fa);
+}
+.v2 .weather-feature{
+ background-image:radial-gradient(circle at calc(100% + 10px) 170px,transparent 99px,#72829933 100px 101px,#72829911 102px 120px,#7282990a 121px 140px,transparent 141px);
+}
+
+/* Locality names, source URLs and expanded text must be able to shrink and
+   wrap inside their grid/flex track instead of widening the whole document. */
+.v2 .pulse-row>button>span:not(.pulse-icon),.v2 .entity-row>span:nth-child(2){min-width:0;flex:1;overflow-wrap:anywhere}
+.v2 .pulse-row strong{flex-wrap:wrap}
+.v2 .vsource{flex-wrap:wrap;max-width:100%}
+.v2 .vsource>span{min-width:0;flex:1 1 12rem;overflow-wrap:anywhere}
+.v2 .snapshot-note>span,.v2 .vcallout>div{min-width:0;flex:1 1 12rem;overflow-wrap:anywhere}
+.v2 .source-links>a{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.v2 .live-section,.v2 .domain-workspace{overflow-wrap:anywhere}
+.v2 .table-scroll,.v2 .dataset-table-scroll{min-width:0;max-width:100%;overscroll-behavior-x:contain}
+.v2 .vbottom-nav span{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:640px){
+ .v2 .weather-cities,.v2 .currency-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .v2 .weather-cities>*,.v2 .currency-grid>*{min-width:0;overflow-wrap:anywhere}
+}
+
+.v2 .weather-load-state{max-width:100%;overflow-wrap:anywhere}.v2 .weather-load-state p{margin:0 0 12px}.v2 .weather-load-state button{color:#123860;background:#fff;border-color:#d8e5f7}

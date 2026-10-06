@@ -1,0 +1,1 @@
+Dezarhivați Aflivra_Cod.zip și toate volumele Aflivra_Date_*.zip în același director. Volumele includ toate fișierele publicate, datele și media. Fișierele JSON.gz păstrează exact octeții JSON originali după decomprimare gzip; aplicația le citește automat. Lista completă cu SHA-256 este în source-packages.json. În arhive nu sunt conturi sau credențiale.
