@@ -777,3 +777,10 @@ All findings LOW/INFO — none block approval; safe to fold into the T3.3 final 
 - [orchestrator] After fix: migration remote APPLIED (source_budget, source_cache) + re-run idempotent no-op
 - [orchestrator] Cloudflare agent-setup (user-directed): MCP server registered through the durable source chain — oauth passthrough added to ai-harness generate-opencode.py convert_mcp (same pattern as headers), cloudflare entry added to ai-harness/config/mcp.json, sync-from-claude-settings.py regenerated ~/.config/opencode/opencode.jsonc: cloudflare {type remote, url https://mcp.cloudflare.com/mcp, oauth {}} — valid per opencode schema (McpRemoteConfig.oauth). Skills pack (npx cloudflare/skills) + cf CLI deferred — unpinned npx execution per house rules; optional per Cloudflare's own doc.
 - [orchestrator] DEPLOY BLOCKED at the last step: worker uploaded (65.8s) but the account has no workers.dev subdomain registered yet (wrangler non-interactive fallback declined). Awaiting user: register subdomain at the dashboard onboarding link (one-time, their choice of public name), then re-run deploy.
+
+### T3.2 production deploy — COMPLETE ✅
+- Subdomain registered via API (wrangler OAuth): romania ✗ (10031 taken), data ✗ (taken), **brebu ✓** → https://aflivra.brebu.workers.dev
+- Deploy: worker + 5 cron triggers live (live 0 0 / weather 7 0 / news 14 0 / legislation 21 0 / registers 28 0 UTC), version ed41461f
+- First-connection TLS failure explained: freshly-registered subdomain edge certificate propagation (~3 min), NOT a network block — resolved by itself; subsequent 200s
+- LIVE VERIFICATION: GET / → 200 · /api/live → 200 · /manifest.webmanifest → 200 · POST /api/refresh no-token → 401 (fail-closed in production) · GET /api/refresh/status with production token → 200 (5 groups + 9 seedBacked families) · POST ?source=weather with token → 200, 4/4 ok, 0 failed, 4.08s wall (network-dominated; no budget exhaustion)
+- Production REFRESH_TOKEN: stored ONLY at the untracked temp path (outside repo) — rotate anytime with `wrangler secret put REFRESH_TOKEN --name aflivra`
