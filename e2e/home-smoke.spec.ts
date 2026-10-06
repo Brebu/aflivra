@@ -11,6 +11,12 @@ function collectPageErrors(page: Page): string[] {
   return errors;
 }
 
+// The suggestion chips need hydrated React handlers; the mount effect writes the
+// preferences key, so a non-null read proves the client app is interactive.
+async function waitForClientReady(page: Page) {
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('reper.v2.preferences') !== null), {timeout: 30_000}).toBe(true);
+}
+
 test.describe('Home smoke', () => {
   test('home view renders with header nav, hero, PWA head links and valid live statuses', async ({page}) => {
     const pageErrors = collectPageErrors(page);
@@ -57,6 +63,48 @@ test.describe('Home smoke', () => {
     }).toPass({timeout: 45_000});
 
     // The app must load without uncaught page errors.
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});
+
+test.describe('Hero suggestion chips route semantically', () => {
+  test('the Castelul Peleș chip opens the place detail view directly', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    await waitForClientReady(page);
+    await page.locator('.hero-suggestions').getByRole('button', {name: 'Castelul Peleș', exact: true}).click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'place');
+    await expect(page.locator('.place-hero h1')).toHaveText('Castelul Peleș');
+    await expect.poll(() => page.evaluate(() => decodeURIComponent(location.hash))).toBe('#view=place&id=peles');
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('the Monitorul Oficial RA chip opens the ANAF company view for CUI 427282', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    await waitForClientReady(page);
+    await page.locator('.hero-suggestions').getByRole('button', {name: 'Monitorul Oficial RA', exact: true}).click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'company');
+    await expect(page.getByRole('heading', {level: 1, name: 'Verifică o firmă după CUI.'})).toBeVisible();
+    // The CUI field is seeded from the routed entity id, regardless of live-data state.
+    await expect(page.getByLabel('CUI firmă')).toHaveValue('427282');
+    await expect.poll(() => page.evaluate(() => decodeURIComponent(location.hash))).toBe('#view=company&id=427282');
+    // Entity-intent chips set no catalog query: the landed dataset search starts empty
+    // (only typed free-text searches still seed it).
+    await expect(page.getByLabel('Caută în catalogul național')).toHaveValue('');
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('the Brașov chip selects the city and opens the local domain', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    await waitForClientReady(page);
+    await page.locator('.hero-suggestions').getByRole('button', {name: 'Brașov', exact: true}).click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await expect(page.getByRole('heading', {level: 1, name: 'Orașul tău'})).toBeVisible();
+    await expect.poll(() => page.evaluate(() => decodeURIComponent(location.hash))).toBe('#view=domain&id=local');
+    // City-story semantics: the chip activates the Brașov locality context, like the city cards below.
+    await expect(page.locator('.location-strip [role="status"]')).toContainText('Brașov');
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });

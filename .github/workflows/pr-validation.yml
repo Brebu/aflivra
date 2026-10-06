@@ -57,6 +57,8 @@ jobs:
           node scripts/verify-catalog.mjs
           node scripts/verify-snapshot-transport.mjs
           node scripts/verify-refresh-sweep.mjs
+          node scripts/verify-ro-text.mjs
+          node scripts/verify-source-errors.mjs
       - name: verify-legal-pdf — needs pypdf, not on the runner image
         continue-on-error: true
         run: node scripts/verify-legal-pdf.mjs

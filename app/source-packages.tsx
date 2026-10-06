@@ -1,9 +1,9 @@
 'use client';
-import {useEffect,useState} from 'react';
-import {snapshotJson} from './snapshot-store';
-import {ExportActions} from './export-actions';
-export function SourcePackages(){
- const [manifest,setManifest]=useState<any>(null),[error,setError]=useState('');
- useEffect(()=>{const c=new AbortController();snapshotJson('/downloads/source-packages.json?v=35',undefined,c.signal).then(setManifest).catch(e=>{if(e.name!=='AbortError')setError(e.message)});return()=>c.abort()},[]);
- return <section className="live-section"><h2>Inventarul aplicației</h2><p>Lista volumelor, numărul de fișiere, dimensiunile și valorile SHA-256 pot fi exportate ca PDF, CSV sau Excel. Datele și documentele se descarcă din categoria lor.</p><p><a className="text-link" href="/downloads/index.html">Descarcă toate volumele de cod și documentația PDF</a></p>{error&&<p role="alert">{error}</p>}{manifest&&<><ExportActions input={{title:'Inventarul aplicației Aflivra',data:manifest}} label="Descarcă inventarul complet"/><div className="source-downloads">{manifest.packages.map((p:any)=><article className="source-download" key={p.file}><span>{p.label}<small>{(p.bytes/1000000).toFixed(1)} MB · {p.files} fișiere</small></span><a className="text-link" href={'/downloads/'+p.file} download={p.file}>Descarcă ZIP</a></article>)}</div></>}</section>;
-}
+import {BookOpen} from 'lucide-react';
+const GUIDES=[
+ {revision:'35',file:'Aflivra_v35_Documentatie.pdf',summary:'fond și apel legate prin date și trimiteri oficiale'},
+ {revision:'34',file:'Aflivra_v34_Documentatie.pdf',summary:'dosare urmărite la toate instanțele și ședințe păstrate integral'},
+ {revision:'33',file:'Aflivra_v33_Documentatie.pdf',summary:'categorii și subcategorii după locația activă'},
+ {revision:'32',file:'Aflivra_v32_Documentatie.pdf',summary:'cuprins apăsabil și copii consolidate confirmate'},
+ {revision:'30',file:'Aflivra_v30_Documentatie.pdf',summary:'explorare, vreme și trailere'}];
+export function SourcePackages(){return <section className="live-section"><div className="panel-top"><div><span className="kicker">DOCUMENTAȚIA PLATFORMEI</span><h2>Ghidurile platformei</h2><p>Ghidul complet de folosire, publicat ca PDF odată cu fiecare revizie. Fiecare ediție documentează platforma așa cum a fost lansată la revizia ei și rămâne disponibilă aici.</p></div><BookOpen size={26}/></div><div className="source-downloads">{GUIDES.map(g=><article className="source-download" key={g.file}><span>Ghidul platformei · revizia {g.revision}<small>{g.summary}</small></span><a className="text-link" href={'/downloads/'+g.file} download={g.file}>Descarcă PDF</a></article>)}</div></section>}

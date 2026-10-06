@@ -37,7 +37,7 @@ test.describe('Transit network view', () => {
     // rather than weakening the structural assertions on it.
     await expect(workspace.locator('.entity-grid .transit-card').first()).toBeVisible({timeout: 60_000});
     await expect(workspace.locator('.entity-grid .transit-card h3').first()).toHaveText(/^Linia /);
-    await expect(workspace.getByText(/rezultate · copia integrală: [\d.]+ linii, [\d.]+ stații, [\d.]+ curse/)).toBeVisible();
+    await expect(workspace.getByText(/rezultate? · copia integrală: [\d.]+ (?:de )?(?:linie|linii), [\d.]+ (?:de )?(?:stație|stații), [\d.]+ (?:de )?(?:cursă|curse)/)).toBeVisible();
 
     // Structure: kind chips, filters and the search control on the network mode.
     await expect(workspace.getByLabel('Caută linii, operatori, stații și informații de transport')).toBeVisible();

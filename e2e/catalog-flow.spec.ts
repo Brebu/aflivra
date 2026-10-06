@@ -41,7 +41,7 @@ test.describe('National catalog', () => {
     // Pagination elements: page input from the shared Pagination component.
     const pagination = catalog.locator('nav.live-pagination');
     await expect(pagination).toBeVisible();
-    await expect(pagination).toContainText(/din \d+( · [\d.]+ rezultate)?/);
+    await expect(pagination).toContainText(/din \d+( · [\d.]+ (?:de )?rezultate?)?/);
     await expect(pagination.getByLabel('Numărul paginii')).toBeVisible();
     const next = pagination.getByRole('button', {name: 'Vezi mai mult'});
     await expect(next).toBeVisible();
