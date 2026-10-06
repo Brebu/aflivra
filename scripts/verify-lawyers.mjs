@@ -8,11 +8,15 @@ import ts from 'typescript';
 const root=resolve(import.meta.dirname,'..'),temp=await mkdtemp(join(tmpdir(),'aflivra-lawyers-'));
 const stub="const getSource=(...args)=>globalThis.__lawyersSource(...args);class SourceError extends Error{};";
 try{
- for(const name of ['text','source-html','lawyers']){
-  const source=(await readFile(join(root,'lib/live',name+'.ts'),'utf8')).replace("import {getSource,SourceError} from './adapters';",stub);
-  const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,path)=>"from '"+path+".mjs'");
-  await writeFile(join(temp,name+'.mjs'),js);
- }
+ for(const name of ['text','source-html','lawyers','query']){
+   const source=(await readFile(join(root,'lib/live',name+'.ts'),'utf8')).replace("import {getSource,SourceError} from './adapters';",stub);
+   const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,path)=>"from '"+path+".mjs'");
+   await writeFile(join(temp,name+'.mjs'),js);
+  }
+ for(const name of ['location-context','geographic-scope']){
+   let source=await readFile(join(root,'lib',name+'.ts'),'utf8');for(const [binding,file] of [['countyLookup','public/data/locality-counties.json'],['urbanLocalities','public/data/geographic-localities.json']])source=source.replace("import "+binding+" from '@/"+file+"';",'const '+binding+'='+await readFile(join(root,file),'utf8')+';');source=source.replace("from './live/query'","from './query'");
+   const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,path)=>"from '"+path+".mjs'");await writeFile(join(temp,name+'.mjs'),js);
+  }
  const {parseLawyers,normalizeLawyerData,lawyerLoader}=await import(pathToFileURL(join(temp,'lawyers.mjs')));
  const {sourceElements}=await import(pathToFileURL(join(temp,'source-html.mjs'))),{sourceText}=await import(pathToFileURL(join(temp,'text.mjs')));
  const rights='Drept de concluzii la: Judecătorii, Tribunale, Curți de Apel';
@@ -36,13 +40,13 @@ try{
  assert.throws(()=>parseLawyers('<span>Structure changed</span>'),/numărul/);
  const legacy={items:[{id:'old',name:'POPESCU Ana',title:'Avocat',details:'1 < 2 și 3 > 0',paragraphs:[`05-10-2026 12:12 <span class="pop" data-content="${rights}`,'Adresa completă','0700 000 000'],rights}],total:40149,page:0,pages:2677,pageSize:15};
  const clean=normalizeLawyerData(legacy);assert.equal(clean.total,40149);assert.equal(clean.items[0].updatedAt,'05-10-2026 12:12');assert.deepEqual(clean.items[0].paragraphs,['Adresa completă','0700 000 000']);assert.equal(clean.items[0].details,'1 < 2 și 3 > 0');assert(legacy.items[0].paragraphs[0].includes('<span'),'Reading an old copy must not mutate stored data.');
- let route=(await readFile(join(root,'app/api/lawyers/route.ts'),'utf8')).replace("from '@/lib/live/lawyers'","from './lawyers.mjs'").replace("import {readSource} from '@/lib/live/cache';",'const readSource=(loader)=>globalThis.__lawyersReadSource(loader);');
+  let route=(await readFile(join(root,'app/api/lawyers/route.ts'),'utf8')).replace("from '@/lib/geographic-scope'","from './geographic-scope.mjs'").replace("from '@/lib/live/lawyers'","from './lawyers.mjs'").replace("import {readSource} from '@/lib/live/cache';",'const readSource=(loader)=>globalThis.__lawyersReadSource(loader);');
  await writeFile(join(temp,'route.mjs'),ts.transpileModule(route,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText);
  const prior={status:'stale',data:legacy,lastSuccessAt:'2026-10-05T09:00:00Z',error:'HTTP 429',nextAttemptAt:'2026-10-05T10:00:00Z'};
  globalThis.__lawyersReadSource=async loader=>{assert.equal(loader.version,'ifep.public-search.v2');return prior};
  const {GET}=await import(pathToFileURL(join(temp,'route.mjs'))),response=await GET(new Request('https://example.test/api/lawyers?q=&page=0&sort=recent&v=2')),shown=await response.json();
  assert.equal(response.headers.get('Cache-Control'),'no-store');assert.equal(shown.status,'stale');assert.equal(shown.lastSuccessAt,prior.lastSuccessAt);assert.equal(shown.error,'HTTP 429');assert.equal(shown.nextAttemptAt,prior.nextAttemptAt);assert(!JSON.stringify(shown).includes('<span'));
- const workspace=await readFile(join(root,'app/lawyers-workspace.tsx'),'utf8');assert(workspace.includes("v:'2'"));assert(workspace.includes('Ultima actualizare a fișei: {item.updatedAt}'));
+  const workspace=await readFile(join(root,'app/lawyers-workspace.tsx'),'utf8');assert(workspace.includes("v:'3'"));assert(workspace.includes('Ultima actualizare a fișei: {item.updatedAt}'));
  const position=process.argv.indexOf('--html');
  if(position>=0){
   const actual=parseLawyers(await readFile(process.argv[position+1],'utf8'));

@@ -62,8 +62,7 @@ jobs:
       - name: verify-legal-pdf — needs pypdf, not on the runner image
         continue-on-error: true
         run: node scripts/verify-legal-pdf.mjs
-      - name: verify-downloads — rev-35 sandbox drift, Wave-3 follow-up
-        continue-on-error: true
+      - name: verify-downloads
         run: node scripts/verify-downloads.mjs
       - name: verify-legal-records — rev-35 sandbox drift, Wave-3 follow-up
         continue-on-error: true

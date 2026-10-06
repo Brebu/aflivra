@@ -1,6 +1,6 @@
 import {readSnapshotFile as readFile} from './snapshot-read.mjs';
 import assert from 'node:assert/strict';
-import {writeFile,mkdtemp,rm} from 'node:fs/promises';
+import {writeFile,mkdtemp,rm,readdir} from 'node:fs/promises';
 import {join,resolve} from 'node:path';import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';import {DatabaseSync} from 'node:sqlite';import ts from 'typescript';
@@ -11,8 +11,21 @@ globalThis.__aflivraDownloadEnv={DB:db};
 const checksum=data=>createHash('sha256').update(data).digest('hex');
 const insert=(key,data)=>sqlite.prepare('INSERT INTO source_cache (key,data,adapter_version) VALUES (?,?,?)').run(key,data,'download-test');
 try{
+ const guideList=(await readFile(join(root,'app/source-packages.tsx'),'utf8')).match(/const GUIDES=\[([\s\S]*?)\];/);
+ assert(guideList,'The About section must keep its GUIDES list of guide PDFs.');
+ const listedGuides=[...guideList[1].matchAll(/file:'([^']+)'/g)].map(match=>match[1]);
+ assert(listedGuides.length>0,'The About section must name a PDF file for every guide card.');
+ const diskGuides=(await readdir(join(root,'public/downloads'))).filter(name=>/^Aflivra_v\d+_Documentatie\.pdf$/.test(name)).sort();
+ assert.equal(new Set(listedGuides).size,listedGuides.length,'Each guide file must be listed in the About section only once.');
+ const deadLinks=[...new Set(listedGuides)].filter(file=>!diskGuides.includes(file)),unlistedGuides=diskGuides.filter(file=>!listedGuides.includes(file));
+ assert.deepEqual({deadLinks,unlistedGuides},{deadLinks:[],unlistedGuides:[]},'Every guide listed in „Ghidurile platformei” must exist in public/downloads/ and every published guide PDF must be listed — deadLinks: listed but missing from public/downloads/; unlistedGuides: present in public/downloads/ but missing from the About section.');
+ console.log(`Guide manifest verified: ${listedGuides.length} guide PDFs in „Ghidurile platformei” match public/downloads/ in both directions.`);
+ for(const name of ['location-context','geographic-scope','tabular-geography']){
+  let source=await readFile(join(root,'lib',name+'.ts'),'utf8');for(const [binding,file] of [['countyLookup','public/data/locality-counties.json'],['urbanLocalities','public/data/geographic-localities.json']])source=source.replace("import "+binding+" from '@/"+file+"';",'const '+binding+'='+await readFile(join(root,file),'utf8')+';');source=source.replace("from './live/query'","from './query'");
+  const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");await writeFile(join(temp,name+'.mjs'),js);
+ }
  for(const name of ['resource-copy','catalog-metadata','resources','resource-download','adapters','catalog-categories','records','query','text','media']){
-  let source=await readFile(join(root,'lib/live',name+'.ts'),'utf8');source=source.replace("import audit from '@/public/catalog/audit.json';",'const audit='+await readFile(join(root,'public/catalog/audit.json'),'utf8')+';');source=source.replace("import {env} from 'cloudflare:workers';",'const env=globalThis.__aflivraDownloadEnv;');
+   let source=await readFile(join(root,'lib/live',name+'.ts'),'utf8');source=source.replace("import audit from '@/public/catalog/audit.json';",'const audit='+await readFile(join(root,'public/catalog/audit.json'),'utf8')+';');source=source.replace("import {env} from 'cloudflare:workers';",'const env=globalThis.__aflivraDownloadEnv;');source=source.replace("from '../tabular-geography'","from './tabular-geography'").replace("from '../geographic-scope'","from './geographic-scope'");
   let js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replaceAll('@/lib/http-retry.mjs',pathToFileURL(join(root,'lib/http-retry.mjs')).href).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
   for(const pkg of ['xlsx','fflate'])js=js.replace("from '"+pkg+"'","from '"+pathToFileURL(require.resolve(pkg)).href+"'");await writeFile(join(temp,name+'.mjs'),js);
  }
