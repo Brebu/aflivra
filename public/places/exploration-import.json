@@ -1,0 +1,16 @@
+{
+  "source": "https://download.geofabrik.de/europe/romania.html",
+  "dataAsOf": "2026-10-03T20:20:50Z",
+  "fetchedAt": "2026-10-05T08:55:31.316873+00:00",
+  "places": 28,
+  "photos": 28,
+  "maxParallelRequests": 3,
+  "failures": [
+    "HTTP Error 429: Too many requests (f061ab2)",
+    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)",
+    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)",
+    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)",
+    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+  ],
+  "note": "A photographed selection of exact source records, not a replacement for the complete inventory."
+}

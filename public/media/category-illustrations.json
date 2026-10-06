@@ -1,0 +1,485 @@
+[
+  {
+    "id": "local",
+    "category": "localities",
+    "name": "Localități",
+    "file": "illustration-local.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 137212,
+    "sha256": "eb3a02598c666091f731177493a14ffa9e43a755519002a5c874e77b149eb8b0",
+    "sourcePngSha256": "4a18f5afe7a91a32137c48502237677b2ed3c2da2ca23cd08eb4574332ba79ef",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Localități.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Localități.\nUnique subject: A miniature sculptural town square: porcelain houses with dark navy pitched roofs and one taller civic clock-tower form, arranged around a simple electric-blue circular plaza. This is imaginary architectural sculpture, not any real locality and not a map.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-local.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-local.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "bani",
+    "category": "money-economy",
+    "name": "Bani & economie",
+    "file": "illustration-bani.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 130908,
+    "sha256": "c4890f8173f27a0b1ecb4192561efd992c52955441b99b452579565582e00974",
+    "sourcePngSha256": "d017916470c3f874bdca67ff0f2450d0111910557588b8651ffaff5c450a6520",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Bani & economie.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Bani & economie.\nUnique subject: A bold stack of thick blank porcelain coin discs, two electric-blue folded banknote-like paper rectangles without printing, and a graphite vault-ring shape behind them. No currency symbols, numbers, text, logos, bar charts or financial data.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-bani.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-bani.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "firme",
+    "category": "companies",
+    "name": "Firme",
+    "file": "illustration-firme.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 97844,
+    "sha256": "e3f44ddf6ef2df0692ae19a01a7058b191b9af022e1cd338facd9dff26015321",
+    "sourcePngSha256": "e1e52eb0500533e937bbae252e082464be38933da6571e16733f124eae006dd6",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Firme.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Firme.\nUnique subject: A sculptural cluster of three abstract business towers built from stacked navy and porcelain rectangular paper volumes, with electric-blue connecting ribbons and one blank porcelain portfolio folder in front. These are imaginary business forms, not real company buildings or logos.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-firme.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-firme.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "mediu",
+    "category": "environment-weather",
+    "name": "Mediu & vreme",
+    "file": "illustration-mediu.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 92228,
+    "sha256": "bc5f207a0669c38b1bd2fedcc40ee9e402ee9bd5bf59a70e4ae978101d0887bc",
+    "sourcePngSha256": "3c7dc0fab7b877edd3b616f448d11db6e9a03516c429703730eea429900f9842",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Mediu & vreme.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Mediu & vreme.\nUnique subject: A large suspended porcelain paper cloud above three electric-blue raindrop sculptures, a rippling navy water disc and one folded blue leaf. The composition symbolizes weather, water and the environment. No green, weather readings, forecasts, maps or charts.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-mediu.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-mediu.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "transport",
+    "category": "transport",
+    "name": "Transport",
+    "file": "illustration-transport.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 156784,
+    "sha256": "31274d21d947c3b227a1fb7c0a07ef1e397db4a9017db1d4e23d2e5ee8bffad5",
+    "sourcePngSha256": "da6163c395944b1f4682579061acd8e425c09386aa8b6f957267bf69d2d389c9",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Transport.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Transport.\nUnique subject: A clearly stylized electric-blue and porcelain tram sculpture seen in three-quarter view, on two curved graphite rails over a navy layered-paper base. Windows are blank dark blue, with no people, destination writing, route numbers, logos, maps or real vehicle branding.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-transport.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-transport.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "sanatate",
+    "category": "health",
+    "name": "Sănătate",
+    "file": "illustration-sanatate.webp",
+    "width": 1672,
+    "height": 940,
+    "bytes": 110740,
+    "sha256": "fcb52a42023b0c7b89a2bf59bbfa6c937990ebf83c58960d689e100a22a4de67",
+    "sourcePngSha256": "c72817fef1c3f9834b8c732e1fba3edb7bdd90e06ed07bf280e130d465d23192",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Sănătate.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Sănătate.\nUnique subject: A large extruded porcelain medical cross with layered paper edges, framed by an elegant electric-blue stethoscope loop and a graphite rounded medicine-case form. No people, brands, pills with printing, medical charts, numbers or text.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-sanatate.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-sanatate.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "educatie",
+    "category": "education",
+    "name": "Educație",
+    "file": "illustration-educatie.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 124500,
+    "sha256": "6f6a67bfd285ba0aa96b6e6e93a1cc57fee18cfb68c27de3ecbc72c711de79ae",
+    "sourcePngSha256": "223a769eb5a8936118e6ba6df12dd932e6a2c7578c0adfad9172353fc69607ad",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Educație.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Educație.\nUnique subject: An oversized open book sculpted from many porcelain paper pages that fan upward, with a floating electric-blue graduation cap and two small navy book volumes at its base. Every page and spine is completely blank; no letters, text, diagrams, formulas or numbers.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-educatie.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-educatie.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "cultura",
+    "category": "culture",
+    "name": "Cultură",
+    "file": "illustration-cultura.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 139374,
+    "sha256": "e2af12bca065ef6aebcee67d3c02756aff83e067bb170907a14ef82a0c48eef2",
+    "sourcePngSha256": "0e5e1ba3b493ae862b513b2f2cd3c219b5278595474542f05341e1cb35bb1599",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Cultură.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Cultură.\nUnique subject: An elegant porcelain theatrical half-mask with simple anonymous sculptural facial features beside an electric-blue abstract lyre and layered curved navy paper sheets. A symbolic sculpture for performing arts and cultural heritage, no actual person, building, instrument brand or text.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-cultura.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-cultura.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "munca",
+    "category": "work",
+    "name": "Muncă",
+    "file": "illustration-munca.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 156910,
+    "sha256": "350ba5c5d77639ef7a246085c3c2d80453ecacaed14e091da288c53eaf8b4860",
+    "sourcePngSha256": "0ab15ef0945d71558ade0fad1b60dd2c057af8a54adcb18fc8fd1007d6fd007d",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Muncă.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Muncă.\nUnique subject: A porcelain protective hardhat in the foreground, an oversized electric-blue wrench diagonally behind it, and one thick graphite gear wheel. Crisp layered-paper construction and sculptural craftsmanship symbolize practical work and employment. No people, company logos, warning words or text.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-munca.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-munca.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "justitie",
+    "category": "justice",
+    "name": "Justiție",
+    "file": "illustration-justitie.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 108462,
+    "sha256": "04ff292594d6005d60b7aad63302788cfaa5f1838c79bbba6f91d79098dcc2f2",
+    "sourcePngSha256": "987c54c300675f3436d8ea1a40bd6dbf23a8a7ee3435c0332129058d1fc20286",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Justiție.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Justiție.\nUnique subject: A strong sculptural balance scale: an electric-blue horizontal beam, porcelain hanging pans and a navy central pillar, above one thick completely blank porcelain law book. The scale is a symbolic editorial object, with no real court, insignia, seal, numbers, words or legal chart.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-justitie.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-justitie.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "energie",
+    "category": "energy",
+    "name": "Energie",
+    "file": "illustration-energie.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 111636,
+    "sha256": "bf6ef81172693b665f5134339ebb339a07060c08fb2885ecb6a5b78555f2ac29",
+    "sourcePngSha256": "3879c3e2e25f3c983ef34cbd62b9c306ef813db7559606a2da27dd6e0df85af6",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Energie.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Energie.\nUnique subject: A large electric-blue folded-paper lightning bolt rising from a porcelain circular base, with a small navy turbine rotor and two porcelain coil arcs creating a sculptural sense of power. No real power station, brand, numbers, wires with labels, energy graphs, maps or charts.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-energie.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-energie.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "agricultura",
+    "category": "agriculture",
+    "name": "Agricultură",
+    "file": "illustration-agricultura.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 170336,
+    "sha256": "368f0e06efbc724dfe3f9ae7dfd570abacb315c77fdd56750a14f191ae2be68a",
+    "sourcePngSha256": "cca47d90a2f9928985523425f993f5f96b35e9c3a8007bd600ee41131b6f2bf6",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Agricultură.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Agricultură.\nUnique subject: Three oversized porcelain and electric-blue wheat heads, their grain forms made of precisely layered folded paper, rising above sculptural navy furrows and gentle cobalt terrace ribbons. Agricultural symbolism only, no green plants, actual farmland depiction, maps, crop measurements or text.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-agricultura.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-agricultura.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "filme",
+    "category": "cinema",
+    "name": "Filme",
+    "file": "illustration-filme.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 135272,
+    "sha256": "044aa1b594d282e2b41dbca062dd87cd58272b7bfd81800f094f000bedbe8ca1",
+    "sourcePngSha256": "5e4a74cfe1be6f1e04513378d2a831f289b3a8a6114a3ef0f65767746e9230c2",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Filme.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Filme.\nUnique subject: A bold porcelain film reel with circular holes, an electric-blue curled strip of film with completely blank frames, and a small graphite clapperboard with unprinted blue-and-porcelain diagonal stripes. No movie poster, actors, words, titles, numbers, logos or printed markings.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-filme.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-filme.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "stiri",
+    "category": "institutional-news",
+    "name": "Știri & instituții",
+    "file": "illustration-stiri.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 93704,
+    "sha256": "ed38f84cb023deeba7999ece5710ebe74a899b05cceca3574e636a285d491e74",
+    "sourcePngSha256": "dbe7c42acb67fcbe1bee929bc2136a433107bdf4c5c8047fa48868033cdd38aa",
+    "caption": "Ilustrație editorială generată cu AI pentru categoria Știri & instituții.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Știri & instituții.\nUnique subject: An abstract civic portico of three porcelain columns and a navy lintel behind one oversized folded blank porcelain document, with a small electric-blue microphone sculpture in front. Symbolic institutional communication, no real government building, officials, flags, insignia, words, news headlines, UI or charts.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-stiri.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-stiri.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  },
+  {
+    "id": "vreme",
+    "category": "environment-weather",
+    "name": "Vreme",
+    "file": "illustration-vreme-v30.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 60490,
+    "sha256": "3fc2a40a2793f2991fa1fd20b2b6f533e80e879b921560d455ae95a7dac997b8",
+    "sourcePngSha256": "0adae29f04aca5778190fbb9f5836dd2c251c0b4b0548016e154d8e4a62a2b29",
+    "caption": "Ilustrație AI pentru Vreme și prognoză: termometru, nor, soare și vânt.",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for Aflivra “Vreme și prognoză”.\nPrimary request: generate exactly one new original horizontal 16:9 image, approximately 1536 × 864 pixels, showing an elegant sculptural porcelain thermometer with a vivid electric-blue inset, one small porcelain folded-paper cloud, a circular electric-blue sun halo behind the small cloud, and a single restrained flowing navy/blue wind ribbon.\nReference roles: the three inspected collection illustrations for transport, money, and environment are style references only, never edit targets. Match their premium restrained sculptural 3D, folded-paper layers, tactile paper-fibre surfaces, softly bevelled edges, warm porcelain-white material, cobalt accents, and deep dimensional shadows. Create a different subject and silhouette; do not reproduce the environment illustration.\nScene/backdrop: continuous midnight-navy studio background and floor. The grouped weather sculpture sits on a low layered navy plinth with subtly bevelled squared corners. The plinth is a solid support, without water, ripples, concentric rings, or a water disc.\nSubject: a recognizable upright warm porcelain thermometer is the main object, with a rounded bulb and a clean slender electric-blue inset running vertically inside it. The thermometer has absolutely no ticks, scale, marks, numbers, writing, or symbols. A much smaller folded-paper porcelain cloud sits beside it, with a crisp circular electric-blue sun halo rising behind the cloud. One graceful restrained navy/blue wind ribbon curves through the lower part of the group.\nStyle/medium: premium editorial concept illustration blending luminous folded paper and matte porcelain sculpture; restrained dimensional stylized 3D, not photorealistic.\nComposition/framing: horizontal 16:9 category card; three-quarter editorial perspective; all essential objects fully contained in the central 70% safe-crop area, generous clean margins on every side, uncluttered balanced central composition, complete objects without clipping.\nLighting/mood: soft porcelain studio light and cobalt rim light, rich controlled dimensional shadows, calm refined atmosphere.\nColor palette: strictly midnight navy #0B142A, graphite #161E2E, electric blue #0066FF, warm porcelain #F4F1EA, and pale blue highlights only.\nMaterials/textures: luminous subtle paper fibres, carefully folded layered paper, tactile warm porcelain-white surfaces, softly bevelled edges and deep navy shadows.\nText: none.\nAvoid: text, numbers, letters, ticks, thermometer scale, labels, logos, UI, watermarks, charts, maps, large floating cloud, raindrops, water disc, ripples, leaf, plants, landscape, green, yellow, orange, red, other colours, extra weather icons, extra objects, photorealism.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [
+        "/workspace/sites/reper-romania/public/media/illustration-transport.webp",
+        "/workspace/sites/reper-romania/public/media/illustration-bani.webp",
+        "/workspace/sites/reper-romania/public/media/illustration-mediu.webp"
+      ],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-05",
+      "export": "Pillow WebP format conversion only: quality=90, method=6. Original dimensions preserved; no resizing, retouching, compositing, or recolouring."
+    },
+    "localPath": "/workspace/sites/reper-romania/public/media/illustration-mediu.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/weather-illustration-v30/illustration-vreme-v30.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "review": "Inspected generated illustration: matches blue/navy/porcelain editorial category collection, distinct thermometer/cloud/sun/wind subject, no environment leaf or water disc, no text."
+    }
+  },
+  {
+    "id": "povesti",
+    "category": "culture",
+    "name": "Cultură",
+    "file": "illustration-cultura.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 139374,
+    "sha256": "e2af12bca065ef6aebcee67d3c02756aff83e067bb170907a14ef82a0c48eef2",
+    "sourcePngSha256": "0e5e1ba3b493ae862b513b2f2cd3c219b5278595474542f05341e1cb35bb1599",
+    "caption": "Ilustrație reprezentativă pentru povești și lectură · AI",
+    "prompt": "Use case: stylized-concept.\nAsset type: one original editorial category-card illustration for the Aflivra Romanian information website.\nPrimary request: create a completely new raster illustration, visibly designed and sculptural rather than photographic. Do not edit, trace, imitate or colorize any source photograph.\nUnified collection style: premium graphic editorial art made of layered folded paper and restrained sculptural 3D forms, subtle luminous paper fibers, softly bevelled edges, tactile porcelain-like white surfaces and deep dimensional shadows. Sophisticated and calm, with a clear silhouette and one strongly readable central motif.\nComposition: one horizontal 16:9 image, approximately 1536 x 864 pixels, useful for a website card crop. Keep the subject within the central 70 percent of the canvas, generous uncluttered edge margins, gentle three-quarter editorial perspective, a low layered navy paper plinth beneath the object, and a continuous dark midnight-navy backdrop. No border and no transparent background.\nPalette must be restricted to midnight navy #0B142A, graphite #161E2E, vivid electric blue #0066FF and warm porcelain #F4F1EA, with only blue-tinted pale highlights. Absolutely no green, teal, red, orange, pink, purple or yellow.\nLighting: soft luminous porcelain highlights, a subtle cobalt rim light, delicate ambient shadowing, a quiet midnight background. Artistic soft texture, no photorealism or stock-photo appearance.\nStrict exclusions: no words, letters, numbers, tiny print, captions, labels, logos, watermarks, UI elements, actual data charts, maps, flags or identifiable real officials. No photographic landscape or architectural photograph. No generic repeated object from another category. Produce exactly one final illustration for the specified category.\n\nCategory: Cultură.\nUnique subject: An elegant porcelain theatrical half-mask with simple anonymous sculptural facial features beside an electric-blue abstract lyre and layered curved navy paper sheets. A symbolic sculpture for performing arts and cultural heritage, no actual person, building, instrument brand or text.",
+    "provenance": {
+      "tool": "built-in image_gen.imagegen",
+      "mode": "new generation",
+      "referenceImages": [],
+      "generationCallsForAsset": 1,
+      "created": "2026-10-04",
+      "export": "WebP quality 90, method 6; format conversion only; original dimensions and pixels retained before lossy encoding."
+    },
+    "localPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-cultura.webp",
+    "pngPath": "/workspace/scratch/266b937f3dd0/category-illustrations-v15/illustration-cultura.png",
+    "qa": {
+      "decodes": true,
+      "dimensionsPreserved": true,
+      "distinctSha256": true,
+      "strongGreenPixelFraction": 0,
+      "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
+    }
+  }
+]

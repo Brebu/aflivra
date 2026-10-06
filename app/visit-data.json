@@ -1,0 +1,26 @@
+{
+  "peles": {
+    "checkedAt":"2026-10-04",
+    "sourceUrl":"https://peles.ro/ro/program-si-taxe/",
+    "sourceName":"Muzeul Național Peleș",
+    "schedule":["Miercuri: 10:00–17:00","Joi–duminică: 09:15–17:00","Luni și marți: închis","Ultima intrare individuală: 16:00"],
+    "prices":[{"label":"Adult · parter și primul etaj","value":100},{"label":"Pensionar","value":50},{"label":"Elev sau student","value":25}],
+    "notes":["Închiderea pentru conservare este anunțată pentru 2 noiembrie–1 decembrie 2026.","Biletele sunt asociate unei zile și unui interval de acces.","Pentru acces adaptat, administratorul indică telefonul 0244 314 552."]
+  },
+  "bran": {
+    "checkedAt":"2026-10-04",
+    "sourceUrl":"https://bran-castle.com/ro/pages/plan-your-visit",
+    "sourceName":"Administratorul Castelului Bran",
+    "schedule":["1 aprilie–1 noiembrie: luni de la 12:00, marți–duminică de la 09:00; ultima intrare la 19:00.","2 noiembrie–31 martie: aceleași ore de deschidere; ultima intrare la 18:00."],
+    "prices":[{"label":"Adult · tur standard","value":100},{"label":"Copil · 5–17 ani","value":40},{"label":"Student","value":60},{"label":"Persoană peste 65 de ani","value":70}],
+    "notes":["Pe 7 noiembrie 2026, ultima intrare anunțată este la 15:00.","Evenimentele din perioada Halloween au bilete și condiții proprii.","Contact: +40 268 237 700 · info@bran-castle.com."]
+  },
+  "turda": {
+    "checkedAt":"2026-10-04",
+    "sourceUrl":"https://www.salinaturda.eu/vizitare-si-tarife/",
+    "sourceName":"Salina Turda",
+    "schedule":["Zilnic: 09:00–17:00","Ultima intrare: 16:20"],
+    "prices":[{"label":"Adult · luni–vineri","value":75},{"label":"Adult · weekend și sărbători legale","value":90},{"label":"Copil · 3–18 ani, luni–vineri","value":48},{"label":"Copil · weekend și sărbători legale","value":59},{"label":"Senior peste 65 ani · luni–vineri","value":50},{"label":"Senior · weekend și sărbători legale","value":60}],
+    "notes":["Tarifele de agrement sunt separate de biletul de intrare.","Parcarea autoturismelor este afișată la 10 RON/oră.","Pagina cu tarife indică închiderea la 17:00; o pagină separată de bilete afișează 19:00. Pentru planificare folosim pagina dedicată programului și tarifelor."]
+  }
+}

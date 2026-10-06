@@ -1,0 +1,75 @@
+/* Readable text and usable targets across the existing editorial layouts. */
+.v2{font-size:1rem}
+.v2 p,.v2 .place-body p,.v2 .domain-card p,.v2 .insight-story p,.v2 .recommendation-card p,.v2 .vpanel>p,.v2 .domain-hero p,.v2 .discovery-copy p,.v2 .coverage-grid p,.v2 .comparison-guide p,.v2 .planner-layout p,.v2 .insight-grid p,:is(.v2.entity-modal,.v2 .entity-modal) p{font-size:1rem;line-height:1.7}
+.v2 [data-slot=button],.v2 [data-slot=select-trigger],.v2 [data-slot=tabs-trigger],.v2 input,.v2 label,.v2 .desktop-nav button,.v2 .text-link,.v2 .external-button,.v2 .domain-nav-bottom button,.v2 .interest-selector>button,.v2 .compare-selection>button{font-size:.875rem!important;min-height:44px}
+.v2 .kicker,.v2 .hero-kicker,.v2 .vbadge,.v2 .micro-location,.v2 .place-tag,.v2 .image-index,.v2 .map-credit,.v2 .footer-caption,.v2 .hero-side,.v2 .hero-side small,.v2 .hero-side>span,.v2 .hero-side button,.v2 .hero-scroll,.v2 .small-muted,.v2 .source-record small,.v2 .photo-credit,.v2 .photo-credit small,.v2 .chart-table summary,.v2 .currency-grid small{font-size:.75rem;line-height:1.6}
+.v2 .vsource,.v2 .place-bottom,.v2 .place-bottom button,.v2 .domain-card>span,.v2 .vstat>span,.v2 .vstat>small,.v2 .pulse-row small,.v2 .pulse-row em,.v2 .hero-suggestions,.v2 .hero-suggestions button,.v2 .header-city,.v2 .source-links,.v2 .weather-details,.v2 .weather-cities span,.v2 .weather-cities small,.v2 .preference-switch strong,.v2 .preference-switch small,.v2 .entity-row small{font-size:.875rem;line-height:1.6}
+.v2 .vbadge{white-space:normal;max-width:100%}
+.v2 .kicker,.v2 .micro-location,.v2 .small-muted,.v2 .vsource,.v2 .vstat>span,.v2 .vstat>small{color:#505966}
+.v2 .hero .hero-kicker,.v2 .hero .kicker,.v2 .wide-story .kicker{color:#d7dee9}
+.v2 .chart-table table,.v2 .facts-table,.v2 .compare-table,.v2 .compare-table tbody th{font-size:.875rem;line-height:1.6}
+.v2 .domain-rail{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+.v2 .domain-rail strong{font-size:.875rem;line-height:1.5;overflow-wrap:anywhere}
+.v2 .domain-rail>button{min-height:106px;padding-inline:8px}
+.v2 .place-bottom{flex-wrap:wrap}
+.v2 .place-bottom button,.v2 .hero-suggestions button{min-height:40px}
+.v2 .pulse-row{grid-template-columns:repeat(4,minmax(0,1fr))}
+.v2 .pulse-row>button{min-width:0;flex-wrap:wrap}
+.v2 .pulse-row em{max-width:none}
+.v2 .hero-suggestions{flex-wrap:wrap;gap:6px 14px}
+.v2 .hero{min-height:610px;height:auto}
+.v2 .hero-content{padding-bottom:90px}
+.v2 .hero-search input{font-size:1rem}
+.v2 .hero-search{min-width:0}
+.v2 .company-profile>div:nth-child(2){min-width:0;flex:1}
+.v2 .company-profile p,.v2 .company-tags>span{font-size:.875rem;overflow-wrap:anywhere}
+.v2 .company-profile .vstat>span{min-height:0}
+.v2 .currency-grid>button>span{font-size:.875rem}
+.v2 .source-record{flex-wrap:wrap}
+.v2 .source-record strong{font-size:.875rem;overflow-wrap:anywhere}
+.v2 .source-record small{overflow-wrap:anywhere}
+.v2 .vpanel,.v2 .discovery-copy,.v2 .plan-summary,.v2 .coverage-grid article{min-width:0}
+.v2 .vstatus{font-size:.875rem;line-height:1.6}
+.v2 [data-slot=sheet-description],.v2 [data-slot=dialog-description]{font-size:.875rem;line-height:1.65}
+.v2 .source-lab-controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:24px 0}
+.v2 .source-lab-controls [data-slot=select-trigger]{width:260px;max-width:100%}
+.v2 .source-lab-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}
+.v2 .source-state,.v2 .source-unaffected{border:1px solid #dadfe6;border-radius:12px;padding:24px;min-width:0}
+.v2 .source-state.delayed{background:#fff9ed;border-color:#dfc58c}
+.v2 .source-state.available{background:#eff2f7}
+.v2 .source-state-title{display:flex;align-items:flex-start;gap:10px}
+.v2 .source-state-title h3{margin:0}
+.v2 .source-state-title>svg{flex:none;margin-top:4px}
+.v2 .source-observation{display:flex;align-items:flex-start;gap:10px;padding:17px 0;border-top:1px solid #d5dae1;border-bottom:1px solid #d5dae1;margin:20px 0}
+.v2 .source-observation>svg{flex:none;margin-top:4px}
+.v2 .source-observation strong,.v2 .source-observation span{display:block;font-size:.875rem;line-height:1.7}
+.v2 .source-retry{display:flex;align-items:center;gap:8px;font-size:.875rem;min-height:50px}
+.v2 .source-unaffected dl>div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;padding:12px 0;border-bottom:1px solid #dce1e7;font-size:.875rem}
+.v2 .source-unaffected dd{font-weight:600;margin:0}
+.v2 .source-events{margin-top:22px;font-size:.875rem}
+.v2 .source-events summary{cursor:pointer;min-height:44px;padding:10px 0}
+.v2 .source-events ol{padding-left:22px;line-height:1.8}
+@media(max-width:1000px){.v2 .header-inner{gap:24px}.v2 .desktop-nav{gap:18px}.v2 .header-city{display:none}.v2 .hero-side{display:none}.v2 .home-analytics{grid-template-columns:1fr 1fr}.v2 .home-analytics>:first-child{grid-column:1/-1}}
+@media(max-width:640px){
+ .v2 .vwrap,.v2 .header-inner,.v2 .hero-content{width:calc(100% - 36px)}
+ .v2 .hero{min-height:580px;height:auto}.v2 .hero-content{padding-top:44px;padding-bottom:64px}.v2 .hero h1{font-size:clamp(2.5rem,10vw,3.3rem)}
+ .v2 .hero p{font-size:1rem}.v2 .hero-search{gap:6px;padding-left:10px}.v2 .hero-search>svg{width:18px;flex:none}.v2 .hero-search input{min-width:0}.v2 .hero-search button{padding:8px 12px!important}
+ .v2 .hero-scroll{display:none}.v2 .hero-suggestions>span{width:100%;font-size:.875rem}
+ .v2 .pulse-row{grid-template-columns:repeat(2,minmax(0,1fr))}.v2 .pulse-row>button{padding:18px 12px!important;align-items:flex-start;border-bottom:1px solid #d5dbe3}.v2 .pulse-row strong{font-size:1.3rem}.v2 .pulse-icon{display:none}
+ .v2 .domain-rail{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.v2 .domain-rail>button{padding:15px 6px}.v2 .domain-rail strong{font-size:.875rem}
+ .v2 .vstat{padding:20px 16px}.v2 .vstat>span{min-height:0}.v2 .vstat>strong{font-size:1.8rem;line-height:1.3;overflow-wrap:anywhere}.v2 .vstat>strong small{font-size:.875rem}
+ .v2 .dash-stats,.v2 .dash-stats.four{grid-template-columns:1fr 1fr}.v2 .dash-stats.four .vstat>strong{font-size:1.65rem}.v2 .dash-stats.four .vstat>span{font-size:.875rem;min-height:0}
+ .v2 .vpanel{padding:22px 18px}.v2 .section-head{align-items:flex-start;flex-wrap:wrap;gap:12px}.v2 .panel-top{align-items:flex-start;flex-wrap:wrap;gap:12px}
+ .v2 .home-analytics{grid-template-columns:1fr}.v2 .home-analytics>:first-child{grid-column:auto}.v2 .domain-card{min-height:0}.v2 .domain-hero h1{max-width:none}.v2 .domain-hero p{max-width:none}
+ .v2 .place-title{font-size:1.35rem}.v2 .image-save{min-width:40px;min-height:40px!important}.v2 .map-controls button{width:42px;height:42px;min-height:42px}
+ .v2 .weather-cities{grid-template-columns:1fr 1fr}.v2 .weather-cities>article:last-child{grid-column:auto}.v2 .weather-cities strong{font-size:1.75rem}
+ .v2 .domain-nav-bottom{grid-template-columns:1fr}.v2 .compare-cards{grid-template-columns:1fr!important}.v2 .compare-cards img{height:200px}.v2 .compare-cards h2{font-size:1.4rem}.v2 .compare-cards .kicker{font-size:.75rem}.v2 .compare-cards .text-link{font-size:.875rem}
+ .v2 .plan-stop{grid-template-columns:auto 1fr auto;gap:10px}.v2 .plan-stop>img{display:none}.v2 .plan-stop p,.v2 .plan-stop .text-link{font-size:.875rem}.v2 .stop-actions button{width:38px;height:40px;min-height:40px}
+ .v2 .architecture-v2{grid-template-columns:1fr}.v2 .architecture-v2 h3{font-size:1.2rem}.v2 .architecture-v2 p{font-size:1rem}
+ .v2 .vbottom-nav{padding-bottom:env(safe-area-inset-bottom)}.v2 .vbottom-nav button{font-size:.75rem;min-height:62px;gap:4px}.v2 .footer-links{font-size:.875rem}
+ .v2 .source-lab-grid{grid-template-columns:1fr}.v2 .source-lab-controls{align-items:stretch}.v2 .source-lab-controls>*{width:100%!important}.v2 .source-state,.v2 .source-unaffected{padding:20px 16px}
+ .v2 .photo-credit>p{font-size:.875rem}.v2 .lightbox-image>img{height:auto;max-height:55vh;min-height:0}.v2 .transit-line{overflow-x:auto;gap:18px}.v2 .transit-line button{font-size:.875rem;min-width:75px}.v2 .transit-line strong{font-size:.875rem}
+}
+.v2-large .v2 p{font-size:1.125rem}.v2-large .v2 [data-slot=button],.v2-large .v2 input{font-size:1rem!important}
+
+.v2 input { font-size: 1rem !important; }

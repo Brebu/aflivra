@@ -1,0 +1,3 @@
+import {readSource} from '@/lib/live/cache';import {articleLoader,filmDetailLoader} from '@/lib/live/content';
+export const dynamic='force-dynamic';
+export async function GET(request:Request){const p=new URL(request.url).searchParams;try{if(p.get('kind')==='film'){const id=p.get('id')||'';if(!/^Q\d{1,12}$/.test(id))return Response.json({error:'Identificator invalid.'},{status:400});return Response.json(await readSource(filmDetailLoader(id)),{headers:{'Cache-Control':'no-store'}})}const url=p.get('url')||'';if(url.length>2000)throw Error('Adresă invalidă.');return Response.json(await readSource(articleLoader(url)),{headers:{'Cache-Control':'no-store'}})}catch(e){return Response.json({error:e instanceof Error?e.message:'Publicația nu poate fi citită.'},{status:400})}}

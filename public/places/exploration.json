@@ -1,0 +1,794 @@
+[
+  {
+    "id": "osm-w122651438",
+    "name": "Biserica fortificată din Agnita",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Agnita",
+    "region": "România",
+    "tag": "Biserica fortificată din Agnita",
+    "lat": 45.973484,
+    "lon": 24.622793,
+    "images": [
+      "explore-w122651438"
+    ],
+    "summary": "Locuri de vizitat · Zona Agnita",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/122651438",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/122651438",
+    "recordId": "w122651438",
+    "recordChunk": "0021",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w178140424",
+    "name": "Biserica Romano-Catolică Roșia Montană",
+    "kind": "Locuri de vizitat",
+    "city": "Roșia Montană",
+    "region": "România",
+    "tag": "Biserica Romano-Catolică Roșia Montană",
+    "lat": 46.30467,
+    "lon": 23.130692,
+    "images": [
+      "explore-w178140424"
+    ],
+    "summary": "Locuri de vizitat · Roșia Montană",
+    "description": "549, Roșia Montană. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/178140424",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/178140424",
+    "recordId": "w178140424",
+    "recordChunk": "0021",
+    "cityApproximate": false
+  },
+  {
+    "id": "osm-w780297975",
+    "name": "Biserica Rotondă din Geoagiu",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Geoagiu",
+    "region": "România",
+    "tag": "Biserica Rotondă din Geoagiu",
+    "lat": 45.919996,
+    "lon": 23.203193,
+    "images": [
+      "explore-w780297975"
+    ],
+    "summary": "Locuri de vizitat · Zona Geoagiu",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/780297975",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/780297975",
+    "recordId": "w780297975",
+    "recordChunk": "0021",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w74463768",
+    "name": "Biserica Sfânta Paraschiva",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Desești",
+    "region": "România",
+    "tag": "Biserica Sfânta Paraschiva",
+    "lat": 47.774053,
+    "lon": 23.855139,
+    "images": [
+      "explore-w74463768"
+    ],
+    "summary": "Locuri de vizitat · Zona Desești",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/74463768",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/74463768",
+    "recordId": "w74463768",
+    "recordChunk": "0021",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n2634651894",
+    "name": "Casa Memorială Constantin Brâncuși",
+    "kind": "Muzee",
+    "city": "Hobița",
+    "region": "România",
+    "tag": "Casa Memorială Constantin Brâncuși",
+    "lat": 45.053752,
+    "lon": 23.055673,
+    "images": [
+      "explore-n2634651894"
+    ],
+    "summary": "Muzee · Hobița",
+    "description": "Hobița, 217341. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2634651894",
+    "features": [
+      "Muzee",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2634651894",
+    "recordId": "n2634651894",
+    "recordChunk": "0033",
+    "cityApproximate": false
+  },
+  {
+    "id": "osm-n2295517581",
+    "name": "Cascada Beușnița",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Socolari",
+    "region": "România",
+    "tag": "Cascada Beușnița",
+    "lat": 44.9352154,
+    "lon": 21.8034825,
+    "images": [
+      "explore-n2295517581"
+    ],
+    "summary": "Locuri de vizitat · Zona Socolari",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2295517581",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2295517581",
+    "recordId": "n2295517581",
+    "recordChunk": "0034",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n2295508683",
+    "name": "Cascada Bigăr",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Poneasca",
+    "region": "România",
+    "tag": "Cascada Bigăr",
+    "lat": 45.003476,
+    "lon": 21.9595306,
+    "images": [
+      "explore-n2295508683"
+    ],
+    "summary": "Locuri de vizitat · Zona Poneasca",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2295508683",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2295508683",
+    "recordId": "n2295508683",
+    "recordChunk": "0034",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n2295517582",
+    "name": "Cascada Văioaga",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Potoc",
+    "region": "România",
+    "tag": "Cascada Văioaga",
+    "lat": 44.9162254,
+    "lon": 21.7640144,
+    "images": [
+      "explore-n2295517582"
+    ],
+    "summary": "Locuri de vizitat · Zona Potoc",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2295517582",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2295517582",
+    "recordId": "n2295517582",
+    "recordChunk": "0034",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n3038878029",
+    "name": "Cascada Șușara",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Știnăpari",
+    "region": "România",
+    "tag": "Cascada Șușara",
+    "lat": 44.8583801,
+    "lon": 21.7519318,
+    "images": [
+      "explore-n3038878029"
+    ],
+    "summary": "Locuri de vizitat · Zona Știnăpari",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/3038878029",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/3038878029",
+    "recordId": "n3038878029",
+    "recordChunk": "0034",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w222148705",
+    "name": "Castelul Kendeffy",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Sântămăria-Orlea",
+    "region": "România",
+    "tag": "Castelul Kendeffy",
+    "lat": 45.588682,
+    "lon": 22.966676,
+    "images": [
+      "explore-w222148705"
+    ],
+    "summary": "Locuri de vizitat · Zona Sântămăria-Orlea",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/222148705",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/222148705",
+    "recordId": "w222148705",
+    "recordChunk": "0035",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n2832321027",
+    "name": "Cetatea Caraș (Turcului)",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Iabalcea",
+    "region": "România",
+    "tag": "Cetatea Caraș (Turcului)",
+    "lat": 45.2100916,
+    "lon": 21.8910148,
+    "images": [
+      "explore-n2832321027"
+    ],
+    "summary": "Locuri de vizitat · Zona Iabalcea",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2832321027",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2832321027",
+    "recordId": "n2832321027",
+    "recordChunk": "0041",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n1270293744",
+    "name": "Cetatea Tricule",
+    "kind": "Locuri de vizitat",
+    "city": "Svinița",
+    "region": "România",
+    "tag": "Cetatea Tricule",
+    "lat": 44.4799329,
+    "lon": 22.1426408,
+    "images": [
+      "explore-n1270293744"
+    ],
+    "summary": "Locuri de vizitat · Svinița",
+    "description": "Svinița. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/1270293744",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/1270293744",
+    "recordId": "n1270293744",
+    "recordChunk": "0041",
+    "cityApproximate": false
+  },
+  {
+    "id": "osm-n2837609287",
+    "name": "Cheile Nerei",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Sasca Română",
+    "region": "România",
+    "tag": "Cheile Nerei",
+    "lat": 44.8865912,
+    "lon": 21.799238,
+    "images": [
+      "explore-n2837609287"
+    ],
+    "summary": "Locuri de vizitat · Zona Sasca Română",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2837609287",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2837609287",
+    "recordId": "n2837609287",
+    "recordChunk": "0041",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w1201727812",
+    "name": "Inima lui Isus",
+    "kind": "Puncte panoramice",
+    "city": "Zona Bisericani",
+    "region": "România",
+    "tag": "Inima lui Isus",
+    "lat": 46.393471,
+    "lon": 25.256438,
+    "images": [
+      "explore-w1201727812"
+    ],
+    "summary": "Puncte panoramice · Zona Bisericani",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/1201727812",
+    "features": [
+      "Puncte panoramice",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/1201727812",
+    "recordId": "w1201727812",
+    "recordChunk": "0088",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n5966825327",
+    "name": "La Tunele",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Sasca Română",
+    "region": "România",
+    "tag": "La Tunele",
+    "lat": 44.902202,
+    "lon": 21.7474658,
+    "images": [
+      "explore-n5966825327"
+    ],
+    "summary": "Locuri de vizitat · Zona Sasca Română",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/5966825327",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/5966825327",
+    "recordId": "n5966825327",
+    "recordChunk": "0096",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-r2317481",
+    "name": "Lacul Ursu",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Sovata",
+    "region": "România",
+    "tag": "Lacul Ursu",
+    "lat": 46.603956,
+    "lon": 25.085538,
+    "images": [
+      "explore-r2317481"
+    ],
+    "summary": "Locuri de vizitat · Zona Sovata",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/relation/2317481",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/relation/2317481",
+    "recordId": "r2317481",
+    "recordChunk": "0096",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n3412928381",
+    "name": "Moara de la Tunel",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Eftimie Murgu",
+    "region": "România",
+    "tag": "Moara de la Tunel",
+    "lat": 44.863779,
+    "lon": 22.101676,
+    "images": [
+      "explore-n3412928381"
+    ],
+    "summary": "Locuri de vizitat · Zona Eftimie Murgu",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/3412928381",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/3412928381",
+    "recordId": "n3412928381",
+    "recordChunk": "0122",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n2634652845",
+    "name": "Muzeul Național al Unirii",
+    "kind": "Muzee",
+    "city": "Alba Iulia",
+    "region": "România",
+    "tag": "Muzeul Național al Unirii",
+    "lat": 46.0682361,
+    "lon": 23.5709349,
+    "images": [
+      "explore-n2634652845"
+    ],
+    "summary": "Muzee · Alba Iulia",
+    "description": "Strada Mihai Viteazul 12-14, Alba Iulia, 510010. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://mnuai.ro/",
+    "features": [
+      "Muzee",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2634652845",
+    "recordId": "n2634652845",
+    "recordChunk": "0126",
+    "cityApproximate": false
+  },
+  {
+    "id": "osm-n2634652301",
+    "name": "Muzeul Orașului Deta",
+    "kind": "Muzee",
+    "city": "Deta",
+    "region": "România",
+    "tag": "Muzeul Orașului Deta",
+    "lat": 45.3912808,
+    "lon": 21.223179,
+    "images": [
+      "explore-n2634652301"
+    ],
+    "summary": "Muzee · Deta",
+    "description": "Piața Pompierilor 7, Deta, 305200. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2634652301",
+    "features": [
+      "Muzee",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2634652301",
+    "recordId": "n2634652301",
+    "recordChunk": "0126",
+    "cityApproximate": false
+  },
+  {
+    "id": "osm-n2634652697",
+    "name": "Muzeul Victor Tăutu",
+    "kind": "Muzee",
+    "city": "Sasca Montană",
+    "region": "România",
+    "tag": "Muzeul Victor Tăutu",
+    "lat": 44.8821616,
+    "lon": 21.7226863,
+    "images": [
+      "explore-n2634652697"
+    ],
+    "summary": "Muzee · Sasca Montană",
+    "description": "570, Sasca Montană. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/2634652697",
+    "features": [
+      "Muzee",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/2634652697",
+    "recordId": "n2634652697",
+    "recordChunk": "0126",
+    "cityApproximate": false
+  },
+  {
+    "id": "osm-n1419098099",
+    "name": "Podul lui Traian",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Drobeta-Turnu Severin",
+    "region": "România",
+    "tag": "Podul lui Traian",
+    "lat": 44.6237815,
+    "lon": 22.6670763,
+    "images": [
+      "explore-n1419098099"
+    ],
+    "summary": "Locuri de vizitat · Zona Drobeta-Turnu Severin",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/1419098099",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/1419098099",
+    "recordId": "n1419098099",
+    "recordChunk": "0217",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w274933064",
+    "name": "Ruinele Cetății Severinului",
+    "kind": "Locuri de vizitat",
+    "city": "Drobeta-Turnu Severin",
+    "region": "România",
+    "tag": "Ruinele Cetății Severinului",
+    "lat": 44.622598,
+    "lon": 22.656146,
+    "images": [
+      "explore-w274933064"
+    ],
+    "summary": "Locuri de vizitat · Drobeta-Turnu Severin",
+    "description": "Drobeta-Turnu Severin. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/274933064",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/274933064",
+    "recordId": "w274933064",
+    "recordChunk": "0239",
+    "cityApproximate": false
+  },
+  {
+    "id": "osm-w19545147",
+    "name": "Scara Acoperită",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Sighișoara",
+    "region": "România",
+    "tag": "Scara Acoperită",
+    "lat": 46.218515,
+    "lon": 24.791339,
+    "images": [
+      "explore-w19545147"
+    ],
+    "summary": "Locuri de vizitat · Zona Sighișoara",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/19545147",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/19545147",
+    "recordId": "w19545147",
+    "recordChunk": "0243",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w264050077",
+    "name": "Turnul Cositorarilor",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Sighișoara",
+    "region": "România",
+    "tag": "Turnul Cositorarilor",
+    "lat": 46.21822,
+    "lon": 24.792255,
+    "images": [
+      "explore-w264050077"
+    ],
+    "summary": "Locuri de vizitat · Zona Sighișoara",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/264050077",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/264050077",
+    "recordId": "w264050077",
+    "recordChunk": "0287",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w1472816943",
+    "name": "Turnul de pe deal din Grădinari",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Grădinari",
+    "region": "România",
+    "tag": "Turnul de pe deal din Grădinari",
+    "lat": 45.120277,
+    "lon": 21.586982,
+    "images": [
+      "explore-w1472816943"
+    ],
+    "summary": "Locuri de vizitat · Zona Grădinari",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/1472816943",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/1472816943",
+    "recordId": "w1472816943",
+    "recordChunk": "0287",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w264050905",
+    "name": "Turnul Frânghierilor",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Sighișoara",
+    "region": "România",
+    "tag": "Turnul Frânghierilor",
+    "lat": 46.217727,
+    "lon": 24.789976,
+    "images": [
+      "explore-w264050905"
+    ],
+    "summary": "Locuri de vizitat · Zona Sighișoara",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/264050905",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/264050905",
+    "recordId": "w264050905",
+    "recordChunk": "0287",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-w343212311",
+    "name": "Turnul Spart",
+    "kind": "Locuri de vizitat",
+    "city": "Zona Lazaret",
+    "region": "România",
+    "tag": "Turnul Spart",
+    "lat": 45.588814,
+    "lon": 24.25948,
+    "images": [
+      "explore-w343212311"
+    ],
+    "summary": "Locuri de vizitat · Zona Lazaret",
+    "description": "Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/way/343212311",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "local"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/way/343212311",
+    "recordId": "w343212311",
+    "recordChunk": "0287",
+    "cityApproximate": true
+  },
+  {
+    "id": "osm-n296454793",
+    "name": "Tâmpa",
+    "kind": "Locuri de vizitat",
+    "city": "Brașov",
+    "region": "România",
+    "tag": "Tâmpa",
+    "lat": 45.6341687,
+    "lon": 25.59291,
+    "images": [
+      "explore-n296454793"
+    ],
+    "summary": "Locuri de vizitat · Brașov",
+    "description": "Brașov. Poziția și informațiile acestui loc provin din fișa OpenStreetMap. Fotografia reală, autorul și licența sunt disponibile în galerie; programul și condițiile actuale se confirmă la administrator.",
+    "website": "https://www.openstreetmap.org/node/296454793",
+    "features": [
+      "Locuri de vizitat",
+      "Fotografie reală"
+    ],
+    "interests": [
+      "cultura",
+      "natura",
+      "mediu"
+    ],
+    "sourceUrl": "https://www.openstreetmap.org/node/296454793",
+    "recordId": "n296454793",
+    "recordChunk": "0277",
+    "cityApproximate": false
+  }
+]
