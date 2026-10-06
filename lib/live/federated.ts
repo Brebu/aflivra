@@ -114,8 +114,9 @@ function placeItem(record:Record<string,unknown>):FederatedItem{
 }
 function catalogItem(record:Record<string,unknown>):FederatedItem{
  const title=text(record.title)||'Set de date publice';
- const categories=Array.isArray(record.categories)?record.categories.map(String):[];
- const domain=categories.find(c=>groupLabels.has(c))||'local';
+ const raw=Array.isArray(record.categories)?record.categories.map(String):text(record.category)?[String(record.category)]:[];
+ // The dataset's own classification picks its home group and target domain — the same category the catalog workspace filters by.
+ const domain=raw.find(c=>groupLabels.has(c))||'local';
  return {family:'catalog',category:domain,id:String(record.id??title),title,subtitle:text(record.organization),snippet:snip(record.note),kind:'dataset',source:'data.gov.ro',url:text(record.url),target:{view:'domain',domain,tab:'data',query:title}};
 }
 function lawyerItem(record:Record<string,unknown>,term:string):FederatedItem{

@@ -388,3 +388,181 @@ Their liaison note (STATUS above) observed my intermediate `set-state-in-effect`
 - **Discipline:** stayed inside the partition (weather files, scripts/, CI, README, e2e/ untouched by me); no git commits/branch ops; dev server never restarted; zero external fetches (all verification local dev routes + offline corpora + samples already on disk).
 - **Testing:** probes exercise real shipped code (transpile-import / SSR / Playwright), not mocks of it; the full e2e battery re-run at the end.
 - **Known limits (honest):** the dosar-row click-through to the seeded courts FORM is wired + type-verified but not end-to-end probed (its submit hits the live portal.just.ro SOAP service — the Validator's T2.4 legs own that pin); `initialSub` rides the pre-existing initialQuery effect in places-workspace (existing baseline warning, count unchanged); federated AFIR/lawyers honest-degrade states were verified structurally (mock battery + probe route states), not against a good live source response (the ≤2-direct-fetch budget discipline forbids it outside surfaced failures).
+
+## Validator Findings (T2.4/T3.3)
+
+**Status: FAILED — 1 real bug found, documented per dispatch ("NO new app code"), its failing-first e2e leg kept RED as the regression pin; everything else green: 47/48 legs passing (28/28 existing — zero regressions — + 19/20 new), tsc --noEmit 0 errors, lint 0 errors / 114 warnings (exact baseline), full `corepack pnpm test:e2e` run at the merged tree.**
+
+Files: `e2e/federated-search.spec.ts` (15 legs, NEW), `e2e/weather-motion.spec.ts` (3 legs, NEW), `e2e/sweep-regressions.spec.ts` (2 legs, NEW). Suite total 48. No app/ or lib/ file touched by me; the dev server was never restarted; probe scripts + evidence in session `probes/` (probe-stories-dom/check/app/second).
+
+### T2.4 federated e2e — per-leg outcomes (15)
+
+| # | leg (term / flow) | pinned behavior | outcome |
+|---|---|---|---|
+| 1 | 'sala' from home hero | ONE grouped list: groups ⊆ registry order (subsequence, unique), labels = registry labels, per-group countText grammar exact vs rendered rows (0/2–19/„N de" mirror of countNoun), ≥10 rows, domain-news rows carry external „La sursă" https href | ✅ 9 groups, 34 rows observed consistently |
+| 2 | diacritics 'școli' vs 'scoli' | identical group list + identical sorted row titles (normalizeSearch fold across places + catalog + directory families) | ✅ byte-identical snapshots (local + educatie groups incl.) |
+| 3 | long multi-word 'ateneul român bucurești' | every word must match (queryMatcher AND semantics): gallery 'Ateneul Român' row in cultura group | ✅ |
+| 4 | chip collision 'Brașov' (typed hero term == chip label) | typed term = search: location strip stays default city (no city-context steal); 7 explore filter chips intact, 'Locuri' still filters the editorial gallery; federated list unaffected by chips | ✅ |
+| 5 | 'avocați' | justitie group: OSM lawyer-office rows with side label 'Avocați · OpenStreetMap'; IFEP family never silent — rows OR honest `source-warning` note | ✅ (places rows ✓; lawyers family surfaced its honest unavailable note — the 'avocați'-query IFEP parse class, verified stable across calls) |
+| 6 | 'notari' | notaries surface via the OSM „Notari" subcategory (side label 'Notari · OpenStreetMap'), ≥2 rows in justitie group | ✅ (18 matching places server-side) |
+| 7 | lawyers click-through 'popescu' → row click | domain justitie + `tab=lawyers` in hash + LawyersWorkspace registry input seeded with the clicked name | ✅ |
+| 8 | CUI '427282' (numeric) | firme group eager 'Firma cu CUI 427282' row → click → company view: data-view=company, h1 'Verifică o firmă după CUI.', CUI field 427282, hash #view=company&id=427282 | ✅ |
+| 9 | dosar '123/45/2024' → row click | justitie/legal + `tab=legal` hash, courts form seeded: 'Număr dosar' input = 123/45/2024, numberScope='all' (Toate instanțele și stadiile), NOT submitted (no .court-results, no busy line) — zero SOAP calls | ✅ the seed-only contract pinned exactly |
+| 10 | catalog click-through 'urbanism' | domain local + `tab=data` hash, LiveCatalog input seeded with the dataset title, dataset card surface after 'Întregul catalog național' scope | ✅ (row choice = inventory-local-classified dataset — see V2 for why non-local rows cannot work) |
+| 11 | stories 'harap' → row click + external link | povesti group row 'Povestea lui Harap-Alb' + 'La sursă' href `https://ro.wikisource.org/wiki/Povestea_lui_Harap-Alb` → povesti/stories tab + seeded library input + the story card in the grid | ❌ **RED = failing-first pin of bug V1** (row never renders on the first search) |
+| 12 | gallery click-through 'castelul peles' | 'Prezentare editorială' row → place view: data-view=place, h1 'Castelul Peleș', hash #view=place&id=peles | ✅ |
+| 13 | 'zzqxvqm' (no matches anywhere) | global honest empty (federated-empty + honest copy + reset works and clears the section); every anchored group shows 0 rows with 'Nicio potrivire în această categorie.'; editorial gallery keeps its OWN empty below | ✅ (design renders anchored zero-row groups — asserted their honesty, not their absence) |
+| 14 | 'ab' (2-char boundary) | lawyers min-3 gate note verbatim in justitie group ('Tabloul avocaților: Introdu cel puțin 3 caractere…'), other families still search, count/label parity holds | ✅ |
+| 15 | 205-char term | honest >200 note (exact copy), zero groups/rows/busy | ✅ |
+
+### T3.3 weather-motion e2e — per-leg outcomes (3)
+
+| # | leg | pinned behavior | outcome |
+|---|---|---|---|
+| 1 | motion-on sanity | computed animationName matches the per-condition contract read off the scene's OWN class (rain/snow: rain-far/near + snow-far/near pseudos; sunny: glow on the span; night: twinkle+drift comma list on both pseudos (set-matched); cloudy: drift-far/near; img=aflivra-weather-sky; metric-chip + grid icons=aflivra-weather-icon) | ✅ (encountered 'cloudy' + 'sunny' runs — class-driven, no fixed state) |
+| 2 | prefers-reduced-motion: reduce emulated | every tracked element/::before/::after computed animationName === 'none'; ambient span stays rendered (static texture) | ✅ |
+| 3 | forecast readability under reduce | kicker + condition h2 + temperature + 3 metric chips non-empty; metric-grid ≥12 articles all with non-empty text; forecast table rows non-empty; period chips present | ✅ |
+
+### T1 honest pins — per-leg outcomes (2)
+
+| # | leg | pinned behavior | outcome |
+|---|---|---|---|
+| 1 | AFIR dedupe (agricultura news) | [data-testid="feed-article"] list: unique h3 titles (Set size == count), ZERO React duplicate-key console errors (the original defect's evidence channel) | ✅ 9 articles, 9 unique titles, 0 duplicate-key errors (route-level probe: 9/9 unique URLs) |
+| 2 | /catalog SSR h1 | `page.request.get('/catalog')` 200 + `<h1>Catalogul de date publice ale României</h1>` in the server-rendered HTML | ✅ |
+
+### V1 — REAL BUG (OUR-BUG, T2.4 route): the stories eager family is invisible on the FIRST search of a fresh page
+
+- **Where**: `app/search-results.tsx:19` — `const [result,setResult]=useState<FederatedSearchResult>(base)` snapshots the mount-time `base` (stories corpus still `[]` — it loads via `snapshotJson('/stories/manifest.json')` → `/stories/index.json` ~1s after mount); `app/search-results.tsx:26` — `const current=result.term===settled?result:base` then prefers the stale `result` whenever the term is unchanged, so the corpus-backed `base` recompute never reaches the render. Only a NETWORK collect (`setResult` in the fan-out effect, :21) or a term change updates `result`.
+- **Effect**: on the first search of a fresh page (or a `#view=explore&q=…` deep-link), the Povești group always renders „0 rezultate — Nicio potrivire în această categorie." even for terms that match the 233-item corpus; the stories data arrives and is silently dropped. Second searches on the same mounted list work (base is preferred once the term changes).
+- **Repro (probes/probe-stories-*;mjs, evidence in session dir)**: open `/#view=explore`, fill 'harap' → `povesti:0`; fill 'creanga' → `povesti:6` (Azima mergătoare, Capra cu trei iezi…); fill 'harap' again → `povesti:2` (Balaurul cel cu șapte capete, Povestea lui Harap-Alb). The corpus itself loads fine (browser-level fetch + sha256 proof verified: 3,692,521 bytes, proof matches, 233 items; StoriesWorkspace on `#view=domain&id=povesti` shows „233 fișe") — the transport is healthy; the loss is purely the React state flow.
+- **Fix path (Builder-B's file)**: fold eager recomputes into the rendered state — e.g. keep collecting only the pending-family overlay keyed by term and derive `current` from the fresh `base` (or `setResult(base)` whenever `result.term===base.term` and base changed while no in-flight collect for that term). My leg 11 is the failing-first regression: it goes green the moment the fix lands. NOT fixed by me per dispatch (no new app code).
+- **Note**: legs 1/13 pass today partly because stories=0 is indistinguishable from no-match for those terms; after the fix nothing changes for them (zzqxvqm matches no story; 'sala' gains povesti rows symmetrically in the count-parity assertions only).
+
+### V2 — REAL BUG (OUR-BUG, T2.1/T2.3 routing contract): catalog federated rows always target the LOCAL domain regardless of the dataset's own classification, and non-local datasets are unreachable from the seeded tab
+
+- **Where**: `lib/live/federated.ts:117-119` — `catalogItem` derives `domain` from `record.categories`; the `/api/catalog` **national-scope response rows carry no category field at all** (verified keys: id, license, metadata, modified, name, notes, organization, resourceCount, resources, title, url — the geo-context branch at `app/api/catalog/route.ts:12` DOES serve inventory rows with `categories`, but the seeded national path used by the federated fan-out does not), so `categories.find(c=>groupLabels.has(c))||'local'` falls back to `'local'` for EVERY catalog row.
+- **Effect**: a dataset the inventory classifies `educatie` (e.g. „Plati Programul național „Școli sigure și sănătoase” (PNSS)”, which the 'școli' legs surface in the local group) click-throughs to `#view=domain&id=local&q=<title>&tab=data`, where LiveCatalog runs under `category=catalogTopic('local')='local'` and the `r.categories.includes(activeCategory)` filter (`app/catalog-workspace.tsx`, filtered useMemo) excludes it — the seeded search honestly reports “0 seturi · Nu sunt seturi pentru acești parametri.” and the clicked object is NOT reachable in the landed workspace (R2's „each entry navigates to the object inside its own category workspace"). 212 of 5,251 inventory datasets are local-classified; the rest can all hit this.
+- **Repro (evidence in session + my first failing run)**: search 'școli' → click the catalog row „…Școli sigure…” → local data tab, seeded input correct, result „0 seturi" even after switching 'Context geografic' to 'Întregul catalog național' (it is a category exclusion, not geography). Same title IS in the inventory with `categories:['educatie']` and surfaces under the educatie data tab.
+- **Test handling**: leg 10 pins the contract on the subset that honors it end-to-end (urbanism rows — inventory-local-classified) so the click-through path itself stays guarded green; the divergence is reported, not papered over. Fix path (API + Builder-B): map the dataset's category into the `/api/catalog` national response (seed pool rows already carry `category:'educatie'`) and let `catalogItem` target that domain — or seed LiveCatalog's category from the item; either way it needs a route/mapper change, not test changes. NOT fixed by me per dispatch.
+
+### Rate-limit discipline accounting
+
+- **Zero dosar SOAP submits**: leg 9 pins the courts-form seed WITHOUT submitting (asserted no `.court-results`, no 'Se verifică' busy — the one allowed external probe was not needed). No direct upstream fetch of any kind made by me (all curl/python/browser probes hit `127.0.0.1:5173` local dev routes or local files only).
+- The federated legs exercise the app's own fan-out (local cached routes; lawyers/IFEP + AFIR/agricultura loaders follow the app's per-query 1h-TTL + failure-backoff machinery — 'avocați' lawyers state verified stable-unavailable, 'popescu' cached). Distinct fan-out terms per first run ≈ 13, each a single upstream attempt per TTL window by the app's design — same class as Builder-B's earlier fan-out curls.
+
+### Verification (final, all run at the merged tree with the 3 new specs)
+
+| Check | Exit | Result |
+|-------|------|--------|
+| `corepack pnpm test:e2e --reporter=list` (full suite) | 1 | ⚠️ **47/48 passing** — 28/28 existing green (zero regressions) + 19/20 new green; the single red is leg 11 = the V1 failing-first pin (kept red deliberately; never weaken an assertion to green) |
+| `corepack pnpm exec tsc --noEmit` | 0 | ✅ 0 errors |
+| `corepack pnpm lint` | 0 | ✅ 0 errors / 114 warnings — exact pre-existing baseline |
+| targeted eslint on the 3 new spec files | 0 | ✅ 0 problems |
+
+**Final line: FAILED — 1 leg failing (V1, documented with file:line + repro; fix belongs to Builder-B in app/search-results.tsx), V2 documented as the second routing defect; both routed to the orchestrator per dispatch. Suite 47/48.**
+
+## Builder-B Findings (V1/V2 fixes)
+
+**Status: DONE — both bugs fixed with failing-first evidence; leg 11 and the extended leg 10 green; full suite 48/48; tsc 0; lint 0 errors / 114 warnings (exact baseline); verify-federated-search ×2 exit 0 (extended honestly, see below); verify-source-errors 19 families / 114 cells exit 0 (extended honestly, see below); full CI battery 16/16 green.**
+
+### V1 — stories corpus dropped from the first search (fixed)
+
+- **Root cause (1 sentence):** `app/search-results.tsx` snapshotted the mount-time `base` into `useState` (stories corpus still `[]`) and the `result.term===settled?result:base` guard then preferred that stale snapshot for an unchanged term, so the corpus-backed recompute never reached the render.
+- **Fix (derived state, no effect-setState — the lint-error class DevOps's liaison flagged):** the only state kept from the fan-out is a **term-keyed overlay of raw network responses** (`CollectedResponse[]{term,family,payload}`, appended with a same-term prune so the array stays bounded at one fan-out ≈ ≤0.5 MB), and the rendered result is **derived every render**: `useMemo` folds `federatedCollect` over the overlay onto the fresh `base` (stale-term entries skipped; `federatedCollect`'s duplicate/late-drop contract gives the dedupe). The mount snapshot and the term-shadow guard are gone; eager families (stories, gallery) recompute from current props on every render.
+- **TDD:** the Validator's leg 11 was the failing-first pin (re-confirmed RED this dispatch: story row never rendered, `element(s) not found`); post-fix green end-to-end (row + Wikisource href + povesti click-through + seeded library + story card).
+- **Spec repair disclosed (assertions unchanged):** with V1 fixed, leg 11's next assertion surfaced a latent locator defect in the Validator's spec — `storyRow` resolved to the row **button**, but `a.federated-row-source` is a **sibling** of that button inside the `li` (a link inside a button would be invalid HTML), so `storyRow.locator('a.federated-row-source')` could never match. The app provably rendered the exact href (`https://ro.wikisource.org/wiki/Povestea_lui_Harap-Alb` in the aria snapshot of the failed run). Repaired the scoping to the list item (`li{hasText}` → `getByTestId('federated-row')` for the click, `li.locator('a.federated-row-source')` for the href); every expected value is byte-identical to the original pin.
+
+### V2 — catalog rows ignored the dataset's own category (fixed)
+
+- **Root cause (1 sentence):** the `/api/catalog` national-scope response (parseCatalog/D1 shape) carries no classification at all, so `catalogItem`'s `categories.find(c=>groupLabels.has(c))||'local'` fell back to `'local'` for every row — group AND target — and non-local datasets click-throughed to a data tab whose category filter hides the clicked object.
+- **Fix (both sides of the seam):**
+  - **Route** (`app/api/catalog/route.ts`, national branch only — the geo branch already serves inventory rows): after `readSource`, every served result row is enriched with its classification from the **same integrity-verified inventory snapshot** the client workspace filters by (`localInventory` id-join, sha256-proven like the geo branch, classes map memoized per isolate; a row's own seed-pool `category` string takes precedence; rows already carrying `categories` untouched). Inventory-read failure degrades honestly — rows serve unclassified exactly as before, never 5xx.
+  - **Mapper** (`lib/live/federated.ts` `catalogItem`): accepts both served shapes — `categories` (array: enriched/geo rows) **or** `category` (string: seed-pool fallback rows) — and the dataset's own category picks BOTH the item's group (`item.category`) and `target.domain/tab:'data'`, so the click lands where the object is visible. All 14 catalog category ids are domain ids (identity mapping through `groupLabels`, the existing semantics the module already had); unclassified rows keep the documented `'local'` fallback.
+- **Live evidence:** `/api/catalog?q=școli&geoScope=national` now returns the 6 PNSS „Școli sigure" rows with `categories:["educatie"]` (21 of 24 rows classified, incl. multi-category rows like `['bani','mediu','cultura']`, 1 honest `[]` fallback); click-through lands `#view=domain&id=educatie&q=<title>&tab=data` and the dataset card is visible on its own category tab.
+
+### Harness extensions (both honest, both exit-0 — disclosed per dispatch)
+
+- **`scripts/verify-federated-search.mjs` LEG 5** + the new category field: a seed-pool-shaped row `category:'educatie'` (real PNSS row from `lib/live/catalog-seed.json`) must land in the educatie group + target, and a row with no classification must keep the local fallback. RED pre-mapper-fix (`un rând servit din copia de rezervă…` assertion failure) → GREEN ×2.
+- **`scripts/verify-source-errors.mjs`**: the mock env gains an `ASSETS` binding serving the real `public/catalog/index.json.gz` (mirrors the deployed worker's binding surface + the `verify-geographic-scope.mjs:33` shim precedent — the enrichment reads the inventory through `env.ASSETS`, never the mocked global fetch, so the "doar adresele familiei" zero-unexpected gate keeps holding); the ckan fixture id becomes the real PNSS inventory id and the catalog success + warm-500 cells pin `payload.data.results[0].categories` deep-equal `['educatie']`. RED pre-route-fix (`actual: undefined`) → GREEN (19 families / 114 cells).
+- **`e2e/federated-search.spec.ts` leg 10 extended** per dispatch: after the existing urbanism (local-classified) flow, it searches 'școli', clicks the 'Școli sigure' row **inside the educatie group**, and pins hash `#view=domain&id=educatie&q=.+&tab=data`, h1 'Educație & viitor', the seeded LiveCatalog input, and the dataset card visible on that tab (no geo crutch — PNSS is national-coverage). RED pre-fix (row lived in the local group, locator empty) → GREEN.
+
+### Verification (all run this dispatch, final tree)
+
+| Check | Exit | Result |
+|-------|------|--------|
+| `corepack pnpm test:e2e` (full suite) | 0 | ✅ **48/48 passed** — leg 11 green, extended leg 10 green, 28/28 pre-existing + weather/sweep legs green, zero regressions |
+| federated spec alone (mid-cycle) | 0 | ✅ 15/15 (after the leg-11 locator repair; 13/15 pre-fix with both pins RED as evidence) |
+| `corepack pnpm exec tsc --noEmit` | 0 | ✅ 0 errors |
+| `corepack pnpm lint` | 0 | ✅ 0 errors / 114 warnings — exact pre-existing baseline (targeted eslint on all 6 touched files: 0 problems) |
+| `node scripts/verify-federated-search.mjs` ×2 | 0, 0 | ✅ extended harness, both runs green |
+| `node scripts/verify-source-errors.mjs` (mock) | 0 | ✅ `{"result":"ok","families":19,"cells":114}` — incl. the enriched-categories cell pins |
+| Full CI battery, workflow order (15 scripts) + `verify-geographic-scope` | 0 ×16 | ✅ live · cache · export-formats · legal-refresh · catalog · snapshot-transport · refresh-sweep · ro-text · source-errors · sweep-inventory · model-contracts · federated-search · legal-records · expanded · audit-controls · downloads · geographic-scope (route change is compiled by source-errors + geographic-scope — both re-proven) |
+| Live route curl ×2 | 200 | ✅ national rows now carry categories (PNSS → `['educatie']`); geo branch unchanged |
+
+### Files touched (mine, this dispatch)
+
+`app/search-results.tsx` (V1 derived-state rewrite), `app/api/catalog/route.ts` (V2 enrichment, national branch), `lib/live/federated.ts` (V2 mapper), `scripts/verify-federated-search.mjs` (LEG 5 extension), `scripts/verify-source-errors.mjs` (ASSETS shim + fixture id + catalog cell pins), `e2e/federated-search.spec.ts` (leg 10 extension + leg 11 locator repair — the Validator's file, extensions mandated/disclosed), this STATUS append.
+
+### Self-review (four lenses)
+
+- **Completeness:** both register bugs fixed at root cause (state flow; category seam both sides), no scaffolding, harness/spec coverage added for every new behavior (module-level pin, route-level mock pin, e2e click-through pin).
+- **Quality:** enrichment joins the exact snapshot the client renders (no second classifier to drift); honest degrade preserved on inventory failure; overlay stays bounded via same-term pruning; comments are one-line business rules; the ASSETS shim reuses the established verify-geographic-scope pattern.
+- **Discipline:** no refactors beyond the bugs (e.g. `catalogItem`'s pre-existing `record.note`-vs-`notes` snippet gap left untouched — out of scope); no git commits/branch ops; dev server never restarted; zero external fetches (all probes hit the local dev routes + offline corpora).
+- **Testing:** every fix has RED evidence captured this dispatch before its change and a green run after; the full battery re-run because the route file is compiled by two other harnesses.
+
+**Final line: DONE — V1 + V2 fixed and verified (48/48, tsc 0, lint baseline, battery 16/16); harness + spec extensions disclosed above.**
+
+## DevOps Findings (T4.1)
+
+**Status: T4.1: PASSED — the full ordered chain green end-to-end; the stop-and-report contract was never triggered (no step failed, nothing fixed — verification-only dispatch).** Chain run at the current tree: HEAD 9f4d332 + the uncommitted V1/V2 post-commit files (app/api/catalog/route.ts, app/search-results.tsx, lib/live/federated.ts, scripts/verify-federated-search.mjs, scripts/verify-source-errors.mjs + the 3 untracked e2e specs) — the chain certifies exactly this merged state. All scratch logs under /tmp/t41 (outside the repo), removed after this report. Dev server :5173 pre-existing, never restarted; e2e reused it.
+
+### The chain (ordered, every exit code recorded)
+
+| # | check | exit | verdict |
+|---|-------|------|---------|
+| 1 | `corepack pnpm exec tsc --noEmit` | 0 | ✅ 0 errors |
+| 2 | `corepack pnpm lint` | 0 | ✅ 0 errors / **114 warnings = exact baseline** (nothing new) |
+| 3 | Full verify battery, workflow order (17 steps) | 0 ×17 | ✅ per-step table below |
+| 4 | `corepack pnpm test:e2e` | 0 | ✅ **48/48 passed (38.3s)** — federated 15/15 (incl. leg 11 = the V1 stories pin + the extended leg 10 = the V2 catalog pin), weather-motion 3/3, sweep-regressions 2/2, all 28 baseline legs green |
+| 5 | Live parity pass (the SINGLE budget-capped run) | 0 | ✅ result ok — 19 families: 17 ok + 2 source-blocks-egress; 1 direct source probe spent (cap ≤2/family) |
+| 6a | `corepack pnpm build` | 0 | ✅ Build complete |
+| 6b | `git checkout -- lib/live/seed-snapshots.json` | 0 | ✅ churn quirk reproduced then restored byte-identical (md5 fe9e8e64bd2cdb9db72d445758e3aac3 → 538642e939e36865dbf7efcf106ceb52 → fe9e8e64bd2cdb9db72d445758e3aac3; post-restore `git diff` on the file: empty) |
+| 6c | `node scripts/deploy.mjs --dry-run` | 0 | ✅ "wrangler deploy --dry-run exit 0." |
+| 6d | `node scripts/db-migrate.mjs --local` (run 1) | 0 | ✅ migration applied — tables source_budget, source_cache |
+| 6e | `node scripts/db-migrate.mjs --local` (run 2) | 0 | ✅ **byte-identical no-op** (cmp of both runs' full outputs: identical; „deja aplicată — nimic de făcut") |
+
+### Battery per-step (workflow order, `pr-validation.yml`)
+
+15-script block: live 0 · cache 0 · export-formats 0 (pdftotext present locally — the full generated-PDF re-read leg ran) · legal-refresh 0 · catalog 0 · snapshot-transport 0 („all 6534 snapshots and 676679112 original bytes") · refresh-sweep 0 (5 groups / 21 members, budget sub plafonul de 40 subrequest-uri) · ro-text 0 · source-errors 0 (`{"result":"ok","mode":"mock","families":19,"cells":114}`) · sweep-inventory 0 (16 domenii / 46 secțiuni / 14 categorii catalog / 73 subcategorii / 38 familii de surse, toate acoperite) · model-contracts 0 (offline 4,988 ms, strict post-P1 state — „acord integral", cunoscut-clasă register printed, 0 OUR-BUG) · federated-search 0 (6 legs) · legal-records 0 · expanded 0 · audit-controls 0. Then: verify-downloads 0 (2,101 CSV rows / 37,488 PDF bytes). Then: verify-legal-pdf — **SKIP înregistrat** (python3 pypdf absent locally, same as the CI runner image; the guarded step's overall exit 0). Battery ran ×1 this session per dispatch (idempotence already proven per-script in T1.1/T1.2/T1.6/T1.4c).
+
+### Live parity verdict table (single `--live` run; base http://127.0.0.1:5173, deployedBase https://aflivra.brebu.workers.dev)
+
+| family | verdict | notes |
+|---|---|---|
+| weather/open-meteo | ok | app 200/cached, worker 200/fresh, no error either leg |
+| company/anaf | ok | both legs 200/cached |
+| courts/portal.just | ok | app 200/stale, worker 200/fresh |
+| feeds/stiri | **source-blocks-egress** | honest NEW surfacing: worker 200/stale with envelope „3 surse au copii vechi sau sunt temporar indisponibile. Celelalte informații rămân disponibile." → direct probe spent **1** (of the ≤2 cap): source itself ok → egress class (3 of the 7 feed hosts degrade on the deployed worker; dev leg 200/cached, no error; per-host `surfaced` register: feed:all-institutions et al.) |
+| catalog/ckan | ok | both cached |
+| transport/tpbi | ok | worker stale, no error |
+| directory/schools | ok | worker stale, no error |
+| directory/health | ok | worker stale, no error |
+| directory/pharmacies | ok | worker stale, no error |
+| directory/hospitals | ok | both cached |
+| localities/siruta | ok | both cached |
+| lawyers/ifep | ok | both stale, no error surfaced |
+| legal/law | ok | both fresh |
+| feeds/agricultura | **source-blocks-egress** | the pre-classified AFIR class confirmed WITHOUT spending a direct fetch (worker 200/stale, honest „Sursa a răspuns cu HTTP 500." envelope) — exactly as designed |
+| feeds/filme | ok | worker stale, no error |
+| events/odeon | ok | both cached |
+| cinema/cinemacity | ok | worker stale, no error |
+| stories/wikisource | ok | both fresh |
+| transport/realtime | ok | app stale, worker fresh |
+
+Totals: **17 ok + 2 source-blocks-egress · 0 our-bug · direct-fetch spending 1 of the ≤2/family cap (stiri only) · script result "ok", exit 0.** Both egress-class verdicts are the documented honest-degrade behavior (last valid copy + Romanian envelope + direct-to-source path) — informational, never a failure verdict. The feeds/stiri surfacing is the honest new datapoint this pass exists to catch: 3 feed hosts hold stale-unavailable copies on the deployed worker while the sources themselves respond — the same Workers-egress class as AFIR, now visible per-host through the surfaced register. Classified and reported per dispatch; no action taken (the honest-degrade UX is the shipped behavior for this class — an upstream/infra fix would live outside this session's scope).
+
+### Post-chain hygiene (read-only checks)
+- `git status` after the chain: identical to pre-chain (the V1/V2 modified files + 3 untracked e2e specs + session probes; nothing added by the verification itself — build artifacts untracked/ignored, seed-snapshots restored to zero diff).
+- Environment: node v24.19.0; pdftotext present; pypdf absent (guarded-skip parity with the CI runner); .dev.vars present for the gated refresh API specs.
+
+**Final line: T4.1: PASSED — all seven chain steps green: tsc 0 errors · lint 0 errors / 114 warnings (exact baseline) · battery 17/17 (incl. the guarded recorded skip) · e2e 48/48 · live parity ok (17 ok + 2 honest egress classes, 1 direct probe of the ≤2/family cap) · build + seed-restore + deploy-dry-run + db-migrate ×2 byte-identical idempotent.**

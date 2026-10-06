@@ -2,13 +2,14 @@
 import React,{useEffect,useMemo,useState} from 'react';
 import {ArrowUpRight,ExternalLink,Search} from 'lucide-react';
 import {Button} from '@/components/ui/button';
-import {federatedSearch,federatedCollect,federatedFamilies,type FederatedItem,type FederatedSearchResult,type FederatedStory,type FederatedPlace} from '@/lib/live/federated';
+import {federatedSearch,federatedCollect,federatedFamilies,type FederatedItem,type FederatedFamilyId,type FederatedStory,type FederatedPlace} from '@/lib/live/federated';
 import {countText} from '@/lib/live/query';
 import {snapshotJson} from './snapshot-store';
 import {fetchWithServerRetry} from '@/lib/http-retry.mjs';
 
 const familyById=new Map(federatedFamilies.map(f=>[f.id,f]));
 const externalLinkKinds=['article','dataset','story'];
+type CollectedResponse={term:string;family:FederatedFamilyId;payload:unknown};
 
 export function FederatedResults({term,gallery,onNavigate,onReset}:{term:string;gallery:readonly FederatedPlace[];onNavigate:(item:FederatedItem)=>void;onReset:()=>void}){
  const [stories,setStories]=useState<readonly FederatedStory[]|null>(null);
@@ -16,16 +17,19 @@ export function FederatedResults({term,gallery,onNavigate,onReset}:{term:string;
  const [settled,setSettled]=useState(term);
  useEffect(()=>{const t=setTimeout(()=>setSettled(term),300);return()=>clearTimeout(t)},[term]);
  const base=useMemo(()=>federatedSearch(settled,{gallery,stories:stories||[]}),[settled,gallery,stories]);
- const [result,setResult]=useState<FederatedSearchResult>(base);
+ // Network responses are the only state: the eager families (stories corpus, gallery)
+ // recompute from the current props every render, so a late-arriving corpus can never
+ // be shadowed by a mount-time snapshot.
+ const [responses,setResponses]=useState<readonly CollectedResponse[]>([]);
  useEffect(()=>{
-  const runs=base.requests.map(request=>{const c=new AbortController();return{c,promise:fetchWithServerRetry(request.url,{signal:c.signal,cache:'no-store'}).then(r=>r.json()).then(payload=>{if(c.signal.aborted)return;setResult(prev=>federatedCollect(prev.term===base.term?prev:base,request.family,payload))}).catch(()=>{})}});
+  const runs=base.requests.map(request=>{const c=new AbortController();return{c,promise:fetchWithServerRetry(request.url,{signal:c.signal,cache:'no-store'}).then(r=>r.json()).then(payload=>{if(c.signal.aborted)return;setResponses(prev=>[...prev.filter(r=>r.term===base.term),{term:base.term,family:request.family,payload}])}).catch(()=>{})}});
   return()=>{runs.forEach(run=>run.c.abort())};
  },[base]);
+ const result=useMemo(()=>{let current=base;for(const response of responses){if(response.term!==base.term)continue;current=federatedCollect(current,response.family,response.payload)}return current},[base,responses]);
  const trimmed=term.trim();
- if(!trimmed||!result)return null;
- const current=result.term===settled?result:base;
+ if(!trimmed)return null;
  if(base.note)return <section className="live-section federated-results" data-testid="federated-results"><div className="panel-top"><div><span className="kicker">O CAUTARE, TOATE SURSELE</span><h2>Rezultate pentru „{trimmed}”</h2></div><Search size={26}/></div><p className="reader-note" role="status" data-testid="federated-note">{base.note}</p></section>;
- const groups=current.groups,pending=current.families.filter(f=>f.status==='pending');
+ const groups=result.groups,pending=result.families.filter(f=>f.status==='pending');
  const pendingInGroup=(id:string)=>pending.filter(f=>familyById.get(f.family)?.category===id);
  const foundAnywhere=groups.some(g=>g.count>0);
  return <section className="live-section federated-results" data-testid="federated-results" aria-label="Rezultatele căutării în toate categoriile">

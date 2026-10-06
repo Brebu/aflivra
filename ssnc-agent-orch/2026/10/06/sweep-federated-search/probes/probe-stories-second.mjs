@@ -1,0 +1,20 @@
+import {chromium} from '@playwright/test';
+const browser = await chromium.launch();
+const page = await browser.newPage();
+await page.goto('http://127.0.0.1:5173/#view=explore');
+await page.waitForFunction(() => localStorage.getItem('reper.v2.preferences') !== null, null, {timeout: 30000}).catch(()=>{});
+const input = page.getByLabel('Caută în locuri și domenii');
+await input.fill('harap');
+await page.waitForTimeout(4000);
+const first = await page.evaluate(() => Array.from(document.querySelectorAll('[data-testid="federated-group"]')).map(g => g.getAttribute('data-group') + ':' + g.querySelectorAll('[data-testid="federated-row"]').length).join(' '));
+console.log('FIRST SEARCH :', first);
+// any second term re-settles the same mounted component after the corpus load
+await input.fill('creanga');
+await page.waitForTimeout(2500);
+const second = await page.evaluate(() => Array.from(document.querySelectorAll('[data-testid="federated-group"]')).map(g => g.getAttribute('data-group') + ':' + g.querySelectorAll('[data-testid="federated-row"]').length + '[' + Array.from(g.querySelectorAll('[data-testid="federated-row"] strong')).map(s=>s.textContent).slice(0,2).join('|') + ']').join(' '));
+console.log('SECOND SEARCH:', second);
+await input.fill('harap');
+await page.waitForTimeout(2500);
+const third = await page.evaluate(() => Array.from(document.querySelectorAll('[data-testid="federated-group"][data-group="povesti"]')).map(g => g.querySelectorAll('[data-testid="federated-row"]').length + '[' + Array.from(g.querySelectorAll('[data-testid="federated-row"] strong')).map(s=>s.textContent).join('|') + ']').join(' '));
+console.log('THIRD SEARCH :', third);
+await browser.close();

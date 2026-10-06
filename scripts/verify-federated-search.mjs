@@ -140,8 +140,15 @@ try{
  collected=federatedCollect(federatedSearch('set'),'catalog',{status:'cached',data:{results:[{id:'ed-1',title:'Set de date despre școli',organization:'Ministerul Educației',note:'Inventar unități școlare.',modified:'2026-01-02',formats:['CSV'],categories:['educatie']}],count:5,page:0,pages:1}});
  let educatie=collected.groups.find(g=>g.id==='educatie');assert.ok(educatie);assert.equal(educatie.items[0].kind,'dataset');assert.equal(educatie.items[0].title,'Set de date despre școli');assert.equal(educatie.items[0].subtitle,'Ministerul Educației');
  assert.equal(educatie.items[0].target.tab,'data');assert.equal(educatie.items[0].target.domain,'educatie');assert.equal(educatie.items[0].target.query,'Set de date despre școli');
- assert.equal(collected.families.find(f=>f.family==='catalog').total,5);
- collected=federatedCollect(federatedSearch('avocat'),'lawyers',{status:'cached',data:{items:[{id:'123',name:'Popescu Ion',title:'Baroul Brașov — definitiv',url:'https://www.ifep.ro/Justice/Lawyers/LawyerFile.aspx?RecordId=123',details:'avocat definitiv',updatedAt:'2026-01-01'}],total:77,page:0,pages:6}});
+  assert.equal(collected.families.find(f=>f.family==='catalog').total,5);
+  collected=federatedCollect(federatedSearch('plati'),'catalog',{status:'stale',data:{results:[{id:'c20c6438-91ec-4204-a8df-c3d7c5fb47aa',title:'Plati Programul național „Școli sigure și sănătoase” (PNSS) (2026-prezent)',organization:'Ministerul Dezvoltării, Lucrărilor Publice și Administrației',category:'educatie',modified:'2026-09-17T11:02:07.876807'}],count:6,page:0,pages:1}});
+  educatie=collected.groups.find(g=>g.id==='educatie');assert.ok(educatie,'un rând servit din copia de rezervă își poartă propria categorie în grupul ei');
+  assert.ok(educatie.items[0].title.includes('Școli sigure'));
+  assert.equal(educatie.items[0].target.domain,'educatie','rândul de catalog trimite spre domeniul unde filtrul de categorie arată setul');
+  assert.equal(educatie.items[0].target.tab,'data');
+  collected=federatedCollect(federatedSearch('set'),'catalog',{status:'cached',data:{results:[{id:'fara-clasificare',title:'Set de date fără clasificare',organization:'Editor neprecizat'}],count:1,page:0,pages:1}});
+  const localDatasets=collected.groups.find(g=>g.id==='local');assert.ok(localDatasets&&localDatasets.items.some(i=>i.kind==='dataset'),'un rând fără nicio clasificare păstrează grupul local de rezervă');
+  collected=federatedCollect(federatedSearch('avocat'),'lawyers',{status:'cached',data:{items:[{id:'123',name:'Popescu Ion',title:'Baroul Brașov — definitiv',url:'https://www.ifep.ro/Justice/Lawyers/LawyerFile.aspx?RecordId=123',details:'avocat definitiv',updatedAt:'2026-01-01'}],total:77,page:0,pages:6}});
  const justitie=collected.groups.find(g=>g.id==='justitie');assert.ok(justitie);assert.equal(justitie.items[0].kind,'lawyer');assert.equal(justitie.items[0].title,'Popescu Ion');assert.equal(justitie.items[0].subtitle,'Baroul Brașov — definitiv');
  assert.equal(justitie.items[0].target.domain,'justitie');assert.equal(justitie.items[0].target.tab,'lawyers');assert.equal(justitie.items[0].target.query,'Popescu Ion');
  collected=federatedCollect(federatedSearch('liceul'),'directory-schools',{status:'cached',data:{title:'Rețeaua școlară',period:'2025–2026',note:'Ediția 2025–2026.',fields:['Denumire lunga unitate','Localitate unitate','Judet PJ'],total:9,records:[{'Denumire lunga unitate':'Liceul Teoretic Eminescu','Localitate unitate':'Brașov','Judet PJ':'Brașov'}],page:0,pages:1}});
