@@ -1,0 +1,60 @@
+{
+ "when": "2026-10-06T18:12:55.241Z",
+ "url": "http://localhost:5173/",
+ "ssr": {
+  "status": 200,
+  "provenanceStringsInSsr": [],
+  "surrogatePairsChecked": [
+   "ILUSTRAȚIE EDITORIALĂ",
+   "După o fotografie de xulescu_g",
+   "Fotografia originală",
+   "Proveniență și transformări",
+   "Format pentru proveniență",
+   "hero-style.json"
+  ],
+  "licensesPanelInSsr": true
+ },
+ "dom": {
+  "heroProvenanceLeaks": [],
+  "heroSideElements": 0,
+  "heroEssentials": {
+   "heroImage": "/media/hero-graphite-blue.webp | alt: Ilustrație editorială albastru–grafit, derivată din panorama Munților Bucegi",
+   "heading": "Ce ai nevoie să afli?Începe de aici.",
+   "searchLabel": "Caută în Aflivra",
+   "suggestionChips": [
+    "Castelul Peleș",
+    "Brașov",
+    "Monitorul Oficial RA"
+   ],
+   "scrollHint": "DERULEAZĂ ȘI DESCOPERĂ ↓"
+  },
+  "licensesPanel": {
+   "panelText": "Ilustrații reprezentative și fotografii atribuiteFormat pentru surse și licențePDFCSVExcel (.xlsx)PDFSurse și licențeToate seturile de date",
+   "selectAriaLabel": "Format pentru surse și licențe",
+   "selectOptions": [
+    "PDF",
+    "CSV",
+    "Excel (.xlsx)"
+   ],
+   "exportButton": "Surse și licențe"
+  },
+  "pageErrors": []
+ },
+ "movedCredit": {
+  "manifestStatus": 200,
+  "manifestEntries": 29,
+  "heroCredit": {
+   "category": "editorial-hero",
+   "file": "hero-graphite-blue.webp",
+   "caption": "Munții Bucegi — ilustrație editorială derivată din panorama văzută de pe Clăbucetul Taurului",
+   "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bucegi_Mountains_seen_from_the_Cl%C4%83bucetul_Taurului_peak_(51121408743).jpg",
+   "credit": "xulescu_g / Wikimedia Commons",
+   "license": "CC BY-SA 2.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+   "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Bucegi_Mountains_seen_from_the_Cl%C4%83bucetul_Taurului_peak_%2851121408743%29.jpg",
+   "changes": "Stilizare editorială asistată de AI asupra fotografiei originale; transformările complete sunt înregistrate în media/hero-style.json.",
+   "displayChanges": "Duoton albastru–grafit, accente reci luminoase și reîncadrare la aproximativ 2,2:1; ilustrație derivată, nu o observație factuală a condițiilor actuale."
+  }
+ },
+ "verdict": "PASS — hero provenance hidden; credit exported in the licenses panel"
+}

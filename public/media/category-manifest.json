@@ -320,5 +320,17 @@
     "changes": "Redimensionare și conversie WebP; decupare la afișare, dacă este cazul.",
     "galleryOrder": 2,
     "displayChanges": "Decupare la afișare și tratament cromatic albastru–grafit în miniaturi; fotografia completă se deschide în culorile originale."
+  },
+  {
+    "category": "editorial-hero",
+    "file": "hero-graphite-blue.webp",
+    "caption": "Munții Bucegi — ilustrație editorială derivată din panorama văzută de pe Clăbucetul Taurului",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bucegi_Mountains_seen_from_the_Cl%C4%83bucetul_Taurului_peak_(51121408743).jpg",
+    "credit": "xulescu_g / Wikimedia Commons",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Bucegi_Mountains_seen_from_the_Cl%C4%83bucetul_Taurului_peak_%2851121408743%29.jpg",
+    "changes": "Stilizare editorială asistată de AI asupra fotografiei originale; transformările complete sunt înregistrate în media/hero-style.json.",
+    "displayChanges": "Duoton albastru–grafit, accente reci luminoase și reîncadrare la aproximativ 2,2:1; ilustrație derivată, nu o observație factuală a condițiilor actuale."
   }
 ]

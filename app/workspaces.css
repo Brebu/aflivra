@@ -53,6 +53,38 @@
 .v2 .weather-scene p{color:#f3f7ff;margin:10px 0 18px;font-size:1rem;line-height:1.6}.v2 .weather-scene-content>small{display:block;color:#e5f0ff;font-size:.75rem;margin-top:24px;line-height:1.5}
 .v2 .weather-scene-metrics{display:flex;flex-wrap:wrap;gap:12px}.v2 .weather-scene-metrics>span{display:flex;align-items:center;gap:9px;border:1px solid #ffffff55;padding:10px 14px;border-radius:12px;background:#071b3a55;font-size:.875rem;backdrop-filter:blur(10px)}
 .v2 .weather-source-block[hidden]{display:none!important}.v2 .weather-navigation{margin:24px 0}
+/* Weather scene life: ambient condition layers on the decorative .weather-ambient span — transform/opacity only, seamless tile loops; the modern.css blanket gates freeze every keyframe under prefers-reduced-motion and .v2.no-motion, leaving a static, legible scene. */
+.v2 .weather-scene>img{animation:aflivra-weather-sky .55s ease both}
+@keyframes aflivra-weather-sky{from{opacity:0}to{opacity:1}}
+.v2 .weather-ambient{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.v2 .weather-scene-rain .weather-ambient:before,.v2 .weather-scene-rain .weather-ambient:after,.v2 .weather-scene-snow .weather-ambient:before,.v2 .weather-scene-snow .weather-ambient:after,.v2 .weather-scene-cloudy .weather-ambient:before,.v2 .weather-scene-cloudy .weather-ambient:after,.v2 .weather-scene-night .weather-ambient:before,.v2 .weather-scene-night .weather-ambient:after{content:'';position:absolute}
+.v2 .weather-scene-rain .weather-ambient:before{inset:-80% -40%;background-image:repeating-linear-gradient(90deg,transparent 0 26px,#d9eaff0d 26px 27px,transparent 27px 48px);transform:rotate(18deg) translateY(-46%);animation:aflivra-weather-rain-far .95s linear infinite}
+.v2 .weather-scene-rain .weather-ambient:after{inset:-80% -40%;background-image:repeating-linear-gradient(90deg,transparent 0 37px,#f3f7ff16 37px 38.6px,transparent 38.6px 69px);transform:rotate(13deg) translateY(-60%);animation:aflivra-weather-rain-near .7s linear infinite}
+@keyframes aflivra-weather-rain-far{from{transform:rotate(18deg) translateY(-46%)}to{transform:rotate(18deg) translateY(0)}}
+@keyframes aflivra-weather-rain-near{from{transform:rotate(13deg) translateY(-60%)}to{transform:rotate(13deg) translateY(0)}}
+.v2 .weather-scene-snow .weather-ambient:before{inset:-220px -70px;background-image:radial-gradient(2px 2px at 23px 38px,#f3f7ff2e,transparent 51%),radial-gradient(1.5px 1.5px at 67px 14px,#ffffff2a,transparent 51%),radial-gradient(2.2px 2.2px at 119px 74px,#d9eaff26,transparent 52%),radial-gradient(1.6px 1.6px at 155px 133px,#f3f7ff2b,transparent 51%),radial-gradient(1.2px 1.2px at 95px 176px,#ffffff26,transparent 50%);background-size:190px 220px;background-repeat:repeat;transform:translate3d(11px,-220px,0);animation:aflivra-weather-snow-far 10s linear infinite}
+.v2 .weather-scene-snow .weather-ambient:after{inset:-170px -60px;background-image:radial-gradient(3px 3px at 28px 44px,#f3f7ff33,transparent 52%),radial-gradient(2.4px 2.4px at 88px 19px,#ffffff30,transparent 51%),radial-gradient(3.4px 3.4px at 76px 108px,#d9eaff2b,transparent 52%),radial-gradient(2px 2px at 137px 129px,#f3f7ff30,transparent 51%);background-size:150px 160px;background-repeat:repeat;transform:translate3d(-13px,-160px,0);animation:aflivra-weather-snow-near 7s linear infinite}
+@keyframes aflivra-weather-snow-far{from{transform:translate3d(0,-220px,0)}50%{transform:translate3d(22px,-110px,0)}to{transform:translate3d(0,0,0)}}
+@keyframes aflivra-weather-snow-near{from{transform:translate3d(0,-160px,0)}50%{transform:translate3d(-26px,-80px,0)}to{transform:translate3d(0,0,0)}}
+.v2 .weather-scene-sunny .weather-ambient{background-image:radial-gradient(340px 340px at 79% 20%,#f3f7ff1c,transparent 72%);opacity:.85;animation:aflivra-weather-glow 12s ease-in-out infinite alternate}
+@keyframes aflivra-weather-glow{from{opacity:.6;transform:scale(1)}to{opacity:1;transform:scale(1.07)}}
+.v2 .weather-scene-night .weather-ambient{background-image:radial-gradient(300px 300px at 82% 16%,#f3f7ff12,transparent 70%)}
+.v2 .weather-scene-night .weather-ambient:before{inset:0 -180px;background-image:radial-gradient(1.3px 1.3px at 18px 26px,#f3f7ff38,transparent 51%),radial-gradient(1px 1px at 64px 58px,#ffffff33,transparent 50%),radial-gradient(1.6px 1.6px at 108px 14px,#f3f7ff30,transparent 52%),radial-gradient(1.1px 1.1px at 149px 93px,#ffffff2e,transparent 50%);background-size:180px 130px;background-repeat:repeat;transform:translate3d(-180px,0,0);opacity:.8;animation:aflivra-weather-twinkle 7s ease-in-out infinite alternate,aflivra-weather-night-drift 160s linear infinite}
+.v2 .weather-scene-night .weather-ambient:after{inset:0 -180px;background-image:radial-gradient(1.2px 1.2px at 31px 47px,#ffffff26,transparent 50%),radial-gradient(1.4px 1.4px at 92px 21px,#f3f7ff29,transparent 51%),radial-gradient(1px 1px at 128px 77px,#ffffff24,transparent 50%),radial-gradient(1.5px 1.5px at 161px 106px,#f3f7ff27,transparent 51%);background-size:180px 96px;background-repeat:repeat;transform:translate3d(-180px,0,0);opacity:.7;animation:aflivra-weather-twinkle 8.5s .9s ease-in-out infinite alternate,aflivra-weather-night-drift 210s linear infinite reverse}
+@keyframes aflivra-weather-twinkle{from{opacity:.45}to{opacity:.95}}
+@keyframes aflivra-weather-night-drift{from{transform:translate3d(-180px,0,0)}to{transform:translate3d(0,0,0)}}
+.v2 .weather-scene-cloudy .weather-ambient:before{inset:0 -640px;background-image:radial-gradient(240px 130px at 30% 42%,#f3f7ff12,transparent 72%),radial-gradient(300px 110px at 74% 68%,#d9eaff10,transparent 72%);background-size:640px 100%;background-repeat:repeat-x;transform:translate3d(-640px,0,0);animation:aflivra-weather-drift-far 34s linear infinite}
+.v2 .weather-scene-cloudy .weather-ambient:after{inset:0 -420px;background-image:radial-gradient(180px 90px at 36% 30%,#d9eaff0d,transparent 70%),radial-gradient(220px 80px at 70% 58%,#f3f7ff0e,transparent 70%);background-size:420px 100%;background-repeat:repeat-x;transform:translate3d(0,0,0);animation:aflivra-weather-drift-near 23s linear infinite}
+@keyframes aflivra-weather-drift-far{from{transform:translate3d(-640px,0,0)}to{transform:translate3d(0,0,0)}}
+@keyframes aflivra-weather-drift-near{from{transform:translate3d(0,0,0)}to{transform:translate3d(420px,0,0)}}
+.v2 .weather-scene-metrics>span>svg{animation:aflivra-weather-icon .5s cubic-bezier(.2,.8,.3,1.2) both}
+.v2 .weather-scene-metrics>span:nth-child(2)>svg{animation-delay:.09s}
+.v2 .weather-scene-metrics>span:nth-child(3)>svg{animation-delay:.18s}
+.v2 .weather-metric-grid article>svg{animation:aflivra-weather-icon .5s cubic-bezier(.2,.8,.3,1.2) both}
+@keyframes aflivra-weather-icon{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+.v2 .weather-live-grid article{transition:box-shadow .18s ease,border-color .18s ease}
+@media(hover:hover){.v2 .weather-live-grid article:hover{border-color:#afbcce;box-shadow:0 8px 24px #1532470a}}
+.v2 .weather-live-grid article:focus-within{border-color:#afbcce;box-shadow:0 8px 24px #1532470a}
 :is(.v2.reader-dialog,.v2.dataset-dialog) [data-slot=dialog-header]{flex:none;min-width:0;max-height:22dvh;overflow:auto;padding-right:54px}
 :is(.v2.reader-dialog,.v2.dataset-dialog) [data-slot=dialog-title]{font-size:1.35rem!important;line-height:1.45;overflow-wrap:anywhere;padding-right:0!important}
 :is(.v2.reader-dialog,.v2.dataset-dialog) [data-slot=dialog-close]{width:44px;height:44px;z-index:20;background:#edf2fa;border-radius:12px;right:16px;top:16px}

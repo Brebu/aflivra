@@ -1,0 +1,64 @@
+[390] domains 1/16 done   [390] domains 2/16 done   [390] domains 3/16 done   [390] domains 4/16 done   [390] domains 5/16 done   [390] domains 6/16 done   [390] domains 7/16 done   [390] domains 8/16 done   [390] domains 9/16 done   [390] domains 10/16 done   [390] domains 11/16 done   [390] domains 12/16 done   [390] domains 13/16 done   [390] domains 14/16 done   [390] domains 15/16 done   [390] domains 16/16 done   
+[1280] domains 1/16 done   [1280] domains 2/16 done   [1280] domains 3/16 done   [1280] domains 4/16 done   [1280] domains 5/16 done   [1280] domains 6/16 done   [1280] domains 7/16 done   [1280] domains 8/16 done   [1280] domains 9/16 done   [1280] domains 10/16 done   [1280] domains 11/16 done   [1280] domains 12/16 done   [1280] domains 13/16 done   [1280] domains 14/16 done   [1280] domains 15/16 done   [1280] domains 16/16 done   
+SSR sanity:
+  ok  home             status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  explore          status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  map              status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  place            status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  dashboard        status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  company          status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  money            status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  domain           status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  compare          status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  recommendations  status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  saved            status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  planner          status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  about            status=200 title="Aflivra — România la îndemână" markers={"shellMain":true,"brand":true,"footer":true}
+  ok  catalog          status=200 title="Aflivra — România la îndemână" markers={"shellMain":false,"brand":false,"footer":false,"catalogHome":true}
+  ok  design           status=200 title="Aflivra" markers={"shellMain":false,"brand":false,"footer":false,"metaRedirect":true}
+
+Surfaces audited: 162 (domain surface count 62)
+Issues: 63 {"blocks-usability":4,"polish":59}
+Top routes by issue count:
+  home — 9
+  about — 8
+  educatie/news — 8
+  stiri/data — 8
+  dashboard — 4
+  educatie/data — 4
+  munca/news — 4
+  stiri/news — 4
+  local/data — 2
+  vreme/data — 2
+  transport/data — 2
+  agricultura/news — 2
+  agricultura/places — 2
+  agricultura/data — 2
+  mediu/data — 2
+
+Worst findings (first 25):
+  [blocks-usability] home (cutoff-text) {"el":"button.city-story","text":"DESCOPERĂ ORAȘULBrașovPiața Sfatului, patrimon","sw":379,"cw":358,"tov":"cli
+  [blocks-usability] home (cutoff-text) {"el":"button.city-story","text":"DESCOPERĂ ORAȘULBucureștiArhitectură, cultură ","sw":379,"cw":358,"tov":"cli
+  [polish] home (snake_case) BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din 
+  [polish] home (CAPS_TOKEN) BV14C_02
+  [polish] dashboard (snake_case) BV14C_02 ⋯ IS Cod proiect BV14C_02 Finanțat din 
+  [polish] dashboard (CAPS_TOKEN) BV14C_02
+  [polish] about (snake_case) datastore_search ⋯ 026-10-04 Catalogul descrie resurse. datastore_search se aplică numai r
+  [polish] about (snake_case) datastore_active ⋯ _search se aplică numai resurselor cu datastore_active=true. Nu toate ce
+  [polish] about (snake_case) OD_FIRME ⋯ pshot ONRC din 02.09.2026. Selectează OD_FIRME și nomenclatoarel
+  [polish] about (CAPS_TOKEN) OD_FIRME
+  [polish] local/data (snake_case) SIRUTA_s1 ⋯ l de Statistică Acoperire națională SIRUTA_s1 2026 Registrul u
+  [polish] vreme/data (snake_case) outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato
+  [polish] educatie/news (snake_case) 24_08_2026_dosar_presa_rezultate_finale_bacalaureat_S2 ⋯ egorie Comunicate de presă fisiere 24_08_20
+  [polish] educatie/news (count-grammar) {"text":"2026 rezultate","n":2026,"exp":"de","actual":"pl"}
+  [polish] educatie/news (count-grammar) {"text":"2026 rezultate","n":2026,"exp":"de","actual":"pl"}
+  [polish] educatie/news (count-grammar) {"text":"2026 rezultate","n":2026,"exp":"de","actual":"pl"}
+  [polish] educatie/data (snake_case) Plati_ianuarie ⋯ l „Școli sigure și sănătoase” (PNSS)_ Plati_ianuarie 2026 Programul n
+  [polish] educatie/data (snake_case) Plati_ianuarie ⋯ l „Școli sigure și sănătoase” (PNSS)_ Plati_ianuarie 2026 XLSX 1 resu
+  [polish] transport/data (snake_case) outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato
+  [polish] munca/news (count-grammar) {"text":"34.128 locuri","n":34128,"exp":"de","actual":"pl"}
+  [polish] munca/news (count-grammar) {"text":"34.352 locuri","n":34352,"exp":"de","actual":"pl"}
+  [polish] agricultura/news (console) Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden
+  [polish] agricultura/places (console) Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden
+  [polish] agricultura/data (console) Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their iden
+  [polish] mediu/data (snake_case) outside_agg ⋯ ttps://zgomot.github.io/zgomot-rutier-outside_agg/ Pentru utilizato

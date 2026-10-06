@@ -55,13 +55,13 @@ export function PlaceSourceDetails({id,chunk,category,name,lat,lon,sourceUrl}:{i
  const entry:PlaceIndex={id,chunk,name,lat,lon,sourceUrl,categories:[category],types:[],address:'',city:'',phone:'',email:'',website:'',openingHours:'',updatedAt:'',search:''};
  return <details className="place-source-details" onToggle={e=>setOpen(e.currentTarget.open)}><summary>Fișa completă, contactele și harta din sursă</summary>{open&&<ImportedPlaceRecord entry={entry} category={category}/>}</details>;
 }
-export function PlacesWorkspace({category,preferredCity='București',photosDefault=false,initialQuery=''}:{category:string;preferredCity?:string;photosDefault?:boolean;initialQuery?:string}){
+export function PlacesWorkspace({category,preferredCity='București',photosDefault=false,initialQuery='',initialSub=''}:{category:string;preferredCity?:string;photosDefault?:boolean;initialQuery?:string;initialSub?:string}){
  const geo=useLocation();const [manifest,setManifest]=useState<Manifest|null>(null),[error,setError]=useState(''),[loading,setLoading]=useState(true),[revision,setRevision]=useState(0);
- const [resetKey,setResetKey]=useState(0),[draft,setDraft]=useState(initialQuery),[q,setQ]=useState(initialQuery),[sub,setSub]=useState(''),[scope,setScope]=useLocationState('context'),[photos,setPhotos]=useState(photosDefault),[radius,setRadius]=useLocationState('15'),[sort,setSort]=useState('context'),[contact,setContact]=useState(''),[page,setPage]=useLocationState(0),[view,setView]=useState('cards');const section=useRef<HTMLElement>(null);
+ const [resetKey,setResetKey]=useState(0),[draft,setDraft]=useState(initialQuery),[q,setQ]=useState(initialQuery),[sub,setSub]=useState(initialSub),[scope,setScope]=useLocationState('context'),[photos,setPhotos]=useState(photosDefault),[radius,setRadius]=useLocationState('15'),[sort,setSort]=useState('context'),[contact,setContact]=useState(''),[page,setPage]=useLocationState(0),[view,setView]=useState('cards');const section=useRef<HTMLElement>(null);
  useEffect(()=>{const c=new AbortController();setLoading(true);setError('');snapshotJson<Manifest>('/places/manifest.json',undefined,c.signal).then(async m=>{if(m.schema!=='aflivra-places-v2')throw Error('Inventarul locurilor nu are formatul așteptat.');setManifest(m)}).catch(e=>{if(e.name!=='AbortError')setError(e.message)}).finally(()=>{if(!c.signal.aborted)setLoading(false)});return()=>c.abort()},[revision]);
  useEffect(()=>{setSub('');setPage(0)},[category]);
  useEffect(()=>setPage(0),[geo.key]);
- useEffect(()=>{setDraft(initialQuery);setQ(initialQuery);setPage(0)},[initialQuery]);
+ useEffect(()=>{setDraft(initialQuery);setQ(initialQuery);setSub(initialSub);setPage(0)},[initialQuery,initialSub]);
  const center=geo.center,activeScope=scope==='context'?(geo.hasLocal?'nearby':'all'):scope,activeSort=sort==='context'?(geo.hasLocal?'distance':'name'):sort;
  const categoryKey=category==='local'?'local-all':category,labels=manifest?.subcategories[categoryKey]||[];
  const state=useSource(manifest&&(activeScope==='all'||center)?'/api/places?'+new URLSearchParams({category,q,sub,contact,scope:activeScope,radius,sort:activeSort,photos:String(photos),page:String(page),...(center?{lat:center.lat.toFixed(3),lon:center.lon.toFixed(3)}:{})}):null);
