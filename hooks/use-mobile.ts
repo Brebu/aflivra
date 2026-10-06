@@ -1,3 +1,6 @@
 'use client';
 import * as React from 'react';
-export function useIsMobile(){const [isMobile,setIsMobile]=React.useState<boolean|undefined>(undefined);React.useEffect(()=>{const mql=window.matchMedia('(max-width: 767px)'),onChange=()=>setIsMobile(mql.matches);mql.addEventListener('change',onChange);setIsMobile(mql.matches);return()=>mql.removeEventListener('change',onChange)},[]);return !!isMobile}
+
+const mq='(max-width: 767px)',subscribe=(onChange:()=>void)=>{const mql=window.matchMedia(mq);mql.addEventListener('change',onChange);return()=>mql.removeEventListener('change',onChange)},snapshot=():boolean=>window.matchMedia(mq).matches,serverSnapshot=():boolean=>false;
+
+export function useIsMobile(){return React.useSyncExternalStore(subscribe,snapshot,serverSnapshot)}

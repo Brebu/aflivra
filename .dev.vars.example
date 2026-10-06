@@ -1,0 +1,3 @@
+# Copiază acest fișier în .dev.vars și alege propria valoare de dezvoltare; fișierul .dev.vars este ignorat de git.
+REFRESH_TOKEN=change-me-local-dev
+# În producție valoarea reală nu ajunge niciodată în fișier: wrangler secret put REFRESH_TOKEN --name aflivra

@@ -60,7 +60,7 @@ on web/iOS/Android — with a Playwright E2E suite over the critical flows.
 6. **Playwright** (Advocate D5 adopted): `playwright.config.ts` with
    `webServer: {command: 'pnpm dev', url: 'http://127.0.0.1:5173', timeout: >=120_000
    (vinext/workerd cold start), reuseExistingServer: !process.env.CI}`; generous per-test
-   timeouts (loaders budget 6-18s); local cron E2E can hit `/cdn-cgi/local/scheduled`
+   timeouts (loaders budget 6-18s); local cron E2E can hit `/cdn-cgi/handler/scheduled`
    exposed by the Cloudflare Vite plugin. Specs in `e2e/` for the seven flows (home smoke;
    explore → place → lightbox → bookmark → Saved; catalog filter+pagination+geo; places
    workspace; legal workspace + consolidated reader + exports; transit graceful
@@ -80,7 +80,7 @@ heavy families on bundled seeds); D2 UTC `0 0 * * *`-based crons (03:00+ Buchare
 assert-or-fail, patched copy never overwrites build output; seam now VERIFIED by a real
 build + `wrangler deploy --dry-run` exit 0 — see Tasks preamble); D4 token gates BOTH
 refresh routes, `.dev.vars` dev plumbing (gitignored), `wrangler secret put` in prod;
-D5 Playwright webServer hardening + `/cdn-cgi/local/scheduled` + status-semantics
+D5 Playwright webServer hardening + `/cdn-cgi/handler/scheduled` + status-semantics
 assertions; D6 PWA audit-and-complete (export already ships manifest/icons/sw/offline);
 D7 `archives/` in .gitignore + public tree committed.
 External dependencies: none (solo project, no tracker, no platform repos)
@@ -306,7 +306,7 @@ spawnSync + Romanian one-line success output).
 
 - [ ] T2.1 scheduled handler (assigned: Builder; depends T1.2)
   - Test: dev endpoint per the Cloudflare Vite plugin docs:
-    `curl 'http://127.0.0.1:5173/cdn-cgi/local/scheduled?cron=0%200%20*%20*%20*'` →
+    `curl 'http://127.0.0.1:5173/cdn-cgi/handler/scheduled?cron=0%200%20*%20*%20*'` →
     sweep runs (summary rows appear; GET /api/refresh/status with dev token shows the
     group result)
   - Implement: `build/sites-worker.ts` default export += `scheduled(controller:
@@ -460,7 +460,7 @@ spawnSync + Romanian one-line success output).
     `node scripts/deploy.mjs --dry-run` → exit 0 with `git status` clean (seed restore
     proven) · `corepack pnpm db:migrate:local` ×2 idempotent · `corepack pnpm dev` +
     smoke: GET / 200, /api/live 200, POST /api/refresh?source=live (dev token) 200,
-    GET /api/refresh/status 200, curl all 5 `/cdn-cgi/local/scheduled?cron=` variants ·
+    GET /api/refresh/status 200, curl all 5 `/cdn-cgi/handler/scheduled?cron=` variants ·
     `corepack pnpm test:e2e` green · exit dev server, `git status` clean
   - Files: none (verification only)
 

@@ -3,10 +3,13 @@ node_modules/
 .wrangler/
 dist/
 .next/
+.vinext/
+/next-env.d.ts
 *.tsbuildinfo
 .env*
 .dev.vars
 .dev.vars.*
+!.dev.vars.example
 .playwright-mcp/
 archives/
 public/downloads/Aflivra_*.zip

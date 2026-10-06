@@ -1,0 +1,122 @@
+name: pr-validation
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main, "feat/**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-typecheck:
+    name: Lint & typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies (frozen lockfile — committed pins satisfy minimumReleaseAge 10080)
+        run: corepack pnpm install --frozen-lockfile
+      - name: Lint (0 errors — scoped warnings documented in ssnc-agent-orch STATUS, T2.4)
+        run: corepack pnpm lint
+      - name: Typecheck
+        run: corepack pnpm exec tsc --noEmit
+
+  verify:
+    name: Verify battery
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies (frozen lockfile)
+        run: corepack pnpm install --frozen-lockfile
+      - name: Install poppler-utils (verify-export-formats re-reads generated PDFs with pdftotext)
+        run: sudo apt-get update -q && sudo apt-get install -y poppler-utils
+      - name: Verify battery — README pipeline scripts that must pass
+        run: |
+          set -e
+          node scripts/verify-live.mjs
+          node scripts/verify-cache.mjs
+          node scripts/verify-export-formats.mjs
+          node scripts/verify-legal-refresh.mjs
+          node scripts/verify-catalog.mjs
+          node scripts/verify-snapshot-transport.mjs
+          node scripts/verify-refresh-sweep.mjs
+      - name: verify-legal-pdf — needs pypdf, not on the runner image
+        continue-on-error: true
+        run: node scripts/verify-legal-pdf.mjs
+      - name: verify-downloads — rev-35 sandbox drift, Wave-3 follow-up
+        continue-on-error: true
+        run: node scripts/verify-downloads.mjs
+      - name: verify-legal-records — rev-35 sandbox drift, Wave-3 follow-up
+        continue-on-error: true
+        run: node scripts/verify-legal-records.mjs
+      - name: verify-expanded — rev-35 sandbox drift, Wave-3 follow-up
+        continue-on-error: true
+        run: node scripts/verify-expanded.mjs
+      - name: audit-controls — rev-35 sandbox drift, Wave-3 follow-up
+        continue-on-error: true
+        run: node scripts/audit-controls.mjs
+
+  build-restore:
+    name: Build, restore seed churn, deploy dry-run, D1 idempotency
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies (frozen lockfile)
+        run: corepack pnpm install --frozen-lockfile
+      - name: Build (python3 prep steps run on the runner's preinstalled python3)
+        run: corepack pnpm build
+      - name: Restore lib/live/seed-snapshots.json (build churns 2 gzip-header bytes) and assert a clean tree
+        run: |
+          git checkout -- lib/live/seed-snapshots.json
+          STATUS="$(git status --porcelain)"
+          if [ -n "$STATUS" ]; then echo "$STATUS"; exit 1; fi
+      - name: Deploy dry-run (patched config passes wrangler deploy --dry-run)
+        run: node scripts/deploy.mjs --dry-run
+      - name: Local D1 migration (run 1)
+        run: node scripts/db-migrate.mjs --local
+      - name: Local D1 migration (run 2 — must be an idempotent no-op)
+        run: node scripts/db-migrate.mjs --local
+
+  e2e:
+    name: E2E suite (Playwright)
+    runs-on: ubuntu-latest
+    needs: build-restore
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies (frozen lockfile)
+        run: corepack pnpm install --frozen-lockfile
+      - name: Seed .dev.vars for the gated refresh API specs (from the committed dev template)
+        run: cp .dev.vars.example .dev.vars
+      - name: Install Playwright chromium with system dependencies
+        run: corepack pnpm exec playwright install chromium --with-deps
+      - name: Run the e2e suite (CI=true — playwright boots the vinext dev server, no server reuse)
+        run: corepack pnpm test:e2e
