@@ -306,6 +306,16 @@ Deploy-ul aplică din nou migrația remote cu aceeași gardă — un no-op dacă
 
 Declanșarea manuală în producție se face per grup: `POST /api/refresh?source=<grup>` cu tokenul de producție. Declanșarea completă, fără `?source`, este sincronă și depășește plafonul de subrequest-uri per invocare pe planul gratuit; rămâne calea de dezvoltare locală și a planului cu plată (detalii în „API-ul de reîmprospătare și tokenul local”). Starea turelor programate se citește cu `GET /api/refresh/status`: `lastSweepAt` per grup confirmă că tura de noapte a rulat.
 
+### Instalare pe telefon
+
+Aflivra este o aplicație web instalabilă (PWA): se adaugă pe ecranul de start ca aplicație de sine stătătoare, cu propriile date incluse, fără magazin de aplicații.
+
+- **iPhone / iPad (Safari):** deschide `https://aflivra.<subdomeniul-tău>.workers.dev`, apoi „Distribuie" (pătratul cu săgeata în sus) → „Adaugă la ecranul de start". Iconița Aflivra apare între aplicații, iar aplicația pornește fără barele Safari, în ecran complet.
+- **Android (Chrome):** deschide adresa, apoi meniul (trei puncte) → „Instalează aplicația" (sau banner-ul „Adaugă la ecranul de start"). Aplicația apare în lista de aplicații a sistemului.
+- **Desktop (Chrome/Edge):** bara de adrese afișează iconița de instalare din dreapta; click → „Instalează". Aplicația se deschide în propria fereastră.
+
+Instalarea cere HTTPS, îndeplinit de adresa `workers.dev`. Iconițele pentru iOS (`apple-touch-icon`, 180×180) și pentru Android/desktop (`manifest.webmanifest`, 192 și 512, cu variante `maskable` pentru decupările lansatorului) sunt incluse în `public/`. Aplicația instalată folosește aceleași date și aceeați reîmprospătare programată ca și în browser; pentru conținutul extern — hărți, trailere, documentație — legăturile se deschid în browserul sistemului.
+
 ## Disponibilitate și reutilizare
 
 Unele instituții au răspuns intermitent cu 403/500/502 la 4 octombrie 2026. Infotrafic a rămas indisponibil în verificările efectuate. Nu sunt folosite proxy-uri pentru evitarea restricțiilor, certificate fictive sau autentificări imitate. O sursă indisponibilă este indicată separat și nu blochează restul platformei.
