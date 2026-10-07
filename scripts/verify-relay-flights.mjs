@@ -16,6 +16,11 @@ import {pathToFileURL} from 'node:url';
 // raw board texts relayed byte for byte, the {result,aircraft,hexes} confirmation, the
 // exit classes 0/1/2, and the workflow + registry classification — loopback only, zero
 // real addresses.
+// The first real weekly tour (2026-10-07) met the source's rolling rate limit on the
+// fourth consecutive hit (200, 200, 200, 429 back-to-back): the politeness answer is
+// frozen here too — the four points stay sequential with a fixed inter-point gap, and
+// only the source pause (HTTP 429) is retried, twice, with increasing delays, before the
+// tour keeps its fail-closed verdict (a pause that never clears still delivers nothing).
 const root=resolve(import.meta.dirname,'..');
 const relay=await import(pathToFileURL(join(root,'scripts','relay-flights.mjs')));
 
@@ -27,6 +32,9 @@ assert.equal(relay.RELAY_UA,'Aflivra/1.0 gh-relay','the relay identifies itself 
 assert.equal(relay.SOURCE_ACCEPT,'application/json','the relay asks the source for the format the app loader reads');
 assert.equal(relay.MAX_BODY_BYTES,5_000_000,'the relay carries at most the response cap the app connector accepts');
 assert.equal(relay.FETCH_TIMEOUT_MS,12_000,'the per-query bound mirrors the loader timeoutMs cap');
+assert.equal(relay.POINT_GAP_MS,1_000,'the four sequential coverage GETs are paced with a fixed ~1 s inter-point gap — the first real tour met the source rolling window on the fourth back-to-back hit (200, 200, 200, 429)');
+assert.equal(relay.RETRY_STATUS,429,'only the source pause (HTTP 429) is retried — every other status keeps the single-attempt fail-closed semantics');
+assert.deepEqual(relay.RETRY_DELAYS_MS,[2_000,5_000],'a paused point gets at most two extra attempts with increasing delays — the absorbed-pause leg and the exhaustion leg freeze this bound behaviorally');
 const flightsSource=await readFile(join(root,'lib/live','flights.ts'),'utf8');
 const pointsLine=flightsSource.split('\n').find(text=>text.includes('const ADSB_POINTS'));
 const loaderPoints=[...String(pointsLine).matchAll(/\[(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)]/g)].map(match=>[Number(match[1]),Number(match[2])]);
@@ -82,11 +90,13 @@ const startDouble=async behavior=>{
      response.end(JSON.stringify({result:'ok',aircraft:3,hexes:4,observedAt:new Date().toISOString(),servedAt:new Date().toISOString()}))});
     return}
    const match=url.pathname.match(/^\/v2\/lat\/([\d.]+)\/lon\/([\d.]+)\/dist\/(\d+)$/),point=match?[match[1],match[2]]:null;
-   log.sourceGets.push({point,dist:match?Number(match[3]):null,url:url.pathname,userAgent:request.headers['user-agent']||null,accept:request.headers.accept||null,authorization:request.headers.authorization||undefined});
-   if(!match){response.writeHead(404);response.end();return}
-   if(behavior.hangPoint&&behavior.hangPoint===point.join(','))return;
-   if(behavior.failPoints&&behavior.failPoints.has(point.join(','))){const status=behavior.failPoints.get(point.join(','));response.writeHead(status);response.end();return}
-   response.writeHead(200,{'Content-Type':'application/json'});response.end(boardText)});
+    log.sourceGets.push({point,dist:match?Number(match[3]):null,url:url.pathname,userAgent:request.headers['user-agent']||null,accept:request.headers.accept||null,authorization:request.headers.authorization||undefined,at:Date.now()});
+    if(!match){response.writeHead(404);response.end();return}
+    if(behavior.hangPoint&&behavior.hangPoint===point.join(','))return;
+    if(behavior.failPoints&&behavior.failPoints.has(point.join(','))){const status=behavior.failPoints.get(point.join(','));response.writeHead(status);response.end();return}
+    if(behavior.throttlePoints&&point){const key=point.join(','),left=behavior.throttlePoints.get(key)||0;
+     if(left>0){behavior.throttlePoints.set(key,left-1);response.writeHead(429);response.end();return}}
+    response.writeHead(200,{'Content-Type':'application/json'});response.end(boardText)});
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const origin='http://127.0.0.1:'+server.address().port;
   return {origin,log,boardText,close:async()=>{server.closeAllConnections?.();await new Promise(resolve=>server.close(resolve))}}};
@@ -188,12 +198,43 @@ await leg('confirmare lipsă la rută: contract încălcat, ieșire 1',async()=>
 await leg('token lipsă: ieșire 1 înainte de orice contact cu sursa sau ruta',async()=>{
   const d=await startDouble({});
   try{
-   const run=await runRelay(relayEnv(d,''));
-   assert.equal(run.status,1,'exit 1 — missing token');
-   assert.equal(d.log.sourceGets.length,0,'the source is not contacted without a token');
-   assert.equal(d.log.workerPosts.length,0,'the seed route is not contacted without a token');
-   assert.ok(run.stdout.includes('AFLIVRA_REFRESH_TOKEN'),'the missing variable is named');
+    const run=await runRelay(relayEnv(d,''));
+    assert.equal(run.status,1,'exit 1 — missing token');
+    assert.equal(d.log.sourceGets.length,0,'the source is not contacted without a token');
+    assert.equal(d.log.workerPosts.length,0,'the seed route is not contacted without a token');
+    assert.ok(run.stdout.includes('AFLIVRA_REFRESH_TOKEN'),'the missing variable is named');
   }finally{await d.close()}});
 
-console.log('Runnerul de relație al avioanelor verificat pe dublă loopback: cele patru cereri fixe de acoperire în ordinea și pe adresele încărcătorului, textele brute preluate byte cu byte, tura fail-closed — un singur punct căzut oprește predarea, fără cadran tăcut —, confirmările aeronave/adrese Mode-S, terminalul fără token și clasele de ieșire 0/1/2 — fără nicio adresă reală. Reputația runnerului GitHub față de adsb.lol se confirmă la prima tură reală (clasa respingerii egress-ului Worker a fost dovedită de sonde); o formă schimbată iese cu clasa 2 și mesajul rutei.');
-console.log(JSON.stringify({result:'ok',legs:9,points:relay.ADSB_POINTS.length,boardCap:relay.MAX_BODY_BYTES,route:relay.SEED_ROUTE}));
+await leg('pauza sursei (HTTP 429) absorbită mărginit: punctul al patrulea cere pauză de două ori și apoi răspunde — tura livrează integral, ieșire 0',async()=>{
+  const d=await startDouble({throttlePoints:new Map([['44.5,28.25',2]])});
+  try{
+    const started=Date.now();
+    const run=await runRelay(relayEnv(d));
+    assert.equal(run.status,0,'exit 0 — the rolling rate limit on the fourth point is absorbed by the bounded retry, the relay completes');
+    assert.equal(d.log.sourceGets.length,6,'the four coverage points plus exactly two bounded retries on the throttled point — nothing else');
+    assert.deepEqual(d.log.sourceGets.map(get=>get.point.join(',')),['47.5,22.75','47.5,28.25','44.5,22.75','44.5,28.25','44.5,28.25','44.5,28.25'],'the coverage stays sequential in loader order, with the throttled point retried in place');
+    const times=d.log.sourceGets.map(get=>get.at),gaps=times.slice(1).map((at,index)=>at-times[index]);
+    assert.ok(gaps[0]>=900&&gaps[1]>=900&&gaps[2]>=900,'the sequential points are paced by the fixed inter-point gap (~1 s each)');
+    assert.ok(gaps[3]>=1900&&gaps[4]>=4900,'the two bounded 429 retries wait the increasing delays (~2 s, then ~5 s) before refetching the same point');
+    assert.ok(Date.now()-started>=7000,'the retry delays actually elapsed, the tour is not instant-pass');
+    assert.equal((run.stdout.match(/a cerut o pauză/g)||[]).length,2,'each of the two source pauses is logged with its bounded retry');
+    assert.ok(run.stdout.includes('după 2 reîncercări'),'the recovered point reports its retries honestly');
+    assert.equal(d.log.workerPosts.length,1,'the tour still delivers exactly once, after the retries');
+    assert.deepEqual(d.log.workerPosts[0].body.boards,relay.ADSB_POINTS.map(()=>d.boardText),'all four boards arrive byte for byte after the absorbed pauses');
+    assert.ok(run.stdout.includes('[final]'),'the honest final line is printed after the recovered tour');
+  }finally{await d.close()}});
+
+await leg('pauza sursei care nu se limpezește: 429 în toate cele trei încercări ale punctului al patrulea — fără cadran tăcut, tura nu predă nimic, ieșire 2',async()=>{
+  const d=await startDouble({failPoints:new Map([['44.5,28.25',429]])});
+  try{
+    const run=await runRelay(relayEnv(d));
+    assert.equal(run.status,2,'exit 2 — the retry is bounded, the exhausted pause still fails the whole tour closed');
+    assert.equal(d.log.workerPosts.length,0,'nothing is relayed when the bounded retry exhausts — fail-closed unchanged, a cut quadrant is never published');
+    assert.equal(d.log.sourceGets.filter(get=>get.point.join(',')==='44.5,28.25').length,3,'the throttled point is attempted exactly three times — the initial try plus two bounded retries');
+    assert.equal(d.log.sourceGets.filter(get=>get.point.join(',')!=='44.5,28.25').length,3,'the other three points stay at one attempt each — only the source pause is retried, no other status');
+    assert.ok(run.stdout.includes('HTTP 429')&&run.stdout.includes('fără cadran tăcut'),'the exhausted pause status and the fail-closed rule are stated in the log');
+    assert.equal((run.stdout.match(/a cerut o pauză/g)||[]).length,2,'both bounded retries are logged before the honest give-up');
+  }finally{await d.close()}});
+
+console.log('Runnerul de relație al avioanelor verificat pe dublă loopback: cele patru cereri fixe de acoperire în ordinea și pe adresele încărcătorului, citite pe rând cu pauză fixă între ele, cu pauza sursei (HTTP 429) absorbită mărginit — până la două reîncercări cu întârzieri crescătoare pentru același punct, iar pauza care nu se limpezește lasă tura fail-closed, fără cadran tăcut —, textele brute preluate byte cu byte, confirmările aeronave/adrese Mode-S, terminalul fără token și clasele de ieșire 0/1/2 — fără nicio adresă reală. Reputația runnerului GitHub față de adsb.lol se confirmă la prima tură reală (clasa respingerii egress-ului Worker a fost dovedită de sonde, iar limita rulantă a primei ture reale e absorbită de forma politicoasă); o formă schimbată iese cu clasa 2 și mesajul rutei.');
+console.log(JSON.stringify({result:'ok',legs:11,points:relay.ADSB_POINTS.length,boardCap:relay.MAX_BODY_BYTES,route:relay.SEED_ROUTE}));

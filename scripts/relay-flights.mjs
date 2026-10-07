@@ -7,6 +7,13 @@ export const RELAY_UA='Aflivra/1.0 gh-relay';
 export const SOURCE_ACCEPT='application/json';
 export const MAX_BODY_BYTES=5_000_000;
 export const FETCH_TIMEOUT_MS=12_000,POST_TIMEOUT_MS=30_000;
+// Prima tură reală (2026-10-07) a întâlnit fereastra rulantă de limită a sursei: 200,
+// 200, 200 și apoi 429, pe cele patru cereri consecutive una după alta. Răspunsul
+// politicos nu e o rafală reîncercată, ci cerere + pauză: punctele se citesc pe rând cu
+// o pauză fixă între ele, iar numai pauza sursei (HTTP 429) primește reîncercări
+// mărginite, cu întârzieri crescătoare — orice altă cădere rămâne o singură încercare,
+// iar pauza epuizată păstrează verdictul fail-closed al turei.
+export const POINT_GAP_MS=1_000,RETRY_STATUS=429,RETRY_DELAYS_MS=[2_000,5_000];
 // Cele patru puncte fixe de acoperire și raza de 250 NM sunt constantele propriului
 // încărcător al aplicației (lib/live/flights.ts): tura citește exact aceleași cereri
 // pe care le-ar citi încărcătorul, iar verifica-relay-flights.mjs le îngheață în paritate.
@@ -21,8 +28,11 @@ export const adsbCoverageUrl=(base,lat,lon)=>base+'/v2/lat/'+lat+'/lon/'+lon+'/d
 // care le publică prin exact parserul și fuziunea încărcătorului, la cheia flights:adsb.
 // Tura este fail-closed, ca și încărcătorul: dacă un singur punct de acoperire eșuează,
 // tura nu predă nimic — un cadran tăcut nu se publică niciodată ca spațiu aerian întreg.
+// Pauza sursei (HTTP 429) se absoarbe mărginit, cu reîncercări crescătoare pe același
+// punct — politețe față de fereastra rulantă a sursei, care nu slăbește niciun verdict.
 const line=(...parts)=>console.log(parts.join(' '));
 const cause=error=>error instanceof Error?error.message:String(error);
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 
 async function fetchBounded(url,init){
   // Every request is timeout-bounded through AbortController: a hung source or a hung seed
@@ -57,16 +67,28 @@ export async function relayFlights(env=process.env){
   line('[config]','Cele patru cereri de acoperire de la '+sourceBase+' → depunere '+seedBase+SEED_ROUTE+'.');
   // Toate cele patru puncte se citesc înainte de verdict, ca la încărcător: primul punct
   // căzut nu oprește celelalte (fiecare are raportul lui onest în jurnal), dar orice
-  // cădere oprește predarea — fără cadran tăcut.
+  // cădere oprește predarea — fără cadran tăcut. Punctele se citesc pe rând, cu pauza
+  // fixă între ele, iar numai pauza sursei (HTTP 429) se reîncearcă mărginit, pe
+  // același punct — orice altă cădere rămâne o singură încercare, iar pauza epuizată
+  // nu schimbă verdictul fail-closed al turei.
   const boards=[];let failed=false;
-  for(const [lat,lon] of ADSB_POINTS){
-    const url=adsbCoverageUrl(sourceBase,lat,lon);
-    try{
-      const response=await fetchBounded(url,{headers:{'User-Agent':RELAY_UA,Accept:SOURCE_ACCEPT},timeoutMs:FETCH_TIMEOUT_MS});
-      if(!response.ok){try{await response.body?.cancel()}catch{}line('[sursă]','punctul '+lat+', '+lon+' a răspuns cu HTTP '+response.status+' — fără cadran tăcut, tura nu predă nimic.');failed=true;boards.push(null);continue}
-      const body=await readBounded(response);line('[sursă]','punctul '+lat+', '+lon+' → HTTP '+response.status+', '+body.length+' caractere.');
-      boards.push(body);
-    }catch(error){line('[sursă]','punctul '+lat+', '+lon+' nu a putut fi citit ('+cause(error)+') — fără cadran tăcut, tura nu predă nimic.');failed=true;boards.push(null)}}
+  for(let index=0;index<ADSB_POINTS.length;index++){
+    if(index)await pause(POINT_GAP_MS);
+    const [lat,lon]=ADSB_POINTS[index],url=adsbCoverageUrl(sourceBase,lat,lon);
+    let board=null;
+    for(let attempt=0;attempt<=RETRY_DELAYS_MS.length;attempt++){
+      try{
+        const response=await fetchBounded(url,{headers:{'User-Agent':RELAY_UA,Accept:SOURCE_ACCEPT},timeoutMs:FETCH_TIMEOUT_MS});
+        if(response.status===RETRY_STATUS&&attempt<RETRY_DELAYS_MS.length){
+          try{await response.body?.cancel()}catch{}
+          line('[sursă]','punctul '+lat+', '+lon+' a cerut o pauză (HTTP '+RETRY_STATUS+') — reîncercarea '+(attempt+2)+' din '+(RETRY_DELAYS_MS.length+1)+', peste '+(RETRY_DELAYS_MS[attempt]/1000)+' s.');
+          await pause(RETRY_DELAYS_MS[attempt]);
+          continue}
+        if(!response.ok){try{await response.body?.cancel()}catch{}line('[sursă]','punctul '+lat+', '+lon+' a răspuns cu HTTP '+response.status+' — fără cadran tăcut, tura nu predă nimic.');failed=true;break}
+        const body=await readBounded(response);line('[sursă]','punctul '+lat+', '+lon+' → HTTP '+response.status+(attempt?' — după '+attempt+' reîncercări':'')+', '+body.length+' caractere.');
+        board=body;break}
+      catch(error){line('[sursă]','punctul '+lat+', '+lon+' nu a putut fi citit ('+cause(error)+') — fără cadran tăcut, tura nu predă nimic.');failed=true;break}}
+    boards.push(board)}
    if(failed){line('[final]','Cel puțin un punct de acoperire a eșuat în această tură — fără listă parțială la rută. Ieșire 2 (informațional; reia la următoarea tură programată, săptămânal).');return 2}
   line('[sursă]','Cele patru răspunsuri de acoperire au fost citite integral — fuziunea o face ruta de depunere, prin logica încărcătorului.');
   const delivered=await postBoards(seedBase,token,boards);
