@@ -119,8 +119,8 @@
       "attested": 0
     },
     "cultura": {
-      "rows": 8655,
-      "hotlink": 181,
+      "rows": 8540,
+      "hotlink": 179,
       "attested": 184
     },
     "educatie": {
@@ -250,5 +250,11 @@
     "WLM photo no longer licensed/available: File:Timisoara - Sinagoga din Cetate (2).jpg",
     "WLM photo no longer licensed/available: File:Anton Pann memorial house.jpg"
   ],
-  "note": "A photographed selection of exact source records — every Commons-linked OSM record in every category and the Wiki Loves Monuments 2011 monuments mapped to the corpus — not a replacement for the complete inventory."
+  "note": "A photographed selection of exact source records — every Commons-linked OSM record in every category and the Wiki Loves Monuments 2011 monuments mapped to the corpus — not a replacement for the complete inventory.",
+  "corpusGateRealignment": {
+    "appliedAt": "2026-10-07T19:13:42.312966+00:00",
+    "gate": {},
+    "rejectedNames": {},
+    "note": "Tabela afterCoverage și fragmentele de înregistrare ale galeriei au fost re-aliniate la corpusul re-făcut de poarta de validare a numelor atracțiilor; tabelele before* rămân instantanee de la import."
+  }
 }

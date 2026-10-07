@@ -3,10 +3,14 @@
 Accepts a staging directory made by import-places.py. Index rows are never
 discarded. Full original tags remain in record chunks. Browser pages request
 bounded server queries instead of downloading the entire national index.
+
+The national path verifies and re-reads the PBF for the city index; the corpus
+recovery path (recover-places-attractions.py) passes the prior build's
+cities.json and dataAsOf instead, so a gate can be re-applied to an already
+shipped corpus without re-fetching the extract.
 """
 
 import argparse, collections, datetime, hashlib, json, math, pathlib, shutil, unicodedata
-import osmium
 
 
 # norm() and lib/live/query.ts normalizeSearch implement the same rule (drop exactly the nonzero-combining-class characters after NFD); the places index search keys are built with this norm, so the two must never diverge.
@@ -21,10 +25,21 @@ def norm(s):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--stage", required=True)
-    p.add_argument("--pbf", required=True)
+    p.add_argument("--pbf")
     p.add_argument("--metadata", required=True)
+    p.add_argument(
+        "--cities",
+        help="prior cities.json for the corpus-recovery path (used instead of --pbf)",
+    )
+    p.add_argument(
+        "--as-of",
+        dest="as_of",
+        help="dataAsOf carried from the prior build for the recovery path",
+    )
     p.add_argument("--output", default="public/places")
     a = p.parse_args()
+    if not a.pbf and not (a.cities and a.as_of):
+        p.error("either --pbf or both --cities and --as-of are required")
     stage = pathlib.Path(a.stage)
     meta = json.loads(pathlib.Path(a.metadata).read_text())
     rows = json.loads((stage / "index.json").read_text())["items"]
@@ -119,32 +134,42 @@ def main():
             }
         )
     cities = []
-    for item in osmium.FileProcessor(a.pbf).with_filter(
-        osmium.filter.KeyFilter("place")
-    ):
-        if not isinstance(item, osmium.osm.Node):
-            continue
-        t = dict(item.tags)
-        if (
-            t.get("place") not in ("city", "town", "village", "hamlet")
-            or not t.get("name")
-            or not item.location.valid()
+    if a.pbf:
+        import osmium
+
+        for item in osmium.FileProcessor(a.pbf).with_filter(
+            osmium.filter.KeyFilter("place")
         ):
-            continue
-        lat, lon = item.location.lat, item.location.lon
-        if 43 <= lat <= 49.2 and 20 <= lon <= 31:
-            cities.append(
-                {
-                    "name": t.get("name:ro") or t["name"],
-                    "lat": round(lat, 6),
-                    "lon": round(lon, 6),
-                    "type": t["place"],
-                    "county": t.get("is_in:county", ""),
-                    "sourceUrl": "https://www.openstreetmap.org/node/" + str(item.id),
-                }
-            )
-    with osmium.io.Reader(a.pbf) as reader:
-        asof = reader.header().get("osmosis_replication_timestamp")
+            if not isinstance(item, osmium.osm.Node):
+                continue
+            t = dict(item.tags)
+            if (
+                t.get("place") not in ("city", "town", "village", "hamlet")
+                or not t.get("name")
+                or not item.location.valid()
+            ):
+                continue
+            lat, lon = item.location.lat, item.location.lon
+            if 43 <= lat <= 49.2 and 20 <= lon <= 31:
+                cities.append(
+                    {
+                        "name": t.get("name:ro") or t["name"],
+                        "lat": round(lat, 6),
+                        "lon": round(lon, 6),
+                        "type": t["place"],
+                        "county": t.get("is_in:county", ""),
+                        "sourceUrl": "https://www.openstreetmap.org/node/"
+                        + str(item.id),
+                    }
+                )
+        with osmium.io.Reader(a.pbf) as reader:
+            asof = reader.header().get("osmosis_replication_timestamp")
+    else:
+        # Corpus recovery: the city index is carried from the prior verified
+        # build byte-for-byte; only the places records are re-assembled.
+        prior = json.loads(pathlib.Path(a.cities).read_text())
+        cities = prior["items"]
+        asof = a.as_of
     manifest = {
         "schema": "aflivra-places-v2",
         "count": len(rows),

@@ -19,7 +19,28 @@ try{
   const query=await compile('query','lib/live/query.ts');
   const wideNorm=s=>String(s??'').normalize('NFD').replace(/\p{M}/gu,'').toLowerCase();
   const marksHandled=!/\p{M}/u.test(query.normalizeSearch('a\u3099\u05b8'));
-  const leg1={records:0,proofs:0,shards:0,spatialParts:0,spatialItems:0,indexItems:0,cities:0,divergedObjects:new Set()};
+  const leg1={records:0,proofs:0,shards:0,spatialParts:0,spatialItems:0,indexItems:0,cities:0,divergedObjects:new Set(),attractions:0,famousKept:new Set(),attractionJunk:0};
+
+  // Attractions validity gate — mirrors valid_public_attraction_name in scripts/import-places.py
+  // (applied identically by scripts/recover-places-attractions.py). Both implementations
+  // reject the same audited junk classes; changing one without the other breaks this leg.
+  const ATTRACTION_LABEL='Locuri de vizitat';
+  const ENGLISH_ATTRACTION_WORDS=new Set(['enclosure','cliff','peninsula','viewpoint','waterfall','windmill','windmills','barn','wagons','with','floating','mill','fresh','meat','red','pole','gravity','hill','former','mine','nude','beach','ski','slope','the','of','and','a','sign','ruins','fort','island','bridge','tower','cave','spring','lake','river','forest','park','garden']);
+  const EXPLICIT_REJECTED_ATTRACTIONS=new Set(['partie schi - ski slope','former mine-Valea Blaznei','NICOSMAIL','Ot11378 campu mare','Traseu Manastirea Magarul, la dreapta dupa canton']);
+  const STRUCTURAL_ECHO_TAGS=['man_made','historic','natural','landuse','leisure','tourism','amenity','waterway','building','barrier'];
+  const validAttractionName=(name,tags)=>{
+    const fold=s=>wideNorm(s);
+    if(fold(name)===fold(ATTRACTION_LABEL))return false;
+    if(/^[0-9]+(st|nd|rd|th)\b/i.test(String(name).trim()))return false;
+    if(/fixme/i.test(String(name)))return false;
+    for(const k of STRUCTURAL_ECHO_TAGS){const v=tags?.[k];if(v&&fold(v)===fold(name))return false}
+    if(EXPLICIT_REJECTED_ATTRACTIONS.has(name))return false;
+    const tk=String(name).split(/[^a-zA-Z\u00C0-\u024F\u0391-\u03C9\u0400-\u04FF]+/).filter(Boolean).map(fold);
+    if(tk.length&&tk.every(t=>ENGLISH_ATTRACTION_WORDS.has(t)))return false;
+    if(/\bla dreapta\b|\bla stanga\b|\bla st\u00e2nga\b/i.test(String(name)))return false;
+    return true;
+  };
+  const FAMOUS_ATTRACTIONS=['Salina Turda','Castelul Bran','Castelul Pelișor','Cetatea Râșnov','Salina Cacica'];
 
   console.log('LEG 1 — places corpus: full offline walk, integrity proofs, index-vs-recompute parity');
   const manifest=JSON.parse(await readFile(join(root,'public/places/manifest.json'),'utf8'));
@@ -59,6 +80,11 @@ try{
         if(r.locationApproximate!==(typ!=='n'))bucket('places-record-locationApproximate','locationApproximate must follow the id prefix type',id);
       }
       if(!r.tags||typeof r.tags!=='object'||Array.isArray(r.tags)||Object.values(r.tags).some(v=>typeof v!=='string'))bucket('places-record-tags','tags must be a string map',id);
+      if(r.types.some(t=>t.label===ATTRACTION_LABEL)){
+        leg1.attractions++;
+        if(FAMOUS_ATTRACTIONS.includes(r.name))leg1.famousKept.add(r.name);
+        if(!validAttractionName(r.name,r.tags)){leg1.attractionJunk++;bucket('places-attraction-name','an attractions entry must carry a valid public name — the build gate (import-places.py / recover-places-attractions.py) rejects unnamed label fallbacks, English descriptive dumps, fixme artifacts and route-directions sentences',id+' '+r.name)}
+      }
       const key2=sortKey(r);
       if(key2<prevSortKey)bucket('places-record-order','records must follow normalized-name order inside the corpus walk',id);
       else prevSortKey=key2;
@@ -67,6 +93,8 @@ try{
     }
   }
   if(manifest.count!==leg1.records)bucket('places-manifest-count','manifest.count disagrees with the walked records',manifest.count+' vs '+leg1.records);
+  if(leg1.attractions!==1533)bucket('places-attraction-count','the attractions subcategory must count exactly the audited post-gate size (1649 corpus entries minus the 116 gate rejects)',String(leg1.attractions));
+  for(const famous of FAMOUS_ATTRACTIONS)if(!leg1.famousKept.has(famous))bucket('places-attraction-keep','the gate must never remove a famous Romanian-named attraction',famous);
   for(const c of Object.keys(manifest.categories)){if(c==='local-all'){if(manifest.categories[c]!==leg1.records)bucket('places-manifest-count','local-all count disagrees with the walk',manifest.categories[c]+' vs '+leg1.records);continue}
     if(manifest.categories[c]!==(catCounter[c]||0))bucket('places-manifest-count','category count disagrees with the walk: '+c,manifest.categories[c]+' vs '+(catCounter[c]||0))}
   for(const k of Object.keys(contactCounter))if(manifest.contacts[k]!==contactCounter[k])bucket('places-manifest-contacts','contact count disagrees with the walk: '+k,manifest.contacts[k]+' vs '+contactCounter[k]);
@@ -139,6 +167,7 @@ try{
   }
   if(!marksHandled)note('places-search-p1',leg1.divergedObjects.size);
   console.log('Places: '+leg1.records+' obiecte în '+Object.keys(manifest.chunks).length+' fragmente, '+leg1.indexItems+' intrări de index ('+leg1.shards+' sharduri), '+leg1.spatialItems+' intrări spațiale, '+leg1.cities+' orașe; dovezi sha256 verificate: '+leg1.proofs+'; paritate search index↔runtime: '+(marksHandled?('acord integral pe '+leg1.indexItems+' intrări (normalizatorul runtime acoperă toate semnele combinante)'):('decalaj doar în clasa documentată P1 — '+leg1.divergedObjects.size+' obiecte cu semne combinante non-latine')+'.'));
+  console.log('Locuri de vizitat: '+leg1.attractions+' intrări după poarta de validare a numelor — fără nume-fallback, fără gunoaie descriptive englezești; țintele celebre ('+FAMOUS_ATTRACTIONS.join(', ')+') rămân toate în corpus.');
 
   console.log('LEG 2 — dosar model: fond < apel < recurs on every built history, evidence-only stages, extraction rule');
   const institutionsRaw=await readFile(join(root,'public/courts/institutions.json'),'utf8');

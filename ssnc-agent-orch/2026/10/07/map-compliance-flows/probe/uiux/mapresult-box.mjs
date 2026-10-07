@@ -1,0 +1,21 @@
+import {chromium} from '@playwright/test';
+const base = 'http://127.0.0.1:5173';
+const browser = await chromium.launch();
+const page = await browser.newPage({viewport: {width: 390, height: 844, isMobile: true, hasTouch: true}, deviceScaleFactor: 2});
+await page.route('**://*/**', r => r.request().url().startsWith(base) ? r.continue() : r.abort());
+await page.goto(base + '/#view=map', {waitUntil: 'domcontentloaded'});
+await page.waitForSelector('main#vcontent', {timeout: 60000});
+await page.waitForTimeout(2200);
+const res = await page.evaluate(() => {
+  const el = document.querySelector('.map-result');
+  if (!el) return {found: false};
+  const pr = el.getBoundingClientRect();
+  const span = el.querySelector('span') || el.querySelector('strong')?.parentElement;
+  const strong = el.querySelector('strong');
+  const sr = span.getBoundingClientRect(), str = strong.getBoundingClientRect();
+  const range = new Range(); range.selectNodeContents(strong.firstChild);
+  const tr = range.getBoundingClientRect();
+  return {btnLeft: pr.left, pad: getComputedStyle(el).padding, spanLeft: sr.left - pr.left, strongLeft: str.left - pr.left, textRectLeft: tr.left - pr.left, textRectRight: pr.right - tr.right};
+});
+console.log(JSON.stringify(res));
+await browser.close();

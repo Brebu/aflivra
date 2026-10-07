@@ -74,8 +74,22 @@ try{
   assert(tight.items.length>0,'Cluj transport within 100 km must have results');
   const tightIds=tight.items.map(r=>r.id),wideIds=wide.items.map(r=>r.id);
   assert(wide.items.length>=tight.items.length,'the map-sized page carries at least the list page');
-  assert(tightIds.every((id,at)=>wideIds[at]===id),'the 18-item list page keeps being the distance-sorted prefix of the 200-item map page');
-  console.log('Map-sized place pages checked around Cluj: the map view serves up to the 200 nearest places in the radius while every list page keeps 18 — the first 18 stay identical.');
+   assert(tightIds.every((id,at)=>wideIds[at]===id),'the 18-item list page keeps being the distance-sorted prefix of the 200-item map page');
+   console.log('Paged place queries checked around Cluj: pageSize requests keep serving distance-sorted pages (the national map sample stays capped by its own request) while every plain list page keeps 18 — the first 18 stay identical.');
+
+  // The nearby map pin set (view=map) honors the selected radius with no silent
+  // cap: every in-radius element is served, spanning the radius — the old
+  // nearest-page slice clustered within a few km no matter the radius.
+  const pins=await places.queryPlaces(manifest,{category:'cultura',q:'',sub:'',contact:'',scope:'nearby',lat:cluj.point.lat,lon:cluj.point.lon,radius:100,sort:'distance',photos:false,page:0,view:'map'},read);
+  assert.equal(pins.items.length,pins.total,'the pin set must serve every in-radius element, not a nearest page');
+  assert(pins.total>200,'the 100 km cultura pin set exceeds the old 200-item page');
+  assert(pins.items.every(r=>r.distance<=100),'every pin stays within the selected radius');
+  assert(Math.max(...pins.items.map(r=>r.distance))>50,'the pin set must span the radius, not a dense core');
+  const culturaTight=await places.queryPlaces(manifest,{category:'cultura',q:'',sub:'',contact:'',scope:'nearby',lat:cluj.point.lat,lon:cluj.point.lon,radius:100,sort:'distance',photos:false,page:0},read);
+  assert.equal(culturaTight.pageSize,18);
+  const culturaTightIds=culturaTight.items.map(r=>r.id),pinIds=pins.items.map(r=>r.id);
+  assert(culturaTightIds.every((id,at)=>pinIds[at]===id),'the 18-item list page stays the distance-sorted prefix of the pin set');
+  console.log('Map pin sets checked around Cluj: view=map serves every in-radius element and spans the radius while every list page keeps 18 — the first 18 stay identical.');
 
  const packed=(await json('lib/live/seed-snapshots.json')).server,raw=gunzipSync(Buffer.from(packed.gzipBase64,'base64'));assert.equal(createHash('sha256').update(raw).digest('hex'),packed.sha256);const seeds=JSON.parse(raw),directory=await load('app/api/directory/route.ts'),localities=await load('app/api/localities/route.ts');
  for(const kind of ['health','pharmacies','hospitals'])for(const context of [buc,cluj]){const entry=seeds['directory:'+kind];assert(entry);globalThis.__geographicFixture=source(entry.data);const page=await (await directory.GET(new Request('https://example.test/api/directory?'+new URLSearchParams({kind,locality:context.locality,county:context.county,geoScope:'context',page:'0'})))).json();assert(page.data.records.length);assert(page.data.records.every(r=>geo.countyName(r['Cod CAS']||r['Nume CAS'])===context.county));assert(page.data.total>=page.data.records.length)}

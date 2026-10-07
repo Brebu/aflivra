@@ -12,6 +12,11 @@ export type CourtStage={
 };
 export type CourtHistory={number:string;recordIds:string[];stages:CourtStage[];relatedCases:CourtReference[];historyComplete:false};
 const validNumber=(value:string)=>/^\d{1,8}\/\d{1,5}\/\d{4}(?:\/[a-zA-Z0-9.]{1,20})?$/.test(value);
+// The Ministry of Justice's own systems replaced ș/ț with «?» inside words
+// before publication; a fișa reproduces the official text verbatim instead of
+// inventing the missing letters, and the loss is disclosed where it appears.
+export const upstreamDiacriticLoss=(text:string)=>/[a-zăâîșțşţA-ZĂÂÎȘȚŞŢ]\?[a-zăâîșțşţA-ZĂÂÎȘȚŞŢ]/i.test(text);
+export const DIACRITIC_LOSS_NOTE='Textul oficial al sursei conține «?» în locul unor litere ș/ț pierdute în sistemul Ministerului Justiției înainte de publicare; fișa redă primit textul oficial, fără a completa caracterele lipsă.';
 const normalized=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
 const courtByLabel=new Map(institutions.items.map(c=>[normalized(c.label),c]));
 const stageLabel=(stage:string)=>({fond:'Fond',apel:'Apel',recurs:'Recurs'}[normalized(stage)]||stage||'Stadiu neprecizat');

@@ -122,14 +122,25 @@ test.describe('Legal footer links', () => {
 });
 
 test.describe('First-use notices at the moment of collection', () => {
-  test('the location control states coarsening and non-persistence beside the button', async ({page}) => {
+  test('the location strip keeps its status line and carries no long compliance paragraph', async ({page}) => {
     const pageErrors = collectPageErrors(page);
     await page.goto('/');
     const control = page.locator('.location-strip .location-control');
     await expect(control).toBeVisible();
-    // The one-liner must sit next to the button that triggers the browser prompt.
-    await expect(control).toContainText('rotunjite');
-    await expect(control).toContainText('nu sunt salvate pe server');
+    // The coarsening / non-persistence detail lives on /confidentialitate and the
+    // home footer already links it — the strip keeps only the functional status
+    // line beside the button, not a wall of compliance text.
+    await expect(control.getByRole('status').first()).toBeVisible();
+    for (const removed of [
+      'Poziția se folosește doar pentru datele locale',
+      'rotunjite pe dispozitiv',
+      'nu sunt salvate pe server',
+      '2 zecimale pentru vreme',
+    ]) {
+      await expect(control, `"${removed}" must be gone from the home location strip`).not.toContainText(removed);
+    }
+    // The legal route the paragraph pointed at stays reachable through the footer.
+    await expect(page.locator('footer.vfooter').getByRole('link', {name: 'Confidentialitate', exact: true})).toBeVisible();
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 

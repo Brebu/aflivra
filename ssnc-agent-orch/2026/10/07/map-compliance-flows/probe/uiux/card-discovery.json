@@ -1,0 +1,6394 @@
+{
+  "desktop/home": [
+    {
+      "cls": "pulse-row",
+      "tag": "div",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "București · Open-Meteo 7 o"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIOrașul tăuSer"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIVreme și prog"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIBani & econom"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFirme, pe înț"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AINatură și med"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIÎn mișcareSta"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AISănătate apro"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEducație & vi"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AICultură și tu"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIMuncă & oport"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AILege & admini"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEnergie & con"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPământ & agri"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFilme și cine"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPovești și le"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIȘtiri & actua"
+    },
+    {
+      "cls": "domain-card category-other",
+      "tag": "button",
+      "pad": "0",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Alte date publiceSeturile "
+    },
+    {
+      "cls": "select-field",
+      "tag": "span",
+      "pad": "10/14",
+      "inset": 14,
+      "shadow": "none",
+      "text": "PDFCSVExcel (.xlsx)PDF"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    },
+    {
+      "cls": "live-section",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "PUBLICAT DE INSTITUȚIIInfo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Sinaia, P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "live-section places-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 10,
+      "shadow": "none",
+      "text": "LOCURI ȘI SERVICII · ROMÂN"
+    },
+    {
+      "cls": "discovery-split",
+      "tag": "section",
+      "pad": "0",
+      "inset": 11,
+      "shadow": "none",
+      "text": "SCHIMBĂ PERSPECTIVAO hartă"
+    },
+    {
+      "cls": "vpanel mini-trend",
+      "tag": "article",
+      "pad": "28",
+      "inset": 3,
+      "shadow": "elev",
+      "text": "ECONOMIE ÎN CONTEXTCum a e"
+    },
+    {
+      "cls": "insight-story",
+      "tag": "article",
+      "pad": "29/26",
+      "inset": 27,
+      "shadow": "none",
+      "text": "O PRIVIRE MAI ATENTĂ01Ce î"
+    },
+    {
+      "cls": "recommendation-card",
+      "tag": "article",
+      "pad": "29/26",
+      "inset": 27,
+      "shadow": "none",
+      "text": "PENTRU CURIOSUL DIN TINEMa"
+    },
+    {
+      "cls": "snapshot-note",
+      "tag": "div",
+      "pad": "18/0",
+      "inset": 1,
+      "shadow": "none",
+      "text": "Fiecare sursă are propria "
+    }
+  ],
+  "desktop/explore": [
+    {
+      "cls": "explore-search",
+      "tag": "form",
+      "pad": "8/8/8/18",
+      "inset": 24.5,
+      "shadow": "none",
+      "text": "Caută"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Sinaia, P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Natură & biodiversitate02 "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cultură & arhitectură01 Bu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Spațiu urban & patrimoniu0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Universități02 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Aeroporturi01 București, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Potlogi, RomâniaAn"
+    },
+    {
+      "cls": "live-section places-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 10,
+      "shadow": "none",
+      "text": "LOCURI ȘI SERVICII · ROMÂN"
+    },
+    {
+      "cls": "company-result",
+      "tag": "button",
+      "pad": "28",
+      "inset": 33.2,
+      "shadow": "none",
+      "text": "MODate din surse publiceMo"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIOrașul tăuSer"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIVreme și prog"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIBani & econom"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFirme, pe înț"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AINatură și med"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIÎn mișcareSta"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AISănătate apro"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEducație & vi"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AICultură și tu"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIMuncă & oport"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AILege & admini"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEnergie & con"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPământ & agri"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFilme și cine"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPovești și le"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIȘtiri & actua"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    },
+    {
+      "cls": "snapshot-note",
+      "tag": "div",
+      "pad": "18/0",
+      "inset": 1,
+      "shadow": "none",
+      "text": "Fiecare sursă are propria "
+    }
+  ],
+  "desktop/dashboard": [
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "EUR / RON5.35017 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "București17°C7 oct. 2026, "
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Bilanț ANAF2025Ultimul an "
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIOrașul tăuSer"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIVreme și prog"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIBani & econom"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFirme, pe înț"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AINatură și med"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIÎn mișcareSta"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AISănătate apro"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEducație & vi"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AICultură și tu"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIMuncă & oport"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AILege & admini"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEnergie & con"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPământ & agri"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFilme și cine"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPovești și le"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIȘtiri & actua"
+    },
+    {
+      "cls": "domain-card category-other",
+      "tag": "button",
+      "pad": "0",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Alte date publiceSeturile "
+    },
+    {
+      "cls": "select-field",
+      "tag": "span",
+      "pad": "10/14",
+      "inset": 14,
+      "shadow": "none",
+      "text": "PDFCSVExcel (.xlsx)PDF"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    },
+    {
+      "cls": "live-section",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "PUBLICAT DE INSTITUȚIIAnun"
+    },
+    {
+      "cls": "live-section weather-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "BUCUREȘTIParțial noros / a"
+    },
+    {
+      "cls": "snapshot-note",
+      "tag": "div",
+      "pad": "18/0",
+      "inset": 1,
+      "shadow": "none",
+      "text": "Fiecare sursă are propria "
+    }
+  ],
+  "desktop/map": [
+    {
+      "cls": "map-sidebar",
+      "tag": "div",
+      "pad": "25",
+      "inset": 26,
+      "shadow": "none",
+      "text": "LOCURI DIN SELECȚIECastelu"
+    },
+    {
+      "cls": "map-preview",
+      "tag": "div",
+      "pad": "24",
+      "inset": 25,
+      "shadow": "none",
+      "text": "Date din surse publiceCast"
+    }
+  ],
+  "desktop/compare": [
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "28",
+      "inset": 48,
+      "shadow": "elev",
+      "text": "Ce te intereseazăCastelul "
+    }
+  ],
+  "desktop/watch": [
+    {
+      "cls": "watch-push",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "Notificări pe acest dispoz"
+    },
+    {
+      "cls": "watch-empty",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "none",
+      "text": "Nu urmărești nimic încăApa"
+    }
+  ],
+  "desktop/saved": [
+    {
+      "cls": "select-field",
+      "tag": "span",
+      "pad": "10/14",
+      "inset": 14,
+      "shadow": "none",
+      "text": "PDFCSVExcel (.xlsx)PDF"
+    },
+    {
+      "cls": "vcallout",
+      "tag": "div",
+      "pad": "24",
+      "inset": 29,
+      "shadow": "none",
+      "text": "Din colecție, într-un plan"
+    }
+  ],
+  "desktop/place": [
+    {
+      "cls": "visit-card",
+      "tag": "aside",
+      "pad": "31",
+      "inset": 32,
+      "shadow": "none",
+      "text": "PĂSTREAZĂ LOC PENTRU CURIO"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "div",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "elev",
+      "text": "SinaiaCoordonate orientati"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    }
+  ],
+  "desktop/domainStiri": [
+    {
+      "cls": "domain-hero",
+      "tag": "div",
+      "pad": "32",
+      "inset": 33,
+      "shadow": "none",
+      "text": "INFORMAȚII PENTRU FIECARE "
+    },
+    {
+      "cls": "live-section",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "PUBLICAT DE INSTITUȚIIAnun"
+    }
+  ],
+  "desktop/domainLocal": [
+    {
+      "cls": "domain-hero",
+      "tag": "div",
+      "pad": "32",
+      "inset": 33,
+      "shadow": "none",
+      "text": "INFORMAȚII PENTRU FIECARE "
+    },
+    {
+      "cls": "live-section places-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 10,
+      "shadow": "none",
+      "text": "LOCURI ȘI SERVICII · ROMÂN"
+    }
+  ],
+  "desktop/money": [
+    {
+      "cls": "live-freshness",
+      "tag": "div",
+      "pad": "12/16",
+      "inset": 17,
+      "shadow": "none",
+      "text": "Sursă verificatăBanca Nați"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "EUR / RON5,35017 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "USD / RON4,78017 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "GBP / RON6,32367 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "CHF / RON5,73557 oct. 2026"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "28",
+      "inset": 28.7,
+      "shadow": "elev",
+      "text": "10 OBSERVAȚII, O PERSPECTI"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "elev",
+      "text": "Toate valutele, la un locA"
+    }
+  ],
+  "desktop/company": [
+    {
+      "cls": "live-freshness",
+      "tag": "div",
+      "pad": "12/16",
+      "inset": 17,
+      "shadow": "none",
+      "text": "Sursă verificatăANAFPagina"
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Cifră de afaceri · 2025104"
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Rezultat net · 202539.755."
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Marjă netă · 202538,01%"
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Salariați medii · 2025264"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "28",
+      "inset": 3.6,
+      "shadow": "elev",
+      "text": "Activitate și rezultat\n[da"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "28",
+      "inset": 3.6,
+      "shadow": "elev",
+      "text": "Echipa, în timp\n[data-char"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "elev",
+      "text": "Sursele care completează a"
+    },
+    {
+      "cls": "category-banner",
+      "tag": "figure",
+      "pad": "0",
+      "inset": 20.4,
+      "shadow": "none",
+      "text": "Vezi fotografiaClădiri de "
+    },
+    {
+      "cls": "category-banner",
+      "tag": "figure",
+      "pad": "0",
+      "inset": 20.4,
+      "shadow": "none",
+      "text": "Vezi fotografiaȘantierul n"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "28",
+      "inset": 29,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    }
+  ],
+  "desktop/planner": [
+    {
+      "cls": "plan-stop",
+      "tag": "article",
+      "pad": "21",
+      "inset": 28,
+      "shadow": "none",
+      "text": "1SinaiaCastelul PeleșPatri"
+    },
+    {
+      "cls": "plan-stop",
+      "tag": "article",
+      "pad": "21",
+      "inset": 28,
+      "shadow": "none",
+      "text": "2BranCastelul BranPatrimon"
+    },
+    {
+      "cls": "plan-summary",
+      "tag": "article",
+      "pad": "30",
+      "inset": 31,
+      "shadow": "none",
+      "text": "SPAȚIU PENTRU SPONTANEITAT"
+    }
+  ],
+  "desktop/recommendations": [
+    {
+      "cls": "recommendation-summary",
+      "tag": "div",
+      "pad": "25",
+      "inset": 28,
+      "shadow": "none",
+      "text": "De ce vezi aceste locuri?L"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Sinaia, P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona Ș"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee · Parcuri și natură0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Natură & biodiversitate02 "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cultură & arhitectură01 Bu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Spațiu urban & patrimoniu0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Potlogi, RomâniaAn"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Brașov"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Biblioteci02 Buzău, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Biblioteci02 București, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Biblioteci01 Galați, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Galați"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona D"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 Râmnicu Vâlcea, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Humulești, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Pârscov, RomâniaCa"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 Hobița, RomâniaCas"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Crișan, RomâniaCas"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Zona Brăila, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bușten"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Hunedo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Drobet"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sinaia"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona I"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona I"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Deva, RomâniaCetat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Enisal"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Făgăra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Târgu Neamț, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Arefu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Adamcl"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Sviniț"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Puncte panoramice · Peșter"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cinematografe02 Brăila, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Biertan, RomâniaCo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Scărișoara, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Sâmbăta de Sus, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Râmeț, RomâniaCole"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Târgoviște, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Constanța, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona C"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Pitești, RomâniaGa"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee · Parcuri și natură0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Puncte panoramice03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Cluj-N"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona E"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Puncte panoramice01 Zona T"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Câmpina, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Brașov, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Timișoara, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Deva, RomâniaMuzeu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 Craiova, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Târgoviște, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Timișoara, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Piatra-Neamț, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Vălenii de Munte, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Alba Iulia, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 Pucioasa, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Piatra-Neamț, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Fântânele, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Turda, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiu, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Constanța, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Bicaz, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Reșița, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Galați, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Vatra Dornei, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Sulina, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 Pitești, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Buzău, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Slatina, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Oradea, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Zona Căldăraru, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Vălenii de Munte, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 Alba Iulia, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiu, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Deta, RomâniaMuzeu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiel, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Miercurea Ciuc, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Slănic, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee01 Sasca Montană, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Vatra "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Sinaia"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Snagov"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Iași, RomâniaPalat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Buzău,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona D"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Drobet"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre · Locuri de vizitat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Timișo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Timișo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre02 Oradea, RomâniaTe"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre03 Zona București, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre · Locuri de vizitat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre02 Cluj-Napoca, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre03 Zona Timișoara, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Teatre02 Brăila, RomâniaTe"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiu, RomâniaTurn"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona L"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Universități02 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Aeroporturi01 București, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Apă potabilă01 Zona Teiuș,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Instituții publice02 Zona "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Autogări02 București, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii02 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare03 Sighișoara, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Centre comunitare02 Bușten"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Centre comunitare03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Peșteri03 Putna, RomâniaCh"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Aluniș, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Vârfuri01 Zona Bughea de J"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii · Muz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii · Muz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Școli02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii01 Zon"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Universități03 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare02 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Vârfuri03 Zona București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Gări01 Zona Deta, RomâniaD"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Universități02 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii02 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Gări01 Zona Grădiștea, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Cluj-N"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Piețe agroalimentare · Pie"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare02 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Instituții publice03 Bucur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Instituții publice01 Galaț"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Instituții publice02 Zona "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Vârfuri03 Zona Poiana Măru"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii · Muz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Primării02 Buzău, RomâniaP"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii02 Zon"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare01 Steierdorf, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare01 Poiana Mărului, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare01 Bucova, RomâniaPe"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Poliție02 Sibiu, RomâniaPo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Infrastructură energetică0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Primării03 Gheorgheni, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Primării03 București, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Primării02 Mănăstirea Humo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Primării02 Pitești, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Primării02 București, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Birouri și servicii02 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare01 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Spitale02 Zona București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Spitale03 București, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Spitale01 Timișoara, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Sport și timp liber02 Chia"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Zona"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Zona"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Toalete publice01 Zona Cra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Instanțe02 Buzău, RomâniaT"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Universități01 Bacău, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Universități02 Zona Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Universități03 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Cazare01 Zona Mogoșoaia, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 24,
+      "shadow": "elev",
+      "text": "Școli02 București, România"
+    }
+  ],
+  "mobile/home": [
+    {
+      "cls": "pulse-row",
+      "tag": "div",
+      "pad": "0",
+      "inset": 13,
+      "shadow": "elev",
+      "text": "București · Open-Meteo 7 o"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIOrașul tăuSer"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIVreme și prog"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIBani & econom"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFirme, pe înț"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AINatură și med"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIÎn mișcareSta"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AISănătate apro"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEducație & vi"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AICultură și tu"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIMuncă & oport"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AILege & admini"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEnergie & con"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPământ & agri"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFilme și cine"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPovești și le"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIȘtiri & actua"
+    },
+    {
+      "cls": "domain-card category-other",
+      "tag": "button",
+      "pad": "0",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Alte date publiceSeturile "
+    },
+    {
+      "cls": "select-field",
+      "tag": "span",
+      "pad": "10/14",
+      "inset": 14,
+      "shadow": "none",
+      "text": "PDFCSVExcel (.xlsx)PDF"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    },
+    {
+      "cls": "live-section",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "PUBLICAT DE INSTITUȚIIInfo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Sinaia, P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "live-section places-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 0,
+      "shadow": "none",
+      "text": "LOCURI ȘI SERVICII · ROMÂN"
+    },
+    {
+      "cls": "discovery-split",
+      "tag": "section",
+      "pad": "0",
+      "inset": 11,
+      "shadow": "none",
+      "text": "SCHIMBĂ PERSPECTIVAO hartă"
+    },
+    {
+      "cls": "vpanel mini-trend",
+      "tag": "article",
+      "pad": "22/18",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "ECONOMIE ÎN CONTEXTCum a e"
+    },
+    {
+      "cls": "insight-story",
+      "tag": "article",
+      "pad": "28/25",
+      "inset": 26,
+      "shadow": "none",
+      "text": "O PRIVIRE MAI ATENTĂ01Ce î"
+    },
+    {
+      "cls": "recommendation-card",
+      "tag": "article",
+      "pad": "28/25",
+      "inset": 26,
+      "shadow": "none",
+      "text": "PENTRU CURIOSUL DIN TINEMa"
+    },
+    {
+      "cls": "snapshot-note",
+      "tag": "div",
+      "pad": "15/0/18",
+      "inset": 1,
+      "shadow": "none",
+      "text": "Fiecare sursă are propria "
+    }
+  ],
+  "mobile/explore": [
+    {
+      "cls": "explore-search",
+      "tag": "form",
+      "pad": "12",
+      "inset": 25,
+      "shadow": "none",
+      "text": "Caută"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Sinaia, P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Natură & biodiversitate02 "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cultură & arhitectură01 Bu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Spațiu urban & patrimoniu0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Universități02 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Aeroporturi01 București, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Potlogi, RomâniaAn"
+    },
+    {
+      "cls": "live-section places-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 0,
+      "shadow": "none",
+      "text": "LOCURI ȘI SERVICII · ROMÂN"
+    },
+    {
+      "cls": "company-result",
+      "tag": "button",
+      "pad": "21/16",
+      "inset": 24.4,
+      "shadow": "none",
+      "text": "MODate din surse publiceMo"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIOrașul tăuSer"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIVreme și prog"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIBani & econom"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFirme, pe înț"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AINatură și med"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIÎn mișcareSta"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AISănătate apro"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEducație & vi"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AICultură și tu"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIMuncă & oport"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AILege & admini"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEnergie & con"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPământ & agri"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFilme și cine"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPovești și le"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIȘtiri & actua"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    },
+    {
+      "cls": "snapshot-note",
+      "tag": "div",
+      "pad": "15/0/18",
+      "inset": 1,
+      "shadow": "none",
+      "text": "Fiecare sursă are propria "
+    }
+  ],
+  "mobile/dashboard": [
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "EUR / RON5.35017 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "București17°C7 oct. 2026, "
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "15/18",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "Bilanț ANAF2025Ultimul an "
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIOrașul tăuSer"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIVreme și prog"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIBani & econom"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFirme, pe înț"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AINatură și med"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIÎn mișcareSta"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AISănătate apro"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEducație & vi"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AICultură și tu"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIMuncă & oport"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AILege & admini"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIEnergie & con"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPământ & agri"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIFilme și cine"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIPovești și le"
+    },
+    {
+      "cls": "domain-card",
+      "tag": "button",
+      "pad": "0",
+      "inset": 22,
+      "shadow": "elev",
+      "text": "Ilustrație AIȘtiri & actua"
+    },
+    {
+      "cls": "domain-card category-other",
+      "tag": "button",
+      "pad": "0",
+      "inset": 23,
+      "shadow": "elev",
+      "text": "Alte date publiceSeturile "
+    },
+    {
+      "cls": "select-field",
+      "tag": "span",
+      "pad": "10/14",
+      "inset": 14,
+      "shadow": "none",
+      "text": "PDFCSVExcel (.xlsx)PDF"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    },
+    {
+      "cls": "live-section",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "PUBLICAT DE INSTITUȚIIAnun"
+    },
+    {
+      "cls": "live-section weather-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 0.1,
+      "shadow": "none",
+      "text": "BUCUREȘTIParțial noros / a"
+    },
+    {
+      "cls": "snapshot-note",
+      "tag": "div",
+      "pad": "15/0/18",
+      "inset": 1,
+      "shadow": "none",
+      "text": "Fiecare sursă are propria "
+    }
+  ],
+  "mobile/map": [
+    {
+      "cls": "map-sidebar",
+      "tag": "div",
+      "pad": "19/15",
+      "inset": 16,
+      "shadow": "none",
+      "text": "LOCURI DIN SELECȚIECastelu"
+    },
+    {
+      "cls": "map-preview",
+      "tag": "div",
+      "pad": "22/19",
+      "inset": 20,
+      "shadow": "none",
+      "text": "Date din surse publiceCast"
+    }
+  ],
+  "mobile/compare": [
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "22/18",
+      "inset": 21.7,
+      "shadow": "elev",
+      "text": "Ce te intereseazăCastelul "
+    }
+  ],
+  "mobile/watch": [
+    {
+      "cls": "watch-push",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "Notificări pe acest dispoz"
+    },
+    {
+      "cls": "watch-empty",
+      "tag": "div",
+      "pad": "22",
+      "inset": 23,
+      "shadow": "none",
+      "text": "Nu urmărești nimic încăApa"
+    }
+  ],
+  "mobile/saved": [
+    {
+      "cls": "select-field",
+      "tag": "span",
+      "pad": "10/14",
+      "inset": 14,
+      "shadow": "none",
+      "text": "PDFCSVExcel (.xlsx)PDF"
+    },
+    {
+      "cls": "vcallout",
+      "tag": "div",
+      "pad": "21/17",
+      "inset": 27,
+      "shadow": "none",
+      "text": "Din colecție, într-un plan"
+    }
+  ],
+  "mobile/place": [
+    {
+      "cls": "visit-card",
+      "tag": "aside",
+      "pad": "27",
+      "inset": 28,
+      "shadow": "none",
+      "text": "PĂSTREAZĂ LOC PENTRU CURIO"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "div",
+      "pad": "22/18",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "SinaiaCoordonate orientati"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    }
+  ],
+  "mobile/domainStiri": [
+    {
+      "cls": "domain-hero",
+      "tag": "div",
+      "pad": "24/20",
+      "inset": 21,
+      "shadow": "none",
+      "text": "INFORMAȚII PENTRU FIECARE "
+    },
+    {
+      "cls": "live-section",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "PUBLICAT DE INSTITUȚIIAnun"
+    }
+  ],
+  "mobile/domainLocal": [
+    {
+      "cls": "domain-hero",
+      "tag": "div",
+      "pad": "24/20",
+      "inset": 21,
+      "shadow": "none",
+      "text": "INFORMAȚII PENTRU FIECARE "
+    },
+    {
+      "cls": "live-section places-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 0,
+      "shadow": "none",
+      "text": "LOCURI ȘI SERVICII · ROMÂN"
+    }
+  ],
+  "mobile/money": [
+    {
+      "cls": "live-freshness",
+      "tag": "div",
+      "pad": "14",
+      "inset": 15,
+      "shadow": "none",
+      "text": "Sursă verificatăBanca Nați"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "EUR / RON5,35017 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "USD / RON4,78017 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "GBP / RON6,32367 oct. 2026"
+    },
+    {
+      "cls": "vstat",
+      "tag": "div",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "CHF / RON5,73557 oct. 2026"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "22/18",
+      "inset": 17.4,
+      "shadow": "elev",
+      "text": "10 OBSERVAȚII, O PERSPECTI"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "22/18",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Toate valutele, la un locA"
+    }
+  ],
+  "mobile/company": [
+    {
+      "cls": "live-freshness",
+      "tag": "div",
+      "pad": "14",
+      "inset": 15,
+      "shadow": "none",
+      "text": "Sursă verificatăANAFPagina"
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "Cifră de afaceri · 2025104"
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "Rezultat net · 202539.755."
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "Marjă netă · 202538,01%"
+    },
+    {
+      "cls": "vstat",
+      "tag": "article",
+      "pad": "20/16",
+      "inset": 17,
+      "shadow": "elev",
+      "text": "Salariați medii · 2025264"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "22/18",
+      "inset": 14.6,
+      "shadow": "elev",
+      "text": "Activitate și rezultat\n[da"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "22/18",
+      "inset": 14.6,
+      "shadow": "elev",
+      "text": "Echipa, în timp\n[data-char"
+    },
+    {
+      "cls": "vpanel",
+      "tag": "article",
+      "pad": "22/18",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Sursele care completează a"
+    },
+    {
+      "cls": "category-banner",
+      "tag": "figure",
+      "pad": "0",
+      "inset": 20.4,
+      "shadow": "none",
+      "text": "Vezi fotografiaClădiri de "
+    },
+    {
+      "cls": "category-banner",
+      "tag": "figure",
+      "pad": "0",
+      "inset": 20.4,
+      "shadow": "none",
+      "text": "Vezi fotografiaȘantierul n"
+    },
+    {
+      "cls": "live-section catalog-workspace",
+      "tag": "section",
+      "pad": "18",
+      "inset": 19,
+      "shadow": "none",
+      "text": "CATALOG NAȚIONAL · TOATE D"
+    }
+  ],
+  "mobile/planner": [
+    {
+      "cls": "plan-stop",
+      "tag": "article",
+      "pad": "16/12",
+      "inset": 22.4,
+      "shadow": "none",
+      "text": "1SinaiaCastelul PeleșPatri"
+    },
+    {
+      "cls": "plan-stop",
+      "tag": "article",
+      "pad": "16/12",
+      "inset": 22.4,
+      "shadow": "none",
+      "text": "2BranCastelul BranPatrimon"
+    },
+    {
+      "cls": "plan-summary",
+      "tag": "article",
+      "pad": "27",
+      "inset": 28,
+      "shadow": "none",
+      "text": "SPAȚIU PENTRU SPONTANEITAT"
+    }
+  ],
+  "mobile/recommendations": [
+    {
+      "cls": "recommendation-summary",
+      "tag": "div",
+      "pad": "22/19",
+      "inset": 26,
+      "shadow": "none",
+      "text": "De ce vezi aceste locuri?L"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Sinaia, P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Castel & muzeu02 Bran, Bra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Experiență subterană02 Tur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona Ș"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee · Parcuri și natură0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Natură & biodiversitate02 "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cultură & arhitectură01 Bu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Spațiu urban & patrimoniu0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Potlogi, RomâniaAn"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Brașov"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Biblioteci02 Buzău, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Biblioteci02 București, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Biblioteci01 Galați, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Galați"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona D"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 Râmnicu Vâlcea, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Humulești, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Pârscov, RomâniaCa"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 Hobița, RomâniaCas"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Crișan, RomâniaCas"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Zona Brăila, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bușten"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Hunedo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Drobet"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sinaia"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona I"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona I"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Deva, RomâniaCetat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Enisal"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Făgăra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Târgu Neamț, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Arefu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Adamcl"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Sviniț"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Puncte panoramice · Peșter"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cinematografe02 Brăila, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Biertan, RomâniaCo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Scărișoara, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Sâmbăta de Sus, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Râmeț, RomâniaCole"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Târgoviște, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Constanța, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona C"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Pitești, RomâniaGa"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee · Parcuri și natură0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Puncte panoramice03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Cluj-N"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona E"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Puncte panoramice01 Zona T"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Câmpina, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Brașov, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Timișoara, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Deva, RomâniaMuzeu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 Craiova, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Târgoviște, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Timișoara, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Piatra-Neamț, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Vălenii de Munte, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Alba Iulia, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 Pucioasa, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Piatra-Neamț, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Fântânele, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Turda, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiu, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Constanța, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Bicaz, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Reșița, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Galați, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Vatra Dornei, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Sulina, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 Pitești, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Buzău, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Slatina, RomâniaMu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Oradea, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Zona Căldăraru, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Vălenii de Munte, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 Alba Iulia, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiu, RomâniaMuze"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Ploiești, RomâniaM"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Deta, RomâniaMuzeu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiel, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Miercurea Ciuc, Ro"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Slănic, RomâniaMuz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee01 Sasca Montană, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Vatra "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Sinaia"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Snagov"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Iași, RomâniaPalat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Buzău,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona D"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Drobet"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre · Locuri de vizitat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona P"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Timișo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Timișo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Consta"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre02 Oradea, RomâniaTe"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre03 Zona București, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre · Locuri de vizitat"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre02 Cluj-Napoca, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre03 Zona Timișoara, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Teatre02 Brăila, RomâniaTe"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona A"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat01 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Muzee02 Sibiu, RomâniaTurn"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Zona S"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat02 Sibiu,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Locuri de vizitat03 Zona L"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Universități02 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Aeroporturi01 București, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Apă potabilă01 Zona Teiuș,"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Instituții publice02 Zona "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Autogări02 București, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii02 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare03 Sighișoara, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Centre comunitare02 Bușten"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Centre comunitare03 Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Peșteri03 Putna, RomâniaCh"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Aluniș, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Vârfuri01 Zona Bughea de J"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii · Muz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii · Muz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Școli02 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Școli03 București, România"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii01 Zon"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Universități03 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare02 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Vârfuri03 Zona București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Gări01 Zona Deta, RomâniaD"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Universități02 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii02 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare03 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Gări01 Zona Grădiștea, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Cluj-N"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură03 Zona B"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Parcuri și natură02 Zona G"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Piețe agroalimentare · Pie"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare02 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Instituții publice03 Bucur"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Instituții publice01 Galaț"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Instituții publice02 Zona "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Vârfuri03 Zona Poiana Măru"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii · Muz"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Primării02 Buzău, RomâniaP"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii02 Zon"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare01 Steierdorf, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare01 Poiana Mărului, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare01 Bucova, RomâniaPe"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Peșteri03 Zona Nucu, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Poliție02 Sibiu, RomâniaPo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Infrastructură energetică0"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Primării03 Gheorgheni, Rom"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Primării03 București, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Primării02 Mănăstirea Humo"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Primării02 Pitești, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Primării02 București, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Birouri și servicii02 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare01 București, Români"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Spitale02 Zona București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Spitale03 București, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Spitale01 Timișoara, Român"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Bucu"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Sport și timp liber02 Chia"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Zona"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Sport și timp liber03 Zona"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Toalete publice01 Zona Cra"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Instanțe02 Buzău, RomâniaT"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Magazine și servicii03 Buc"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Universități01 Bacău, Româ"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Universități02 Zona Bucure"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Universități03 București, "
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Cazare01 Zona Mogoșoaia, R"
+    },
+    {
+      "cls": "place-card",
+      "tag": "article",
+      "pad": "0",
+      "inset": 19,
+      "shadow": "elev",
+      "text": "Școli02 București, România"
+    }
+  ]
+}
