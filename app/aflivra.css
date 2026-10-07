@@ -49,3 +49,14 @@ html{overflow-x:hidden}
 }
 
 .v2 .weather-load-state{max-width:100%;overflow-wrap:anywhere}.v2 .weather-load-state p{margin:0 0 12px}.v2 .weather-load-state button{color:#123860;background:#fff;border-color:#d8e5f7}
+
+/* ShareAction: the hero chip joins the suggestion pill family; the fallback
+   sheet follows the menu-sheet conventions (same width, same 52px rows). */
+.v2 .hero-share{min-height:34px;font-size:11px;padding:7px 13px;background:#ffffff13;border:1px solid #ffffff22;border-radius:999px;color:#f1f5fa}
+.v2 .hero-share:hover{background:#ffffff26;color:#fff}
+.v2.share-sheet{padding:35px 27px;width:min(370px,90vw);overflow:auto}
+.v2 .share-options{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.v2 .share-options>[data-slot=button]{justify-content:flex-start;min-height:52px}
+.v2 .share-options>a{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;padding:0 16px;border-radius:8px;font-size:13px;color:var(--ink);text-decoration:none}
+.v2 .share-options>a:hover{background:#eef2f7}
+@media(max-width:640px){.v2 .hero-share{font-size:.8125rem}}

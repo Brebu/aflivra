@@ -1,0 +1,42 @@
+# Aflivra
+
+> Agregator românesc de date publice oficiale. Aduce cursuri BNR, vreme și avertizări ANM, firme după CUI de la ANAF, dosare din portalul instanțelor, acte normative din Portalul Legislativ, fluxurile ministerelor, registre naționale, transport, cinematografe și altele — într-un singur loc, fără cont, fără plată și fără reclame, cu sursa, licența, perioada și ultima verificare vizibile pe fiecare element.
+
+- Limba conținutului: română (locale ro_RO).
+- Aplicația: https://aflivra.brebu.workers.dev/ — single-page app cu router pe hash (#view=…), instalabilă ca PWA.
+- Pagini statice crawlabile: /, /catalog (catalogul surselor de date), /confidentialitate (politica GDPR), /termeni (termenii de utilizare).
+- Harta completă a rutelor: https://aflivra.brebu.workers.dev/sitemap.xml
+
+## Ce găsești (suprafețe)
+
+- 16 domenii cu 51 de secțiuni de conținut: orașul tău, vreme și prognoză, bani & economie, firme pe CUI, natură și mediu, transport în mișcare, sănătate, educație, cultură și turism, muncă, lege & administrație (dosare, avocați, notari, experți), energie, agricultură, filme și cinematografe, povești și lectură, știri.
+- Hărți live: harta națională a locurilor (Leaflet/OpenStreetMap), pozițiile vehiculelor de transport public în timp real, stările aeronavelor.
+- Dosare de justiție după număr, cu istoricul modificărilor; firme după CUI, cu bilanțuri ANAF; acte normative cu cititor și text integral.
+- Urmăriri și notificări: urmărești dosare, firme, localități, acte, spectacole sau avertizări meteo și primești notificări push criptate când se schimbă ceva (fără cont).
+- Inventarul național de locuri: 181.537 de înregistrări cu fotografii reale atestate (Wikimedia Commons), licență și autor la vedere.
+
+## Sursele de date
+
+Registrul complet, cu adresele, licențele și probele de acces: `/catalog` în aplicație (generat din registrele public/catalog/sources.json și public/data/sources.json). Sursa oficială rămâne adevărul de referință: fiecare element din aplicație poartă legătura curentă către sursa lui, iar aplicația nu este consultanță juridică, fiscală sau de alt fel.
+
+Principalele instituții: BNR, ANM, ANAF, Ministerul Justiției (portalul instanțelor, tablourile avocaților/notarilor/experților), Portalul Legislativ, MAI (fluxuri, InfoTrafic), data.gov.ro (CKAN), INS, Eurostat, ANL, ANCPI, CNAS, ANRE, APIA, Transelectrica, muzeele din România, AGERPRES, Wikidata, Wikisource, OpenStreetMap.
+
+## Actualitate și reîmprospătare (onest)
+
+- Aplicația reîmprospătează automat, zilnic, cele mai multe surse (grupe de crons pe Worker; registrele de bază de mai multe ori pe zi); fiecare element arată data sursei și data ultimei verificări.
+- Fluxurile și panourile ale căror surse blochează rețeaua Cloudflare Workers (AFIR, panoul aeroporturilor București, stările aeronavelor adsb.lol) se reîmprospătează săptămânal prin ture de relaie exterioare (GitHub Actions), iar copia servită poartă eticheta onestă de vechime.
+- Când o sursă nu răspunde, aplicația servește ultima copie validă, marcată clar ca atale — nu inventează date și nu ascunde erorile.
+
+## API public de date
+
+Rutele /api/* servesc datele publice cache-uite (vreme, firme, dosare, transport, catalog etc.) pentru aplicație; crawlerelor le sunt rezervate paginile, nu API-ul (vezi robots.txt). Inventarul complet al seturilor de date, cu adresele surselor: https://aflivra.brebu.workers.dev/catalog
+
+## Licențe și atribuire
+
+Licențele diferă per sursă și sunt afișate la fiecare element și în registry; fotografiile Wikimedia Commons păstrează autorul și licența originală (de regulă CC BY / CC BY-SA), iar ilustrațiile editoriale generate cu AI sunt etichetate onest ca atare.
+
+## Contact și versiunea extinsă
+
+- Contact: contactretetesecrete@gmail.com
+- Ghidul extins, pe fiecare domeniu: https://aflivra.brebu.workers.dev/llms-full.txt
+- Operator individual, România; fără cookie-uri de urmărire, fără instrumente analytics.

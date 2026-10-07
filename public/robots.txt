@@ -1,2 +1,51 @@
+# Aflivra — https://aflivra.brebu.workers.dev
+# Aggregator of Romanian official public data: every page is indexable.
+# The data API routes are kept out of crawling budgets; the app surface (/, /catalog,
+# /confidentialitate, /termeni) is fully open.
+
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /api/
+
+# Explicit sections for AI crawlers and training pipelines — all allowed,
+# with the same polite /api/ carve-out. Claude-Web is not a real user agent;
+# Anthropic's fetchers are ClaudeBot (indexing), Claude-User (user-initiated
+# actions) and Claude-SearchBot (search).
+
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /api/
+
+Sitemap: https://aflivra.brebu.workers.dev/sitemap.xml

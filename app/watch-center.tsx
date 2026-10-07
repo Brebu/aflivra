@@ -6,6 +6,7 @@ import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '@
 import {toast} from 'sonner';
 import {useWatch,type WatchEvent,type WatchKind,type WatchRow} from './watch-state';
 import {WatchButton,watchKindNoun,watchOpenAria} from './watch-button';
+import {ShareAction} from './share-action';
 import {dateText} from './live-data';
 import {countText} from '@/lib/live/query';
 
@@ -91,6 +92,7 @@ export function WatchCenter({onOpen}:{onOpen:(kind:WatchKind,ref:string,label:st
     <div className="watch-controls">
       <Button variant="outline" onClick={()=>{watch.refresh();loadFeed()}} disabled={watch.busy}><History size={17}/>{watch.busy?'Se verifică…':'Reîncarcă'}</Button>
       <Button variant="outline" className="watch-purge" onClick={()=>setPurgeOpen(true)} disabled={!rows.length&&!events?.length}><Trash2 size={17}/>Șterge-mi datele</Button>
+      <ShareAction variant="outline" ariaLabel="Partajează Aflivra" label="Partajează" title="Aflivra — Ce s-a schimbat" text="Urmărește schimbările datelor publice care te privesc, cu sursa la vedere — fără cont, fără cookie-uri de urmărire." url={()=>location.origin+'/'}/>
     </div>
   </div>
   {watch.error&&<div className="live-error" role="alert"><p>{watch.error}</p><Button onClick={()=>watch.refresh()}>Reîncearcă</Button></div>}
