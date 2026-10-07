@@ -1,0 +1,1936 @@
+https://operanb.ro/
+HTTP 200
+
+
+<!DOCTYPE html>
+<html lang="ro-RO" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="profile" href="http://gmpg.org/xfn/11">
+	<title>Opera Națională București</title>
+    <link href="https://operanb.ro/wp-content/plugins/fuse-social-floating-sidebar/inc/css/font-awesome.min.css" rel="stylesheet">			<style>
+						#icon_wrapper
+			{
+			position: fixed;
+			top: 25%;
+			left: 0px;
+			z-index: 99999;
+			}
+						.awesome-social
+			{
+                margin-top:2px;
+			color: black !important;
+			text-align: center !important;
+						line-height: 29px !important;
+			width: 28px !important;
+			height: 28px !important;
+			font-size: 0.9em !important;
+			
+									border-radius:50% !important;
+							-moz-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s; /* For Safari 3.1 to 6.0 */
+
+				-webkit-transition: width 0.4s, height 0.4s, -webkit-transform 0.4s; /* For Safari 3.1 to 6.0 */
+				transition: width 0.4s, height 0.4s, transform 0.4s;
+
+				
+			}
+						.awesome-social:hover
+			{
+
+			-webkit-transform: rotate(360deg); /* Chrome, Safari, Opera */
+				transform: rotate(deg);
+					-moz-transform: rotate(360deg); /* Chrome, Safari, Opera */
+							-ms-transform: rotate(360deg); /* Chrome, Safari, Opera */
+
+			}
+							.fuse_social_icons_links
+			{
+			outline:0 !important;
+
+			}
+			.fuse_social_icons_links:hover{
+			text-decoration:none !important;
+			}
+						.fb-awesome-social
+			{
+			background: #3b5998;
+			}
+			.tw-awesome-social
+			{
+			background:#00aced;
+			}
+			.rss-awesome-social
+			{
+			background:#FA9B39;
+			}
+			.linkedin-awesome-social
+			{
+			background:#007bb6;
+			}
+			.youtube-awesome-social
+			{
+			background:#bb0000;
+			}
+			.flickr-awesome-social
+			{
+			background: #ff0084;
+			}
+			.pinterest-awesome-social
+			{
+			background:#cb2027;
+			}
+			.stumbleupon-awesome-social
+			{
+			background:#f74425 ;
+			}
+			.google-plus-awesome-social
+			{
+			background:#f74425 ;
+			}
+			.instagram-awesome-social
+			{
+			background:#517fa4 ;
+			}
+			.tumblr-awesome-social
+			{
+			background: #32506d ;
+			}
+			.vine-awesome-social
+			{
+			background: #00bf8f ;
+			}
+            .vk-awesome-social {
+
+            background: #45668e ;
+
+            }
+            .soundcloud-awesome-social
+                {
+            background: #ff3300 ;
+
+                }
+                .reddit-awesome-social{
+
+            background: #ff4500 ;
+
+                }
+                .stack-awesome-social{
+
+            background: #fe7a15 ;
+
+                }
+                .behance-awesome-social{
+            background: #1769ff ;
+
+                }
+                .github-awesome-social{
+            background: #999999 ;
+
+
+                }
+                .envelope-awesome-social{
+                  background: #ccc ;
+                }
+/*  Mobile */
+
+
+/* Custom Background */
+
+                .awesome-social {
+            background:#ffffff !important;
+                }
+
+                                          .awesome-social{
+
+-webkit-transition-property:color, text;
+-webkit-transition-duration: 0.25s, 0.25s;
+-webkit-transition-timing-function: linear, ease-in;
+-moz-transition-property:color, text;
+-moz-transition-duration:0.25s;
+-moz-transition-timing-function: linear, ease-in;
+
+-o-transition-property:color, text;
+-o-transition-duration:0.25s;
+-o-transition-timing-function: linear, ease-in;
+             }
+            .fb-awesome-social:hover
+			{
+			color: #3b5998 !important;
+			}
+			.tw-awesome-social:hover
+			{
+			color:#00aced !important;
+			}
+			.rss-awesome-social:hover
+			{
+			color:#FA9B39 !important;
+			}
+			.linkedin-awesome-social:hover
+			{
+			color:#007bb6 !important;
+			}
+			.youtube-awesome-social:hover
+			{
+			color:#bb0000 !important;
+			}
+			.flickr-awesome-social:hover
+			{
+			color: #ff0084 !important;
+			}
+			.pinterest-awesome-social:hover
+			{
+			color:#cb2027 !important;
+			}
+			.stumbleupon-awesome-social:hover
+			{
+			color:#f74425  !important;
+			}
+			.google-plus-awesome-social:hover
+			{
+			color:#f74425  !important;
+			}
+			.instagram-awesome-social:hover
+			{
+			color:#517fa4  !important;
+			}
+			.tumblr-awesome-social:hover
+			{
+			color: #32506d  !important;
+			}
+			.vine-awesome-social:hover
+			{
+			color: #00bf8f  !important;
+			}
+
+            .vk-awesome-social:hover {
+
+            color: #45668e !important;
+
+            }
+            .soundcloud-awesome-social:hover
+                {
+            color: #ff3300 !important;
+
+                }
+                .reddit-awesome-social:hover{
+
+            color: #ff4500 !important;
+
+                }
+                .stack-awesome-social:hover{
+
+            color: #fe7a15 !important;
+
+                }
+                .behance-awesome-social:hover{
+            color: #1769ff !important;
+
+                }
+                .github-awesome-social:hover{
+            color: #999999 !important;
+
+
+                }
+
+
+                 
+
+			</style>
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<link rel="alternate" hreflang="ro" href="https://operanb.ro/" />
+<link rel="alternate" hreflang="en" href="https://operanb.ro/?lang=en" />
+<link rel="alternate" hreflang="x-default" href="https://operanb.ro/" />
+
+	<!-- This site is optimized with the Yoast SEO plugin v28.6 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<meta name="description" content="Site-ul Operei Naționale București" />
+	<link rel="canonical" href="https://operanb.ro/" />
+	<link rel="next" href="https://operanb.ro/page/2/" />
+	<meta property="og:locale" content="ro_RO" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Opera Națională București" />
+	<meta property="og:description" content="Site-ul Operei Naționale București" />
+	<meta property="og:url" content="https://operanb.ro/" />
+	<meta property="og:site_name" content="Opera Națională București" />
+	<meta property="og:image" content="https://operanb.ro/wp-content/uploads/2023/05/opera-nb.jpg" />
+	<meta property="og:image:width" content="704" />
+	<meta property="og:image:height" content="396" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@OperaBucharest" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"CollectionPage","@id":"https:\/\/operanb.ro\/","url":"https:\/\/operanb.ro\/","name":"Opera Națională București - Site-ul Operei Naționale București","isPartOf":{"@id":"https:\/\/operanb.ro\/#website"},"description":"Site-ul Operei Naționale București","breadcrumb":{"@id":"https:\/\/operanb.ro\/#breadcrumb"},"inLanguage":"ro-RO"},{"@type":"BreadcrumbList","@id":"https:\/\/operanb.ro\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă"}]},{"@type":"WebSite","@id":"https:\/\/operanb.ro\/#website","url":"https:\/\/operanb.ro\/","name":"Opera Națională București","description":"Site-ul Operei Naționale București","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/operanb.ro\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"ro-RO"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+		<!-- This site uses the Google Analytics by MonsterInsights plugin v11.3.0 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+							<script src="//www.googletagmanager.com/gtag/js?id=G-ERWWMM0R81"  data-cfasync="false" data-wpfc-render="false" type="text/javascript" async></script>
+			<script data-cfasync="false" data-wpfc-render="false" type="text/javascript">
+				var mi_version = '11.3.0';
+				var mi_track_user = true;
+				var mi_no_track_reason = '';
+								var MonsterInsightsDefaultLocations = {"page_location":"https:\/\/operanb.ro\/"};
+								if ( typeof MonsterInsightsPrivacyGuardFilter === 'function' ) {
+					var MonsterInsightsLocations = (typeof MonsterInsightsExcludeQuery === 'object') ? MonsterInsightsPrivacyGuardFilter( MonsterInsightsExcludeQuery ) : MonsterInsightsPrivacyGuardFilter( MonsterInsightsDefaultLocations );
+				} else {
+					var MonsterInsightsLocations = (typeof MonsterInsightsExcludeQuery === 'object') ? MonsterInsightsExcludeQuery : MonsterInsightsDefaultLocations;
+				}
+
+								var disableStrs = [
+										'ga-disable-G-ERWWMM0R81',
+									];
+
+				/* Function to detect opted out users */
+				function __gtagTrackerIsOptedOut() {
+					for (var index = 0; index < disableStrs.length; index++) {
+						if (document.cookie.indexOf(disableStrs[index] + '=true') > -1) {
+							return true;
+						}
+					}
+
+					return false;
+				}
+
+				/* Disable tracking if the opt-out cookie exists. */
+				if (__gtagTrackerIsOptedOut()) {
+					for (var index = 0; index < disableStrs.length; index++) {
+						window[disableStrs[index]] = true;
+					}
+				}
+
+				/* Opt-out function */
+				function __gtagTrackerOptout() {
+					for (var index = 0; index < disableStrs.length; index++) {
+						document.cookie = disableStrs[index] + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+						window[disableStrs[index]] = true;
+					}
+				}
+
+				if ('undefined' === typeof gaOptout) {
+					function gaOptout() {
+						__gtagTrackerOptout();
+					}
+				}
+								window.dataLayer = window.dataLayer || [];
+
+				window.MonsterInsightsDualTracker = {
+					helpers: {},
+					trackers: {},
+				};
+				if (mi_track_user) {
+					function __gtagDataLayer() {
+						dataLayer.push(arguments);
+					}
+
+					function __gtagTracker(type, name, parameters) {
+						if (!parameters) {
+							parameters = {};
+						}
+
+						if (parameters.send_to) {
+							__gtagDataLayer.apply(null, arguments);
+							return;
+						}
+
+						if (type === 'event') {
+														parameters.send_to = monsterinsights_frontend.v4_id;
+							var hookName = name;
+							if (typeof parameters['event_category'] !== 'undefined') {
+								hookName = parameters['event_category'] + ':' + name;
+							}
+
+							if (typeof MonsterInsightsDualTracker.trackers[hookName] !== 'undefined') {
+								MonsterInsightsDualTracker.trackers[hookName](parameters);
+							} else {
+								__gtagDataLayer('event', name, parameters);
+							}
+							
+						} else {
+							__gtagDataLayer.apply(null, arguments);
+						}
+					}
+
+					__gtagTracker('js', new Date());
+					__gtagTracker('set', {
+						'developer_id.dZGIzZG': true,
+											});
+					if ( MonsterInsightsLocations.page_location ) {
+						__gtagTracker('set', MonsterInsightsLocations);
+					}
+										__gtagTracker('config', 'G-ERWWMM0R81', {"forceSSL":"true"} );
+										window.gtag = __gtagTracker;										(function () {
+						/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+						/* ga and __gaTracker compatibility shim. */
+						var noopfn = function () {
+							return null;
+						};
+						var newtracker = function () {
+							return new Tracker();
+						};
+						var Tracker = function () {
+							return null;
+						};
+						var p = Tracker.prototype;
+						p.get = noopfn;
+						p.set = noopfn;
+						p.send = function () {
+							var args = Array.prototype.slice.call(arguments);
+							args.unshift('send');
+							__gaTracker.apply(null, args);
+						};
+						var __gaTracker = function () {
+							var len = arguments.length;
+							if (len === 0) {
+								return;
+							}
+							var f = arguments[len - 1];
+							if (typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function') {
+								if ('send' === arguments[0]) {
+									var hitConverted, hitObject = false, action;
+									if ('event' === arguments[1]) {
+										if ('undefined' !== typeof arguments[3]) {
+											hitObject = {
+												'eventAction': arguments[3],
+												'eventCategory': arguments[2],
+												'eventLabel': arguments[4],
+												'value': arguments[5] ? arguments[5] : 1,
+											}
+										}
+									}
+									if ('pageview' === arguments[1]) {
+										if ('undefined' !== typeof arguments[2]) {
+											hitObject = {
+												'eventAction': 'page_view',
+												'page_path': arguments[2],
+											}
+										}
+									}
+									if (typeof arguments[2] === 'object') {
+										hitObject = arguments[2];
+									}
+									if (typeof arguments[5] === 'object') {
+										Object.assign(hitObject, arguments[5]);
+									}
+									if ('undefined' !== typeof arguments[1].hitType) {
+										hitObject = arguments[1];
+										if ('pageview' === hitObject.hitType) {
+											hitObject.eventAction = 'page_view';
+										}
+									}
+									if (hitObject) {
+										action = 'timing' === arguments[1].hitType ? 'timing_complete' : hitObject.eventAction;
+										hitConverted = mapArgs(hitObject);
+										__gtagTracker('event', action, hitConverted);
+									}
+								}
+								return;
+							}
+
+							function mapArgs(args) {
+								var arg, hit = {};
+								var gaMap = {
+									'eventCategory': 'event_category',
+									'eventAction': 'event_action',
+									'eventLabel': 'event_label',
+									'eventValue': 'event_value',
+									'nonInteraction': 'non_interaction',
+									'timingCategory': 'event_category',
+									'timingVar': 'name',
+									'timingValue': 'value',
+									'timingLabel': 'event_label',
+									'page': 'page_path',
+									'location': 'page_location',
+									'title': 'page_title',
+									'referrer' : 'page_referrer',
+								};
+								for (arg in args) {
+																		if (!(!args.hasOwnProperty(arg) || !gaMap.hasOwnProperty(arg))) {
+										hit[gaMap[arg]] = args[arg];
+									} else {
+										hit[arg] = args[arg];
+									}
+								}
+								return hit;
+							}
+
+							try {
+								f.hitCallback();
+							} catch (ex) {
+							}
+						};
+						__gaTracker.create = newtracker;
+						__gaTracker.getByName = newtracker;
+						__gaTracker.getAll = function () {
+							return [];
+						};
+						__gaTracker.remove = noopfn;
+						__gaTracker.loaded = true;
+						window['__gaTracker'] = __gaTracker;
+					})();
+									} else {
+										console.log("");
+					(function () {
+						function __gtagTracker() {
+							return null;
+						}
+
+						window['__gtagTracker'] = __gtagTracker;
+						window['gtag'] = __gtagTracker;
+					})();
+									}
+			</script>
+							<!-- / Google Analytics by MonsterInsights -->
+		<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://operanb.ro/wp-includes/blocks/paragraph/style.min.css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<link rel='stylesheet' id='metaslider-blocks-editor-css-css' href='https://operanb.ro/wp-content/plugins/ml-slider/admin/assets/dist/css/editor-block.css?ver=3.113.1' media='all' property='stylesheet' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='wpml-blocks-css' href='https://operanb.ro/wp-content/plugins/sitepress-multilingual-cms/dist/css/blocks/styles.css?ver=4.6.9' media='all' />
+<link rel='stylesheet' id='magnific-css' href='https://operanb.ro/wp-content/plugins/shortcode-gallery-for-matterport-showcase/magnific.css?ver=1.1.0' media='all' />
+<link rel='stylesheet' id='wp-matterport-css' href='https://operanb.ro/wp-content/plugins/shortcode-gallery-for-matterport-showcase/wp-matterport.css?ver=2.2.2' media='all' />
+<link rel='stylesheet' id='wf-cookie-consent-css' href='https://operanb.ro/wp-content/plugins/wf-cookie-consent/css/wf-cookie-consent.min.css?ver=1.3' media='all' />
+<link rel='stylesheet' id='wpml-legacy-horizontal-list-0-css' href='https://operanb.ro/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-list-horizontal/style.min.css?ver=1' media='all' />
+<style id="wpml-legacy-horizontal-list-0-inline-css">
+.wpml-ls-statics-shortcode_actions{background-color:#eeeeee;}.wpml-ls-statics-shortcode_actions, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu, .wpml-ls-statics-shortcode_actions a {border-color:#cdcdcd;}.wpml-ls-statics-shortcode_actions a, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu a, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu a:link, .wpml-ls-statics-shortcode_actions li:not(.wpml-ls-current-language) .wpml-ls-link, .wpml-ls-statics-shortcode_actions li:not(.wpml-ls-current-language) .wpml-ls-link:link {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions a, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu a:hover,.wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu a:focus, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu a:link:hover, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu a:link:focus {color:#000000;background-color:#eeeeee;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language > a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language:hover>a, .wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a:focus {color:#000000;background-color:#eeeeee;}
+/*# sourceURL=wpml-legacy-horizontal-list-0-inline-css */
+</style>
+<link rel='stylesheet' id='wpml-menu-item-0-css' href='https://operanb.ro/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/menu-item/style.min.css?ver=1' media='all' />
+<link rel='stylesheet' id='mdp-readabler-css' href='https://operanb.ro/wp-content/plugins/readabler/css/readabler.min.css?ver=1.5.0' media='all' />
+<style id="mdp-readabler-inline-css">
+
+		:root{
+		
+			--readabler-reading-mask: rgba(0, 0, 0, 0.7)
+		
+		}
+		.mdp-readabler-tts {
+		
+			--readabler-tts-bg: transparent;
+			--readabler-tts-color: transparent;
+			
+		}
+        
+        #mdp-readabler-popup-box{
+        
+            --readabler-overlay: rgba(2, 83, 238, 1);
+            
+            --readabler-bg: rgba(255, 255, 255, 1);
+            --readabler-bg-dark: rgba(22, 25, 27, 1);
+            --readabler-text: rgba(51, 51, 51, 1);
+            --readabler-text-dark: rgba(222, 239, 253, 1);
+            --readabler-color: rgba(33, 150, 243, 1);
+            --readabler-color-dark: rgba(33, 150, 243, 1);
+            --readabler-color-transparent: rgba(33,150,243,0.2);
+            --readabler-color-transparent-dark: rgba(33,150,243,0.2);
+            --readabler-border-radius: 20px;
+            --readabler-animate: 600ms;          
+            
+        }
+        
+        .mdp-readabler-trigger-button-box{
+        
+            --readabler-btn-margin: 10px;
+            --readabler-btn-padding: 20px;
+            --readabler-btn-radius: 50px;
+            --readabler-btn-color: rgba(255, 255, 255, 1);
+            --readabler-btn-color-hover: rgba(33, 150, 243, 1);
+            --readabler-btn-bg: rgba(33, 150, 243, 1);
+            --readabler-btn-bg-hover: rgba(255, 255, 255, 1);
+            --readabler-btn-size: 24px;
+            --readabler-btn-delay: 2s;
+        
+        }
+		
+	        #mdp-readabler-keyboard-box {
+	        
+	        	--readabler-keyboard-light-bg: #ececec;
+	        	--readabler-keyboard-light-key-bg: #ffffff;
+	        	--readabler-keyboard-light-key: #111111;	        	
+	        	--readabler-keyboard-dark-bg: #000000CC;
+	        	--readabler-keyboard-dark-key-bg: rgba( 0, 0, 0, .5 );
+	        	--readabler-keyboard-dark-key: #ffffff;
+	        
+	        }	        
+	        
+/*# sourceURL=mdp-readabler-inline-css */
+</style>
+<link rel='stylesheet' id='reset-style-css' href='https://operanb.ro/wp-content/themes/opera/css/reset.css?ver=7.1.3' media='all' />
+<link rel='stylesheet' id='fonts-style-css' href='https://operanb.ro/wp-content/themes/opera/css/fonts.css?ver=7.1.3' media='all' />
+<link rel='stylesheet' id='videojs-style-css' href='https://operanb.ro/wp-content/themes/opera/css/video-js.css?ver=7.1.3' media='all' />
+<link rel='stylesheet' id='bootstrap-style-css' href='https://operanb.ro/wp-content/themes/opera/css/bootstrap.min.css?ver=7.1.3' media='all' />
+<link rel='stylesheet' id='curtain-style-css' href='https://operanb.ro/wp-content/themes/opera/css/curtain.css?ver=7.1.3' media='all' />
+<link rel='stylesheet' id='opera-style-css' href='https://operanb.ro/wp-content/themes/opera/style.css?ver=5.72' media='all' />
+<link rel='stylesheet' id=' add_google_fonts -css' href='https://fonts.googleapis.com/css?family=Cinzel|Sorts+Mill+Goudy&#038;ver=7.1.3' media='all' />
+<link rel='stylesheet' id='fancybox-css' href='https://operanb.ro/wp-content/plugins/easy-fancybox/fancybox/1.5.4/jquery.fancybox.css?ver=1791345211' media='screen' />
+<script async data-wp-strategy="async" id="monsterinsights-frontend-script-js" src="https://operanb.ro/wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend-gtag.js?ver=11.3.0"></script>
+<script data-cfasync="false" data-wpfc-render="false" type="text/javascript" id='monsterinsights-frontend-script-js-extra'>/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[]","home_url":"https:\/\/operanb.ro","hash_tracking":"false","v4_id":"G-ERWWMM0R81"};/* ]]> */
+</script>
+<script id="jquery-core-js" src="https://operanb.ro/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://operanb.ro/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<link rel="https://api.w.org/" href="https://operanb.ro/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://operanb.ro/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1.3" />
+<meta name="generator" content="WPML ver:4.6.9 stt:1,45;" />
+<script   type="text/javascript">
+    var _nzm = _nzm || [];
+    var _nzm_config = _nzm_config || [];
+    (function(w, d, e, f, c, l, n) {
+        ["identify", "track", "run"].map(function(m) {
+            w[f][m] = function() {
+                w[f].push([m].concat([].slice.call(arguments)));
+            };
+        });
+        l = d.createElement(e);
+        l.async = 1;
+        l.src = (w[c].js_prefix || "https://t.newsmanapp.com") + "/jt/t.js";
+        l.setAttribute("data-site-id", "91285-5475-000000000000000000000000-c23113d6736be4348f0bb720223da839");
+        n = d.getElementsByTagName(e)[0];
+        n.parentNode.insertBefore(l, n);
+    })(window, document, "script", "_nzm", "_nzm_config");
+</script><script>
+</script>
+
+		<!-- Facebook Pixel Code -->
+		<script>
+		  !function(f,b,e,v,n,t,s)
+		  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		  n.queue=[];t=b.createElement(e);t.async=!0;
+		  t.src=v;s=b.getElementsByTagName(e)[0];
+		  s.parentNode.insertBefore(t,s)}(window, document,'script',
+		  'https://connect.facebook.net/en_US/fbevents.js');
+		  fbq('init', '310833633503572');
+		  fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		  src="https://www.facebook.com/tr?id=310833633503572&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Facebook Pixel Code -->  
+
+		<!-- Meta Pixel Code -->
+		<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '457564690015061');
+		fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		src="https://www.facebook.com/tr?id=457564690015061&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Meta Pixel Code -->
+		<meta name="facebook-domain-verification" content="pnkla8d4xtutswz39cepyrm9rtohac" /> 
+
+    <link rel="icon" href="https://operanb.ro/wp-content/uploads/2024/02/cropped-scris-512-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://operanb.ro/wp-content/uploads/2024/02/cropped-scris-512-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://operanb.ro/wp-content/uploads/2024/02/cropped-scris-512-180x180.png" />
+<meta name="msapplication-TileImage" content="https://operanb.ro/wp-content/uploads/2024/02/cropped-scris-512-270x270.png" />
+
+</head>
+
+<body class="home-page">
+  <!--[if IE]>
+  <div id="ie">
+    <p>It seems you are using IE6. Sort it out!</p>
+  </div>
+<![endif]-->
+
+    <section id="curtain_secCurtain" class="curtain" style="display:none;background:
+		#000		
+		;">
+        
+				<div class="curtain-video"><iframe style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:0;" src="https://www.youtube.com/embed/OOiDU2n4q1s?rel=0&amp;controls=1&amp;showinfo=0&amp;autoplay=1&amp;mute=1&amp;vq=hd1080" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>  
+        <div class="curtain-logo"><img src="https://opera.milicron.ro/wp-content/themes/opera/img/logo_blazon_hs2.png" style="max-width:90px;image-rendering: crisp-edges;position:absolute;left:30px; top:30px;" alt="logo"></div>
+        <div class="curtain-header">
+            <h1 class="title-fit"><p class="white"></p></h1>
+            
+        </div>
+				  				
+
+        <a href="#" class="curtain-arrow sfo-icon-arrow_down"><i class="fa fa-angle-down"></i></a>
+    </section>
+
+
+
+<div id="pnlCurtainWrapper" class="curtain-wrapper">
+  <input type="hidden" name="ctl00$hdnHideCurtain" id="hdnHideCurtain" value="True" />
+
+  <div id="header">
+    <ul id="scroll-slider" class="slides">
+
+                <li style="background-image:url(https://operanb.ro/wp-content/uploads/2026/02/Octavian-Pavel-Opera-romana-13.jpg);">
+          <div class="black-mask">
+            <div class="event"> 
+              <h2 class="title"><a href="https://operanb.ro/spectacol/barbierul-din-sevilla/" title="BĂRBIERUL DIN SEVILLA">BĂRBIERUL DIN SEVILLA</a></h2>
+                      <p class="author">Gioachino Rossini</p> 
+                                      <!--div>
+                <a class="btn red" href="#" title="Cumpără bilete">Cumpără bilete</a>
+                <a class="btn black" href="https://operanb.ro/spectacol/barbierul-din-sevilla/" title="Citește mai mult">Citește mai mult</a>
+              </div>
+            </div-->  
+						         <div class="home-reps"> 
+											 <ul class="scroller">
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64165" title="Cumpără">Miercuri, 7 Octombrie<span>18:30</span></a> </li>
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64166" title="Cumpără">Joi, 8 Octombrie<span>18:30</span></a> </li>
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64167" title="Cumpără">Vineri, 9 Octombrie<span>18:30</span></a> </li>
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64178" title="Cumpără">Miercuri, 28 Octombrie<span>18:30</span></a> </li>
+                                                											</ul>
+								</div>
+
+          </div>
+        </li>
+        
+                <li style="background-image:url(https://operanb.ro/wp-content/uploads/2017/04/rigoletto-web.jpg);">
+          <div class="black-mask">
+            <div class="event"> 
+              <h2 class="title"><a href="https://operanb.ro/spectacol/rigoletto-2/" title="Rigoletto">Rigoletto</a></h2>
+                      <p class="author">Giuseppe Verdi</p> 
+                                      <!--div>
+                <a class="btn red" href="#" title="Cumpără bilete">Cumpără bilete</a>
+                <a class="btn black" href="https://operanb.ro/spectacol/rigoletto-2/" title="Citește mai mult">Citește mai mult</a>
+              </div>
+            </div-->  
+						         <div class="home-reps"> 
+											 <ul class="scroller">
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64170" title="Cumpără">Miercuri, 14 Octombrie<span>18:30</span></a> </li>
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64171" title="Cumpără">Joi, 15 Octombrie<span>18:30</span></a> </li>
+                                                											</ul>
+								</div>
+
+          </div>
+        </li>
+        
+                <li style="background-image:url(https://operanb.ro/wp-content/uploads/2024/11/caver-web-Callas.jpg);">
+          <div class="black-mask">
+            <div class="event"> 
+              <h2 class="title"><a href="https://operanb.ro/spectacol/callas/" title="CALLAS &#8211; OANA PELLEA">CALLAS &#8211; OANA PELLEA</a></h2>
+                      <p class="author">de Terrence McNally</p> 
+                                      <!--div>
+                <a class="btn red" href="#" title="Cumpără bilete">Cumpără bilete</a>
+                <a class="btn black" href="https://operanb.ro/spectacol/callas/" title="Citește mai mult">Citește mai mult</a>
+              </div>
+            </div-->  
+						         <div class="home-reps"> 
+											 <ul class="scroller">
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64173" title="Cumpără">Vineri, 16 Octombrie<span>20:00</span></a> </li>
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64203" title="Cumpără">Duminică, 29 Noiembrie<span>19:30</span></a> </li>
+                                                                                                          <li> <a href="https://tickets.operanb.ro/event.php?id=64221" title="Cumpără">Sâmbătă, 26 Decembrie<span>19:30</span></a> </li>
+                                                											</ul>
+								</div>
+
+          </div>
+        </li>
+        
+                        
+    </ul>
+    <div class="mobile-menu">
+      <span id="expand-mobile-menu"></span>
+      <a class="logo-nav"><img src="https://operanb.ro/wp-content/themes/opera/img/home-btn-cf2.png" /></a>
+      <a href="/calendar" class="cal-icon-mobile"><img src="https://operanb.ro/wp-content/themes/opera/img/calendar-btn.svg" /></a>
+    </div>
+    
+        <nav id="mainMenu" class="menu">
+      <ul id="menu-principal" class=""><li id="menu-item-77" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-77"><a href="/" aria-current="page">Home</a></li>
+<li id="menu-item-70" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-70"><a href="https://operanb.ro/category/noutati/">Noutăți</a></li>
+<li id="menu-item-71" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-71"><a href="/calendar/">Calendar</a></li>
+<li id="menu-item-72" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-72"><a href="/spectacol">Spectacole</a></li>
+<li id="menu-item-14825" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14825"><a href="https://operanb.ro/despre-noi/artistic/">Artiști</a></li>
+<li id="menu-item-15233" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15233"><a href="https://operanb.ro/partenerii-nostri/">Parteneri</a></li>
+<li id="menu-item-75" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-75"><a href="https://operanb.ro/despre-noi/">Despre noi</a></li>
+<li id="menu-item-19289" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19289"><a href="/contul-meu/"><i class="fa fa-user"></i></a></li>
+<li id="menu-item-wpml-ls-9-ro" class="menu-item-language menu-item-language-current menu-item wpml-ls-slot-9 wpml-ls-item wpml-ls-item-ro wpml-ls-current-language wpml-ls-menu-item wpml-ls-first-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-wpml-ls-9-ro"><a href="https://operanb.ro/"><img
+            class="wpml-ls-flag"
+            src="https://operanb.ro/wp-content/plugins/sitepress-multilingual-cms/res/flags/ro.png"
+            alt="Română"
+            width=18
+            height=12
+    /></a></li>
+<li id="menu-item-wpml-ls-9-en" class="menu-item-language menu-item wpml-ls-slot-9 wpml-ls-item wpml-ls-item-en wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-wpml-ls-9-en"><a href="https://operanb.ro/?lang=en"><img
+            class="wpml-ls-flag"
+            src="https://operanb.ro/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png"
+            alt="Engleză"
+            width=18
+            height=12
+    /></a></li>
+</ul>            <form role="search" method="get" class="search-form search" action="https://operanb.ro/">
+    <input type="text" class="search-field"
+        placeholder="Caută …"
+        value="" name="s"
+        title="Caută după:" />
+<input type='hidden' name='lang' value='ro' /></form>
+                        
+            
+        </nav>
+    
+    <div id="logo" class="fixedlogo fixed">
+      <img src="https://operanb.ro/wp-content/themes/opera/img/logo_blazon_hc2s2025.png" alt="logo"/>
+    </div>
+    <a id="calendar-btn" class="fixed" href="/calendar" title="calendar"><i class="fa fa-calendar"></i>Calendar</a>
+    <a id="tur-btn" class="fixed" href="https://my.matterport.com/show/?m=s2sTtSx5HRp&f=0" title="Tur Virtual Opera Nationala Bucuresti" target="_blank" rel="nofollow"><i class="fa fa-cube"></i>Tur virtual</a>
+    <!--a id="por-btn" class="fixed" href="https://porumbescu.org" title="Porumbescu" target="_blank" rel="nofollow"><span  class="notranslate">Porumbescu</span></a-->
+    <!--a id="po-btn" class="fixed" href="https://operanb.ro/bof2023" title="Bucharest Opera Festival 2024"><span>Bucharest<br>Opera Festival</span></a-->
+    <a id="concurs" class="fixed" href="https://operanb.ro/descopera/" title="DescOperă"><span>DescOperă</span></a>
+    <a id="moon-btn" class="fixed" href="https://operanb.ro/fazele-lunii-la-opera/" title="Fazele lunii la Opera"><div id="cycling-container"></div></a>   
+    
+    <!--div id="social-btn" class="fixed" >
+      <a href="https://www.facebook.com/opera.bucharest" target="_blank"><i class="fa fa-facebook"></i></a>
+      <a href="https://twitter.com/OperaBucharest" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.youtube.com/channel/UClYu9GLWIYTpcZQH34Qzllw" target="_blank"><i class="fa fa-youtube"></i></a>
+      <a href="https://vimeo.com/user23033269" target="_blank"><i class="fa fa-vimeo"></i></a>
+    </div-->
+
+    <div id="iconScroll" class="fixed"><i class="fa fa-angle-down"></i></div>
+    <div id="navSlide" class="navSlide fixed">
+    </div>
+  </div>
+	
+  <div id="content" class="content">
+		<div class="dif2-bg">
+		<div class="site-wrapper">
+			<h3 style="color: #eee;">Spectacole</h3>  
+		</div>
+    <div class="grid site-wrapper">
+        <div class="grid-sizer"></div>
+    
+          
+      <div class="grid-item box">
+        <div class="ingrid">
+          
+                        <a class="box-thumb" href="https://operanb.ro/spectacol/barbierul-din-sevilla/" title="BĂRBIERUL DIN SEVILLA">
+                <img width="370" height="250" src="https://operanb.ro/wp-content/uploads/2026/02/Octavian-Pavel-Opera-romana-13-370x250.jpg" class="attachment-grid size-grid wp-post-image" alt="" decoding="async" loading="lazy" />              </a>
+                    <a class="box-title" href="https://operanb.ro/spectacol/barbierul-din-sevilla/" title="BĂRBIERUL DIN SEVILLA">BĂRBIERUL DIN SEVILLA					<div class="home-line">
+						<span class="box-stag-type" style="margin-right:15px;">
+														</span>    
+						<span class="home-compozitor"> Gioachino Rossini </span>
+					</div>		
+            </a>
+          <p class="box-excerpt">&nbsp;</p>
+          <div class="clear">
+            <a class="read-more right" href="https://operanb.ro/spectacol/barbierul-din-sevilla/" title="Citește">Citește</a>
+                      </div>
+        </div>  
+      </div>
+      
+      
+          
+      <div class="grid-item box">
+        <div class="ingrid">
+          
+                        <a class="box-thumb" href="https://operanb.ro/spectacol/rigoletto-2/" title="Rigoletto">
+                <img width="370" height="250" src="https://operanb.ro/wp-content/uploads/2017/04/rigoletto-web-370x250.jpg" class="attachment-grid size-grid wp-post-image" alt="" decoding="async" loading="lazy" />              </a>
+                    <a class="box-title" href="https://operanb.ro/spectacol/rigoletto-2/" title="Rigoletto">Rigoletto					<div class="home-line">
+						<span class="box-stag-type" style="margin-right:15px;">
+								Operă						</span>    
+						<span class="home-compozitor"> Giuseppe Verdi </span>
+					</div>		
+            </a>
+          <p class="box-excerpt">Sinopsis
+
+Actul I
+
+Scena 1
+
+Chicago. Revelion 1929. La un speakeasy condus de Rigoletto (unul din barurile de la subsol ilegale unde se putea bea alcool în timpul prohibiţiei), Ducele, oamenii din banda lui şi prietenele lor dau o petrecere nebună.</p>
+          <div class="clear">
+            <a class="read-more right" href="https://operanb.ro/spectacol/rigoletto-2/" title="Citește">Citește</a>
+                      </div>
+        </div>  
+      </div>
+      
+      
+          
+      <div class="grid-item box">
+        <div class="ingrid">
+          
+                        <a class="box-thumb" href="https://operanb.ro/spectacol/callas/" title="CALLAS &#8211; OANA PELLEA">
+                <img width="370" height="250" src="https://operanb.ro/wp-content/uploads/2024/11/caver-web-Callas-370x250.jpg" class="attachment-grid size-grid wp-post-image" alt="" decoding="async" loading="lazy" />              </a>
+                    <a class="box-title" href="https://operanb.ro/spectacol/callas/" title="CALLAS &#8211; OANA PELLEA">CALLAS &#8211; OANA PELLEA					<div class="home-line">
+						<span class="box-stag-type" style="margin-right:15px;">
+								Evenimente						</span>    
+						<span class="home-compozitor"> de Terrence McNally </span>
+					</div>		
+            </a>
+          <p class="box-excerpt">Callas – Oana Pellea de Terrence McNally, o producție originală, la intersecția dintre teatru și operă, ce explorează multiplele fațete ale personalității sopranei Maria Callas. Piesa lui Terrence McNally urmărește un masterclass susținut de divă la Juilliard School of Music din New York, în ultimii ani din viață. Traducerea, adaptarea și regia poartă semnătura lui Laurențiu [&hellip;]</p>
+          <div class="clear">
+            <a class="read-more right" href="https://operanb.ro/spectacol/callas/" title="Citește">Citește</a>
+                      </div>
+        </div>  
+      </div>
+      
+      
+      
+    </div>
+		</div> 
+		<div class="dif-bg">		
+		<div class="site-wrapper">
+			<hr />
+		</div>
+		
+		<div class="site-wrapper">
+			<h3>Noutăți</h3>  
+		</div>
+		<div class="grid site-wrapper">
+    <div class="grid-sizer"></div>
+
+          
+      <div class="grid-item box">
+        <div class="ingrid">
+          
+                    <a class="box-title" href="https://operanb.ro/auditie-prim-solisti-corp-de-balet/" title="AUDIȚIE &#8211; PRIM-SOLIȘTI &#8211; CORP DE BALET">AUDIȚIE &#8211; PRIM-SOLIȘTI &#8211; CORP DE BALET</a>
+          <p class="box-excerpt">      STAGIUNEA 2026-2027 BĂIEȚI Opera Națională București organizează audiție pentru prim-soliști și băieți ansamblu în vederea colaborării în cadrul stagiunii 2026–2027. Sunt invitați să se înscrie candidații care îndeplinesc următoarele condiții: În prima etapă, candidații vor transmite materialele preliminare în intervalul 26 septembrie &#8211; 04 octombrie, iar răspunsul celor selectați pentru etapa a II-a va fi [&hellip;]</p>
+          <div class="clear">
+            <a class="read-more right" href="https://operanb.ro/auditie-prim-solisti-corp-de-balet/" title="Citește">Citește</a>
+                      </div>
+        </div>  
+      </div>
+      
+      
+          
+      <div class="grid-item box">
+        <div class="ingrid">
+          
+                        <a class="box-thumb" href="https://operanb.ro/opera-nationala-bucuresti-organizeaza-auditie-pentru-musical/" title="OPERA NAȚIONALĂ BUCUREȘTI ORGANIZEAZĂ AUDIȚIE PENTRU MUSICAL">
+                <img width="370" height="250" src="https://operanb.ro/wp-content/uploads/2026/09/auditie-370x250.jpg" class="attachment-grid size-grid wp-post-image" alt="" decoding="async" loading="lazy" />              </a>
+                    <a class="box-title" href="https://operanb.ro/opera-nationala-bucuresti-organizeaza-auditie-pentru-musical/" title="OPERA NAȚIONALĂ BUCUREȘTI ORGANIZEAZĂ AUDIȚIE PENTRU MUSICAL">OPERA NAȚIONALĂ BUCUREȘTI ORGANIZEAZĂ AUDIȚIE PENTRU MUSICAL</a>
+          <p class="box-excerpt">Opera Națională București, prin Studioul Experimental în Artele Spectacolului Muzical – ”Ludovic Spiess”,&nbsp; organizează audiție pentru tineri soliști, în vederea participării la viitoare producții de musical. Înscrierea la audiție se realizează prin transmiterea următoarelor materiale: • CV ; • link YouTube cu o înregistrare realizată cu cel mult 2 luni înainte de data înscrierii, conținând [&hellip;]</p>
+          <div class="clear">
+            <a class="read-more right" href="https://operanb.ro/opera-nationala-bucuresti-organizeaza-auditie-pentru-musical/" title="Citește">Citește</a>
+                      </div>
+        </div>  
+      </div>
+      
+      
+          
+      <div class="grid-item box">
+        <div class="ingrid">
+          
+                    <a class="box-title" href="https://operanb.ro/anunt-17/" title="ANUNȚ">ANUNȚ</a>
+          <p class="box-excerpt">Având în vedere interesul foarte ridicat pentru spectacolul „Fantoma de la Operă”, Opera Națională București atrage atenția publicului asupra riscului apariției unor bilete false, duplicate sau revândute prin surse neautorizate. Pentru siguranța spectatorilor, recomandăm achiziționarea biletelor exclusiv prin canalele oficiale comunicate de Opera Națională București. Instituția nu poate garanta autenticitatea biletelor cumpărate de pe platforme [&hellip;]</p>
+          <div class="clear">
+            <a class="read-more right" href="https://operanb.ro/anunt-17/" title="Citește">Citește</a>
+                      </div>
+        </div>  
+      </div>
+      
+      
+      
+
+    </div>
+    </div>		
+    
+    <div class="dif3-bg">
+        <div class="site-wrapper">
+    			<div id="nzm-container-5f7b0edd1fbbbf2e240db486"></div>
+    	</div>
+	</div>
+	<div class="par-ban desktop-only">
+        <a href="/operanb/seasm/"><img src="/wp-content/uploads/2023/10/Studioul-experimental-1920x270-1.jpg"></a>
+    </div>
+    <div class="par-ban mobile-only">
+        <a href="/operanb/seasm/"><img src="/wp-content/uploads/2023/10/Studioul-experimental-1024x810-1.jpg"></a>
+    </div>
+	
+
+		<div class="par-ban">
+	    <img src="https://operanb.ro/wp-content/uploads/2026/05/parteneri43.jpg">
+	</div>
+	
+    <div id="footer">
+<section id="foomenu">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-3 col-xs-12">
+<ul>
+	<li class="first"><a href="/despre-noi/" class="box-title">Despre noi</a>
+	<ul>
+		<li class="first"><a href="/despre-noi/legislatie/">Legislație</a></li>
+		<li><a href="/despre-noi/conducere/">Conducere</a></li>
+		<li><a href="/despre-noi/artistic/">Artistic</a></li>
+		<li><a href="/despre-noi/departamente/">Departamente</a></li>
+		<li><a href="/despre-noi/organizare/">Organizare</a></li>
+		<li><a href="/despre-noi/programe-strategii/">Programe și strategii</a></li>
+		<li><a href="/despre-noi/rapoarte-studii/">Rapoarte și studii</a></li>
+		<li><a href="/despre-noi/integritate-institutionala/">Integritate instituțională</a></li>
+
+	</ul>
+	</li>
+	<li>&nbsp;</li>
+	<li class="last"><a  class="box-title" href="/despre-noi/informatii-de-interes-public/">Interes public</a>
+	<ul>
+		<li class="first"><a href="/despre-noi/solicitare-informaii/">Solicitare de informații</a></li>
+		<li><a href="/despre-noi/buget/">Buget</a></li>
+		<li><a href="/despre-noi/bilanuri-contabile/">Bilanțuri contabile</a></li>
+		<li><a href="/despre-noi/informatii-de-interes-public/achizitii-publice/">Achiziții publice</a></li>
+		<li><a href="/despre-noi/informatii-de-interes-public/declaratii-de-avere-si-interese/">Declarații de avere</a></li>
+		<li class="last"><a href="/agenda-conducerii/">Agenda conducerii</a></li>
+	</ul>	
+	</li>
+</ul>
+</div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+<ul>
+	<li class="first last"><a href="/pentru-spectatori/" class="box-title">Pentru spectatori</a>
+	<ul>
+		<li><a href="/spectacol">Spectacole</a></li>
+		<li class="first"><a href="/pentru-spectatori/informatii-utile-si-facilitati/">Informații utile și facilități</a></li>
+		<li><a href="/pentru-spectatori/bilete/">Bilete</a></li> 
+		<li><a href="/programe-de-sala/">Programe de sală</a></li>
+		<li><a href="/galerie-foto/">Galerie foto</a></li>
+		<li><a href="/pentru-spectatori/termeni-si-conditii/">Termeni și condiții</a></li>
+		<li><a href="/pentru-spectatori/politica-de-confidentialitate/">Politica de confidențialitate</a></li>
+		<li><a href="/category/mass-media/">Media</a></li>
+		<!--
+		<li><a href="/pentru-spectatori/regulament-seri-de-opera-estivale/">Regulament Seri de Operă Estivale</a></li>
+        <li><a href="/pentru-spectatori/regulament-promenada-operei/" style="font-size: 0.97em;">Regulament Promenada Operei 2020</a></li>
+        <li><a href="/pentru-spectatori/regulament-promenada-operei-2021/" style="font-size: 0.97em;">Regulament Promenada Operei 2021</a></li>
+        -->
+        <li><a href="/regulament-de-participare-la-spectacole/">Regulament participare spectacole</a></li>
+        
+	</ul>
+	</li>
+    <li>&nbsp;</li>
+	<li class="first"><a href="/parteneri/" class="box-title">Proiecte</a>
+	<ul>
+		<li class="first"><a href="https://operanb.ro/opera100" target="_blank">Centenar</a></li>
+        <li><a href="https://porumbescu.org/" target="_blank" class="notranslate">Porumbescu</a></li>
+        <li><a href="https://operanb.ro/ccm2022" target="_blank">Christmas Market</a></li>
+        <li><a href="https://operanb.ro/bof2023" target="_blank">Bucharest Opera Festival</a></li>
+        <li><a href="https://operanb.ro/concursului-international-constantin-silvestri-2024/">Concursul Internațional „Constantin Silvestri” 2024</a></li>
+	</ul>
+	</li>    
+
+</ul>
+</div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+<ul>
+
+    <li class="first"><a href="#" class="box-title">Social Media</a>
+	<ul>
+		<li class="first">
+		    <a target="_blank" class="fuse_social_icons_links" href="https://www.facebook.com/operanb.ro">	
+		    <i class="fa fa-facebook fb-awesome-social awesome-social"></i>
+		    </a>
+		    <a target="_blank" class="fuse_social_icons_links" href="https://www.instagram.com/operanationalabucuresti/">	
+		    <i class="fa fa-instagram instagram-awesome-social awesome-social"></i>
+		    </a>
+		    <a target="_blank" class="fuse_social_icons_links" href="https://twitter.com/OperaBucharest">	
+		    <i class="fa fa-twitter tw-awesome-social awesome-social"></i>
+		    </a>
+		    <a target="_blank" class="fuse_social_icons_links" href="https://www.youtube.com/channel/UCeTAqr45pGvWFemU0k8k2fA">	
+		    <i class="fa fa-youtube-play youtube-awesome-social awesome-social"></i>
+		    </a>
+	    </li>
+
+	</ul>
+	</li>	
+	<li>&nbsp;</li>
+	<li class="first last"><a href="#" class="box-title">Serviciul 112</a>
+	<ul>
+		<li class="first"><a target="_blank" href="https://www.sts.ro/ro/serviciu-localizare-apel-112"><img src="/wp-content/themes/opera/img/112-40.png"></a></li>
+
+	</ul>
+	</li>
+    <li>&nbsp;</li>
+	<li class="first"><a href="/parteneri/" class="box-title">Parteneri</a>
+	<ul>
+		<li class="first"><a href="/parteneri/partenerii-nostri">Partenerii nostri</a></li>
+
+	</ul>	
+	<li>&nbsp;</li>
+	<li class="first last"><a href="#" class="box-title">Contact</a>
+	<ul>
+		<li class="first"><a href="/contact/">Contact</a></li>
+	</ul>
+	</li>
+	<li>&nbsp;</li>
+	<li class="first last"><a href="https://e-consultare.gov.ro/" class="box-title">Platforma E-consultare</a>
+	<ul>
+		<li class="first"><a target="_blank" href="https://e-consultare.gov.ro/"><img src="/wp-content/themes/opera/img/e-con.jpg" style="border-radius:12px; width:100px;"></a></li>
+	</ul>
+	</li>	
+</ul>
+</div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+	<div class="final-logo">	
+		<img src="https://operanb.ro/wp-content/themes/opera/img/logo_blazon_hc2s2025v3.png" class="center-block">
+		<span class="mcult">Opera Națională București </span>
+		<span class="mcult">este o instituție subordonată </span>
+		<span class="mcult"><a target="_blank" href="http://cultura.ro/">Ministerului Culturii</a>.</span>
+		<span class="mcult cright">(Bulevardul Unirii nr. 22, Sector 3 București)</span>
+	</div>
+	</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <span class="cright">© 2026 Opera Națională București. Toate drepturile rezervate.</span>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+<!--section id="final">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><img src="/wp-content/themes/opera/img/logob.png" class="center-block"></div>
+      
+    </div>
+  </div>
+</section-->
+
+	
+</div>
+  </div>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/opera/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+	    <!-- Start Readabler WordPress Plugin -->
+        <div id="mdp-readabler-popup-box" class="mdp-readabler-modal-animation-fade mdp-readabler-modal-fixed  mdp-readabler-modal-shadow " aria-hidden="true" data-nosnippet>
+
+            <div id="mdp-readabler-popup" role="dialog" aria-modal="true" data-start="left" aria-labelledby="mdp-readabler-popup-box">
+                <header id="mdp-readabler-popup-header">
+                    <h3>Accesibilizare</h3>
+                    <button id="mdp-readabler-popup-close" aria-label="Close Accessibility Panel"></button>
+                </header>
+                <section id="mdp-readabler-popup-main">
+                    
+                    <div class="mdp-readabler-subheader">            <h4>Moduri de accesibilizare</h4>
+		</div>
+
+		<div id="mdp-readabler-accessibility-profiles-box">        <div id="mdp-readabler-accessibility-profile-epilepsy" class="mdp-readabler-accessibility-profile-item" tabindex="0">
+            <div class="mdp-readabler-row">
+                <div class="mdp-readabler-switch-box">
+                    <label class="mdp-switch">
+	                    Mod de siguranță pentru epilepsie                        <input type="checkbox" name="mdp-readabler-accessibility-profile-epilepsy" value="on" tabindex="-1">
+                        <span class="mdp-slider"></span>
+                    </label>
+                </div>
+                <div class="mdp-readabler-title-box">
+                    <div class="mdp-readabler-profile-title">Mod de siguranță pentru epilepsie</div>
+                    <div class="mdp-readabler-profile-short">Culori mai șterse &amp; fără animații intermitente</div>
+                </div>
+            </div>
+            <div class="mdp-readabler-profile-description">Acest mod le permite persoanelor cu epilepsie să folosească site-ul în siguranță, eliminând riscul de convulsii care rezultă din animațiile intermitente sau intermitente și combinațiile de culori riscante.</div>
+        </div>
+                <div id="mdp-readabler-accessibility-profile-visually-impaired" class="mdp-readabler-accessibility-profile-item" tabindex="0">
+            <div class="mdp-readabler-row">
+                <div class="mdp-readabler-switch-box">
+                    <label class="mdp-switch">
+	                    Modul pentru deficiențe de vedere                        <input type="checkbox" name="mdp-readabler-accessibility-profile-visually-impaired" value="on" tabindex="-1">
+                        <span class="mdp-slider"></span>
+                    </label>
+                </div>
+                <div class="mdp-readabler-title-box">
+                    <div class="mdp-readabler-profile-title">Modul pentru deficiențe de vedere</div>
+                    <div class="mdp-readabler-profile-short">Îmbunătățește elementele site-ului</div>
+                </div>
+            </div>
+            <div class="mdp-readabler-profile-description">Acest mod ajustează site-ul web pentru confortul utilizatorilor cu deficiențe de vedere, cum ar fi vederea degradată, vederea în tunel, cataractă, glaucom și altele.</div>
+        </div>
+                <div id="mdp-readabler-accessibility-profile-cognitive-disability" class="mdp-readabler-accessibility-profile-item" tabindex="0">
+            <div class="mdp-readabler-row">
+                <div class="mdp-readabler-switch-box">
+                    <label class="mdp-switch">
+	                    Modul pentru dizabilități cognitive                        <input type="checkbox" name="mdp-readabler-accessibility-profile-cognitive-disability" value="on" tabindex="-1">
+                        <span class="mdp-slider"></span>
+                    </label>
+                </div>
+                <div class="mdp-readabler-title-box">
+                    <div class="mdp-readabler-profile-title">Modul pentru dizabilități cognitive</div>
+                    <div class="mdp-readabler-profile-short">Ajută la concentrarea asupra unui anumit conținut</div>
+                </div>
+            </div>
+            <div class="mdp-readabler-profile-description">Acest mod oferă diferite opțiuni de asistență pentru a ajuta utilizatorii cu deficiențe cognitive, cum ar fi dislexia, autismul și altele, să se concentreze mai ușor pe elementele esențiale ale site-ului web.</div>
+        </div>
+                <div id="mdp-readabler-accessibility-profile-adhd-friendly" class="mdp-readabler-accessibility-profile-item" tabindex="0">
+            <div class="mdp-readabler-row">
+                <div class="mdp-readabler-switch-box">
+                    <label class="mdp-switch">
+	                    Modul prietenos ADHD                         <input type="checkbox" name="mdp-readabler-accessibility-profile-adhd-friendly" value="on" tabindex="-1">
+                        <span class="mdp-slider"></span>
+                    </label>
+                </div>
+                <div class="mdp-readabler-title-box">
+                    <div class="mdp-readabler-profile-title">Modul prietenos ADHD </div>
+                    <div class="mdp-readabler-profile-short">Reduce distragerile și îmbunătățește concentrarea</div>
+                </div>
+            </div>
+            <div class="mdp-readabler-profile-description">Acest mod îi ajută pe utilizatorii cu ADHD și tulburări de neurodezvoltare să citească, să răsfoiască și să se concentreze mai ușor pe elementele principale ale site-ului web, reducând în același timp semnificativ distragerile.</div>
+        </div>
+                <div id="mdp-readabler-accessibility-profile-blind-users" class="mdp-readabler-accessibility-profile-item" tabindex="0">
+            <div class="mdp-readabler-row">
+                <div class="mdp-readabler-switch-box">
+                    <label class="mdp-switch">
+	                    Mod pentru deficiențe de vedere                        <input type="checkbox" name="mdp-readabler-accessibility-profile-blind-users" value="on" tabindex="-1">
+                        <span class="mdp-slider"></span>
+                    </label>
+                </div>
+                <div class="mdp-readabler-title-box">
+                    <div class="mdp-readabler-profile-title">Mod pentru deficiențe de vedere</div>
+                    <div class="mdp-readabler-profile-short">Permite utilizarea site-ului cu cititorul de ecran</div>
+                </div>
+            </div>
+            <div class="mdp-readabler-profile-description">Acest mod configurează site-ul web să fie compatibil cu cititoare de ecran precum JAWS, NVDA, VoiceOver și TalkBack. Un cititor de ecran este un software pentru utilizatori nevăzători care este instalat pe un computer și pe un smartphone, iar site-urile web trebuie să fie compatibile cu acesta.</div>
+        </div>
+        </div>
+                    
+                    <div class="mdp-readabler-subheader">                <h4>Alte setări</h4>
+	        </div><div id="mdp-readabler-readable-experience-box">        <div id="mdp-readabler-action-content-scaling" class="mdp-readabler-action-box mdp-readabler-spinner-box">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-title">Scalarea conținutului</span>
+            </div>
+            <div class="mdp-readabler-input-spinner-box" data-step="5">
+                <div class="mdp-readabler-control">
+                    <button class="mdp-readabler-plus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Increase Content Size" ></button>
+                    <div class="mdp-readabler-value" data-value="0">Implicit</div>
+                    <button class="mdp-readabler-minus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Decrease Content Size" ></button>
+                </div>
+            </div>
+        </div>
+                <div id="mdp-readabler-action-text-magnifier"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Lupă pentru text</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-readable-font"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Font special</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-dyslexia-font"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Prietenos cu dislexia</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-highlight-titles"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Subliniază titluri</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-highlight-links"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Subliniază linkuri</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-font-sizing" class="mdp-readabler-action-box mdp-readabler-spinner-box">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-title">Mărimea fontului</span>
+            </div>
+            <div class="mdp-readabler-input-spinner-box" data-step="5">
+                <div class="mdp-readabler-control">
+                    <button class="mdp-readabler-plus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Increase Font Size" ></button>
+                    <div class="mdp-readabler-value" data-value="0">Implicit</div>
+                    <button class="mdp-readabler-minus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Decrease Font Size" ></button>
+                </div>
+            </div>
+        </div>
+                <div id="mdp-readabler-action-line-height" class="mdp-readabler-action-box mdp-readabler-spinner-box">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-title">Înălțimea liniei</span>
+            </div>
+            <div class="mdp-readabler-input-spinner-box" data-step="5">
+                <div class="mdp-readabler-control">
+                    <button class="mdp-readabler-plus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Increase Înălțimea liniei" ></button>
+                    <div class="mdp-readabler-value" data-value="0">Implicit</div>
+                    <button class="mdp-readabler-minus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Decrease Înălțimea liniei" ></button>
+                </div>
+            </div>
+        </div>
+                <div id="mdp-readabler-action-letter-spacing" class="mdp-readabler-action-box mdp-readabler-spinner-box">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-title">Spațiere litere</span>
+            </div>
+            <div class="mdp-readabler-input-spinner-box" data-step="5">
+                <div class="mdp-readabler-control">
+                    <button class="mdp-readabler-plus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Increase Letter Space" ></button>
+                    <div class="mdp-readabler-value" data-value="0">Implicit</div>
+                    <button class="mdp-readabler-minus"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Decrease Letter Space" ></button>
+                </div>
+            </div>
+        </div>
+                <div id="mdp-readabler-action-align-left"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Aliniat la stânga</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-align-center"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Aliniat la centru</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-align-right"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Aliniat la dreapta</span>
+            </div>
+        </div>
+	    </div>
+                    <div class="mdp-readabler-subheader">                <h4>Setări vizuale</h4>
+		    </div><div id="mdp-readabler-visually-pleasing-experience-box">        <div id="mdp-readabler-action-dark-contrast"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Contrast închis</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-light-contrast"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Contrast deschis</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-monochrome"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Monochrome</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-high-contrast"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Contrast puternic</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-high-saturation"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Saturație mare</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-low-saturation"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Saturație mică</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-text-colors" class="mdp-readabler-action-box mdp-readabler-palette-box">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-title">Ajustați culorile textului</span>
+                <div class="mdp-readabler-color-box">
+                                            <span data-color="maroon"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Maroon"
+                              style="background-color: maroon !important;">
+                        </span>
+                                            <span data-color="red"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Red"
+                              style="background-color: red !important;">
+                        </span>
+                                            <span data-color="orange"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Orange"
+                              style="background-color: orange !important;">
+                        </span>
+                                            <span data-color="yellow"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Yellow"
+                              style="background-color: yellow !important;">
+                        </span>
+                                            <span data-color="olive"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Olive"
+                              style="background-color: olive !important;">
+                        </span>
+                                            <span data-color="green"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Green"
+                              style="background-color: green !important;">
+                        </span>
+                                            <span data-color="purple"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Purple"
+                              style="background-color: purple !important;">
+                        </span>
+                                            <span data-color="fuchsia"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Fuchsia"
+                              style="background-color: fuchsia !important;">
+                        </span>
+                                            <span data-color="lime"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Lime"
+                              style="background-color: lime !important;">
+                        </span>
+                                            <span data-color="teal"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Teal"
+                              style="background-color: teal !important;">
+                        </span>
+                                            <span data-color="aqua"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Aqua"
+                              style="background-color: aqua !important;">
+                        </span>
+                                            <span data-color="blue"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Blue"
+                              style="background-color: blue !important;">
+                        </span>
+                                            <span data-color="navy"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Navy"
+                              style="background-color: navy !important;">
+                        </span>
+                                            <span data-color="black"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Black"
+                              style="background-color: black !important;">
+                        </span>
+                                            <span data-color="white"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to White"
+                              style="background-color: white !important;">
+                        </span>
+                                    </div>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-title-colors" class="mdp-readabler-action-box mdp-readabler-palette-box">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-title">Ajustați culorile titlului</span>
+                <div class="mdp-readabler-color-box">
+                                            <span data-color="maroon"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Maroon"
+                              style="background-color: maroon !important;">
+                        </span>
+                                            <span data-color="red"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Red"
+                              style="background-color: red !important;">
+                        </span>
+                                            <span data-color="orange"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Orange"
+                              style="background-color: orange !important;">
+                        </span>
+                                            <span data-color="yellow"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Yellow"
+                              style="background-color: yellow !important;">
+                        </span>
+                                            <span data-color="olive"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Olive"
+                              style="background-color: olive !important;">
+                        </span>
+                                            <span data-color="green"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Green"
+                              style="background-color: green !important;">
+                        </span>
+                                            <span data-color="purple"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Purple"
+                              style="background-color: purple !important;">
+                        </span>
+                                            <span data-color="fuchsia"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Fuchsia"
+                              style="background-color: fuchsia !important;">
+                        </span>
+                                            <span data-color="lime"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Lime"
+                              style="background-color: lime !important;">
+                        </span>
+                                            <span data-color="teal"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Teal"
+                              style="background-color: teal !important;">
+                        </span>
+                                            <span data-color="aqua"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Aqua"
+                              style="background-color: aqua !important;">
+                        </span>
+                                            <span data-color="blue"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Blue"
+                              style="background-color: blue !important;">
+                        </span>
+                                            <span data-color="navy"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Navy"
+                              style="background-color: navy !important;">
+                        </span>
+                                            <span data-color="black"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Black"
+                              style="background-color: black !important;">
+                        </span>
+                                            <span data-color="white"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to White"
+                              style="background-color: white !important;">
+                        </span>
+                                    </div>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-background-colors" class="mdp-readabler-action-box mdp-readabler-palette-box">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-title">Ajustați culorile de fundal</span>
+                <div class="mdp-readabler-color-box">
+                                            <span data-color="maroon"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Maroon"
+                              style="background-color: maroon !important;">
+                        </span>
+                                            <span data-color="red"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Red"
+                              style="background-color: red !important;">
+                        </span>
+                                            <span data-color="orange"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Orange"
+                              style="background-color: orange !important;">
+                        </span>
+                                            <span data-color="yellow"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Yellow"
+                              style="background-color: yellow !important;">
+                        </span>
+                                            <span data-color="olive"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Olive"
+                              style="background-color: olive !important;">
+                        </span>
+                                            <span data-color="green"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Green"
+                              style="background-color: green !important;">
+                        </span>
+                                            <span data-color="purple"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Purple"
+                              style="background-color: purple !important;">
+                        </span>
+                                            <span data-color="fuchsia"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Fuchsia"
+                              style="background-color: fuchsia !important;">
+                        </span>
+                                            <span data-color="lime"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Lime"
+                              style="background-color: lime !important;">
+                        </span>
+                                            <span data-color="teal"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Teal"
+                              style="background-color: teal !important;">
+                        </span>
+                                            <span data-color="aqua"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Aqua"
+                              style="background-color: aqua !important;">
+                        </span>
+                                            <span data-color="blue"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Blue"
+                              style="background-color: blue !important;">
+                        </span>
+                                            <span data-color="navy"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Navy"
+                              style="background-color: navy !important;">
+                        </span>
+                                            <span data-color="black"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to Black"
+                              style="background-color: black !important;">
+                        </span>
+                                            <span data-color="white"
+                              class="mdp-readabler-color "
+                              role="button"
+                              tabindex="0"
+                              aria-label="Change Color to White"
+                              style="background-color: white !important;">
+                        </span>
+                                    </div>
+            </div>
+        </div>
+	    </div>
+                    <div class="mdp-readabler-subheader">                <h4>Orientare ușoară</h4>
+		    </div><div id="mdp-readabler-easy-orientation-box">        <div id="mdp-readabler-action-mute-sounds"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Fără sunete</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-hide-images"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Ascunde imaginile</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-virtual-keyboard"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Tastatura virtuală</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-reading-guide"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Suport de citit</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-stop-animations"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Fără animații</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-reading-mask"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Mască de citire</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-highlight-hover"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Subliniază deasupra</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-highlight-focus"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Subliniază focus</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-big-black-cursor"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Cursor mare închis</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-big-white-cursor"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Cursor mare deschis</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-keyboard-navigation"
+             class="mdp-readabler-action-box mdp-readabler-toggle-box"
+             tabindex="0">
+            <div class="mdp-readabler-action-box-content">
+                <span class="mdp-readabler-icon"></span>
+                <span class="mdp-readabler-title">Taste de navigare</span>
+            </div>
+        </div>
+	            <div id="mdp-readabler-action-useful-links" class="mdp-readabler-action-box mdp-readabler-useful-links-box">
+            <div class="mdp-readabler-action-box-content">
+                <label for="mdp-readabler-useful-links" class="mdp-readabler-title">Navigator linkuri</label>
+                <div class="mdp-readabler-select-box">
+                    <select id="mdp-readabler-useful-links" aria-label="Useful Links">
+                        <option selected="" disabled="" value="mdp-default">
+                            Selectează o opțiune                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+	    </div>
+                </section>
+                <footer id="mdp-readabler-popup-footer">
+                                        <button id="mdp-readabler-reset-btn" aria-label="Setări inițiale">
+                        <span>Setări inițiale</span>
+                    </button>
+                    	                                    <button id="mdp-readabler-hide-btn" aria-label="Hide Accessibility Panel forever" >
+                        <span>Ascunde definitiv</span>
+                    </button>
+	                                                    </footer>
+                            </div>
+
+            
+        </div>
+                    <div id="mdp-readabler-keyboard-box">
+                <div class="simple-keyboard"></div>
+            </div>
+        	    <!-- End Readabler WordPress Plugin -->
+	            <!-- Start Readabler WordPress Plugin -->
+        <div class="mdp-readabler-trigger-button-box bottom-left mdp-entrance-fade mdp-hover-none" data-nosnippet>
+            <button  id="mdp-readabler-trigger-button"
+                    class="mdp-icon-position-before"
+                    aria-label="Open Accessibility Panel"
+                    data-readabler-trigger="">
+	                                <span class="mdp-readabler-trigger-button-icon"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 293.05 349.63"><path d="M95.37,51.29a51.23,51.23,0,1,1,51.29,51.16h-.07A51.19,51.19,0,0,1,95.37,51.29ZM293,134.59A25.61,25.61,0,0,0,265.49,111h-.13l-89.64,8c-3.06.28-6.13.42-9.19.42H126.65q-4.59,0-9.16-.41L27.7,111a25.58,25.58,0,0,0-4.23,51l.22,0,72.45,6.56a8.55,8.55,0,0,1,7.77,8.48v19.62a33.82,33.82,0,0,1-2.36,12.45L60.48,313.66a25.61,25.61,0,1,0,46.85,20.71h0l39.14-95.61L186,334.63A25.61,25.61,0,0,0,232.86,314L191.63,209.14a34.14,34.14,0,0,1-2.35-12.44V177.09a8.55,8.55,0,0,1,7.77-8.49l72.33-6.55A25.61,25.61,0,0,0,293,134.59Z" /></svg></span>
+	            
+	                        </button>
+        </div>
+        <!-- End Readabler WordPress Plugin -->
+        <script>_nzm.run( 'send', 'pageview' ); </script><script id="magnific-js" src="https://operanb.ro/wp-content/plugins/shortcode-gallery-for-matterport-showcase/magnific.min.js"></script>
+<script id="wp-matterport-js" src="https://operanb.ro/wp-content/plugins/shortcode-gallery-for-matterport-showcase/wp-matterport.js"></script>
+<script id="wf-cookie-consent-cookiechoices-js" src="https://operanb.ro/wp-content/plugins/wf-cookie-consent/js/cookiechoices.min.js?ver=1.3"></script>
+<script id="micromodal-js" src="https://operanb.ro/wp-content/plugins/readabler/js/micromodal.min.js?ver=1.5.0"></script>
+<noscript> For full functionality of this site it is necessary to enable JavaScript.</noscript><script id="hotkeys-js" src="https://operanb.ro/wp-content/plugins/readabler/js/hotkeys.min.js?ver=1.5.0"></script>
+<noscript> For full functionality of this site it is necessary to enable JavaScript.</noscript><script id="simple-keyboard-js" src="https://operanb.ro/wp-content/plugins/readabler/js/simple-keyboard.min.js?ver=1.5.0"></script>
+<noscript> For full functionality of this site it is necessary to enable JavaScript.</noscript><script id="simple-keyboard-layout-js" src="https://operanb.ro/wp-content/plugins/readabler/js/simple-keyboard-layouts/index.min.js?ver=1.5.0"></script>
+<noscript> For full functionality of this site it is necessary to enable JavaScript.</noscript><script id="mdp-readabler-js-extra">
+var mdpReadablerOptions = {"ajaxurl":"https://operanb.ro/wp-admin/admin-ajax.php","nonce":"9f286fd9ee","pluginURL":"https://operanb.ro/wp-content/plugins/readabler/","onlineDictionary":"","language":"auto","profileEpilepsy":"1","profileVisuallyImpaired":"1","profileCognitiveDisability":"1","profileAdhdFriendly":"1","profileBlindUsers":"1","contentScaling":"1","readableFont":"1","dyslexiaFont":"1","highlightTitles":"1","highlightLinks":"1","textMagnifier":"1","fontSizing":"1","lineHeight":"1","letterSpacing":"1","alignCenter":"1","alignLeft":"1","alignRight":"1","darkContrast":"1","lightContrast":"1","monochrome":"1","highSaturation":"1","highContrast":"1","lowSaturation":"1","textColors":"1","titleColors":"1","backgroundColors":"1","muteSounds":"1","hideImages":"1","virtualKeyboard":"1","readingGuide":"1","usefulLinks":"1","stopAnimations":"1","readingMask":"1","highlightHover":"1","highlightFocus":"1","bigBlackCursor":"1","bigWhiteCursor":"1","textToSpeech":"","keyboardNavigation":"1","startConfig":"","startContentScaling":"0","startFontSizing":"0","startLineHeight":"0","startLetterSpacing":"0","ignoreSavedConfig":"off","showOpenButton":"1","buttonPosition":"bottom-left","buttonCaption":"","buttonIcon":"_readabler/readabler.svg","buttonIconPosition":"before","buttonSize":"24","buttonMargin":"10","buttonPadding":"20","buttonBorderRadius":"50","buttonColor":"rgba(255, 255, 255, 1)","buttonColorHover":"rgba(33, 150, 243, 1)","buttonBgcolor":"rgba(33, 150, 243, 1)","buttonBgcolorHover":"rgba(255, 255, 255, 1)","buttonEntranceTimeout":"2","buttonEntranceAnimation":"fade","buttonHoverAnimation":"none","popupOverlayColor":"rgba(2, 83, 238, 1)","popupBackgroundColor":"rgba(255, 255, 255, 1)","popupKeyColor":"rgba(33, 150, 243, 1)","popupBorderRadius":"20","popupAnimation":"fade","popupScroll":"","closeAnywhere":"","popupDraggable":"1","highlightP":"","hotKeyOpenInterface":"Alt+9","LEARN_MORE_IN_WIKIPEDIA":"Learn more in Wikipedia","DEFAULT":"Implicit","HOME":"Home","HIDE_ACCESSIBILITY_INTERFACE":"Ascunde\u021bi interfa\u021ba de accesibilitate?\n\nV\u0103 rug\u0103m s\u0103 re\u021bine\u021bi: dac\u0103 alege\u021bi s\u0103 ascunde\u021bi interfa\u021ba de accesibilitate, nu o ve\u021bi mai putea vedea, dec\u00e2t dac\u0103 \u0219terge\u021bi cookie-urile pentru acest site. Sunte\u021bi sigur c\u0103 dori\u021bi s\u0103 ascunde\u021bi interfa\u021ba?","highlightTitlesStyle":"solid","highlightTitlesColor":"#639af9","highlightTitlesWidth":"2","highlightTitlesOffset":"2","highlightLinksStyle":"solid","highlightLinksColor":"#639af9","highlightLinksWidth":"2","highlightLinksOffset":"2","textMagnifierBgColor":"#333333","textMagnifierColor":"#ffffff","textMagnifierFontSize":"36","readingGuideWidth":"500","readingGuideHeight":"12","readingGuideBackgroundColor":"#0274e6","readingGuideBorderColor":"#000000","readingGuideBorderWidth":"2","readingGuideBorderRadius":"10","readingGuideArrow":"10","readingMaskHeight":"100","readingMaskColor":"rgba(0, 0, 0, 0.7)","highlightHoverStyle":"solid","highlightHoverColor":"#639af9","highlightHoverWidth":"2","highlightHoverOffset":"2","highlightFocusStyle":"solid","highlightFocusColor":"#639af9","highlightFocusWidth":"2","highlightFocusOffset":"2","virtualKeyboardLayout":"english","hotKeyMenu":"M","hotKeyHeadings":"H","hotKeyForms":"F","hotKeyButtons":"B","hotKeyGraphics":"G"};
+//# sourceURL=mdp-readabler-js-extra
+</script>
+<script id="mdp-readabler-js" src="https://operanb.ro/wp-content/plugins/readabler/js/readabler.min.js?ver=1.5.0"></script>
+<noscript> For full functionality of this site it is necessary to enable JavaScript.</noscript><script id="opera-videojs-script-js" src="https://operanb.ro/wp-content/themes/opera/js/video.min.js?ver=20160816"></script>
+<script id="opera-masonry-script-js" src="https://operanb.ro/wp-content/themes/opera/js/masonry.js?ver=20160816"></script>
+<script id="opera-underscore-script-js" src="https://operanb.ro/wp-content/themes/opera/js/underscore.js?ver=20160816"></script>
+<script id="opera-app-parallax-script-js" src="https://operanb.ro/wp-content/themes/opera/js/app-parallax.js?ver=20241118"></script>
+<script id="opera-app-scroller-script-js" src="https://operanb.ro/wp-content/themes/opera/js/app-scroller.js?ver=20160816"></script>
+<script id="opera-app-menu-script-js" src="https://operanb.ro/wp-content/themes/opera/js/app-menu.js?ver=20160816"></script>
+<script id="opera-app-script-js" src="https://operanb.ro/wp-content/themes/opera/js/app.js?ver=1.1.9"></script>
+<script id="curtain-js-js" src="https://operanb.ro/wp-content/themes/opera/js/curtain.js?ver=1.1.0"></script>
+<script id="fancybox-purify-js" src="https://operanb.ro/wp-content/plugins/easy-fancybox/vendor/purify.min.js?ver=1791345211"></script>
+<script id="jquery-fancybox-js-extra">
+var efb_i18n = {"close":"Close","next":"Next","prev":"Previous","startSlideshow":"Start slideshow","toggleSize":"Toggle size"};
+//# sourceURL=jquery-fancybox-js-extra
+</script>
+<script id="jquery-fancybox-js" src="https://operanb.ro/wp-content/plugins/easy-fancybox/fancybox/1.5.4/jquery.fancybox.js?ver=1791345211"></script>
+<script id="jquery-fancybox-js-after">
+var fb_timeout, fb_opts={'autoScale':true,'showCloseButton':true,'margin':20,'pixelRatio':'false','centerOnScroll':true,'enableEscapeButton':true,'overlayShow':true,'hideOnOverlayClick':true,'minViewportWidth':320,'minVpHeight':320,'disableCoreLightbox':'true','enableBlockControls':'true','fancybox_openBlockControls':'true' };
+if(typeof easy_fancybox_handler==='undefined'){
+var easy_fancybox_handler=function(){
+jQuery([".nolightbox","a.wp-block-file__button","a.pin-it-button","a[href*='pinterest.com\/pin\/create']","a[href*='facebook.com\/share']","a[href*='twitter.com\/share']"].join(',')).addClass('nofancybox');
+jQuery('a.fancybox-close').on('click',function(e){e.preventDefault();jQuery.fancybox.close()});
+/* IMG */
+						var unlinkedImageBlocks=jQuery(".wp-block-image > img:not(.nofancybox,figure.nofancybox>img)");
+						unlinkedImageBlocks.wrap(function() {
+							var href = jQuery( this ).attr( "src" );
+							return "<a href='" + href + "'></a>";
+						});
+var fb_IMG_select=jQuery('a[href*=".jpg" i]:not(.nofancybox,li.nofancybox>a,figure.nofancybox>a),area[href*=".jpg" i]:not(.nofancybox),a[href*=".jpeg" i]:not(.nofancybox,li.nofancybox>a,figure.nofancybox>a),area[href*=".jpeg" i]:not(.nofancybox),a[href*=".png" i]:not(.nofancybox,li.nofancybox>a,figure.nofancybox>a),area[href*=".png" i]:not(.nofancybox)');
+fb_IMG_select.addClass('fancybox image');
+var fb_IMG_sections=jQuery('.gallery,.wp-block-gallery,.tiled-gallery,.wp-block-jetpack-tiled-gallery,.ngg-galleryoverview,.ngg-imagebrowser,.nextgen_pro_blog_gallery,.nextgen_pro_film,.nextgen_pro_horizontal_filmstrip,.ngg-pro-masonry-wrapper,.ngg-pro-mosaic-container,.nextgen_pro_sidescroll,.nextgen_pro_slideshow,.nextgen_pro_thumbnail_grid,.tiled-gallery');
+fb_IMG_sections.each(function(){jQuery(this).find(fb_IMG_select).attr('rel','gallery-'+fb_IMG_sections.index(this));});
+jQuery('a.fancybox,area.fancybox,.fancybox>a').each(function(){jQuery(this).fancybox(jQuery.extend(true,{},fb_opts,{'transition':'elastic','transitionIn':'elastic','easingIn':'easeOutBack','transitionOut':'elastic','easingOut':'easeInBack','opacity':false,'hideOnContentClick':false,'titleShow':true,'titlePosition':'over','titleFromAlt':true,'showNavArrows':true,'enableKeyboardNav':true,'cyclic':false,'mouseWheel':'true'}))});
+};};
+jQuery(easy_fancybox_handler);jQuery(document).on('post-load',easy_fancybox_handler);
+
+//# sourceURL=jquery-fancybox-js-after
+</script>
+<script id="jquery-easing-js" src="https://operanb.ro/wp-content/plugins/easy-fancybox/vendor/jquery.easing.js?ver=1.4.1"></script>
+<script id="jquery-mousewheel-js" src="https://operanb.ro/wp-content/plugins/easy-fancybox/vendor/jquery.mousewheel.js?ver=3.1.13"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://operanb.ro/wp-includes/js/wp-emoji-release.min.js?ver=7.1.3"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://operanb.ro/wp-includes/js/wp-emoji-loader.min.js
+</script>
+<div id='icon_wrapper'><a  target="_blank"  class='fuse_social_icons_links' href='https://www.facebook.com/operanb.ro'>	<i class='fa fa-facebook fb-awesome-social awesome-social'></i></a><br /><a target="_blank" class='fuse_social_icons_links' href='https://www.instagram.com/operanationalabucuresti/'>	<i class='fa fa-instagram instagram-awesome-social awesome-social'></i></a><br /><a target="_blank" class='fuse_social_icons_links' href='https://twitter.com/OperaBucharest'>	<i class='fa fa-twitter tw-awesome-social awesome-social'></i></a><br /><a target="_blank" class='fuse_social_icons_links' href='https://www.youtube.com/channel/UCeTAqr45pGvWFemU0k8k2fA'>	<i class='fa fa-youtube-play youtube-awesome-social awesome-social'></i></a><br /></div><script type="text/javascript">
+	window._wfCookieConsentSettings = {"wf_cookietext":"Aceast\u0103 pagin\u0103 web folose\u0219te cookie-uri pentru a \u00eembun\u0103t\u0103\u021bi experien\u021ba de navigare \u0219i a asigura func\u021bionali\u021b\u0103\u021bi adi\u021bionale.","wf_dismisstext":"Am \u00eenteles","wf_linktext":"Afl\u0103 mai multe","wf_linkhref":"https:\/\/operanb.ro\/despre-noi\/","wf_position":"bottom","wf_style":"light","wf_auto_dark":true,"language":"ro"};
+</script>
+	</div>
+</body>
+</html>

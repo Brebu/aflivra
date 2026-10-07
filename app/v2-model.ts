@@ -256,7 +256,8 @@ export const domains=[
       "rute",
       "statii",
       "orar",
-      "accesibilitate"
+      "accesibilitate",
+      "avioane"
     ],
     "source": "Operatori locali / date de infrastructură",
     "intro": "Stații și linii de transport, surse de orare și informații de călătorie."

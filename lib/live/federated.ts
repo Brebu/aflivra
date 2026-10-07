@@ -26,16 +26,27 @@ Contract (consumed by T2.2 FederatedResults, T2.3 navigation seeds, T2.4 e2e):
   · Item targets follow the go(view, id, query) semantics: {view:'place'|'company'|'domain',
     domain, tab, id, query, sub, courtNumber}. courtNumber seeds the courts form.
 
-Families v1: places/local-all, catalog, lawyers, directory×4 (schools/health/pharmacies/
-hospitals), feeds/stiri, feeds/agricultura, stories, gallery, cui, dosare. Families v2 (the
-justice + rail wave): notaries (/api/notaries), experts-judiciari/-tehnici and translators
-(/api/experts kind=), trains (/api/trains — the station index of the planned-timetable
-corpus). 'notary' and 'station' are kinds since that wave: the notary registry and the rail
-stations own their workspaces, so click-through targets exist for them.
+  Families v1: places/local-all, catalog, lawyers, directory×4 (schools/health/pharmacies/
+  hospitals), feeds/stiri, feeds/agricultura, stories, gallery, cui, dosare. Families v2 (the
+  justice + rail wave): notaries (/api/notaries), experts-judiciari/-tehnici and translators
+  (/api/experts kind=), trains (/api/trains — the station index of the planned-timetable
+  corpus). 'notary' and 'station' are kinds since that wave: the notary registry and the rail
+  stations own their workspaces, so click-through targets exist for them. Families v3 (the
+  live-flights wave): flights (/api/flights — live aircraft states over the Romanian
+  airspace; the row land targets the tab seeded with the aircraft's callsign — no per-flight
+  route is invented, the source publishes state vectors, not schedules). The BIA airport
+  board stays out of the family plan: a per-airport day board, not a discovery corpus.
+  Families v4 (the live-venues spectacole wave): events (/api/events?q= — the registry's own
+  published calendars merged server-side; the row lands the Spectacole tab seeded with the
+  event's title, the institution's own page stays on the row) and anl-sites (/api/anl — the
+  ANL reception-site registry; the row lands the Imobiliare & locuințe tab seeded with the
+  site's own name, completing parity with the notaries registry family).
 
-Excluded from v1 (rationale, recorded not silent): cinema and events (locality/day-scoped
-corpora with no national query contract — reachable through their own workspaces);
-transport (București–Ilfov coverage gate, no national contract); localities/SIRUTA
+Excluded (rationale, recorded not silent): cinema (locality/day-scoped corpus with no
+  national query contract — reachable through its own workspace); events joined the family
+  plan in v4 when its registry gained a national search contract (the v1 exclusion was the
+  missing contract, not a permanent verdict); transport (București–Ilfov coverage gate, no national
+  contract); localities/SIRUTA
 (reference-lookup surface rather than a discovery corpus — locality names already surface
 through the places family); legal/law search, films feed, weather, company-by-name (not in
 the v1 family plan; 'legislation' is a reserved kind for a future law-search family).
@@ -49,8 +60,8 @@ same change (conventions.md, closed-resolver constraint).
 import {matchesQuery,countText} from '@/lib/live/query';
 import {topicSections} from '@/lib/dashboard-topics';
 
-export type FederatedKind='place'|'company'|'lawyer'|'dataset'|'record'|'article'|'story'|'dosar'|'notary'|'station';
-export type FederatedFamilyId='places'|'catalog'|'lawyers'|'directory-schools'|'directory-health'|'directory-pharmacies'|'directory-hospitals'|'stiri'|'agricultura'|'stories'|'gallery'|'cui'|'dosare'|'notaries'|'experts-judiciari'|'experts-tehnici'|'translators'|'trains';
+export type FederatedKind='place'|'company'|'lawyer'|'dataset'|'record'|'article'|'story'|'dosar'|'notary'|'station'|'flight'|'event';
+export type FederatedFamilyId='places'|'catalog'|'lawyers'|'directory-schools'|'directory-health'|'directory-pharmacies'|'directory-hospitals'|'stiri'|'agricultura'|'stories'|'gallery'|'cui'|'dosare'|'notaries'|'experts-judiciari'|'experts-tehnici'|'translators'|'trains'|'flights'|'events'|'anl-sites';
 export type FederatedTarget={view:'place'|'company'|'domain';domain?:string;tab?:string;id?:string;query?:string;sub?:string;courtNumber?:string};
 export type FederatedItem={family:FederatedFamilyId;category:string;subcategory?:string;id:string;title:string;subtitle?:string;snippet?:string;kind:FederatedKind;source:string;url?:string;target:FederatedTarget};
 export type FederatedFamilyState={family:FederatedFamilyId;status:'pending'|'done'|'gate'|'unavailable';total?:number;note?:string};
@@ -92,10 +103,19 @@ export const federatedFamilies:readonly FederatedFamilyDescriptor[]=[
  {id:'experts-judiciari',label:'Tabloul experților judiciari',source:'Ministerul Justiției',kind:'record',category:'justitie',maxChars:100,request:term=>'/api/experts?'+new URLSearchParams({kind:'experti-judiciari',q:term,page:'0',geoScope:'national'})},
  {id:'experts-tehnici',label:'Registrul experților tehnici atestați',source:'MDPLPA',kind:'record',category:'justitie',maxChars:100,request:term=>'/api/experts?'+new URLSearchParams({kind:'experti-tehnici',q:term,page:'0',geoScope:'national'})},
  {id:'translators',label:'Registrul traducătorilor și interpreților',source:'Ministerul Justiției',kind:'record',category:'justitie',maxChars:100,request:term=>'/api/experts?'+new URLSearchParams({kind:'traducatori',q:term,page:'0',geoScope:'national'})},
- // The train-station family joins lib/live/trains.ts in treating „gara/gară/stația/stație" as
- // corpus nouns (never station-name content); the fan-out sends the effective term.
- {id:'trains',label:'Mersul trenurilor · gări',source:'data.gov.ro · Informatică Feroviară',kind:'station',category:'transport',maxChars:100,request:term=>'/api/trains?'+new URLSearchParams({q:trainSearchTerm(term),page:'0'})}
-];
+  // The train-station family joins lib/live/trains.ts in treating „gara/gară/stația/stație" as
+  // corpus nouns (never station-name content); the fan-out sends the effective term.
+  {id:'trains',label:'Mersul trenurilor · gări',source:'data.gov.ro · Informatică Feroviară',kind:'station',category:'transport',maxChars:100,request:term=>'/api/trains?'+new URLSearchParams({q:trainSearchTerm(term),page:'0'})},
+  // A live state vector is not a corpus row: the family joins so a callsign search
+  // reaches today's sky, with the aircraft's own callsign seeding the tab.
+  {id:'flights',label:'Avioane în spațiul aerian',source:'adsb.lol',kind:'flight',category:'transport',maxChars:100,request:term=>'/api/flights?'+new URLSearchParams({q:term,page:'0'})},
+  // The venue registry's own published calendars, merged server-side over
+  // title/institution/city; the row seeds the Spectacole tab with the event's title.
+  {id:'events',label:'Spectacole și concerte',source:'Calendarele publice ale instituțiilor',kind:'event',category:'cultura',maxChars:100,request:term=>'/api/events?'+new URLSearchParams({q:term,page:'0'})},
+  // The ANL reception-site registry completes parity with the notaries registry family:
+  // a national public register browsed through its own validated route.
+  {id:'anl-sites',label:'Amplasamente locuințe ANL',source:'data.gov.ro · ANL',kind:'record',category:'bani',maxChars:100,request:term=>'/api/anl?'+new URLSearchParams({q:term,page:'0'})}
+ ];
 const descriptorById=new Map(federatedFamilies.map(f=>[f.id,f]));
 
 export function validDomainTab(domain:string,tab:string):boolean{
@@ -146,6 +166,27 @@ function stationItem(record:Record<string,unknown>):FederatedItem{
  const trains=typeof record.trains==='number'&&record.trains>=0?record.trains:0;
  return {family:'trains',category:'transport',subcategory:'Mersul trenurilor',id:record.code!==undefined?String(record.code):name,title:name,subtitle:[operators.length?countText(operators.length,'operator','operatori'):'',trains?countText(trains,'tren','trenuri'):''].filter(Boolean).join(' · ')||undefined,kind:'station',source:'data.gov.ro · Informatică Feroviară',url:'https://data.gov.ro/dataset/c4f71dbb-de39-49b2-b697-5b60a5f299a2',target:{view:'domain',domain:'transport',tab:'trains',query:name}};
 }
+function flightItem(record:Record<string,unknown>):FederatedItem{
+   const callsign=text(record.callsign),registration=text(record.registration),typeCode=text(record.typeCode);
+   const hex=text(record.hex)||'fara-adresa';
+   const title=callsign||registration||'Aeronava '+hex;
+   return {family:'flights',category:'transport',subcategory:'Stări ADS-B în spațiul românesc',id:hex,title,subtitle:[typeCode,registration].filter(Boolean).join(' · ')||'Stare live publicată de receptori',kind:'flight',source:'adsb.lol',url:'https://api.adsb.lol/v2/',target:{view:'domain',domain:'transport',tab:'flights',query:title}};
+  }
+function eventItem(record:Record<string,unknown>):FederatedItem{
+  // The merged calendar row carries the venue registry context route-side (venueName/city);
+  // a per-venue row keeps the institution's own page on the row.
+  const title=text(record.title)||'Spectacol în calendarul public';
+  const venueName=text(record.venueName)||text(record.sourceName),city=text(record.city);
+  const start=text(record.start);
+  return {family:'events',category:'cultura',subcategory:'Calendarele publice ale instituțiilor',id:String(record.id??title),title,subtitle:[venueName,city].filter(Boolean).join(' · ')||undefined,snippet:start?start.replace('T',' · ora locală '):undefined,kind:'event',source:'Calendarele publice ale instituțiilor',url:text(record.url),target:{view:'domain',domain:'cultura',tab:'events',query:title}};
+ }
+function anlItem(record:Record<string,unknown>):FederatedItem{
+  // The site's own name is the row title — the record carries the published Romanian column
+  // names, like the justice registries; the row lands the Imobiliare & locuințe tab seeded with it.
+  const title=text(record['Amplasament'])||text(record['Localitate'])||'Amplasament ANL';
+  const county=text(record['Judeţ']),locality=text(record['Localitate']);
+  return {family:'anl-sites',category:'bani',subcategory:'Amplasamente locuințe ANL',id:record._id!==undefined?String(record._id):title,title,subtitle:[locality,county].filter(Boolean).join(' · ')||undefined,kind:'record',source:'data.gov.ro · ANL',url:'https://data.gov.ro/dataset/04ab4208-d17f-4f9b-ba81-7778f373344d',target:{view:'domain',domain:'bani',tab:'imobiliare',query:title}};
+ }
 function lawyerItem(record:Record<string,unknown>,term:string):FederatedItem{
  const name=text(record.name)||term||'Avocat în tablou';
  return {family:'lawyers',category:'justitie',subcategory:'Tabloul avocaților',id:String(record.id??name),title:name,subtitle:text(record.title),kind:'lawyer',source:'IFEP / UNBR',url:text(record.url),target:{view:'domain',domain:'justitie',tab:'lawyers',query:name}};
@@ -206,12 +247,27 @@ function mapFamily(family:FederatedFamilyId,data:Record<string,unknown>,term:str
   if(!rows)return null;
   return {items:rows.slice(0,cap).map(r=>expertItem(family,r)),total:numberOr(data.total,rows.length)};
  }
- if(family==='trains'){
-  const rows=asObjects(data.items);
-  if(!rows)return null;
-  return {items:rows.slice(0,cap).map(stationItem),total:numberOr(data.total,rows.length)};
- }
- return null;
+  if(family==='trains'){
+   const rows=asObjects(data.items);
+   if(!rows)return null;
+   return {items:rows.slice(0,cap).map(stationItem),total:numberOr(data.total,rows.length)};
+  }
+   if(family==='flights'){
+    const rows=asObjects(data.items);
+    if(!rows)return null;
+    return {items:rows.slice(0,cap).map(flightItem),total:numberOr(data.total,rows.length)};
+   }
+   if(family==='events'){
+    const rows=asObjects(data.items);
+    if(!rows)return null;
+    return {items:rows.slice(0,cap).map(eventItem),total:numberOr(data.total,rows.length)};
+   }
+   if(family==='anl-sites'){
+    const rows=asObjects(data.records);
+    if(!rows)return null;
+    return {items:rows.slice(0,cap).map(anlItem),total:numberOr(data.total,rows.length)};
+   }
+   return null;
 }
 function assembleGroups(items:readonly FederatedItem[],families:readonly FederatedFamilyState[]):FederatedGroupResult[]{
  const states=new Map(families.map(f=>[f.family,f]));

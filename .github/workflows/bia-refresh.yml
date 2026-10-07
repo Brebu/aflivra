@@ -1,0 +1,40 @@
+name: bia-refresh
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bia-refresh
+  cancel-in-progress: true
+
+jobs:
+  relay:
+    name: Relay the Bucharest airports day boards to the seed store
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Relay (exit 2 = the airport itself errored or the board shape was rejected, recorded as a warning; our own infrastructure failures stay red)
+        env:
+          AFLIVRA_SEED_BASE: ${{ vars.AFLIVRA_SEED_BASE }}
+          AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}
+        run: |
+          set +e
+          node scripts/relay-bia.mjs
+          code=$?
+          set -e
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::Aeroportul a răspuns cu eroare sau ruta a respins forma panoului în această tură (relaia nu a livrat panoul tocmai atunci) — reîmprospătarea reia la următoarea tură programată."
+            exit 0
+          fi
+          exit "$code"

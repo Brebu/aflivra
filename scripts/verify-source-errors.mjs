@@ -25,7 +25,7 @@ const db=live?null:{prepare(sql){let args=[];const wrapper={bind(...values){for(
 const assetsFetch=live?null:async request=>{const path=new URL(request.url).pathname;
  if(path.startsWith('/trains/')){if(globalThis.__aflivraAssetFault==='trains')return new Response('{"items":[{"code":1,"name":"corupt', {status:200});try{return new Response(await readFile(join(root,'public',path)))}catch{return new Response(null,{status:404})}}
  return path==='/catalog/index.json.gz'?new Response(await readFile(join(root,'public/catalog/index.json.gz'))):new Response(null,{status:404})};
-globalThis.__aflivraTestEnv=live?{}:{DB:db,...(assetsFetch?{ASSETS:{fetch:assetsFetch}}:{})};
+globalThis.__aflivraTestEnv=live?{}:{DB:db,REFRESH_TOKEN:'token-relay-de-verificare',...(assetsFetch?{ASSETS:{fetch:assetsFetch}}:{})};
 globalThis.__aflivraResourceCopies=JSON.parse(await readFile(join(root,'lib/live/resource-seed.json'),'utf8'));
 const escapes=[];const recordEscape=reason=>escapes.push(String(reason&&reason.stack||reason));
 process.on('unhandledRejection',recordEscape);process.on('uncaughtExceptionMonitor',recordEscape);
@@ -40,7 +40,7 @@ for(const name of ['court-history','court-query','location-context','geographic-
  await writeFile(join(temp,name+'.mjs'),output);
 }
 const liveSeeds=await readFile(join(root,'lib/live/seed.json'),'utf8');
-for(const name of ['records','text','media','query','source-xml','source-html','catalog-categories','catalog-metadata','adapters','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','transit-realtime','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge','lawyers','directories','justice','trains','resources','events','cinema','stories']){
+for(const name of ['records','text','media','query','source-xml','source-html','catalog-categories','catalog-metadata','adapters','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','transit-realtime','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge','lawyers','directories','justice','trains','flights','housing','resources','events','cinema','stories']){
  let source=await readFile(join(root,'lib/live',name+'.ts'),'utf8');
  source=source
   .replace("from '../court-history'","from './court-history'").replace("from '../court-query'","from './court-query'")
@@ -54,14 +54,15 @@ for(const name of ['records','text','media','query','source-xml','source-html','
   .replace("import confirmed from '@/public/courts/confirmed-references.json';",'const confirmed='+await readFile(join(root,'public/courts/confirmed-references.json'),'utf8')+';')
   .replace("import courtInstitutions from '@/public/courts/institutions.json';",'const courtInstitutions='+await readFile(join(root,'public/courts/institutions.json'),'utf8')+';')
   .replace("import codes from '@/public/legal-snapshots/manifest.json';",'const codes='+await readFile(join(root,'public/legal-snapshots/manifest.json'),'utf8')+';')
-  .replace("import cinemaCatalog from '@/public/cinema/cinemas.json';",'const cinemaCatalog='+await readFile(join(root,'public/cinema/cinemas.json'),'utf8')+';')
+   .replace("import cinemaCatalog from '@/public/cinema/cinemas.json';",'const cinemaCatalog='+await readFile(join(root,'public/cinema/cinemas.json'),'utf8')+';')
+   .replace("import venuesCatalog from '@/public/events/venues.json';",'const venuesCatalog='+await readFile(join(root,'public/events/venues.json'),'utf8')+';')
   .replace("import audit from '@/public/catalog/audit.json';",'const audit='+await readFile(join(root,'public/catalog/audit.json'),'utf8')+';')
   .replace("import proofs from '@/public/data/snapshot-transport.json';",'const proofs='+await readFile(join(root,'public/data/snapshot-transport.json'),'utf8')+';');
  let output=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;
  output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace("from 'fflate'","from '"+fflateUrl+"'");output=output.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");for(const pkg of ['xlsx','gtfs-realtime-bindings'])output=output.replace("from '"+pkg+"'","from '"+pathToFileURL(require.resolve(pkg)).href+"'");
  await writeFile(join(temp,name+'.mjs'),output);
 }
-const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs'))),justiceModule=await import(pathToFileURL(join(temp,'justice.mjs'))),trainsModule=await import(pathToFileURL(join(temp,'trains.mjs')));
+const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs'))),justiceModule=await import(pathToFileURL(join(temp,'justice.mjs'))),trainsModule=await import(pathToFileURL(join(temp,'trains.mjs'))),flightsModule=await import(pathToFileURL(join(temp,'flights.mjs'))),housingModule=await import(pathToFileURL(join(temp,'housing.mjs')));
 const feedHosts=Object.entries(feedsModule.feedConfigs).map(([key])=>new URL(feedsModule.feedConfigs[key].url).host);
 const lawQuery={title:'CODUL CIVIL',text:'',number:'',year:'',page:0,full:false};
 // Familia Tranzy este poartă de mediu (TRANZY_API_KEY); fixture-urile oglindesc
@@ -77,6 +78,64 @@ const tranzyVehiclesBody=()=>[
  {id:'tz-future',label:'Viitor',latitude:46.77,longitude:23.62,timestamp:tranzyStamp(-600),vehicle_type:3,bike_accessible:'UNKNOWN',wheelchair_accessible:'UNKNOWN',speed:5,route_id:9},
  {id:'tz-stale',label:'Troleibuzul păstrat',latitude:46.77,longitude:23.62,timestamp:tranzyStamp(1800),vehicle_type:11,bike_accessible:'UNKNOWN',wheelchair_accessible:'UNKNOWN',speed:0,route_id:8,trip_id:'t8'},
  {id:'tz-nospeed',label:'Autobuzul fără viteză',latitude:46.76,longitude:23.61,timestamp:tranzyStamp(8),vehicle_type:3,bike_accessible:'UNKNOWN',wheelchair_accessible:'NO_VALUE'}];
+// Stările ADS-B oglindesc forma v2 a adsb.lol (petic live 2026-10-07, sesiunea
+// wave2-live-romania/fixtures/adsb-point-250.json): ac[] cu hex zburător în chenarul
+// românesc, rând „ground” cu alt_baro textual, scurgere dincolo de chenar și un rând
+// fără adresă mod S; now vine în milisecunde.
+const adsbFlight=(hex,flight,r,t,lat,lon,extra={})=>({hex,type:'adsb_icao',flight,r,t,lat,lon,alt_baro:30500,gs:448.1,baro_rate:1152,track:270.5,true_heading:268.2,squawk:'1000',emergency:'none',seen_pos:0.5,...extra});
+const adsbBody=()=>{const now=Date.now();
+ return Response.json({now,ctime:now,msg:'No error',total:5,ac:[
+  adsbFlight('481f55','W6XYZ  ','HA-LMN','A320',44.5,26.1),
+  adsbFlight('89408c','GFA007','A9C-FB','B789',46.68,20.5,{alt_baro:39975,gs:501.5,track:297.9,true_heading:294.1,baro_rate:-64,squawk:'5261'}),
+  adsbFlight('4a1b2c','     ','YR-ABB','C172',44.42,26.05,{alt_baro:'ground',gs:5,track:null,true_heading:null,baro_rate:null,squawk:'7000'}),
+  adsbFlight('3c6b2f','DLH440','D-ABYT','A21N',48.85,2.35),
+  {type:'adsb_icao',flight:'NOHEX',lat:44.5,lon:26.1}]})};
+// Panoul BIA oglindește structura înregistrată în sesiunea de cercetare (obiectul unei
+// sosiri reale citit în browser; forma exactă se confirmă la prima tură de relaie):
+// număr de zbor, operator cu denumirile RO/EN, sens, origine/destinație, ore publicate,
+// stare, poartă; rândurile fără număr sau fără sens se omit, nu se inventează.
+const biaBoardBody=()=>JSON.stringify([
+ {flightNumber:'W6 3187',airline:{RO:'Wizz Air',EN:'Wizz Air'},direction:'A',origin:'Londra Luton',destination:'București',scheduledTime:'07:45',estimatedTime:'07:52',status:'Aterizat',gate:'04'},
+ {flightNumber:'OS 899',airline:{RO:'Tarom',EN:'TAROM'},Direction:'A',origin:'Viena',destination:'București',scheduledTime:'08:10',status:'Întârziat'},
+ {flightNumber:'W6 3189',airline:{RO:'Wizz Air',EN:'Wizz Air'},direction:'D',origin:'București',destination:'Londra Luton',scheduledTime:'09:15',status:'Programat'},
+ {origin:'Fără număr de zbor',destination:'București',direction:'A'},
+ {flightNumber:'QR 000',origin:'neprecizat'}]);
+const biaChallenge=()=>new Response('<!DOCTYPE html><html><head><title>Just a moment...</title></head></html>',{status:403,headers:{'content-type':'text/html','cf-mitigated':'challenge'}});
+// Calendarul tribe-events-v1 al Operei Cluj oglindește răspunsul real capturat în sesiunea
+// wave2-live-romania/fixtures/operacluj-tribe-events-v1.txt: events[] cu id/global_id, url pe
+// domeniul instituției, start_date/end_date „YYYY-MM-DD HH:MM:SS” (ore locale), image.url,
+// categories[].name; ediția EN a aceleiași apariții se repetă în calendar — rândul /en/ se
+// omite, nu se dublează, iar rândul fără dată de început se omite, nu se inventează.
+const operaclujEvent=(id,title,start,end,slug,extra={})=>({id,global_id:'operacluj.ro?id='+id,status:'publish',url:'https://operacluj.ro/spectacole/stagiunea-2026-2027/'+slug+'/',title,description:'<p>Descrierea publică a spectacolului de verificare.</p>',excerpt:'',slug,start_date:start,end_date:end,image:{url:'https://images.operacluj.ro/2026/10/'+slug+'.jpg',width:1812,height:682},categories:[{name:'operă'}],...extra});
+const operaclujBody=()=>JSON.stringify({events:[
+  operaclujEvent(23701,'BOEMA DE VERIFICARE','2026-10-08 19:30:00','2026-10-08 21:00:00','boema-de-verificare'),
+  {id:23702,global_id:'operacluj.ro?id=23702',status:'publish',url:'https://operacluj.ro/spectacole/stagiunea-2026-2027/rondoul-de-verificare/',title:'RONDOUL DE VERIFICARE',description:'<p>Balet în două acte.</p>',start_date:'2026-10-10 18:00:00',end_date:'2026-10-10 19:30:00',image:{url:'https://images.operacluj.ro/2026/10/rondoul-de-verificare.jpg'},categories:[{name:'balet'}]},
+  // ediția EN a aceleiași apariții — instituția o publică în ambele limbi, pe calea /en/;
+  // rândul nu se dublează în registru
+  operaclujEvent(23699,'Guided tour / Tur ghidat (ediție EN)','2026-10-08 15:00:00','2026-10-08 17:00:00','tururighidate-guided-tours-en',{categories:[{name:'Vizită ghidată'}],url:'https://operacluj.ro/en/spectacole/tururighidate-guided-tours/'}),
+  // rând fără dată de început — omis onest, fără oră inventată
+  {id:23703,global_id:'operacluj.ro?id=23703',status:'publish',url:'https://operacluj.ro/spectacole/stagiunea-2026-2027/spectacol-fara-ora/',title:'SPECTACOL FĂRĂ ORĂ PUBLICATĂ'}],
+ total:58,rest_url:'https://operacluj.ro/wp-json/tribe/events/v1/events/',total_pages:6});
+// Registrele imobiliare oglindesc structura publicată a registrului capturat integral
+// în sesiunea wave2-live-romania/fixtures/ (anl-obiective-2025.xls: antet cu „Nr. crt” și
+// „Amplasament”, coloanele de ani de recepție și rândul TOTAL GENERAL; ancpi-ipoteci-ianuarie-2024.xlsx:
+// antet unic JUDET/LUNA/TIP_PROPRIETATE/TIP_OPERATIUNE/NUMAR_IPOTECI, 42 de județe, 6 feluri de proprietate).
+const anlCounties=['ALBA','ARAD','ARGEŞ','BACĂU','BIHOR','BISTRIŢA-NĂSĂUD','BOTOŞANI','BRAŞOV','BRĂILA','BUZĂU','CĂLĂRAŞI','CARAŞ-SEVERIN','CLUJ','CONSTANŢA','COVASNA','DÂMBOVIŢA','DOLJ','GALAŢI','GIURGIU','GORJ','HARGHITA','HUNEDOARA','IALOMIŢA','IAŞI','ILFOV','MARAMUREŞ','MEHEDINŢI','MUREŞ','NEAMŢ','OLT','PRAHOVA','SĂLAJ','SATU MARE','SIBIU','SUCEAVA','TELEORMAN','TIMIŞ','TULCEA','VASLUI','VÂLCEA','VRANCEA','BUCUREŞTI'];
+const anlYears=Array.from({length:20},(_,i)=>String(2005+i));
+const anlXlsx=()=>{const XLSX=require('xlsx');const rows=[['Nr. crt','JUDET','LOCALITATE','AMPLASAMENT','NR. U.L.',...anlYears]];let crt=0,unitsTotal=0;const perYear=Object.fromEntries(anlYears.map(year=>[year,0]));
+ // Ca în registrul real, unitățile fiecărui amplasament se livrează integral într-un singur
+ // an de recepție — seria derivată pe ani se compune exact în rândul TOTAL GENERAL.
+ for(const [ci,county] of anlCounties.entries())for(let s=1;s<=8;s++){crt++;const units=30+s*4+(ci%7);unitsTotal+=units;const delivery=anlYears[(ci+s)%20];
+  perYear[delivery]+=units;
+  rows.push([crt,county,'Localitatea de verificare '+ci,'Amplasamentul de verificare '+county+' '+s,units,...anlYears.map(year=>year===delivery?units:null)])}
+ rows.push(['','TOTAL GENERAL','','',unitsTotal,...anlYears.map(year=>perYear[year])]);
+ const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),'obiective');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
+const anlBody=()=>({success:true,result:{resources:[{name:'Lista amplasamentelor obiectivelor de locuințe pentru tineri recepționate 11.03.2025',url:'https://data.gov.ro/dataset/anl-obiective/resource/anl-amplasamente-de-verificare.xls',format:'XLS',last_modified:'2025-03-11T00:00:00'}]}});
+const ancpiTypes=['apartamente','cu constructii','fara constructii','agricol','neagricol','neprecizat'];
+const ancpiXlsx=()=>{const XLSX=require('xlsx');const rows=[['JUDET','LUNA_RAPORTATA','TIP_PROPRIETATE','TIP_OPERATIUNE','NUMAR_IPOTECI']];
+ for(const [ci,county] of anlCounties.entries())for(const [ti,type] of ancpiTypes.entries())rows.push([county,'31.01.2024',type,'Ipoteca înscrisă',(county==='BUCUREŞTI'?30:8)+((ci*5+ti*3)%20)]);
+ const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),'ipoteci');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
+const ancpiBody=()=>({success:true,result:{resources:[{name:'Numarul imobilelor ipotecate in cartea funciara ianuarie 2024',url:'https://data.gov.ro/dataset/ancpi-ipoteci/resource/ipoteci-de-verificare-ianuarie-2024.xlsx',format:'XLSX',last_modified:'2024-02-05T00:00:00'}]}});
 const families=[
  {family:'weather/open-meteo',routeName:'weather',route:'/api/weather?lat=44.43&lon=26.1',host:'api.open-meteo.com',allowed:['api.open-meteo.com'],key:()=>weatherModule.forecastLoader(44.43,26.1).key,loader:()=>weatherModule.forecastLoader(44.43,26.1)},
  {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org'],key:()=>adapters.companyLoader('427282').key,loader:()=>adapters.companyLoader('427282')},
@@ -105,7 +164,21 @@ const families=[
  // Poarta de mediu își are propriile celule, după sonda de referință: fără cheie
  // (fără nicio interogare), 403 cu o singură încercare, operator nerezolvat, filtre
  // invalide — matricea generală nu le poate exprima prin scenariile ei fixe.
- {family:'transport/tranzy',routeName:'tranzy-live',kind:'tranzy',host:'api.tranzy.ai',allowed:['api.tranzy.ai'],scenarios:['nokey','http403','http500','malformed','unmatched','invalid','success'],route:'/api/tranzy-live?geoScope=context&locality=Cluj-Napoca&county=Cluj&lat=46.7712&lon=23.6236',scenarioRoutes:{unmatched:'/api/tranzy-live?geoScope=context&locality=Z%C4%83rne%C8%99ti&county=Bra%C8%99ov',invalid:'/api/tranzy-live?q='+('x'.repeat(201))},key:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency()).key,loader:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency())}];
+  {family:'transport/tranzy',routeName:'tranzy-live',kind:'tranzy',host:'api.tranzy.ai',allowed:['api.tranzy.ai'],scenarios:['nokey','http403','http500','malformed','unmatched','invalid','success'],route:'/api/tranzy-live?geoScope=context&locality=Cluj-Napoca&county=Cluj&lat=46.7712&lon=23.6236',scenarioRoutes:{unmatched:'/api/tranzy-live?geoScope=context&locality=Z%C4%83rne%C8%99ti&county=Bra%C8%99ov',invalid:'/api/tranzy-live?q='+('x'.repeat(201))},key:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency()).key,loader:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency())},
+  {family:'flights/adsb',routeName:'flights',route:'/api/flights',host:'api.adsb.lol',allowed:['api.adsb.lol'],scenarios:['http500','http429','timeout','malformed','invalid','success'],scenarioRoutes:{invalid:'/api/flights?q='+('x'.repeat(201))},key:()=>flightsModule.adsbFlightsLoader.key,loader:()=>flightsModule.adsbFlightsLoader},
+  // Panoul BIA este preluat de relaie, deci celulele lui proprii, după sonda de
+  // referință: fără copie predată (testul de browser respins onest), poarta de acces
+  // și aeroportul respinse, panoul corupt respins, panoul fără curse respins, filtre
+  // invalide — și predarea reușită, după care cititorul servește fără să reinterogheze sursa.
+   {family:'flights/bia',routeName:'flight-board',kind:'bia',route:'/api/flight-board?airport=henri-coanda',host:'bucharestairports.ro',allowed:['bucharestairports.ro'],scenarios:['norelay','relay-noauth','relay-airport','relay-corrupt','relay-empty','invalid','relay-publish'],scenarioRoutes:{invalid:'/api/flight-board?airport=sibiu'},key:()=>flightsModule.biaFlightsLoader(flightsModule.biaAirports[0]).key,loader:()=>flightsModule.biaFlightsLoader(flightsModule.biaAirports[0])},
+  // Căutarea națională a spectacolelor reunește calendarele registrului: familia poartă
+  // propria gazdă (Opera Cluj — noul calendar din registru), iar calendarul Odeon, deja
+  // acoperit de familia events/odeon, continuă să servească prin propriul lui fixture —
+  // avaria unei instituții degradează onest reuniunea, nu o ascunde.
+  {family:'events/search',routeName:'events',route:'/api/events?q=verificare',host:'operacluj.ro',allowed:['teatrul-odeon.ro','operacluj.ro'],scenarios:['http500','http429','timeout','malformed','invalid','success'],scenarioRoutes:{invalid:'/api/events?q='+('x'.repeat(201))},key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj'))},
+  {family:'events/operanationalacluj',routeName:'events',route:'/api/events?venue=operacluj',host:'operacluj.ro',allowed:['operacluj.ro'],key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj'))},
+  {family:'housing/anl',routeName:'anl',route:'/api/anl',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.anlLoader.key,loader:()=>housingModule.anlLoader},
+  {family:'housing/ancpi',routeName:'ancpi',route:'/api/ancpi',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.ancpiLoader.key,loader:()=>housingModule.ancpiLoader}];
 if(live){
  let routes=null;
  try{routes=await Promise.all(families.map(async family=>[family.family,await (async()=>{const init=family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};return fetch(base+family.route,{...init,signal:AbortSignal.timeout(60000)})})()]))}catch(error){console.error('Serverul local de dezvoltare nu răspunde la '+base+' — pornit cu „npm start” înainte de --live. Detaliu: '+error.message);process.exitCode=2}
@@ -152,7 +225,7 @@ if(live){
   if(ourBug){console.error('Verdict our-bug: sursa răspunde corect direct sau workerul nostru publicat eșuează, dar ruta raportează eroarea sursei. Diferențele de mai sus sunt bug-ul nostru.');process.exitCode=1}
  }
 }else{
- for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts'],['tranzy-live','app/api/tranzy-live/route.ts']]){
+   for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts'],['tranzy-live','app/api/tranzy-live/route.ts'],['flights','app/api/flights/route.ts'],['flight-board','app/api/flight-board/route.ts'],['seed-bia','app/api/seed/bia/route.ts'],['anl','app/api/anl/route.ts'],['ancpi','app/api/ancpi/route.ts']]){
   let source=await readFile(join(root,file),'utf8');
   source=source
    .replace("import network from '@/public/transit/network.json';",'const network='+await readFile(join(root,'public/transit/network.json'),'utf8')+';')
@@ -166,7 +239,7 @@ if(live){
   output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
   await writeFile(join(temp,'route-'+name+'.mjs'),output);
  }
- const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains','tranzy-live'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
+  const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains','tranzy-live','flights','flight-board','seed-bia','anl','ancpi'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
  const {zipSync,strToU8}=require('fflate');
  const gtfsBytes=()=>{const rows=(head,list)=>head+'\n'+list.join('\n')+'\n';const stops=Array.from({length:12},(_,i)=>'S'+i+',Stația de verificare '+i+',Descriere publică,'+(44.40+i/100)+','+(26.10+i/100)),routeRows=Array.from({length:12},(_,i)=>'R'+i+',A0,'+(100+i)+',Linia de verificare '+i+','+(i%2?'3':'0'));
   return zipSync({'agency.txt':strToU8(rows('agency_id,agency_name,agency_url',['A0,Operatorul de test,https://example.test'])),'stops.txt':strToU8(rows('stop_id,stop_name,stop_desc,stop_lat,stop_lon',stops)),'routes.txt':strToU8(rows('route_id,agency_id,route_short_name,route_long_name,route_type',routeRows)),'calendar.txt':strToU8(rows('service_id,monday,tuesday,start_date,end_date',['A0,1,1,20260101,20261231']))})};
@@ -206,14 +279,17 @@ if(live){
  const storyBody=()=>({parse:{pageid:29611,title:'Aflatul',text:{'*':'<p>Povestea de verificare conține un text integral suficient de lung pentru cititorul public de povestiri.</p>'},links:[],revid:87065}});
  const realtimeBytes=()=>{const FeedMessage=require('gtfs-realtime-bindings').transit_realtime.FeedMessage;const now=Math.floor(Date.now()/1000);
   return new Uint8Array(FeedMessage.encode(FeedMessage.fromObject({header:{gtfsRealtimeVersion:'2.0',timestamp:now},entity:[{id:'v-verificare',vehicle:{trip:{routeId:'R1',tripId:'T1'},position:{latitude:44.43,longitude:26.1,speed:8,bearing:90},vehicle:{label:'Tramvaiul de verificare'},currentStatus:'IN_TRANSIT_TO',stopId:'S1',timestamp:now}}]})).finish())};
- const successFor=(family,href,host,init)=>{
-  if(family.family==='weather/open-meteo')return Response.json(openMeteoBody());
-  if(family.family==='company/anaf')return Response.json(href.includes('/api/PlatitorTvaRest/')?anafRegistry:anafBalance(href));
-  if(family.family==='courts/portal.just')return courtResponse(String(init?.headers?.SOAPAction||'').includes('CautareDosare2')?'CautareDosare2':'CautareDosare');
-  if(family.family==='feeds/stiri')return rssFixture(host);
-  if(family.family==='catalog/ckan')return Response.json(ckanBody);
-  if(family.family==='directory/schools')return Response.json(schoolsBody());
-  if(family.family.startsWith('directory/'))return href.includes('package_show')?Response.json(cnasBody(family.family)):new Response(cnasXlsx(),{headers:{'content-type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}});
+  const successFor=(family,href,host,init)=>{
+   if(family.family==='weather/open-meteo')return Response.json(openMeteoBody());
+   if(family.family==='company/anaf')return Response.json(href.includes('/api/PlatitorTvaRest/')?anafRegistry:anafBalance(href));
+   if(family.family==='courts/portal.just')return courtResponse(String(init?.headers?.SOAPAction||'').includes('CautareDosare2')?'CautareDosare2':'CautareDosare');
+   if(family.family==='feeds/stiri')return rssFixture(host);
+   if(family.family==='catalog/ckan')return Response.json(ckanBody);
+   if(family.family==='directory/schools')return Response.json(schoolsBody());
+    if(family.family==='flights/adsb')return adsbBody();
+    if(family.family==='events/operanationalacluj'||family.family==='events/search'&&host==='operacluj.ro')return new Response(operaclujBody(),{headers:{'content-type':'application/json'}});
+    if(family.family==='housing/anl'||family.family==='housing/ancpi')return href.includes('package_show')?Response.json(family.family==='housing/anl'?anlBody():ancpiBody()):new Response(family.family==='housing/anl'?anlXlsx():ancpiXlsx(),{headers:{'content-type':'application/vnd.ms-excel'}});
+   if(family.family.startsWith('directory/'))return href.includes('package_show')?Response.json(cnasBody(family.family)):new Response(cnasXlsx(),{headers:{'content-type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}});
   if(family.family==='localities/siruta')return href.includes('package_show')?Response.json(sirutaMeta()):new Response(sirutaCsv(),{headers:{'content-type':'text/csv'}});
   if(family.family==='lawyers/ifep')return ifepPage();
   if(family.family==='legal/law')return lawSoapResponse(init?.body);
@@ -238,6 +314,9 @@ if(live){
   // cheie (celulele „nokey” și „invalid”) nicio adresă a sursei nu se interoghează.
   tranzyCalls=family.kind==='tranzy'?[]:null;
   if(family.kind==='tranzy'){if(scenario==='nokey'||scenario==='invalid')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;else globalThis.__aflivraTestEnv.TRANZY_API_KEY='stub-key-de-verificare'}
+  // Tokenul rutei de depunere BIA se comută la fel: fără el (celula „relay-noauth”)
+  // poarta se închide înainte de orice stocare, cu el restul celulelor depun onest.
+  if(family.kind==='bia'){if(scenario==='relay-noauth')delete globalThis.__aflivraTestEnv.REFRESH_TOKEN;else globalThis.__aflivraTestEnv.REFRESH_TOKEN='token-relay-de-verificare'}
   globalThis.fetch=async(url,init={})=>{
    init?.signal?.throwIfAborted?.();
    const href=String(url),host=href.match(/^https?:\/\/([^/?#]+)/)?.[1]||'';
@@ -256,13 +335,24 @@ if(live){
      if(scenario==='malformed')return new Response('<html>răspuns nevalid</html>',{headers:{'content-type':'text/html'}});
      return Response.json(tranzyVehiclesBody())}
     return new Response(null,{status:404})}
-   if(host===family.host&&scenario!=='success')return failureFor(scenario,init);
+    // Celulele familiei BIA sunt conștiente de clasa relaiei: panoul zilei se predă
+    // prin ruta de depunere, iar sursa respinge orice server cu testul de browser —
+    // exact nota pe care încărcătorul o raportează onest, fără 403 crud.
+    if(family.kind==='bia'){
+     if(scenario==='http500')return new Response(null,{status:500});
+     if(scenario!=='invalid')return biaChallenge();
+     return new Response(biaBoardBody(),{headers:{'content-type':'application/json'}})}
+    // Căutarea națională a spectacolelor reunește calendarele: gazda proprie a familiei
+    // poartă avaria celulei, iar celălalt calendar al registrului servește în continuare
+    // prin propriul fixture — reuniunea degradează onest, nu dispare.
+    if(family.family==='events/search'&&host==='teatrul-odeon.ro')return odeonPage();
+    if(host===family.host&&scenario!=='success')return failureFor(scenario,init);
    if(host===family.host)return successFor(family,href,host,init);
    if(host==='query.wikidata.org')return Response.json({results:{bindings:[]}});
    return rssFixture(host);
    };
    globalThis.__aflivraAssetFault=family.kind==='trains'&&scenario==='malformed'?'trains':null;
-   try{return await run(counts,unexpected)}finally{if(family.kind==='tranzy')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;globalThis.fetch=original;globalThis.__aflivraAssetFault=null}};
+    try{return await run(counts,unexpected)}finally{if(family.kind==='tranzy')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;if(family.kind==='bia')globalThis.__aflivraTestEnv.REFRESH_TOKEN='token-relay-de-verificare';globalThis.fetch=original;globalThis.__aflivraAssetFault=null}};
   const requestFor=(family,scenario)=>{
    const route=(family.scenarioRoutes||{})[scenario]||family.route;
    if(family.method==='POST'){const body=JSON.stringify(family.body);return new Request('https://verify.test'+route,{method:'POST',body,headers:{'content-type':'application/json','content-length':String(Buffer.byteLength(body))}})}
@@ -534,6 +624,217 @@ if(live){
    else if(scenario==='invalid'){
     assert.equal(payload.error,'Filtre invalide.',label+': plicul de eroare al filtrelor');
     assert.equal(tranzyCalls.length,0,label+': sursa nu este interogată pe filtre invalide')}}
+  if(family.family==='flights/adsb'){
+   const attempts=hostCount('api.adsb.lol');
+   if(scenario==='invalid'){
+    assert.equal(payload.error,'Filtre invalide.',label+': plicul de eroare al filtrelor');
+    assert.equal(attempts,0,label+': sursa nu este interogată pe filtre invalide')}
+   else if(scenario==='success'){
+    assert.equal(payload.status,'fresh',label+': stare proaspătă — primit: '+payload.status+', eroare: '+payload.error);
+    assert.equal(payload.data.items.length,3,label+': doar aeronavele din chenarul românesc sunt servite');
+    assert.equal(payload.data.entityCount,4,label+': cele patru cereri de acoperire se reunesc fără dubluri');
+    assert.equal(payload.data.isLive,true,label+': fluxul marcat live');
+    const airborne=payload.data.items.find(x=>x.hex==='481f55');
+    assert.equal(airborne.callsign,'W6XYZ',label+': indicativul se curăță de spațiile sursei');
+    assert.equal(airborne.registration,'HA-LMN',label+': imatricularea se păstrează');
+    assert.equal(airborne.altitudeFt,30500,label+': altitudinea barometrică în picioare');
+    assert.equal(airborne.groundSpeedKt,448.1,label+': viteza față de sol în noduri');
+    assert.equal(airborne.track,270.5,label+': direcția de zbor se păstrează pentru săgeata de pe hartă');
+    const ground=payload.data.items.find(x=>x.hex==='4a1b2c');
+    assert.equal(ground.onGround,true,label+': rândul „ground” rămâne onest');
+    assert.equal(ground.altitudeFt,null,label+': fără altitudine inventată la sol');
+    assert.equal(ground.callsign,null,label+': fără indicativ inventat');
+    assert.equal(attempts,4,label+': o singură trecere prin cele patru cereri de acoperire')}
+   else if(scenario==='warm-http500'){
+    assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
+    assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+    assert.equal(payload.data.items.length,3,label+': pozițiile din copia validă se păstrează');
+    assert.equal(payload.data.isLive,false,label+': copia veche nu se mai marchează live');
+    assert.equal(attempts,12,label+': cele trei încercări pe fiecare dintre cele patru cereri')}
+   else{
+    assert.equal(payload.status,'unavailable',label+': fără copie, starea documentată');
+    assert.equal(payload.data,null,label+': fără aeronave inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/nu poate fi decodat integral/,label+': fluxul nevalid respins în română');
+    assert.equal(attempts,scenario==='http500'?12:4,label+': numărul documentat de accesări')}}
+  if(family.family==='flights/bia'){
+   const attempts=hostCount('bucharestairports.ro');
+   const relayPost=(payload,headers={})=>routes['seed-bia'].POST(new Request('https://verify.test/api/seed/bia',{method:'POST',headers:{'content-type':'application/json',...headers},body:JSON.stringify(payload)}));
+   const boardState=async()=>(await routes['flight-board'].GET(new Request('https://verify.test/api/flight-board?airport=henri-coanda'))).json();
+   if(scenario==='norelay'){
+    assert.equal(payload.status,'unavailable',label+': fără copie predată, starea documentată');
+    assert.equal(payload.data,null,label+': fără curse inventate');
+    assert.match(e,/nu a fost încă preluat/,label+': nota onestă a panoului preluat prin intermediar');
+    assert.equal(attempts,1,label+': testul de browser al sursei se respinge cu o singură încercare')}
+   else if(scenario==='relay-noauth'){
+    assert.equal(payload.status,'unavailable',label+': citirea de fond rămâne onest indisponibilă');
+    const denied=await relayPost({airport:'henri-coanda',body:biaBoardBody()});
+    assert.equal(denied.status,401,label+': fără token Bearer depunerea se respinge cu 401');
+    assert.deepEqual(await denied.json(),{error:'Acces interzis.'},label+': mesajul 401 este generic');
+    const after=await boardState();
+    assert.equal(after.status,'unavailable',label+': depunerea respinsă nu a publicat nimic');
+    assert.equal(attempts,1,label+': sursa rămâne interogată doar de citirea proprie a celulei')}
+   else if(scenario==='relay-airport'){
+    const rejected=await relayPost({airport:'sibiu',body:biaBoardBody()},{authorization:'Bearer token-relay-de-verificare'});
+    assert.equal(rejected.status,400,label+': aeroportul străin de panouri se respinge cu 400');
+    assert.match(String((await rejected.json()).error),/nu face parte din panourile preluate/,label+': mesajul numește clasa aeroporturilor preluate');
+    const after=await boardState();
+    assert.equal(after.status,'unavailable',label+': aeroportul respins nu a publicat nimic');
+    assert.equal(attempts,1,label+': o singură interogare a sursei blocată')}
+   else if(scenario==='relay-corrupt'){
+    const rejected=await relayPost({airport:'henri-coanda',body:'<html>panou nevalid</html>'},{authorization:'Bearer token-relay-de-verificare'});
+    assert.equal(rejected.status,400,label+': panoul care nu se poate decoda se respinge cu 400');
+    assert.match(String((await rejected.json()).error),/nu poate fi decodat integral/,label+': mesajul de structură în română');
+    const after=await boardState();
+    assert.equal(after.status,'unavailable',label+': panoul corupt nu a publicat nimic');
+    assert.equal(attempts,1,label+': o singură interogare a sursei blocată')}
+   else if(scenario==='relay-empty'){
+    const rejected=await relayPost({airport:'henri-coanda',body:JSON.stringify([{origin:'Fără număr',destination:'București',direction:'A'},{flightNumber:'QR 000'}])},{authorization:'Bearer token-relay-de-verificare'});
+    assert.equal(rejected.status,400,label+': panoul fără curse utilizabile se respinge onest');
+    assert.match(String((await rejected.json()).error),/nu conține curse utilizabile/,label+': fără listă goală la rută')}
+   else if(scenario==='invalid'){
+    assert.equal(payload.error,'Filtre invalide.',label+': aeroportul necunoscut se respinge cu 400');
+    assert.equal(attempts,0,label+': sursa nu este interogată pe filtre invalide')}
+   else if(scenario==='relay-publish'){
+    assert.equal(payload.status,'unavailable',label+': înainte de predare citirea e onest indisponibilă');
+    const delivered=await relayPost({airport:'henri-coanda',body:biaBoardBody()},{authorization:'Bearer token-relay-de-verificare'});
+    assert.equal(delivered.status,200,label+': predarea reușită rămâne 200');
+    const confirmation=await delivered.json();
+    assert.equal(confirmation.result,'ok',label+': rezultatul predării');
+    assert.equal(confirmation.airport,'henri-coanda',label+': aeroportul predat');
+    assert.equal(confirmation.arrivals,2,label+': sosirile numărate onest');
+    assert.equal(confirmation.departures,1,label+': plecările numărate onest');
+    assert.equal(confirmation.dropped,2,label+': rândurile fără câmpuri complete se numără, nu se inventează');
+    const served=await boardState();
+    assert.ok(['fresh','cached'].includes(served.status),label+': după predare copia servește — primit: '+served.status);
+    assert.equal(served.data.arrivals.length,2,label+': sosirile servite integral');
+    assert.equal(served.data.departures.length,1,label+': plecările servite integral');
+    const first=served.data.arrivals[0];
+    assert.equal(first.flightNumber,'W6 3187',label+': numărul zborului se păstrează');
+    assert.equal(first.airline,'Wizz Air',label+': operatorul cu denumirea românească se alege din obiectul sursei');
+    assert.equal(first.route,'Londra Luton · București',label+': ruta se compune din originea și destinația publicate');
+    assert.equal(first.scheduledTime,'07:45',label+': ora publicată se păstrează ca textul sursei');
+    assert.equal(first.status,'Aterizat',label+': starea publicată se păstrează');
+    assert.equal(first.gate,'04',label+': poarta publicată se păstrează');
+    assert.equal(served.data.arrivals[1].flightNumber,'OS 899',label+': denumirea de familie a câmpului de sens se acceptă tolerante');
+    assert.equal(attempts,1,label+': după predare citirea nu reinteroghează sursa blocată')}
+    else if(scenario==='warm-http500'){
+     assert.equal(payload.status,'stale',label+': copia predată servește sub 500');
+     assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+     assert.equal(payload.data.arrivals.length,2,label+': panoul din copia validă se păstrează');
+     assert.equal(payload.data.departures.length,1,label+': plecările din copia validă se păstrează');
+     assert.equal(attempts,3,label+': cele trei încercări la sursa blocată se epuizează')}}
+   if(family.family==='events/operanationalacluj'){
+    const attempts=hostCount('operacluj.ro');
+    if(scenario==='success'){
+     assert.equal(payload.status,'fresh',label+': stare proaspătă — primit: '+payload.status+', eroare: '+payload.error);
+     assert.equal(payload.data.venue.id,'operacluj',label+': instituția aleasă din registru servește');
+     assert.equal(payload.data.items.length,2,label+': ediția românească se servește; rândul EN și cel fără oră publicată se omit');
+     assert.equal(payload.data.publishedTotal,58,label+': totalul publicat de instituție se păstrează');
+     const first=payload.data.items[0];
+     assert.equal(first.title,'BOEMA DE VERIFICARE',label+': titlul spectacolului păstrat ca textul sursei');
+     assert.equal(first.start,'2026-10-08T19:30',label+': data locală păstrată în formatul calendarului');
+     assert.ok(first.url.startsWith('https://operacluj.ro/'),label+': adresa oficială a spectacolului');
+     assert.ok(!payload.data.items.some(item=>item.url.includes('/en/')),label+': ediția EN a aceleiași apariții nu se dublează');
+     assert.equal(first.category,'operă',label+': categoria publicată se păstrează');
+     assert.equal(attempts,1,label+': un singur acces la calendarul public al instituției')}
+    else if(scenario==='warm-http500'){
+     assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
+     assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+     assert.equal(payload.data.items.length,2,label+': spectacolele se păstrează din copie');
+     assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+    else{
+     assert.equal(payload.status,'unavailable',label+': fără copie, starea documentată');
+     assert.equal(payload.data,null,label+': fără spectacole inventate');
+     if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+     if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+     if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+     if(scenario==='malformed')assert.match(e,/Calendarul instituției nu are formatul așteptat/,label+': calendarul nevalid respins în română');
+     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+   if(family.family==='events/search'){
+    const odeon=hostCount('teatrul-odeon.ro'),operacluj=hostCount('operacluj.ro');
+    if(scenario==='invalid'){
+     assert.equal(payload.error,'Căutare invalidă.',label+': plicul de eroare al căutării');
+     assert.equal(odeon+operacluj,0,label+': calendarele registrului nu se interoghează pe filtre invalide')}
+    else if(scenario==='success'){
+     assert.equal(payload.key,'events:search',label+': cheia reuniunii naționale a spectacolelor');
+     assert.equal(payload.status,'cached',label+': reuniunea completă servește starea de registru');
+     assert.equal(payload.data.total,3,label+': totalul căutării naționale');
+     assert.ok(payload.data.items.every(item=>item.venueName&&item.city),label+': fiecare rând purtă instituția și orașul din registru');
+     assert.ok(payload.data.items[0].start.localeCompare(payload.data.items[payload.data.items.length-1].start)<=0,label+': rândurile reunite sunt ordonate cronologic');
+     const sources=payload.data.sources;
+     assert.equal(sources.length,2,label+': ambele calendare ale registrului sunt listate');
+     assert.deepEqual(sources.map(source=>source.venue).sort(),['odeon','operacluj'],label+': sursele poartă instituția registrului');
+     assert.equal(operacluj,1,label+': un singur acces la calendarul instituției căutate');
+     assert.equal(odeon,1,label+': un singur acces la calendarul implicit')}
+    else if(scenario==='warm-http500'){
+     assert.equal(payload.status,'cached',label+': copia validă a calendarului expirat servește sub 500 — reuniunea rămâne completă');
+     assert.equal(payload.data.items.length,3,label+': spectacolele se păstrează din copiile validate');
+     const expired=payload.data.sources.find(source=>source.venue==='operacluj');
+     assert.equal(expired.status,'stale',label+': starea calendarului expirat este documentată onest, nu mascată');
+     assert.equal(operacluj,3,label+': cele trei încercări la calendarul expirat se epuizează');
+     assert.equal(odeon,0,label+': calendarul servit corect nu se reinteroghează')}
+    else{
+     assert.equal(payload.status,'stale',label+': starea parțială a reuniunii este documentată');
+     assert.match(e,/1 calendar public nu a putut fi verificat acum/,label+': mesajul onest de degradare parțială');
+     assert.equal(payload.data.items.length,1,label+': rândurile calendarului disponibil rămân');
+     assert.ok(payload.data.items.every(item=>item.venue==='odeon'),label+': doar calendarul disponibil servește rânduri');
+     const failed=payload.data.sources.find(source=>source.venue==='operacluj');
+     assert.ok(failed&&failed.status==='unavailable',label+': calendarul căzut este listat onest');
+     assert.match(String(failed&&failed.error||''),/HTTP 500|HTTP 429|nu a răspuns în timpul alocat|formatul așteptat/,label+': eroarea calendarului căzut este purtată în sursă');
+     assert.equal(operacluj,scenario==='http500'?3:1,label+': numărul documentat de accesări la calendarul căzut');
+     assert.equal(odeon,1,label+': calendarul sănătos se citește o singură dată')}}
+   if(family.family==='housing/anl'){
+    const attempts=hostCount('data.gov.ro');
+    if(scenario==='success'){
+     assert.equal(payload.status,'fresh',label+': stare proaspătă — primit: '+payload.status+', eroare: '+payload.error);
+     assert.equal(payload.data.total,336,label+': registrul amplasamentelor servit integral');
+     assert.equal(payload.data.records.length,20,label+': pagina de registru servită paginată');
+     assert.equal(payload.data.facets['Județele ANL'].length,42,label+': facetul județelor acoperă registrul');
+     assert(payload.data.records.every(record=>record._id),label+': fiecare amplasament are identificator stabil');
+     assert(payload.data.fields.some(field=>/^amplasament$/i.test(field)),label+': coloanele publicate se păstrează cu numele lor');
+     assert.equal(payload.data.years.reduce((total,year)=>total+year.value,0),payload.data.unitsTotal,label+': seria pe anii de recepție se compune exact în totalul național publicat');
+     assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+    else if(scenario==='warm-http500'){
+     assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
+     assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+     assert.equal(payload.data.records.length,20,label+': registrul se păstrează din copie');
+     assert.equal(payload.data.total,336,label+': totalul se păstrează din copie');
+     assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+    else{
+     assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');
+     assert.equal(payload.data,null,label+': fără amplasamente inventate');
+     if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+     if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+     if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+     if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată|Lista ANL/,label+': plicul de eroare standard sau structura respinsă');
+     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+   if(family.family==='housing/ancpi'){
+    const attempts=hostCount('data.gov.ro');
+    if(scenario==='success'){
+     assert.equal(payload.status,'fresh',label+': stare proaspătă — primit: '+payload.status+', eroare: '+payload.error);
+     assert.equal(payload.data.countyCount,42,label+': raportul lunar acoperă județele');
+     assert.equal(payload.data.monthLabel,'ianuarie 2024',label+': luna raportată se păstrează ca etichetă');
+     assert.equal(payload.data.byCounty.length,42,label+': tabelul pe județe servit integral');
+     assert.equal(payload.data.byCounty[0].county,'BUCUREŞTI',label+': județul cu cele mai multe ipoteci servește primul');
+     assert.deepEqual(payload.data.byType.map(row=>row.name).sort(),[...ancpiTypes].sort(),label+': cele șase feluri de proprietate publicate se păstrează');
+     assert.equal(payload.data.total,payload.data.byCounty.reduce((total,row)=>total+row.total,0),label+': totalul național se compune exact din județele raportate');
+     assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+    else if(scenario==='warm-http500'){
+     assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
+     assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+     assert.equal(payload.data.countyCount,42,label+': raportul se păstrează din copie');
+     assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+    else{
+     assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');
+     assert.equal(payload.data,null,label+': fără ipoteci inventate');
+     if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+     if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+     if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+     if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată|Raportul ANCPI/,label+': plicul de eroare standard sau structura respinsă');
+     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
   };
  const runCell=(family,scenario)=>{const label=family.family+' / '+scenario,mock=scenario==='warm-http500'?'http500':scenario;
   return withMocks(family,mock,async(counts,unexpected)=>{
@@ -549,7 +850,7 @@ if(live){
   sqlite.prepare('UPDATE source_cache SET expires_at=0 WHERE key=?').run(family.key());
   await runCell(family,'warm-http500');
  }
- console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, iar familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
+  console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
  console.log(JSON.stringify({result:'ok',mode:'mock',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
  }
 escapes.length=0;process.off('unhandledRejection',recordEscape);process.off('uncaughtExceptionMonitor',recordEscape);}

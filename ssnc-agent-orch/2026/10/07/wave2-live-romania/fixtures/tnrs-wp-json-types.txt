@@ -1,0 +1,4 @@
+https://tnrs.ro/wp-json/wp/v2/types
+HTTP 404
+
+{"status":404,"error":"Not Found"}

@@ -1,0 +1,24 @@
+https://ateneulroman.ro/
+HTTP 200
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <title>Ateneul Roman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+	<div class='centered'>
+		<h1>Ateneul Român</h1>
+		<h3>Momentan nu se pot achiziționa bilete online</h3>
+
+		<p>Website-ul Ateneului nu este încă disponibil</p>
+
+	    <p>Interim: contact@ateneulroman.ro</p>
+	</div>
+
+
+</body>
+</html>

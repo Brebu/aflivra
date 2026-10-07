@@ -1,16 +1,43 @@
-import {getSource,SourceError} from './adapters';import {sourceText} from './text';import {publicUrl} from './media';import type {Loader,Loaded} from './types';
-export function parseEvents(raw:string):Loaded{
+import {getSource,SourceError} from './adapters';import {sourceText} from './text';import {publicUrl} from './media';import type {Loader,Loaded} from './types';import venuesCatalog from '@/public/events/venues.json';
+export type EventVenueKind='jsonld'|'tribe-events-v1';
+export type EventVenue={id:string;name:string;short:string;type:string;city:string;county:string;latitude:number;longitude:number;url:string;kind:EventVenueKind};
+export const eventVenues=venuesCatalog.items as EventVenue[];
+export function eventVenue(id:string){return eventVenues.find(venue=>venue.id===id)||null}
+const venueHost=(venue:EventVenue)=>new URL(venue.url).hostname.replace(/^www\./,'');
+const venueCalendar=(venue:EventVenue)=>venue.kind==='tribe-events-v1'?venue.url+'wp-json/tribe/events/v1/events?per_page=100&status=publish':venue.url;
+const publishedOn=(url:unknown,venue:EventVenue)=>{const link=publicUrl(url);if(!link)return '';return new URL(link).hostname.replace(/^www\./,'').endsWith(venueHost(venue))?link:''};
+// Calendar stamps arrive both as ISO (JSON-LD) and as „Y-m-d H:i:s” (The Events Calendar); local hours are preserved as published.
+const localStamp=(value:unknown)=>{if(typeof value!=='string')return undefined;const match=value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})[ T](\d{2}:\d{2})/);return match?`${match[1]}-${match[2].padStart(2,'0')}-${match[3].padStart(2,'0')}T${match[4]}`:undefined};
+const uniqueSorted=(items:any[])=>[...new Map(items.map(item=>[item.id,item])).values()].sort((a,b)=>String(a.start).localeCompare(String(b.start)));
+export function parseEvents(raw:string,venue:EventVenue=eventVenue('odeon') as EventVenue):Loaded{
  const items:any[]=[];
  for(const match of raw.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){
   let parsed:any;try{parsed=JSON.parse(match[1])}catch{continue}
   const rows=Array.isArray(parsed)?parsed:parsed['@graph']||[parsed];
-  for(const item of rows){if(!/Event/.test(String(item['@type']))||!item.name||!item.startDate)continue;const url=publicUrl(item.url);if(!url||!new URL(url).hostname.endsWith('teatrul-odeon.ro'))continue;
-   const normalize=(value:string)=>value?.replace(/^(\d{4})-(\d{1,2})-(\d{1,2})T(\d\d:\d\d).*/,(_,y,m,d,t)=>y+'-'+m.padStart(2,'0')+'-'+d.padStart(2,'0')+'T'+t);
-   const image=publicUrl(typeof item.image==='string'?item.image:item.image?.url);
-   items.push({...item,id:String(item['@id']||url),title:sourceText(item.name),content:sourceText(item.description||''),start:normalize(item.startDate),end:normalize(item.endDate||''),url,media:image?[{kind:'image',url:image,caption:sourceText(item.name),sourceUrl:url,credit:'Teatrul Odeon · materialul publicat de instituție'}]:[],sourceName:'Teatrul Odeon'});
+  for(const item of rows){if(!/Event/.test(String(item['@type']))||!item.name||!item.startDate)continue;const url=publishedOn(item.url,venue);if(!url)continue;const start=localStamp(item.startDate);if(!start)continue;
+   const image=publishedOn(typeof item.image==='string'?item.image:item.image?.url,venue);
+   const offers=Array.isArray(item.offers)?item.offers[0]:item.offers;
+   items.push({...item,id:String(item['@id']||url),title:sourceText(item.name),content:sourceText(item.description||''),start,end:localStamp(item.endDate||''),url,ticketUrl:publicUrl(offers?.url)||undefined,media:image?[{kind:'image',url:image,caption:sourceText(item.name),sourceUrl:url,credit:venue.name+' · materialul publicat de instituție'}]:[],sourceName:venue.name,venue:venue.id});
+   }
   }
- }
  if(!items.length)throw new SourceError('Calendarul teatrului nu a transmis spectacole verificabile.');
- return {publishedAt:null,data:{items:[...new Map(items.map(x=>[x.id,x])).values()].sort((a,b)=>a.start.localeCompare(b.start)),sourceUrl:'https://teatrul-odeon.ro/',note:'Program publicat de Teatrul Odeon, ore locale din calendarul vizibil al instituției. Spectacolele se pot modifica.'}};
+ return {publishedAt:null,data:{venue,items:uniqueSorted(items),sourceUrl:venue.url,note:'Program publicat de '+venue.name+', ore locale din calendarul vizibil al instituției. Spectacolele se pot modifica.'}};
 }
-export const odeonLoader:Loader={key:'events:odeon',name:'Teatrul Odeon · calendarul public',url:'https://teatrul-odeon.ro/',version:'odeon.full-calendar.v1',ttl:3600,load:async()=>parseEvents(await getSource('https://teatrul-odeon.ro/',undefined,{maxBytes:8_000_000,timeoutMs:10000}))};
+export function parseTribeEvents(raw:string,venue:EventVenue):Loaded{
+ let parsed:any;try{parsed=JSON.parse(raw)}catch{throw new SourceError('Calendarul instituției nu are formatul așteptat.')}
+ const rows=Array.isArray(parsed?.events)?parsed.events:null;
+ if(!rows)throw new SourceError('Calendarul instituției nu a transmis spectacole verificabile.');
+ const items=rows.map((item:any)=>{
+  const url=publishedOn(item.url,venue);if(!url)return null;const start=localStamp(item.start_date);if(!start)return null;
+  // The institution publishes the same occurrence in both languages; the Romanian edition carries it, the /en/ edition repeats it.
+  if(new URL(url).pathname.split('/').includes('en'))return null;
+  const image=publishedOn(item.image?.url,venue);
+  const category=[item.categories].flat().filter(Boolean).map((entry:any)=>sourceText(entry.name)).find(Boolean);
+  return {...item,id:String(item.id||item.global_id||url),title:sourceText(item.title),content:sourceText(item.description||item.excerpt||''),start,end:localStamp(item.end_date||''),url,ticketUrl:publicUrl(item.website)||undefined,category,media:image?[{kind:'image',url:image,caption:sourceText(item.title),sourceUrl:url,credit:venue.name+' · materialul publicat de instituție'}]:[],sourceName:venue.name,venue:venue.id};
+  }).filter((item:any)=>item);
+ if(!items.length)throw new SourceError('Calendarul instituției nu a transmis spectacole verificabile.');
+ return {publishedAt:null,data:{venue,items:uniqueSorted(items),publishedTotal:Number.isFinite(Number(parsed?.total))?Number(parsed.total):items.length,sourceUrl:venue.url,note:'Program publicat de '+venue.name+' prin calendarul public al instituției (edițiile în limba română). Ore locale; spectacolele se pot modifica.'}};
+}
+const loaderVersions:Record<EventVenueKind,string>={'jsonld':'events.jsonld.v2','tribe-events-v1':'events.tribe-rest.v1'};
+export function eventsLoader(venue:EventVenue):Loader{return{key:'events:'+venue.id,name:venue.name+' · calendarul public',url:venue.url,version:loaderVersions[venue.kind],ttl:3600,load:async()=>(venue.kind==='tribe-events-v1'?parseTribeEvents:parseEvents)(await getSource(venueCalendar(venue),undefined,{maxBytes:8_000_000,timeoutMs:15000}),venue)}}
+export const odeonLoader:Loader=eventsLoader(eventVenue('odeon') as EventVenue);

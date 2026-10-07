@@ -70,6 +70,7 @@ jobs:
           node scripts/verify-css-keyframes.mjs
           node scripts/verify-afir-relay.mjs
           node scripts/verify-relay-afir.mjs
+          node scripts/verify-relay-bia.mjs
       - name: verify-downloads
         run: node scripts/verify-downloads.mjs
       - name: verify-legal-pdf — runs where pypdf is installed; recorded skip otherwise
