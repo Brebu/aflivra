@@ -14,6 +14,14 @@ import {format,cityPositions} from './v2-model';import {dateText} from './live-d
 import {PublicMap} from './public-map';import illustrations from '@/public/media/category-illustrations.json';
 import type {PlacesManifest as Manifest} from '@/lib/places-query';import {useSource} from './use-source';
 type City={name:string;lat:number;lon:number;type:string;county:string};
+/* Inventarul de locuri se citește o dată pe sesiune: fiecare montare a spațiului de
+   locuri și fiecare fișă deschisă refolosesc aceeași promisiune, în loc să re-descarce
+   și re-analizeze același manifest la fiecare schimbare de perspectivă. */
+let placesManifestSession:Promise<Manifest>|null=null;
+function loadPlacesManifest():Promise<Manifest>{
+ placesManifestSession??=snapshotJson<Manifest>('/places/manifest.json').then(m=>{if(m.schema!=='aflivra-places-v2')throw Error('Inventarul locurilor nu are formatul așteptat.');return m}).catch(e=>{placesManifestSession=null;throw e});
+ return placesManifestSession;
+}
 const names:Record<string,string>={local:'Servicii și locuri din localitate',sanatate:'Spitale, clinici și farmacii',cultura:'Muzee, teatre și obiective de vizitat',filme:'Cinematografe',educatie:'Școli și locuri de învățare',bani:'Bănci, bancomate și schimb valutar',firme:'Magazine, birouri și servicii',transport:'Stații, gări și servicii de transport',justitie:'Instanțe și servicii juridice',munca:'Ocupare și recrutare',mediu:'Natură și locuri în aer liber',energie:'Încărcare și infrastructură energetică',agricultura:'Piețe, ferme și servicii agricole',stiri:'Redacții și instituții media'};
 const categoryDescriptions:Record<string,string>={sanatate:'Găsește unitatea, adresa, contactele, programul publicat și specialitățile disponibile în surse.',cultura:'Explorează toate locurile din copia națională, cu program, contacte, acces și materialele publicate.',local:'Administrație, servicii medicale, școli, transport, cultură și servicii utile în jurul localității alese.'};
 function EntityDetail({entry,manifest,category}:{entry:PlaceIndex;manifest:Manifest;category:string}){
@@ -46,8 +54,8 @@ const EntityCard=memo(function EntityCard({entry,category,manifest,distance}:{en
  </div></article>;
 });
 function ImportedPlaceRecord({entry,category}:{entry:PlaceIndex;category:string}){
- const [manifest,setManifest]=useState<Manifest|null>(null),[error,setError]=useState('');
- useEffect(()=>{const c=new AbortController();snapshotJson<Manifest>('/places/manifest.json',undefined,c.signal).then(setManifest).catch(e=>{if(e.name!=='AbortError')setError(e.message)});return()=>c.abort()},[]);
+  const [manifest,setManifest]=useState<Manifest|null>(null),[error,setError]=useState('');
+  useEffect(()=>{const c=new AbortController();loadPlacesManifest().then(m=>{if(!c.signal.aborted)setManifest(m)}).catch(e=>{if(e.name!=='AbortError'&&!c.signal.aborted)setError(e.message)});return()=>c.abort()},[]);
  return error?<p role="status">{error}</p>:manifest?<EntityDetail entry={entry} manifest={manifest} category={category}/>:<p role="status">Se încarcă informațiile locului…</p>;
 }
 export function PlaceSourceDetails({id,chunk,category,name,lat,lon,sourceUrl}:{id:string;chunk:string;category:string;name:string;lat:number;lon:number;sourceUrl:string}){
@@ -58,7 +66,7 @@ export function PlaceSourceDetails({id,chunk,category,name,lat,lon,sourceUrl}:{i
 export function PlacesWorkspace({category,preferredCity='București',photosDefault=false,initialQuery='',initialSub=''}:{category:string;preferredCity?:string;photosDefault?:boolean;initialQuery?:string;initialSub?:string}){
  const geo=useLocation();const [manifest,setManifest]=useState<Manifest|null>(null),[error,setError]=useState(''),[loading,setLoading]=useState(true),[revision,setRevision]=useState(0);
  const [resetKey,setResetKey]=useState(0),[draft,setDraft]=useState(initialQuery),[q,setQ]=useState(initialQuery),[sub,setSub]=useState(initialSub),[scope,setScope]=useLocationState('context'),[photos,setPhotos]=useState(photosDefault),[radius,setRadius]=useLocationState('15'),[sort,setSort]=useState('context'),[contact,setContact]=useState(''),[page,setPage]=useLocationState(0),[view,setView]=useState('cards');const section=useRef<HTMLElement>(null);
- useEffect(()=>{const c=new AbortController();setLoading(true);setError('');snapshotJson<Manifest>('/places/manifest.json',undefined,c.signal).then(async m=>{if(m.schema!=='aflivra-places-v2')throw Error('Inventarul locurilor nu are formatul așteptat.');setManifest(m)}).catch(e=>{if(e.name!=='AbortError')setError(e.message)}).finally(()=>{if(!c.signal.aborted)setLoading(false)});return()=>c.abort()},[revision]);
+  useEffect(()=>{const c=new AbortController();setLoading(true);setError('');loadPlacesManifest().then(m=>{if(!c.signal.aborted)setManifest(m)}).catch(e=>{if(e.name!=='AbortError'&&!c.signal.aborted)setError(e.message)}).finally(()=>{if(!c.signal.aborted)setLoading(false)});return()=>c.abort()},[revision]);
  useEffect(()=>{setSub('');setPage(0)},[category]);
  useEffect(()=>setPage(0),[geo.key]);
  useEffect(()=>{setDraft(initialQuery);setQ(initialQuery);setSub(initialSub);setPage(0)},[initialQuery,initialSub]);
