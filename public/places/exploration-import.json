@@ -1,16 +1,254 @@
 {
   "source": "https://download.geofabrik.de/europe/romania.html",
   "dataAsOf": "2026-10-03T20:20:50Z",
-  "fetchedAt": "2026-10-05T08:55:31.316873+00:00",
-  "places": 28,
-  "photos": 28,
-  "maxParallelRequests": 3,
-  "failures": [
-    "HTTP Error 429: Too many requests (f061ab2)",
-    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)",
-    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)",
-    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)",
-    "HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
+  "fetchedAt": "2026-10-06T23:06:59.058246+00:00",
+  "places": 267,
+  "photos": 598,
+  "videos": 1,
+  "photoRoles": {
+    "photo": 345,
+    "video": 1,
+    "wlm": 253
+  },
+  "videoFiles": [
+    {
+      "app_id": "video-n2634652858",
+      "bytes": 3738236,
+      "license": "CC BY 3.0"
+    }
   ],
-  "note": "A photographed selection of exact source records, not a replacement for the complete inventory."
+  "maxParallelRequests": 3,
+  "maxPhotosPerPlace": 3,
+  "photoMinWidth": 800,
+  "excluded": [
+    "n1918839400",
+    "n3465156723",
+    "w1301174068",
+    "w213092650",
+    "w401658826"
+  ],
+  "wlm": {
+    "dataset": "https://data.gov.ro/dataset/wiki-loves-monuments-ro-2011",
+    "datasetLicense": "OGL-ROU (data.gov.ro, uk-ogl)",
+    "monumentsTotal": 1488,
+    "monumentsMapped": 165,
+    "recordsWithWlmPhotos": 151,
+    "photosSelected": 253
+  },
+  "beforeCoverage": {
+    "agricultura": {
+      "rows": 1313,
+      "hotlink": 1,
+      "attested": 0
+    },
+    "bani": {
+      "rows": 4580,
+      "hotlink": 47,
+      "attested": 0
+    },
+    "cultura": {
+      "rows": 8655,
+      "hotlink": 181,
+      "attested": 28
+    },
+    "educatie": {
+      "rows": 7113,
+      "hotlink": 4,
+      "attested": 0
+    },
+    "energie": {
+      "rows": 1508,
+      "hotlink": 3,
+      "attested": 0
+    },
+    "filme": {
+      "rows": 171,
+      "hotlink": 0,
+      "attested": 0
+    },
+    "firme": {
+      "rows": 54428,
+      "hotlink": 74,
+      "attested": 0
+    },
+    "justitie": {
+      "rows": 2411,
+      "hotlink": 5,
+      "attested": 0
+    },
+    "local": {
+      "rows": 21657,
+      "hotlink": 26,
+      "attested": 0
+    },
+    "mediu": {
+      "rows": 28527,
+      "hotlink": 17,
+      "attested": 1
+    },
+    "munca": {
+      "rows": 31,
+      "hotlink": 0,
+      "attested": 0
+    },
+    "sanatate": {
+      "rows": 9702,
+      "hotlink": 5,
+      "attested": 0
+    },
+    "stiri": {
+      "rows": 31,
+      "hotlink": 0,
+      "attested": 0
+    },
+    "transport": {
+      "rows": 46227,
+      "hotlink": 15,
+      "attested": 0
+    }
+  },
+  "afterCoverage": {
+    "agricultura": {
+      "rows": 1313,
+      "hotlink": 1,
+      "attested": 1
+    },
+    "bani": {
+      "rows": 4580,
+      "hotlink": 47,
+      "attested": 0
+    },
+    "cultura": {
+      "rows": 8655,
+      "hotlink": 181,
+      "attested": 184
+    },
+    "educatie": {
+      "rows": 7113,
+      "hotlink": 4,
+      "attested": 13
+    },
+    "energie": {
+      "rows": 1508,
+      "hotlink": 3,
+      "attested": 1
+    },
+    "filme": {
+      "rows": 171,
+      "hotlink": 0,
+      "attested": 1
+    },
+    "firme": {
+      "rows": 54428,
+      "hotlink": 74,
+      "attested": 22
+    },
+    "justitie": {
+      "rows": 2411,
+      "hotlink": 5,
+      "attested": 2
+    },
+    "local": {
+      "rows": 21657,
+      "hotlink": 26,
+      "attested": 22
+    },
+    "mediu": {
+      "rows": 28527,
+      "hotlink": 17,
+      "attested": 23
+    },
+    "munca": {
+      "rows": 31,
+      "hotlink": 0,
+      "attested": 0
+    },
+    "sanatate": {
+      "rows": 9702,
+      "hotlink": 5,
+      "attested": 4
+    },
+    "stiri": {
+      "rows": 31,
+      "hotlink": 0,
+      "attested": 0
+    },
+    "transport": {
+      "rows": 46227,
+      "hotlink": 15,
+      "attested": 4
+    }
+  },
+  "beforeAttestedRecords": 28,
+  "afterAttestedRecords": 267,
+  "failures": [
+    "Reusable photo not confirmed: File:Biserica_Romano-Catolica_Rosia_Montana.jpg",
+    "No reusable photo confirmed for record: w178140424",
+    "Reusable photo not confirmed: File:AIRM - Biserica Sfânta Paraschiva din Mîrzești - mai 2014 - 790201807671241.jpg",
+    "Reusable photo not confirmed: File:Pod_nera.jpg",
+    "Reusable photo not confirmed: File:Craiova - Palatul Dinu Mihail - carte postala 1901.jpg",
+    "No reusable photo confirmed for record: w244848005",
+    "Reusable photo not confirmed: File:Dacia kaerius.jpg",
+    "Reusable photo not confirmed: File:Dacia lorenz fries.jpg",
+    "Reusable photo not confirmed: File:Dacia and Moesia.jpg",
+    "Reusable photo not confirmed: File:Anonimous - The Black Sea.jpg",
+    "No reusable photo confirmed for record: n2634652840",
+    "Reusable photo not confirmed: File:Zimoun zweifel 200 motors 2000 cardboard elements 01 800x450px.jpg",
+    "Reusable photo not confirmed: File:Stamp of Moldova - 1999 - Colnect 199532 - Bronze helmet and lamp.jpeg",
+    "Reusable photo not confirmed: File:Ighiel treasury mb.jpg",
+    "WLM photo no longer licensed/available: File:Opera Romana -0790 (3).jpg",
+    "WLM photo no longer licensed/available: File:Opera romana si statuia lui George Enescu.jpg",
+    "Reusable photo not confirmed: File:Sfinxul Banatean.jpg",
+    "Reusable photo not confirmed: File:TampaVarf.jpg",
+    "No reusable photo confirmed for record: n296454793",
+    "No reusable photo confirmed for record: w232369190",
+    "Reusable photo not confirmed: File:Teatrul Evreiesc de Stat.jpg",
+    "Reusable photo not confirmed: File:ROU CS Toplet CoA.PNG",
+    "Reusable photo not confirmed: File:Turnul_Macelarilor_-_Sighisoara.jpg",
+    "Reusable photo not confirmed: File:Iulia Hasdeu National College (Bucharest) - Logo.png",
+    "Reusable photo not confirmed: File:University of Agricultural Sciences and Veterinary Medicine of Cluj-Napoca.jpg",
+    "Reusable photo not confirmed: File:Doctor-honoris-cause-ATAR.jpg",
+    "Reusable photo not confirmed: File:Baneasa shopping city under construction photo by dan69en.jpg",
+    "Reusable photo not confirmed: File:RO B Magazinul Unirea communism 1.jpg",
+    "WLM photo no longer licensed/available: File:Hotel Ambasador.jpg",
+    "WLM photo no longer licensed/available: File:Hotel Ambasador, Bucharest.jpg",
+    "Reusable photo not confirmed: File:Bukarest- Hotel Ambasador - LABW - Staatsarchiv Freiburg W 134 Nr. 030189.jpeg",
+    "No reusable photo confirmed for record: w442813528",
+    "No reusable photo confirmed for record: w46256608",
+    "Reusable photo not confirmed: File:Logo-Rompetrol KMG colored approved.jpg",
+    "Reusable photo not confirmed: File:Rompetrol wordmark.svg",
+    "Reusable photo not confirmed: File:IICCR A273 Communist party leaders Gheorgheni.jpg",
+    "WLM photo no longer licensed/available: File:Buc Primaria Capitalei Pano7.jpg",
+    "WLM photo no longer licensed/available: File:Buc Primaria Capitalei Pano3.jpg",
+    "Reusable photo not confirmed: File:Muntele Mic 3D version 1.gif",
+    "Reusable photo not confirmed: File:1976 y. Carol Park, Bucharest, Romania - panoramio.jpg",
+    "Reusable photo not confirmed: File:Access to Tineretului Park.png",
+    "WLM photo no longer licensed/available: File:Arcul de triumf 170920111598.jpg",
+    "WLM photo no longer licensed/available: File:Arcul de triumf170920111604.jpg",
+    "No reusable photo confirmed for record: w217851530",
+    "WLM photo no longer licensed/available: File:Muzeul Național de Artă al României panorama.jpg",
+    "WLM photo no longer licensed/available: File:Muzeul national de arta noaptea.jpg",
+    "No reusable photo confirmed for record: n2634652837",
+    "WLM photo no longer licensed/available: File:RO B - Muzeul Naţional de Istorie a României si Banca Chrissoveloni.jpg",
+    "WLM photo no longer licensed/available: File:Guvernul Romaniei.jpg",
+    "WLM photo no longer licensed/available: File:Palatul Victoria.jpg",
+    "No reusable photo confirmed for record: w23554419",
+    "WLM photo no longer licensed/available: File:Palatul Societăţii \"Adriatica\".jpg",
+    "WLM photo no longer licensed/available: File:BrailaPiataTraian.jpg",
+    "Reusable photo not confirmed: File:Corp Chilii 1.jpg",
+    "WLM photo no longer licensed/available: File:Statuia lui Ovidiu .jpg",
+    "Reusable photo not confirmed: File:Biblioteca V. A. Urechia Galati.jpg",
+    "Reusable photo not confirmed: File:Turnul Ceasornicului vechi.jpg",
+    "WLM photo no longer licensed/available: File:Central Universitary Library „Mihai Eminescu“ in Iaşi.jpg",
+    "No reusable photo confirmed for record: n3804790493",
+    "WLM photo no longer licensed/available: File:Casa cu cerb - detaliu.jpg",
+    "Reusable photo not confirmed: File:Chilia lui Daniil Sihastru - Putna.JPG",
+    "WLM photo no longer licensed/available: File:Catedrala primavara.jpg",
+    "WLM photo no longer licensed/available: File:Catedrala iarna.jpg",
+    "WLM photo no longer licensed/available: File:Timisoara - parc Castelul Huniazilor.jpg",
+    "No reusable photo confirmed for record: n2634652211",
+    "WLM photo no longer licensed/available: File:Timisoara - Sinagoga din Cetate (2).jpg",
+    "WLM photo no longer licensed/available: File:Anton Pann memorial house.jpg"
+  ],
+  "note": "A photographed selection of exact source records — every Commons-linked OSM record in every category and the Wiki Loves Monuments 2011 monuments mapped to the corpus — not a replacement for the complete inventory."
 }

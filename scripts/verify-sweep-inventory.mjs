@@ -25,7 +25,7 @@ try{
  assert.deepEqual([...sections].sort(),[...domainIds].sort(),' fiecare domeniu are secțiunile lui în topicSections');
  let sectionCount=0;
  for(const domain of domainIds)sectionCount+=topicSections[domain].length;
- assert.equal(sectionCount,46,'inventarul de admin: 46 de secțiuni pe domenii');
+ assert.equal(sectionCount,49,'inventarul de admin: 49 de secțiuni pe domenii');
  for(const domain of domainIds)for(const section of topicSections[domain]){
   assert(section.id&&section.label,'fiecare secțiune are id și etichetă');
   assert.notEqual(section.id,'data','data este tab-ul automat, nu o secțiune declarată');
@@ -45,7 +45,7 @@ try{
  assert.deepEqual([...mapped].sort(),[...new Set(catalogIds)].sort(),'fiecare domeniu se rezolvă într-o categorie de catalog, fără nepotriviri');
  const manifest=JSON.parse(await readFile(join(root,'public/places/manifest.json'),'utf8'));
  assert.equal(manifest.schema,'aflivra-places-v2','manifestul locurilor are schema așteptată');
- assert.equal(manifest.count,178868,'inventarul național de locuri: 178.868 de înregistrări');
+ assert.equal(manifest.count,181649,'inventarul național de locuri: 181.649 de înregistrări');
  const placesDomains=domainIds.filter(domain=>topicSections[domain].some(section=>section.id==='places'));
  const manifestCategories=Object.keys(manifest.categories);
  assert.deepEqual(manifestCategories.filter(id=>id!=='local-all').sort(),placesDomains.sort(),'categoriile de locuri acoperă exact domeniile cu secțiune de locuri');
@@ -87,7 +87,7 @@ try{
   for(const family of groups.ghRelayed.map(entry=>entry.family))assert.ok(!members.includes(family),'familia '+family+' este reîmprospătată de intermediar, nu și de tură');
  const paritySource=await readFile(join(root,'scripts/verify-source-errors.mjs'),'utf8');
  const parityFamilies=new Set([...paritySource.matchAll(/\{family:'([^']+)',routeName/g)].map(match=>match[1]));
- assert.ok(parityFamilies.size>=19,'tabela de paritate acoperă universul de familii');
+  assert.ok(parityFamilies.size>=24,'tabela de paritate acoperă universul de familii');
  const coverage={
   'bnr':{harness:'verify-refresh-sweep.mjs'},'weather.anm':{harness:'verify-refresh-sweep.mjs'},'weather.alerts':{harness:'verify-refresh-sweep.mjs'},
   'company.default':{parity:'company/anaf'},'knowledge.company.default':{parity:'company/anaf'},
@@ -104,8 +104,11 @@ try{
   'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs'},
   'transport.realtime':{parity:'transport/realtime'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
   'company-knowledge':{parity:'company/anaf'},
-  'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
-  'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:'legal/law'}};
+ 'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
+ 'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:'legal/law'},
+ 'justice.notari':{parity:'justice/notari'},'justice.experti-judiciari':{parity:'justice/experti-judiciari'},
+ 'justice.experti-tehnici':{parity:'justice/experti-tehnici'},'justice.traducatori':{parity:'justice/traducatori'},
+ 'trains':{parity:'transport/trains'}};
   const registryKeys=[...members,...groups.seedBacked.map(entry=>entry.family),...groups.onDemand.map(entry=>entry.family),...groups.ghRelayed.map(entry=>entry.family)];
  const uncovered=[];
  for(const key of new Set(registryKeys)){
@@ -118,6 +121,6 @@ try{
  const coveredParity=new Set(registryKeys.flatMap(key=>[].concat(familyCoverage[key]?.parity||[])));
  const unaccountedParity=[...parityFamilies].filter(family=>!coveredParity.has(family));
  assert.deepEqual(unaccountedParity,[],'orice familie din tabela de paritate este legată de un registru');
- console.log('Inventarul de admin verificat: 16 domenii, 46 de secțiuni cu conținut, 14 categorii de catalog mapped, '+placesDomains.length+' categorii de locuri ('+masterSubcategories.length+' subcategorii naționale), 178.868 de locuri, '+feedKinds.length+' fluxuri + AFIR + filme, '+transitModes.length+' feluri de transport, '+directoryKinds.length+' registre, '+cinemas.items.length+' cinematografe, '+institutions.items.length+' instanțe și '+new Set(registryKeys).size+' familii de surse din registry, toate acoperite de paritate sau de un harness numit.');
+ console.log('Inventarul de admin verificat: 16 domenii, '+sectionCount+' de secțiuni cu conținut, 14 categorii de catalog mapped, '+placesDomains.length+' categorii de locuri ('+masterSubcategories.length+' subcategorii naționale), 181.649 de locuri, '+feedKinds.length+' fluxuri + AFIR + filme, '+transitModes.length+' feluri de transport, '+directoryKinds.length+' registre, '+cinemas.items.length+' cinematografe, '+institutions.items.length+' instanțe și '+new Set(registryKeys).size+' familii de surse din registry, toate acoperite de paritate sau de un harness numit.');
 }catch(error){console.error(String(error&&error.message||error));process.exitCode=1}
 finally{await rm(temp,{recursive:true,force:true})}

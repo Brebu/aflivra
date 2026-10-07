@@ -1,0 +1,1 @@
+{"key":"transport:tranzy:agencies","name":"Tranzy Opendata · operatori","url":"https://api.tranzy.ai/v1/opendata/agency","adapterVersion":"tranzy.agencies.v1","status":"unavailable","data":null,"publishedAt":null,"lastSuccessAt":null,"lastAttemptAt":"2026-10-07T00:02:47.641Z","nextAttemptAt":"2026-10-07T00:06:48.049Z","error":"Sursa a răspuns cu HTTP 403.","ttlSeconds":86400}
