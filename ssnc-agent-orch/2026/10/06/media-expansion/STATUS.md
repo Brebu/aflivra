@@ -489,3 +489,105 @@ battery 22 steps green with zero continue-on-error · e2e 63/63 · build + deplo
 repaired in scripts/ with RED→GREEN evidence; three follow-ups registered (court-links pin,
 packed-seeds OOM, tranzy parity cell).
 
+
+## DevOps Findings (tranzy parity cell)
+
+Branch `feat/tranzy-parity-cell` (local commit, no push). The registered post-merge
+follow-up is closed: the `transport/tranzy` family is now a first-class member of the
+`verify-source-errors.mjs` parity matrix, mirroring Builder-1b's reference probe
+(`probe-tranzy-cell.mjs`) leg-for-leg — mock/static cells only, per dispatch; the
+`--live` verdicts classify through the existing engine against our own
+`/api/tranzy-live` (budget-free).
+
+### Counts, before → after (all pins aligned in the same change)
+
+| Pin | Before | After | Where |
+|---|---|---|---|
+| Parity families | 24 | **25** | `scripts/verify-source-errors.mjs` families table |
+| Parity cells | 144 | **152** | same (24×6 general matrix + tranzy's 8) |
+| Sweep parity floor | `>=24` | **`>=25`** | `scripts/verify-sweep-inventory.mjs` |
+| Registry source families | 43 | **44** | `lib/live/refresh-groups.json` + sweep gate (computed) |
+| README blurb | „24 de familii (144 de celule)" | **„25 de familii (152 de celule)" + Tranzy in the enumeration** | `README.md` |
+
+### The 8 cells (the probe's 8 legs, 1:1 — final count named: 152)
+
+The gate family cannot be expressed by the fixed general-matrix scenarios, so the
+loop now takes a per-family scenario list (default unchanged for the other 24):
+
+1. `nokey` — gated honestly: `unavailable` + „cheia de acces TRANZY_API_KEY" note,
+   **zero upstream calls**, both loaders reject keyless (route envelope + direct
+   `assert.rejects` on agencies/vehicles loaders, per probe cell 1).
+2. `success` — full mapping contract: 3 usable items of 5 published
+   (`entityCount=5`; Romania-bounds spillover + future-stamped rows dropped, the
+   stale position kept), agency named, `isLive`, route_id→string, bearing=null /
+   occupancy=null / occupancyPercentage=null (never invented), m/s speed,
+   wheelchair enum, UTC ISO `observedAt`, raw details; 1×`/agency` + 1×`/vehicles`,
+   `X-API-KEY` header-only on both, `X-Agency-Id: 1` on the vehicles call.
+3. `http403` — the documented keyless/invalid-key gate: in-band `unavailable`,
+   HTTP 403 in the envelope, **single attempt** (client errors don't retry), retry
+   backoff scheduled (`nextAttemptAt > now`).
+4. `http500` — agency-500: three attempts on `/agency` exhausted, `unavailable`,
+   `/vehicles` never asked (no operator resolved → no cross-stage fetch).
+5. `malformed` — non-JSON vehicles feed: „Fluxul Tranzy nu poate fi decodat…"
+   in-band, single attempt, no partial data.
+6. `unmatched` — Zărnești (no operator): honest „Niciun operator Tranzy… pentru
+   Zărnești…" note, **zero `/vehicles` calls** (another city's feed is never asked).
+7. `invalid` — `?q=` + 201 chars: **400 + „Filtre invalide."**, zero upstream calls
+   (keyless for this cell, exactly as the probe ran it; `degradeCheck`'s
+   200-in-band contract is correctly skipped for the documented 400).
+8. `warm-http500` — keep-valid-copy: agencies serve from the warm daily-TTL copy
+   (0 upstream), vehicles cache force-expired → 3 attempts exhaust → `stale` with
+   the 3 items preserved and HTTP 500 in the envelope.
+
+Fixtures mirror the probe verbatim (CTP Cluj-Napoca/RATBV/CT Buzău agency list;
+the 5 vehicle rows incl. tz-spill/tz-future/tz-stale/tz-nospeed; the
+„YYYY-MM-DD HH:MM:SS" stamps kept real-time). The path-aware mock distinguishes
+/agency from /vehicles because the probe's failure modes differ per stage.
+
+### Registry + gate wiring
+
+- `lib/live/refresh-groups.json`: `transport.tranzy` added to `onDemand` (the class
+  Builder-1b specified — TTL 30 s, per-locality, **plus** env-gated: no key → no
+  address is ever queried). `verify-refresh-sweep.mjs` needs only family+reason — ✓.
+- `verify-sweep-inventory.mjs`: parity floor 24→25; `familyCoverage` gains
+  `'transport.tranzy':{parity:'transport/tranzy'}` — the gate's two-way check
+  (every registry family covered / every parity family accounted for) stays green.
+- Route registered in both fixed compile lists (`tranzy-live` → compiled
+  `app/api/tranzy-live/route.ts` + import list), per Builder-1b's handoff.
+- The mock harness gained exactly three family-generic hooks: per-family
+  `scenarios`, per-scenario `scenarioRoutes`, and the documented-400 branch in
+  `runCell`; the other 24 families' behavior is byte-identical (verified: their
+  per-family counts all still 6, all outputs deterministic).
+
+### Verification (final tree, branch `feat/tranzy-parity-cell`)
+
+- `node scripts/verify-source-errors.mjs` ×2 → **exit 0, byte-identical**:
+  `{"result":"ok","mode":"mock","families":25,"cells":152,…,"transport/tranzy","cells":8}`
+  (first failure during the work was a brace imbalance in my insert — fixed;
+  then an indentation-churn pass normalized the diff to intended lines only).
+- `node scripts/verify-sweep-inventory.mjs` ×2 → **exit 0, byte-identical**:
+  16 domenii, 49 secțiuni, 75 subcategorii, 181.649 locuri, **44 familii de surse
+  din registry, toate acoperite**.
+- `node scripts/verify-refresh-sweep.mjs` ×2 → **exit 0, byte-identical**
+  (refresh-groups.json is its subject — 5 crons/40-subrequest budget unchanged).
+- `corepack pnpm exec tsc --noEmit` → **0 errors**.
+- `corepack pnpm exec eslint scripts/verify-source-errors.mjs
+  scripts/verify-sweep-inventory.mjs` → **0 errors, 0 warnings** (my partition
+  adds zero warnings to the registered 117 baseline).
+- `lib/live/refresh-groups.json` → valid JSON (parsed).
+- Battery YAML untouched (both scripts are already in `pr-validation.yml` — no CI
+  change needed for a family inside an existing harness); no YAML → nothing to
+  validate beyond the run above.
+
+### Files touched (mine, this cell)
+
+`scripts/verify-source-errors.mjs` (tranzy family + fixtures + path-aware cells +
+per-family scenario hook + 400 branch + honest closing line) ·
+`scripts/verify-sweep-inventory.mjs` (floor 25 + familyCoverage mapping) ·
+`lib/live/refresh-groups.json` (onDemand entry) · `README.md` (25/152 + Tranzy
+enumeration + gate-cells clause) · this STATUS append.
+
+**Cell verdict: PASSED — 25 familii / 152 celule, toate porțile verzi, ×2
+deterministe.** Registered follow-up remains from Builder-1b's section: pin the
+agency↔locality pairs (live cache shows CTP Cluj at `transport:tranzy:vehicles:2`)
+once a live `/agency` read is spent — not in this cell's scope.

@@ -87,7 +87,7 @@ try{
   for(const family of groups.ghRelayed.map(entry=>entry.family))assert.ok(!members.includes(family),'familia '+family+' este reîmprospătată de intermediar, nu și de tură');
  const paritySource=await readFile(join(root,'scripts/verify-source-errors.mjs'),'utf8');
  const parityFamilies=new Set([...paritySource.matchAll(/\{family:'([^']+)',routeName/g)].map(match=>match[1]));
-  assert.ok(parityFamilies.size>=24,'tabela de paritate acoperă universul de familii');
+  assert.ok(parityFamilies.size>=25,'tabela de paritate acoperă universul de familii');
  const coverage={
   'bnr':{harness:'verify-refresh-sweep.mjs'},'weather.anm':{harness:'verify-refresh-sweep.mjs'},'weather.alerts':{harness:'verify-refresh-sweep.mjs'},
   'company.default':{parity:'company/anaf'},'knowledge.company.default':{parity:'company/anaf'},
@@ -102,7 +102,7 @@ try{
   'directory.health':{parity:'directory/health'},'directory.pharmacies':{parity:'directory/pharmacies'},'directory.hospitals':{parity:'directory/hospitals'},
   'law.consolidated.full':{harness:'verify-legal-records.mjs'},
   'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs'},
-  'transport.realtime':{parity:'transport/realtime'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
+  'transport.realtime':{parity:'transport/realtime'},'transport.tranzy':{parity:'transport/tranzy'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
   'company-knowledge':{parity:'company/anaf'},
  'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
  'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:'legal/law'},
