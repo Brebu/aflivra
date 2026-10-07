@@ -226,3 +226,10 @@ A **prior DevOps pass had been interrupted mid-write**: `lib/live/refresh-groups
 | `node scripts/db-migrate.mjs --local` ×2 | 0, 0 | ✅ run 2 reports „deja aplicată — nimic de făcut" — idempotent |
 
 **Ship verdict: SHIP — the wave is internally consistent and fully verified at this tree.** Two honest open items ride the merge, both registered where they belong: (1) the BIA first-real-tour verification (challenge clearance + FDS row shape) — exit-2/warning discipline makes it safe to merge before that confirmation; (2) no `--live` source pass was run for the new families this session (the wave's live budget) — recommended as the post-merge check alongside the first `bia-refresh` tour.
+
+### Post-merge live verification + registered follow-ups (orchestrator, 2026-10-07 ~08:00 EEST)
+- **Opera Cluj `/api/events?venue=operacluj`**: serves (58-event calendar live).
+- **ANL `/api/anl`**: serves (seedBacked, 37,317 units). ANCPI idem.
+- **BIA first relay tour** (workflow run 37590242554): both airports responded **HTTP 403 to the GitHub runner too** — the BIA Cloudflare challenge blocks non-browser fetchers everywhere. Tour completed success/exit-2-warning (merge-safe); the boards degrade honestly ("Panoul aeroportului nu conține curse utilizabile acum"). **Follow-up F-BIA-BROWSER: a browser-leg fetch step in bia-refresh.yml (headless challenge pass) — the registered caveat's plan.**
+- **adsb.lol `/api/flights`**: persistent **HTTP 429 from the Workers egress** (residential probes returned 110 aircraft — probe vs production divergence, the AFIR class). **Follow-up F-FLIGHTS-RELAY: generalize the relay pattern (bia-refresh → flights-refresh, cron */5 honest staleness label) or lighter query budget/key — adsb.lol joins AFIR/BIA in the relay class.** The Avioane tab degrades honestly until then.
+- Registered carry-overs unchanged: map cluster-precision UX (spider/offset), verify-court-links date-pin, verify-packed-seeds OOM, Tranzy real ↓key pass, Watch/„Urmărește" brainstorm (standing offer).
