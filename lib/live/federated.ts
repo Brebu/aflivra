@@ -27,7 +27,11 @@ Contract (consumed by T2.2 FederatedResults, T2.3 navigation seeds, T2.4 e2e):
     domain, tab, id, query, sub, courtNumber}. courtNumber seeds the courts form.
 
 Families v1: places/local-all, catalog, lawyers, directory×4 (schools/health/pharmacies/
-hospitals), feeds/stiri, feeds/agricultura, stories, gallery, cui, dosare.
+hospitals), feeds/stiri, feeds/agricultura, stories, gallery, cui, dosare. Families v2 (the
+justice + rail wave): notaries (/api/notaries), experts-judiciari/-tehnici and translators
+(/api/experts kind=), trains (/api/trains — the station index of the planned-timetable
+corpus). 'notary' and 'station' are kinds since that wave: the notary registry and the rail
+stations own their workspaces, so click-through targets exist for them.
 
 Excluded from v1 (rationale, recorded not silent): cinema and events (locality/day-scoped
 corpora with no national query contract — reachable through their own workspaces);
@@ -35,19 +39,18 @@ transport (București–Ilfov coverage gate, no national contract); localities/S
 (reference-lookup surface rather than a discovery corpus — locality names already surface
 through the places family); legal/law search, films feed, weather, company-by-name (not in
 the v1 family plan; 'legislation' is a reserved kind for a future law-search family).
-'notary-office' is not a distinct kind: notaries exist only as the OSM places subcategory
-„Notari" — there is no notary professional registry in this app ( Architect feasibility
-flag #1).
+The OSM places subcategory „Notari" keeps surfacing through the places family; the
+professional notary registry now surfaces through its own family (the v1 flag closed).
 
 Importing this module into compiled components requires extending the closed stub
 resolver lists of scripts/verify-location.mjs and scripts/verify-search-ui.mjs in the
 same change (conventions.md, closed-resolver constraint).
 */
-import {matchesQuery} from '@/lib/live/query';
+import {matchesQuery,countText} from '@/lib/live/query';
 import {topicSections} from '@/lib/dashboard-topics';
 
-export type FederatedKind='place'|'company'|'lawyer'|'dataset'|'record'|'article'|'story'|'dosar';
-export type FederatedFamilyId='places'|'catalog'|'lawyers'|'directory-schools'|'directory-health'|'directory-pharmacies'|'directory-hospitals'|'stiri'|'agricultura'|'stories'|'gallery'|'cui'|'dosare';
+export type FederatedKind='place'|'company'|'lawyer'|'dataset'|'record'|'article'|'story'|'dosar'|'notary'|'station';
+export type FederatedFamilyId='places'|'catalog'|'lawyers'|'directory-schools'|'directory-health'|'directory-pharmacies'|'directory-hospitals'|'stiri'|'agricultura'|'stories'|'gallery'|'cui'|'dosare'|'notaries'|'experts-judiciari'|'experts-tehnici'|'translators'|'trains';
 export type FederatedTarget={view:'place'|'company'|'domain';domain?:string;tab?:string;id?:string;query?:string;sub?:string;courtNumber?:string};
 export type FederatedItem={family:FederatedFamilyId;category:string;subcategory?:string;id:string;title:string;subtitle?:string;snippet?:string;kind:FederatedKind;source:string;url?:string;target:FederatedTarget};
 export type FederatedFamilyState={family:FederatedFamilyId;status:'pending'|'done'|'gate'|'unavailable';total?:number;note?:string};
@@ -67,6 +70,7 @@ const directoryTargets={schools:{domain:'educatie',tab:'schools'},health:{domain
 
 export type FederatedFamilyDescriptor={id:FederatedFamilyId;label:string;source:string;kind:FederatedKind;category?:string;minChars?:number;maxChars?:number;eager?:boolean;request?:(term:string)=>string};
 
+const trainSearchTerm=(term:string)=>term.split(/\s+/).filter(word=>!/^(?:gara|gari|ga(?:ra|ri)|statia|statie|statii|statiile)$/i.test(word.normalize('NFD').replace(/[\u0300-\u036f]/g,''))).join(' ').trim();
 const apiDirectory=(kind:string,term:string)=>'/api/directory?'+new URLSearchParams({kind,q:term,page:'0',geoScope:'national'});
 const apiDomain=(kind:string,term:string)=>'/api/domain?'+new URLSearchParams({kind,q:term,page:'0',sort:'recent',geoScope:'national'});
 
@@ -83,7 +87,14 @@ export const federatedFamilies:readonly FederatedFamilyDescriptor[]=[
  {id:'stories',label:'Povești integral',source:'Wikisource',kind:'story',category:'povesti',eager:true},
  {id:'gallery',label:'Galeria de explorat',source:'Prezentare editorială',kind:'place',category:'cultura',eager:true},
  {id:'cui',label:'Firme după CUI',source:'ANAF',kind:'company',category:'firme',eager:true},
- {id:'dosare',label:'Dosare în instanțe',source:'portal.just.ro',kind:'dosar',category:'justitie',eager:true}
+ {id:'dosare',label:'Dosare în instanțe',source:'portal.just.ro',kind:'dosar',category:'justitie',eager:true},
+ {id:'notaries',label:'Registrul notarilor publici',source:'Ministerul Justiției',kind:'notary',category:'justitie',maxChars:100,request:term=>'/api/notaries?'+new URLSearchParams({q:term,page:'0',geoScope:'national'})},
+ {id:'experts-judiciari',label:'Tabloul experților judiciari',source:'Ministerul Justiției',kind:'record',category:'justitie',maxChars:100,request:term=>'/api/experts?'+new URLSearchParams({kind:'experti-judiciari',q:term,page:'0',geoScope:'national'})},
+ {id:'experts-tehnici',label:'Registrul experților tehnici atestați',source:'MDPLPA',kind:'record',category:'justitie',maxChars:100,request:term=>'/api/experts?'+new URLSearchParams({kind:'experti-tehnici',q:term,page:'0',geoScope:'national'})},
+ {id:'translators',label:'Registrul traducătorilor și interpreților',source:'Ministerul Justiției',kind:'record',category:'justitie',maxChars:100,request:term=>'/api/experts?'+new URLSearchParams({kind:'traducatori',q:term,page:'0',geoScope:'national'})},
+ // The train-station family joins lib/live/trains.ts in treating „gara/gară/stația/stație" as
+ // corpus nouns (never station-name content); the fan-out sends the effective term.
+ {id:'trains',label:'Mersul trenurilor · gări',source:'data.gov.ro · Informatică Feroviară',kind:'station',category:'transport',maxChars:100,request:term=>'/api/trains?'+new URLSearchParams({q:trainSearchTerm(term),page:'0'})}
 ];
 const descriptorById=new Map(federatedFamilies.map(f=>[f.id,f]));
 
@@ -118,6 +129,22 @@ function catalogItem(record:Record<string,unknown>):FederatedItem{
  // The dataset's own classification picks its home group and target domain — the same category the catalog workspace filters by.
  const domain=raw.find(c=>groupLabels.has(c))||'local';
  return {family:'catalog',category:domain,id:String(record.id??title),title,subtitle:text(record.organization),snippet:snip(record.note),kind:'dataset',source:'data.gov.ro',url:text(record.url),target:{view:'domain',domain,tab:'data',query:title}};
+}
+function notaryItem(record:Record<string,unknown>):FederatedItem{
+ const name=text(record.NUME)||'Notar în registru';
+ return {family:'notaries',category:'justitie',subcategory:'Registrul notarilor publici',id:record._id!==undefined?String(record._id):name,title:name,subtitle:[text(record.CAMERA),text(record.LOCALITATE)].filter(Boolean).join(' · ')||undefined,kind:'notary',source:'Ministerul Justiției',url:'https://data.gov.ro/dataset/bc69c898-b356-4e2c-9251-1833857d1a6e',target:{view:'domain',domain:'justitie',tab:'notari',query:name}};
+}
+function expertItem(family:'experts-judiciari'|'experts-tehnici'|'translators',record:Record<string,unknown>):FederatedItem{
+ const name=text(record.Nume)||text(record['Nume și prenume'])||'Expert în registru';
+ const county=text(record.Judet)||text(record.Județul);
+ const specialty=text(record.Specializare)||text(record.Limbi);
+ return {family,category:'justitie',subcategory:descriptorById.get(family)?.label,id:record._id!==undefined?String(record._id):name,title:name,subtitle:[county,specialty].filter(Boolean).join(' · ')||undefined,kind:'record',source:family==='experts-tehnici'?'MDPLPA':'Ministerul Justiției',url:family==='experts-tehnici'?'https://data.gov.ro/dataset/3f26ecb7-df7e-454e-a029-89dbd6d82c3f':'https://data.gov.ro/dataset/'+(family==='experts-judiciari'?'476a8363-7c91-43e2-99d2-4fbe144c8e2a':'b1c5ffa9-9dbc-4e71-82c5-6dbee3c806ff'),target:{view:'domain',domain:'justitie',tab:'experti',query:name}};
+}
+function stationItem(record:Record<string,unknown>):FederatedItem{
+ const name=text(record.name)||'Stație de tren';
+ const operators=Array.isArray(record.operators)?record.operators.map(String):[];
+ const trains=typeof record.trains==='number'&&record.trains>=0?record.trains:0;
+ return {family:'trains',category:'transport',subcategory:'Mersul trenurilor',id:record.code!==undefined?String(record.code):name,title:name,subtitle:[operators.length?countText(operators.length,'operator','operatori'):'',trains?countText(trains,'tren','trenuri'):''].filter(Boolean).join(' · ')||undefined,kind:'station',source:'data.gov.ro · Informatică Feroviară',url:'https://data.gov.ro/dataset/c4f71dbb-de39-49b2-b697-5b60a5f299a2',target:{view:'domain',domain:'transport',tab:'trains',query:name}};
 }
 function lawyerItem(record:Record<string,unknown>,term:string):FederatedItem{
  const name=text(record.name)||term||'Avocat în tablou';
@@ -168,6 +195,21 @@ function mapFamily(family:FederatedFamilyId,data:Record<string,unknown>,term:str
   if(!rows)return null;
   const kind=family.slice('directory-'.length) as keyof typeof directoryTargets;
   return {items:rows.slice(0,cap).map(r=>directoryItem(kind,r)),total:numberOr(data.total,rows.length)};
+ }
+ if(family==='notaries'){
+  const rows=asObjects(data.records);
+  if(!rows)return null;
+  return {items:rows.slice(0,cap).map(notaryItem),total:numberOr(data.total,rows.length)};
+ }
+ if(family==='experts-judiciari'||family==='experts-tehnici'||family==='translators'){
+  const rows=asObjects(data.records);
+  if(!rows)return null;
+  return {items:rows.slice(0,cap).map(r=>expertItem(family,r)),total:numberOr(data.total,rows.length)};
+ }
+ if(family==='trains'){
+  const rows=asObjects(data.items);
+  if(!rows)return null;
+  return {items:rows.slice(0,cap).map(stationItem),total:numberOr(data.total,rows.length)};
  }
  return null;
 }

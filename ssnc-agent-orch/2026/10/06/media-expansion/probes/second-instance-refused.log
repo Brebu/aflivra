@@ -1,0 +1,10 @@
+
+  Another vinext dev server is already running.
+  
+  - Local:        http://127.0.0.1:5173
+  - PID:          79430
+  - Dir:          /Users/cbrebu/Projects/alfivra
+  
+  You can access the existing server at http://127.0.0.1:5173,
+  or run `kill 79430` to stop it and start a new one.
+

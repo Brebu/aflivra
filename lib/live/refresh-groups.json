@@ -16,6 +16,11 @@
     {"family": "directory.health", "reason": "Registrul clinicilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."},
     {"family": "directory.pharmacies", "reason": "Registrul farmaciilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."},
     {"family": "directory.hospitals", "reason": "Registrul spitalelor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."},
+    {"family": "justice.notari", "reason": "Registrul notarilor publici se distribuie ca fișier XLSX publicat lunar; se servește din copia verificată inclusă în aplicație și se reîncearcă la sursă la expirare."},
+    {"family": "justice.experti-judiciari", "reason": "Tabloul experților judiciari se distribuie ca fișier XLSX voluminos; se servește din copia verificată inclusă în aplicație și se reîncearcă la sursă la expirare."},
+    {"family": "justice.experti-tehnici", "reason": "Registrul experților tehnici atestați se distribuie ca fișier XLSX voluminos; se servește din copia verificată inclusă în aplicație și se reîncearcă la sursă la expirare."},
+    {"family": "justice.traducatori", "reason": "Registrul traducătorilor și interpreților are peste 38.000 de înregistrări (peste 6 MB); se verifică integral la prima cerere și se servește din copia persistentă, fără o copie inclusă în aplicație."},
+    {"family": "trains", "reason": "Mersul trenurilor se publică ca fișiere XML anuale voluminoase (peste 10 MB pentru CFR Călători); orarele planificate se servesc din copia verificată inclusă în aplicație."},
     {"family": "law.consolidated.full", "reason": "Consolidarea integrală a unui act poate depăși 1,4 MB de text și se stochează în fragmente; se verifică la deschiderea actului, nu pe tură de noapte."},
     {"family": "catalog.organizations-formats", "reason": "Paginile de organizator și de format ale catalogului sunt combinatorii; se verifică la cerere."},
     {"family": "resource.datastores", "reason": "Resursele și depozitele de date ale catalogului se verifică la deschiderea fiecărui set de date."}

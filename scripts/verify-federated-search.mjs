@@ -20,19 +20,20 @@ try{
   .replace("from '@/lib/live/query'","from './query'")
   .replace("from '@/lib/dashboard-topics'","from './topics'"));
  const {federatedSearch,federatedCollect,federatedFamilies,federatedGroups,courtNumberTerm,validDomainTab}=federated;
- const networkIds=['places','catalog','lawyers','directory-schools','directory-health','directory-pharmacies','directory-hospitals','stiri','agricultura'];
+ const networkIds=['places','catalog','lawyers','directory-schools','directory-health','directory-pharmacies','directory-hospitals','stiri','agricultura','notaries','experts-judiciari','experts-tehnici','translators','trains'];
  const eagerIds=['stories','gallery','cui','dosare'];
  const familyIds=[...networkIds,...eagerIds].sort();
 
  console.log('LEG 1 — module contract and family table');
  assert.equal(typeof federatedSearch,'function');assert.equal(typeof federatedCollect,'function');assert.equal(typeof courtNumberTerm,'function');assert.equal(typeof validDomainTab,'function');
  assert.deepEqual(federatedFamilies.map(f=>f.id).sort(),familyIds,'exactly the federated v1 family set');
- const kinds=new Set(['place','company','lawyer','dataset','record','article','story','dosar']);
+ const kinds=new Set(['place','company','lawyer','dataset','record','article','story','dosar','notary','station']);
  const groupIds=new Set(federatedGroups.map(g=>g.id));
  for(const family of federatedFamilies){assert.equal(typeof family.label,'string','family label must exist: '+family.id);assert.ok(family.label.length>0);assert.equal(typeof family.source,'string');assert.ok(family.source.length>0);assert.ok(kinds.has(family.kind),'family kind must be a supported kind: '+family.id);if(family.category)assert.ok(groupIds.has(family.category)||family.category==='item','family category must be a registry group: '+family.id)}
  assert.equal(validDomainTab('local','places'),true);assert.equal(validDomainTab('local','data'),true,'the auto data tab is a valid tab');
  assert.equal(validDomainTab('justitie','lawyers'),true);assert.equal(validDomainTab('justitie','legal'),true);assert.equal(validDomainTab('educatie','schools'),true);assert.equal(validDomainTab('sanatate','health'),true);assert.equal(validDomainTab('sanatate','pharmacies'),true);assert.equal(validDomainTab('sanatate','hospitals'),true);
  assert.equal(validDomainTab('povesti','stories'),true);assert.equal(validDomainTab('stiri','news'),true);assert.equal(validDomainTab('agricultura','news'),true);assert.equal(validDomainTab('firme','companies'),true);
+ assert.equal(validDomainTab('justitie','notari'),true);assert.equal(validDomainTab('justitie','experti'),true);assert.equal(validDomainTab('transport','trains'),true);assert.equal(validDomainTab('local','notari'),false,'local nu are secțiune de notari');
  assert.equal(validDomainTab('vreme','places'),false,'vreme has no places section');assert.equal(validDomainTab('povesti','lawyers'),false);assert.equal(validDomainTab('local','bogus'),false);assert.equal(validDomainTab('','places'),false);assert.equal(validDomainTab('local',''),false);
 
  console.log('LEG 2 — registry mirrors against real repo data');
@@ -100,6 +101,14 @@ try{
  const schoolUrl=requestByFamily.get('directory-schools');assert.equal(schoolUrl.pathname,'/api/directory');assert.equal(schoolUrl.searchParams.get('kind'),'schools');assert.equal(schoolUrl.searchParams.get('q'),'școli');
  const stiriUrl=requestByFamily.get('stiri');assert.equal(stiriUrl.pathname,'/api/domain');assert.equal(stiriUrl.searchParams.get('kind'),'stiri');assert.equal(stiriUrl.searchParams.get('q'),'școli');
  const afirUrl=requestByFamily.get('agricultura');assert.equal(afirUrl.pathname,'/api/domain');assert.equal(afirUrl.searchParams.get('kind'),'agricultura');
+ const notariesUrl=requestByFamily.get('notaries');assert.equal(notariesUrl.pathname,'/api/notaries');assert.equal(notariesUrl.searchParams.get('q'),'școli');assert.equal(notariesUrl.searchParams.get('geoScope'),'national');
+ const judiciariUrl=requestByFamily.get('experts-judiciari');assert.equal(judiciariUrl.pathname,'/api/experts');assert.equal(judiciariUrl.searchParams.get('kind'),'experti-judiciari');assert.equal(judiciariUrl.searchParams.get('q'),'școli');assert.equal(judiciariUrl.searchParams.get('geoScope'),'national');
+ const trainsUrl=requestByFamily.get('trains');assert.equal(trainsUrl.pathname,'/api/trains');assert.equal(trainsUrl.searchParams.get('q'),'școli');assert.equal(trainsUrl.searchParams.get('page'),'0');
+ result=federatedSearch('gara brașov');
+ const garaUrl=result.requests.find(r=>r.family==='trains');
+ assert.equal(new URL(garaUrl.url,'https://aflivra.test').searchParams.get('q'),'brașov','cuvintele-corp „gara/stația” nu ajung în interogarea de stații');
+ result=federatedSearch('stația cluj napoca');
+ assert.equal(new URL(result.requests.find(r=>r.family==='trains')?.url||'','https://aflivra.test').searchParams.get('q'),'cluj napoca');
  for(const family of networkIds)assert.ok(result.families.some(f=>f.family===family&&f.status==='pending'),'every planned family starts pending: '+family);
  result=federatedSearch('șc');
  assert.ok(!result.requests.some(r=>r.family==='lawyers'),'a 2-character term must not query the lawyers registry');
@@ -149,8 +158,24 @@ try{
   collected=federatedCollect(federatedSearch('set'),'catalog',{status:'cached',data:{results:[{id:'fara-clasificare',title:'Set de date fără clasificare',organization:'Editor neprecizat'}],count:1,page:0,pages:1}});
   const localDatasets=collected.groups.find(g=>g.id==='local');assert.ok(localDatasets&&localDatasets.items.some(i=>i.kind==='dataset'),'un rând fără nicio clasificare păstrează grupul local de rezervă');
   collected=federatedCollect(federatedSearch('avocat'),'lawyers',{status:'cached',data:{items:[{id:'123',name:'Popescu Ion',title:'Baroul Brașov — definitiv',url:'https://www.ifep.ro/Justice/Lawyers/LawyerFile.aspx?RecordId=123',details:'avocat definitiv',updatedAt:'2026-01-01'}],total:77,page:0,pages:6}});
- const justitie=collected.groups.find(g=>g.id==='justitie');assert.ok(justitie);assert.equal(justitie.items[0].kind,'lawyer');assert.equal(justitie.items[0].title,'Popescu Ion');assert.equal(justitie.items[0].subtitle,'Baroul Brașov — definitiv');
+ let justitie=collected.groups.find(g=>g.id==='justitie');assert.ok(justitie);assert.equal(justitie.items[0].kind,'lawyer');assert.equal(justitie.items[0].title,'Popescu Ion');assert.equal(justitie.items[0].subtitle,'Baroul Brașov — definitiv');
  assert.equal(justitie.items[0].target.domain,'justitie');assert.equal(justitie.items[0].target.tab,'lawyers');assert.equal(justitie.items[0].target.query,'Popescu Ion');
+ collected=federatedCollect(federatedSearch('notar'),'notaries',{status:'cached',data:{title:'Registrul notarilor publici',period:'23.01.2025',note:'Registrul notarilor publici.',fields:['NUME','CAMERA','LOCALITATE','JUDET'],total:3096,records:[{NUME:' POPESCU ANA',CAMERA:'CAMERA DE NOTARI PUBLICI TIMIȘOARA',LOCALITATE:'Lugoj',JUDET:'TIMIȘ',_id:'n-fixture'}],page:0,pages:155}});
+ justitie=collected.groups.find(g=>g.id==='justitie');assert.ok(justitie,'familia notarilor creează grupul justiție');
+ assert.equal(justitie.items[0].kind,'notary','kind-ul notar există de la valul registrelor de justiție');assert.equal(justitie.items[0].title,'POPESCU ANA','numele notarului curățat de spațiile sursei');
+ assert.equal(justitie.items[0].subtitle,'CAMERA DE NOTARI PUBLICI TIMIȘOARA · Lugoj');
+ assert.equal(justitie.items[0].subcategory,'Registrul notarilor publici');
+ assert.equal(justitie.items[0].target.domain,'justitie');assert.equal(justitie.items[0].target.tab,'notari');assert.equal(justitie.items[0].target.query,'POPESCU ANA','click-through seed-ează cautarea în tabloul notarilor');
+ assert.equal(collected.families.find(f=>f.family==='notaries').total,3096);
+ collected=federatedCollect(federatedSearch('expert'),'experts-judiciari',{status:'cached',data:{title:'Tabloul experților judiciari',period:'23.01.2025',note:'Experții judiciari.',fields:['Legitimatie','Judet','Nume','Specializare'],total:8024,records:[{Legitimatie:'2344 316',Judet:'Timiș',Nume:'Petric Ion',Specializare:'Agricultură',_id:'e-1'}],page:0,pages:402}});
+ justitie=collected.groups.find(g=>g.id==='justitie');assert.ok(justitie,'familia experților creează grupul justiție');
+ assert.equal(justitie.items[0].kind,'record');assert.equal(justitie.items[0].title,'Petric Ion');assert.equal(justitie.items[0].subtitle,'Timiș · Agricultură');
+ assert.equal(justitie.items[0].target.tab,'experti');assert.equal(justitie.items[0].target.query,'Petric Ion');
+ collected=federatedCollect(federatedSearch('gara'),'trains',{status:'cached',data:{items:[{code:30691,name:'Braşov',operators:['sntfc','regio'],trains:267,shard:99}],total:1846,page:0,pages:47}});
+ const transportGroup=collected.groups.find(g=>g.id==='transport');assert.ok(transportGroup,'familia gărilor creează grupul transport');
+ assert.equal(transportGroup.items[0].kind,'station','kind-ul stație există de la valul mersului trenurilor');assert.equal(transportGroup.items[0].title,'Braşov');
+ assert.equal(transportGroup.items[0].subtitle,query.countText(2,'operator','operatori')+' · '+query.countText(267,'tren','trenuri'),'subtitlul folosește gramatica de numărătoare');
+ assert.equal(transportGroup.items[0].target.domain,'transport');assert.equal(transportGroup.items[0].target.tab,'trains');assert.equal(transportGroup.items[0].target.query,'Braşov');
  collected=federatedCollect(federatedSearch('liceul'),'directory-schools',{status:'cached',data:{title:'Rețeaua școlară',period:'2025–2026',note:'Ediția 2025–2026.',fields:['Denumire lunga unitate','Localitate unitate','Judet PJ'],total:9,records:[{'Denumire lunga unitate':'Liceul Teoretic Eminescu','Localitate unitate':'Brașov','Judet PJ':'Brașov'}],page:0,pages:1}});
  educatie=collected.groups.find(g=>g.id==='educatie');assert.ok(educatie);assert.equal(educatie.items[0].kind,'record');assert.equal(educatie.items[0].title,'Liceul Teoretic Eminescu','the directory title heuristic mirrors the workspace');
  assert.equal(educatie.items[0].subtitle,'Brașov · Brașov');assert.equal(educatie.items[0].target.domain,'educatie');assert.equal(educatie.items[0].target.tab,'schools');

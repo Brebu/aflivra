@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XmlIf encoding="UTF-8" version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="trnIfSchema_v4.xsd">
+    <XmlMts>
+        <Mt DataExport="20251203" MtValabilDeLa="20251214" MtValabilPinaLa="20261212" Versiune="1">
+            <Trenuri>
+                <Tren CategorieTren="IR" KmCum="389136.0" Lungime="50" Numar="16521" Operator="236037" Proprietar="236037" Putere="" Rang="3"
+                    Servicii="3" Tonaj="100">
+                    <Trase>
+                        <Trasa CodStatieFinala="32015" CodStatieInitiala="11906" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="36578" CodStaOrigine="11906" DenStaDestinatie="Ram. Pav. C.F.R."
+                                DenStaOrigine="Timişoara Nord" Km="2493" Lungime="50" OraP="23400" OraS="23820" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="1" StationareSecunde="0" TipOprire="N" Tonaj="100" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="36803" CodStaOrigine="36578" DenStaDestinatie="Ram. Ronat Triaj"
+                                DenStaOrigine="Ram. Pav. C.F.R." Km="1000" Lungime="50" OraP="23820" OraS="23940" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="2" StationareSecunde="0" TipOprire="N" Tonaj="100" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="25282" CodStaOrigine="36803" DenStaDestinatie="Ronaţ Triaj Gr. D"
+                                DenStaOrigine="Ram. Ronat Triaj" Km="3412" Lungime="50" OraP="23940" OraS="24300" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="3" StationareSecunde="0" TipOprire="N" Tonaj="100" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="25309" CodStaOrigine="25282" DenStaDestinatie="Sânandrei Hm."
+                                DenStaOrigine="Ronaţ Triaj Gr. D" Km="6295" Lungime="250" OraP="24300" OraS="24840" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="4" StationareSecunde="0" TipOprire="N" Tonaj="500" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="25323" CodStaOrigine="25309" DenStaDestinatie="Băile Calacea Hm."
+                                DenStaOrigine="Sânandrei Hm." Km="7182" Lungime="250" OraP="24840" OraS="25560" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="5" StationareSecunde="0" TipOprire="N" Tonaj="500" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="60" CodStaDest="25347" CodStaOrigine="25323" DenStaDestinatie="Orţişoara"
+                                DenStaOrigine="Băile Calacea Hm." Km="5936" Lungime="250" OraP="25980" OraS="26520" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="6" StationareSecunde="420" TipOprire="T" Tonaj="500" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="60" CodStaDest="25361" CodStaOrigine="25347" DenStaDestinatie="Vinga Hm."
+                                DenStaOrigine="Orţişoara" Km="6241" Lungime="250" OraP="26520" OraS="27240" Rci="IR" Rco="IR" Restrictie="180"
+                                Secventa="7" StationareSecunde="0" TipOprire="N" Tonaj="500" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="25385" CodStaOrigine="25361" DenStaDestinatie="Şag Hm." DenStaOrigine="Vinga Hm."
+                                Km="7541" Lungime="250" OraP="27240" OraS="28020" Rci="IR" Rco="IR" Restrictie="180" Secventa="8"
+                                StationareSecunde="0" TipOprire="N" Tonaj="500" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="25402" CodStaOrigine="25385" DenStaDestinatie="Valea Viilor Hm."
+                                DenStaOrigine="Şag Hm." Km="5490" Lungime="250" OraP="28020" OraS="28440" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="9" StationareSecunde="0" TipOprire="N" Tonaj="500" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="25426" CodStaOrigine="25402" DenStaDestinatie="Aradu Nou"
+                                DenStaOrigine="Valea Viilor Hm." Km="5503" Lungime="250" OraP="28440" OraS="28860" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="10" StationareSecunde="0" TipOprire="N" Tonaj="500" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="36633" CodStaOrigine="25426" DenStaDestinatie="Ram. Glogovăţ"
+                                DenStaOrigine="Aradu Nou" Km="2709" Lungime="250" OraP="28860" OraS="29100" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="11" StationareSecunde="0" TipOprire="N" Tonaj="500" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21834" CodStaOrigine="36633" DenStaDestinatie="Arad" DenStaOrigine="Ram. Glogovăţ"
+                                Km="3483" Lungime="250" OraP="29100" OraS="29400" Rci="IR" Rco="IR" Restrictie="0" Secventa="12" StationareSecunde="0"
+                                TipOprire="N" Tonaj="500" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="21808" CodStaOrigine="21834" DenStaDestinatie="Glogovăţ Hm." DenStaOrigine="Arad"
+                                Km="6877" Lungime="300" OraP="29760" OraS="30060" Rci="IR" Rco="IR" Restrictie="0" Secventa="13"
+                                StationareSecunde="360" TipOprire="C" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="-30" CodStaDest="21755" CodStaOrigine="21808" DenStaDestinatie="Ghioroc Hm."
+                                DenStaOrigine="Glogovăţ Hm." Km="15208" Lungime="300" OraP="30060" OraS="30420" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="14" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="21731" CodStaOrigine="21755" DenStaDestinatie="Paulis Hm."
+                                DenStaOrigine="Ghioroc Hm." Km="6097" Lungime="300" OraP="30420" OraS="30600" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="15" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="-30" CodStaDest="21705" CodStaOrigine="21731" DenStaDestinatie="Radna" DenStaOrigine="Paulis Hm."
+                                Km="6827" Lungime="300" OraP="30600" OraS="30780" Rci="IR" Rco="IR" Restrictie="0" Secventa="16" StationareSecunde="0"
+                                TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="21688" CodStaOrigine="21705" DenStaDestinatie="Milova Hm." DenStaOrigine="Radna"
+                                Km="8305" Lungime="300" OraP="30780" OraS="31080" Rci="IR" Rco="IR" Restrictie="0" Secventa="17" StationareSecunde="0"
+                                TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21640" CodStaOrigine="21688" DenStaDestinatie="Bârzava Nouă Hm."
+                                DenStaOrigine="Milova Hm." Km="15714" Lungime="300" OraP="31080" OraS="31560" Rci="IR" Rco="IR" Restrictie="120"
+                                Secventa="18" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21585" CodStaOrigine="21640" DenStaDestinatie="Bata Hm"
+                                DenStaOrigine="Bârzava Nouă Hm." Km="9651" Lungime="300" OraP="31560" OraS="31830" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="19" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21597" CodStaOrigine="21585" DenStaDestinatie="Vărădia Hm." DenStaOrigine="Bata Hm"
+                                Km="8404" Lungime="300" OraP="31830" OraS="32220" Rci="IR" Rco="IR" Restrictie="120" Secventa="20"
+                                StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="120" CodStaDest="21559" CodStaOrigine="21597" DenStaDestinatie="Săvârşin"
+                                DenStaOrigine="Vărădia Hm." Km="8020" Lungime="300" OraP="32460" OraS="32940" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="21" StationareSecunde="240" TipOprire="T" Tonaj="600" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="90" CodStaDest="21511" CodStaOrigine="21559" DenStaDestinatie="Ilteu Hm." DenStaOrigine="Săvârşin"
+                                Km="10053" Lungime="300" OraP="32940" OraS="33360" Rci="IR" Rco="IR" Restrictie="0" Secventa="22"
+                                StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="-60" CodStaDest="21482" CodStaOrigine="21511" DenStaDestinatie="Zam Hm." DenStaOrigine="Ilteu Hm."
+                                Km="7862" Lungime="300" OraP="33360" OraS="33780" Rci="IR" Rco="IR" Restrictie="0" Secventa="23" StationareSecunde="0"
+                                TipOprire="N" Tonaj="600" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21456" CodStaOrigine="21482" DenStaDestinatie="Câmpuri Surduc Hm."
+                                DenStaOrigine="Zam Hm." Km="12284" Lungime="300" OraP="33780" OraS="34920" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="24" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21406" CodStaOrigine="21456" DenStaDestinatie="Ilia"
+                                DenStaOrigine="Câmpuri Surduc Hm." Km="10284" Lungime="300" OraP="35040" OraS="35880" Rci="IR" Rco="IR"
+                                Restrictie="120" Secventa="25" StationareSecunde="120" TipOprire="T" Tonaj="600" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21315" CodStaOrigine="21406" DenStaDestinatie="Mintia Hm." DenStaOrigine="Ilia"
+                                Km="15929" Lungime="300" OraP="35940" OraS="36540" Rci="IR" Rco="IR" Restrictie="0" Secventa="26"
+                                StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="-60" CodStaDest="21286" CodStaOrigine="21315" DenStaDestinatie="Deva" DenStaOrigine="Mintia Hm."
+                                Km="6445" Lungime="300" OraP="36540" OraS="36840" Rci="IR" Rco="IR" Restrictie="0" Secventa="27" StationareSecunde="0"
+                                TipOprire="N" Tonaj="600" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="-60" CodStaDest="21236" CodStaOrigine="21286" DenStaDestinatie="Simeria" DenStaOrigine="Deva"
+                                Km="9181" Lungime="300" OraP="36960" OraS="37440" Rci="IR" Rco="IR" Restrictie="120" Secventa="28"
+                                StationareSecunde="120" TipOprire="C" Tonaj="600" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="36724" CodStaOrigine="21236" DenStaDestinatie="Ram. Simeria"
+                                DenStaOrigine="Simeria" Km="2106" Lungime="300" OraP="37860" OraS="38040" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="29" StationareSecunde="420" TipOprire="C" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="21157" CodStaOrigine="36724" DenStaDestinatie="Orăştie Hm."
+                                DenStaOrigine="Ram. Simeria" Km="14102" Lungime="300" OraP="38040" OraS="38460" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="30" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21121" CodStaOrigine="21157" DenStaDestinatie="Aurel Vlaicu"
+                                DenStaOrigine="Orăştie Hm." Km="6317" Lungime="300" OraP="38520" OraS="38760" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="31" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="21092" CodStaOrigine="21121" DenStaDestinatie="Şibot Hm."
+                                DenStaOrigine="Aurel Vlaicu" Km="5982" Lungime="300" OraP="38760" OraS="39060" Rci="IR" Rco="IR" Restrictie="120"
+                                Secventa="32" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21054" CodStaOrigine="21092" DenStaDestinatie="Blandiana Hm."
+                                DenStaOrigine="Şibot Hm." Km="9769" Lungime="300" OraP="39060" OraS="39300" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="33" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21028" CodStaOrigine="21054" DenStaDestinatie="Vinţu de Jos"
+                                DenStaOrigine="Blandiana Hm." Km="5193" Lungime="300" OraP="39300" OraS="39540" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="34" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="21030" CodStaOrigine="21028" DenStaDestinatie="R2 Vinţu"
+                                DenStaOrigine="Vinţu de Jos" Km="2383" Lungime="300" OraP="39600" OraS="39720" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="35" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="23038" CodStaOrigine="21030" DenStaDestinatie="Alba Iulia" DenStaOrigine="R2 Vinţu"
+                                Km="7484" Lungime="0" OraP="39720" OraS="39960" Rci="IR" Rco="IR" Restrictie="0" Secventa="36" StationareSecunde="0"
+                                TipOprire="N" Tonaj="0" VitezaLivret="160"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="23002" CodStaOrigine="23038" DenStaDestinatie="Bărăbanţ Hm."
+                                DenStaOrigine="Alba Iulia" Km="4454" Lungime="275" OraP="40020" OraS="40200" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="37" StationareSecunde="60" TipOprire="C" Tonaj="550" VitezaLivret="140"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="22981" CodStaOrigine="23002" DenStaDestinatie="Sântimbru Hm."
+                                DenStaOrigine="Bărăbanţ Hm." Km="4763" Lungime="275" OraP="40200" OraS="40380" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="38" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="140"/>
+                            <ElementTrasa Ajustari="30" CodStaDest="57003" CodStaOrigine="22981" DenStaDestinatie="Ram. Coşlariu"
+                                DenStaOrigine="Sântimbru Hm." Km="4069" Lungime="275" OraP="40380" OraS="40530" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="39" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="22929" CodStaOrigine="57003" DenStaDestinatie="Coşlariu Hm."
+                                DenStaOrigine="Ram. Coşlariu" Km="2249" Lungime="275" OraP="40530" OraS="40620" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="40" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31645" CodStaOrigine="22929" DenStaDestinatie="Teiuş" DenStaOrigine="Coşlariu Hm."
+                                Km="3533" Lungime="275" OraP="40620" OraS="40860" Rci="IR" Rco="IR" Restrictie="60" Secventa="41"
+                                StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="-60" CodStaDest="31695" CodStaOrigine="31645" DenStaDestinatie="Aiud Hm." DenStaOrigine="Teiuş"
+                                Km="13176" Lungime="275" OraP="41100" OraS="41700" Rci="IR" Rco="IR" Restrictie="0" Secventa="42"
+                                StationareSecunde="240" TipOprire="C" Tonaj="550" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31748" CodStaOrigine="31695" DenStaDestinatie="Unirea Hm." DenStaOrigine="Aiud Hm."
+                                Km="13913" Lungime="275" OraP="42000" OraS="42720" Rci="IR" Rco="IR" Restrictie="0" Secventa="43"
+                                StationareSecunde="300" TipOprire="C" Tonaj="550" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="60" CodStaDest="31774" CodStaOrigine="31748" DenStaDestinatie="Războieni"
+                                DenStaOrigine="Unirea Hm." Km="6448" Lungime="275" OraP="43080" OraS="43800" Rci="IR" Rco="IR" Restrictie="120"
+                                Secventa="44" StationareSecunde="360" TipOprire="T" Tonaj="550" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31798" CodStaOrigine="31774" DenStaDestinatie="Călăraşi Turda Hm."
+                                DenStaOrigine="Războieni" Km="9440" Lungime="275" OraP="44160" OraS="44640" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="45" StationareSecunde="360" TipOprire="C" Tonaj="550" VitezaLivret="85"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="47967" CodStaOrigine="31798" DenStaDestinatie="Ram. Turda"
+                                DenStaOrigine="Călăraşi Turda Hm." Km="6878" Lungime="275" OraP="44640" OraS="44940" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="46" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31827" CodStaOrigine="47967" DenStaDestinatie="Câmpia Turzii"
+                                DenStaOrigine="Ram. Turda" Km="733" Lungime="275" OraP="44940" OraS="45180" Rci="IR" Rco="IR" Restrictie="120"
+                                Secventa="47" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31877" CodStaOrigine="31827" DenStaDestinatie="Valea Florilor Hm."
+                                DenStaOrigine="Câmpia Turzii" Km="14975" Lungime="275" OraP="45240" OraS="46020" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="48" StationareSecunde="60" TipOprire="C" Tonaj="550" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31891" CodStaOrigine="31877" DenStaDestinatie="Boju Hm."
+                                DenStaOrigine="Valea Florilor Hm." Km="7935" Lungime="275" OraP="46020" OraS="46680" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="49" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31918" CodStaOrigine="31891" DenStaDestinatie="Tunel Hm." DenStaOrigine="Boju Hm."
+                                Km="5791" Lungime="275" OraP="46680" OraS="47100" Rci="IR" Rco="IR" Restrictie="0" Secventa="50" StationareSecunde="0"
+                                TipOprire="N" Tonaj="550" VitezaLivret="60"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31920" CodStaOrigine="31918" DenStaDestinatie="Cojocna Hm."
+                                DenStaOrigine="Tunel Hm." Km="5692" Lungime="275" OraP="47100" OraS="47520" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="51" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="60"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31932" CodStaOrigine="31920" DenStaDestinatie="Ram. Jucu"
+                                DenStaOrigine="Cojocna Hm." Km="4038" Lungime="275" OraP="47520" OraS="47760" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="52" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31944" CodStaOrigine="31932" DenStaDestinatie="Apahida Hm."
+                                DenStaOrigine="Ram. Jucu" Km="916" Lungime="275" OraP="47760" OraS="47880" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="53" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31982" CodStaOrigine="31944" DenStaDestinatie="Cluj Napoca Est"
+                                DenStaOrigine="Apahida Hm." Km="5749" Lungime="275" OraP="47880" OraS="48120" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="54" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="31982" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Cluj Napoca Est" Km="6622" Lungime="275" OraP="48120" OraS="48600" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="55" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="120"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32015" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Cluj Napoca" Km="0" Lungime="275" OraP="48600" OraS="48600" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="56" StationareSecunde="0" TipOprire="N" Tonaj="550" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20260504" Id="1" PinaLa="20261212" Tip="Da" Zile="383"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="R" KmCum="49422.0" Lungime="0" Numar="Auto10550" Operator="236037" Proprietar="236037" Putere="" Rang="4"
+                    Servicii="2" Tonaj="0">
+                    <Trase>
+                        <Trasa CodStatieFinala="32015" CodStatieInitiala="32261" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="32235" CodStaOrigine="32261" DenStaDestinatie="Jebuc h." DenStaOrigine="Huedin"
+                                Km="5425" Lungime="0" OraP="14400" OraS="14700" Rci="R" Rco="R" Restrictie="0" Secventa="1" StationareSecunde="0"
+                                TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32223" CodStaOrigine="32235" DenStaDestinatie="Stana Hm." DenStaOrigine="Jebuc h."
+                                Km="5253" Lungime="0" OraP="14730" OraS="14970" Rci="R" Rco="R" Restrictie="0" Secventa="2" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32194" CodStaOrigine="32223" DenStaDestinatie="Gălăşeni h."
+                                DenStaOrigine="Stana Hm." Km="2169" Lungime="0" OraP="15000" OraS="15720" Rci="R" Rco="R" Restrictie="0" Secventa="3"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32209" CodStaOrigine="32194" DenStaDestinatie="Aghireş h."
+                                DenStaOrigine="Gălăşeni h." Km="6086" Lungime="0" OraP="15750" OraS="16050" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="4" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32182" CodStaOrigine="32209" DenStaDestinatie="Aghireş Hm."
+                                DenStaOrigine="Aghireş h." Km="2643" Lungime="0" OraP="16110" OraS="16410" Rci="R" Rco="R" Restrictie="0" Secventa="5"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32168" CodStaOrigine="32182" DenStaDestinatie="Dorolţu h."
+                                DenStaOrigine="Aghireş Hm." Km="2072" Lungime="0" OraP="16440" OraS="16620" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="6" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32156" CodStaOrigine="32168" DenStaDestinatie="Macău h." DenStaOrigine="Dorolţu h."
+                                Km="1604" Lungime="0" OraP="16650" OraS="16890" Rci="R" Rco="R" Restrictie="0" Secventa="7" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32144" CodStaOrigine="32156" DenStaDestinatie="Gârbău h." DenStaOrigine="Macău h."
+                                Km="3954" Lungime="0" OraP="16920" OraS="17100" Rci="R" Rco="R" Restrictie="0" Secventa="8" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32120" CodStaOrigine="32144" DenStaDestinatie="Nădăşel h."
+                                DenStaOrigine="Gârbău h." Km="6143" Lungime="0" OraP="17160" OraS="17640" Rci="R" Rco="R" Restrictie="0" Secventa="9"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32118" CodStaOrigine="32120" DenStaDestinatie="Mera Hm." DenStaOrigine="Nădăşel h."
+                                Km="2049" Lungime="0" OraP="17670" OraS="17850" Rci="R" Rco="R" Restrictie="0" Secventa="10" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32091" CodStaOrigine="32118" DenStaDestinatie="Rădaia h." DenStaOrigine="Mera Hm."
+                                Km="1546" Lungime="0" OraP="17880" OraS="18000" Rci="R" Rco="R" Restrictie="0" Secventa="11" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32106" CodStaOrigine="32091" DenStaDestinatie="Suceag h." DenStaOrigine="Rădaia h."
+                                Km="1819" Lungime="0" OraP="18030" OraS="18210" Rci="R" Rco="R" Restrictie="0" Secventa="12" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32065" CodStaOrigine="32106" DenStaDestinatie="Baciu h." DenStaOrigine="Suceag h."
+                                Km="2618" Lungime="0" OraP="18240" OraS="18540" Rci="R" Rco="R" Restrictie="0" Secventa="13" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32053" CodStaOrigine="32065" DenStaDestinatie="Baciu Triaj Hm."
+                                DenStaOrigine="Baciu h." Km="1258" Lungime="0" OraP="18570" OraS="18750" Rci="R" Rco="R" Restrictie="0" Secventa="14"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32053" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Baciu Triaj Hm." Km="4783" Lungime="0" OraP="18780" OraS="19200" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="15" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32015" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Cluj Napoca" Km="0" Lungime="0" OraP="19200" OraS="19200" Rci="R" Rco="R" Restrictie="0" Secventa="16"
+                                StationareSecunde="0" TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20251214" Id="1" PinaLa="20251224" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20251227" Id="2" PinaLa="20251231" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260103" Id="3" PinaLa="20260105" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260108" Id="4" PinaLa="20260314" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260316" Id="5" PinaLa="20260409" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260411" Id="6" PinaLa="20260412" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260531" Id="7" PinaLa="20260531" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20261212" Id="8" PinaLa="20261212" Tip="Da" Zile="799"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="R" KmCum="29620.0" Lungime="125" Numar="10619" Operator="236037" Proprietar="236037" Putere="" Rang="4"
+                    Servicii="3" Tonaj="250">
+                    <Trase>
+                        <Trasa CodStatieFinala="42967" CodStatieInitiala="43052" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="43090" CodStaOrigine="43052" DenStaDestinatie="Bistriţa Bârgăului h."
+                                DenStaOrigine="Bistriţa Bârgăului hcv." Km="1865" Lungime="125" OraP="22800" OraS="23070" Rci="R" Rco="R"
+                                Restrictie="0" Secventa="1" StationareSecunde="0" TipOprire="N" Tonaj="250" VitezaLivret="30"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="43076" CodStaOrigine="43090" DenStaDestinatie="Bistriţa Bârgăului Sat h."
+                                DenStaOrigine="Bistriţa Bârgăului h." Km="1815" Lungime="125" OraP="23100" OraS="23370" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="2" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="30"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="43105" CodStaOrigine="43076" DenStaDestinatie="Bârgău h."
+                                DenStaOrigine="Bistriţa Bârgăului Sat h." Km="1020" Lungime="125" OraP="23400" OraS="23610" Rci="R" Rco="R"
+                                Restrictie="0" Secventa="3" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="30"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="43088" CodStaOrigine="43105" DenStaDestinatie="Prundul Bârgaului h."
+                                DenStaOrigine="Bârgău h." Km="1665" Lungime="125" OraP="23640" OraS="23970" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="4" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="30"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="43026" CodStaOrigine="43088" DenStaDestinatie="Susenii Bârgăului Hm."
+                                DenStaOrigine="Prundul Bârgaului h." Km="2224" Lungime="125" OraP="24000" OraS="24360" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="5" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="30"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="43064" CodStaOrigine="43026" DenStaDestinatie="Mijlocenii Bârgăului h."
+                                DenStaOrigine="Susenii Bârgăului Hm." Km="1686" Lungime="125" OraP="24420" OraS="24570" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="6" StationareSecunde="60" TipOprire="C" Tonaj="250" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="43040" CodStaOrigine="43064" DenStaDestinatie="Josenii Bârgăului h."
+                                DenStaOrigine="Mijlocenii Bârgăului h." Km="2018" Lungime="125" OraP="24600" OraS="24870" Rci="R" Rco="R"
+                                Restrictie="0" Secventa="7" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42993" CodStaOrigine="43040" DenStaDestinatie="Rusul Bârgăului h."
+                                DenStaOrigine="Josenii Bârgăului h." Km="3108" Lungime="125" OraP="24900" OraS="25350" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="8" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42981" CodStaOrigine="42993" DenStaDestinatie="Livezile Bârgăului h."
+                                DenStaOrigine="Rusul Bârgăului h." Km="6138" Lungime="125" OraP="25380" OraS="25950" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="9" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42955" CodStaOrigine="42981" DenStaDestinatie="Bistriţa h."
+                                DenStaOrigine="Livezile Bârgăului h." Km="6056" Lungime="125" OraP="25980" OraS="26370" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="10" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42979" CodStaOrigine="42955" DenStaDestinatie="Semnal Bistriţa Nord"
+                                DenStaOrigine="Bistriţa h." Km="525" Lungime="125" OraP="26400" OraS="26460" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="11" StationareSecunde="30" TipOprire="C" Tonaj="250" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42967" CodStaOrigine="42979" DenStaDestinatie="Bistriţa Nord"
+                                DenStaOrigine="Semnal Bistriţa Nord" Km="1500" Lungime="125" OraP="26460" OraS="26700" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="12" StationareSecunde="0" TipOprire="N" Tonaj="250" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42967" CodStaOrigine="42967" DenStaDestinatie="Bistriţa Nord"
+                                DenStaOrigine="Bistriţa Nord" Km="0" Lungime="125" OraP="26700" OraS="26700" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="13" StationareSecunde="0" TipOprire="N" Tonaj="250" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20251214" Id="1" PinaLa="20251224" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20251227" Id="2" PinaLa="20251231" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260103" Id="3" PinaLa="20260105" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260108" Id="4" PinaLa="20260409" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260411" Id="5" PinaLa="20260412" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260414" Id="6" PinaLa="20260430" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260502" Id="7" PinaLa="20260531" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20260602" Id="8" PinaLa="20261129" Tip="Da" Zile="799"/>
+                        <CalendarTren DeLa="20261202" Id="9" PinaLa="20261212" Tip="Da" Zile="799"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="R" KmCum="49422.0" Lungime="0" Numar="Auto10560" Operator="236037" Proprietar="236037" Putere="" Rang="4"
+                    Servicii="2" Tonaj="0">
+                    <Trase>
+                        <Trasa CodStatieFinala="32015" CodStatieInitiala="32261" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="32235" CodStaOrigine="32261" DenStaDestinatie="Jebuc h." DenStaOrigine="Huedin"
+                                Km="5425" Lungime="0" OraP="55200" OraS="55500" Rci="R" Rco="R" Restrictie="0" Secventa="1" StationareSecunde="0"
+                                TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32223" CodStaOrigine="32235" DenStaDestinatie="Stana Hm." DenStaOrigine="Jebuc h."
+                                Km="5253" Lungime="0" OraP="55530" OraS="55770" Rci="R" Rco="R" Restrictie="0" Secventa="2" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32194" CodStaOrigine="32223" DenStaDestinatie="Gălăşeni h."
+                                DenStaOrigine="Stana Hm." Km="2169" Lungime="0" OraP="55800" OraS="56520" Rci="R" Rco="R" Restrictie="0" Secventa="3"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32209" CodStaOrigine="32194" DenStaDestinatie="Aghireş h."
+                                DenStaOrigine="Gălăşeni h." Km="6086" Lungime="0" OraP="56550" OraS="56850" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="4" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32182" CodStaOrigine="32209" DenStaDestinatie="Aghireş Hm."
+                                DenStaOrigine="Aghireş h." Km="2643" Lungime="0" OraP="56910" OraS="57210" Rci="R" Rco="R" Restrictie="0" Secventa="5"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32168" CodStaOrigine="32182" DenStaDestinatie="Dorolţu h."
+                                DenStaOrigine="Aghireş Hm." Km="2072" Lungime="0" OraP="57240" OraS="57420" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="6" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32156" CodStaOrigine="32168" DenStaDestinatie="Macău h." DenStaOrigine="Dorolţu h."
+                                Km="1604" Lungime="0" OraP="57450" OraS="57690" Rci="R" Rco="R" Restrictie="0" Secventa="7" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32144" CodStaOrigine="32156" DenStaDestinatie="Gârbău h." DenStaOrigine="Macău h."
+                                Km="3954" Lungime="0" OraP="57720" OraS="57900" Rci="R" Rco="R" Restrictie="0" Secventa="8" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32120" CodStaOrigine="32144" DenStaDestinatie="Nădăşel h."
+                                DenStaOrigine="Gârbău h." Km="6143" Lungime="0" OraP="57960" OraS="58440" Rci="R" Rco="R" Restrictie="0" Secventa="9"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32118" CodStaOrigine="32120" DenStaDestinatie="Mera Hm." DenStaOrigine="Nădăşel h."
+                                Km="2049" Lungime="0" OraP="58470" OraS="58650" Rci="R" Rco="R" Restrictie="0" Secventa="10" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32091" CodStaOrigine="32118" DenStaDestinatie="Rădaia h." DenStaOrigine="Mera Hm."
+                                Km="1546" Lungime="0" OraP="58680" OraS="58800" Rci="R" Rco="R" Restrictie="0" Secventa="11" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32106" CodStaOrigine="32091" DenStaDestinatie="Suceag h." DenStaOrigine="Rădaia h."
+                                Km="1819" Lungime="0" OraP="58830" OraS="59010" Rci="R" Rco="R" Restrictie="0" Secventa="12" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32065" CodStaOrigine="32106" DenStaDestinatie="Baciu h." DenStaOrigine="Suceag h."
+                                Km="2618" Lungime="0" OraP="59040" OraS="59340" Rci="R" Rco="R" Restrictie="0" Secventa="13" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32053" CodStaOrigine="32065" DenStaDestinatie="Baciu Triaj Hm."
+                                DenStaOrigine="Baciu h." Km="1258" Lungime="0" OraP="59370" OraS="59550" Rci="R" Rco="R" Restrictie="0" Secventa="14"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32053" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Baciu Triaj Hm." Km="4783" Lungime="0" OraP="59580" OraS="60000" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="15" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32015" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Cluj Napoca" Km="0" Lungime="0" OraP="60000" OraS="60000" Rci="R" Rco="R" Restrictie="0" Secventa="16"
+                                StationareSecunde="0" TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20251214" Id="1" PinaLa="20260412" Tip="Da" Zile="383"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="R-E" KmCum="119218.0" Lungime="0" Numar="10506" Operator="236037" Proprietar="236037" Putere="" Rang="4"
+                    Servicii="3" Tonaj="0">
+                    <Trase>
+                        <Trasa CodStatieFinala="42967" CodStatieInitiala="32015" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="47668" CodStaOrigine="32015" DenStaDestinatie="Clujana h."
+                                DenStaOrigine="Cluj Napoca" Km="2092" Lungime="0" OraP="27300" OraS="27570" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="1" StationareSecunde="0" TipOprire="N" Tonaj="0" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31982" CodStaOrigine="47668" DenStaDestinatie="Cluj Napoca Est"
+                                DenStaOrigine="Clujana h." Km="4530" Lungime="300" OraP="27600" OraS="27840" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="2" StationareSecunde="30" TipOprire="C" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="31944" CodStaOrigine="31982" DenStaDestinatie="Apahida Hm."
+                                DenStaOrigine="Cluj Napoca Est" Km="5749" Lungime="300" OraP="27840" OraS="28200" Rci="R-E" Rco="R-E" Restrictie="60"
+                                Secventa="3" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="44006" CodStaOrigine="31944" DenStaDestinatie="Ram. Cojocna"
+                                DenStaOrigine="Apahida Hm." Km="720" Lungime="300" OraP="28260" OraS="28380" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="4" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="44020" CodStaOrigine="44006" DenStaDestinatie="Jucu Hm."
+                                DenStaOrigine="Ram. Cojocna" Km="8258" Lungime="300" OraP="28380" OraS="28740" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="5" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="44032" CodStaOrigine="44020" DenStaDestinatie="Răscruci h."
+                                DenStaOrigine="Jucu Hm." Km="4344" Lungime="300" OraP="28800" OraS="29130" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="6" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="44044" CodStaOrigine="44032" DenStaDestinatie="Bonţida Hm."
+                                DenStaOrigine="Răscruci h." Km="2932" Lungime="300" OraP="29160" OraS="29520" Rci="R-E" Rco="R-E" Restrictie="120"
+                                Secventa="7" StationareSecunde="30" TipOprire="C" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="44068" CodStaOrigine="44044" DenStaDestinatie="Iclod Hm."
+                                DenStaOrigine="Bonţida Hm." Km="6450" Lungime="300" OraP="29580" OraS="29940" Rci="R-E" Rco="R-E" Restrictie="60"
+                                Secventa="8" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="44094" CodStaOrigine="44068" DenStaDestinatie="Gherla" DenStaOrigine="Iclod Hm."
+                                Km="9955" Lungime="300" OraP="30000" OraS="30660" Rci="R-E" Rco="R-E" Restrictie="180" Secventa="9"
+                                StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41195" CodStaOrigine="44094" DenStaDestinatie="Dej Călători" DenStaOrigine="Gherla"
+                                Km="13883" Lungime="300" OraP="30720" OraS="31440" Rci="R-E" Rco="R-E" Restrictie="60" Secventa="10"
+                                StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="47876" CodStaOrigine="41195" DenStaDestinatie="Ram. Dej Gr. B"
+                                DenStaOrigine="Dej Călători" Km="1185" Lungime="300" OraP="31560" OraS="31800" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="11" StationareSecunde="120" TipOprire="C" Tonaj="600" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41145" CodStaOrigine="47876" DenStaDestinatie="Dej Triaj"
+                                DenStaOrigine="Ram. Dej Gr. B" Km="1558" Lungime="300" OraP="31800" OraS="32040" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="12" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="50"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41107" CodStaOrigine="41145" DenStaDestinatie="Reteag Hm."
+                                DenStaOrigine="Dej Triaj" Km="9097" Lungime="300" OraP="32040" OraS="32640" Rci="R-E" Rco="R-E" Restrictie="120"
+                                Secventa="13" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="85"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41092" CodStaOrigine="41107" DenStaDestinatie="Reteag h."
+                                DenStaOrigine="Reteag Hm." Km="3390" Lungime="300" OraP="32700" OraS="32910" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="14" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41080" CodStaOrigine="41092" DenStaDestinatie="Ciceu Cristur h."
+                                DenStaOrigine="Reteag h." Km="1903" Lungime="300" OraP="32940" OraS="33090" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="15" StationareSecunde="30" TipOprire="C" Tonaj="600" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41078" CodStaOrigine="41080" DenStaDestinatie="Coldău Hm."
+                                DenStaOrigine="Ciceu Cristur h." Km="2483" Lungime="300" OraP="33120" OraS="33300" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="16" StationareSecunde="30" TipOprire="C" Tonaj="600" VitezaLivret="70"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41054" CodStaOrigine="41078" DenStaDestinatie="Beclean pe Someş"
+                                DenStaOrigine="Coldău Hm." Km="5131" Lungime="300" OraP="33300" OraS="33780" Rci="R-E" Rco="R-E" Restrictie="120"
+                                Secventa="17" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="100"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="41030" CodStaOrigine="41054" DenStaDestinatie="Şintereag Hm."
+                                DenStaOrigine="Beclean pe Someş" Km="7430" Lungime="300" OraP="33840" OraS="34320" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="18" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="90"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="40995" CodStaOrigine="41030" DenStaDestinatie="Măgheruş Şieu Hm."
+                                DenStaOrigine="Şintereag Hm." Km="11247" Lungime="300" OraP="34380" OraS="34920" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="19" StationareSecunde="60" TipOprire="C" Tonaj="600" VitezaLivret="90"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="40971" CodStaOrigine="40995" DenStaDestinatie="Sărăţel Hm."
+                                DenStaOrigine="Măgheruş Şieu Hm." Km="6176" Lungime="300" OraP="35220" OraS="35580" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="20" StationareSecunde="300" TipOprire="C" Tonaj="600" VitezaLivret="90"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42967" CodStaOrigine="40971" DenStaDestinatie="Bistriţa Nord"
+                                DenStaOrigine="Sărăţel Hm." Km="10705" Lungime="300" OraP="35580" OraS="36240" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="21" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="42967" CodStaOrigine="42967" DenStaDestinatie="Bistriţa Nord"
+                                DenStaOrigine="Bistriţa Nord" Km="0" Lungime="300" OraP="36240" OraS="36240" Rci="R-E" Rco="R-E" Restrictie="0"
+                                Secventa="22" StationareSecunde="0" TipOprire="N" Tonaj="600" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20251214" Id="1" PinaLa="20261212" Tip="Da" Zile="16767"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="R" KmCum="49422.0" Lungime="0" Numar="Auto10636" Operator="236037" Proprietar="236037" Putere="" Rang="4"
+                    Servicii="2" Tonaj="0">
+                    <Trase>
+                        <Trasa CodStatieFinala="32015" CodStatieInitiala="32261" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="32235" CodStaOrigine="32261" DenStaDestinatie="Jebuc h." DenStaOrigine="Huedin"
+                                Km="5425" Lungime="0" OraP="58200" OraS="58500" Rci="R" Rco="R" Restrictie="0" Secventa="1" StationareSecunde="0"
+                                TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32223" CodStaOrigine="32235" DenStaDestinatie="Stana Hm." DenStaOrigine="Jebuc h."
+                                Km="5253" Lungime="0" OraP="58530" OraS="58770" Rci="R" Rco="R" Restrictie="0" Secventa="2" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32194" CodStaOrigine="32223" DenStaDestinatie="Gălăşeni h."
+                                DenStaOrigine="Stana Hm." Km="2169" Lungime="0" OraP="58800" OraS="59520" Rci="R" Rco="R" Restrictie="0" Secventa="3"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32209" CodStaOrigine="32194" DenStaDestinatie="Aghireş h."
+                                DenStaOrigine="Gălăşeni h." Km="6086" Lungime="0" OraP="59550" OraS="59850" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="4" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32182" CodStaOrigine="32209" DenStaDestinatie="Aghireş Hm."
+                                DenStaOrigine="Aghireş h." Km="2643" Lungime="0" OraP="59910" OraS="60210" Rci="R" Rco="R" Restrictie="0" Secventa="5"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32168" CodStaOrigine="32182" DenStaDestinatie="Dorolţu h."
+                                DenStaOrigine="Aghireş Hm." Km="2072" Lungime="0" OraP="60240" OraS="60420" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="6" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32156" CodStaOrigine="32168" DenStaDestinatie="Macău h." DenStaOrigine="Dorolţu h."
+                                Km="1604" Lungime="0" OraP="60450" OraS="60690" Rci="R" Rco="R" Restrictie="0" Secventa="7" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32144" CodStaOrigine="32156" DenStaDestinatie="Gârbău h." DenStaOrigine="Macău h."
+                                Km="3954" Lungime="0" OraP="60720" OraS="60900" Rci="R" Rco="R" Restrictie="0" Secventa="8" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32120" CodStaOrigine="32144" DenStaDestinatie="Nădăşel h."
+                                DenStaOrigine="Gârbău h." Km="6143" Lungime="0" OraP="60960" OraS="61440" Rci="R" Rco="R" Restrictie="0" Secventa="9"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32118" CodStaOrigine="32120" DenStaDestinatie="Mera Hm." DenStaOrigine="Nădăşel h."
+                                Km="2049" Lungime="0" OraP="61470" OraS="61650" Rci="R" Rco="R" Restrictie="0" Secventa="10" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32091" CodStaOrigine="32118" DenStaDestinatie="Rădaia h." DenStaOrigine="Mera Hm."
+                                Km="1546" Lungime="0" OraP="61680" OraS="61800" Rci="R" Rco="R" Restrictie="0" Secventa="11" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32106" CodStaOrigine="32091" DenStaDestinatie="Suceag h." DenStaOrigine="Rădaia h."
+                                Km="1819" Lungime="0" OraP="61830" OraS="62010" Rci="R" Rco="R" Restrictie="0" Secventa="12" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32065" CodStaOrigine="32106" DenStaDestinatie="Baciu h." DenStaOrigine="Suceag h."
+                                Km="2618" Lungime="0" OraP="62040" OraS="62340" Rci="R" Rco="R" Restrictie="0" Secventa="13" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32053" CodStaOrigine="32065" DenStaDestinatie="Baciu Triaj Hm."
+                                DenStaOrigine="Baciu h." Km="1258" Lungime="0" OraP="62370" OraS="62550" Rci="R" Rco="R" Restrictie="0" Secventa="14"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32053" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Baciu Triaj Hm." Km="4783" Lungime="0" OraP="62580" OraS="63000" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="15" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32015" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Cluj Napoca" Km="0" Lungime="0" OraP="63000" OraS="63000" Rci="R" Rco="R" Restrictie="0" Secventa="16"
+                                StationareSecunde="0" TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20260413" Id="1" PinaLa="20261212" Tip="Da" Zile="383"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="R" KmCum="49422.0" Lungime="0" Numar="Auto10508" Operator="236037" Proprietar="236037" Putere="" Rang="4"
+                    Servicii="2" Tonaj="0">
+                    <Trase>
+                        <Trasa CodStatieFinala="32015" CodStatieInitiala="32261" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="32235" CodStaOrigine="32261" DenStaDestinatie="Jebuc h." DenStaOrigine="Huedin"
+                                Km="5425" Lungime="0" OraP="68400" OraS="68700" Rci="R" Rco="R" Restrictie="0" Secventa="1" StationareSecunde="0"
+                                TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32223" CodStaOrigine="32235" DenStaDestinatie="Stana Hm." DenStaOrigine="Jebuc h."
+                                Km="5253" Lungime="0" OraP="68730" OraS="68970" Rci="R" Rco="R" Restrictie="0" Secventa="2" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32194" CodStaOrigine="32223" DenStaDestinatie="Gălăşeni h."
+                                DenStaOrigine="Stana Hm." Km="2169" Lungime="0" OraP="69000" OraS="69720" Rci="R" Rco="R" Restrictie="0" Secventa="3"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32209" CodStaOrigine="32194" DenStaDestinatie="Aghireş h."
+                                DenStaOrigine="Gălăşeni h." Km="6086" Lungime="0" OraP="69750" OraS="70050" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="4" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32182" CodStaOrigine="32209" DenStaDestinatie="Aghireş Hm."
+                                DenStaOrigine="Aghireş h." Km="2643" Lungime="0" OraP="70110" OraS="70410" Rci="R" Rco="R" Restrictie="0" Secventa="5"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32168" CodStaOrigine="32182" DenStaDestinatie="Dorolţu h."
+                                DenStaOrigine="Aghireş Hm." Km="2072" Lungime="0" OraP="70440" OraS="70620" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="6" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32156" CodStaOrigine="32168" DenStaDestinatie="Macău h." DenStaOrigine="Dorolţu h."
+                                Km="1604" Lungime="0" OraP="70650" OraS="70890" Rci="R" Rco="R" Restrictie="0" Secventa="7" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32144" CodStaOrigine="32156" DenStaDestinatie="Gârbău h." DenStaOrigine="Macău h."
+                                Km="3954" Lungime="0" OraP="70920" OraS="71100" Rci="R" Rco="R" Restrictie="0" Secventa="8" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32120" CodStaOrigine="32144" DenStaDestinatie="Nădăşel h."
+                                DenStaOrigine="Gârbău h." Km="6143" Lungime="0" OraP="71160" OraS="71640" Rci="R" Rco="R" Restrictie="0" Secventa="9"
+                                StationareSecunde="60" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32118" CodStaOrigine="32120" DenStaDestinatie="Mera Hm." DenStaOrigine="Nădăşel h."
+                                Km="2049" Lungime="0" OraP="71670" OraS="71850" Rci="R" Rco="R" Restrictie="0" Secventa="10" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32091" CodStaOrigine="32118" DenStaDestinatie="Rădaia h." DenStaOrigine="Mera Hm."
+                                Km="1546" Lungime="0" OraP="71880" OraS="72000" Rci="R" Rco="R" Restrictie="0" Secventa="11" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32106" CodStaOrigine="32091" DenStaDestinatie="Suceag h." DenStaOrigine="Rădaia h."
+                                Km="1819" Lungime="0" OraP="72030" OraS="72210" Rci="R" Rco="R" Restrictie="0" Secventa="12" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32065" CodStaOrigine="32106" DenStaDestinatie="Baciu h." DenStaOrigine="Suceag h."
+                                Km="2618" Lungime="0" OraP="72240" OraS="72540" Rci="R" Rco="R" Restrictie="0" Secventa="13" StationareSecunde="30"
+                                TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32053" CodStaOrigine="32065" DenStaDestinatie="Baciu Triaj Hm."
+                                DenStaOrigine="Baciu h." Km="1258" Lungime="0" OraP="72570" OraS="72750" Rci="R" Rco="R" Restrictie="0" Secventa="14"
+                                StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32053" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Baciu Triaj Hm." Km="4783" Lungime="0" OraP="72780" OraS="73200" Rci="R" Rco="R" Restrictie="0"
+                                Secventa="15" StationareSecunde="30" TipOprire="C" Tonaj="0" VitezaLivret="0"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="32015" CodStaOrigine="32015" DenStaDestinatie="Cluj Napoca"
+                                DenStaOrigine="Cluj Napoca" Km="0" Lungime="0" OraP="73200" OraS="73200" Rci="R" Rco="R" Restrictie="0" Secventa="16"
+                                StationareSecunde="0" TipOprire="N" Tonaj="0" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+           

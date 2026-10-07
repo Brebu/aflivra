@@ -22,7 +22,9 @@ if(!live)sqlite.exec(await readFile(join(root,'drizzle/0000_thin_demogoblin.sql'
 const db=live?null:{prepare(sql){let args=[];const wrapper={bind(...values){for(const v of values)if(typeof v==='string'&&Buffer.byteLength(v)>2_000_000)throw Error('D1 row bound exceeded');args=values;return wrapper},async first(){return sqlite.prepare(sql).get(...args)||null},async all(){return{results:sqlite.prepare(sql).all(...args)}},async run(){const result=sqlite.prepare(sql).run(...args);return{meta:{changes:Number(result.changes)}}}};return wrapper},async batch(statements){const results=[];for(const statement of statements)results.push(await statement.run());return results}};
 // Legătura ASSETS oglindește workerul publicat: ruta catalogului citește inventarul
 // clasificat prin bindingul de active statice, nu prin fetch global (sub mock).
-const assetsFetch=live?null:async request=>{const path=new URL(request.url).pathname;return path==='/catalog/index.json.gz'?new Response(await readFile(join(root,'public/catalog/index.json.gz'))):new Response(null,{status:404})};
+const assetsFetch=live?null:async request=>{const path=new URL(request.url).pathname;
+ if(path.startsWith('/trains/')){if(globalThis.__aflivraAssetFault==='trains')return new Response('{"items":[{"code":1,"name":"corupt', {status:200});try{return new Response(await readFile(join(root,'public',path)))}catch{return new Response(null,{status:404})}}
+ return path==='/catalog/index.json.gz'?new Response(await readFile(join(root,'public/catalog/index.json.gz'))):new Response(null,{status:404})};
 globalThis.__aflivraTestEnv=live?{}:{DB:db,...(assetsFetch?{ASSETS:{fetch:assetsFetch}}:{})};
 globalThis.__aflivraResourceCopies=JSON.parse(await readFile(join(root,'lib/live/resource-seed.json'),'utf8'));
 const escapes=[];const recordEscape=reason=>escapes.push(String(reason&&reason.stack||reason));
@@ -38,11 +40,12 @@ for(const name of ['court-history','court-query','location-context','geographic-
  await writeFile(join(temp,name+'.mjs'),output);
 }
 const liveSeeds=await readFile(join(root,'lib/live/seed.json'),'utf8');
-for(const name of ['records','text','media','query','source-xml','source-html','catalog-categories','catalog-metadata','adapters','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','transit-realtime','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge','lawyers','directories','resources','events','cinema','stories']){
+for(const name of ['records','text','media','query','source-xml','source-html','catalog-categories','catalog-metadata','adapters','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','transit-realtime','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge','lawyers','directories','justice','trains','resources','events','cinema','stories']){
  let source=await readFile(join(root,'lib/live',name+'.ts'),'utf8');
  source=source
   .replace("from '../court-history'","from './court-history'").replace("from '../court-query'","from './court-query'")
   .replace("from '../geographic-scope'","from './geographic-scope'").replace("from '../tabular-geography'","from './tabular-geography'")
+  .replace("from '../snapshot-transport'","from './snapshot-transport'")
   .replace("from '../location-context'","from './location-context'")
   .replace("import {env} from 'cloudflare:workers';",'const env=globalThis.__aflivraTestEnv;')
   .replace("import baseSeeds from './seed.json';",'const baseSeeds='+liveSeeds+';')
@@ -52,12 +55,13 @@ for(const name of ['records','text','media','query','source-xml','source-html','
   .replace("import courtInstitutions from '@/public/courts/institutions.json';",'const courtInstitutions='+await readFile(join(root,'public/courts/institutions.json'),'utf8')+';')
   .replace("import codes from '@/public/legal-snapshots/manifest.json';",'const codes='+await readFile(join(root,'public/legal-snapshots/manifest.json'),'utf8')+';')
   .replace("import cinemaCatalog from '@/public/cinema/cinemas.json';",'const cinemaCatalog='+await readFile(join(root,'public/cinema/cinemas.json'),'utf8')+';')
-  .replace("import audit from '@/public/catalog/audit.json';",'const audit='+await readFile(join(root,'public/catalog/audit.json'),'utf8')+';');
+  .replace("import audit from '@/public/catalog/audit.json';",'const audit='+await readFile(join(root,'public/catalog/audit.json'),'utf8')+';')
+  .replace("import proofs from '@/public/data/snapshot-transport.json';",'const proofs='+await readFile(join(root,'public/data/snapshot-transport.json'),'utf8')+';');
  let output=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;
  output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace("from 'fflate'","from '"+fflateUrl+"'");output=output.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");for(const pkg of ['xlsx','gtfs-realtime-bindings'])output=output.replace("from '"+pkg+"'","from '"+pathToFileURL(require.resolve(pkg)).href+"'");
  await writeFile(join(temp,name+'.mjs'),output);
 }
-const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs')));
+const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs'))),justiceModule=await import(pathToFileURL(join(temp,'justice.mjs'))),trainsModule=await import(pathToFileURL(join(temp,'trains.mjs')));
 const feedHosts=Object.entries(feedsModule.feedConfigs).map(([key])=>new URL(feedsModule.feedConfigs[key].url).host);
 const lawQuery={title:'CODUL CIVIL',text:'',number:'',year:'',page:0,full:false};
 const families=[
@@ -79,7 +83,12 @@ const families=[
  {family:'events/odeon',routeName:'events',route:'/api/events',host:'teatrul-odeon.ro',allowed:['teatrul-odeon.ro'],key:()=>eventsModule.odeonLoader.key,loader:()=>eventsModule.odeonLoader},
  {family:'cinema/cinemacity',routeName:'cinema',route:'/api/cinema?id=1824&date='+todayIso(),host:'www.cinemacity.ro',allowed:['www.cinemacity.ro'],key:()=>cinemaModule.cinemaLoader('1824',todayIso()).key,loader:()=>cinemaModule.cinemaLoader('1824',todayIso())},
  {family:'stories/wikisource',routeName:'story',route:'/api/story?id=29611',host:'ro.wikisource.org',allowed:['ro.wikisource.org'],key:()=>storiesModule.storyLoader('29611').key,loader:()=>storiesModule.storyLoader('29611')},
- {family:'transport/realtime',routeName:'transport-live',route:'/api/transport-live?kind=vehicles',host:'gtfs.tpbi.ro',allowed:['gtfs.tpbi.ro'],key:()=>realtimeModule.realtimeLoader('vehicles').key,loader:()=>realtimeModule.realtimeLoader('vehicles')}];
+ {family:'transport/realtime',routeName:'transport-live',route:'/api/transport-live?kind=vehicles',host:'gtfs.tpbi.ro',allowed:['gtfs.tpbi.ro'],key:()=>realtimeModule.realtimeLoader('vehicles').key,loader:()=>realtimeModule.realtimeLoader('vehicles')},
+ {family:'justice/notari',routeName:'notaries',kind:'notari',route:'/api/notaries',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>justiceModule.justiceLoader('notari').key,loader:()=>justiceModule.justiceLoader('notari')},
+ {family:'justice/experti-judiciari',routeName:'experts',kind:'experti-judiciari',route:'/api/experts?kind=experti-judiciari',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>justiceModule.justiceLoader('experti-judiciari').key,loader:()=>justiceModule.justiceLoader('experti-judiciari')},
+ {family:'justice/experti-tehnici',routeName:'experts',kind:'experti-tehnici',route:'/api/experts?kind=experti-tehnici',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>justiceModule.justiceLoader('experti-tehnici').key,loader:()=>justiceModule.justiceLoader('experti-tehnici')},
+ {family:'justice/traducatori',routeName:'experts',kind:'traducatori',route:'/api/experts?kind=traducatori',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>justiceModule.justiceLoader('traducatori').key,loader:()=>justiceModule.justiceLoader('traducatori')},
+ {family:'transport/trains',routeName:'trains',kind:'trains',route:'/api/trains?q=bra%C8%99ov',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>'trains:stations',loader:()=>({key:'trains:stations',name:'Informatică Feroviară · mersul trenurilor',url:'https://data.gov.ro/',version:'trains.planned.v1',ttl:86400,load:async()=>{throw Error('corpus-only')}})}];
 if(live){
  let routes=null;
  try{routes=await Promise.all(families.map(async family=>[family.family,await (async()=>{const init=family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};return fetch(base+family.route,{...init,signal:AbortSignal.timeout(60000)})})()]))}catch(error){console.error('Serverul local de dezvoltare nu răspunde la '+base+' — pornit cu „npm start” înainte de --live. Detaliu: '+error.message);process.exitCode=2}
@@ -126,11 +135,12 @@ if(live){
   if(ourBug){console.error('Verdict our-bug: sursa răspunde corect direct sau workerul nostru publicat eșuează, dar ruta raportează eroarea sursei. Diferențele de mai sus sunt bug-ul nostru.');process.exitCode=1}
  }
 }else{
- for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts']]){
+ for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts']]){
   let source=await readFile(join(root,file),'utf8');
   source=source
    .replace("import network from '@/public/transit/network.json';",'const network='+await readFile(join(root,'public/transit/network.json'),'utf8')+';')
    .replace("import transit from '@/public/transit/manifest.json';",'const transit='+await readFile(join(root,'public/transit/manifest.json'),'utf8')+';')
+   .replace("import manifest from '@/public/trains/manifest.json';",'const manifest='+await readFile(join(root,'public/trains/manifest.json'),'utf8')+';')
    .replace("import proofs from '@/public/data/snapshot-transport.json';",'const proofs='+await readFile(join(root,'public/data/snapshot-transport.json'),'utf8')+';')
    .replace("import institutions from '@/public/courts/institutions.json';",'const institutions='+await readFile(join(root,'public/courts/institutions.json'),'utf8')+';')
    .replace("import {env} from 'cloudflare:workers';",'const env=globalThis.__aflivraTestEnv;')
@@ -139,7 +149,7 @@ if(live){
   output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
   await writeFile(join(temp,'route-'+name+'.mjs'),output);
  }
- const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
+ const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
  const {zipSync,strToU8}=require('fflate');
  const gtfsBytes=()=>{const rows=(head,list)=>head+'\n'+list.join('\n')+'\n';const stops=Array.from({length:12},(_,i)=>'S'+i+',Stația de verificare '+i+',Descriere publică,'+(44.40+i/100)+','+(26.10+i/100)),routeRows=Array.from({length:12},(_,i)=>'R'+i+',A0,'+(100+i)+',Linia de verificare '+i+','+(i%2?'3':'0'));
   return zipSync({'agency.txt':strToU8(rows('agency_id,agency_name,agency_url',['A0,Operatorul de test,https://example.test'])),'stops.txt':strToU8(rows('stop_id,stop_name,stop_desc,stop_lat,stop_lon',stops)),'routes.txt':strToU8(rows('route_id,agency_id,route_short_name,route_long_name,route_type',routeRows)),'calendar.txt':strToU8(rows('service_id,monday,tuesday,start_date,end_date',['A0,1,1,20260101,20261231']))})};
@@ -157,6 +167,17 @@ if(live){
  const cnasResource={health:'CLINIC',pharmacies:'FARM',hospitals:'SPITAL'};
  const cnasBody=family=>({success:true,result:{resources:[{name:'Lista furnizori cu drept de decont '+cnasResource[family.split('/')[1]]+' 31.03.2026',url:'https://data.gov.ro/dataset/lista-furnizori/resource/export-de-verificare.xlsx',format:'XLSX',last_modified:'2026-04-01T00:00:00'}]}});
  const cnasXlsx=()=>{const XLSX=require('xlsx');const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet([['Nume furnizor','CUI cod','Localitate','Judet'],['Furnizor public de verificare 1','12345','București','București'],['Furnizor public de verificare 2','12456','Cluj-Napoca','Cluj']]),'CLINIC');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
+ // Justice fixtures mirror the published structure of each registry workbook (real column
+ // names; the experți tehnici sheet starts with a title row before the header, as published).
+ const justiceFixture=(kind)=>{
+  const XLSX=require('xlsx');const rows=[];
+  if(kind==='notari'){rows.push(['NUME','CAMERA','ADRESA_SEDIU','LOCALITATE','JUDET']);for(let i=1;i<=12;i++)rows.push(['POPESCU ALIN-'+i,'CAMERA DE NOTARI PUBLICI TIMIȘOARA','Str. Verificare nr. '+i,'Timișoara','TIMIȘ'])}
+  else if(kind==='experti-judiciari'){rows.push(['Legitimatie','Judet','Nume','Telefon','Adresa','Specializare']);for(let i=1;i<=12;i++)rows.push([String(20000+i),'Timiș','POPESCU ANA-'+i,'0256/123456; 0740000'+i,'Timișoara, Str. Exemplu '+i,'Agricultură'])}
+  else if(kind==='experti-tehnici'){rows.push(['LISTA EXPERȚILOR TEHNICI DE VERIFICARE ACTUALIZATĂ LA DATA DE 08 IUNIE 2026','','','','','','']);rows.push(['Nr.crt','Nume și prenume','E-mail ','Telefon ','Județul','Mențiuni privind exercitarea dreptului de practică','Serie şi număr \ncertificat de atestare ','Domenii de atestare tehnico-profesională ']);for(let i=1;i<=12;i++)rows.push([i,'POPESCU HORIA-'+i,'notar'+i+'@verificare.test','0740000'+i,'ALBA','','VAE 11'+i,'Cc'])}
+  else{rows.push(['Nume','Nr Autorizatie','Curte de Apel','Judet','Limbi','telefon','Email']);for(let i=1;i<=12;i++)rows.push(['AAMOUM ALINA-'+i,5800+i,'TIMIȘOARA','TIMIȘ','Franceză, Rusă',2126679000+i,'alina'+i+'@verificare.test'])}
+  const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),kind==='traducatori'?'Sheet2':'Sheet1');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
+ const justiceResourceName={notari:'Notari 23.01.2025','experti-judiciari':'Experti judiciari 23.01.2025','experti-tehnici':'Lista experților tehnici atestați până la data de 08 iunie 2026.xlsx',traducatori:'Traducatori 23.01.2025'};
+ const justiceBody=kind=>({success:true,result:{resources:[{name:justiceResourceName[kind],url:'https://data.gov.ro/dataset/fixture/resource/export-de-verificare-'+kind+'.xlsx',format:'.xlsx',last_modified:'2026-06-08T00:00:00'}]}});
  const sirutaMeta=()=>({success:true,result:{resources:[{name:'SIRUTA 2026 semestrul I',url:'https://data.gov.ro/dataset/siruta_s1-2026/resource/siruta-de-verificare.csv',format:'CSV',last_modified:'2026-03-01T00:00:00'}]}});
  const sirutaCsv=()=>{const rows=['SIRUTA;DENLOC;NIV;JUD;SIRSUP;CODP;MED','40;București;1;40;0;0;1'];for(let i=1;i<=1001;i++)rows.push(String(10000+i)+';Localitatea de verificare '+i+';3;40;40;'+String(100000+i).slice(-6)+';'+(i%2?'1':'2'));return rows.join('\r\n')};
  const ifepPage=()=>{const rights='Drept de concluzii la: Judecătorii, Tribunale, Curți de Apel';const card='<a href=\'LawyerFile.aspx?RecordId=fixture-1&Panel=public\'><p><span title="Ultima actualizare"><em>05-10-2026 12:12</em></span><span class="pop" data-html="true" data-content=\'<p>'+rights+'</p>\'><img src="level.gif"></span><span>Fișă</span></p><h4>Avocat definitiv <font>POPESCU Ana</font>, Baroul Cluj [inactiv]</h4><p>Sediu principal: Cluj-Napoca, Strada Exemplu nr. 3</p><p>0700 000 000</p></a>';
@@ -185,6 +206,7 @@ if(live){
   if(family.family==='cinema/cinemacity')return Response.json(cinemaBody());
   if(family.family==='stories/wikisource')return Response.json(storyBody());
   if(family.family==='transport/realtime')return new Response(realtimeBytes(),{headers:{'content-type':'application/octet-stream'}});
+  if(family.family.startsWith('justice/'))return href.includes('package_show')?Response.json(justiceBody(family.kind)):new Response(justiceFixture(family.kind),{headers:{'content-type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}});
   return new Response(gtfsBytes(),{headers:{'last-modified':new Date().toUTCString()}})};
  const failureFor=(scenario,init)=>{
   if(scenario==='http500')return new Response(null,{status:500});
@@ -203,8 +225,9 @@ if(live){
    if(host===family.host)return successFor(family,href,host,init);
    if(host==='query.wikidata.org')return Response.json({results:{bindings:[]}});
    return rssFixture(host);
-  };
-  try{return await run(counts,unexpected)}finally{globalThis.fetch=original}};
+   };
+   globalThis.__aflivraAssetFault=family.kind==='trains'&&scenario==='malformed'?'trains':null;
+   try{return await run(counts,unexpected)}finally{globalThis.fetch=original;globalThis.__aflivraAssetFault=null}};
  const requestFor=family=>{
   if(family.method==='POST'){const body=JSON.stringify(family.body);return new Request('https://verify.test'+family.route,{method:'POST',body,headers:{'content-type':'application/json','content-length':String(Buffer.byteLength(body))}})}
   return new Request('https://verify.test'+family.route)};
@@ -217,7 +240,7 @@ if(live){
   assert(['fresh','cached','stale','unavailable'].includes(payload.status),label+': stare documentată');
   assert.equal(escapes.length,0,label+': nicio respingere neprinsă nu evadează din rută');
  };
- const familyExpectations=(family,scenario,payload,counts,label)=>{
+ const familyExpectations=async(family,scenario,payload,counts,label)=>{
   const hostCount=host=>counts.get(host)||0,e=String(payload.error||'');
   const future=payload.nextAttemptAt,pauseOk=!future||Date.parse(future)>=Date.now()-5000;
   assert(pauseOk,label+': fereastra de pauză, dacă există, este onorată');
@@ -379,14 +402,49 @@ if(live){
     if(scenario==='http429')assert.match(e,/Fluxul TPBI răspunde cu HTTP 429/,label+': pauza sursei păstrată');
     if(scenario==='timeout'||scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată|Fluxul TPBI nu poate fi decodat/,label+': plicul de eroare documentat');
     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
- };
+  if(family.family.startsWith('justice/')){
+   const kind=family.kind,attempts=hostCount('data.gov.ro');
+   const sample='POPESCU',sampleSuffix=kind==='traducatori'?'class':'';
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.total,12,label+': registrul servit integral');assert.equal(payload.data.records.length,12,label+': pagina de registru servită integral');
+    assert(payload.data.fields.includes(kind==='notari'?'NUME':kind==='experti-tehnici'?'Nume și prenume':'Nume'),label+': coloanele publicate se păstrează');
+    assert(payload.data.records.every(record=>record._id),label+': fiecare înregistrare are un identificator stabil');
+    assert.equal(payload.data.period,kind==='experti-tehnici'?'08 iunie 2026':'23.01.2025',label+': ediția registrului se păstrează');
+    assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.records.length,12,label+': registrul se păstrează din copie');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără înregistrări inventate');
+    if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+    if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+    if(scenario==='malformed')assert.match(e,/Structura registrului|nu conține înregistrări utilizabile|Sursa nu a putut fi verificată/,label+': structura respinsă în română');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='transport/trains'){
+   const attempts=hostCount('data.gov.ro');
+   if(scenario==='malformed'){
+    // The station index is memoized per isolate, so the valid copy keeps serving within it
+    // (keep-valid-copy semantics); the unmemoized per-station board read must fail honestly.
+    if(payload.status!=='cached'){assert.equal(payload.status,'unavailable',label+': indicele corupt degradează în-band');assert.equal(payload.data,null,label+': fără orare inventate');assert.match(String(payload.error||''),/integralitat|integralit\u0103|nu poate fi citit/,label+': eroarea de integritate onestă')}
+    const corrupt=await (await routes.trains.GET(new Request('https://verify.test/api/trains?station=30691'))).json();
+    assert.equal(corrupt.status,'unavailable',label+': fișa de stație dintr-o copie coruptă degradează în-band');assert.equal(corrupt.data,null,label+': fără orare inventate');
+    assert.match(String(corrupt.error||''),/integralitat|integralit\u0103|nu poate fi citit/,label+': eroarea de integritate onestă');
+    assert.equal(attempts,0,label+': corpul orarului nu interoghează nicio sursă')}
+   else{
+    assert.equal(payload.status,'cached',label+': corpul verificat servește planificat');assert(payload.data.total>=3,label+': căutarea pe stații servește rezultate');
+    const brasov=payload.data.items.find(row=>row.code===30691);assert(brasov&&/Bra[sșş]ov/.test(brasov.name),label+': căutarea cu diacritice moderne găsește stația publicată');
+    const index=await (await routes.trains.GET(new Request('https://verify.test/api/trains'))).json();
+    assert.equal(index.status,'cached',label+': indicele național servește');assert.equal(index.data.total,1846,label+': indicele național de stații servit integral');assert.equal(index.data.items.length,40,label+': pagina de stații servită');
+    assert(payload.data.operators.length===9,label+': cei nouă operatori sunt publicați cu edițiile lor');
+    const boardPayload=await (await routes.trains.GET(new Request('https://verify.test/api/trains?station=30691'))).json();
+    assert.equal(boardPayload.status,'cached',label+': fișa stației servește din copie');assert(boardPayload.data.departures.length>10,label+': plecările planificate servite');assert(boardPayload.data.arrivals.length>10,label+': sosirile planificate servite');
+    assert(boardPayload.data.departures.every(row=>/^\d{2}:\d{2}( \+1)?$/.test(row.tt)&&row.n&&row.o),label+': fiecare plecare are oră, tren și operator');
+    assert.equal(attempts,0,label+': corpul orarului face parte din aplicație, nu se interoghează nicio sursă')}}
+  };
  const runCell=(family,scenario)=>{const label=family.family+' / '+scenario,mock=scenario==='warm-http500'?'http500':scenario;
   return withMocks(family,mock,async(counts,unexpected)=>{
    assert.equal(unexpected.length,0,label+': doar adresele familiei sunt interogate ('+unexpected.join(', ')+')');
    const response=await callRoute(family),payload=await response.json();
    cellCount++;counters.push({family:family.family,scenario});
    degradeCheck(label,response,payload);
-   familyExpectations(family,scenario,payload,counts,label);
+   await familyExpectations(family,scenario,payload,counts,label);
    return payload})};
  for(const family of families){
   for(const scenario of ['http500','http429','timeout','malformed','success']){wipe();const payload=await runCell(family,scenario);if(scenario==='success')successPayloads.set(family.family,payload)}

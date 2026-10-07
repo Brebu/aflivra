@@ -51,4 +51,36 @@ test.describe('Places workspace', () => {
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  test('the mediu inventory offers the shelters and rest-area subcategories from the national corpus', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/#view=domain&id=mediu');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+
+    const workspace = page.locator('section.places-workspace').first();
+    await expect(workspace).toBeVisible();
+    await expect(workspace.getByRole('heading', {level: 2, name: 'Natură și locuri în aer liber'})).toBeVisible();
+
+    // The subcategory filter is populated from the national corpus manifest; the
+    // OSM shelter/hut/rest-area classes add their own labels to the list.
+    const subSelect = workspace.locator('label', {hasText: 'Subcategorie'}).locator('select');
+    await expect(subSelect).toBeVisible();
+    await expect(subSelect.locator('option', {hasText: 'Adăposturi'})).toBeAttached();
+    await expect(subSelect.locator('option', {hasText: 'Spații de odihnă'})).toBeAttached();
+
+    // Filtering to Adăposturi returns shelter records (refuge huts, wilderness
+    // huts and amenity=shelter features) tagged with the subcategory in OSM.
+    await subSelect.selectOption('Adăposturi');
+    await expect(workspace.locator('.entity-results-header')).toContainText(/rezultat/, {timeout: 30_000});
+    await expect(workspace.locator('.entity-card').first()).toBeVisible({timeout: 30_000});
+    await expect(workspace.locator('.entity-card .kicker').first()).toContainText('Adăposturi');
+    await expect(workspace.locator('.entity-results-header')).toContainText('locuri în categoria națională');
+
+    // The rest-area class keeps its own filterable subcategory label.
+    await subSelect.selectOption('Spații de odihnă');
+    await expect(workspace.locator('.entity-results-header')).toContainText(/rezultat/, {timeout: 30_000});
+    await expect(workspace.locator('.entity-card .kicker').first()).toContainText('Spații de odihnă');
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });

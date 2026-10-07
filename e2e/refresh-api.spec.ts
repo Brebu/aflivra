@@ -12,7 +12,7 @@ const devToken = (() => {
 })();
 
 const groupNames = ['live', 'weather', 'news', 'legislation', 'registers'];
-const seedBackedFamilies = ['transport', 'siruta', 'films', 'directory.health', 'directory.pharmacies', 'directory.hospitals', 'law.consolidated.full', 'catalog.organizations-formats', 'resource.datastores'];
+const seedBackedFamilies = ['transport', 'siruta', 'films', 'directory.health', 'directory.pharmacies', 'directory.hospitals', 'justice.notari', 'justice.experti-judiciari', 'justice.experti-tehnici', 'justice.traducatori', 'trains', 'law.consolidated.full', 'catalog.organizations-formats', 'resource.datastores'];
 const validSourceStatuses = new Set(['fresh', 'cached', 'stale', 'unavailable']);
 
 test.describe('Refresh API', () => {

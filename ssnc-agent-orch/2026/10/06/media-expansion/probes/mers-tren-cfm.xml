@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XmlIf encoding="UTF-8" version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="trnIfSchema_v4.xsd">
+    <XmlMts>
+        <Mt DataExport="20241209" MtValabilDeLa="20241215" MtValabilPinaLa="20251213" Versiune="1">
+            <Trenuri>
+                <Tren CategorieTren="IR" KmCum="17561.0" Lungime="350" Numar="1054" Operator="234273" Proprietar="234273" Putere="" Rang="3"
+                    Servicii="2" Tonaj="720">
+                    <Trase>
+                        <Trasa CodStatieFinala="936" CodStatieInitiala="61016" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="61066" CodStaOrigine="61016" DenStaDestinatie="Holboca Hm." DenStaOrigine="Socola"
+                                Km="6918" Lungime="350" OraP="63600" OraS="64320" Rci="IR" Rco="IR" Restrictie="60" Secventa="1" StationareSecunde="0"
+                                TipOprire="N" Tonaj="720" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61080" CodStaOrigine="61066" DenStaDestinatie="Cristeşti Jijia"
+                                DenStaOrigine="Holboca Hm." Km="3544" Lungime="350" OraP="64320" OraS="64800" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="2" StationareSecunde="0" TipOprire="N" Tonaj="720" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61092" CodStaOrigine="61080" DenStaDestinatie="Ungheni Prut Hm."
+                                DenStaOrigine="Cristeşti Jijia" Km="6053" Lungime="350" OraP="64860" OraS="65340" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="3" StationareSecunde="60" TipOprire="C" Tonaj="720" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="61092" DenStaDestinatie="Ungheni Prut Fr."
+                                DenStaOrigine="Ungheni Prut Hm." Km="246" Lungime="350" OraP="67740" OraS="67920" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="4" StationareSecunde="2400" TipOprire="C" Tonaj="720" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="936" DenStaDestinatie="Ungheni"
+                                DenStaOrigine="Ungheni Prut Fr." Km="800" Lungime="350" OraP="67980" OraS="68160" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="5" StationareSecunde="60" TipOprire="C" Tonaj="720" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="936" DenStaDestinatie="Ungheni" DenStaOrigine="Ungheni" Km="0"
+                                Lungime="350" OraP="68160" OraS="68160" Rci="IR" Rco="IR" Restrictie="0" Secventa="6" StationareSecunde="0"
+                                TipOprire="N" Tonaj="720" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20241215" Id="1" PinaLa="20251213" Tip="Da" Zile="16767"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="IR" KmCum="17561.0" Lungime="350" Numar="1052" Operator="234273" Proprietar="234273" Putere="" Rang="3"
+                    Servicii="2" Tonaj="720">
+                    <Trase>
+                        <Trasa CodStatieFinala="936" CodStatieInitiala="61016" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="61066" CodStaOrigine="61016" DenStaDestinatie="Holboca Hm." DenStaOrigine="Socola"
+                                Km="6918" Lungime="350" OraP="49740" OraS="50400" Rci="IR" Rco="IR" Restrictie="0" Secventa="1" StationareSecunde="0"
+                                TipOprire="N" Tonaj="720" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61080" CodStaOrigine="61066" DenStaDestinatie="Cristeşti Jijia"
+                                DenStaOrigine="Holboca Hm." Km="3544" Lungime="350" OraP="50400" OraS="50940" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="2" StationareSecunde="0" TipOprire="N" Tonaj="720" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61092" CodStaOrigine="61080" DenStaDestinatie="Ungheni Prut Hm."
+                                DenStaOrigine="Cristeşti Jijia" Km="6053" Lungime="350" OraP="51360" OraS="51840" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="3" StationareSecunde="420" TipOprire="C" Tonaj="720" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="61092" DenStaDestinatie="Ungheni Prut Fr."
+                                DenStaOrigine="Ungheni Prut Hm." Km="246" Lungime="350" OraP="54240" OraS="54420" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="4" StationareSecunde="2400" TipOprire="C" Tonaj="720" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="936" DenStaDestinatie="Ungheni"
+                                DenStaOrigine="Ungheni Prut Fr." Km="800" Lungime="350" OraP="54480" OraS="54660" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="5" StationareSecunde="60" TipOprire="C" Tonaj="720" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="936" DenStaDestinatie="Ungheni" DenStaOrigine="Ungheni" Km="0"
+                                Lungime="350" OraP="54660" OraS="54660" Rci="IR" Rco="IR" Restrictie="0" Secventa="6" StationareSecunde="0"
+                                TipOprire="N" Tonaj="720" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20250101" Id="1" PinaLa="20250101" Tip="Da" Zile="383"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="IR" KmCum="17561.0" Lungime="175" Numar="1051" Operator="234273" Proprietar="234273" Putere="" Rang="3"
+                    Servicii="2" Tonaj="350">
+                    <Trase>
+                        <Trasa CodStatieFinala="61016" CodStatieInitiala="936" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="936" DenStaDestinatie="Ungheni Prut Fr."
+                                DenStaOrigine="Ungheni" Km="800" Lungime="175" OraP="35460" OraS="35640" Rci="IR" Rco="IR" Restrictie="0" Secventa="1"
+                                StationareSecunde="0" TipOprire="N" Tonaj="350" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61092" CodStaOrigine="936" DenStaDestinatie="Ungheni Prut Hm."
+                                DenStaOrigine="Ungheni Prut Fr." Km="246" Lungime="175" OraP="35700" OraS="35880" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="2" StationareSecunde="60" TipOprire="C" Tonaj="350" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61080" CodStaOrigine="61092" DenStaDestinatie="Cristeşti Jijia"
+                                DenStaOrigine="Ungheni Prut Hm." Km="6053" Lungime="175" OraP="38280" OraS="39000" Rci="IR" Rco="IR" Restrictie="60"
+                                Secventa="3" StationareSecunde="2400" TipOprire="C" Tonaj="350" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61066" CodStaOrigine="61080" DenStaDestinatie="Holboca Hm."
+                                DenStaOrigine="Cristeşti Jijia" Km="3544" Lungime="175" OraP="39060" OraS="39600" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="4" StationareSecunde="60" TipOprire="C" Tonaj="350" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61016" CodStaOrigine="61066" DenStaDestinatie="Socola" DenStaOrigine="Holboca Hm."
+                                Km="6918" Lungime="175" OraP="39600" OraS="40380" Rci="IR" Rco="IR" Restrictie="60" Secventa="5" StationareSecunde="0"
+                                TipOprire="N" Tonaj="350" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61016" CodStaOrigine="61016" DenStaDestinatie="Socola" DenStaOrigine="Socola"
+                                Km="0" Lungime="175" OraP="40380" OraS="40380" Rci="IR" Rco="IR" Restrictie="0" Secventa="6" StationareSecunde="0"
+                                TipOprire="N" Tonaj="350" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20241215" Id="1" PinaLa="20251213" Tip="Da" Zile="16767"/>
+                    </RestrictiiTren>
+                </Tren>
+                <Tren CategorieTren="IR" KmCum="17561.0" Lungime="175" Numar="1053" Operator="234273" Proprietar="234273" Putere="" Rang="3"
+                    Servicii="2" Tonaj="350">
+                    <Trase>
+                        <Trasa CodStatieFinala="61016" CodStatieInitiala="936" Id="1" Tip="Implicita">
+                            <ElementTrasa Ajustari="0" CodStaDest="936" CodStaOrigine="936" DenStaDestinatie="Ungheni Prut Fr."
+                                DenStaOrigine="Ungheni" Km="800" Lungime="175" OraP="47400" OraS="47580" Rci="IR" Rco="IR" Restrictie="0" Secventa="1"
+                                StationareSecunde="0" TipOprire="N" Tonaj="350" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61092" CodStaOrigine="936" DenStaDestinatie="Ungheni Prut Hm."
+                                DenStaOrigine="Ungheni Prut Fr." Km="246" Lungime="175" OraP="47640" OraS="47820" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="2" StationareSecunde="60" TipOprire="C" Tonaj="350" VitezaLivret="40"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61080" CodStaOrigine="61092" DenStaDestinatie="Cristeşti Jijia"
+                                DenStaOrigine="Ungheni Prut Hm." Km="6053" Lungime="175" OraP="50520" OraS="51180" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="3" StationareSecunde="2700" TipOprire="C" Tonaj="350" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61066" CodStaOrigine="61080" DenStaDestinatie="Holboca Hm."
+                                DenStaOrigine="Cristeşti Jijia" Km="3544" Lungime="175" OraP="51240" OraS="51780" Rci="IR" Rco="IR" Restrictie="0"
+                                Secventa="4" StationareSecunde="60" TipOprire="C" Tonaj="350" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61016" CodStaOrigine="61066" DenStaDestinatie="Socola" DenStaOrigine="Holboca Hm."
+                                Km="6918" Lungime="175" OraP="51780" OraS="52560" Rci="IR" Rco="IR" Restrictie="60" Secventa="5" StationareSecunde="0"
+                                TipOprire="N" Tonaj="350" VitezaLivret="80"/>
+                            <ElementTrasa Ajustari="0" CodStaDest="61016" CodStaOrigine="61016" DenStaDestinatie="Socola" DenStaOrigine="Socola"
+                                Km="0" Lungime="175" OraP="52560" OraS="52560" Rci="IR" Rco="IR" Restrictie="0" Secventa="6" StationareSecunde="0"
+                                TipOprire="N" Tonaj="350" VitezaLivret="0"/>
+                            <ModificariInParcurs/>
+                        </Trasa>
+                    </Trase>
+                    <Grupe/>
+                    <RestrictiiTren>
+                        <CalendarTren DeLa="20250101" Id="1" PinaLa="20250101" Tip="Da" Zile="383"/>
+                    </RestrictiiTren>
+                </Tren>
+            </Trenuri>
+        </Mt>
+    </XmlMts>
+</XmlIf>

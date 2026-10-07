@@ -1,0 +1,10 @@
+
+  vinext dev  (Vite 8.0.13)
+
+Sites local sign-in: seedy@sites.test
+Using secrets defined in .dev.vars
+Using secrets defined in .dev.vars
+  ➜  Local:   http://127.0.0.1:5173/
+ GET / 200 in 3.2s (compile: 1791331351.3s, render: 3.1s)
+ GET /api/tranzy-live?geoScope=context&locality=Cluj-Napoca&county=Cluj 200 in 653ms
+  ➜  Tunnel closed

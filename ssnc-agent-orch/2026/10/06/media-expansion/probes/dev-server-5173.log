@@ -1,0 +1,1996 @@
+
+  vinext dev  (Vite 8.0.13)
+
+Sites local sign-in: seedy@sites.test
+Using secrets defined in .dev.vars
+Using secrets defined in .dev.vars
+  ➜  Local:   http://127.0.0.1:5173/
+ GET / 200 in 7.6s (compile: 1791331089.4s, render: 7.5s)
+ GET /api/tranzy-live?geoScope=context&locality=Cluj-Napoca&county=Cluj 200 in 407ms
+ GET /api/tranzy-live?geoScope=context&locality=Zarnesti&county=Brasov 200 in 6ms
+ GET /api/tranzy-live 400 in 4ms
+ GET /api/transport-live?kind=vehicles 200 in 569ms
+ GET / 200 in 35ms (compile: 1791331089.2s, render: 27ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/live 200 in 512ms
+ GET / 200 in 112ms (compile: 1791331089.3s, render: 25ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 23ms
+ GET /api/live 200 in 307ms
+2:59:24 AM [vite] (client) hmr update /app/globals.css?direct
+ GET / 200 in 32ms (compile: 1791331089.2s, render: 24ms)
+ GET / 200 in 34ms (compile: 1791331089.2s, render: 27ms)
+ GET / 200 in 189ms (compile: 1791331089.3s, render: 164ms)
+ GET / 200 in 190ms (compile: 1791331089.3s, render: 163ms)
+ GET / 200 in 191ms (compile: 1791331089.3s, render: 164ms)
+ GET / 200 in 192ms (compile: 1791331089.3s, render: 164ms)
+ GET / 200 in 193ms (compile: 1791331089.3s, render: 164ms)
+ GET / 200 in 201ms (compile: 1791331089.3s, render: 169ms)
+ GET / 200 in 202ms (compile: 1791331089.3s, render: 169ms)
+ GET / 200 in 204ms (compile: 1791331089.3s, render: 171ms)
+ GET / 200 in 208ms (compile: 1791331089.3s, render: 174ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 342ms
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 345ms
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 343ms
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 240ms
+ GET /api/live 200 in 931ms
+ GET /api/live 200 in 931ms
+ GET /api/live 200 in 930ms
+ GET /api/live 200 in 930ms
+ GET /api/live 200 in 932ms
+ GET /api/live 200 in 1.2s
+ GET /api/live 200 in 1.2s
+ GET /api/notaries?q=&page=0&geoScope=context&locality=&county= 200 in 1.2s
+ GET /api/lawyers?q=sala&page=0&sort=recent&geoScope=national 200 in 309ms
+ POST /api/legal 200 in 1.2s
+ GET / 200 in 1.1s (compile: 1791331090.0s, render: 276ms)
+ GET / 200 in 981ms (compile: 1791331089.9s, render: 273ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+ GET /api/catalog?q=sala&page=0&geoScope=national 200 in 787ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+ GET /api/notaries?q=cazacu&page=0&geoScope=context&locality=&county= 200 in 231ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+ GET /api/directory?kind=schools&q=sala&page=0&geoScope=national 200 in 476ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+ GET / 200 in 614ms (compile: 1791331089.6s, render: 232ms)
+ GET / 200 in 743ms (compile: 1791331089.7s, render: 230ms)
+ GET /api/directory?kind=pharmacies&q=sala&page=0&geoScope=national 200 in 252ms
+ GET /api/directory?kind=health&q=sala&page=0&geoScope=national 200 in 255ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/live 200 in 429ms
+ GET /api/live 200 in 405ms
+ GET / 200 in 792ms (compile: 1791331089.7s, render: 373ms)
+ GET /api/directory?kind=hospitals&q=sala&page=0&geoScope=national 200 in 458ms
+ GET /api/domain?kind=stiri&q=sala&page=0&sort=recent&geoScope=national 200 in 484ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+ GET / 200 in 764ms (compile: 1791331089.8s, render: 162ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/live 200 in 316ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=agricultura&q=sala&page=0&sort=recent&geoScope=national 200 in 600ms
+ GET / 200 in 1.1s (compile: 1791331089.9s, render: 406ms)
+ GET /api/notaries?q=sala&page=0&geoScope=national 200 in 579ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+ GET /api/live 200 in 627ms
+ POST /api/legal 200 in 549ms
+ GET /api/live 200 in 511ms
+ GET /api/places?category=local-all&q=sala&scope=all&sort=name&page=0 200 in 3.0s
+ GET / 200 in 1.0s (compile: 1791331090.0s, render: 212ms)
+ GET /api/experts?kind=experti-tehnici&q=sala&page=0&geoScope=national 200 in 478ms
+ GET /api/experts?kind=experti-judiciari&q=&page=0&geoScope=context&locality=&county= 200 in 693ms
+ GET /api/experts?kind=experti-judiciari&q=sala&page=0&geoScope=national 200 in 639ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+ GET / 200 in 868ms (compile: 1791331089.9s, render: 203ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 468ms
+ GET /api/live 200 in 419ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/experts?kind=traducatori&q=sala&page=0&geoScope=national 200 in 594ms
+ GET /catalog 200 in 1.2s (compile: 1791331089.8s, render: 629ms)
+ GET /api/experts?kind=experti-tehnici&q=&page=0&geoScope=context&locality=&county= 200 in 408ms
+ GET /api/live 200 in 445ms
+ GET / 200 in 768ms (compile: 1791331089.7s, render: 263ms)
+ GET /api/trains?q=sala&page=0 200 in 900ms
+ GET /api/live 200 in 366ms
+ POST /api/refresh?source=weather 401 in 437ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+{"event":"legal_source_failure","checkedAt":"2026-10-06T23:59:34.175Z","url":"https://legislatie.just.ro/Public/DetaliiDocument/109855","category":"connection","detail":"Network connection lost.","retryAfterSeconds":900}
+ POST /api/legal 200 in 1.0s
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/experts?kind=traducatori&q=&page=0&geoScope=context&locality=&county= 200 in 230ms
+ POST /api/refresh?source=weather 401 in 186ms
+ GET / 200 in 251ms (compile: 1791331089.3s, render: 174ms)
+ GET / 200 in 223ms (compile: 1791331089.3s, render: 167ms)
+ GET /api/live 200 in 200ms
+ GET /api/refresh/status 401 in 203ms
+ GET /api/refresh/status 401 in 28ms
+ GET / 200 in 180ms (compile: 1791331089.3s, render: 75ms)
+ GET / 200 in 185ms (compile: 1791331089.3s, render: 75ms)
+ POST /api/refresh?source=inexistent 400 in 414ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET / 200 in 339ms (compile: 1791331089.5s, render: 61ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+ GET /api/refresh/status 200 in 170ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 266ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/live 200 in 265ms
+ GET /api/live 200 in 265ms
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 287ms
+ GET /api/live 200 in 374ms
+ GET /api/live 200 in 429ms
+ GET /api/trains?q=&page=0 200 in 449ms
+ GET / 200 in 707ms (compile: 1791331089.6s, render: 362ms)
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 442ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/live 200 in 577ms
+ GET /api/catalog?q=%C8%99coli&page=0&geoScope=national 200 in 394ms
+ GET / 200 in 781ms (compile: 1791331089.8s, render: 241ms)
+ GET / 200 in 636ms (compile: 1791331089.7s, render: 206ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+ GET /api/domain?kind=agricultura&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 513ms
+ GET / 200 in 847ms (compile: 1791331089.7s, render: 399ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+ GET /api/live 200 in 561ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/directory?kind=schools&q=%C8%99coli&page=0&geoScope=national 200 in 529ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/directory?kind=health&q=%C8%99coli&page=0&geoScope=national 200 in 302ms
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 390ms
+ GET /api/live 200 in 402ms
+ GET /api/live 200 in 513ms
+ GET /api/directory?kind=pharmacies&q=%C8%99coli&page=0&geoScope=national 200 in 502ms
+ GET /api/live 200 in 569ms
+ GET /catalog 200 in 850ms (compile: 1791331089.8s, render: 334ms)
+ GET /api/directory?kind=hospitals&q=%C8%99coli&page=0&geoScope=national 200 in 466ms
+ GET / 200 in 919ms (compile: 1791331089.8s, render: 355ms)
+ GET / 200 in 861ms (compile: 1791331089.7s, render: 355ms)
+ GET /api/domain?kind=stiri&q=%C8%99coli&page=0&sort=recent&geoScope=national 200 in 366ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+ GET / 200 in 756ms (compile: 1791331089.7s, render: 266ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/places?category=local-all&q=%C8%99coli&scope=all&sort=name&page=0 200 in 2.8s
+ GET / 200 in 756ms (compile: 1791331089.7s, render: 252ms)
+ GET /api/domain?kind=agricultura&q=%C8%99coli&page=0&sort=recent&geoScope=national 200 in 132ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+ GET /api/notaries?q=%C8%99coli&page=0&geoScope=national 200 in 180ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+ GET /api/lawyers?q=%C8%99coli&page=0&sort=recent&geoScope=national 200 in 3.0s
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 221ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/experts?kind=experti-judiciari&q=%C8%99coli&page=0&geoScope=national 200 in 293ms
+ GET /api/live 200 in 409ms
+ GET /api/experts?kind=experti-tehnici&q=%C8%99coli&page=0&geoScope=national 200 in 486ms
+ GET /api/experts?kind=traducatori&q=%C8%99coli&page=0&geoScope=national 200 in 695ms
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 794ms
+ GET /api/live 200 in 810ms
+ GET /api/live 200 in 710ms
+ GET /api/trains?q=%C8%99coli&page=0 200 in 813ms
+ GET /api/weather?kind=alerts&geoScope=context&locality=&county= 200 in 694ms
+ POST /api/refresh?source=weather 200 in 5.1s
+ GET /api/lawyers?q=Salina+Turda&page=0&sort=recent&geoScope=national 200 in 242ms
+ GET / 200 in 980ms (compile: 1791331090.1s, render: 153ms)
+ GET /api/catalog?q=Salina+Turda&page=0&geoScope=national 200 in 272ms
+ GET /api/directory?kind=health&q=Salina+Turda&page=0&geoScope=national 200 in 151ms
+ GET /api/directory?kind=schools&q=Salina+Turda&page=0&geoScope=national 200 in 181ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET / 200 in 405ms (compile: 1791331089.5s, render: 171ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET / 200 in 448ms (compile: 1791331089.5s, render: 174ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+ GET /api/live 200 in 421ms
+ GET /api/live 200 in 269ms
+ GET /api/weather?kind=alerts&geoScope=context&locality=&county= 200 in 269ms
+ GET / 200 in 636ms (compile: 1791331089.6s, render: 275ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/live 200 in 372ms
+ GET / 200 in 396ms (compile: 1791331089.6s, render: 38ms)
+ GET / 200 in 176ms (compile: 1791331089.4s, render: 40ms)
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 31ms
+ GET /api/catalog?q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 86ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/directory?kind=schools&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 218ms
+ GET /api/directory?kind=health&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 158ms
+ GET /api/live 200 in 332ms
+ GET /api/live 200 in 344ms
+ GET /api/directory?kind=pharmacies&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 355ms
+ GET /api/weather?kind=alerts&geoScope=context&locality=&county= 200 in 373ms
+ GET / 200 in 555ms (compile: 1791331089.4s, render: 355ms)
+ GET /api/directory?kind=hospitals&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 122ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+ GET /api/domain?kind=stiri&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&sort=recent&geoScope=national 200 in 136ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/places?category=local-all&q=ateneul+rom%C3%A2n+bucure%C8%99ti&scope=all&sort=name&page=0 200 in 1.2s
+ GET / 200 in 218ms (compile: 1791331089.4s, render: 68ms)
+ GET /api/domain?kind=agricultura&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&sort=recent&geoScope=national 200 in 93ms
+ GET /api/notaries?q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 47ms
+ GET /api/experts?kind=experti-judiciari&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 87ms
+ GET /api/experts?kind=experti-tehnici&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 126ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/live 200 in 157ms
+ GET /api/experts?kind=traducatori&q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&geoScope=national 200 in 350ms
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 337ms
+ GET /api/trains?q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0 200 in 332ms
+ GET /api/weather?kind=alerts&geoScope=context&locality=&county= 200 in 262ms
+ GET /api/live 200 in 284ms
+ GET / 200 in 64ms (compile: 1791331089.3s, render: 31ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 20ms
+ GET /api/live 200 in 90ms
+ GET /api/cinema?id=1807&date=2026-10-07&geoScope=context&locality=&county= 200 in 83ms
+ GET /api/lawyers?q=ateneul+rom%C3%A2n+bucure%C8%99ti&page=0&sort=recent&geoScope=national 200 in 2.5s
+ GET / 200 in 30ms (compile: 1791331089.2s, render: 23ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 23ms
+ GET / 200 in 52ms (compile: 1791331089.3s, render: 24ms)
+ GET /api/live 200 in 112ms
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 21ms
+ GET /api/live 200 in 93ms
+ GET /api/catalog?q=Bra%C8%99ov&page=0&geoScope=national 200 in 84ms
+ GET /api/directory?kind=schools&q=Bra%C8%99ov&page=0&geoScope=national 200 in 124ms
+ GET /api/lawyers?q=Bra%C8%99ov&page=0&sort=recent&geoScope=national 200 in 144ms
+ GET /api/directory?kind=pharmacies&q=Bra%C8%99ov&page=0&geoScope=national 200 in 110ms
+ GET /api/directory?kind=health&q=Bra%C8%99ov&page=0&geoScope=national 200 in 111ms
+ GET /api/directory?kind=hospitals&q=Bra%C8%99ov&page=0&geoScope=national 200 in 72ms
+ GET /api/domain?kind=stiri&q=Bra%C8%99ov&page=0&sort=recent&geoScope=national 200 in 77ms
+ GET /api/domain?kind=agricultura&q=Bra%C8%99ov&page=0&sort=recent&geoScope=national 200 in 62ms
+ GET /api/notaries?q=Bra%C8%99ov&page=0&geoScope=national 200 in 76ms
+ GET /api/experts?kind=experti-judiciari&q=Bra%C8%99ov&page=0&geoScope=national 200 in 112ms
+ GET /api/experts?kind=experti-tehnici&q=Bra%C8%99ov&page=0&geoScope=national 200 in 115ms
+ GET /api/experts?kind=traducatori&q=Bra%C8%99ov&page=0&geoScope=national 200 in 221ms
+ GET /api/places?category=local-all&q=Bra%C8%99ov&scope=all&sort=name&page=0 200 in 770ms
+ GET /api/trains?q=Bra%C8%99ov&page=0 200 in 206ms
+ GET / 200 in 30ms (compile: 1791331089.2s, render: 23ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 20ms
+ GET /api/live 200 in 90ms
+ GET /api/catalog?q=avoca%C8%9Bi&page=0&geoScope=national 200 in 11ms
+ GET /api/directory?kind=schools&q=avoca%C8%9Bi&page=0&geoScope=national 200 in 102ms
+ GET /api/directory?kind=health&q=avoca%C8%9Bi&page=0&geoScope=national 200 in 93ms
+ GET /api/directory?kind=pharmacies&q=avoca%C8%9Bi&page=0&geoScope=national 200 in 62ms
+ GET /api/directory?kind=hospitals&q=avoca%C8%9Bi&page=0&geoScope=national 200 in 57ms
+ GET /api/domain?kind=stiri&q=avoca%C8%9Bi&page=0&sort=recent&geoScope=national 200 in 75ms
+ GET /api/domain?kind=agricultura&q=avoca%C8%9Bi&page=0&sort=recent&geoScope=national 200 in 59ms
+ GET /api/places?category=local-all&q=avoca%C8%9Bi&scope=all&sort=name&page=0 200 in 478ms
+ GET /api/notaries?q=avoca%C8%9Bi&page=0&geoScope=national 200 in 21ms
+ GET /api/experts?kind=experti-judiciari&q=avoca%C8%9Bi&page=0&geoScope=national 200 in 53ms
+ GET /api/experts?kind=experti-tehnici&q=avoca%C8%9Bi&page=0&geoScope=national 200 in 57ms
+ GET /api/experts?kind=traducatori&q=avoca%C8%9Bi&page=0&geoScope=national 200 in 174ms
+ GET /api/trains?q=avoca%C8%9Bi&page=0 200 in 161ms
+ GET /api/lawyers?q=avoca%C8%9Bi&page=0&sort=recent&geoScope=national 200 in 2.3s
+ GET / 200 in 30ms (compile: 1791331089.2s, render: 22ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 19ms
+ GET /api/live 200 in 92ms
+ GET /api/catalog?q=notari&page=0&geoScope=national 200 in 26ms
+ GET /api/directory?kind=schools&q=notari&page=0&geoScope=national 200 in 99ms
+ GET /api/directory?kind=health&q=notari&page=0&geoScope=national 200 in 80ms
+ GET /api/directory?kind=pharmacies&q=notari&page=0&geoScope=national 200 in 64ms
+ GET /api/directory?kind=hospitals&q=notari&page=0&geoScope=national 200 in 57ms
+ GET /api/domain?kind=stiri&q=notari&page=0&sort=recent&geoScope=national 200 in 75ms
+ GET /api/domain?kind=agricultura&q=notari&page=0&sort=recent&geoScope=national 200 in 62ms
+ GET /api/places?category=local-all&q=notari&scope=all&sort=name&page=0 200 in 496ms
+ GET /api/notaries?q=notari&page=0&geoScope=national 200 in 33ms
+ GET /api/experts?kind=experti-judiciari&q=notari&page=0&geoScope=national 200 in 56ms
+ GET /api/experts?kind=experti-tehnici&q=notari&page=0&geoScope=national 200 in 58ms
+ GET /api/experts?kind=traducatori&q=notari&page=0&geoScope=national 200 in 172ms
+ GET /api/trains?q=notari&page=0 200 in 161ms
+ GET /api/lawyers?q=notari&page=0&sort=recent&geoScope=national 200 in 2.4s
+ GET / 200 in 31ms (compile: 1791331089.2s, render: 25ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 19ms
+ GET /api/live 200 in 90ms
+ GET /api/catalog?q=popescu&page=0&geoScope=national 200 in 23ms
+ GET /api/lawyers?q=popescu&page=0&sort=recent&geoScope=national 200 in 86ms
+ GET /api/directory?kind=schools&q=popescu&page=0&geoScope=national 200 in 103ms
+ GET /api/directory?kind=health&q=popescu&page=0&geoScope=national 200 in 99ms
+ GET /api/directory?kind=pharmacies&q=popescu&page=0&geoScope=national 200 in 82ms
+ GET /api/directory?kind=hospitals&q=popescu&page=0&geoScope=national 200 in 70ms
+ GET /api/domain?kind=stiri&q=popescu&page=0&sort=recent&geoScope=national 200 in 75ms
+ GET /api/domain?kind=agricultura&q=popescu&page=0&sort=recent&geoScope=national 200 in 64ms
+ GET /api/notaries?q=popescu&page=0&geoScope=national 200 in 60ms
+ GET /api/experts?kind=experti-judiciari&q=popescu&page=0&geoScope=national 200 in 100ms
+ GET /api/experts?kind=experti-tehnici&q=popescu&page=0&geoScope=national 200 in 106ms
+ GET /api/experts?kind=traducatori&q=popescu&page=0&geoScope=national 200 in 227ms
+ GET /api/trains?q=popescu&page=0 200 in 212ms
+ GET /api/places?category=local-all&q=popescu&scope=all&sort=name&page=0 200 in 704ms
+ GET / 200 in 35ms (compile: 1791331089.2s, render: 29ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 18ms
+ GET /api/live 200 in 89ms
+ GET /api/catalog?q=427282&page=0&geoScope=national 200 in 7ms
+ GET /api/directory?kind=schools&q=427282&page=0&geoScope=national 200 in 89ms
+ GET /api/directory?kind=health&q=427282&page=0&geoScope=national 200 in 76ms
+ GET /api/directory?kind=pharmacies&q=427282&page=0&geoScope=national 200 in 70ms
+ GET /api/directory?kind=hospitals&q=427282&page=0&geoScope=national 200 in 52ms
+ GET /api/domain?kind=stiri&q=427282&page=0&sort=recent&geoScope=national 200 in 73ms
+ GET /api/domain?kind=agricultura&q=427282&page=0&sort=recent&geoScope=national 200 in 59ms
+ GET /api/places?category=local-all&q=427282&scope=all&sort=name&page=0 200 in 463ms
+ GET /api/notaries?q=427282&page=0&geoScope=national 200 in 19ms
+ GET /api/experts?kind=experti-judiciari&q=427282&page=0&geoScope=national 200 in 53ms
+ GET /api/experts?kind=experti-tehnici&q=427282&page=0&geoScope=national 200 in 59ms
+ GET /api/experts?kind=traducatori&q=427282&page=0&geoScope=national 200 in 178ms
+ GET /api/company?cui=427282 200 in 53ms
+ GET / 200 in 32ms (compile: 1791331089.2s, render: 24ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 19ms
+ GET /api/live 200 in 92ms
+ GET /api/catalog?q=123%2F45%2F2024&page=0&geoScope=national 200 in 98ms
+ GET /api/directory?kind=schools&q=123%2F45%2F2024&page=0&geoScope=national 200 in 112ms
+ GET /api/directory?kind=health&q=123%2F45%2F2024&page=0&geoScope=national 200 in 86ms
+ GET /api/directory?kind=pharmacies&q=123%2F45%2F2024&page=0&geoScope=national 200 in 67ms
+ GET /api/directory?kind=hospitals&q=123%2F45%2F2024&page=0&geoScope=national 200 in 62ms
+ GET /api/domain?kind=stiri&q=123%2F45%2F2024&page=0&sort=recent&geoScope=national 200 in 64ms
+ GET /api/domain?kind=agricultura&q=123%2F45%2F2024&page=0&sort=recent&geoScope=national 200 in 73ms
+ GET /api/places?category=local-all&q=123%2F45%2F2024&scope=all&sort=name&page=0 200 in 569ms
+ GET /api/notaries?q=123%2F45%2F2024&page=0&geoScope=national 200 in 58ms
+ GET /api/experts?kind=experti-tehnici&q=123%2F45%2F2024&page=0&geoScope=national 200 in 57ms
+ GET / 200 in 147ms (compile: 1791331089.4s, render: 23ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 21ms
+ GET /api/live 200 in 183ms
+ GET /api/catalog?q=urbanism&page=0&geoScope=national 200 in 27ms
+ GET /api/directory?kind=schools&q=urbanism&page=0&geoScope=national 200 in 106ms
+ GET /api/directory?kind=health&q=urbanism&page=0&geoScope=national 200 in 227ms
+ GET /api/directory?kind=pharmacies&q=urbanism&page=0&geoScope=national 200 in 55ms
+ GET /api/directory?kind=hospitals&q=urbanism&page=0&geoScope=national 200 in 53ms
+ GET /api/domain?kind=stiri&q=urbanism&page=0&sort=recent&geoScope=national 200 in 76ms
+ GET /api/places?category=local-all&q=urbanism&scope=all&sort=name&page=0 200 in 624ms
+ GET /api/domain?kind=agricultura&q=urbanism&page=0&sort=recent&geoScope=national 200 in 62ms
+ GET /api/notaries?q=urbanism&page=0&geoScope=national 200 in 59ms
+ GET /api/experts?kind=experti-tehnici&q=urbanism&page=0&geoScope=national 200 in 58ms
+ GET /api/experts?kind=experti-judiciari&q=urbanism&page=0&geoScope=national 200 in 91ms
+ GET /api/catalog?q=%C8%99coli&page=0&geoScope=national 200 in 14ms
+ GET /api/lawyers?q=%C8%99coli&page=0&sort=recent&geoScope=national 200 in 94ms
+ GET /api/directory?kind=schools&q=%C8%99coli&page=0&geoScope=national 200 in 88ms
+ GET /api/directory?kind=pharmacies&q=%C8%99coli&page=0&geoScope=national 200 in 90ms
+ GET /api/directory?kind=health&q=%C8%99coli&page=0&geoScope=national 200 in 93ms
+ GET /api/directory?kind=hospitals&q=%C8%99coli&page=0&geoScope=national 200 in 70ms
+ GET /api/domain?kind=stiri&q=%C8%99coli&page=0&sort=recent&geoScope=national 200 in 77ms
+ GET /api/domain?kind=agricultura&q=%C8%99coli&page=0&sort=recent&geoScope=national 200 in 65ms
+ GET /api/notaries?q=%C8%99coli&page=0&geoScope=national 200 in 75ms
+ GET /api/experts?kind=experti-judiciari&q=%C8%99coli&page=0&geoScope=national 200 in 121ms
+ GET /api/experts?kind=experti-tehnici&q=%C8%99coli&page=0&geoScope=national 200 in 123ms
+ GET /api/places?category=local-all&q=%C8%99coli&scope=all&sort=name&page=0 200 in 536ms
+ GET /api/experts?kind=traducatori&q=%C8%99coli&page=0&geoScope=national 200 in 215ms
+ GET /api/trains?q=%C8%99coli&page=0 200 in 192ms
+ GET / 200 in 32ms (compile: 1791331089.2s, render: 25ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 22ms
+ GET /api/live 200 in 145ms
+ GET /api/catalog?q=harap&page=0&geoScope=national 200 in 9ms
+ GET /api/directory?kind=schools&q=harap&page=0&geoScope=national 200 in 91ms
+ GET /api/directory?kind=health&q=harap&page=0&geoScope=national 200 in 95ms
+ GET /api/directory?kind=pharmacies&q=harap&page=0&geoScope=national 200 in 61ms
+ GET /api/directory?kind=hospitals&q=harap&page=0&geoScope=national 200 in 47ms
+ GET /api/domain?kind=stiri&q=harap&page=0&sort=recent&geoScope=national 200 in 69ms
+ GET /api/domain?kind=agricultura&q=harap&page=0&sort=recent&geoScope=national 200 in 60ms
+ GET /api/places?category=local-all&q=harap&scope=all&sort=name&page=0 200 in 472ms
+ GET /api/notaries?q=harap&page=0&geoScope=national 200 in 29ms
+ GET /api/experts?kind=experti-judiciari&q=harap&page=0&geoScope=national 200 in 53ms
+ GET /api/experts?kind=experti-tehnici&q=harap&page=0&geoScope=national 200 in 58ms
+ GET /api/experts?kind=traducatori&q=harap&page=0&geoScope=national 200 in 165ms
+ GET /api/trains?q=harap&page=0 200 in 153ms
+ GET /api/lawyers?q=harap&page=0&sort=recent&geoScope=national 200 in 2.5s
+ GET / 200 in 36ms (compile: 1791331089.2s, render: 29ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 21ms
+ GET /api/live 200 in 92ms
+ GET /api/catalog?q=castelul+peles&page=0&geoScope=national 200 in 10ms
+ GET /api/directory?kind=schools&q=castelul+peles&page=0&geoScope=national 200 in 96ms
+ GET /api/directory?kind=health&q=castelul+peles&page=0&geoScope=national 200 in 79ms
+ GET /api/directory?kind=pharmacies&q=castelul+peles&page=0&geoScope=national 200 in 60ms
+ GET /api/directory?kind=hospitals&q=castelul+peles&page=0&geoScope=national 200 in 51ms
+ GET /api/domain?kind=stiri&q=castelul+peles&page=0&sort=recent&geoScope=national 200 in 72ms
+ GET /api/domain?kind=agricultura&q=castelul+peles&page=0&sort=recent&geoScope=national 200 in 61ms
+ GET /api/places?category=local-all&q=castelul+peles&scope=all&sort=name&page=0 200 in 474ms
+ GET /api/notaries?q=castelul+peles&page=0&geoScope=national 200 in 31ms
+ GET /api/experts?kind=experti-judiciari&q=castelul+peles&page=0&geoScope=national 200 in 55ms
+ GET /api/experts?kind=experti-tehnici&q=castelul+peles&page=0&geoScope=national 200 in 58ms
+ GET / 200 in 143ms (compile: 1791331089.4s, render: 24ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 19ms
+ GET /api/live 200 in 89ms
+ GET /api/catalog?q=zzqxvqm&page=0&geoScope=national 200 in 8ms
+ GET /api/directory?kind=schools&q=zzqxvqm&page=0&geoScope=national 200 in 84ms
+ GET /api/directory?kind=health&q=zzqxvqm&page=0&geoScope=national 200 in 76ms
+ GET /api/directory?kind=pharmacies&q=zzqxvqm&page=0&geoScope=national 200 in 64ms
+ GET /api/directory?kind=hospitals&q=zzqxvqm&page=0&geoScope=national 200 in 56ms
+ GET /api/domain?kind=stiri&q=zzqxvqm&page=0&sort=recent&geoScope=national 200 in 73ms
+ GET /api/domain?kind=agricultura&q=zzqxvqm&page=0&sort=recent&geoScope=national 200 in 71ms
+ GET /api/places?category=local-all&q=zzqxvqm&scope=all&sort=name&page=0 200 in 466ms
+ GET /api/notaries?q=zzqxvqm&page=0&geoScope=national 200 in 22ms
+ GET /api/experts?kind=experti-judiciari&q=zzqxvqm&page=0&geoScope=national 200 in 56ms
+ GET /api/experts?kind=experti-tehnici&q=zzqxvqm&page=0&geoScope=national 200 in 59ms
+ GET /api/experts?kind=traducatori&q=zzqxvqm&page=0&geoScope=national 200 in 169ms
+ GET /api/trains?q=zzqxvqm&page=0 200 in 159ms
+ GET /api/lawyers?q=zzqxvqm&page=0&sort=recent&geoScope=national 200 in 2.7s
+ GET / 200 in 31ms (compile: 1791331089.2s, render: 24ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 20ms
+ GET /api/live 200 in 91ms
+ GET /api/catalog?q=ab&page=0&geoScope=national 200 in 81ms
+ GET /api/directory?kind=health&q=ab&page=0&geoScope=national 200 in 134ms
+ GET /api/directory?kind=schools&q=ab&page=0&geoScope=national 200 in 175ms
+ GET /api/directory?kind=hospitals&q=ab&page=0&geoScope=national 200 in 85ms
+ GET /api/directory?kind=pharmacies&q=ab&page=0&geoScope=national 200 in 89ms
+ GET /api/domain?kind=agricultura&q=ab&page=0&sort=recent&geoScope=national 200 in 73ms
+ GET /api/domain?kind=stiri&q=ab&page=0&sort=recent&geoScope=national 200 in 88ms
+ GET /api/notaries?q=ab&page=0&geoScope=national 200 in 74ms
+ GET /api/experts?kind=experti-judiciari&q=ab&page=0&geoScope=national 200 in 96ms
+ GET /api/experts?kind=experti-tehnici&q=ab&page=0&geoScope=national 200 in 127ms
+ GET /api/experts?kind=traducatori&q=ab&page=0&geoScope=national 200 in 259ms
+ GET /api/places?category=local-all&q=ab&scope=all&sort=name&page=0 200 in 781ms
+ GET /api/trains?q=ab&page=0 200 in 224ms
+ GET / 200 in 32ms (compile: 1791331089.2s, render: 25ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 18ms
+ GET /api/live 200 in 90ms
+ GET /api/live 200 in 87ms
+ GET /api/live 200 in 91ms
+ GET / 200 in 32ms (compile: 1791331089.2s, render: 24ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 21ms
+ GET /api/live 200 in 92ms
+ GET /api/catalog?q=popescu&page=0&geoScope=national 200 in 13ms
+ GET /api/lawyers?q=popescu&page=0&sort=recent&geoScope=national 200 in 91ms
+ GET /api/directory?kind=schools&q=popescu&page=0&geoScope=national 200 in 94ms
+ GET /api/directory?kind=health&q=popescu&page=0&geoScope=national 200 in 83ms
+ GET /api/directory?kind=pharmacies&q=popescu&page=0&geoScope=national 200 in 95ms
+ GET /api/directory?kind=hospitals&q=popescu&page=0&geoScope=national 200 in 61ms
+ GET /api/domain?kind=stiri&q=popescu&page=0&sort=recent&geoScope=national 200 in 68ms
+ GET /api/domain?kind=agricultura&q=popescu&page=0&sort=recent&geoScope=national 200 in 65ms
+ GET /api/notaries?q=popescu&page=0&geoScope=national 200 in 60ms
+ GET /api/experts?kind=experti-judiciari&q=popescu&page=0&geoScope=national 200 in 117ms
+ GET /api/experts?kind=experti-tehnici&q=popescu&page=0&geoScope=national 200 in 122ms
+ GET / 200 in 163ms (compile: 1791331089.3s, render: 86ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 21ms
+ GET /api/live 200 in 92ms
+ GET /api/catalog?q=gara+brasov&page=0&geoScope=national 200 in 9ms
+ GET /api/directory?kind=schools&q=gara+brasov&page=0&geoScope=national 200 in 81ms
+ GET /api/directory?kind=health&q=gara+brasov&page=0&geoScope=national 200 in 78ms
+ GET /api/directory?kind=pharmacies&q=gara+brasov&page=0&geoScope=national 200 in 65ms
+ GET /api/directory?kind=hospitals&q=gara+brasov&page=0&geoScope=national 200 in 49ms
+ GET /api/domain?kind=stiri&q=gara+brasov&page=0&sort=recent&geoScope=national 200 in 70ms
+ GET /api/domain?kind=agricultura&q=gara+brasov&page=0&sort=recent&geoScope=national 200 in 60ms
+ GET /api/places?category=local-all&q=gara+brasov&scope=all&sort=name&page=0 200 in 469ms
+ GET /api/notaries?q=gara+brasov&page=0&geoScope=national 200 in 44ms
+ GET /api/experts?kind=experti-judiciari&q=gara+brasov&page=0&geoScope=national 200 in 56ms
+ GET /api/experts?kind=experti-tehnici&q=gara+brasov&page=0&geoScope=national 200 in 59ms
+ GET /api/experts?kind=traducatori&q=gara+brasov&page=0&geoScope=national 200 in 176ms
+ GET /api/trains?q=brasov&page=0 200 in 165ms
+ GET /api/lawyers?q=gara+brasov&page=0&sort=recent&geoScope=national 200 in 2.5s
+ GET /api/live 200 in 83ms
+ GET / 200 in 36ms (compile: 1791331089.2s, render: 29ms)
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/places/exploration.json instead of /public/places/exploration.json.
+If you intend to use the URL of that asset, use /places/exploration.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/geographic-localities.json instead of /public/data/geographic-localities.json.
+If you intend to use the URL of that asset, use /data/geographic-localities.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/data/locality-counties.json instead of /public/data/locality-counties.json.
+If you intend to use the URL of that asset, use /data/locality-counties.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-illustrations.json instead of /public/media/category-illustrations.json.
+If you intend to use the URL of that asset, use /media/category-illustrations.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/media/category-manifest.json instead of /public/media/category-manifest.json.
+If you intend to use the URL of that asset, use /media/category-manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/cinema/cinemas.json instead of /public/cinema/cinemas.json.
+If you intend to use the URL of that asset, use /cinema/cinemas.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/legal-snapshots/manifest.json instead of /public/legal-snapshots/manifest.json.
+If you intend to use the URL of that asset, use /legal-snapshots/manifest.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/transit/coverage.json instead of /public/transit/coverage.json.
+If you intend to use the URL of that asset, use /transit/coverage.json?url.
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/courts/institutions.json instead of /public/courts/institutions.json.
+If you intend to use the URL of that asset, use /courts/institutions.json?url.
+ GET /api/domain?kind=stiri&q=&page=0&publisher=&from=&to=&sort=recent&geoScope=context&locality=&county= 200 in 24ms
+ GET /api/live 200 in 87ms
+ GET /api/catalog?q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 10ms
+ GET /api/directory?kind=schools&q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 85ms
+ GET /api/directory?kind=health&q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 67ms
+ GET /api/directory?kind=pharmacies&q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 51ms
+ GET /api/directory?kind=hospitals&q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 43ms
+ GET /api/domain?kind=stiri&q=petric+agricultur%C4%83&page=0&sort=recent&geoScope=national 200 in 50ms
+ GET /api/domain?kind=agricultura&q=petric+agricultur%C4%83&page=0&sort=recent&geoScope=national 200 in 54ms
+ GET /api/notaries?q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 54ms
+ GET /api/places?category=local-all&q=petric+agricultur%C4%83&scope=all&sort=name&page=0 200 in 483ms
+ GET /api/experts?kind=experti-judiciari&q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 82ms
+ GET /api/experts?kind=experti-tehnici&q=petric+agricultur%C4%83&page=0&geoScope=national 200 in 54ms
+3:02:12 AM [vite] (client) page reload playwright-report/index.html
+3:02:12 AM [vite] (client) page reload playwright-report/index.html
+3:02:12 AM [vite] (client) page reload playwright-report/index.html
+3:02:12 AM [vite] (client) page reload playwright-report/index.html
+  ➜  Tunnel closed

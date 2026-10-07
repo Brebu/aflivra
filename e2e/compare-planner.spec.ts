@@ -30,7 +30,10 @@ test.describe('Compare, planner and the standalone catalog route', () => {
     await expect(page.locator('.compare-cards article')).toHaveCount(3);
 
     // A fourth is rejected: the toast states the cap and the selection stays at three.
-    await selection.getByRole('button', {name: 'Ateneul Român'}).click();
+    // The widened attested corpus also carries the OSM record of the real Ateneul
+    // Român, so the same display name now appears twice: .first() picks the
+    // editorial one and either way the cap toast is the assertion under test.
+    await selection.getByRole('button', {name: 'Ateneul Român'}).first().click();
     await expect(page.getByText('Poți compara maximum 3 locuri. Elimină mai întâi un loc.')).toBeVisible();
     await expect(page.locator('.compare-selection button.selected')).toHaveCount(3);
 

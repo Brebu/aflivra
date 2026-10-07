@@ -4,5 +4,6 @@ declare namespace Cloudflare {
     DB?: D1Database;
     BUCKET?: R2Bucket;
     REFRESH_TOKEN?: string;
+    TRANZY_API_KEY?: string;
   }
 }
