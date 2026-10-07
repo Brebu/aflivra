@@ -64,6 +64,19 @@ for(const name of ['records','text','media','query','source-xml','source-html','
 const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs'))),justiceModule=await import(pathToFileURL(join(temp,'justice.mjs'))),trainsModule=await import(pathToFileURL(join(temp,'trains.mjs')));
 const feedHosts=Object.entries(feedsModule.feedConfigs).map(([key])=>new URL(feedsModule.feedConfigs[key].url).host);
 const lawQuery={title:'CODUL CIVIL',text:'',number:'',year:'',page:0,full:false};
+// Familia Tranzy este poartă de mediu (TRANZY_API_KEY); fixture-urile oglindesc
+// sonda de referință din ssnc-agent-orch/2026/10/06/media-expansion/probe-tranzy-cell.mjs.
+const tranzyClujAgency=()=>({agency_id:1,agency_name:'CTP Cluj-Napoca SA',agency_timezone:'Europe/Bucharest',agency_url:'https://ctpcj.ro'});
+const tranzyAgenciesBody=()=>[tranzyClujAgency(),{agency_id:2,agency_name:'SC RATBV SA',agency_timezone:'Europe/Bucharest',agency_url:'https://ratbv.ro'},{agency_id:3,agency_name:'CT Buzău',agency_timezone:'Europe/Bucharest'}];
+// Tranzy publică momentele pozițiilor ca „YYYY-MM-DD HH:MM:SS”; rândurile de
+// scurgere (în afara României) și cele cu moment viitor se dropă, cele vechi se păstrează.
+const tranzyStamp=secondsAgo=>new Date(Date.now()-secondsAgo*1000).toISOString().slice(0,19).replace('T',' ');
+const tranzyVehiclesBody=()=>[
+ {id:'tz-1',label:'Tramvaiul 101',latitude:46.7712,longitude:23.6236,timestamp:tranzyStamp(8),vehicle_type:0,bike_accessible:'UNKNOWN',wheelchair_accessible:'WHEELCHAIR_ACCESSIBLE',speed:9.7,route_id:25,trip_id:'t25'},
+ {id:'tz-spill',label:'Spillover',latitude:48.85,longitude:2.35,timestamp:tranzyStamp(8),vehicle_type:3,bike_accessible:'UNKNOWN',wheelchair_accessible:'UNKNOWN',speed:5,route_id:9},
+ {id:'tz-future',label:'Viitor',latitude:46.77,longitude:23.62,timestamp:tranzyStamp(-600),vehicle_type:3,bike_accessible:'UNKNOWN',wheelchair_accessible:'UNKNOWN',speed:5,route_id:9},
+ {id:'tz-stale',label:'Troleibuzul păstrat',latitude:46.77,longitude:23.62,timestamp:tranzyStamp(1800),vehicle_type:11,bike_accessible:'UNKNOWN',wheelchair_accessible:'UNKNOWN',speed:0,route_id:8,trip_id:'t8'},
+ {id:'tz-nospeed',label:'Autobuzul fără viteză',latitude:46.76,longitude:23.61,timestamp:tranzyStamp(8),vehicle_type:3,bike_accessible:'UNKNOWN',wheelchair_accessible:'NO_VALUE'}];
 const families=[
  {family:'weather/open-meteo',routeName:'weather',route:'/api/weather?lat=44.43&lon=26.1',host:'api.open-meteo.com',allowed:['api.open-meteo.com'],key:()=>weatherModule.forecastLoader(44.43,26.1).key,loader:()=>weatherModule.forecastLoader(44.43,26.1)},
  {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org'],key:()=>adapters.companyLoader('427282').key,loader:()=>adapters.companyLoader('427282')},
@@ -88,7 +101,11 @@ const families=[
  {family:'justice/experti-judiciari',routeName:'experts',kind:'experti-judiciari',route:'/api/experts?kind=experti-judiciari',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>justiceModule.justiceLoader('experti-judiciari').key,loader:()=>justiceModule.justiceLoader('experti-judiciari')},
  {family:'justice/experti-tehnici',routeName:'experts',kind:'experti-tehnici',route:'/api/experts?kind=experti-tehnici',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>justiceModule.justiceLoader('experti-tehnici').key,loader:()=>justiceModule.justiceLoader('experti-tehnici')},
  {family:'justice/traducatori',routeName:'experts',kind:'traducatori',route:'/api/experts?kind=traducatori',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>justiceModule.justiceLoader('traducatori').key,loader:()=>justiceModule.justiceLoader('traducatori')},
- {family:'transport/trains',routeName:'trains',kind:'trains',route:'/api/trains?q=bra%C8%99ov',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>'trains:stations',loader:()=>({key:'trains:stations',name:'Informatică Feroviară · mersul trenurilor',url:'https://data.gov.ro/',version:'trains.planned.v1',ttl:86400,load:async()=>{throw Error('corpus-only')}})}];
+ {family:'transport/trains',routeName:'trains',kind:'trains',route:'/api/trains?q=bra%C8%99ov',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>'trains:stations',loader:()=>({key:'trains:stations',name:'Informatică Feroviară · mersul trenurilor',url:'https://data.gov.ro/',version:'trains.planned.v1',ttl:86400,load:async()=>{throw Error('corpus-only')}})},
+ // Poarta de mediu își are propriile celule, după sonda de referință: fără cheie
+ // (fără nicio interogare), 403 cu o singură încercare, operator nerezolvat, filtre
+ // invalide — matricea generală nu le poate exprima prin scenariile ei fixe.
+ {family:'transport/tranzy',routeName:'tranzy-live',kind:'tranzy',host:'api.tranzy.ai',allowed:['api.tranzy.ai'],scenarios:['nokey','http403','http500','malformed','unmatched','invalid','success'],route:'/api/tranzy-live?geoScope=context&locality=Cluj-Napoca&county=Cluj&lat=46.7712&lon=23.6236',scenarioRoutes:{unmatched:'/api/tranzy-live?geoScope=context&locality=Z%C4%83rne%C8%99ti&county=Bra%C8%99ov',invalid:'/api/tranzy-live?q='+('x'.repeat(201))},key:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency()).key,loader:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency())}];
 if(live){
  let routes=null;
  try{routes=await Promise.all(families.map(async family=>[family.family,await (async()=>{const init=family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};return fetch(base+family.route,{...init,signal:AbortSignal.timeout(60000)})})()]))}catch(error){console.error('Serverul local de dezvoltare nu răspunde la '+base+' — pornit cu „npm start” înainte de --live. Detaliu: '+error.message);process.exitCode=2}
@@ -135,7 +152,7 @@ if(live){
   if(ourBug){console.error('Verdict our-bug: sursa răspunde corect direct sau workerul nostru publicat eșuează, dar ruta raportează eroarea sursei. Diferențele de mai sus sunt bug-ul nostru.');process.exitCode=1}
  }
 }else{
- for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts']]){
+ for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts'],['tranzy-live','app/api/tranzy-live/route.ts']]){
   let source=await readFile(join(root,file),'utf8');
   source=source
    .replace("import network from '@/public/transit/network.json';",'const network='+await readFile(join(root,'public/transit/network.json'),'utf8')+';')
@@ -149,7 +166,7 @@ if(live){
   output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
   await writeFile(join(temp,'route-'+name+'.mjs'),output);
  }
- const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
+ const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains','tranzy-live'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
  const {zipSync,strToU8}=require('fflate');
  const gtfsBytes=()=>{const rows=(head,list)=>head+'\n'+list.join('\n')+'\n';const stops=Array.from({length:12},(_,i)=>'S'+i+',Stația de verificare '+i+',Descriere publică,'+(44.40+i/100)+','+(26.10+i/100)),routeRows=Array.from({length:12},(_,i)=>'R'+i+',A0,'+(100+i)+',Linia de verificare '+i+','+(i%2?'3':'0'));
   return zipSync({'agency.txt':strToU8(rows('agency_id,agency_name,agency_url',['A0,Operatorul de test,https://example.test'])),'stops.txt':strToU8(rows('stop_id,stop_name,stop_desc,stop_lat,stop_lon',stops)),'routes.txt':strToU8(rows('route_id,agency_id,route_short_name,route_long_name,route_type',routeRows)),'calendar.txt':strToU8(rows('service_id,monday,tuesday,start_date,end_date',['A0,1,1,20260101,20261231']))})};
@@ -213,25 +230,44 @@ if(live){
   if(scenario==='http429')return new Response(null,{status:429,headers:{'retry-after':'120'}});
   if(scenario==='timeout')throw init?.signal?.reason||new DOMException('The operation was aborted due to timeout','TimeoutError');
   return new Response('<html>răspuns nevalid de test</html>',{headers:{'content-type':'text/html'}})};
- const counters=[],successPayloads=new Map();let cellCount=0;
+ const counters=[],successPayloads=new Map();let cellCount=0,tranzyCalls=null;
  const withMocks=async(family,scenario,run)=>{
   const original=globalThis.fetch,counts=new Map(),unexpected=[],allowed=new Set(family.allowed);
+  // Modulele compilate capturează obiectul de mediu o singură dată la încărcare,
+  // deci cheia Tranzy se comută per celulă mutând acest obiect partajat; fără
+  // cheie (celulele „nokey” și „invalid”) nicio adresă a sursei nu se interoghează.
+  tranzyCalls=family.kind==='tranzy'?[]:null;
+  if(family.kind==='tranzy'){if(scenario==='nokey'||scenario==='invalid')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;else globalThis.__aflivraTestEnv.TRANZY_API_KEY='stub-key-de-verificare'}
   globalThis.fetch=async(url,init={})=>{
    init?.signal?.throwIfAborted?.();
    const href=String(url),host=href.match(/^https?:\/\/([^/?#]+)/)?.[1]||'';
    counts.set(host,(counts.get(host)||0)+1);
+   if(family.kind==='tranzy')tranzyCalls.push({path:href.replace('https://api.tranzy.ai/v1/opendata',''),headers:{...(init.headers||{})}});
    if(!allowed.has(host)){unexpected.push(href);return new Response(null,{status:404})}
+   // Celulele familiei Tranzy sunt conștiente de cale: lista operatorilor și fluxul
+   // vehiculelor au avarii distincte în sonda de referință (operatorul cade înainte
+   // ca fluxul să fie cerut; celula warm păstrează operatorul și avariază fluxul).
+   if(family.kind==='tranzy'){
+    const call=tranzyCalls[tranzyCalls.length-1];
+    if(call.path==='/agency')return scenario==='http500'?new Response(null,{status:500}):Response.json(tranzyAgenciesBody());
+    if(call.path==='/vehicles'){
+     if(scenario==='http500')return new Response(null,{status:500});
+     if(scenario==='http403')return new Response(JSON.stringify({message:'Forbidden resource',error:'Forbidden',statusCode:403}),{status:403,headers:{'content-type':'application/json'}});
+     if(scenario==='malformed')return new Response('<html>răspuns nevalid</html>',{headers:{'content-type':'text/html'}});
+     return Response.json(tranzyVehiclesBody())}
+    return new Response(null,{status:404})}
    if(host===family.host&&scenario!=='success')return failureFor(scenario,init);
    if(host===family.host)return successFor(family,href,host,init);
    if(host==='query.wikidata.org')return Response.json({results:{bindings:[]}});
    return rssFixture(host);
    };
    globalThis.__aflivraAssetFault=family.kind==='trains'&&scenario==='malformed'?'trains':null;
-   try{return await run(counts,unexpected)}finally{globalThis.fetch=original;globalThis.__aflivraAssetFault=null}};
- const requestFor=family=>{
-  if(family.method==='POST'){const body=JSON.stringify(family.body);return new Request('https://verify.test'+family.route,{method:'POST',body,headers:{'content-type':'application/json','content-length':String(Buffer.byteLength(body))}})}
-  return new Request('https://verify.test'+family.route)};
- const callRoute=async family=>{const handler=family.method==='POST'?routes[family.routeName].POST:routes[family.routeName].GET;return handler(requestFor(family))};
+   try{return await run(counts,unexpected)}finally{if(family.kind==='tranzy')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;globalThis.fetch=original;globalThis.__aflivraAssetFault=null}};
+  const requestFor=(family,scenario)=>{
+   const route=(family.scenarioRoutes||{})[scenario]||family.route;
+   if(family.method==='POST'){const body=JSON.stringify(family.body);return new Request('https://verify.test'+route,{method:'POST',body,headers:{'content-type':'application/json','content-length':String(Buffer.byteLength(body))}})}
+   return new Request('https://verify.test'+route)};
+  const callRoute=async(family,scenario)=>{const handler=family.method==='POST'?routes[family.routeName].POST:routes[family.routeName].GET;return handler(requestFor(family,scenario))};
  const wipe=()=>{sqlite.prepare('DELETE FROM source_cache').run();sqlite.prepare('DELETE FROM source_budget').run();escapes.length=0};
  const degradeCheck=(label,response,payload)=>{
   assert.equal(response.status,200,label+': ruta degradează în-band și nu returnează niciodată 5xx');
@@ -437,21 +473,83 @@ if(live){
     assert.equal(boardPayload.status,'cached',label+': fișa stației servește din copie');assert(boardPayload.data.departures.length>10,label+': plecările planificate servite');assert(boardPayload.data.arrivals.length>10,label+': sosirile planificate servite');
     assert(boardPayload.data.departures.every(row=>/^\d{2}:\d{2}( \+1)?$/.test(row.tt)&&row.n&&row.o),label+': fiecare plecare are oră, tren și operator');
     assert.equal(attempts,0,label+': corpul orarului face parte din aplicație, nu se interoghează nicio sursă')}}
+  if(family.family==='transport/tranzy'){
+   const at=path=>tranzyCalls?tranzyCalls.filter(call=>call.path===path).length:0;
+   if(scenario==='success'){
+    assert.equal(payload.status,'fresh',label+': stare proaspătă — primit: '+payload.status+', eroare: '+payload.error);
+    assert.equal(payload.data.items.length,3,label+': pozițiile utilizabile servite (valabil + păstrat + fără viteză)');
+    assert.equal(payload.data.entityCount,5,label+': numărul publicat de rânduri se păstrează');
+    assert.equal(payload.data.agency,'CTP Cluj-Napoca SA',label+': operatorul localizat este numit');
+    assert.equal(payload.data.isLive,true,label+': fluxul marcat live');
+    const first=payload.data.items.find(item=>item.id==='tz-1');
+    assert.equal(first.routeId,'25',label+': route_id numeric → linie text');
+    assert.equal(first.vehicleName,'Tramvaiul 101',label+': eticheta vehiculului');
+    assert.equal(first.bearing,null,label+': Tranzy nu publică direcția — fără direcție inventată');
+    assert.equal(first.speed,9.7,label+': viteza (m/s, convenția GTFS-RT) se păstrează');
+    assert.equal(first.occupancy,null,label+': fără ocupare publicată');
+    assert.equal(first.occupancyPercentage,null,label+': fără procent de ocupare inventat');
+    assert.equal(first.wheelchairAccessible,'WHEELCHAIR_ACCESSIBLE',label+': accesibilitatea publicată se păstrează');
+    assert.match(first.observedAt,/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/,label+': momentul poziției, UTC ISO');
+    assert.equal(first.details.label,'Tramvaiul 101',label+': detaliile publicate rămân la îndemână');
+    assert(payload.data.items.some(item=>item.id==='tz-stale'),label+': poziția mai veche se păstrează (isLive o marchează separat)');
+    assert.equal(at('/agency'),1,label+': un singur acces la lista operatorilor');
+    assert.equal(at('/vehicles'),1,label+': un singur acces la fluxul operatorului');
+    assert(tranzyCalls.every(call=>call.headers['X-API-KEY']==='stub-key-de-verificare'),label+': cheia merge doar în antet, spre familia permisă');
+    assert.equal(tranzyCalls.find(call=>call.path==='/vehicles').headers['X-Agency-Id'],'1',label+': antetul X-Agency-Id desemnează operatorul rezolvat')}
+   else if(scenario==='warm-http500'){
+    assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
+    assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+    assert.equal(payload.data.items.length,3,label+': pozițiile din copia validă se păstrează');
+    assert.equal(at('/vehicles'),3,label+': cele trei încercări asupra fluxului se epuizează');
+    assert.equal(at('/agency'),0,label+': operatorul servit corect nu se reinteroghează')}
+   else if(scenario==='nokey'){
+    assert.equal(payload.status,'unavailable',label+': starea documentată');
+    assert.equal(payload.data,null,label+': fără date inventate');
+    assert.match(e,/cheia de acces TRANZY_API_KEY/,label+': nota onestă de clasă blocată');
+    assert.equal(tranzyCalls.length,0,label+': sursa nu este interogată fără cheie');
+    await assert.rejects(realtimeModule.tranzyAgenciesLoader.load(),/cheia de acces TRANZY_API_KEY/,label+': loaderul operatorilor refuză onest');
+    await assert.rejects(realtimeModule.tranzyVehiclesLoader(tranzyClujAgency()).load(),/cheia de acces TRANZY_API_KEY/,label+': loaderul vehiculelor refuză onest')}
+   else if(scenario==='http403'){
+    assert.equal(payload.status,'unavailable',label+': starea documentată');
+    assert.equal(payload.data,null,label+': fără poziții inventate');
+    assert.match(e,/HTTP 403/,label+': codul sursei păstrat în plicul de eroare');
+    assert.equal(at('/vehicles'),1,label+': un singur acces — fără furtună de reîncercări');
+    assert(Date.parse(payload.nextAttemptAt)>Date.now(),label+': pauza de reîncercare este programată')}
+   else if(scenario==='http500'){
+    assert.equal(payload.status,'unavailable',label+': starea documentată');
+    assert.equal(payload.data,null,label+': fără operatori inventați');
+    assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+    assert.equal(at('/agency'),3,label+': cele trei încercări la lista operatorilor se epuizează');
+    assert.equal(at('/vehicles'),0,label+': fluxul fără operator rezolvat nu este interogat')}
+   else if(scenario==='malformed'){
+    assert.equal(payload.status,'unavailable',label+': starea documentată');
+    assert.equal(payload.data,null,label+': fără date parțial inventate');
+    assert.match(e,/Fluxul Tranzy nu poate fi decodat|Sursa nu a putut fi verificată/,label+': plicul de eroare în română');
+    assert.equal(at('/vehicles'),1,label+': un singur acces la fluxul nevalid')}
+   else if(scenario==='unmatched'){
+    assert.equal(payload.status,'unavailable',label+': starea documentată');
+    assert.equal(payload.data,null,label+': fără poziții inventate');
+    assert.match(e,/operator Tranzy.*Zărnești/i,label+': nota onestă: operator neidentificat');
+    assert.equal(at('/vehicles'),0,label+': fluxul altui oraș nu este interogat')}
+   else if(scenario==='invalid'){
+    assert.equal(payload.error,'Filtre invalide.',label+': plicul de eroare al filtrelor');
+    assert.equal(tranzyCalls.length,0,label+': sursa nu este interogată pe filtre invalide')}}
   };
  const runCell=(family,scenario)=>{const label=family.family+' / '+scenario,mock=scenario==='warm-http500'?'http500':scenario;
   return withMocks(family,mock,async(counts,unexpected)=>{
    assert.equal(unexpected.length,0,label+': doar adresele familiei sunt interogate ('+unexpected.join(', ')+')');
-   const response=await callRoute(family),payload=await response.json();
+   const response=await callRoute(family,scenario),payload=await response.json();
    cellCount++;counters.push({family:family.family,scenario});
-   degradeCheck(label,response,payload);
+   if(scenario==='invalid')assert.equal(response.status,400,label+': filtrele invalide sunt respinse cu 400, fără interogarea sursei');
+   else degradeCheck(label,response,payload);
    await familyExpectations(family,scenario,payload,counts,label);
    return payload})};
  for(const family of families){
-  for(const scenario of ['http500','http429','timeout','malformed','success']){wipe();const payload=await runCell(family,scenario);if(scenario==='success')successPayloads.set(family.family,payload)}
+  for(const scenario of (family.scenarios||['http500','http429','timeout','malformed','success'])){wipe();const payload=await runCell(family,scenario);if(scenario==='success')successPayloads.set(family.family,payload)}
   sqlite.prepare('UPDATE source_cache SET expires_at=0 WHERE key=?').run(family.key());
   await runCell(family,'warm-http500');
  }
- console.log('Matricea de avarie a trecut: pentru fiecare familie de surse, HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes — ruta locală răspunde mereu 200, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
+ console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, iar familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
  console.log(JSON.stringify({result:'ok',mode:'mock',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
  }
 escapes.length=0;process.off('unhandledRejection',recordEscape);process.off('uncaughtExceptionMonitor',recordEscape);}
