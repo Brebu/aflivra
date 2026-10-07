@@ -3,6 +3,7 @@ import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
 import {groupForCron, runGroup} from "../lib/live/refresh-sweep";
+import {runsWatchSweep, runWatchSweep} from "../lib/live/watch-sweep";
 
 export default {
   fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
@@ -29,6 +30,15 @@ export default {
   },
   async scheduled(controller: ScheduledController, env: Cloudflare.Env, ctx: ExecutionContext) {
     return withLiveContext(ctx, async () => {
+      // Declanșătorul registers („28 0,4,10,16 * * *”) cară și tura de urmărire la orele de zi;
+      // firingul de la ora 00 UTC rămâne tura registers — planul gratuit plafonează contul la cinci crons.
+      if (runsWatchSweep(controller)) {
+        const watch = await runWatchSweep(env.DB);
+        if (watch) {
+          console.log(JSON.stringify({ event: "watch_sweep_completed", itemsChecked: watch.itemsChecked, events: watch.eventsEmitted, pushes: watch.pushesSent, skipped: watch.budgetSkipped, degraded: watch.degraded, durationMs: Date.parse(watch.finishedAt) - Date.parse(watch.startedAt) }));
+        }
+        return;
+      }
       const group = groupForCron(controller.cron);
       if (!group) {
         console.warn(JSON.stringify({ event: "sweep_unknown_cron", cron: controller.cron }));

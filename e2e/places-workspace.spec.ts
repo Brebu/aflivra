@@ -32,7 +32,7 @@ test.describe('Places workspace', () => {
 
     const radiusGroup = workspace.locator('.entity-location');
     await expect(radiusGroup).toBeVisible();
-    await expect(radiusGroup.getByLabel('Localitate')).toBeVisible();
+    await expect(radiusGroup.getByLabel('Localitate', {exact: true})).toBeVisible();
     await expect(radiusGroup.getByRole('button', {name: 'Aplică localitatea'})).toBeVisible();
     const radiusSelect = radiusGroup.locator('label', {hasText: 'Rază'}).locator('select');
     await expect(radiusSelect).toBeVisible();

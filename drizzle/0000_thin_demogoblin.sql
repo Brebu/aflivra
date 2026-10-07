@@ -17,3 +17,41 @@ CREATE TABLE `source_cache` (
 	`error` text,
 	`adapter_version` text DEFAULT '' NOT NULL
 );
+--> statement-breakpoint
+CREATE TABLE `watch_items` (
+	`id` text PRIMARY KEY NOT NULL,
+	`install_id` text NOT NULL,
+	`kind` text NOT NULL,
+	`ref` text NOT NULL,
+	`label` text,
+	`created_at` text NOT NULL,
+	`muted` integer DEFAULT 0 NOT NULL,
+	`checked_at` text,
+	`fingerprint` text,
+	`sigs` text,
+	CONSTRAINT `watch_items_install_kind_ref_unique` UNIQUE(`install_id`, `kind`, `ref`)
+);
+--> statement-breakpoint
+CREATE TABLE `watch_events` (
+	`id` text PRIMARY KEY NOT NULL,
+	`install_id` text NOT NULL,
+	`kind` text NOT NULL,
+	`ref` text NOT NULL,
+	`title` text NOT NULL,
+	`body` text,
+	`url` text NOT NULL,
+	`created_at` text NOT NULL,
+	`seen` integer DEFAULT 0 NOT NULL,
+	`sig` text NOT NULL,
+	CONSTRAINT `watch_events_install_sig_unique` UNIQUE(`install_id`, `sig`)
+);
+--> statement-breakpoint
+CREATE TABLE `push_subs` (
+	`id` text PRIMARY KEY NOT NULL,
+	`install_id` text NOT NULL,
+	`endpoint` text NOT NULL,
+	`p256dh` text NOT NULL,
+	`auth` text NOT NULL,
+	`created_at` text NOT NULL,
+	CONSTRAINT `push_subs_endpoint_unique` UNIQUE(`endpoint`)
+);

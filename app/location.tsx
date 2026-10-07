@@ -4,7 +4,8 @@ import {LocateFixed,MapPin} from 'lucide-react';
 import {Button} from '@/components/ui/button';import {Input} from '@/components/ui/input';
 import {defaultCity,defaultCountry,validPoint,nearestLocality,distanceKm,type LocalCity} from '@/lib/location-context';
 import {withLocalCounty} from '@/lib/geographic-scope';
-import {cityPositions} from './v2-model';import {normalizeSearch} from '@/lib/live/query';import {snapshotJson} from './snapshot-store';
+import {cityPositions} from './v2-model';
+import {WatchButton} from './watch-button';import {normalizeSearch} from '@/lib/live/query';import {snapshotJson} from './snapshot-store';
 export {distanceKm};
 export type Position={lat:number;lon:number;accuracy:number};
 type Mode='default'|'manual'|'device';
@@ -56,6 +57,7 @@ export function LocationCityPicker(){
  const query=normalizeSearch(draft),chosen:LocalCity|undefined=index.exact.get(query)||cityPositions.find(c=>normalizeSearch(c.name)===query);
  const matches=useMemo(()=>{const found:typeof index.items=[];for(const item of index.items){if(item.folded.includes(query))found.push(item);if(found.length===30)break}return found},[index,query]);
  function apply(){if(chosen){geo.selectCity(chosen);setDraft(chosen.name+(chosen.county&&chosen.county!==chosen.name?' · '+chosen.county:''))}}
- return <div className="location-city-picker"><label htmlFor={id}>Localitate</label><div className="location-city-input"><Input id={id} list={id+'-options'} value={draft} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();apply()}}} placeholder="Caută o localitate" autoComplete="off"/><Button type="button" variant="outline" onClick={apply} disabled={!chosen}>Aplică localitatea</Button></div><datalist id={id+'-options'}>{matches.map(item=><option key={item.label+':'+item.city.lat} value={item.label}/>)}</datalist><small>Alege din listă și aplică localitatea. Vremea și datele locale se actualizează automat.</small></div>;
+ return <div className="location-city-picker"><label htmlFor={id}>Localitate</label><div className="location-city-input"><Input id={id} list={id+'-options'} value={draft} onChange={e=>setDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter'){e.preventDefault();apply()}}} placeholder="Caută o localitate" autoComplete="off"/><Button type="button" variant="outline" onClick={apply} disabled={!chosen}>Aplică localitatea</Button></div><datalist id={id+'-options'}>{matches.map(item=><option key={item.label+':'+item.city.lat} value={item.label}/>)}</datalist><small>Alege din listă și aplică localitatea. Vremea și datele locale se actualizează automat.</small>
+   <div className="location-watch-row"><WatchButton kind="localitate" target={geo.city.name} name={geo.city.name}/></div></div>;
 }
 export function LocationControl({onManual,compact=false}:{onManual?:()=>void;compact?:boolean}){const l=useLocation();return <div className={'location-control '+(compact?'compact':'')}><Button variant="outline" onClick={l.request} disabled={l.busy}><LocateFixed size={17}/>{l.busy?'Localizare…':l.position?'Actualizează poziția':'Folosește locația mea'}</Button>{!compact&&<><p role="status">{l.label}{l.position?` · precizie aproximativă ${Math.round(l.position.accuracy)} m. Poziția și datele locale se actualizează automat.`:'. Contextul local se aplică datelor care au informații geografice.'}</p>{l.hasLocal&&<button className="text-link" onClick={l.clear}>{l.position?'Oprește localizarea · revino la România':'Revino la România · București implicit'}</button>}{onManual&&<button className="text-link" onClick={onManual}><MapPin size={15}/>Alege localitatea manual</button>}</>}{l.error&&<p role="status">{l.error}</p>}</div>}

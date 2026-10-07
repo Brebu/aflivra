@@ -1,3 +1,8 @@
 # Copiază acest fișier în .dev.vars și alege propria valoare de dezvoltare; fișierul .dev.vars este ignorat de git.
 REFRESH_TOKEN=change-me-local-dev
 # În producție valoarea reală nu ajunge niciodată în fișier: wrangler secret put REFRESH_TOKEN --name aflivra
+# Perechea VAPID (ES256 P-256) pentru notificările „Urmărește”: privatul are 32 de octeți, publicul 65 (0x04||x||y), amândouă base64url.
+# Genereaz-o o singură dată (Node: crypto.generateKeyPairSync('ec',{namedCurve:'prime256v1'})) și pune-o în producție tot prin secret:
+# wrangler secret put VAPID_PRIVATE --name aflivra și wrangler secret put VAPID_PUBLIC --name aflivra
+VAPID_PRIVATE=change-me-32-byte-base64url
+VAPID_PUBLIC=change-me-65-byte-base64url

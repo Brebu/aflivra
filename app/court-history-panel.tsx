@@ -5,11 +5,12 @@ import {courtHistoryText,type CourtHistory} from '@/lib/court-history';
 import {countText} from '@/lib/live/query';
 import {dateText} from './live-data';
 import {ExportActions} from './export-actions';
+import {WatchButton} from './watch-button';
 
 export function CourtHistoryPanel({history,onOpenRecord,onSearchNumber}:{history:CourtHistory;onOpenRecord:(id:string)=>void;onSearchNumber:(number:string)=>void}){
  const [evidenceOpen,setEvidenceOpen]=useState<string[]>([]);
  return <section className="court-history-panel" aria-label={'Etapele dosarului '+history.number}>
-  <h3>Parcursul dosarului {history.number}</h3>
+  <div className="court-history-head"><h3>Parcursul dosarului {history.number}</h3><WatchButton kind="dosar" target={history.number} name={history.number} label={'Dosar '+history.number}/></div>
   <div className="court-history-stages">{history.stages.map(stage=><article className="court-stage" key={stage.id}>
    <h4>{stage.label}</h4><p>{stage.courtLabel}</p>
     <p className="court-stage-status">{stage.availability==='record'?countText(stage.recordIds.length,'fișă disponibilă','fișe disponibile')+' · '+countText(stage.hearingCount,'ședință publicată','ședințe publicate'):'Confirmat prin trimitere oficială'}</p>

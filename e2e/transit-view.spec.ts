@@ -16,7 +16,7 @@ async function switchLocality(page: Page, locality: string) {
   await page.getByRole('button', {name: 'Pentru tine: localitate, interese și aspect'}).click();
   const sheet = page.getByRole('dialog');
   await expect(sheet).toBeVisible();
-  await sheet.getByLabel('Localitate').fill(locality);
+  await sheet.getByLabel('Localitate', {exact: true}).fill(locality);
   await sheet.getByRole('button', {name: 'Aplică localitatea'}).click();
   await page.keyboard.press('Escape');
   await expect(sheet).toBeHidden();

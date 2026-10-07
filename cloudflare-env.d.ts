@@ -5,5 +5,7 @@ declare namespace Cloudflare {
     BUCKET?: R2Bucket;
     REFRESH_TOKEN?: string;
     TRANZY_API_KEY?: string;
+    VAPID_PUBLIC?: string;
+    VAPID_PRIVATE?: string;
   }
 }
