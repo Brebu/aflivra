@@ -30,7 +30,7 @@ assert.ok(!/continue-on-error/i.test(workflow),'the tour never downgrades failur
 assert.ok(!/git (push|commit)/.test(workflow),'the tour writes no git state — the D1 store is the store');
 const groups=JSON.parse(await readFile(join(root,'lib/live','refresh-groups.json'),'utf8'));
 const members=groups.groups.flatMap(group=>group.members);
-assert.deepEqual(groups.ghRelayed.map(entry=>entry.family),['feed.agricultura'],'AFIR is classified ghRelayed');
+assert.deepEqual(groups.ghRelayed.map(entry=>entry.family),['feed.agricultura','flights.bia'],'AFIR and the BIA airport board are classified ghRelayed — both sit behind relay tours, each with its own runner');
 assert.ok(!members.includes('feed.agricultura'),'the relayed family left the cron sweep: the relay is the single writer of its freshness');
 assert.equal(groups.groups.find(group=>group.name==='registers').estimatedSubrequests,30,'the registers estimate dropped with the relayed member');
 const routeHarness=await readFile(join(root,'scripts','verify-afir-relay.mjs'),'utf8');

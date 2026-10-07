@@ -20,20 +20,20 @@ try{
   .replace("from '@/lib/live/query'","from './query'")
   .replace("from '@/lib/dashboard-topics'","from './topics'"));
  const {federatedSearch,federatedCollect,federatedFamilies,federatedGroups,courtNumberTerm,validDomainTab}=federated;
- const networkIds=['places','catalog','lawyers','directory-schools','directory-health','directory-pharmacies','directory-hospitals','stiri','agricultura','notaries','experts-judiciari','experts-tehnici','translators','trains'];
+  const networkIds=['places','catalog','lawyers','directory-schools','directory-health','directory-pharmacies','directory-hospitals','stiri','agricultura','notaries','experts-judiciari','experts-tehnici','translators','trains','flights','events','anl-sites'];
  const eagerIds=['stories','gallery','cui','dosare'];
  const familyIds=[...networkIds,...eagerIds].sort();
 
  console.log('LEG 1 — module contract and family table');
  assert.equal(typeof federatedSearch,'function');assert.equal(typeof federatedCollect,'function');assert.equal(typeof courtNumberTerm,'function');assert.equal(typeof validDomainTab,'function');
  assert.deepEqual(federatedFamilies.map(f=>f.id).sort(),familyIds,'exactly the federated v1 family set');
- const kinds=new Set(['place','company','lawyer','dataset','record','article','story','dosar','notary','station']);
+  const kinds=new Set(['place','company','lawyer','dataset','record','article','story','dosar','notary','station','flight','event']);
  const groupIds=new Set(federatedGroups.map(g=>g.id));
  for(const family of federatedFamilies){assert.equal(typeof family.label,'string','family label must exist: '+family.id);assert.ok(family.label.length>0);assert.equal(typeof family.source,'string');assert.ok(family.source.length>0);assert.ok(kinds.has(family.kind),'family kind must be a supported kind: '+family.id);if(family.category)assert.ok(groupIds.has(family.category)||family.category==='item','family category must be a registry group: '+family.id)}
  assert.equal(validDomainTab('local','places'),true);assert.equal(validDomainTab('local','data'),true,'the auto data tab is a valid tab');
  assert.equal(validDomainTab('justitie','lawyers'),true);assert.equal(validDomainTab('justitie','legal'),true);assert.equal(validDomainTab('educatie','schools'),true);assert.equal(validDomainTab('sanatate','health'),true);assert.equal(validDomainTab('sanatate','pharmacies'),true);assert.equal(validDomainTab('sanatate','hospitals'),true);
  assert.equal(validDomainTab('povesti','stories'),true);assert.equal(validDomainTab('stiri','news'),true);assert.equal(validDomainTab('agricultura','news'),true);assert.equal(validDomainTab('firme','companies'),true);
- assert.equal(validDomainTab('justitie','notari'),true);assert.equal(validDomainTab('justitie','experti'),true);assert.equal(validDomainTab('transport','trains'),true);assert.equal(validDomainTab('local','notari'),false,'local nu are secțiune de notari');
+  assert.equal(validDomainTab('justitie','notari'),true);assert.equal(validDomainTab('justitie','experti'),true);assert.equal(validDomainTab('transport','trains'),true);assert.equal(validDomainTab('transport','flights'),true,'the flights tab of the transport domain is registered');assert.equal(validDomainTab('cultura','events'),true,'the events tab of the cultura domain is registered');assert.equal(validDomainTab('bani','imobiliare'),true,'the imobiliare tab of the bani domain is registered');assert.equal(validDomainTab('local','notari'),false,'local nu are secțiune de notari');
  assert.equal(validDomainTab('vreme','places'),false,'vreme has no places section');assert.equal(validDomainTab('povesti','lawyers'),false);assert.equal(validDomainTab('local','bogus'),false);assert.equal(validDomainTab('','places'),false);assert.equal(validDomainTab('local',''),false);
 
  console.log('LEG 2 — registry mirrors against real repo data');
@@ -104,6 +104,9 @@ try{
  const notariesUrl=requestByFamily.get('notaries');assert.equal(notariesUrl.pathname,'/api/notaries');assert.equal(notariesUrl.searchParams.get('q'),'școli');assert.equal(notariesUrl.searchParams.get('geoScope'),'national');
  const judiciariUrl=requestByFamily.get('experts-judiciari');assert.equal(judiciariUrl.pathname,'/api/experts');assert.equal(judiciariUrl.searchParams.get('kind'),'experti-judiciari');assert.equal(judiciariUrl.searchParams.get('q'),'școli');assert.equal(judiciariUrl.searchParams.get('geoScope'),'national');
  const trainsUrl=requestByFamily.get('trains');assert.equal(trainsUrl.pathname,'/api/trains');assert.equal(trainsUrl.searchParams.get('q'),'școli');assert.equal(trainsUrl.searchParams.get('page'),'0');
+  const flightsUrl=requestByFamily.get('flights');assert.equal(flightsUrl.pathname,'/api/flights');assert.equal(flightsUrl.searchParams.get('q'),'școli');assert.equal(flightsUrl.searchParams.get('page'),'0');
+  const eventsUrl=requestByFamily.get('events');assert.equal(eventsUrl.pathname,'/api/events');assert.equal(eventsUrl.searchParams.get('q'),'școli');assert.equal(eventsUrl.searchParams.get('page'),'0','the events family plans the national search contract of the venue registry');
+  const anlUrl=requestByFamily.get('anl-sites');assert.equal(anlUrl.pathname,'/api/anl');assert.equal(anlUrl.searchParams.get('q'),'școli');assert.equal(anlUrl.searchParams.get('page'),'0','the ANL family plans the registry route, notaries-style');
  result=federatedSearch('gara brașov');
  const garaUrl=result.requests.find(r=>r.family==='trains');
  assert.equal(new URL(garaUrl.url,'https://aflivra.test').searchParams.get('q'),'brașov','cuvintele-corp „gara/stația” nu ajung în interogarea de stații');
@@ -176,6 +179,25 @@ try{
  assert.equal(transportGroup.items[0].kind,'station','kind-ul stație există de la valul mersului trenurilor');assert.equal(transportGroup.items[0].title,'Braşov');
  assert.equal(transportGroup.items[0].subtitle,query.countText(2,'operator','operatori')+' · '+query.countText(267,'tren','trenuri'),'subtitlul folosește gramatica de numărătoare');
  assert.equal(transportGroup.items[0].target.domain,'transport');assert.equal(transportGroup.items[0].target.tab,'trains');assert.equal(transportGroup.items[0].target.query,'Braşov');
+ collected=federatedCollect(federatedSearch('avion'),'flights',{status:'fresh',data:{kind:'flights',observedAt:new Date().toISOString(),items:[{hex:'481f55',callsign:'W6XYZ',registration:'HA-LMN',typeCode:'A320',lat:44.5,lon:26.1,track:270.5,altitudeFt:30500,onGround:false,groundSpeedKt:448.1},{hex:'481f56',callsign:null,registration:'YR-BBT',typeCode:'C208',lat:44.6,lon:25.9,track:null,altitudeFt:null,onGround:true,groundSpeedKt:8}],total:2,page:0,pages:1}});
+ const flightsGroup=collected.groups.find(g=>g.id==='transport');assert.ok(flightsGroup,'familia avioanelor creează grupul transport');
+ assert.equal(flightsGroup.items[0].kind,'flight','kind-ul zbor există de la valul avioanelor live');assert.equal(flightsGroup.items[0].title,'W6XYZ');
+ assert.equal(flightsGroup.items[0].subtitle,'A320 · HA-LMN');
+ assert.equal(flightsGroup.items[0].target.domain,'transport');assert.equal(flightsGroup.items[0].target.tab,'flights');assert.equal(flightsGroup.items[0].target.query,'W6XYZ','click-through seed-ează indicativul aeronavei');
+  assert.equal(flightsGroup.items[1].title,'YR-BBT','aeronava fără indicativ rămâne onestă pe imatriculare');
+  assert.equal(collected.families.find(f=>f.family==='flights').total,2,'familia avioanelor poartă totalul sursei');
+  collected=federatedCollect(federatedSearch('spectacol'),'events',{status:'cached',data:{items:[{id:'23616',title:'Boema de verificare',start:'2026-10-08T19:30',end:'2026-10-08T21:00',url:'https://operacluj.ro/spectacole/verificare-boema',venueName:'Opera Națională Română Cluj-Napoca',city:'Cluj-Napoca',venue:'operacluj'},{id:'odeon-9',title:'Spectacol de verificare',start:'2026-10-06T19:30',url:'https://teatrul-odeon.ro/spectacol/verificare',venueName:'Teatrul Odeon',city:'București',venue:'odeon'}],total:58,page:0,pages:3}});
+  const eventsGroup=collected.groups.find(g=>g.id==='cultura');assert.ok(eventsGroup,'familia spectacolelor creează grupul cultură');
+  assert.equal(eventsGroup.items[0].kind,'event','kind-ul eveniment există de la valul calendarelor publice');assert.equal(eventsGroup.items[0].title,'Boema de verificare');
+  assert.equal(eventsGroup.items[0].subtitle,'Opera Națională Română Cluj-Napoca · Cluj-Napoca','subtitlul purtă instituția și orașul din registru');
+  assert.equal(eventsGroup.items[0].target.domain,'cultura');assert.equal(eventsGroup.items[0].target.tab,'events');assert.equal(eventsGroup.items[0].target.query,'Boema de verificare','click-through seed-ează titlul spectacolului în tabul Spectacole');
+  assert.equal(collected.families.find(f=>f.family==='events').total,58,'familia spectacolelor poartă totalul publicat de registru');
+  collected=federatedCollect(federatedSearch('amplasament'),'anl-sites',{status:'cached',data:{title:'Amplasamente locuințe pentru tineri · ANL',period:'2007–2024',note:'Amplasamentele recepționate în programul național.',fields:['Nr. crt.','Judeţ','Localitate','Amplasament','Nr. u.l.'],total:764,records:[{'Nr. crt.':1,'Judeţ':'BUCURESTI','Localitate':'București','Amplasament':'Amplasamentul de verificare S11','Nr. u.l.':1352,_id:'anl-bucuresti-amplasamentul-de-ver-2015'}],page:0,pages:39}});
+  const baniGroup=collected.groups.find(g=>g.id==='bani');assert.ok(baniGroup,'familia amplasamentelor ANL creează grupul bani');
+  assert.equal(baniGroup.items[0].kind,'record');assert.equal(baniGroup.items[0].title,'Amplasamentul de verificare S11','titlul rândului este numele propriu al amplasamentului');
+  assert.equal(baniGroup.items[0].subtitle,'București · BUCURESTI');assert.equal(baniGroup.items[0].subcategory,'Amplasamente locuințe ANL');
+  assert.equal(baniGroup.items[0].target.domain,'bani');assert.equal(baniGroup.items[0].target.tab,'imobiliare');assert.equal(baniGroup.items[0].target.query,'Amplasamentul de verificare S11','click-through seed-ează tabul Imobiliare & locuințe');
+  assert.equal(collected.families.find(f=>f.family==='anl-sites').total,764,'familia ANL poartă totalul registrului');
  collected=federatedCollect(federatedSearch('liceul'),'directory-schools',{status:'cached',data:{title:'Rețeaua școlară',period:'2025–2026',note:'Ediția 2025–2026.',fields:['Denumire lunga unitate','Localitate unitate','Judet PJ'],total:9,records:[{'Denumire lunga unitate':'Liceul Teoretic Eminescu','Localitate unitate':'Brașov','Judet PJ':'Brașov'}],page:0,pages:1}});
  educatie=collected.groups.find(g=>g.id==='educatie');assert.ok(educatie);assert.equal(educatie.items[0].kind,'record');assert.equal(educatie.items[0].title,'Liceul Teoretic Eminescu','the directory title heuristic mirrors the workspace');
  assert.equal(educatie.items[0].subtitle,'Brașov · Brașov');assert.equal(educatie.items[0].target.domain,'educatie');assert.equal(educatie.items[0].target.tab,'schools');

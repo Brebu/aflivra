@@ -24,8 +24,8 @@ try{
  const sections=Object.keys(topicSections);
  assert.deepEqual([...sections].sort(),[...domainIds].sort(),' fiecare domeniu are secțiunile lui în topicSections');
  let sectionCount=0;
- for(const domain of domainIds)sectionCount+=topicSections[domain].length;
- assert.equal(sectionCount,49,'inventarul de admin: 49 de secțiuni pe domenii');
+  for(const domain of domainIds)sectionCount+=topicSections[domain].length;
+  assert.equal(sectionCount,51,'inventarul de admin: 51 de secțiuni pe domenii');
  for(const domain of domainIds)for(const section of topicSections[domain]){
   assert(section.id&&section.label,'fiecare secțiune are id și etichetă');
   assert.notEqual(section.id,'data','data este tab-ul automat, nu o secțiune declarată');
@@ -102,13 +102,15 @@ try{
   'directory.health':{parity:'directory/health'},'directory.pharmacies':{parity:'directory/pharmacies'},'directory.hospitals':{parity:'directory/hospitals'},
   'law.consolidated.full':{harness:'verify-legal-records.mjs'},
   'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs'},
-  'transport.realtime':{parity:'transport/realtime'},'transport.tranzy':{parity:'transport/tranzy'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
+  'transport.realtime':{parity:'transport/realtime'},'transport.tranzy':{parity:'transport/tranzy'},'transport.flights':{parity:'flights/adsb'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
   'company-knowledge':{parity:'company/anaf'},
  'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
  'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:'legal/law'},
  'justice.notari':{parity:'justice/notari'},'justice.experti-judiciari':{parity:'justice/experti-judiciari'},
- 'justice.experti-tehnici':{parity:'justice/experti-tehnici'},'justice.traducatori':{parity:'justice/traducatori'},
- 'trains':{parity:'transport/trains'}};
+  'justice.experti-tehnici':{parity:'justice/experti-tehnici'},'justice.traducatori':{parity:'justice/traducatori'},
+   'trains':{parity:'transport/trains'},'flights.bia':{parity:'flights/bia'},
+   'events.venues':{parity:['events/operanationalacluj','events/search']},
+   'housing.anl':{parity:'housing/anl'},'housing.ancpi':{parity:'housing/ancpi'}};
   const registryKeys=[...members,...groups.seedBacked.map(entry=>entry.family),...groups.onDemand.map(entry=>entry.family),...groups.ghRelayed.map(entry=>entry.family)];
  const uncovered=[];
  for(const key of new Set(registryKeys)){

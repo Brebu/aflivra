@@ -7,7 +7,8 @@
     {"name": "registers", "cron": "28 0 * * *", "estimatedSubrequests": 30, "members": ["directory.schools.page0", "catalog.category.bani", "catalog.category.sanatate"]}
   ],
   "ghRelayed": [
-    {"family": "feed.agricultura", "reason": "Sursa afir.ro respinge conexiunile venite din rețeaua Cloudflare Workers; reîmprospătarea o face un intermediar extern care preia fluxul și articolele cerute de ruta /api/seed/afir și le predă stocării D1, în afara tururilor Worker."}
+    {"family": "feed.agricultura", "reason": "Sursa afir.ro respinge conexiunile venite din rețeaua Cloudflare Workers; reîmprospătarea o face un intermediar extern care preia fluxul și articolele cerute de ruta /api/seed/afir și le predă stocării D1, în afara tururilor Worker."},
+    {"family": "flights.bia", "reason": "Panoul oficial al aeroporturilor București este apărat de un test de browser (Cloudflare) care respinge orice server, inclusiv tururile Worker; reîmprospătarea o face un intermediar extern care preia panoul zilei al fiecărui aeroport și îl predă rutei /api/seed/bia, în afara tururilor Worker."}
   ],
   "seedBacked": [
     {"family": "transport", "reason": "Arhiva GTFS a transportului public se parsează integral la pornire; reîmprospătarea ei zilnică ar depăși plafonul gratuit de subrequest-uri și de CPU pe invocare."},
@@ -19,8 +20,10 @@
     {"family": "justice.notari", "reason": "Registrul notarilor publici se distribuie ca fișier XLSX publicat lunar; se servește din copia verificată inclusă în aplicație și se reîncearcă la sursă la expirare."},
     {"family": "justice.experti-judiciari", "reason": "Tabloul experților judiciari se distribuie ca fișier XLSX voluminos; se servește din copia verificată inclusă în aplicație și se reîncearcă la sursă la expirare."},
     {"family": "justice.experti-tehnici", "reason": "Registrul experților tehnici atestați se distribuie ca fișier XLSX voluminos; se servește din copia verificată inclusă în aplicație și se reîncearcă la sursă la expirare."},
-    {"family": "justice.traducatori", "reason": "Registrul traducătorilor și interpreților are peste 38.000 de înregistrări (peste 6 MB); se verifică integral la prima cerere și se servește din copia persistentă, fără o copie inclusă în aplicație."},
-    {"family": "trains", "reason": "Mersul trenurilor se publică ca fișiere XML anuale voluminoase (peste 10 MB pentru CFR Călători); orarele planificate se servesc din copia verificată inclusă în aplicație."},
+   {"family": "justice.traducatori", "reason": "Registrul traducătorilor și interpreților are peste 38.000 de înregistrări (peste 6 MB); se verifică integral la prima cerere și se servește din copia persistentă, fără o copie inclusă în aplicație."},
+   {"family": "housing.anl", "reason": "Lista amplasamentelor ANL se distribuie ca fișier XLS voluminos; se verifică integral la prima cerere și se servește din copia persistentă, fără o copie inclusă în aplicație."},
+   {"family": "housing.ancpi", "reason": "Raportul lunar ANCPI se distribuie ca fișier XLSX; se verifică la prima cerere și se servește din copia persistentă."},
+   {"family": "trains", "reason": "Mersul trenurilor se publică ca fișiere XML anuale voluminoase (peste 10 MB pentru CFR Călători); orarele planificate se servesc din copia verificată inclusă în aplicație."},
     {"family": "law.consolidated.full", "reason": "Consolidarea integrală a unui act poate depăși 1,4 MB de text și se stochează în fragmente; se verifică la deschiderea actului, nu pe tură de noapte."},
     {"family": "catalog.organizations-formats", "reason": "Paginile de organizator și de format ale catalogului sunt combinatorii; se verifică la cerere."},
     {"family": "resource.datastores", "reason": "Resursele și depozitele de date ale catalogului se verifică la deschiderea fiecărui set de date."}
@@ -28,10 +31,12 @@
   "onDemand": [
     {"family": "transport.realtime", "reason": "Pozițiile, sesizările și disfuncționalitățile în timp real au un TTL de 30 de secunde și nu pot fi pre-împrospătate."},
     {"family": "transport.tranzy", "reason": "Pozițiile vehiculelor Tranzy au un TTL de 30 de secunde și se citesc la cerere pentru operatorul localizat; sursa este în plus o poartă de mediu — fără cheia TRANZY_API_KEY configurată nu se interoghează nicio adresă."},
+    {"family": "transport.flights", "reason": "Stările aeronavelor din spațiul aerian românesc au un TTL de 60 de secunde și se citesc la cerere din fluxul public adsb.lol, prin cele patru cereri fixe de acoperire națională."},
     {"family": "courts", "reason": "Dosarele se verifică la cerere după număr, cu un TTL de 5 minute."},
     {"family": "forecast", "reason": "Prognoza se calculează pentru coordonatele alese; doar orașul implicit este pre-împrospătat."},
     {"family": "company-knowledge", "reason": "Identitatea și cunoștințele despre firme se verifică pentru CUI-ul explorat; doar CUI-ul implicit este pre-împrospătat."},
     {"family": "articles-stories-cinema", "reason": "Articolele, povestirile și programele cinema se verifică pentru cheia și ziua aleasă; azi se pre-împrospătează doar varianta implicită București."},
+    {"family": "events.venues", "reason": "Calendarele publice ale instituțiilor din registrul spectacolelor se verifică la cerere pentru instituția aleasă, fiecare cu un TTL de o oră; tura de dimineață pre-împrospătează doar instituția implicită din București, iar căutarea națională reunește calendarele validate."},
     {"family": "feeds.energie-transport", "reason": "Fluxurile ministerelor de energie și transport se verifică la cerere."},
     {"family": "datastore.pages", "reason": "Paginile dincolo de prima ale fiecărui registru și filtrările geografice se verifică la cerere."},
     {"family": "law.search", "reason": "Căutările legislative se verifică la cerere; varianta implicită și Codul civil se pre-împrospătează zilnic."}
