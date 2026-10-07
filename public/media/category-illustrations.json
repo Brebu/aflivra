@@ -27,7 +27,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-local-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 41500,
+        "sha256": "731ba01c7fef0c9ad921cbefc96d81834eca8054ff7694b6992ff275ea7c2024"
+      }
+    ]
   },
   {
     "id": "bani",
@@ -57,7 +66,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-bani-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 26988,
+        "sha256": "94694a5cdc6042cd0611b156ba611faff8ed7db4164929004b382b23b20ebc7a"
+      }
+    ]
   },
   {
     "id": "firme",
@@ -87,7 +105,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-firme-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 26302,
+        "sha256": "da31d8218eb82189162c20c3719537bec445a51a15f4888de364df04bd79e0ff"
+      }
+    ]
   },
   {
     "id": "mediu",
@@ -117,7 +144,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-mediu-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 23286,
+        "sha256": "1d3002df6f8b9a6441ef1e03020ccce72d9603074878ea7149301323112d3d5e"
+      }
+    ]
   },
   {
     "id": "transport",
@@ -147,7 +183,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-transport-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 36976,
+        "sha256": "09f5696a4a2d5d3131da3e2c2290582c969bed1663b7df56b3bb462ef678f2bd"
+      }
+    ]
   },
   {
     "id": "sanatate",
@@ -177,7 +222,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-sanatate-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 29152,
+        "sha256": "45f4c2aac6c6c7c6fe566f270a8aeca9d478b039ec77413733ef507af09fc040"
+      }
+    ]
   },
   {
     "id": "educatie",
@@ -207,7 +261,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-educatie-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 32854,
+        "sha256": "e69760bd4c52fbfea36d0d685fa2f7a33820b8691250cb8fba20a56fd9dce195"
+      }
+    ]
   },
   {
     "id": "cultura",
@@ -237,7 +300,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-cultura-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 38616,
+        "sha256": "df28b9a90f8daac73bde6f0de57c57ddef48573eea6154bfdb4af9cb1e823286"
+      }
+    ]
   },
   {
     "id": "munca",
@@ -267,7 +339,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-munca-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 31462,
+        "sha256": "a22e03a05aaf08a3c9b19baae7954da2b8b115745a7a2d4655f3f382380275b8"
+      }
+    ]
   },
   {
     "id": "justitie",
@@ -297,7 +378,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-justitie-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 29490,
+        "sha256": "a5219aca11b5d9a4d57733681c13784dfb025a13cf55a978845d52be982145ec"
+      }
+    ]
   },
   {
     "id": "energie",
@@ -327,7 +417,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-energie-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 30022,
+        "sha256": "62b054d1bf6c0021acc352b38168e1e5171daa716681dc00edb1c8ca958f1fec"
+      }
+    ]
   },
   {
     "id": "agricultura",
@@ -357,7 +456,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-agricultura-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 51066,
+        "sha256": "6b7bf50557ae04cadac1295af2b5f6d581ab3f9c9638ffbc8dfb310aa136cdfb"
+      }
+    ]
   },
   {
     "id": "filme",
@@ -387,7 +495,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-filme-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 35986,
+        "sha256": "76830025de36b1390b06c394df36933f494ee2d10bad898cb7bf12e5d75f5b21"
+      }
+    ]
   },
   {
     "id": "stiri",
@@ -417,7 +534,16 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-stiri-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 21244,
+        "sha256": "5bcf93c644ff6577097c6cf1bd051beec8b94e215f673d613188a885f17cf698"
+      }
+    ]
   },
   {
     "id": "vreme",
@@ -450,7 +576,16 @@
       "dimensionsPreserved": true,
       "distinctSha256": true,
       "review": "Inspected generated illustration: matches blue/navy/porcelain editorial category collection, distinct thermometer/cloud/sun/wind subject, no environment leaf or water disc, no text."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-vreme-v30-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 13924,
+        "sha256": "d17927d386910381894b72374f792b6cd0734a662604faeaa778eb45362f1464"
+      }
+    ]
   },
   {
     "id": "povesti",
@@ -480,6 +615,15 @@
       "distinctSha256": true,
       "strongGreenPixelFraction": 0,
       "review": "Visual contact-sheet review: distinct subject per category; blue, navy and porcelain sculptural editorial artwork; no real-photo reuse."
-    }
+    },
+    "variants": [
+      {
+        "file": "illustration-cultura-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 38616,
+        "sha256": "df28b9a90f8daac73bde6f0de57c57ddef48573eea6154bfdb4af9cb1e823286"
+      }
+    ]
   }
 ]
