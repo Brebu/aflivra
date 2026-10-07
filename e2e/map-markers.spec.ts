@@ -272,3 +272,181 @@ test.describe('Hartă — tap pe cluster, pe mobil', () => {
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });
+
+// Sub-pixel stacks of genuinely distinct places (Ateneul Român ↔ Muzeul Colecțiilor
+// de Artă at ~0.45 svg units, the Sinaia trio's pairs at 0.24–0.54) can never be
+// separated by zoom — the separation/disk ratio is scale-invariant — so even the
+// deterministic nearest-pick can land on the neighbour when the click pixel is
+// owned by rounding luck. The declutter displaces colliding pairs apart along
+// their own axis (hairline leaders mark the true position), and the rendered
+// (offset) position becomes the click target the resolver resolves against.
+const PIN_GEO = [
+  {label: 'Selectează Ateneul Român', name: 'Ateneul Român', id: 'ateneu', lat: 44.4413, lon: 26.0972},
+  {label: 'Selectează Muzeul Colecțiilor de Artă', name: 'Muzeul Colecțiilor de Artă', id: 'osm-n2634652186', lat: 44.4446375, lon: 26.091422},
+  {label: 'Selectează Castelul Peleș', name: 'Castelul Peleș', id: 'peles', lat: 45.359828, lon: 25.54302},
+  {label: 'Selectează Castelul Pelișor', name: 'Castelul Pelișor', id: 'osm-w242580048', lat: 45.360563, lon: 25.539208},
+  {label: 'Selectează Mănăstirea Sinaia', name: 'Mănăstirea Sinaia', id: 'osm-w1076307879', lat: 45.355321, lon: 25.549244},
+  {label: 'Selectează Cetatea romană Adamclisi', name: 'Cetatea romană Adamclisi', id: 'osm-w132318311', lat: 44.09245, lon: 27.943598},
+  {label: 'Selectează Tropaeum Traiani', name: 'Tropaeum Traiani', id: 'osm-w228772727', lat: 44.102324, lon: 27.955382},
+] as const;
+const geoByLabel = (label: string) => {
+  const g = PIN_GEO.find(p => p.label === label);
+  if (!g) throw new Error(`no known geometry for ${label}`);
+  return g;
+};
+const projectLocal = (lat: number, lon: number): [number, number] => [(lon - 20) * 61, (49.1 - lat) * 84];
+
+// Rendered geometry of named pins, read from the live DOM: the g.map-pin transform
+// (offset included once the declutter lands) mapped to css px through the screen CTM.
+async function renderedPins(page: Page, labels: string[]) {
+  return page.evaluate(({labels}) => {
+    const svg = document.querySelector('.map-workspace .romap svg') as unknown as SVGSVGElement | null;
+    const ctm = svg?.getScreenCTM();
+    if (!svg || !ctm) throw new Error('map svg or screen CTM unavailable');
+    return labels.map(label => {
+      const g = svg.querySelector(`g.map-pin[aria-label="${label}"]`) as SVGGElement | null;
+      if (!g) throw new Error(`pin ${label} missing`);
+      const [tx, ty] = ((g.getAttribute('transform') || '').match(/[-\d.]+/g) || []).map(Number);
+      const c = new DOMPoint(tx, ty).matrixTransform(ctm as unknown as DOMMatrix);
+      return {label, localX: tx, localY: ty, x: c.x, y: c.y};
+    });
+  }, {labels});
+}
+
+// Distance between the pin's rendered position and its true projected position, in
+// svg local units — the leader-line length. Converges to 0 as zoom separates a pair.
+async function leaderLengths(page: Page, labels: string[]) {
+  const rendered = await renderedPins(page, labels);
+  return rendered.map(p => {
+    const g = geoByLabel(p.label);
+    const [ax, ay] = projectLocal(g.lat, g.lon);
+    return {label: p.label, length: Math.hypot(p.localX - ax, p.localY - ay)};
+  });
+}
+
+test.describe('Hartă — deziglomerarea stivelor sub-pixel (offseturi + linii ghid)', () => {
+  test('the Ateneul ↔ Muzeul Colecțiilor stack separates and each rendered position opens its own place', async ({page}) => {
+    test.setTimeout(120_000);
+    const pageErrors = collectPageErrors(page);
+    const labels = [PIN_GEO[0].label, PIN_GEO[1].label];
+    for (let attempt = 0; attempt < 2; attempt++) {
+      await openMapFresh(page);
+      await scrollMapIntoView(page, PIN_GEO[0].label);
+      const rendered = await renderedPins(page, labels);
+      const [a, b] = rendered;
+      const sepCss = Math.hypot(a.x - b.x, a.y - b.y);
+      // Before the declutter the pair renders ~0.58 css px apart — one rounding-owned
+      // pixel for both centres. Two css px is the pixel-ownership floor the repair
+      // pass enforces; a matched pair reaches ~11.5.
+      expect(sepCss, `Ateneul ↔ Muzeul Colecțiilor rendered ${sepCss.toFixed(2)} css px apart`).toBeGreaterThanOrEqual(2);
+
+      // Clicking each pin's own RENDERED (offset) centre must open that place, and
+      // the same pixel must keep resolving the same way (deterministic, not luck).
+      for (const pin of rendered) {
+        await page.mouse.click(Math.round(pin.x), Math.round(pin.y));
+        const expected = {name: geoByLabel(pin.label).name, id: geoByLabel(pin.label).id};
+        await expectPlaceOpened(page, expected);
+        await openMapFresh(page);
+        await scrollMapIntoView(page, PIN_GEO[0].label);
+        const again = (await renderedPins(page, [pin.label]))[0];
+        await page.mouse.click(Math.round(again.x), Math.round(again.y));
+        await expectPlaceOpened(page, expected);
+        await openMapFresh(page);
+        await scrollMapIntoView(page, PIN_GEO[0].label);
+      }
+    }
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('all three Sinaia-trio places are reachable at their rendered positions at compact zoom', async ({page}) => {
+    test.setTimeout(120_000);
+    const pageErrors = collectPageErrors(page);
+    const trio = [PIN_GEO[2].label, PIN_GEO[3].label, PIN_GEO[4].label];
+    await openMapFresh(page);
+    await scrollMapIntoView(page, trio[0]);
+    const rendered = await renderedPins(page, trio);
+    for (let i = 0; i < rendered.length; i++) for (let j = i + 1; j < rendered.length; j++) {
+      const sepCss = Math.hypot(rendered[i].x - rendered[j].x, rendered[i].y - rendered[j].y);
+      expect(sepCss, `${rendered[i].label} ↔ ${rendered[j].label} rendered ${sepCss.toFixed(2)} css px apart`).toBeGreaterThanOrEqual(2);
+    }
+    // Keyboard focus targets and aria labels are untouched by the offsets.
+    for (const g of PIN_GEO.slice(2, 5)) {
+      const pin = page.locator(`.map-workspace .romap g.map-pin[aria-label="${g.label}"]`).first();
+      await expect(pin).toHaveAttribute('role', 'button');
+      await expect(pin).toHaveAttribute('tabindex', '0');
+    }
+    for (const pin of rendered) {
+      await page.mouse.click(Math.round(pin.x), Math.round(pin.y));
+      await expectPlaceOpened(page, {name: geoByLabel(pin.label).name, id: geoByLabel(pin.label).id});
+      await openMapFresh(page);
+      await scrollMapIntoView(page, trio[0]);
+    }
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('offsets recompose per zoom and converge toward the true positions', async ({page}) => {
+    test.setTimeout(120_000);
+    const pageErrors = collectPageErrors(page);
+    const trioPair = [PIN_GEO[2].label, PIN_GEO[3].label];
+    const convergePair = [PIN_GEO[5].label, PIN_GEO[6].label];
+    await openMapFresh(page);
+    await scrollMapIntoView(page, trioPair[0]);
+
+    // Compact zoom: the permanently-stacked trio pair is displaced; the Dobrogea
+    // pair (1.1 svg units apart, mutual-nearest in open country) collides too.
+    const trioAt1 = await leaderLengths(page, trioPair);
+    for (const p of trioAt1) expect(p.length, `${p.label} must carry an offset at compact zoom`).toBeGreaterThan(0.5);
+    const pairAt1 = await leaderLengths(page, convergePair);
+    for (const p of pairAt1) expect(p.length, `${p.label} must carry an offset at compact zoom`).toBeGreaterThan(0.5);
+
+    // Zoom in one step (1.3): the offsets recompose — the trio's geographic
+    // deviation shrinks (layout follows the zoom transform, not the mount), and
+    // the Dobrogea pair is closer to leaving the collision set.
+    await page.locator('.map-workspace .romap .map-controls button[aria-label="Mărește harta"]').click();
+    const trioAt13 = await leaderLengths(page, trioPair);
+    const pairAt13 = await leaderLengths(page, convergePair);
+    for (let i = 0; i < 2; i++) {
+      expect(trioAt13[i].length, `trio offset must shrink with zoom (${trioAt13[i].label})`).toBeLessThan(trioAt1[i].length);
+      expect(pairAt13[i].length, `Dobrogea pair offset must shrink with zoom (${pairAt13[i].label})`).toBeLessThan(pairAt1[i].length);
+    }
+
+    // One more step (1.6): the Dobrogea pair's true separation exceeds the stack
+    // threshold — its offsets converge fully to the truth (leaders withdrawn).
+    await page.locator('.map-workspace .romap .map-controls button[aria-label="Mărește harta"]').click();
+    const pairAt16 = await leaderLengths(page, convergePair);
+    for (const p of pairAt16) expect(p.length, `${p.label} must be back at its true position at zoom 1.6`).toBe(0);
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('hairline leaders anchor every displaced pin to its true position', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await openMapFresh(page);
+    await scrollMapIntoView(page, PIN_GEO[5].label);
+    const leaders = await page.evaluate(() => {
+      const g = document.querySelector('.map-workspace .romap g.map-leaders');
+      if (!g) return null;
+      return [...g.querySelectorAll('line')].map(line => ({
+        x1: Number(line.getAttribute('x1')), y1: Number(line.getAttribute('y1')),
+        x2: Number(line.getAttribute('x2')), y2: Number(line.getAttribute('y2')),
+        stroke: line.getAttribute('stroke-width'), effect: line.getAttribute('vector-effect'),
+      }));
+    });
+    expect(leaders, 'a displaced map must render a map-leaders group').not.toBeNull();
+    expect(leaders!.length).toBeGreaterThanOrEqual(4);
+    for (const line of leaders!) {
+      expect(line.stroke, 'leaders must be 0.5 hairlines').toBe('0.5');
+      expect(line.effect, 'leaders must not scale with the zoom transform').toBe('non-scaling-stroke');
+      // Repair pushes are capped at twice the target separation (~18 svg units at
+      // this width), so no fan can wander a pin far from its true position.
+      const length = Math.hypot(line.x2 - line.x1, line.y2 - line.y1);
+      expect(length, `leader length ${length.toFixed(1)} exceeds the displacement cap`).toBeLessThanOrEqual(19);
+    }
+    // The Adamclisi leader runs from the true position to the rendered (offset) pin.
+    const converge = await renderedPins(page, [PIN_GEO[5].label]);
+    const [ax, ay] = projectLocal(PIN_GEO[5].lat, PIN_GEO[5].lon);
+    const anchored = leaders!.some(l =>
+      Math.hypot(l.x1 - ax, l.y1 - ay) < 0.05 && Math.hypot(l.x2 - converge[0].localX, l.y2 - converge[0].localY) < 0.05);
+    expect(anchored, 'a leader must anchor the displaced Adamclisi pin to its true position').toBe(true);
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});

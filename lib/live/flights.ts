@@ -30,21 +30,37 @@ export function parseAdsbFlights(raw:string):Loaded{
  const identities=[...new Set(d.ac.map((row:any)=>String(row?.hex||'').trim().toLowerCase()).filter(Boolean))];
  return{publishedAt:observedAt,data:{kind:'flights',observedAt,items:uniqueRecords<FlightItem>(items,x=>x.hex),hexes:identities,note:'Stările aeronavelor provin din fluxul public adsb.lol, alimentat de receptori comunitari. O aeronavă lipsă din flux nu înseamnă că nu zboară.'}};
 }
-export const adsbFlightsLoader:Loader={key:'flights:adsb',name:'adsb.lol · ADS-B comunitar',url:'https://api.adsb.lol/v2/',version:'flights.adsb.ro.v1',ttl:60,load:async()=>{
- // Cele patru cereri de acoperire fac parte dintr-o singură încărcare: toate se
- // așază la loc înainte de verdict, iar dacă una dintre ele eșuează, întregul
- // flux eșuează — nu se servește o hartă cu un cadran tăcut, fără să se spună.
- const parts=await Promise.allSettled(ADSB_POINTS.map(async([lat,lon])=>parseAdsbFlights(await getSource(adsbUrl(lat,lon),{headers:{'User-Agent':'Aflivra/1.0 public-flight-state reader',Accept:'application/json'}},{timeoutMs:12000}))));
- const failed=parts.find(part=>part.status==='rejected');
- if(failed)throw (failed as PromiseRejectedResult).reason;
- const boards=parts.map(part=>(part as PromiseFulfilledResult<Loaded>).value);
+// Fuziunea celor patru răspunsuri de acoperire este logica partajată a sursei: o citește
+// încărcătorul la cerere, o citește și ruta de depunere /api/seed/flights pentru tura
+// externă de relaie — aceeași dedublare pe Mode-S, același chenar național, același
+// moment al fluxului, ca să nu existe două adevăruri despre spațiul aerian.
+export function mergeAdsbBoards(boards:Loaded[]):Loaded{
  const merged=uniqueRecords<FlightItem>(boards.flatMap(board=>board.data.items),x=>x.hex);
  const latest=new Date(Math.max(...boards.map(board=>Date.parse(board.data.observedAt)))).toISOString();
  // Identitățile se reunesc și ele, ca pozițiile: patru răspunsuri identice rămân
  // un singur set de aeronave observate, nu patru.
  const entityCount=[...new Set(boards.flatMap(board=>board.data.hexes||[]))].length;
  return{publishedAt:latest,data:{...boards[0].data,items:merged,entityCount,observedAt:boards[0].data.observedAt}};
-}};
+}
+export const adsbFlightsLoader:Loader={key:'flights:adsb',name:'adsb.lol · ADS-B comunitar',url:'https://api.adsb.lol/v2/',version:'flights.adsb.ro.v1',ttl:60,load:loadAdsbFlights};
+async function loadAdsbFlights():Promise<Loaded>{
+ try{
+  // Cele patru cereri de acoperire fac parte dintr-o singură încărcare: toate se
+  // așază la loc înainte de verdict, iar dacă una dintre ele eșuează, întregul
+  // flux eșuează — nu se servește o hartă cu un cadran tăcut, fără să se spună.
+  const parts=await Promise.allSettled(ADSB_POINTS.map(async([lat,lon])=>parseAdsbFlights(await getSource(adsbUrl(lat,lon),{headers:{'User-Agent':'Aflivra/1.0 public-flight-state reader',Accept:'application/json'}},{timeoutMs:12000}))));
+  const failed=parts.find(part=>part.status==='rejected');
+  if(failed)throw (failed as PromiseRejectedResult).reason;
+  return mergeAdsbBoards(parts.map(part=>(part as PromiseFulfilledResult<Loaded>).value));
+  }catch(e){
+   // Fluxul servește egress-ul rezidențial, dar respinge rețeaua Cloudflare Workers a
+   // serverului cu 429/503 (clasa AFIR, dovedită de sonde): clasa se preia onest în
+   // nota de intermediar, cu codul sursei păstrat — prospețimea o poartă tura externă
+   // de relaie, săptămânal, iar încărcătorul rămâne logica partajată.
+   if(e instanceof SourceError&&(e.diagnostic?.httpStatus===429||e.diagnostic?.httpStatus===503))throw new SourceError('Fluxul public adsb.lol a respins rețeaua serverului (HTTP '+e.diagnostic?.httpStatus+'). Pozițiile se reîmprospătează prin tura de intermediar extern, săptămânal; încearcă din nou peste puțin timp.',e.retryAfter,e.diagnostic);
+   throw e;
+  }
+}
 
 export type BiaAirport={id:string;name:string;label:string};
 export const biaAirports:BiaAirport[]=[{id:'henri-coanda',name:'Henri Coandă',label:'Henri Coandă (OTP)'},{id:'baneasa-aurel-vlaicu',name:'Băneasa · Aurel Vlaicu',label:'Băneasa · Aurel Vlaicu (BBU)'}];

@@ -22,7 +22,7 @@ const feedsSource=await readFile(join(root,'lib/live','feeds.ts'),'utf8');
 const afirLoaderUrl=feedsSource.match(/export const afirLoader[^\n]*?url:'([^']+)'/)?.[1];
 assert.equal(afirLoaderUrl,relay.AFIR_FEED_URL_DEFAULT,'the relay fetches exactly the URL the app afirLoader reads — same URL, same data');
 const workflow=await readFile(join(root,'.github/workflows','afir-refresh.yml'),'utf8');
-assert.ok(workflow.includes('cron: "0 */2 * * *"'),'the relay tour runs every two hours (user-decided cadence)');
+assert.ok(workflow.includes('cron: "0 3 * * 1"'),'the relay tour runs weekly, Monday 03:00 UTC (user-decided cadence: everything the Worker can fetch itself stays on the Worker; the egress-blocked relay class goes weekly on GitHub Actions)');
 assert.ok(workflow.includes('workflow_dispatch'),'the relay tour can be triggered manually');
 assert.ok(workflow.includes('node scripts/relay-afir.mjs'),'the tour runs the relay script');
 assert.ok(workflow.includes('AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}'),'the token comes from the GitHub secret');
@@ -30,7 +30,7 @@ assert.ok(!/continue-on-error/i.test(workflow),'the tour never downgrades failur
 assert.ok(!/git (push|commit)/.test(workflow),'the tour writes no git state — the D1 store is the store');
 const groups=JSON.parse(await readFile(join(root,'lib/live','refresh-groups.json'),'utf8'));
 const members=groups.groups.flatMap(group=>group.members);
-assert.deepEqual(groups.ghRelayed.map(entry=>entry.family),['feed.agricultura','flights.bia'],'AFIR and the BIA airport board are classified ghRelayed — both sit behind relay tours, each with its own runner');
+assert.deepEqual(groups.ghRelayed.map(entry=>entry.family),['feed.agricultura','transport.flights','flights.bia'],'AFIR, the Romanian airspace flight states and the BIA airport board are classified ghRelayed — each sits behind its own relay tour with its own runner');
 assert.ok(!members.includes('feed.agricultura'),'the relayed family left the cron sweep: the relay is the single writer of its freshness');
 assert.equal(groups.groups.find(group=>group.name==='registers').estimatedSubrequests,30,'the registers estimate dropped with the relayed member');
 const routeHarness=await readFile(join(root,'scripts','verify-afir-relay.mjs'),'utf8');

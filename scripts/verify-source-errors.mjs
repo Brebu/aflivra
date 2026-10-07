@@ -83,13 +83,18 @@ const tranzyVehiclesBody=()=>[
 // românesc, rând „ground” cu alt_baro textual, scurgere dincolo de chenar și un rând
 // fără adresă mod S; now vine în milisecunde.
 const adsbFlight=(hex,flight,r,t,lat,lon,extra={})=>({hex,type:'adsb_icao',flight,r,t,lat,lon,alt_baro:30500,gs:448.1,baro_rate:1152,track:270.5,true_heading:268.2,squawk:'1000',emergency:'none',seen_pos:0.5,...extra});
-const adsbBody=()=>{const now=Date.now();
- return Response.json({now,ctime:now,msg:'No error',total:5,ac:[
+// Textul brut al unui panou de acoperire — exact ce predă tura de relaie rutei
+// /api/seed/flights: cele patru panouri identice reunite de rută prin fuziunea
+// încărcătorului rămân un singur set de aeronave, nu patru.
+const adsbBoardObject=()=>{const now=Date.now();
+ return {now,ctime:now,msg:'No error',total:5,ac:[
   adsbFlight('481f55','W6XYZ  ','HA-LMN','A320',44.5,26.1),
   adsbFlight('89408c','GFA007','A9C-FB','B789',46.68,20.5,{alt_baro:39975,gs:501.5,track:297.9,true_heading:294.1,baro_rate:-64,squawk:'5261'}),
   adsbFlight('4a1b2c','     ','YR-ABB','C172',44.42,26.05,{alt_baro:'ground',gs:5,track:null,true_heading:null,baro_rate:null,squawk:'7000'}),
   adsbFlight('3c6b2f','DLH440','D-ABYT','A21N',48.85,2.35),
-  {type:'adsb_icao',flight:'NOHEX',lat:44.5,lon:26.1}]})};
+  {type:'adsb_icao',flight:'NOHEX',lat:44.5,lon:26.1}]}};
+const adsbBody=()=>Response.json(adsbBoardObject());
+const adsbBoardText=()=>JSON.stringify(adsbBoardObject());
 // Panoul BIA oglindește structura înregistrată în sesiunea de cercetare (obiectul unei
 // sosiri reale citit în browser; forma exactă se confirmă la prima tură de relaie):
 // număr de zbor, operator cu denumirile RO/EN, sens, origine/destinație, ore publicate,
@@ -165,7 +170,11 @@ const families=[
  // (fără nicio interogare), 403 cu o singură încercare, operator nerezolvat, filtre
  // invalide — matricea generală nu le poate exprima prin scenariile ei fixe.
   {family:'transport/tranzy',routeName:'tranzy-live',kind:'tranzy',host:'api.tranzy.ai',allowed:['api.tranzy.ai'],scenarios:['nokey','http403','http500','malformed','unmatched','invalid','success'],route:'/api/tranzy-live?geoScope=context&locality=Cluj-Napoca&county=Cluj&lat=46.7712&lon=23.6236',scenarioRoutes:{unmatched:'/api/tranzy-live?geoScope=context&locality=Z%C4%83rne%C8%99ti&county=Bra%C8%99ov',invalid:'/api/tranzy-live?q='+('x'.repeat(201))},key:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency()).key,loader:()=>realtimeModule.tranzyVehiclesLoader(tranzyClujAgency())},
-  {family:'flights/adsb',routeName:'flights',route:'/api/flights',host:'api.adsb.lol',allowed:['api.adsb.lol'],scenarios:['http500','http429','timeout','malformed','invalid','success'],scenarioRoutes:{invalid:'/api/flights?q='+('x'.repeat(201))},key:()=>flightsModule.adsbFlightsLoader.key,loader:()=>flightsModule.adsbFlightsLoader},
+  {family:'flights/adsb',routeName:'flights',kind:'adsb',route:'/api/flights',host:'api.adsb.lol',allowed:['api.adsb.lol'],scenarios:['http500','http429','timeout','malformed','invalid','success','relay-noauth','relay-partial','relay-corrupt','relay-publish'],scenarioRoutes:{invalid:'/api/flights?q='+('x'.repeat(201))},key:()=>flightsModule.adsbFlightsLoader.key,loader:()=>flightsModule.adsbFlightsLoader},
+  // Stările aeronavelor sunt în plus reluate de intermediar (clasa 429/503 a egress-ului
+  // Worker, dovedită de sonde): celulele proprii numără depunerea fără token, livrul
+  // scurt sau corupt respins fără publicare, și predarea celor patru panouri de
+  // acoperire, după care cititorul servește fără să reinterogheze sursa.
   // Panoul BIA este preluat de relaie, deci celulele lui proprii, după sonda de
   // referință: fără copie predată (testul de browser respins onest), poarta de acces
   // și aeroportul respinse, panoul corupt respins, panoul fără curse respins, filtre
@@ -225,7 +234,7 @@ if(live){
   if(ourBug){console.error('Verdict our-bug: sursa răspunde corect direct sau workerul nostru publicat eșuează, dar ruta raportează eroarea sursei. Diferențele de mai sus sunt bug-ul nostru.');process.exitCode=1}
  }
 }else{
-   for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts'],['tranzy-live','app/api/tranzy-live/route.ts'],['flights','app/api/flights/route.ts'],['flight-board','app/api/flight-board/route.ts'],['seed-bia','app/api/seed/bia/route.ts'],['anl','app/api/anl/route.ts'],['ancpi','app/api/ancpi/route.ts']]){
+    for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts'],['tranzy-live','app/api/tranzy-live/route.ts'],['flights','app/api/flights/route.ts'],['flight-board','app/api/flight-board/route.ts'],['seed-bia','app/api/seed/bia/route.ts'],['seed-flights','app/api/seed/flights/route.ts'],['anl','app/api/anl/route.ts'],['ancpi','app/api/ancpi/route.ts']]){
   let source=await readFile(join(root,file),'utf8');
   source=source
    .replace("import network from '@/public/transit/network.json';",'const network='+await readFile(join(root,'public/transit/network.json'),'utf8')+';')
@@ -239,7 +248,7 @@ if(live){
   output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
   await writeFile(join(temp,'route-'+name+'.mjs'),output);
  }
-  const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains','tranzy-live','flights','flight-board','seed-bia','anl','ancpi'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
+   const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains','tranzy-live','flights','flight-board','seed-bia','seed-flights','anl','ancpi'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
  const {zipSync,strToU8}=require('fflate');
  const gtfsBytes=()=>{const rows=(head,list)=>head+'\n'+list.join('\n')+'\n';const stops=Array.from({length:12},(_,i)=>'S'+i+',Stația de verificare '+i+',Descriere publică,'+(44.40+i/100)+','+(26.10+i/100)),routeRows=Array.from({length:12},(_,i)=>'R'+i+',A0,'+(100+i)+',Linia de verificare '+i+','+(i%2?'3':'0'));
   return zipSync({'agency.txt':strToU8(rows('agency_id,agency_name,agency_url',['A0,Operatorul de test,https://example.test'])),'stops.txt':strToU8(rows('stop_id,stop_name,stop_desc,stop_lat,stop_lon',stops)),'routes.txt':strToU8(rows('route_id,agency_id,route_short_name,route_long_name,route_type',routeRows)),'calendar.txt':strToU8(rows('service_id,monday,tuesday,start_date,end_date',['A0,1,1,20260101,20261231']))})};
@@ -314,9 +323,9 @@ if(live){
   // cheie (celulele „nokey” și „invalid”) nicio adresă a sursei nu se interoghează.
   tranzyCalls=family.kind==='tranzy'?[]:null;
   if(family.kind==='tranzy'){if(scenario==='nokey'||scenario==='invalid')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;else globalThis.__aflivraTestEnv.TRANZY_API_KEY='stub-key-de-verificare'}
-  // Tokenul rutei de depunere BIA se comută la fel: fără el (celula „relay-noauth”)
-  // poarta se închide înainte de orice stocare, cu el restul celulelor depun onest.
-  if(family.kind==='bia'){if(scenario==='relay-noauth')delete globalThis.__aflivraTestEnv.REFRESH_TOKEN;else globalThis.__aflivraTestEnv.REFRESH_TOKEN='token-relay-de-verificare'}
+   // Tokenul rutelor de depunere se comută la fel: fără el (celulele „relay-noauth”)
+   // poarta se închide înainte de orice stocare, cu el restul celulelor depun onest.
+   if(family.kind==='bia'||family.kind==='adsb'){if(scenario==='relay-noauth')delete globalThis.__aflivraTestEnv.REFRESH_TOKEN;else globalThis.__aflivraTestEnv.REFRESH_TOKEN='token-relay-de-verificare'}
   globalThis.fetch=async(url,init={})=>{
    init?.signal?.throwIfAborted?.();
    const href=String(url),host=href.match(/^https?:\/\/([^/?#]+)/)?.[1]||'';
@@ -335,13 +344,18 @@ if(live){
      if(scenario==='malformed')return new Response('<html>răspuns nevalid</html>',{headers:{'content-type':'text/html'}});
      return Response.json(tranzyVehiclesBody())}
     return new Response(null,{status:404})}
-    // Celulele familiei BIA sunt conștiente de clasa relaiei: panoul zilei se predă
-    // prin ruta de depunere, iar sursa respinge orice server cu testul de browser —
-    // exact nota pe care încărcătorul o raportează onest, fără 403 crud.
-    if(family.kind==='bia'){
-     if(scenario==='http500')return new Response(null,{status:500});
-     if(scenario!=='invalid')return biaChallenge();
-     return new Response(biaBoardBody(),{headers:{'content-type':'application/json'}})}
+     // Celulele familiei BIA sunt conștiente de clasa relaiei: panoul zilei se predă
+     // prin ruta de depunere, iar sursa respinge orice server cu testul de browser —
+     // exact nota pe care încărcătorul o raportează onest, fără 403 crud.
+     if(family.kind==='bia'){
+      if(scenario==='http500')return new Response(null,{status:500});
+      if(scenario!=='invalid')return biaChallenge();
+      return new Response(biaBoardBody(),{headers:{'content-type':'application/json'}})}
+     // Celulele de relaie ale avioanelor întâlnesc clasa ei: rețeaua serverului (Worker)
+     // este respinsă de adsb.lol cu 429 — tura externă de intermediar predă cele patru
+     // panouri de acoperire prin ruta de depunere, iar după predare citirea servește
+     // copia fără să reinterogheze sursa.
+     if(family.kind==='adsb'&&scenario.startsWith('relay-'))return new Response(null,{status:429,headers:{'retry-after':'120'}});
     // Căutarea națională a spectacolelor reunește calendarele: gazda proprie a familiei
     // poartă avaria celulei, iar celălalt calendar al registrului servește în continuare
     // prin propriul fixture — reuniunea degradează onest, nu dispare.
@@ -352,7 +366,7 @@ if(live){
    return rssFixture(host);
    };
    globalThis.__aflivraAssetFault=family.kind==='trains'&&scenario==='malformed'?'trains':null;
-    try{return await run(counts,unexpected)}finally{if(family.kind==='tranzy')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;if(family.kind==='bia')globalThis.__aflivraTestEnv.REFRESH_TOKEN='token-relay-de-verificare';globalThis.fetch=original;globalThis.__aflivraAssetFault=null}};
+     try{return await run(counts,unexpected)}finally{if(family.kind==='tranzy')delete globalThis.__aflivraTestEnv.TRANZY_API_KEY;if(family.kind==='bia'||family.kind==='adsb')globalThis.__aflivraTestEnv.REFRESH_TOKEN='token-relay-de-verificare';globalThis.fetch=original;globalThis.__aflivraAssetFault=null}};
   const requestFor=(family,scenario)=>{
    const route=(family.scenarioRoutes||{})[scenario]||family.route;
    if(family.method==='POST'){const body=JSON.stringify(family.body);return new Request('https://verify.test'+route,{method:'POST',body,headers:{'content-type':'application/json','content-length':String(Buffer.byteLength(body))}})}
@@ -626,6 +640,8 @@ if(live){
     assert.equal(tranzyCalls.length,0,label+': sursa nu este interogată pe filtre invalide')}}
   if(family.family==='flights/adsb'){
    const attempts=hostCount('api.adsb.lol');
+   const relayPost=(payload,headers={})=>routes['seed-flights'].POST(new Request('https://verify.test/api/seed/flights',{method:'POST',headers:{'content-type':'application/json',...headers},body:JSON.stringify(payload)}));
+   const flightsState=async()=>(await routes['flights'].GET(new Request('https://verify.test/api/flights'))).json();
    if(scenario==='invalid'){
     assert.equal(payload.error,'Filtre invalide.',label+': plicul de eroare al filtrelor');
     assert.equal(attempts,0,label+': sursa nu este interogată pe filtre invalide')}
@@ -634,6 +650,7 @@ if(live){
     assert.equal(payload.data.items.length,3,label+': doar aeronavele din chenarul românesc sunt servite');
     assert.equal(payload.data.entityCount,4,label+': cele patru cereri de acoperire se reunesc fără dubluri');
     assert.equal(payload.data.isLive,true,label+': fluxul marcat live');
+    assert.equal(payload.data.stalenessMinutes,undefined,label+': fluxul viu nu poartă vechime');
     const airborne=payload.data.items.find(x=>x.hex==='481f55');
     assert.equal(airborne.callsign,'W6XYZ',label+': indicativul se curăță de spațiile sursei');
     assert.equal(airborne.registration,'HA-LMN',label+': imatricularea se păstrează');
@@ -645,17 +662,67 @@ if(live){
     assert.equal(ground.altitudeFt,null,label+': fără altitudine inventată la sol');
     assert.equal(ground.callsign,null,label+': fără indicativ inventat');
     assert.equal(attempts,4,label+': o singură trecere prin cele patru cereri de acoperire')}
+   else if(scenario==='http429'){
+    // Clasa egress-ului respins, tradusă onest în nota de intermediar — codul sursei
+    // rămâne vizibil, iar copia se reîmprospătează prin tura externă.
+    assert.equal(payload.status,'unavailable',label+': starea documentată');
+    assert.equal(payload.data,null,label+': fără aeronave inventate');
+    assert.match(e,/a respins rețeaua serverului/,label+': nota onestă a clasei de intermediar');
+    assert.match(e,/HTTP 429/,label+': codul sursei rămâne în nota de intermediar');
+    assert.match(e,/intermediar extern/,label+': nota numește tura de intermediar extern');
+    assert.ok(Date.parse(payload.nextAttemptAt)>Date.now(),label+': pauza de reîncercare a sursei este programată');
+    assert.equal(attempts,4,label+': cele patru cereri de acoperire, o singură trecere')}
    else if(scenario==='warm-http500'){
     assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
     assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
     assert.equal(payload.data.items.length,3,label+': pozițiile din copia validă se păstrează');
     assert.equal(payload.data.isLive,false,label+': copia veche nu se mai marchează live');
+    assert.ok(payload.data.stalenessMinutes===0||payload.data.stalenessMinutes===1,label+': vechimea onestă a copiei, în minute de la ultima preluare validă');
     assert.equal(attempts,12,label+': cele trei încercări pe fiecare dintre cele patru cereri')}
+   else if(scenario==='relay-noauth'){
+    assert.equal(payload.status,'unavailable',label+': citirea de fond rămâne onest indisponibilă');
+    assert.match(e,/a respins rețeaua serverului/,label+': nota clasei se servește onest');
+    const denied=await relayPost({boards:[adsbBoardText(),adsbBoardText(),adsbBoardText(),adsbBoardText()]});
+    assert.equal(denied.status,401,label+': fără token Bearer depunerea se respinge cu 401');
+    assert.deepEqual(await denied.json(),{error:'Acces interzis.'},label+': mesajul 401 este generic');
+    const after=await flightsState();
+    assert.equal(after.status,'unavailable',label+': depunerea respinsă nu a publicat nimic');
+    assert.equal(attempts,4,label+': sursa rămâne interogată doar de citirea proprie a celulei')}
+   else if(scenario==='relay-partial'){
+    const rejected=await relayPost({boards:[adsbBoardText(),adsbBoardText()]},{authorization:'Bearer token-relay-de-verificare'});
+    assert.equal(rejected.status,400,label+': livrul scurt de acoperire se respinge cu 400');
+    assert.match(String((await rejected.json()).error),/cereri fixe de acoperire națională/,label+': fără cadran tăcut — livrul incomplet nu se publică ca spațiu aerian întreg');
+    const after=await flightsState();
+    assert.equal(after.status,'unavailable',label+': livrul respins nu a publicat nimic');
+    assert.equal(attempts,4,label+': doar citirea proprie a celulei a interogat sursa')}
+   else if(scenario==='relay-corrupt'){
+    const rejected=await relayPost({boards:[adsbBoardText(),adsbBoardText(),adsbBoardText(),'<html>flux nevalid</html>']},{authorization:'Bearer token-relay-de-verificare'});
+    assert.equal(rejected.status,400,label+': panoul de acoperire care nu se poate decoda se respinge cu 400');
+    assert.match(String((await rejected.json()).error),/nu poate fi decodat integral/,label+': mesajul de structură în română');
+    const after=await flightsState();
+    assert.equal(after.status,'unavailable',label+': panoul corupt nu a publicat nimic');
+    assert.equal(attempts,4,label+': doar citirea proprie a celulei a interogat sursa')}
+   else if(scenario==='relay-publish'){
+    assert.equal(payload.status,'unavailable',label+': înainte de predare citirea e onest indisponibilă');
+    const delivered=await relayPost({boards:[adsbBoardText(),adsbBoardText(),adsbBoardText(),adsbBoardText()]},{authorization:'Bearer token-relay-de-verificare'});
+    assert.equal(delivered.status,200,label+': predarea celor patru panouri de acoperire rămâne 200');
+    const confirmation=await delivered.json();
+    assert.equal(confirmation.result,'ok',label+': rezultatul predării');
+    assert.equal(confirmation.aircraft,3,label+': aeronavele din chenar, reunite fără dubluri');
+    assert.equal(confirmation.hexes,4,label+': adresele Mode-S distincte, reunite ca pozițiile');
+    const served=await flightsState();
+    assert.ok(['fresh','cached'].includes(served.status),label+': după predare copia servește — primit: '+served.status);
+    assert.equal(served.data.items.length,3,label+': pozițiile servite integral');
+    assert.equal(served.data.entityCount,4,label+': reunirea rămâne un singur set de observate, nu patru');
+    assert.equal(served.data.isLive,true,label+': copia proaspăt predată servește poziții vii');
+    const airborne=served.data.items.find(x=>x.hex==='481f55');
+    assert.equal(airborne.callsign,'W6XYZ',label+': indicativul servit se curăță de spațiile sursei');
+    assert.equal(airborne.altitudeFt,30500,label+': altitudinea barometrică servită');
+    assert.equal(attempts,4,label+': după predare citirea nu reinteroghează sursa respinsă')}
    else{
     assert.equal(payload.status,'unavailable',label+': fără copie, starea documentată');
     assert.equal(payload.data,null,label+': fără aeronave inventate');
     if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
-    if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
     if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
     if(scenario==='malformed')assert.match(e,/nu poate fi decodat integral/,label+': fluxul nevalid respins în română');
     assert.equal(attempts,scenario==='http500'?12:4,label+': numărul documentat de accesări')}}
@@ -850,7 +917,7 @@ if(live){
   sqlite.prepare('UPDATE source_cache SET expires_at=0 WHERE key=?').run(family.key());
   await runCell(family,'warm-http500');
  }
-  console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
+   console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri și, suplimentată de intermediar, își parcurge celulele proprii — egress-ul respins (HTTP 429) se traduce onest în nota de tură de intermediar cu codul sursei păstrat, depunerea fără token, livrul scurt și panoul corupt se resping fără să publice nimic, iar după predarea celor patru panouri citirea servește pozițiile fără să reinterogheze sursa —, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
  console.log(JSON.stringify({result:'ok',mode:'mock',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
  }
 escapes.length=0;process.off('unhandledRejection',recordEscape);process.off('uncaughtExceptionMonitor',recordEscape);}

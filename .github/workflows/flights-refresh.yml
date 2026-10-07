@@ -1,20 +1,20 @@
-name: afir-refresh
+name: flights-refresh
 
 on:
   schedule:
-    - cron: "0 3 * * 1"
+    - cron: "0 5 * * 3"
   workflow_dispatch: {}
 
 permissions:
   contents: read
 
 concurrency:
-  group: afir-refresh
+  group: flights-refresh
   cancel-in-progress: true
 
 jobs:
   relay:
-    name: Relay AFIR feed and articles to the seed store
+    name: Relay the Romanian airspace flight states to the seed store
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -24,17 +24,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Relay (exit 2 = afir.ro itself errored this tour, recorded as a warning; our own infrastructure failures stay red)
+      - name: Relay (exit 2 = adsb.lol itself errored this tour, recorded as a warning; our own infrastructure failures stay red)
         env:
           AFLIVRA_SEED_BASE: ${{ vars.AFLIVRA_SEED_BASE }}
           AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}
         run: |
           set +e
-          node scripts/relay-afir.mjs
+          node scripts/relay-flights.mjs
           code=$?
           set -e
           if [ "$code" -eq 2 ]; then
-            echo "::warning::afir.ro a răspuns cu eroare în această tură (relaia nu a livrat articole) — reîmprospătarea reia la următoarea tură programată."
+            echo "::warning::adsb.lol a răspuns cu eroare sau ruta a respins forma fluxului în această tură (relaia nu a livrat pozițiile tocmai atunci) — reîmprospătarea reia la următoarea tură programată, săptămânal."
             exit 0
           fi
           exit "$code"

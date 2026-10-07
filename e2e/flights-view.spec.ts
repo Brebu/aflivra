@@ -92,6 +92,8 @@ test.describe('Flights over the Romanian airspace', () => {
 
     // countText grammar on the live aircraft count: 3 → „3 avioane în spațiul aerian românesc”.
     await expect(workspace.getByText(/^3 avioane în spațiul aerian românesc/)).toBeVisible();
+    // The genuinely live feed keeps the live claim: „flux publicat acum”.
+    await expect(workspace.getByText(/flux publicat acum/)).toBeVisible();
 
     // Each airborne row names the callsign, the type · registration pair, and the
     // altitude (ft → m) and ground speed (kt → km/h) in the published conversions.
@@ -179,6 +181,162 @@ test.describe('Flights over the Romanian airspace', () => {
     await expect(workspace).toBeVisible();
     await expect(workspace.getByRole('heading', {level: 2, name: 'Avioane în spațiul românesc'})).toBeVisible();
     await expect(page.locator('section.transit-workspace')).toHaveCount(0);
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('the relayed stale copy serves every aircraft honestly labeled „poziții de acum ~12 minute”', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    // The exact response shape /api/flights serves between relay tours: the worker
+    // egress is rejected by adsb.lol (HTTP 429, the relay class), the copy relayed
+    // by the external tour serves with isLive:false + stalenessMinutes from
+    // lastSuccessAt — never with the live-60s claim.
+    const minutes = 12;
+    const lastSuccessAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    const observedAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    await page.route('**/api/flights*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({
+        key: 'flights:adsb', name: 'adsb.lol · ADS-B comunitar',
+        url: 'https://api.adsb.lol/v2/', adapterVersion: 'flights.adsb.ro.v1',
+        status: 'stale', publishedAt: observedAt, lastSuccessAt, lastAttemptAt: new Date().toISOString(),
+        nextAttemptAt: null,
+        error: 'Fluxul public adsb.lol a respins rețeaua serverului (HTTP 429). Pozițiile se reîmprospătează prin tura de intermediar extern, săptămânal; încearcă din nou peste puțin timp.',
+        ttlSeconds: 60,
+        data: {kind: 'flights', observedAt, items: adsbItems(), page: 0, pages: 1, total: 3, entityCount: 3,
+          isLive: false, stalenessMinutes: minutes},
+      })});
+    });
+    await page.route('**/api/flight-board*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(biaState())});
+    });
+    await openFlightsTab(page);
+
+    const workspace = page.locator('section.flights-workspace');
+    await expect(workspace).toBeVisible();
+    // The stale copy still counts every aircraft — the count is honest, the age is labeled.
+    await expect(workspace.getByText(/^3 avioane în spațiul aerian românesc/)).toBeVisible();
+    // The snapshot-age label replaces the live claim: minutes under an hour.
+    await expect(workspace.getByText(/poziții de acum ~12 minute/)).toBeVisible();
+    await expect(workspace.getByText(/flux publicat acum/)).toHaveCount(0);
+    // The relayed positions still render: records list…
+    await expect(workspace.locator('.flight-record')).toHaveCount(3);
+    // …and the map, honestly aged — the two tracked arrows keep their rotation.
+    await expect(workspace.locator('.public-map')).toBeVisible({timeout: 60_000});
+    await expect(workspace.locator('.public-map [role="img"]')).toHaveCount(2);
+    // The weekly relay cadence is disclosed inside the snapshot-age label itself — the
+    // honest weekly word beside the age, never a numeric tour promise.
+    await expect(workspace.getByText(/poziții de acum ~12 minute.*intermediar extern.*săptămânal/)).toBeVisible();
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('the hours-old relayed copy is labeled „poziții de acum ~3 ore”, never in raw minutes', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    // Between weekly relay tours a copy can sit for hours: minutes from lastSuccessAt
+    // must readable-scale to hours — „~180 minute” would be honest arithmetic but a
+    // dishonest label for a human reading the map.
+    const minutes = 180;
+    const lastSuccessAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    const observedAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    await page.route('**/api/flights*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({
+        key: 'flights:adsb', name: 'adsb.lol · ADS-B comunitar',
+        url: 'https://api.adsb.lol/v2/', adapterVersion: 'flights.adsb.ro.v1',
+        status: 'stale', publishedAt: observedAt, lastSuccessAt, lastAttemptAt: new Date().toISOString(),
+        nextAttemptAt: null,
+        error: 'Fluxul public adsb.lol a respins rețeaua serverului (HTTP 429). Pozițiile se reîmprospătează prin tura de intermediar extern, săptămânal; încearcă din nou peste puțin timp.',
+        ttlSeconds: 60,
+        data: {kind: 'flights', observedAt, items: adsbItems(), page: 0, pages: 1, total: 3, entityCount: 3,
+          isLive: false, stalenessMinutes: minutes},
+      })});
+    });
+    await page.route('**/api/flight-board*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(biaState())});
+    });
+    await openFlightsTab(page);
+
+    const workspace = page.locator('section.flights-workspace');
+    await expect(workspace).toBeVisible();
+    await expect(workspace.getByText(/^3 avioane în spațiul aerian românesc/)).toBeVisible();
+    // The age label scales to hours…
+    await expect(workspace.getByText(/poziții de acum ~3 ore/)).toBeVisible();
+    // …never raw minutes at hours-scale age…
+    await expect(workspace.getByText(/180 minute/)).toHaveCount(0);
+    await expect(workspace.getByText(/flux publicat acum/)).toHaveCount(0);
+    // …and the weekly relay cadence is disclosed inside the same label.
+    await expect(workspace.getByText(/poziții de acum ~3 ore.*intermediar extern.*săptămânal/)).toBeVisible();
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('the six-day-old relayed copy stays honest: „poziții de acum ~6 zile” and the map pins carry the snapshot moment', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    // The weekly relay tour's worst case: a copy relayed almost a full week ago (or
+    // older, if a tour failed). The label must scale to days, and every map position
+    // must stay reachable and labeled as the snapshot it is.
+    const minutes = 6 * 24 * 60;
+    const lastSuccessAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    const observedAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    await page.route('**/api/flights*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({
+        key: 'flights:adsb', name: 'adsb.lol · ADS-B comunitar',
+        url: 'https://api.adsb.lol/v2/', adapterVersion: 'flights.adsb.ro.v1',
+        status: 'stale', publishedAt: observedAt, lastSuccessAt, lastAttemptAt: new Date().toISOString(),
+        nextAttemptAt: null,
+        error: 'Fluxul public adsb.lol a respins rețeaua serverului (HTTP 429). Pozițiile se reîmprospătează prin tura de intermediar extern, săptămânal; încearcă din nou peste puțin timp.',
+        ttlSeconds: 60,
+        data: {kind: 'flights', observedAt, items: adsbItems(), page: 0, pages: 1, total: 3, entityCount: 3,
+          isLive: false, stalenessMinutes: minutes},
+      })});
+    });
+    await page.route('**/api/flight-board*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(biaState())});
+    });
+    await openFlightsTab(page);
+
+    const workspace = page.locator('section.flights-workspace');
+    await expect(workspace).toBeVisible();
+    await expect(workspace.getByText(/^3 avioane în spațiul aerian românesc/)).toBeVisible();
+    // Days-scale age, labeled in days…
+    await expect(workspace.getByText(/poziții de acum ~6 zile/)).toBeVisible();
+    await expect(workspace.getByText(/flux publicat acum/)).toHaveCount(0);
+    // …with the weekly relay cadence disclosed inside the same label.
+    await expect(workspace.getByText(/poziții de acum ~6 zile.*intermediar extern.*săptămânal/)).toBeVisible();
+    // The stale positions still render as records and map arrows…
+    await expect(workspace.locator('.flight-record')).toHaveCount(3);
+    await expect(workspace.locator('.public-map')).toBeVisible({timeout: 60_000});
+    await expect(workspace.locator('.public-map [role="img"]')).toHaveCount(2);
+    // …and each map position names its snapshot moment when opened.
+    await workspace.locator('.public-map [role="img"]').first().click();
+    await expect(page.locator('.leaflet-popup')).toContainText('poziția observată la');
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('when the worker egress is rejected the airspace degrades honestly and invents no aircraft', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.route('**/api/flights*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({
+        key: 'flights:adsb', name: 'adsb.lol · ADS-B comunitar',
+        url: 'https://api.adsb.lol/v2/', adapterVersion: 'flights.adsb.ro.v1',
+        status: 'unavailable', publishedAt: null, lastSuccessAt: null, lastAttemptAt: new Date().toISOString(),
+        nextAttemptAt: null, data: null,
+        error: 'Fluxul public adsb.lol a respins rețeaua serverului (HTTP 429). Pozițiile se reîmprospătează prin tura de intermediar extern, săptămânal; încearcă din nou peste puțin timp.',
+        ttlSeconds: 60,
+      })});
+    });
+    await page.route('**/api/flight-board*', async route => {
+      await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(biaState())});
+    });
+    await openFlightsTab(page);
+
+    const workspace = page.locator('section.flights-workspace');
+    await expect(workspace).toBeVisible();
+    await expect(workspace.locator('.live-error', {hasText: /a respins rețeaua serverului/})).toBeVisible();
+    await expect(workspace.locator('.flight-record')).toHaveCount(0);
+    await expect(workspace.locator('.public-map')).toHaveCount(0);
+    // The airport board stays healthy beside the degraded airspace.
+    await expect(page.locator('.airport-board').getByText(/^2 sosiri · 1 plecare/)).toBeVisible();
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
