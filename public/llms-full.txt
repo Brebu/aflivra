@@ -1,0 +1,80 @@
+# Aflivra — ghidul extins pentru agenți AI
+
+> Versiunea extinsă a /llms.txt. Agregator românesc de date publice oficiale: fiecare domeniu de mai jos este real, randat din registrele live (public/catalog/sources.json, public/data/sources.json). Limba conținutului: română. Aplicația: https://aflivra.brebu.workers.dev/
+
+## Cum citești aplicația
+
+- Router: single-page app cu hash (#view=…&id=…). Paginile statice crawlabile sunt /, /catalog, /confidentialitate, /termeni (vezi https://aflivra.brebu.workers.dev/sitemap.xml).
+- Fiecare element de date arată: sursa, licența, data publicării sursei și data ultimei verificări. Sursa oficială rămâne adevărul de referință; aplicația nu este consultanță juridică, fiscală sau de alt fel.
+- Când o sursă nu răspunde, se servește ultima copie validă, marcată onest ca atare.
+- Actualizare: crons pe Worker, zilnic pentru majoritatea surselor (registrele de bază de mai multe ori pe zi); fluxurile blocate pentru rețeaua Cloudflare Workers (AFIR, panoul aeroporturilor București, stările aeronavelor) se aduc săptămânal prin ture de relaie exterioare.
+
+## Domeniile (16 domenii, 51 de secțiuni de conținut)
+
+### Orașul tău (local)
+Informații pe localitate: populație și statistici locale, buget și servicii publice, harta locurilor din apropiere. Surse: INS TEMPO Online, registrele locale derivate din data.gov.ro, OpenStreetMap/Geofabrik pentru localități.
+
+### Vreme și prognoză (vreme)
+Observații de la stațiile meteorologice ANM, avertizări meteoactive, prognoză numerică pe localități, radare. Surse: ANM (parametri măsurați, alerte, prognoză numerică, radare), Open-Meteo pentru prognoză locală la coordonate.
+
+### Bani & economie (bani)
+Cursul de referință BNR (toate valutele, cu istoric), convertor valutar, evoluții. Sursă: BNR curs de referință XML.
+
+### Firme, pe înțeles (firme)
+Firme după CUI: date de identificare ANAF, TVA inactivi, indicatori din bilanțuri (cifră de afaceri, profit, datorii, angajați, pe ani), registrul RO e-Factura, istoricul modificărilor. Surse: ANAF (identificare, TVA, bilanțuri, e-Factura), Registrul Comerțului (firme înregistrate), nomenclatoarele CAEN/obiect de activitate.
+
+### Natură și mediu (mediu)
+Calitatea aerului (RNMCA), date de evaluare primare validate, seisme (INFP), avertizări de mediu. Surse: RNMCA Calitatea Aerului API, INFP catalog seismic public.
+
+### În mișcare (transport)
+Transport public: orare GTFS, poziții în timp real ale vehiculelor (TPBI București-Ilfov, Tranzy pentru operatorii locali), mersul trenurilor celor nouă operatori, InfoTrafic Poliția Română, stările aeronavelor în timp real (adsb.lol, cu acoperirea națională reunită) și panoul aeroporturilor București. Fluxurile în timp real au TTL de 30 de secunde; stările aeronavelor și panoul aeroporturilor se servesc din copia de relaie săptămânală, cu eticheta de vechime.
+
+### Sănătate aproape (sanatate)
+Lista furnizorilor de servicii medicale, date statistice CNAS, nomenclatorul de medicamente ANMDMR. Surse: CNAS (furnizori, statistici), ANMDMR Nomenclator medicamente.
+
+### Educație & viitor (educatie)
+Rețeaua școlară, rezultatele la Evaluarea Națională și la Baccalaureat, registrele ARACIP. Surse: ministerul educației prin data.gov.ro (rețea școlară 2024-2025, Evaluarea Națională 2026, Bacalaureat 2026), ARACIP.
+
+### Cultură și turism (cultura)
+Muzeele din România, repertoriul arheologic național, calendarele publice ale instituțiilor de spectacole, cinematografele și programele lor, locuri de vizitat cu fotografii reale atestate (inventarul național: 181.537 de înregistrări). Surse: Ministerul Culturii (muzee, repertoriu arheologic), calendare publice (Odeon etc.), Cinema City, Wikidata/Wikimedia Commons pentru patrimoniu vizual.
+
+### Muncă & oportunități (munca)
+Posturi publice vacante și locuri de muncă ANOFM. Surse: Posturi.gov.ro, ANOFM locuri vacante.
+
+### Lege & administrație (justitie)
+Dosare după număr din portalul instanțelor (cu istoricul modificărilor și documente), jurisprudență ReJust, contestații CNSC, acte normative cu cititor și text integral (Portal Legislativ, SOAP), tablourile naționale ale avocaților, notarilor, experților judiciari, tehnici și traducătorilor, ședințele instanțelor (246 de instanțe). Surse: Ministerul Justiției (portal instanțe, tablouri, ReJust), Portalul Legislativ, CNSC.
+
+### Energie & consum (energie)
+Comparatorul de oferte ANRE POSF, situația Sistemului Energetic Național (Transelectrica). Surse: ANRE POSF, Transelectrica SEN.
+
+### Pământ & agricultură (agricultura)
+Registrul agricultorilor ANAF, parcelele de referință APIA (blocuri fizice 2025), categoriile de folosință ale terenurilor (APIA LPIS 2025), dinamica ipotecilor imobilelor (ANCPI). Surse: ANAF, APIA, ANCPI.
+
+### Filme și cinematografe (filme)
+Cinemateca de filme românești (Wikidata), programele cinematografelor din România (1.079 de proiecții), detaliile filmelor (TMDB). Surse: Wikidata, Cinema City România, TMDB.
+
+### Povești și lectură (povesti)
+Corpusul de povestiri și texte din Wikisource în limba română, cu dovada de text pe fiecare fișă. Sursă: Wikisource română.
+
+### Știri & actualitate (stiri)
+Fluxurile ministerelor și ale agențiilor: AGERPRES, ministerul agriculturiei (AFIR date deschise, aduse prin relaie săptămânală), sănătate, educație, justiție, energie, transport. Surse: AGERPRES, afir.ro, fluxurile ministerelor.
+
+## Urmăriri și notificări
+
+Poți urmări (fără cont): un dosar de justiție, o firmă după CUI, localitatea ta, un act normativ, spectacolele unei instituții, avertizările meteo. Aplicația verifică sursele de mai multe ori pe zi și trimite notificări push criptate end-to-end (RFC 8291) când se schimbă ceva. Politica de retenție și ștergere: https://aflivra.brebu.workers.dev/confidentialitate
+
+## API public de date
+
+Rutele /api/* servesc datele publice cache-uite pentru aplicație (vreme, firme, dosare, transport, catalog etc.); ele nu sunt destinate crawlării (vezi robots.txt). Inventarul complet al seturilor de date cu adresele surselor, licențele și probele de acces: https://aflivra.brebu.workers.dev/catalog
+
+## Licențe și atribuire
+
+Licențele diferă per sursă (CC-per-sursă: de regulă CC BY / CC BY-SA pentru Wikimedia, licențe deschise sau administrative per instituție) și sunt afișate la fiecare element și în registre. Fotografiile păstrează autorul și licența originală; ilustrațiile editoriale generate cu AI sunt etichetate onest ca atare.
+
+## Contact
+
+- Operator: individual, România.
+- Contact: contactretetesecrete@gmail.com
+- Termeni: https://aflivra.brebu.workers.dev/termeni
+- Politica de confidentialitate (fără cookie-uri, fără analytics): https://aflivra.brebu.workers.dev/confidentialitate
+- Sitemap: https://aflivra.brebu.workers.dev/sitemap.xml

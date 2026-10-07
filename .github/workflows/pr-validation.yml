@@ -66,6 +66,7 @@ jobs:
           node scripts/verify-federated-search.mjs
           node scripts/verify-exploration-media.mjs
           node scripts/verify-media-budget.mjs
+          node scripts/verify-indexnow.mjs
           node scripts/verify-legal-records.mjs
           node scripts/verify-expanded.mjs
           node scripts/audit-controls.mjs

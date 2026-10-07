@@ -677,3 +677,67 @@ Files: `e2e/events-venues.spec.ts` only (+ this STATUS append). The watch-flows 
 - **Testing**: RED evidence captured before the edit, GREEN ×2 consecutive on the spec, full suite green with the enumerated exact count.
 
 **Status: DONE** — the Opera Cluj (and Odeon) calendar legs can no longer expire: every fixture event is dated forward from the Bucharest day the run starts on; 146/146 green ×(spec ×2, full suite ×1); map commit intact.
+
+---
+
+## Builder Findings (SEO/share)
+
+Branch `feat/seo-share-discoverability` (fresh, cut at f8d6a72). Goal: shareable on social (share buttons + proper link previews), indexed by search engines + AI crawlers, discoverable. All work inside the worktree; dev-server reuse discipline kept (my own server started/killed by me; one wedged-after-HMR instance was killed by me and playwright booted its own).
+
+### TDD evidence — RED → GREEN → REFACTOR
+
+**Arc 1 — e2e `seo-discoverability.spec.ts` (10 legs)**
+- RED: ran on the pre-change tree — **10/10 failed for the right causes** (robots still `Disallow: /`, no sitemap (404), no llms/og-image, `<meta name="robots">` `noindex, nofollow`, no OG/Twitter/canonical, no JSON-LD, subpages showing the home title only).
+- GREEN: implementation below; **10/10 pass**, incl. the route-tree-driven sitemap gate (spec enumerates every `app/*/page.tsx` — a new page without a sitemap entry fails the suite).
+- REFACTOR: robots parsed into groups in the spec (a directive in the wrong group can't pass by adjacency); TZ-tolerant lastmod ceiling (one day — the committing machine's local date can be hours ahead of the runner's UTC).
+
+**Arc 2 — e2e `share-flows.spec.ts` (4 legs)**
+- RED: **4/4 failed** (no ShareAction anywhere; the place view still had the raw clipboard-copy „Distribuie").
+- GREEN: component + 3 integrations; **4/4 pass** (navigator.share stub asserted title/text/url per surface; fallback sheet with clipboard copy + toast + URL-encoded intents on Facebook/X/WhatsApp/Telegram/LinkedIn).
+- REFACTOR/HARD FIX (the session's one real bug, root-caused by bisect): the first ShareAction **500-ed the whole home SSR**. Root cause: the fallback sheet computed `url()` (`location.origin + …`) **during render** — `location` does not exist in the workerd SSR pass → ReferenceError → error shell. Fix: the URL is read only inside the opened sheet (`{open && <SheetContent>}`) — never during SSR; documented as an SSR rule in the component's header comment.
+
+### The flipped policy (diff summary)
+
+- `public/robots.txt`: `User-agent: * / Disallow: /` → **general group `Allow: /` + `Disallow: /api/`** (the data routes stay out of crawling budgets; nothing else excepted), explicit **Allow sections for 9 AI agents** (GPTBot, ClaudeBot, Claude-User, Claude-SearchBot, PerplexityBot, Google-Extended, CCBot, Applebot-Extended, Bytespider — each with the same `/api/` carve-out), and `Sitemap: https://aflivra.brebu.workers.dev/sitemap.xml`. **Claude-Web** (task's „Claude-Web?") is not a real user agent — replaced with Anthropic's actual three fetchers (ClaudeBot/Claude-User/Claude-SearchBot), noted in robots.txt comments.
+- `app/layout.tsx`: `robots: {index: false, follow: false}` → **index,follow** via `app/seo.ts`'s `pageMetadata` builder (one builder = title, description, canonical (alternates + metadataBase), full Open Graph set — image 1200×630 + alt, locale ro_RO, site_name — and the Twitter `summary_large_image` card).
+- **Routes enumerated from the app tree**: `/`, `/catalog`, `/confidentialitate`, `/termeni` (the `/despre`, `/notes-source`, `/surse` candidates from the context do not exist as routes — verified against `app/*/page.tsx`; the SPA's hash views all live under `/`).
+
+### What was built
+
+| Surface | What |
+|---|---|
+| `app/seo.ts` (new) | shared `pageMetadata` builder + `SITE_URL`, `CONTACT_EMAIL`, `OG_IMAGE_*` constants — the drift-lock anchors the battery reads |
+| `app/{catalog,termeni,confidentialitate}/layout.tsx` (new) | per-page metadata (nested vinext layouts — verified rendering per route; titles/descriptions honest from each page's real content) |
+| `public/sitemap.xml` + `scripts/update-sitemap.mjs` (new) | static, route-tree-derived; **lastmod = git author date of each route's page file** (route-derived, never invented; uncommitted routes fall back to today); regeneration documented in README; e2e gate locks locs === route tree |
+| `public/llms.txt` + `public/llms-full.txt` (new) | RO, llms.txt convention: what it is (agregator de date publice oficiale), surfaces (16 domenii/51 secțiuni — verified against verify-sweep-inventory — hărți live, dosare, urmăriri+notificări, PWA, 181.537 locuri), sources (the two sources.json registries, institutions enumerated), honest refresh semantics (daily worker crons + weekly relays + „ultima copie validă" fallback), API surface summary, contact, CC-per-source licenses, sitemap link; llms-full = the per-domain guide (all 16 domain names locked by the spec) |
+| `app/structured-data.tsx` (new) + render in `app/page.tsx` | JSON-LD **in the SSR HTML** (asserted on the raw response text): `WebSite` (name/alternateName/url/description/inLanguage ro) + `WebApplication` (applicationCategory UtilitiesApplication, operatingSystem Web, offers price 0/RON, publisher = the service identity with the real contactPoint email). Schema-honest deviation from the task's „operatingPlatform": schema.org SoftwareApplication has **no operatingPlatform** property — `operatingSystem: "Web"` on the more specific `WebApplication` type is the valid encoding of the same claim |
+| `public/og-image.png` (new) | **1200×630, 246 KB**, rendered ONCE via the probe infra: `probe/og-image-render.mjs` (@playwright/test chromium; the app's real hero photo `/media/hero-graphite-blue.webp` + the live hero gradient from v2.css/modern.css + Inter Aflivra variable + the hero kicker/h1 typography with honest taglines). Plain PNG was over budget → **palette PNG (quality 90) via the pinned media-pipeline sharp** (build-media-variants.mjs require path). Pixel-stat evidence: stdev ≥ 49.5 all channels, navy-dominant (means 24.6/48.6/77.2) — real art, not flat. Attribution kept internal (hero photo's author/license stay in media/category-manifest.json `editorial-hero`, per task). README documents regeneration |
+| `app/share-action.tsx` (new) + CSS | reusable share control: `navigator.share` (title/text/url, honest RO copy per surface; AbortError = user choice, other failures fall back) + fallback Sheet („Copiază linkul" with the app's existing clipboard-honesty pattern + toast; direct intent links Facebook/X/WhatsApp/Telegram/LinkedIn, URL-encoded, no redirect/tracking). **Surfaces: home hero (share the app — a pill in the hero-suggestions row), place profiles (token: name + `#view=place&id=…`), watch center (share the app)**. CSS follows the menu-sheet conventions |
+| IndexNow | key generated once (`crypto.randomBytes(16).toString('hex')` = `ff8744539b83f683aa7dd3d95c169144`) stored as **`public/<key>.txt` containing the key** (file name == content — cannot drift; not a secret, per the IndexNow convention itself); `scripts/indexnow-ping.mjs` exports `pingIndexNow` (reads the key file + sitemap locs, POSTs `{host, key, keyLocation, urlList}` to api.indexnow.org, **never throws** — fetch failure/HTTP≥400 → warning) + manual CLI; `scripts/deploy.mjs` (the ONLY change: post-publish ping after the deploy status gate; `--dry-run` exits before it) |
+| `scripts/verify-indexnow.mjs` (new) | the battery: key file contract, exact payload on a fetch stub (host/key/keyLocation/urlList === sitemap locs), non-fatal failure paths, deploy wiring order (after the status gate, unreachable in dry-run), and the og-image drift lock (file IHDR 1200×630, ≤300 KB, constants in app/seo.ts) |
+| README | battery sentence for verify-indexnow; deploy runbook IndexNow paragraph (key semantics, rotation, manual re-ping); a compact „Descoperire, partajare și indexare" subsection (robots policy, per-page metadata, sitemap regeneration + honest lastmod, llms files, og-image regeneration command) |
+
+### Honest registrations / reservations
+
+1. **`verify-indexnow.mjs` is NOT yet in the pr-validation.yml battery chain** — that file is outside my file partition for this task; one follow-up line wires it (the workflow lists every other verify script).
+2. **Google-Extended** only gates Gemini training/grounding, not search indexing — the robots section allows it explicitly (correct), but it is not a search-indexing control; search comes via the general group + sitemap.
+3. Root canonical/og:url render without the trailing slash (`https://aflivra.brebu.workers.dev`, vinext's `trailingSlash:false` normalization); the sitemap's root loc keeps the `/` form — equivalent URLs, spec accepts both for the head tags.
+4. The og-image ALT alternates per-page in Next's default behavior was replaced by one honest constant describing the actual composed image (brand + tagline), not the page.
+
+### Gates (run this session, on the final tree)
+
+- `corepack pnpm exec tsc --noEmit` → **exit 0**.
+- `corepack pnpm lint` → **0 errors, 115 warnings** (baseline-exact; the one error my first deploy addition introduced — `await` in a non-async `main()` — was root-caused (parsing error line named) and fixed by making main async + `await main()`; `--dry-run` re-verified).
+- `node scripts/verify-indexnow.mjs` → **×2 consecutive exit 0**.
+- `node scripts/audit-controls.mjs` (407 controls, my new components included) / `verify-ro-text` / `verify-media-budget` / `verify-css-keyframes` → **all exit 0**.
+- `node scripts/deploy.mjs --dry-run` → **exit 0** (the CI convention; IndexNow ping unreachable in dry-run).
+- Full e2e (`corepack pnpm test:e2e`): **160 passed, 0 failed** (2.1 min) — baseline 146 + my 14 (10 seo + 4 share). One pre-existing dev-server note: a long-lived vite/vinext dev instance wedged (instant 500s) after ~80 file edits under HMR; killed (mine) and a fresh boot ran the whole suite clean — no app-code regression (all specs passed).
+
+### Four-lens self-review
+
+- **Completeness**: all 10 task items implemented; JSON-LD deviates only where the task's guess wasn't schema-valid (operatingPlatform — documented above); robots deviates only on the "Claude-Web?" question mark (resolved to real agents). No stubs, no TODOs.
+- **Quality**: one metadata builder for every route (no drift possible between home and subpages); robots parsed (not pattern-matched) by the spec; share copy per-surface honest RO; the SSR-500 root cause was diagnosed by bisect (imports-only → 200, usage → 500, inline-Sheet → 200, component-Button-only → 200) before the fix, not patched blind.
+- **Discipline**: stayed in my file partition (deploy.mjs got ONLY the ping; pr-validation.yml left untouched — registered); pr49-* working-tree artifacts from another session identified and excluded from my commit.
+- **Testing**: every behavior has a RED-first leg that failed for the documented reason; the sitemap/llms gates are tree-driven (new pages/domains break the suite); the og-image and IndexNow claims are file-locked by the battery.
+
+**Status: DONE** — robots/sitemap/llms/OG/meta/JSON-LD/ShareAction/IndexNow delivered, all gates green (tsc 0, lint 0 errors/115 warnings, battery ×2, full e2e 160/160); branch committed locally with the house trailer, no push.
