@@ -1,0 +1,16 @@
+import {chromium} from '@playwright/test';
+const base = 'http://127.0.0.1:5173';
+const phase = process.argv[2] ?? 'before';
+const browser = await chromium.launch();
+const page = await browser.newPage({viewport: {width: 1280, height: 900}, deviceScaleFactor: 2});
+await page.route('**://*/**', r => r.request().url().startsWith(base) ? r.continue() : r.abort());
+await page.goto(base + '/#view=home', {waitUntil: 'domcontentloaded'});
+await page.waitForSelector('main#vcontent', {timeout: 60000});
+await page.waitForTimeout(2200);
+const el = await page.$('.vpanel.mini-trend');
+await el.scrollIntoViewIfNeeded();
+await page.waitForTimeout(600);
+const box = await el.boundingBox();
+await page.screenshot({path: new URL('.', import.meta.url).pathname + `vpanel-minitrend-${phase}.png`, clip: {x: box.x - 6, y: box.y - 6, width: box.width + 12, height: box.height + 12}});
+console.log('cropped', JSON.stringify(box));
+await browser.close();

@@ -2,7 +2,7 @@
 .v2 .domain-card{padding:0;overflow:hidden;min-height:0;min-width:0;align-items:stretch;isolation:isolate}
 .v2 .domain-card .category-cover{display:block;width:100%;height:150px;object-fit:cover;transition:transform .5s ease}
 .v2 .domain-card:hover .category-cover{transform:scale(1.035)}
-.v2 .domain-card>.domain-card-content{display:block;margin:0;padding:22px;width:100%;color:#333b4a;font-size:1rem}
+.v2 .domain-card>.domain-card-content{display:block;margin:0;padding:var(--af-card-pad);width:100%;color:#333b4a;font-size:1rem}
 .v2 .domain-card>.domain-card-content>svg{width:26px;height:26px}
 .v2 .domain-card .domain-card-content h3{font-size:1.125rem;line-height:1.4;margin:14px 0 8px}
 .v2 .domain-card .domain-card-content p{font-size:1rem;line-height:1.6;margin:0}

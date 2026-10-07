@@ -45,7 +45,7 @@ try{
  assert.deepEqual([...mapped].sort(),[...new Set(catalogIds)].sort(),'fiecare domeniu se rezolvă într-o categorie de catalog, fără nepotriviri');
  const manifest=JSON.parse(await readFile(join(root,'public/places/manifest.json'),'utf8'));
  assert.equal(manifest.schema,'aflivra-places-v2','manifestul locurilor are schema așteptată');
- assert.equal(manifest.count,181649,'inventarul național de locuri: 181.649 de înregistrări');
+  assert.equal(manifest.count,181537,'inventarul național de locuri: 181.537 de înregistrări');
  const placesDomains=domainIds.filter(domain=>topicSections[domain].some(section=>section.id==='places'));
  const manifestCategories=Object.keys(manifest.categories);
  assert.deepEqual(manifestCategories.filter(id=>id!=='local-all').sort(),placesDomains.sort(),'categoriile de locuri acoperă exact domeniile cu secțiune de locuri');
@@ -123,6 +123,6 @@ try{
  const coveredParity=new Set(registryKeys.flatMap(key=>[].concat(familyCoverage[key]?.parity||[])));
  const unaccountedParity=[...parityFamilies].filter(family=>!coveredParity.has(family));
  assert.deepEqual(unaccountedParity,[],'orice familie din tabela de paritate este legată de un registru');
- console.log('Inventarul de admin verificat: 16 domenii, '+sectionCount+' de secțiuni cu conținut, 14 categorii de catalog mapped, '+placesDomains.length+' categorii de locuri ('+masterSubcategories.length+' subcategorii naționale), 181.649 de locuri, '+feedKinds.length+' fluxuri + AFIR + filme, '+transitModes.length+' feluri de transport, '+directoryKinds.length+' registre, '+cinemas.items.length+' cinematografe, '+institutions.items.length+' instanțe și '+new Set(registryKeys).size+' familii de surse din registry, toate acoperite de paritate sau de un harness numit.');
+  console.log('Inventarul de admin verificat: 16 domenii, '+sectionCount+' de secțiuni cu conținut, 14 categorii de catalog mapped, '+placesDomains.length+' categorii de locuri ('+masterSubcategories.length+' subcategorii naționale), 181.537 de locuri, '+feedKinds.length+' fluxuri + AFIR + filme, '+transitModes.length+' feluri de transport, '+directoryKinds.length+' registre, '+cinemas.items.length+' cinematografe, '+institutions.items.length+' instanțe și '+new Set(registryKeys).size+' familii de surse din registry, toate acoperite de paritate sau de un harness numit.');
 }catch(error){console.error(String(error&&error.message||error));process.exitCode=1}
 finally{await rm(temp,{recursive:true,force:true})}

@@ -315,3 +315,270 @@ After (same harness, 4× throttle): **dashboard +173…197ms, home +430ms paint-
 **Files touched (mine only):** `app/location.tsx` (picker rewrite + provider cell-dedup), `app/use-source.ts` (SWR), `app/places-workspace.tsx` (manifest session cache), `app/deferred-mount.tsx` (NEW), `app/page.tsx` (DeferredMount wraps), `app/controls.css` (listbox + deferred-shell styles), `scripts/verify-location.mjs` (repair: WatchButton stub, useDeferredValue host), `e2e/locality-picker-suggestions.spec.ts` (NEW), `e2e/mobile-nav-swap-latency.spec.ts` (NEW), this STATUS.md section. A concurrent session's `pr49-digital-reporting-engine-pentaho-review-findings.md` working-tree change is NOT mine and is left out of this commit.
 
 **Status: RESOLVED — root causes: (C) county-folded substring matching + scan-order 30-cap + native-datalist prefix/diacritic mismatch drowning county-seat cities under county villages (data was present all along); (B) per-keystroke synchronous datalist churn (871ms longtasks @4×) + geo.key-driven draft wipe + per-tick whole-app re-render storm; (A) full unmount/remount + `no-store` refetch + re-render wave of heavy shared sections inside one deferred commit (1278→431ms worst leg, content fill now one frame after paint). All gates green; 3 attempts never needed.**
+
+---
+
+## Debugger Findings (diacritice dosare)
+
+**USER REPORT (verbatim):** „am probleme cu diacriticele românești. apar cu semnul întrebării... am văzut asta la dosare de justiție" — ș/ț → `?` pe suprafețele de dosare.
+
+### Phase 1 — Root Cause Investigation (dovezi, nu ipoteze)
+
+1. **Rândul cache REAL din `.wrangler/state` D1** (astăzi, adapter `portal.deep-records.v6`, buget `courts` used=1): `solutieSumar` conține LITERAL `?` (byte 0x3F) în pozițiile ș/ț — `Cur?ii de Apel Bucure?ti`, `Sec?ia I Penală`, `pronun?ată`, `solu?ia` — în timp ce diacriticele cu sedilă (ş/ţ U+015F/U+0163: `Sentinţa`, `autorităţile`, `Poliţiei`) și ă/â/î (`Penală`, `măsura`, `comunică`) sunt **intacte**, și **zero U+FFFD** în tot rândul.
+2. **XLSX-urile MJ brute** (capturi reale din sesiune, citite direct cu python `zipfile` — ocolind 100% codul nostru): `notari.xlsx` → `DRAGOMIRE?TI`, `PIATRA NEAM?`, `TÂRGOVI?TE`, `CONSTAN?A`; `experti-judiciari.xlsx` → `DOROBAN?ILOR`, `Grivi?ei`, `coresponden?ă`, `Timi?ul` (59 șiruri). Aceeași semnătură exclusivă: doar pozițiile ș/ț → `?`.
+3. **Contraproba altei instituții**: `experti-tehnici.xlsx` (MDPLPA) exportă formele corecte cu virgulă (U+0219/U+021B) — deci nu e o problemă XLSX/Unicode generică, ci pipeline-ul editorial al Ministerului Justiției.
+4. **Lanțul nostru, pas cu pas** (`adapters.ts:10` TextDecoder implicit UTF-8 streaming cu `{stream:true}`+flush final → `parseCourtSearch` → D1 JSON → `route.ts` → UI/exporturi): pur string-ops fără nia transcodare lossy; `document-pdf` substituie onest `[U+…]` (niciodată `?`).
+
+### Phase 3 — Reproducere offline + testarea ipotezelor (4 fază, RED-first)
+
+Probe byte-identic (envelopă SOAP UTF-8, headere ASMX reale, **chunk-uri de 1/3/7/13 bytes care taie secvențele multibyte la mijloc**) prin lanțul REAL `getSource → parseCourtSearch → loadCourtSearch`:
+
+- **H1 „decode-ul nostru strică ș/Ț" — RESPINSĂ**: ambele familii de glife (virgulă U+0218–021B ȘI sedilă U+015E/U+0163) + ă/â/î supraviețuiesc byte-cu-byte inclusiv la limite de chunk; decoderul nu fabrică niciodată U+FFFD.
+- **H2 „scrierea D1/JSON strică" — RESPINSĂ**: round-trip JSON exact.
+- **H3 „«?» vine din datele publicate de MJ" — CONFIRMATĂ**: lanțul păstrează verbatim `Bucure?ti`/`Sec?ia` (nu poate produce `?` — un TextDecoder UTF-8 produce U+FFFD pe bytes invalizi, niciodată `?`; `?` în output înseamnă byte 0x3F pe wire).
+
+### Root cause
+
+**Textul oficial al MJ vine deja corupt de la sursă**: acolo unde sistemele lor au stocat formele corecte cu virgulă-desubt, pipeline-ul lor de publicare a transcodat printr-un charset legacy fără acele glife (sedila ş/ţ și ă/â/î există în el, ș/ț cu virgulă nu) și a substituit fiecare caracter nereprezentabil cu `?` **înainte să plece_bytes de pe serverul lor**. Provocarea utilizatorului este acea pierdere pre-existentă, afișată onest dar nedivulgate. Ipotezele anticipare ale task-ului (charset în TextDecoder / decodare după header / encoding la scrierea în DB) sunt **toate exonerate de dovezi byte-level** — nu există nimic lossy de reparat în lanțul nostru, iar „repararea" glifelor ar însemna inventare de conținut oficial (respins de principiile repo-ului).
+
+### Fix aplicat (minimal, onest, fără glife inventate)
+
+- `lib/court-history.ts` — `upstreamDiacriticLoss()` (detectorul semnăturii `literă?literă` — intra-cuvânt, deci zero fals-pozitiv pe întrebări legitime cum ar fi „afli?") + `DIACRITIC_LOSS_NOTE` (propoziția de divulgare, vocea repo-ului).
+- `lib/live/legal.ts` `parseCourtSearch` — când semnătura apare în fișe, `note` sursei primește divulgarea (ajunge în UI prin calea existentă `source.data.note` din `courts-workspace.tsx:43`, fără cod UI nou de randare).
+- `app/courts-workspace.tsx` — exporturile PDF „Fișa publică" și „Soluția pe scurt" primesc aceeași divulgare condiționată în textul exportat.
+- `README.md` — paragraful dosarelor documentează cele două familii de glife, fidelitatea byte-cu-byte a lanțului, pierderea upstream la MJ (inclusiv contraproba MDPLPA) și comportamentul de divulgare.
+- Randarea rămâne **verbatim** (ce face și reader-ul de acte normative: `legal-reader.ts:83` normalizează sedilă→virgulă doar pentru cheile de potrivire, niciodată la afișare) — decizia „follow what the app does elsewhere" s-a rezolvat la: afișare verbatim + potrivire pe ambele forme (pattern-ul `Sentin[tţţ]a` deja exista).
+
+### RED → GREEN
+
+- **RED**: `scripts/verify-court-links.mjs` — picior nou: round-trip byte-exact al ambelor familii de glife prin `parseCourtSearch` (parse + JSON), decode streaming pe chunks de 5 bytes prin `loadCourtSearch` real, păstrarea verbatim a `?` sursă, detectarea semnăturii (`Sec?ia` da / „afli?" nu), divulgarea în `note` pentru fișa coruptă + absența ei pentru fișa curată. Înainte de fix: `TypeError: history.upstreamDiacriticLoss is not a function` (piciorul a eșuat primul la funcția inexistentă — eșec așteptat).
+- **GREEN după fix** — piciorul trece; restul piciorului (fidelitatea round-trip) a trecut și la prima rulare ca armură de regresie — documentat onest: partea aceea **nu era ruptă**; o fix a forțat-o ar fi fost o remediere inventată.
+
+### Verification (gates)
+
+- tsc: **0 erori**. ESLint: **0 erori / 115 warninguri = plafon exact** (zero delta; warning-urile din fișierele mele sunt pre-existente: linia de effect din `courts-workspace.tsx` deplasă cu 2 de import, idiomul `module` din harness).
+- Bateria verify-legal-* ×2 + harness-urile atinse/adiacente: `verify-legal-records`, `verify-legal-refresh`, `verify-court-links`, `verify-live` ×2 fiecare = PASS; `verify-geographic-scope`, `verify-federated-search`, `verify-source-errors`, `verify-export-formats`, `verify-watch-api`, `verify-watch-sweep`, `verify-refresh-sweep` = PASS.
+- **Pre-existente, NU ale mele** (documentate, nelăsate să pară ca regresii ale mele): `verify-legal-pdf` = `ModuleNotFoundError: No module named 'pypdf'` (mediu — python3 de sistem nu are pypdf; harness-ul nu încarcă niciun fișier atins de mine); `verify-law-navigation` = `Cannot find module './watch-button'` (break cunoscut din val-ul watch, documentat la §47/existing); `verify-model-contracts` = 2 violări places-attraction (muncă in-flight a agentului paralel — `import-places.py` modificat chiar acum în worktree).
+- `corepack pnpm test:e2e` full: **146/151 passed**. Cele 5 eșecuri: 2 = spec-uri NOI in-flight ale agentului paralel (`places-attractions-validity.spec.ts`, corelate cu violările model-contracts de mai sus) + 3 flakes **rotative** dovedite (federated-search :251/:292 apoi :334, place-image-stability — toate trec la a doua/a treia rulare în izolare; rotesc între rulări = fereastră HMR pe dev-server partajat în timp ce agenții paraleli editează `location.tsx`/CSS-uri; zero suprapunere cu diff-ul meu). Suprafața juridică: `legal-flow` + `legal-pages` + `justice-registries` = **16/16 la fiecare rulare**. Condiția task-ului pentru e2e („if a dosar leg asserts text content") nu e îndeplinită — singurul picior de dosare din e2e asertează doar existența tab-ului; un picior nou care ar depinde de date live de la MJ ar fi flaky prin construcție, iar contractul e dovedit offline în harness.
+- Registrele profesionale (`justice:experti-judiciari`, seed `server-seed.json`: `Bucure?ti` ×2, `Crânga?i`) au ACEEAȘI corupere upstream dovedită — suprafața registrelor e în afara fișierelor mele (deținute de agentul paralel); **ridicat aici** pentru ca divulgarea să fie oglindită și acolo de cine o are în scope.
+
+### Conventions Applied
+
+**Source:** `.specify/memory/conventions.md` — **inexistent** într-acest repo (verificat înainte de orice cod); am urmat convențiile repo-ului observate: mesaje/voice în română onestă, `field-help`/`source-warning` ca canale de divulgare, fără comentarii în cod în afara regulii de business (detectorul are exact comentariul regulii: pierdere upstream MJ, redare verbatim), fără ID-uri de ticket-uri în cod, comentarii doar unde codul singur nu spune de ce.
+
+**Files touched (ale mele):** `lib/court-history.ts` (detector + notă), `lib/live/legal.ts` (divulgare în `note` la `parseCourtSearch`), `app/courts-workspace.tsx` (divulgare în exporturile PDF ale fișei/soluției), `scripts/verify-court-links.mjs` (picior RED→GREEN diacritice + decode streaming), `README.md` (paragraf dosare), această secțiune STATUS.md.
+
+**Status: RESOLVED — root cause: pierderea ș/ț există ÎN datele publicate de Ministerul Justiției (byte 0x3F la pozițiile formelor cu virgulă, înainte de publicare — dovedit byte-level pe rândul cache real + XLSX-urile brute MJ; lanțul nostru dovedit lossless pe chunk-uri de rețea și JSON round-trip), iar remedierea corectă în granita noastră este redarea verbatim + divulgarea sursei pierderii (note + exporturi + README), nu inventarea glifelor. Activat RED-first în verify-court-links (piciorul eșua la helperul inexistent, verde după fix).**
+
+## UI/UX Findings (padding + shadows)
+
+Branch `fix/perfect-pass-v1` (in-place, same worktree). User reports, verbatim: „astea nu au padding în interior. se vad urât" + „ai foarte multe elemente, carduri ce nu au padding interior și se vede urât" and „cred că mergea să pui și niște umbre". Design-system pass over the app's own CSS card system (app/*.css token + card classes) — Maintain mode (no `.bluestone/config.md`): the pass generalizes the elevation vocabulary the app already ships; it invents no new look.
+
+### Token definitions (modern.css `.v2` block, beside the existing `--af-*` family)
+
+- `--af-card-shadow: 0 4px 16px #15324704` — resting card elevation. Byte-identical to the literal the vpanel/place-card/domain-card/news-card/live-resource/vstat family has shipped since modern.css existed; now written once.
+- `--af-card-shadow-raised: 0 12px 28px #1532470e` — interactive/hover tier. The exact place-card hover literal, generalized.
+- `--af-card-pad: 22px` — the systemic card interior. Consumed by `.v2 .domain-card>.domain-card-content` (complete-data.css) — the same wrapper rule family the previous wave introduced; the config contract (card-class `padding:0` + wrapper carries padding, full-bleed covers intact) is untouched.
+- Both tiers are soft y-offset, low-alpha navy (#153247 base) — the flat-navy aesthetic's own shadow language, not a new heavy drop-shadow. Reduced-motion irrelevant to static shadows (verified: the no-motion/reduced-motion global rules already zero transitions; shadows are static).
+
+### Audit method (probe/uiux/card-audit.mjs, both viewports 390+1280, 14 hash-routes)
+
+For every card-class element: computed padding, computed shadow, and a **clip-aware visible text inset** — min distance from the card border to text rects intersected with every overflow/scroll ancestor (scrolled-out table halves measure from the clip edge; fully clipped rects drop). Two measurement pitfalls found and fixed in the probe, both registered as false-positive families, NOT bugs:
+1. overflow rects inside `.table-scroll` (mini-trend/company data tables) — clipped by `overflow:auto`, invisible;
+2. **closed `<details class="chart-table">`** — Chrome lays out slot content with non-zero rects while unpainting it (content-visibility); the probe now skips closed-details subtrees + `checkVisibility()`.
+The earlier raw pass reported `.vpanel` at "3px flush" from both — false; vpanel insets are 29px when measured visible-only.
+
+### Audit table (before → after, class-surfaces 84; raw flags 34 → 24, of which TRUE card defects 17 → 0)
+
+| Card class | Surfaces (views) | Inner pad before | Text inset before | Shadow before | Text inset after | Shadow after | Verdict |
+|---|---|---|---|---|---|---|---|
+| `.snapshot-note` | home, explore, dashboard (+ every sourceNotice surface) | 18/0 (d), 15/0/18 (m) | **1px** | none (inner note) | **15px** both | none (by design) | FIXED — the systemic offender |
+| `.map-result` | map sidebar | 9/7 mobile | 11px inline | none (flat row) | 13px inline (pad 9/10) | none (flat row) | FIXED inline; see registration |
+| `.city-story` | home | 32 | 32 | **none** | 32 | **token resting** + raised on hover | ELEVATED (interactive `<button>`) |
+| `.insight-story` | home analytics | 29/26 | 27 | **none** | 27 | **token resting** | ELEVATED |
+| `.recommendation-card` | home analytics | 29/26 | 27 | **none** | 27 | **token resting** | ELEVATED |
+| `.visit-card` | place reader | 31 | 32 | **none** | 32 | **token resting** | ELEVATED |
+| `.vcallout` | saved, planner | 24 | 29 | **none** | 29 | **token resting** | ELEVATED |
+| `.vpanel` (and the modern.css:8 family) | all | 28/22-18 | 29 | literal 0 4px 16px #15324704 | 29 | `var(--af-card-shadow)` — computed identical | TOKENIZED, zero visual delta |
+| `.place-card` hover | explore, home, saved, place | — | — | literal 0 12px 28px #1532470e | — | `var(--af-card-shadow-raised)` | TOKENIZED, zero visual delta |
+| `.domain-card` + wrapper | dashboard, explore, saved | card 0 / wrapper 22 | 22 | resting + hover | 22 | unchanged | ALREADY HEALTHY (previous wave's wrapper fix present at all 4 render sites; only the wrapper's literal is now the token) |
+| `transit/cinema/story`-cards | domain workspaces | via `entity-card`/`news-card` bases | 21–23 | elevated | unchanged | unchanged | ALREADY HEALTHY (compose over padded/elevated bases) |
+
+Intentionally NOT elevated (rationale): `.live-freshness`, `.reader-note`, `.snapshot-note` are inner notes tinted lighter than their host cards — floating an inner layer above its parent card would invert the depth hierarchy; they get the padding fix only. `.map-result` rows and `.domain-rail` rows are list rows, not cards. Legacy globals.css classes (`.quick-card`, `.station-card`, `.weather-card`, `.currency-card`, `.dataset-card`) are unused by the v2 app — untouched dead template CSS.
+
+### Fix implementation (CSS only — no component/class wiring changes needed; all render sites already route through the fixed base classes)
+
+1. `app/modern.css` token block: +`--af-card-shadow`, `--af-card-shadow-raised`, `--af-card-pad`.
+2. `app/modern.css` card-skin line: resting + hover literals → tokens; `.v2 .snapshot-note` skin gains `padding:12px 16px` (the exact shape of its sibling note `.live-freshness`).
+3. `app/modern.css` new rule: resting token on `.city-story,.insight-story,.recommendation-card,.visit-card,.vcallout`; `city-story:hover` raised tier (its box-shadow transition already exists via the v2.css global button transition).
+4. `app/modern.css` 640px media: `.v2 .snapshot-note{padding:14px}` (matches live-freshness mobile), `.v2 .map-result{padding:9px 10px}`.
+5. `app/complete-data.css`: `.domain-card-content` `22px` → `var(--af-card-pad)`.
+
+### Verification (all run this session, after the final edits)
+
+- `corepack pnpm exec tsc --noEmit` → **0 errors**.
+- `corepack pnpm lint` → **0 errors / 115 warnings = baseline exactly**.
+- `node scripts/verify-css-keyframes.mjs` → **exit 0** (22 animation references, no animation touched).
+- `node scripts/verify-ro-text.mjs` → **exit 0**.
+- `corepack pnpm test:e2e` full suite → **151 passed, 0 failed** (baseline 149 + the 2 legs that rotated as flakes in intermediate runs). Honest instability narrative: run 1/149+2 (federated-search diacritics + picker 4x-CPU latency — both passed 19/19 isolated); run 2/149+2 (map-touch-gestures finger-pan + map-markers Sinaia sub-pixel — the pre-existing flake pair the iOS-lag wave registered; both passed 20/20 isolated; map surfaces are the parallel wave's partition, untouched by this pass); run 3/151 green. No e2e leg asserted the old paddings/shadows (audited: only count/hasText assertions touch `.map-result`), so no RED-first spec updates were owed. Two app-side dev-server deaths mid-session (workerd internal fetch + a foreign leftover server PID squatting :5173) were server-runtime/port-contention events, not CSS; all runs above are from clean playwright-managed servers, and nothing of this session is left running.
+- **Pixel evidence (I could not eyeball PNGs in-session — registered honestly)**: probe/uiux/pad-shadow-pixels.mjs measures the 6px ring outside each card edge: every elevated family darkens −0.10…−0.46 mean gray after vs before (the resting token rendering; sub-perceptual per-pixel, below the 6-gray change threshold — subtle by design, exactly the mission's "tasteful, not heavy"); `map-result` desktop is a 0/0 control pair; mobile map-result shows the 9% content shift from the inline padding bump; snapshot-note pairs reflowed (sizes differ — computed styles assert 12/16 + 14). Screenshots: `probe/uiux/pad-shadow-*-{before,after}-{desktop,mobile}.png` (28 files; BEFORE state reconstructed in-browser by re-injecting the exact replaced literals — no git stash on a shared worktree).
+- Accessibility preserved: no text touches a bordered edge (all true card insets ≥13); contrast untouched (no color changes anywhere); focus-visible outlines untouched; tokens inherit the existing motion rules.
+
+### Probe artifacts (probe/uiux/)
+
+`card-audit.mjs` (+`card-audit-before/after.json`), `card-discovery.mjs` (computed-style card enumeration, 792 card-like roots), `flush-detail.mjs`, `vpanel-offender/all/rect-side/chart-box/visibility/children/crop` (the false-positive investigation chain), `mapresult-box.mjs`, `mapresult-worst.mjs` (the 1px-as-line-box-top finding), `computed-after.mjs`, `offender-shots.mjs`, `pad-shadow-pixels.mjs`.
+
+### Playwright test coverage review
+
+| Surface | Playwright tests | Intersects this pass? |
+|---|---|---|
+| All card surfaces (home/explore/dashboard/saved/place/map/watch/money/company) | Existing suites cover flows; no visual-pixel assertions exist on card chrome | No leg asserted old padding/shadow values — verified by grep before editing |
+| Card padding/elevation invariants | None exist (none existed before either — the app's e2e contract is behavior, not chrome) | Raised for @validator: optional follow-up leg asserting `.snapshot-note` computed `padding-left/right ≥ 14px` + the five families' non-none `box-shadow` on home/saved/place, if chrome assertions are wanted at all |
+
+**Files touched (mine only):** `app/modern.css` (tokens + 4 rule edits), `app/complete-data.css` (1 literal → token), `probe/uiux/*` (audit/evidence scripts + PNGs/JSONs), this STATUS.md section. No components, no lib/, no api routes, no preferences/attractions/dosar surfaces, no layout/typography changes.
+
+**Status: PASSED — padding: 17/17 true card defects cleared (7 flush: snapshot-note systemic 1px→15px on 3 views × 2 viewports + map-result mobile inline 7→10px; 10 elevation: 5 shadow-less card families × 2 viewports elevated via the new 2-tier `--af-card-*` tokens), existing literals tokenized with zero visual delta; the 24 residual raw flags are by-design registrations (12 live-freshness + 6 snapshot-note + 2 reader-note inner notes stay flat by depth-hierarchy, 1 flat map-result desktop control row, 2 non-card watch-feed-section section wrappers, 1 map-result mobile line-box-top semantics row — borderless, no visible boundary); gates: tsc 0, lint 0/115=baseline, css-keyframes 0, ro-text 0, e2e 151/0.**
+
+## Builder Findings (position text + attractions)
+
+Task 1 = the long position-privacy paragraph removed from the location surface (the detail stays on /confidentialitate; home footer already links it everywhere, so the preferred "nothing" option applies). Task 2 = „locuri de vizitat” ships only valid articles: an attractions name-validity gate at the corpus build + a local recovery of the shipped corpus. Scope kept: the dosar/diacritics and global-CSS files showing as modified in the tree belong to the parallel sessions (untouched by me); the push watch-tooltip notice (button-driven dialog) stays by design.
+
+### Task 1 — TDD (paragraph gone)
+
+- RED: rewrote the `e2e/legal-pages.spec.ts:125` leg (the one that pinned the one-liner) into „the location strip keeps its status line and carries no long compliance paragraph" — failed against the current tree on the exact still-rendered paragraph quotes.
+- GREEN: `app/location.tsx` — the entire `<p className="field-help">Poziția se folosește doar pentru datele locale…Confidentialitate…</p>` deleted from `LocationControl` (its only mount: the non-compact home location strip; the preferences sheet and places-workspace render the compact variant, which never carried it). The status line + text-link buttons stay; `/confidentialitate` + registru keep every number (untouched, watch-sweep Leg 12 keeps locking them).
+- No replacement link added: the home footer already carries `Confidentialitate` and the leg asserts it in the same context.
+
+### Task 2 — root cause + gate classes (measured, not guessed)
+
+Root cause: `scripts/import-places.py` took `name:ro`/`name`/`brand`/`operator` with **no validity gate**, and fell back to the subcategory label for unnamed objects — so English OSM name dumps („3rd enclosure" = a Sibiu city-wall segment mapped `historic=citywalls` + `tourism=attraction`, `name="3rd enclosure"`) and 96 unnamed attractions named „Locuri de vizitat" shipped as articles.
+
+Gate (attractions label only — every other subcategory keeps its status quo) rejects **116 records / 16 unique names**, built from the actual corpus audit:
+
+| Class | Names | Records |
+|---|---|---|
+| Unnamed, name = the attraction label itself (pipeline fallback) | `Locuri de vizitat` | 96 |
+| English leading-ordinal descriptor | `3rd enclosure` | 3 |
+| OSM `fixme` artifact | `Sfinxul Buștea (fixme)` | 1 |
+| Name echoes a structural tag value | `windmill` (= `man_made=windmill`) | 4 |
+| Pure-English common-word phrase | `Fresh-meat`, `Gravity Hill`, `Of of`, `Red Pole`, `barn with wagons`, `floating mill` | 6 |
+| Audited singletons (no safe generic rule) | `NICOSMAIL`, `Ot11378 campu mare`, `Traseu Manastirea Magarul, la dreapta dupa canton`, `former mine-Valea Blaznei`, `partie schi - ski slope` | 5 |
+| Unnamed entry whose fallback name is a *different* label (found by the build gate; a shipped-name audit cannot see it) | `Centre culturale` | 1 |
+
+**Keep-list sanity (all present post-gate, pinned in tests):** Salina Turda, Castelul Bran, Castelul Pelișor, Cetatea Râșnov, Salina Cacica (+ Babele, Sfinxul, Mănăstirea Sinaia, Castelul Corvinilor verified in the audit). Deliberately **kept**: `castel Dracula Transfagarasan` (real commercial castle — website/hours/image), `Brașov/Rasnov/Tulcea/#loveREGHIN Sign` (real sign installations), `Amphitheatre`/`Amphiteater of Micia` (real identified ruins), `Fontaine` (named fountain), locality-suffixed `Gravity Hill *` variants, Hungarian/Ukrainian-Cyrillic minority toponyms. 112 records dropped entirely (attraction was their only type); 4 records keep shipping in their other categories with the attractions label stripped and the name re-derived exactly as a fresh import would.
+
+### Task 2 — TDD (RED → GREEN → REFACTOR)
+
+- RED (battery): `scripts/verify-model-contracts.mjs` LEG 1 gained the mirrored gate (`places-attraction-name`), the post-gate count pin (`places-attraction-count`) and the famous keep-list (`places-attraction-keep`). Run against the pre-change corpus: **[places-attraction-name] n=115 + [places-attraction-count] 1649≠1534 — exit 1** (the battery mirror sees shipped names, so it reports 115; the build gate's 116th case is the unnamed `Centre culturale` fallback, correctly caught at name-source level by the Python gate).
+- RED (e2e): `e2e/places-attractions-validity.spec.ts` (NEW, 2 legs) — fixture leg walks every served attractions page and asserts zero junk names/patterns + total 1533 + famous present; live-render leg searches „Salina Turda" (card renders) and „enclosure"/„3rd enclosure" (zero served + `.live-empty`). Both failed on the pre-change corpus (total 1649; the enclosure query served the 3 „3rd enclosure" rows).
+- GREEN: gate implemented in `scripts/import-places.py` (`ATTRACTION_LABEL`, `valid_public_attraction_name`, `apply_attraction_gate` + build-report counters; `import osmium` moved into `main()` so the gate stays importable without pyosmium); corpus recovered locally through the pipeline: `finalize-places.py` gained the PBF-less recovery path (`--cities` + `--as-of`, osmium import scoped to the `--pbf` branch), and **`scripts/recover-places-attractions.py`** (NEW) re-assembles `public/places` from the shipped record chunks (full original tags preserved — no fetch), importing the gate from `import-places.py` so build and recovery can never diverge, then runs finalize + `compress-snapshots.py` (deterministic gzip layer, ×2 byte-identical). Cities/LICENSE/exploration assets carried byte-for-byte; every manifest sha256 proof regenerated by finalize itself.
+- **Exploration realignment (real break caught by the battery, not by luck): the rebuild re-shards records (600/shard), so 30 of the 267 exploration `recordChunk` pins went stale — a runtime break of each gallery place's „Fișa completă" sheet. The recovery now realigns every anchor (loud failure if a record vanished; none did — dropped ∩ anchored = ∅, stripped ∩ anchored = ∅, relatedSources refs to dropped ids = 0) and re-aligns `exploration-import.json`'s `afterCoverage` to the shipped corpus (cultura rows 8655→8540, hotlink 181→179 — two junk records carried image tags; attested unchanged at 184) with an explicit `corpusGateRealignment` provenance entry; the `before*` tables stay the pure import-time snapshot.
+- REFACTOR: recovery idempotence proven — a re-run on the already-gated corpus reports `attractions-rejected 0` and byte-stable output; metadata temp-file now `finally`-unlinked.
+
+### Files modified (mine only)
+
+- `app/location.tsx` — the long privacy paragraph deleted (Task 1).
+- `e2e/legal-pages.spec.ts` — position-notice leg flipped to assert absence (RED-first).
+- `e2e/places-attractions-validity.spec.ts` (NEW) — 2 legs (fixture + live render).
+- `scripts/import-places.py` — attractions validity gate + docs + lazy osmium import + gate report in the build log.
+- `scripts/finalize-places.py` — `--cities`/`--as-of` recovery path (same assembler, single source of truth).
+- `scripts/recover-places-attractions.py` (NEW) — corpus recovery driver + exploration anchor/coverage realignment, idempotent.
+- `scripts/verify-model-contracts.mjs` — LEG 1 attractions gate mirror + count pin + keep-list + summary line.
+- `scripts/verify-sweep-inventory.mjs`, `scripts/verify-expanded.mjs`, `scripts/verify-snapshot-transport.mjs` — count pins 181649→181537 (+ sweep-inventory log text).
+- `app/page.tsx` — about-view copy „181.649"→„181.537 de locuri".
+- `README.md` — corpus truth: **181.537 locuri din 183.310 elemente OpenStreetMap**, contacts 44.106/16.219/7.277/16.594/20.922, + the gate sentence in the `public/places` paragraph.
+- `public/places/**` + `public/data/snapshot-transport.json` — regenerated corpus (manifest proofs, indices, records re-sharded, exploration realigned, gzip registry).
+
+### Count deltas (honest)
+
+- corpus records: 181.649 → **181.537** (−112; sourceFeatures 183.422 → 183.310, exactly the dropped records' own contribution)
+- cultura category: 8.655 → **8.540**; attractions label: 1.649 → **1.533**; every other category unchanged
+- contacts: address −16, phone −2, website −4, program −3, e-mail unchanged; cities 13.971 unchanged
+- e2e baseline 149 → **151 passed** (the two new attractions legs); 0 failed on the final full run
+
+### Gates (run on the final tree)
+
+- `corepack pnpm exec tsc --noEmit` → **exit 0**.
+- `corepack pnpm lint` → **0 errors, 115 warnings** (baseline exactly; my files add none).
+- `node scripts/verify-model-contracts.mjs` → **×2 exit 0** (attractions 1533 post-gate, 858 sha256 proofs, index↔runtime parity on 735.552 entries; re-confirmed once more after the final state).
+- `node scripts/verify-sweep-inventory.mjs` → exit 0 („181.537 de locuri"); `verify-expanded` → exit 0 (181.537 records / 183.310 features / 554 shards); `verify-snapshot-transport` → exit 0 (6.673 snapshots, all proofs); `verify-geographic-scope` → exit 0; `verify-location` → exit 0; `verify-ro-text` → exit 0; `verify-exploration-media` → exit 0 (267 anchors against exact records); `verify-media-budget` → exit 0 (afterCoverage == shipped); `verify-federated-search` → exit 0; `audit-controls` → exit 0.
+- `corepack pnpm test:e2e` full → **151 passed, 0 failed**, exit 0. Intermediate runs documented honestly: one 4×-throttle latency leg (mobile-nav-swap) flaked under full-suite load, passed in isolation; one mid-run collapse (142) was the reused dev server dying mid-suite — the final run on a fresh auto-started server is the green of record.
+- Recovery idempotence: re-run against the recovered corpus → `attractions-rejected 0`, byte-stable output; stray metadata temp files (found twice: one shipped into public/places pre-fix, two left at public/ root) eliminated + `finally`-unlinked and the shipped corpus re-checked.
+
+### Four-lens self-review
+
+- **Completeness**: both user reports resolved at the source (paragraph deleted from the only surface that renders it; junk classes rejected at the corpus build **and** the shipped corpus recovered). No stubs; the recovery is a full pipeline path, not a data patch.
+- **Quality**: the gate mirrors the repo's established Python↔JS mirror pattern (like `norm()` ↔ `normalizeSearch`), with the battery as the parity guard; blocklist built from measured junk, keep-list pinned in two test layers; over-filter consciously avoided (documented keeps).
+- **Discipline**: gate scoped to the attractions label only (the 23k unnamed Parcări etc. remain the other surfaces' status quo — raised here, not silently changed); no map/transport/places-UI files touched beyond the paragraph; no scope creep into the dosar/CSS partitions.
+- **Testing**: every behavior has a RED-first failing leg (e2e ×3, battery ×2 buckets); famous-target survival asserted twice; the full suite green on the final tree.
+
+**Reservations (small, stated):** (1) Borderline English-ish names with identifying value (`Golful Francezului nude beach`, `Amphitheatre`, locality-suffixed `Gravity Hill *`) stay by design — rejecting them needs a judgment call the audit did not support; re-runnable gate means tightening later is one dictionary edit + one recovery run. (2) The gate applies to the attractions label; junk-class names on *other* labels (e.g. `Fresh` in Magazine și servicii) ship as before — out of the reported scope. (3) The attractions count 1533 is pinned in three places (e2e, battery, this report) — a future corpus refresh must move them together (that coupling is the repo's existing pin style).
+
+**Status: DONE** — paragraph gone (RED-first leg pins the absence + the footer link), attractions gate at the corpus build + local recovery of the shipped corpus (116 rejects, 16 junk names, 112 drops + 4 strips; famous keep-list intact; deltas reported), all gates green: tsc 0 / lint 0 errors·115 warnings / verify-model-contracts ×2 exit 0 / sweep-inventory + expanded + snapshot-transport + geographic-scope + location + ro-text + exploration-media + media-budget exit 0 / full e2e **151 passed**.
+
+## Builder Findings (nearby map radius + pan)
+
+User reports (verbatim): (1) „pe hartă când trebuie să vizualizez toate elementele pinate din preajma mea, nu ține cont de ce rază și arată doar până în 5 km ceva de genul"; (2) „când fac pan și mă duc în altă zonă nu am refresh în zona asta". Scope: the nearby-pins places map (`PublicMap` inside `PlacesWorkspace` map view) — the leaflet surface, not the home SVG repere map.
+
+### Root cause (measured, not guessed)
+
+The nearby map's data request was the **nearest-200 slice** — `view=map` sent `pageSize=200` with distance sort, so once the radius selected more than 200 records the rendered pin set was **identical for every radius** (always the nearest 200) and the radius selector changed only the count label. The visual cap = the distance of the 200th-nearest record, which depends purely on POI density (offline corpus probe mirroring `queryPlaces`' nearby path, spatial cells + haversine, on the shipped post-gate corpus):
+
+| center / category | records within 5 km | 15 km | 50 km | 100 km | **200th-nearest pin at** |
+|---|---|---|---|---|---|
+| Cluj / cultura | 119 | 175 | 361 | 1448 | **23.7 km** |
+| București / firma | 4957 | 9257 | 10418 | 14544 | **0.46 km** |
+| București / cultura | 362 | 478 | 536 | 861 | **2.02 km** |
+| București / local-all | 12783 | 26085 | 29862 | 41622 | **0.31 km** |
+
+So on dense surfaces every pin sat within a few hundred meters–2 km regardless of the chosen radius — exactly „arată doar până în 5 km ceva de genul". Wiring was NOT the cause: the old request did carry the selected `radius`; the response just silently capped the pin set at the 200 page boundary (`distanceOrder.slice(page*size,(page+1)*size)` in `lib/places-query.ts`). Pan never refetched because the query URL was keyed to `geo.center` only — the leaflet viewport was invisible to the data layer.
+
+### Fix
+
+- `lib/places-query.ts` — `PlacesQuery.view:'cards'|'map'` + the pins branch: `view:'map'` collects every filter-passing in-radius row in the existing scan (slim pin rows `{id,name,lat,lon,address,distance,updatedAt}` — no second re-read pass) and returns `{items,total:items.length,page:0,pages:1}` — the whole radius set, no page-size ceiling.
+- `app/api/places/route.ts` — `view` validated at the boundary: `view=map` is rejected (400, the app's honest message) unless `scope=nearby` with finite center, and **rejects `pageSize`/`page` alongside `view=map`** (a paging cap on the pin request would silently cap the radius again); `view` must be `cards|map`.
+- `app/places-workspace.tsx` — in map+nearby view the request is the pins set keyed to the **map's own center** (`mapCenter??center`, `useLocationState` so a locality switch reseeds it); count header honest „N rezultate în raza de X km"; field-help states the map-center semantics + the pan refresh; the card grid + pagination are hidden in that view (the map is the presentation — „Fișe" restores the unchanged 18-per-page cards); the national (scope=all) map view keeps its existing bounded sample + cards, unchanged.
+- `app/public-map.tsx` — `onViewportSettle` optional callback: leaflet `moveend`+`zoomend` through one **400 ms debounce** notifying `getCenter()`; programmatic moves (initial `setView`, per-`viewKey` `fitBounds`, `invalidateSize`) complete synchronously and are swallowed by a microtask `quiet` guard so a refit after a radius change can never trigger a surprise refetch; `data-pins` (finite-coordinate count) on the map element for honest render telemetry.
+
+Pan mechanics end-to-end: settled gesture → debounced notify → `setMapCenterFromMap` (rounded to the app's 3-decimal geographic grid, deduped — a zoom that keeps the center is a no-op) → pins URL changes → `useSource` aborts the in-flight request (url-change cleanup — the cancel requirement) and fetches the new center; byte-identical responses hit the ios-lag wave's session SWR (no second render), a different center is a different URL = fresh fetch, exactly as that wave designed.
+
+### TDD evidence — RED → GREEN → REFACTOR (all four units watched failing first)
+
+- **e2e leg (a)** (rewritten `e2e/places-workspace.spec.ts` "the map view serves every in-radius pin…"): RED — `waitForResponse` for a `view=map` request timed out at 60 s (the wiring did not exist; old code sent `pageSize=200`). GREEN — request carries `scope=nearby&radius=100&view=map` + `lat/lon`, **no `pageSize`, no `page`**; response `items.length===total` (861 items at 100 km), farthest pin 99+ km from the center (> the 2.02 km the old 200-slice covered); `.public-map[data-pins]` equals the served total; back on „Fișe" the page size is 18 again (Builder-A's cards contract kept for both directions).
+- **e2e validation leg** (new): RED — `view=map&scope=all`, `view=map&pageSize=200`, `view=map&page=0`, `view=map&radius=101`, `view=bogus` all returned 200 against the old route. GREEN — all five 400 with `{error:'Alege o localitate și filtre valide.'}`; a valid pins request serves `items===total`, `pages:1`; the plain `pageSize=200` card request still works (mobile context, CDP touch-drag/pinch helpers copied from the touch-gestures leaflet leg).
+- **e2e pan leg** (new, mobile 390×844 isMobile hasTouch): RED — `data-pins` attribute missing. GREEN — initial pins request → `data-pins` = served total; one CDP touch drag moves the map ≈138 km → exactly **one** new `view=map` request whose center differs (> 25 km), the new zone's pins render (`data-pins` = new served total, items===total); 1.6 s of silence after (one drag = one fetch); a two-finger pinch around the same center (zoom-only) fires **zero** additional pin requests.
+- **battery leg** (`scripts/verify-geographic-scope.mjs`, after the pageSize-prefix leg): RED — `assert.equal(pins.items.length,pins.total)` failed `18 !== 1457` (view unknown, the query fell through to the 18-page). GREEN — `queryPlaces(… view:'map')` around Cluj returns every in-radius cultura element (`items===total>200`, every `distance<=100`, farthest > 50 km) and the 18-item list page stays its distance-sorted prefix; the old pageSize=200-vs-18 prefix leg kept (still the national-sample contract, sentence updated to say so).
+
+### Probe evidence (`probe/nearby-map-probe.mjs` + `nearby-map-probe.json` + `nearby-map-pan-after.png`, own dev server, killed after)
+
+- Radius legs (cultura, default București center, map view): `radius=5` → served **353** = `data-pins` 353, farthest pin **5.0 km**; `radius=50` → **538** = 538, span **49.7 km**; `radius=100` → **858** = 858, span **99.8 km**. (Before: the map-compliance wave's own probe measured `pageSize:200, items: 200 of total 1466` at radius 100 — a 23.7 km cluster; the offline table above is the before-evidence for the other densities.)
+- Pan sequence (all at radius 100): drag NE 137.6 km → **1** request, center (43.421, 27.103), 33/33 pins rendered; drag N 130 km → 1 request, (44.590, 27.103), 763/763; drag NW 143.4 km → 1 request, (45.675, 28.092), 317/317. One gesture — one fetch — the new zone's own pins, every time. (An earlier probe draft landed one drag in Bulgaria and got an honest 0 — kept as a finding, not hidden: the empty zone renders 0 pins and the count label says 0; the probe was fixed to expect the served total, including 0.)
+- Probe-method finding (my own measurement bug, fixed in-session): the first draft interacted before `main#vcontent[data-view=explore]` settled — the first paint is the home tree, which renders its own `places-workspace`; the interaction died with that tree's unmount and the selects silently reverted. The e2e legs never trip this because they assert `data-view` first; the probe now does too.
+
+### Files modified (mine only — the corpus/binary diffs in the tree belong to the parallel waves)
+
+`lib/places-query.ts` (pins branch + `PlacePin`), `app/api/places/route.ts` (`view` boundary validation), `app/places-workspace.tsx` (pins URL + mapCenter + honest labels + cards hidden in pin view + mapCenter reset on filter reset), `app/public-map.tsx` (settle notify + quiet guard + `data-pins`), `e2e/places-workspace.spec.ts` (rewritten map leg + 2 new legs + gesture helpers), `scripts/verify-geographic-scope.mjs` (battery pins leg + truth sentences), `README.md` (one sentence in the places radius paragraph — the pin view has no paging ceilings, pan refetch, cards stay paginated), `probe/nearby-map-probe.*` + `nearby-map-pan-after.png`.
+
+### Gates (run this session, on the final tree)
+
+- `corepack pnpm exec tsc --noEmit` → **0 errors**.
+- `corepack pnpm lint` → **0 errors, 115 warnings = baseline exactly** (my 6 touched files: 0 errors, 8 pre-existing warnings).
+- `node scripts/verify-geographic-scope.mjs` → **×2 exit 0** (consecutive runs; both include the new "Map pin sets checked" leg).
+- `node scripts/verify-ro-text.mjs` → **exit 0** (the new Romanian copy passes the numeral/diacritic scan).
+- `corepack pnpm test:e2e` full suite → **153 passed, 0 failed** (baseline 151 + 2 new tests; the rewritten map test replaced its predecessor 1:1). No flakes this run; the neighboring map surfaces (touch-gestures leaflet leg, imobiliare ortho legs, map-markers, place-image-stability) all green.
+
+### Four-lens self-review
+
+- **Completeness**: both user reports fixed at the source (the pin set is the whole radius; pan refetches the new center); every mission item delivered incl. probe evidence; no stubs or TODOs.
+- **Quality**: the pins contract mirrors the repo's validation voice (reject, never clamp — paging params alongside `view=map` are 400s, not ignored); `countNoun` grammar in the honest label; `useLocationState` semantics reused for geo-key reseeding; fit/refit suppression documented by a business-rule comment; SWR interplay is exactly what the ios-lag wave designed (byte-identical → no re-render; new center → new URL → fresh fetch).
+- **Discipline**: stayed inside my partition (the `app/page.tsx` and corpus diffs in the tree are the parallel waves' uncommitted work — untouched); the battery leg update was required by the ×2 gate's own contract (it pinned the map-page behavior this fix changes); README got exactly one sentence.
+- **Testing**: all four test units observed RED for the documented reasons before any production code; the full suite is green with the two new legs included; the probe cross-checks DOM telemetry (`data-pins`), network truth (params + totals) and geometry (spans) independently.
+
+### Reservations (small, stated)
+
+1. **local-all at radius 100 km around a big city serves/renders ~23–42k pins** (measured 23,182 Cluj / 41,622 București offline; probe ran cultura). One local request, canvas rendering — desktop-correct, but a low-end phone panning that map will feel it. No silent cap by design; a future clustering/thinning decision would need its own honest-disclosure design.
+2. The nearby map view no longer shows the card grid + pagination (the map is the view; „Fișe" is one tap away). The national map view keeps cards under the map — an intentional asymmetry: the two scopes have different contracts (full radius set vs bounded national sample), each labeled honestly.
+3. The screenshot (`nearby-map-pan-after.png`) was captured but not visually inspected in-session (no image input) — the DOM/URL/count assertions above are the probe's evidence.
+4. `/api/places` `view=map` responses for the biggest sets are multi-MB JSON (uncompressed locally; the platform compresses text responses in transit). Bounded by the corpus, measured, honest.
+
+**Status: DONE** — root cause measured (nearest-200 slice capping the visible radius at 0.3–23.7 km depending on density), the honored-radius pin set wired with no silent caps (validated boundary, honest labels), pan-aware debounced refetch from the map's own center (cancel-in-flight, byte-identical no-op), all gates green: tsc 0 / lint 0 errors·115 warnings / verify-geographic-scope ×2 exit 0 / verify-ro-text 0 / full e2e **153 passed**.

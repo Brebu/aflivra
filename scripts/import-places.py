@@ -6,8 +6,7 @@ This is a derived ODbL database, separate from official registries. No Overpass
 public instance is used as an application backend. Writes only after validation.
 """
 
-import argparse, collections, datetime, hashlib, json, math, pathlib, shutil, tempfile, unicodedata
-import osmium
+import argparse, collections, datetime, hashlib, json, math, pathlib, re, shutil, tempfile, unicodedata
 
 HEALTH = {
     "hospital": "Spitale",
@@ -65,6 +64,75 @@ TRANSPORT = {
     "charging_station": "Încărcare electrică",
     "fuel": "Benzinării",
 }
+
+ATTRACTION_LABEL = "Locuri de vizitat"
+# English common words found in actual junk attraction names of the national
+# corpus (audit 2026-10); a name made entirely of these is a descriptive dump,
+# not an article title. Kept intentionally narrow — mirrored in scripts/
+# verify-model-contracts.mjs (LEG 1) and scripts/recover-places-attractions.py.
+ATTRACTION_ENGLISH_WORDS = {
+    "enclosure",
+    "cliff",
+    "peninsula",
+    "viewpoint",
+    "waterfall",
+    "windmill",
+    "windmills",
+    "barn",
+    "wagons",
+    "with",
+    "floating",
+    "mill",
+    "fresh",
+    "meat",
+    "red",
+    "pole",
+    "gravity",
+    "hill",
+    "former",
+    "mine",
+    "nude",
+    "beach",
+    "ski",
+    "slope",
+    "the",
+    "of",
+    "and",
+    "a",
+    "sign",
+    "ruins",
+    "fort",
+    "island",
+    "bridge",
+    "tower",
+    "cave",
+    "spring",
+    "lake",
+    "river",
+    "forest",
+    "park",
+    "garden",
+}
+# Audited singletons the generic classes cannot catch without overreach.
+ATTRACTION_EXPLICIT_JUNK = {
+    "partie schi - ski slope",
+    "former mine-Valea Blaznei",
+    "NICOSMAIL",
+    "Ot11378 campu mare",
+    "Traseu Manastirea Magarul, la dreapta dupa canton",
+}
+ATTRACTION_ECHO_TAGS = (
+    "man_made",
+    "historic",
+    "natural",
+    "landuse",
+    "leisure",
+    "tourism",
+    "amenity",
+    "waterway",
+    "building",
+    "barrier",
+)
 
 
 def classify(t):
@@ -200,6 +268,63 @@ def norm(s):
     )
 
 
+def valid_public_attraction_name(name, t):
+    """A public attractions article ("Locuri de vizitat") needs a real, presentable name.
+
+    Rejects the junk classes audited in the national corpus (2026-10): entries
+    whose shipped name is the subcategory label itself (unnamed features whose
+    name fell back to the label), English leading-ordinal descriptors
+    ("3rd enclosure"), OSM fixme artifacts, names that echo a structural tag
+    value ("windmill" for man_made=windmill), pure-English common-word
+    descriptive phrases and route-directions sentences. Scoped to attractions
+    only — every other subcategory keeps shipping exactly as before.
+    """
+    n = norm(name)
+    if n == norm(ATTRACTION_LABEL):
+        return False
+    if re.match(r"^[0-9]+(st|nd|rd|th)\b", name.strip(), re.IGNORECASE):
+        return False
+    if re.search(r"fixme", name, re.IGNORECASE):
+        return False
+    for key in ATTRACTION_ECHO_TAGS:
+        value = t.get(key)
+        if value and norm(value) == n:
+            return False
+    if name in ATTRACTION_EXPLICIT_JUNK:
+        return False
+    tokens = [
+        norm(token)
+        for token in re.split(
+            r"[^a-zA-Z\u00C0-\u024F\u0391-\u03C9\u0400-\u04FF]+", name
+        )
+        if token
+    ]
+    if tokens and all(token in ATTRACTION_ENGLISH_WORDS for token in tokens):
+        return False
+    if re.search(r"\bla dreapta\b|\bla st(â|a)nga\b", name, re.IGNORECASE):
+        return False
+    return True
+
+
+def apply_attraction_gate(t, types, gate):
+    """Strip the attractions type from records without a valid public attraction
+    name; the record survives in its other categories (an unnamed utility POI
+    keeps shipping there by design) and is dropped entirely when nothing
+    remains. Every rejection is counted for the build report."""
+    if not any(label == ATTRACTION_LABEL for _, label in types):
+        return types
+    raw = t.get("name:ro") or t.get("name") or t.get("brand") or t.get("operator")
+    if raw and valid_public_attraction_name(raw, t):
+        return types
+    kept = [x for x in types if x[1] != ATTRACTION_LABEL]
+    gate["attractions-rejected"] += 1
+    if kept:
+        gate["attraction-type-stripped"] += 1
+    else:
+        gate["records-dropped"] += 1
+    return kept
+
+
 def mean(points):
     if not points:
         return None
@@ -210,6 +335,11 @@ def mean(points):
 
 
 def main():
+    # The PBF-processing dependency loads only on the national build path; the
+    # attractions gate (and the recovery driver importing this module) must stay
+    # importable where pyosmium is not installed.
+    import osmium
+
     p = argparse.ArgumentParser()
     p.add_argument("--pbf", required=True)
     p.add_argument("--metadata", required=True)
@@ -241,6 +371,7 @@ def main():
     records = []
     cities = []
     stats = collections.Counter()
+    gate = collections.Counter()
     unlocated = 0
 
     def add(typ, ident, t, types, point, updated, version):
@@ -250,6 +381,9 @@ def main():
             return
         lat, lon = point
         if not (43 <= lat <= 49.2 and 20 <= lon <= 31):
+            return
+        types = apply_attraction_gate(t, types, gate)
+        if not types:
             return
         name = (
             t.get("name:ro")
@@ -465,6 +599,10 @@ def main():
             )
             index.append(entry)
     write(stage / "index.json", {"items": index})
+    print(
+        json.dumps({"attractionGate": dict(gate)}, ensure_ascii=False),
+        flush=True,
+    )
     import subprocess, sys
 
     subprocess.run(

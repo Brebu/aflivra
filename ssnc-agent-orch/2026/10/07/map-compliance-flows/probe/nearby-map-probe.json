@@ -1,0 +1,159 @@
+{
+  "radiusLegs": [
+    {
+      "radiusKm": 5,
+      "requestParams": "category=cultura&q=&sub=&contact=&scope=nearby&radius=5&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "servedTotal": 353,
+      "dataPins": "353",
+      "pinSpanKm": 5
+    },
+    {
+      "radiusKm": 50,
+      "requestParams": "category=cultura&q=&sub=&contact=&scope=nearby&radius=50&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "servedTotal": 538,
+      "dataPins": "538",
+      "pinSpanKm": 49.7
+    },
+    {
+      "radiusKm": 100,
+      "requestParams": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "servedTotal": 858,
+      "dataPins": "858",
+      "pinSpanKm": 99.8
+    }
+  ],
+  "panSequence": [
+    {
+      "step": 1,
+      "drag": [
+        -90,
+        -140
+      ],
+      "from": {
+        "lat": 44.427,
+        "lon": 26.102
+      },
+      "to": {
+        "lat": 43.421,
+        "lon": 27.103
+      },
+      "centerDeltaKm": 137.6,
+      "newPinsRequests": 1,
+      "pinsRendered": 33,
+      "servedTotal": 33,
+      "requestParams": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=43.421&lon=27.103"
+    },
+    {
+      "step": 2,
+      "drag": [
+        0,
+        144
+      ],
+      "from": {
+        "lat": 43.421,
+        "lon": 27.103
+      },
+      "to": {
+        "lat": 44.59,
+        "lon": 27.103
+      },
+      "centerDeltaKm": 130,
+      "newPinsRequests": 1,
+      "pinsRendered": 763,
+      "servedTotal": 763,
+      "requestParams": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=44.590&lon=27.103"
+    },
+    {
+      "step": 3,
+      "drag": [
+        -90,
+        140
+      ],
+      "from": {
+        "lat": 44.59,
+        "lon": 27.103
+      },
+      "to": {
+        "lat": 45.675,
+        "lon": 28.092
+      },
+      "centerDeltaKm": 143.4,
+      "newPinsRequests": 1,
+      "pinsRendered": 317,
+      "servedTotal": 317,
+      "requestParams": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=45.675&lon=28.092"
+    }
+  ],
+  "pinsRequests": [
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=all&radius=15&sort=name&photos=false&page=0&lat=44.427&lon=26.102",
+      "status": 200,
+      "total": 8540,
+      "items": 18,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=5&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "status": 200,
+      "total": 353,
+      "items": 353,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=5&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "status": 200,
+      "total": 353,
+      "items": 353,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=50&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "status": 200,
+      "total": 538,
+      "items": 538,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=50&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "status": 200,
+      "total": 538,
+      "items": 538,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "status": 200,
+      "total": 858,
+      "items": 858,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=44.427&lon=26.102",
+      "status": 200,
+      "total": 858,
+      "items": 858,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=43.421&lon=27.103",
+      "status": 200,
+      "total": 33,
+      "items": 33,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=44.590&lon=27.103",
+      "status": 200,
+      "total": 763,
+      "items": 763,
+      "error": null
+    },
+    {
+      "url": "category=cultura&q=&sub=&contact=&scope=nearby&radius=100&sort=name&photos=false&view=map&lat=45.675&lon=28.092",
+      "status": 200,
+      "total": 317,
+      "items": 317,
+      "error": null
+    }
+  ]
+}

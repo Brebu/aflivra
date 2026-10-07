@@ -12,6 +12,7 @@ import courtInstitutions from '@/public/courts/institutions.json';
 import {xmlChildren,xmlChild} from './source-xml';
 import type {CourtQuery} from '../court-query';
 import {rememberCourtReferences} from './court-references';
+import {upstreamDiacriticLoss,DIACRITIC_LOSS_NOTE} from '../court-history';
 export type {CourtQuery} from '../court-query';
 
 // Both public WSDL contracts advertise HTTP. These are server-side, read-only
@@ -96,7 +97,8 @@ export function parseCourtSearch(raw:string,operation:CourtOperation='CautareDos
   return{id:number+'|'+court+'|'+createHash('sha256').update(JSON.stringify(item)).digest('hex'),...item};
  });
  const items=uniqueRecords(rows,r=>r.id);
- return{publishedAt:items.map(x=>x.modified).filter(Boolean).sort().at(-1)||null,data:{items,returnedRecords:records.length,hearingCount:items.reduce((total,item)=>total+item.hearings.length,0),sourceLimit:1000,limitReached:records.length>=1000,historyComplete:false,capabilities:{partyNames:true,hearingSummary:true,judgmentText:false,lawyerField:false},note:'Sunt afișate toate fișele și ședințele din răspunsul primit. Serviciul public nu garantează istoricul complet al dosarului: înregistrările din arhiva pasivă și cele confidențiale pot lipsi. Fișele de la fond, apel sau recurs sunt păstrate separat. Textul integral al hotărârii și un câmp distinct pentru avocat nu sunt incluse.'}};
+ const diacriticsLost=upstreamDiacriticLoss(JSON.stringify(items));
+ return{publishedAt:items.map(x=>x.modified).filter(Boolean).sort().at(-1)||null,data:{items,returnedRecords:records.length,hearingCount:items.reduce((total,item)=>total+item.hearings.length,0),sourceLimit:1000,limitReached:records.length>=1000,historyComplete:false,capabilities:{partyNames:true,hearingSummary:true,judgmentText:false,lawyerField:false},note:'Sunt afișate toate fișele și ședințele din răspunsul primit. Serviciul public nu garantează istoricul complet al dosarului: înregistrările din arhiva pasivă și cele confidențiale pot lipsi. Fișele de la fond, apel sau recurs sunt păstrate separat. Textul integral al hotărârii și un câmp distinct pentru avocat nu sunt incluse.'+(diacriticsLost?' '+DIACRITIC_LOSS_NOTE:'')}};
 }
 export async function loadCourtSearch(query:CourtQuery):Promise<Loaded>{
  const deadline=Date.now()+25000,loaded:Loaded[]=[],checks:{operation:CourtOperation;status:'ok'|'failed';records?:number;hearings?:number}[]=[],warnings:string[]=[];
