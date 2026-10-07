@@ -1,0 +1,96 @@
+[
+  {
+    "tag": "A-inventory",
+    "ready": true,
+    "pageErrors": [],
+    "pinCount": 0,
+    "duplicateLabels": [],
+    "sidebarRows": 0,
+    "ateneul": [],
+    "peles": [],
+    "sinaia": [],
+    "cascadaBigar": [],
+    "izbuculBigar": [],
+    "salinaPraid": [],
+    "podulTraian": []
+  },
+  {
+    "tag": "B-desktop-cluster",
+    "ready": true,
+    "pageErrors": [],
+    "pelesPin": {
+      "transform": "translate(338.1242199999999,314.1744480000001)",
+      "box": {
+        "x": 733,
+        "y": 271,
+        "w": 132,
+        "h": 38
+      },
+      "center": [
+        798.5,
+        290.4
+      ],
+      "topAtCenter": "circle r=11 in g[Selectează Ciuha Teiului]"
+    },
+    "sinaiaPin": {
+      "transform": "translate(338.5038840000001,314.5530359999998)",
+      "box": {
+        "x": 832,
+        "y": 277,
+        "w": 28,
+        "h": 28
+      },
+      "center": [
+        845.7,
+        290.8
+      ],
+      "topAtCenter": "circle r=3 in g[Selectează Mănăstirea Sinaia]"
+    },
+    "centerDistanceSvgUnits": 0.54,
+    "clickAtPelesCenter": {
+      "hash": "#view=place&id=osm-n8607503223",
+      "view": "place"
+    },
+    "clickAtSinaiaCenter": {
+      "hash": "#view=place&id=osm-w1076307879",
+      "view": "place"
+    }
+  },
+  {
+    "tag": "C-mobile-tap",
+    "ready": true,
+    "pageErrors": [],
+    "tapAt": [
+      184,
+      824
+    ],
+    "hashBefore": "#view=map",
+    "hashAfterTap": {
+      "hash": "#view=map",
+      "view": "map"
+    }
+  },
+  {
+    "tag": "D-header-band",
+    "ready": true,
+    "pageErrors": [],
+    "pinCenterY": 884,
+    "headerRect": {
+      "top": 0,
+      "bottom": 77,
+      "height": 77
+    },
+    "pinUnderHeader": false,
+    "pinTop": 870,
+    "topAtPinCenter": "circle.[object SVGAnimatedString] [snd=Selectează Biserica Rotondă din Geoagiu]",
+    "headerBackground": "rgba(255, 255, 255, 0.937)",
+    "headerBackdropFilter": "blur(18px)",
+    "headerPosition": "sticky",
+    "headerZ": "35",
+    "scrollPaddingTop": "auto",
+    "clickAtLandedPinCenter": {
+      "hash": "#view=place&id=osm-w780297975",
+      "view": "place"
+    }
+  }
+]

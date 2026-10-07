@@ -247,3 +247,141 @@ Correctness proof, not just numbers:
 **Bottom line for the reporter:** the nav-latency fix (previous section) already removed the tap-lag; what remains "greoaie" is chiefly the 2 MB eager JS (registered #1/#2), the 33 MB map scroll (registered #2), and the 1–1.4 s live TTFB (registered #5) — plus the −41.3% cold-load weight reduction now shipped at the build/media tier.**
 
 **PERFORMANCE STATUS: ISSUES FOUND — 7 bottlenecks (1 fixed: cold-load −41.3% wire/−19.8% decode, font −52%, hero −57%, covers −74%; 6 registered with file:line). Gates 71/0, tsc 0, lint 0/116, build+dry-run green, media budget green (683 files, 676 binaries claimed).**
+
+## Debugger Findings (pin overlap)
+
+**Issue (verbatim from the live MCP capture):** clicking the Castelul Peleș pin on
+`#view=map` times out — `<circle r="3">` from `<g aria-label="Selectează Mănăstirea
+Sinaia" transform="translate(338.50,314.55)">` "subtree intercepts pointer events",
+with Peleș at `translate(338.12,314.17)` (Δ≈0.4 svg units). Follow-up of the
+"Raised (not fixed)" pin-overlap item from the map-markers wave.
+
+### Root cause (three compounding, all local, all in my partition)
+
+1. **Sub-pin-size stacking with paint-order hit-testing.** `RomaniaMap`
+   (`app/v2-charts.tsx` — not `public-map.tsx`: that file renders the leaflet transit
+   map; the `#view=map` pins are the hand-drawn SVG `g.map-pin` set) projects each pin
+   with `(lon−20)×61, (49.1−lat)×84` and relied on **per-`<g>` onClick**, so selection
+   follows SVG paint order. The Sinaia cluster stacks **three genuinely distinct
+   places** — Castelul Peleș ↔ Castelul Pelișor (309 m, Δ0.24u) ↔ Mănăstirea Sinaia
+   (700 m, Δ0.54u) — inside one r=11 pin disk. Mănăstirea Sinaia paints last (OSM order
+   v2-model.ts:165: editorial first, exploration.json after), so its `<circle r=3>`
+   intercepts every click aimed at the other two. Both overlap and pin size scale with
+   the same `scale(zoom)` transform and max zoom is 2.8, so **zoom can never separate
+   them** (separation/diameter ratio is scale-invariant: need zoom ≈ 22/0.54 ≈ 41×) —
+   a collision-offset scheme could not converge within this map's range.
+   Measured at desktop (CTM 1.281 px/u): the trio is **0.3–0.7 CSS px apart** —
+   pointer events land on integer pixels, so the stack is *sub-pixel* and no tap can
+   discriminate it; the honest pointer contract is deterministic
+   nearest-pin-to-clicked-point.
+2. **True same-place duplicates in the merged set** (editorial + OSM, `v2-model.ts:165`
+   `[...originalPlaces,...expandedPlaces]` = 273 entries): Ateneul Român (ed 'ateneu' ↔
+   osm-w16291602, 3 m), Castelul Bran (ed ↔ osm-r3300200, 19 m), Grădina Botanică
+   (osm-n2634651900 ↔ osm-w23557199, Bucharest, 245 m), Podul lui Traian
+   (osm-n1419098099 ↔ osm-r20620026, 973 m), Salina Praid (osm-n2180418244 ↔
+   osm-w1308097888, 880 m) — the same monument split into an OSM node plus its way or
+   relation — and Izbucul Bigăr (osm-n2295508687) 147 m from Cascada Bigăr
+   (osm-n2295508683): the spring feeds that one waterfall (two names for one visiting
+   site). The editorial duplicates (Ateneul, Bran) painted UNDER their OSM twins: two
+   identical-label pins and sidebar rows, the top one uneditable-invisible.
+3. **Sticky/fixed band interception of scroll landings.** The app header
+   (`position:sticky;top:0;z-index:35;background:rgba(255,255,255,.937)+blur(18px)`,
+   76–84 px) and the mobile bottom nav (fixed, 97 px) cover pins that
+   `scrollIntoViewIfNeeded` lands at the viewport edges: on mobile 390×844 the cluster
+   pin landed at y=824 **under the bottom bar — the tap was swallowed entirely** (probe
+   `probe-pin-overlap-before.json` leg C: no navigation at all). No z-index/pointer-events
+   change on the map can honestly fix this (the bands must own their area; the header
+   is near-opaque under blur(18px)); `html` had `scroll-padding-top/bottom: auto`, so
+   programmatic scrolls did not reserve the bands.
+
+### Fix applied (minimal, 3 pieces)
+
+- `app/v2-model.ts` (merge point) — **one pin per physical place**: the merged set now
+  drops an entry that repeats an already-kept place **under the same normalized name
+  within 1 km** (name equality + proximity = same attraction seen twice; distance is
+  required so same-name museums in different cities — Muzeul de Artă ×3,
+  Muzeul de Etnografie ×2 — correctly survive), with the editorial set always kept and
+  one attested alias: `izbucul bigar → cascada bigar` (the spring/waterfall site).
+  **6 duplicates dropped, 273 → 267 rendered pins.** Kept: editorial Ateneul+ Bran;
+  first-in-file OSM entry for Grădina Botanică, Podul lui Traian, Salina Praid,
+  Cascada Bigăr.
+- `app/v2-charts.tsx` (`RomaniaMap`) — **nearest-pin-to-point resolution** at the svg
+  layer: the per-`<g>` onClick is removed (role/button/tabIndex/aria-label/Enter-key
+  handler stay — keyboard activation of a covered pin keeps working), one `onClick` on
+  the `<svg>` inverse-maps the click through `getScreenCTM()` into map units and
+  selects the nearest pin inside `tol = max(12.5×zoom, 24 CSS px)` — at least the drawn
+  disk at any zoom plus a fixed 24 px touch slop (≈39 map units at 390 px width, a
+  ~48 px effective tap target on phones, where the drawn disk is ~13 px). Outside the
+  tolerance nothing is selected. A press→click movement guard (>5 px) stops a pan drag
+  that ends over a pin from selecting it. Deterministic: strict `<` keeps the first
+  (editorial-before-OSM) pin on exact ties.
+- `app/globals.css` — `html{scroll-padding-top:96px;scroll-padding-bottom:130px}` so
+  scrollIntoViewIfNeeded/hash landings reserve the sticky header and the mobile bottom
+  nav bands.
+
+### Verification (RED → GREEN, probe, gates)
+
+- **RED (final legs, app fixes stashed)**: 4 failed for the right reasons — Corvinilor
+  pixel click opened **Parcul Dendrologic Simeria** (12.09u apart, Simeria's disk covers
+  Corvinilor's centre and paints on top); the sub-pixel-cluster leg failed (pre-fix every
+  cluster click opened the top-painted Sinaia); duplicates rendered (273 pins, Ateneul
+  ×2, Izbucul Bigăr present); mobile tap swallowed by the bottom bar (no navigation).
+  The earlier RED run of the first formulation additionally captured the live smoking
+  gun locally: **clicks at Peleș and Pelișor centres both opened Mănăstirea Sinaia**.
+- **GREEN**: `e2e/map-markers.spec.ts` extended from 2 to **9 legs**, all passing:
+  2 originals + overlap-pair clicks (each pin of the Corvinilor↔Simeria pair opens
+  itself at its own pixel) + sub-pixel cluster (for each of Peleș/Pelișor/Sinaia, an
+  integer pixel that no other of the 267 pins is nearer to opens that place, twice per
+  pixel — determinism) + keyboard-activation of the covered Peleș pin + far-click
+  no-op guard (>22u from any pin selects nothing) + one-pin-per-place inventory
+  (267 pins; the 5 same-name + Bigăr-alias pairs single; Izbucul gone; sidebar uniques;
+  trio all present) + mobile 390×844 touch: the cluster tap navigates to one of the
+  trio, identical across 3 repeats.
+- **Probe** (`probes/probe-pin-overlap-{before,after}.json`): before — 273 pins,
+  Sinaia's r=3 dot on top at Peleș centre, mobile tap swallowed; after — 267 pins,
+  duplicates collapsed (remaining same-name labels are genuinely different-city
+  museums), clicks resolve to the pin nearest the clicked pixel (all cluster clicks
+  open cluster members; the deterministic per-pin proof is the e2e owned-pixel legs),
+  `scrollPaddingTop: 96px` live and the scrollIntoViewIfNeeded-landed pin sits at
+  y=419 clear of both bands (was y=824 under the bottom bar).
+- **Gates**: `tsc --noEmit` **0 errors**; `pnpm lint` **0 errors, 116 warnings**
+  (baseline ≤116, unchanged); `pnpm test:e2e` **78 passed / 0 failed** (71 pre-existing
+  + net 7 new map legs); `verify-model-contracts`, `verify-sweep-inventory`,
+  `verify-exploration-media`, `verify-expanded` all **exit 0 untouched-green** (they pin
+  the raw exploration.json + records corpora, which this change does not touch —
+  exploration-media itself re-states "editorial 6 + 267 = 273" raw, the dedup is
+  runtime-only at the v2-model merge); `pnpm build` green.
+
+### Conventions applied
+
+**Source:** `.specify/memory/conventions.md` — **absent in this repo** (checked before
+coding; no conventions file exists, so the repo's own CLAUDE-level conventions were
+followed: business-rule comments only, no ticket IDs in code, one focused change per
+surface, regression test first).
+
+### Files modified (mine only)
+
+- `app/v2-model.ts` — duplicate suppression at the editorial+OSM merge (business-rule
+  comment + attested alias), pins 273 → 267.
+- `app/v2-charts.tsx` — `RomaniaMap`: svg-level nearest-pin-to-point click resolution
+  with zoom/disk-aware tolerance + touch slop, pan-drag guard; per-pin keyboard
+  activation kept; per-pin onClick removed.
+- `app/globals.css` — `scroll-padding-top/bottom` on `html` (sticky header + mobile
+  bottom-nav band landings).
+- `e2e/map-markers.spec.ts` — 7 new legs (overlap pair ×2, sub-pixel cluster
+  determinism, covered-pin keyboard, far-click guard, one-pin-per-place inventory,
+  mobile cluster tap).
+- `ssnc-agent-orch/2026/10/07/ux-friction/probes/probe-pin-overlap.mjs` +
+  `-before.json` + `-after.json` + `pin-overlap-{before,after}-mobile-tap.png`.
+
+**STATUS: RESOLVED — root cause: (1) three genuinely distinct places of the Sinaia
+cluster stack inside one pin disk at every reachable zoom and selection followed SVG
+paint order (the top-painted Mănăstirea Sinaia intercepted every click aimed at Peleș
+and Pelișor), (2) the merged editorial+OSM set carried 6 true same-place duplicates
+rendering stacked or invisible twin pins, (3) scroll landings under the sticky header /
+mobile bottom nav swallowed taps; fixed by nearest-pin-to-point resolution at the svg
+layer (tolerance = drawn disk ∨ 24 px touch slop, deterministic), name+1 km duplicate
+suppression with one attested alias at the v2-model merge (273→267), and
+scroll-padding for both bands; RED (4 legs, incl. the live smoking gun reproduced:
+Peleș/Pelișor clicks → Sinaia) → GREEN (map spec 9/9, full suite 78/0), tsc 0, lint
+0/116, all corpus gates untouched-green, build green.**
