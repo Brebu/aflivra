@@ -1,6 +1,6 @@
 "use client";
 import {fetchWithServerRetry} from '@/lib/http-retry.mjs';
-import React,{useId,useState,useEffect,useRef} from 'react';
+import React,{useId,useState,useEffect,useMemo,useRef} from 'react';
 import {AreaChart,Area,BarChart,Bar,XAxis,YAxis,CartesianGrid,Tooltip,PieChart,Pie,Cell,Legend} from 'recharts';
 import {ChartContainer} from '@/components/ui/chart';
 import {Button} from '@/components/ui/button';
@@ -15,30 +15,75 @@ export function DataChart({data,keys=['value'],labels=['Valoare'],type='area',un
 }
 export type Pin={id:string;name:string;lat:number;lon:number;label?:string};
 function pinLabelLines(label:string){const lines:string[]=[];for(const word of label.split(/\s+/)){if(!lines.length||lines.at(-1)!.length+word.length>30)lines.push(word);else lines[lines.length-1]+=' '+word}return lines}
+// Stacks of genuinely distinct places (two museums 120 m apart, a castle complex)
+// can never be separated by zoom — separation and pin size scale together — so the
+// render itself separates them: every colliding pair is displaced apart along its
+// own axis (tightest pair first, one pair per pin, ties by array order), and a
+// displaced pin can land stacked on a third pin, so residual pairs repair by
+// pushing the later pin to target separation, capped to keep fans bounded. The
+// collision threshold and the offsets both track the live zoom, so pairs the zoom
+// can actually separate converge back onto their true positions.
+function declutterPins(pins:Pin[],zoom:number,width:number){
+  const k=Math.max(width,1)/640*zoom,stack=2/k,target=11.5/k,cap=23/k;
+  const pos=pins.map(p=>{const x=(p.lon-20)*61,y=(49.1-p.lat)*84;return{id:p.id,x,y,ox:0,oy:0}});
+  const disp=new Map<string,{ox:number;oy:number}>();
+  const pairs:[number,number,number][]=[];
+  for(let i=0;i<pos.length;i++)for(let j=i+1;j<pos.length;j++){const d=Math.hypot(pos[i].x-pos[j].x,pos[i].y-pos[j].y);if(d<stack)pairs.push([i,j,d])}
+  pairs.sort((a,b)=>a[2]-b[2]||a[0]-b[0]||a[1]-b[1]);
+  const taken=new Array<boolean>(pos.length).fill(false);
+  for(const[i,j,d]of pairs){
+    if(taken[i]||taken[j])continue;
+    taken[i]=taken[j]=true;
+    const a=pos[i],b=pos[j],dx=d<1e-9?1:(a.x-b.x)/d,dy=d<1e-9?0:(a.y-b.y)/d,push=Math.max(0,target-d)/2;
+    a.ox+=dx*push;a.oy+=dy*push;b.ox-=dx*push;b.oy-=dy*push;
+  }
+  for(let round=0;round<2;round++){
+    const res:[number,number,number][]=[];
+    for(let i=0;i<pos.length;i++)for(let j=i+1;j<pos.length;j++){const d=Math.hypot(pos[i].x+pos[i].ox-pos[j].x-pos[j].ox,pos[i].y+pos[i].oy-pos[j].y-pos[j].oy);if(d<stack)res.push([i,j,d])}
+    res.sort((a,b)=>a[2]-b[2]||a[0]-b[0]||a[1]-b[1]);
+    for(const[i,j]of res){
+      const b=pos[j],vx=(pos[i].x+pos[i].ox)-(b.x+b.ox),vy=(pos[i].y+pos[i].oy)-(b.y+b.oy),cur=Math.hypot(vx,vy);
+      // Earlier pushes in this round move pins: recompute the pair here, or a stale
+      // distance divides a moved delta into a non-unit vector and the push balloons.
+      if(cur>=stack)continue;
+      const dx=cur<1e-9?1:vx/cur,dy=cur<1e-9?0:vy/cur;
+      const push=Math.min(target-cur,Math.max(0,cap-Math.hypot(b.ox,b.oy)));
+      b.ox-=dx*push;b.oy-=dy*push;
+    }
+  }
+  for(const q of pos)if(q.ox||q.oy)disp.set(q.id,{ox:q.ox,oy:q.oy});
+  return disp;
+}
 export function RomaniaMap({pins,selected,onSelect,compact=false}:{pins:Pin[];selected?:string;onSelect?:(id:string)=>void;compact?:boolean}){
   const [geo,setGeo]=useState<any>(null),[zoom,setZoom]=useState(1),[pan,setPan]=useState({x:0,y:0});
   const press=useRef<{x:number;y:number}|null>(null);
+  const svgRef=useRef<SVGSVGElement|null>(null);
+  const [width,setWidth]=useState(640);
   useEffect(()=>{fetchWithServerRetry('/data/v2/map.json').then(r=>r.json()).then(setGeo).catch(()=>setGeo(false))},[]);
+  useEffect(()=>{const el=svgRef.current;if(!el||typeof ResizeObserver==='undefined')return;const ro=new ResizeObserver(()=>setWidth(el.clientWidth||640));ro.observe(el);setWidth(el.clientWidth||640);return()=>ro.disconnect()},[]);
   const project=(lon:number,lat:number)=>[(lon-20)*61, (49.1-lat)*84];
+  const offsets=useMemo(()=>declutterPins(pins,zoom,width),[pins,zoom,width]);
   // Stacked neighbours (distinct places within one pin disk at every zoom this map
   // offers) can never be separated by paint order: the click resolves to the pin
-  // nearest to the click point, and only inside a tolerance that covers the drawn
-  // disk plus a fixed touch slop, so a click far from every pin selects nothing.
+  // nearest to the click point among the RENDERED (decluttered) positions, and only
+  // inside a tolerance that covers the drawn disk plus a fixed touch slop, so a
+  // click far from every pin selects nothing.
   const resolvePin=(svg:SVGSVGElement,clientX:number,clientY:number)=>{
     const ctm=svg.getScreenCTM();if(!ctm)return;
     const click=new DOMPoint(clientX,clientY).matrixTransform(ctm.inverse());
     const tx=320*(1-zoom)+pan.x,ty=245*(1-zoom)+pan.y;
     const tol=Math.max(12.5*zoom,24*640/Math.max(svg.clientWidth,1));
     let best:Pin|null=null,bestD=tol;
-    for(const p of pins){const [x,y]=project(p.lon,p.lat);const d=Math.hypot(x*zoom+tx-click.x,y*zoom+ty-click.y);if(d<bestD){best=p;bestD=d}}
+    for(const p of pins){const [x,y]=project(p.lon,p.lat);const o=offsets.get(p.id);const d=Math.hypot((x+(o?o.ox:0))*zoom+tx-click.x,(y+(o?o.oy:0))*zoom+ty-click.y);if(d<bestD){best=p;bestD=d}}
     if(best)onSelect?.(best.id);
   };
   const path=(geometry:any)=>{const polygons=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;return polygons.map((poly:any)=>poly.map((ring:any)=>ring.map(([lon,lat]:number[],i:number)=>{const [x,y]=project(lon,lat);return (i?'L':'M')+x.toFixed(1)+','+y.toFixed(1)}).join(' ')+'Z').join(' ')).join(' ')};
-  return <div className={'romap '+(compact?'compact':'')}><div className="map-grid"/><svg viewBox="0 0 640 490" role="group" aria-label="Harta României cu repere selectabile" onPointerDown={e=>{press.current={x:e.clientX,y:e.clientY};if((e.target as Element).tagName==='svg'){e.currentTarget.setPointerCapture(e.pointerId);(e.currentTarget as any)._last={x:e.clientX,y:e.clientY}}}} onPointerMove={e=>{const s=e.currentTarget as any;if(s.hasPointerCapture(e.pointerId)&&s._last){setPan(p=>({x:p.x+(e.clientX-s._last.x)*640/s.clientWidth,y:p.y+(e.clientY-s._last.y)*490/s.clientHeight}));s._last={x:e.clientX,y:e.clientY}}}} onPointerUp={e=>{if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);(e.currentTarget as any)._last=null}} onClick={e=>{const start=press.current;if(start&&Math.hypot(e.clientX-start.x,e.clientY-start.y)>5)return;resolvePin(e.currentTarget,e.clientX,e.clientY)}}><g transform={`translate(${320*(1-zoom)+pan.x} ${245*(1-zoom)+pan.y}) scale(${zoom})`}>
+  return <div className={'romap '+(compact?'compact':'')}><div className="map-grid"/><svg ref={svgRef} viewBox="0 0 640 490" role="group" aria-label="Harta României cu repere selectabile" onPointerDown={e=>{press.current={x:e.clientX,y:e.clientY};if((e.target as Element).tagName==='svg'){e.currentTarget.setPointerCapture(e.pointerId);(e.currentTarget as any)._last={x:e.clientX,y:e.clientY}}}} onPointerMove={e=>{const s=e.currentTarget as any;if(s.hasPointerCapture(e.pointerId)&&s._last){setPan(p=>({x:p.x+(e.clientX-s._last.x)*640/s.clientWidth,y:p.y+(e.clientY-s._last.y)*490/s.clientHeight}));s._last={x:e.clientX,y:e.clientY}}}} onPointerUp={e=>{if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);(e.currentTarget as any)._last=null}} onClick={e=>{const start=press.current;if(start&&Math.hypot(e.clientX-start.x,e.clientY-start.y)>5)return;resolvePin(e.currentTarget,e.clientX,e.clientY)}}><g transform={`translate(${320*(1-zoom)+pan.x} ${245*(1-zoom)+pan.y}) scale(${zoom})`}>
 
  {geo?.features?.map((f:any)=><path key={f.properties.ADMIN} d={path(f.geometry)} fill={f.properties.ADM0_A3==='ROU'?'#d9dfe7':'#e6eaf0'} stroke="#f6f8fb" strokeWidth={2} pointerEvents="none"/>)}
  <text x="270" y="68" className="map-country">UCRAINA</text><text x="53" y="150" className="map-country">UNGARIA</text><text x="310" y="455" className="map-country">BULGARIA</text><text x="574" y="338" className="map-country sea">MAREA</text><text x="574" y="354" className="map-country sea">NEAGRĂ</text>
- {pins.map(p=>{const [x,y]=project(p.lon,p.lat),labelX=x>320?-17:16;return <g key={p.id} role="button" tabIndex={0} aria-label={'Selectează '+p.name} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect?.(p.id)}}} className={'map-pin '+(selected===p.id?'chosen':'')} transform={`translate(${x},${y})`}><title>{p.name}</title><circle r={selected===p.id?15:11} fill={selected===p.id?'#d9ad68':'#233b5d'} stroke="white" strokeWidth={3}/><circle r="3" fill="white"/>{(pins.length<=8||selected===p.id)&&<text x={labelX} y={4} textAnchor={x>320?'end':'start'} paintOrder="stroke" stroke="#edf1f7" strokeWidth={3} fill="#2b394d">{pinLabelLines(p.label||p.name).map((line,i)=><tspan x={labelX} dy={i?16:0} key={i}>{line}</tspan>)}</text>}</g>})}</g></svg>
+ {pins.some(p=>offsets.has(p.id))&&<g className="map-leaders">{pins.map(p=>{const [x,y]=project(p.lon,p.lat),o=offsets.get(p.id);return o?<line key={p.id} className="map-leader" x1={x} y1={y} x2={x+o.ox} y2={y+o.oy} stroke="#8d9aab" strokeWidth={0.5} strokeLinecap="round" vectorEffect="non-scaling-stroke" pointerEvents="none"/>:null})}</g>}
+ {pins.map(p=>{const [x,y]=project(p.lon,p.lat),o=offsets.get(p.id),rx=x+(o?o.ox:0),ry=y+(o?o.oy:0),labelX=rx>320?-17:16;return <g key={p.id} role="button" tabIndex={0} aria-label={'Selectează '+p.name} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect?.(p.id)}}} className={'map-pin '+(selected===p.id?'chosen':'')} transform={`translate(${rx},${ry})`}><title>{p.name}</title><circle r={selected===p.id?15:11} fill={selected===p.id?'#d9ad68':'#233b5d'} stroke="white" strokeWidth={3}/><circle r="3" fill="white"/>{(pins.length<=8||selected===p.id)&&<text x={labelX} y={4} textAnchor={rx>320?'end':'start'} paintOrder="stroke" stroke="#edf1f7" strokeWidth={3} fill="#2b394d">{pinLabelLines(p.label||p.name).map((line,i)=><tspan x={labelX} dy={i?16:0} key={i}>{line}</tspan>)}</text>}</g>})}</g></svg>
  {geo===false&&<span className="map-fail">Fond de carte indisponibil. Reperele rămân selectabile.</span>}
  <div className="map-controls"><Button variant="outline" size="icon" aria-label="Mărește harta" onClick={()=>setZoom(z=>Math.min(2.8,z+.3))}><Plus size={17}/></Button><Button variant="outline" size="icon" aria-label="Micșorează harta" onClick={()=>setZoom(z=>Math.max(1,z-.3))}><Minus size={17}/></Button><Button variant="outline" size="icon" aria-label="Resetează harta" onClick={()=>{setZoom(1);setPan({x:0,y:0})}}><LocateFixed size={17}/></Button></div>
  <a className="map-credit" href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noreferrer">Natural Earth · domeniu public · repere orientative</a></div>

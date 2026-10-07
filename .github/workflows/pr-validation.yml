@@ -47,6 +47,8 @@ jobs:
         run: corepack pnpm install --frozen-lockfile
       - name: Install poppler-utils (verify-export-formats re-reads generated PDFs with pdftotext)
         run: sudo apt-get update -q && sudo apt-get install -y poppler-utils
+      - name: Install the pinned Playwright chromium (verify-relay-bia browser legs; the skip is registered where absent)
+        run: corepack pnpm exec playwright install chromium --with-deps
       - name: Verify battery — README pipeline scripts that must pass
         run: |
           set -e
@@ -71,6 +73,9 @@ jobs:
           node scripts/verify-afir-relay.mjs
           node scripts/verify-relay-afir.mjs
           node scripts/verify-relay-bia.mjs
+          node scripts/verify-relay-flights.mjs
+          node scripts/verify-court-links.mjs
+          node scripts/verify-packed-seeds.mjs
       - name: verify-downloads
         run: node scripts/verify-downloads.mjs
       - name: verify-legal-pdf — runs where pypdf is installed; recorded skip otherwise

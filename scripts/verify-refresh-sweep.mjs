@@ -20,7 +20,7 @@ for(const group of map.groups){assert.deepEqual(group.members,expectedMembers[gr
 assert.equal(new Set(map.groups.flatMap(g=>g.members)).size,20);
 for(const [list,label] of [[map.seedBacked,'seedBacked'],[map.onDemand,'onDemand'],[map.ghRelayed,'ghRelayed']]){assert.ok(Array.isArray(list)&&list.length>0,label+' families must be documented');for(const entry of list){assert.ok(entry.family&&entry.reason,label+' entries carry a family and a reason')}}
 const relayed=map.ghRelayed.map(entry=>entry.family);
-assert.deepEqual(relayed,['feed.agricultura','flights.bia'],'AFIR and the BIA airport board are relayed through the GitHub Actions tour: afir.ro rejects Workers egress, and the airport protects its board with a browser challenge that rejects every server');
+assert.deepEqual(relayed,['feed.agricultura','transport.flights','flights.bia'],'AFIR, the Romanian airspace flight states and the BIA airport board are relayed through the GitHub Actions tours: afir.ro rejects Workers egress, adsb.lol answers the Workers egress with 429/503, and the airport protects its board with a browser challenge that rejects every server');
 for(const family of relayed)assert.ok(!map.groups.some(group=>group.members.includes(family)),'A relayed family is never also cron-swept: the relay is the single writer of its freshness');
 const temp=await mkdtemp(join(tmpdir(),'aflivra-sweep-')),sqlite=new DatabaseSync(':memory:');
 sqlite.exec(await readFile(join(root,'drizzle/0000_thin_demogoblin.sql'),'utf8'));

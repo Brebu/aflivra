@@ -2,7 +2,7 @@ name: bia-refresh
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "0 4 * * 2"
   workflow_dispatch: {}
 
 permissions:
@@ -16,15 +16,19 @@ jobs:
   relay:
     name: Relay the Bucharest airports day boards to the seed store
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          sparse-checkout: scripts
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Relay (exit 2 = the airport itself errored or the board shape was rejected, recorded as a warning; our own infrastructure failures stay red)
+          cache: pnpm
+      - name: Install dependencies for the browser leg (frozen lockfile — the pinned @playwright/test of the repo)
+        run: corepack pnpm install --frozen-lockfile
+      - name: Install the pinned Playwright chromium for the browser leg
+        run: corepack pnpm exec playwright install chromium --with-deps
+      - name: Relay (plain fetch fast-path; exit 2 falls through to the browser leg — the airport's browser challenge rejects non-browser callers)
         env:
           AFLIVRA_SEED_BASE: ${{ vars.AFLIVRA_SEED_BASE }}
           AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}
@@ -32,9 +36,13 @@ jobs:
           set +e
           node scripts/relay-bia.mjs
           code=$?
-          set -e
           if [ "$code" -eq 2 ]; then
-            echo "::warning::Aeroportul a răspuns cu eroare sau ruta a respins forma panoului în această tură (relaia nu a livrat panoul tocmai atunci) — reîmprospătarea reia la următoarea tură programată."
+            echo "::notice::Fetch-ul simplu a întâlnit clasa respinsă de aeroport — rulez pasul de browser (headless, versiunea fixată a depozitului)."
+            node scripts/fetch-bia-browser.mjs
+            code=$?
+          fi
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::Nici pasul de browser nu a livrat panoul în această tură (aeroportul a răspuns cu eroare, testul de browser nu a trecut sau ruta a respins forma panoului) — reîmprospătarea reia la următoarea tură programată."
             exit 0
           fi
           exit "$code"

@@ -1,0 +1,225 @@
+{
+ "widths": {
+  "354": {
+   "zoom1": {
+    "tol": 3.616,
+    "groups": 48,
+    "members": 196,
+    "histogram": {
+     "2": 15,
+     "3": 8,
+     "4": 3,
+     "5": 2,
+     "6": 20
+    },
+    "largest": 6,
+    "minPairSepCss": 9.5,
+    "worstPair": "Templul Coral ~ Unirea Shopping Center",
+    "ateneuMuzeulRenderedSepCss": 19.53,
+    "named": {
+     "Ateneul Român": [
+      [
+       "\"Curtea Veche\" - Palatul Voievodal",
+       "Palatul Voievodal Curtea Veche",
+       "Ateneul Român",
+       "Academia de Studii Economice",
+       "AFI Cotroceni",
+       "Arhivele Naționale"
+      ]
+     ],
+     "Muzeul Colecțiilor de Artă": [
+      [
+       "Parcul Cișmigiu",
+       "Rotonda Scriitorilor",
+       "Memorialul Eroilor Neamului",
+       "Muzeul \"Theodor Aman\"",
+       "Muzeul CFR",
+       "Muzeul Colecțiilor de Artă"
+      ]
+     ],
+     "Castelul Peleș": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ],
+     "Castelul Pelișor": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ],
+     "Mănăstirea Sinaia": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ]
+    }
+   },
+   "zoom2.8": {
+    "tol": 1.291,
+    "groups": 47,
+    "members": 175,
+    "histogram": {
+     "2": 19,
+     "3": 7,
+     "4": 4,
+     "5": 2,
+     "6": 15
+    },
+    "largest": 6,
+    "minPairSepCss": 10.81,
+    "worstPair": "Spitalul Filantropia ~ Sheraton Bucharest Hotel",
+    "ateneuMuzeulRenderedSepCss": 19.43,
+    "named": {
+     "Ateneul Român": [
+      [
+       "\"Curtea Veche\" - Palatul Voievodal",
+       "Palatul Voievodal Curtea Veche",
+       "Ateneul Român",
+       "Arhivele Naționale",
+       "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+       "Blocul Adriatica-Trieste"
+      ]
+     ],
+     "Muzeul Colecțiilor de Artă": [
+      [
+       "Muzeul Național al Țăranului Român",
+       "Muzeul Național Geologic",
+       "Complexul Studențesc Polizu",
+       "Muzeul CFR",
+       "Muzeul Colecțiilor de Artă",
+       "Muzeul Național \"George Enescu\""
+      ]
+     ],
+     "Castelul Peleș": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ],
+     "Castelul Pelișor": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ],
+     "Mănăstirea Sinaia": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ]
+    }
+   }
+  },
+  "820": {
+   "zoom1": {
+    "tol": 1.561,
+    "groups": 47,
+    "members": 178,
+    "histogram": {
+     "2": 20,
+     "3": 4,
+     "4": 5,
+     "5": 2,
+     "6": 16
+    },
+    "largest": 6,
+    "minPairSepCss": 9.51,
+    "worstPair": "Casa Memorială \"Ion Creangă\" ~ Cetatea Neamțului",
+    "ateneuMuzeulRenderedSepCss": 10.02,
+    "named": {
+     "Ateneul Român": [
+      [
+       "\"Curtea Veche\" - Palatul Voievodal",
+       "Palatul Voievodal Curtea Veche",
+       "Ateneul Român",
+       "Academia de Studii Economice",
+       "Arhivele Naționale",
+       "Biblioteca Națională a României"
+      ]
+     ],
+     "Muzeul Colecțiilor de Artă": [
+      [
+       "Muzeul Național al Țăranului Român",
+       "Muzeul Național Geologic",
+       "Muzeul CFR",
+       "Muzeul Colecțiilor de Artă",
+       "Muzeul Național \"George Enescu\"",
+       "Muzeul Național de Istorie Naturală \"Grigore Antipa\""
+      ]
+     ],
+     "Castelul Peleș": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ],
+     "Castelul Pelișor": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ],
+     "Mănăstirea Sinaia": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor",
+       "Mănăstirea Sinaia"
+      ]
+     ]
+    }
+   },
+   "zoom2.8": {
+    "tol": 0.557,
+    "groups": 43,
+    "members": 143,
+    "histogram": {
+     "2": 24,
+     "3": 4,
+     "4": 2,
+     "5": 3,
+     "6": 10
+    },
+    "largest": 6,
+    "minPairSepCss": 10.79,
+    "worstPair": "Muzeul Național \"George Enescu\" ~ Muzeul Național de Istorie Naturală \"Grigore Antipa\"",
+    "ateneuMuzeulRenderedSepCss": null,
+    "named": {
+     "Ateneul Român": [
+      [
+       "Hotel Cișmigiu",
+       "Teatrul de vară Alhambra",
+       "Ateneul Român",
+       "Grand Hotel Bucharest",
+       "Grand Hotel Continental",
+       "Muzeul \"Theodor Aman\""
+      ]
+     ],
+     "Castelul Peleș": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor"
+      ]
+     ],
+     "Castelul Pelișor": [
+      [
+       "Castelul Peleș",
+       "Castelul Pelișor"
+      ]
+     ]
+    }
+   }
+  }
+ }
+}

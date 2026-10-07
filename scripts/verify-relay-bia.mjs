@@ -6,15 +6,20 @@ import {join,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 
 // Relay runner gate: scripts/relay-bia.mjs is the GitHub Actions side of the BIA relay
-// (the airport protects its day board with a browser challenge that rejects every server
-// we could probe from; whether a GitHub-hosted runner is challenged too is verified at the
-// first real tour — registered honestly in README and STATUS, not assumed here). Freeze its
-// single-phase contract against a loopback double of the airport boards and the /api/seed/bia
-// route (route side is gated separately by the flights/bia cells of verify-source-errors.mjs):
-// both boards fetched before any POST, the raw board text relayed byte for byte, the empty
-// board posted honestly, the {result,arrivals,departures,dropped} confirmations, the
-// per-airport partial discipline, the exit classes 0/1/2, and the workflow + registry
-// classification — loopback only, zero real addresses.
+// (the airport protects its day board with a browser challenge that rejected every
+// server we could probe from; whether a GitHub-hosted runner is challenged too is
+// verified at the first real tour — registered honestly in README and STATUS, not
+// assumed here). Freeze its single-phase contract against a loopback double of the
+// airport boards and the /api/seed/bia route (route side is gated separately by the
+// flights/bia cells of verify-source-errors.mjs): both boards fetched before any POST,
+// the raw board text relayed byte for byte, the empty board posted honestly, the
+// {result,arrivals,departures,dropped} confirmations, the per-airport partial
+// discipline, the exit classes 0/1/2, and the workflow + registry classification.
+// The browser leg (scripts/fetch-bia-browser.mjs) runs the same URLs through the
+// repo-pinned headless Playwright chromium when the plain fetch meets the rejected
+// class: its pins freeze the pinned version, the workflow fall-through wiring, and
+// the challenge-pass/exhaustion behavior on a loopback double — loopback only, zero
+// real addresses.
 const root=resolve(import.meta.dirname,'..');
 const relay=await import(pathToFileURL(join(root,'scripts','relay-bia.mjs')));
 
@@ -33,7 +38,7 @@ const seedRouteSource=await readFile(join(root,'app/api/seed/bia','route.ts'),'u
 const boardCap=seedRouteSource.match(/const BOARD_CAP=([\d_]+);/)?.[1];
 assert.equal(Number(boardCap.replace(/_/g,'')),relay.MAX_BODY_BYTES,'the relay body cap matches the seed route board cap');
 const workflow=await readFile(join(root,'.github/workflows','bia-refresh.yml'),'utf8');
-assert.ok(workflow.includes('cron: "*/30 * * * *"'),'the relay tour runs every 30 minutes — a day board whose schedules, estimates and actuals move all day');
+assert.ok(workflow.includes('cron: "0 4 * * 2"'),'the relay tour runs weekly, Tuesday 04:00 UTC, browser leg included — the standing Actions-minutes budget rule: the worker keeps everything it can fetch itself, the egress-blocked relay class goes weekly (≈10 relay minutes/month for all three tours)');
 assert.ok(workflow.includes('workflow_dispatch'),'the relay tour can be triggered manually');
 assert.ok(workflow.includes('node scripts/relay-bia.mjs'),'the tour runs the relay script');
 assert.ok(workflow.includes('AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}'),'the token comes from the GitHub secret shared with the AFIR relay');
@@ -41,10 +46,27 @@ assert.ok(!/continue-on-error/i.test(workflow),'the tour never downgrades failur
 assert.ok(!/git (push|commit)/.test(workflow),'the tour writes no git state — the D1 store is the store');
 const groups=JSON.parse(await readFile(join(root,'lib/live','refresh-groups.json'),'utf8'));
 const members=groups.groups.flatMap(group=>group.members);
-assert.deepEqual(groups.ghRelayed.map(entry=>entry.family),['feed.agricultura','flights.bia'],'AFIR and the BIA airport board are classified ghRelayed — both sit behind relay tours, each with its own runner');
+assert.deepEqual(groups.ghRelayed.map(entry=>entry.family),['feed.agricultura','transport.flights','flights.bia'],'AFIR, the Romanian airspace flight states and the BIA airport board are classified ghRelayed — each sits behind a relay tour with its own runner');
 assert.ok(!members.includes('flights.bia'),'the relayed board family left the cron sweep: the relay is the single writer of its freshness');
 const routeHarness=await readFile(join(root,'scripts','verify-source-errors.mjs'),'utf8');
 assert.ok(routeHarness.includes("family:'flights/bia'")&&routeHarness.includes('relay-publish'),'the route-side parity matrix pins the seed/reader contract this runner consumes');
+
+// Browser-leg static pins: the plain fetch stays the fast path; when it meets the
+// airport's rejected class (exit 2), bia-refresh.yml falls through to the browser leg,
+// which runs the same board URLs through the repo-pinned headless Playwright chromium
+// and reuses the relay's own posting piece — one contract, two transports.
+const browserScript=await readFile(join(root,'scripts','fetch-bia-browser.mjs'),'utf8');
+assert.ok(browserScript.includes("from './relay-bia.mjs'"),'the browser leg reuses the relay-bia contract pieces (airports, URL builder, posting)');
+assert.ok(browserScript.includes("await import('@playwright/test')"),'the browser leg loads the repo-pinned Playwright lazily — missing dependency is a config error, not a crash');
+assert.ok(browserScript.includes('headless:true'),'the browser leg runs headless');
+assert.ok(!/\/api\/seed\/(afir|flights)/.test(browserScript),'the browser leg posts only to the BIA seed route');
+const packageJson=JSON.parse(await readFile(join(root,'package.json'),'utf8'));
+assert.ok(/^\d+\.\d+\.\d+$/.test(String(packageJson.devDependencies['@playwright/test'])),'the Playwright version is pinned exactly, no range — the browser leg launches the same pinned chromium the e2e suite runs');
+assert.ok(workflow.includes('node scripts/fetch-bia-browser.mjs'),'the airport-challenge class falls through to the browser leg');
+assert.ok(workflow.indexOf('node scripts/relay-bia.mjs')<workflow.indexOf('node scripts/fetch-bia-browser.mjs'),'the plain fetch runs first — the browser leg is the fall-through, not the default');
+assert.ok(workflow.includes('corepack pnpm install --frozen-lockfile'),'CI installs the repo dependencies the browser leg imports');
+assert.ok(workflow.includes('corepack pnpm exec playwright install chromium'),'CI installs the pinned chromium before the tour runs');
+assert.ok(/if \[ "\$code" -eq 2 \]; then[\s\S]*node scripts\/fetch-bia-browser\.mjs/.test(workflow),'the browser leg runs exactly on the plain-fetch exit class 2');
 
 // The board fixture mirrors the shape recorded by the research session (biaBoardBody of the
 // parity matrix): three usable rows plus rows without a flight number or without a direction —
@@ -218,5 +240,98 @@ await leg('token lipsă: ieșire 1 înainte de orice contact cu aeroportul sau r
   assert.ok(run.stdout.includes('AFLIVRA_REFRESH_TOKEN'),'the missing variable is named');
  }finally{await d.close()}});
 
-console.log('Runnerul de relație BIA verificat pe dublă loopback: ambele panouri citite înainte de orice predare, panoul gol și răspunsul fără corp preluate onest, avaria per aeroport raportată fără mascare, paritatea URL cu încărcătorul aplicației, confirmările sosiri/plecări/rânduri omise, terminalul fără token și clasele de ieșire 0/1/2 — fără nicio adresă reală. Forma reală a rândurilor FDS se confirmă la prima tură reală a relay-ului (probele noastre au întâlnit testul de browser al sursei); o formă schimbată iese cu clasa 2 și mesajul rutei.');
-console.log(JSON.stringify({result:'ok',legs:11,airports:relay.BIA_AIRPORTS.length,boardCap:relay.MAX_BODY_BYTES,route:relay.SEED_ROUTE}));
+console.log('Runnerul de relație BIA verificat pe dublă loopback: ambele panouri citite înainte de orice predare, panoul gol și răspunsul fără corp preluate onest, avaria per aeroport raportată fără mascare, paritatea URL cu încărcătorul aplicației, confirmările sosiri/plecări/rânduri omise, terminalul fără token și clasele de ieșire 0/1/2 — fără nicio adresă reală.');
+
+// The browser leg runs the same loopback discipline through the repo-pinned headless
+// chromium: the challenge double flips to the board after a bounded number of page
+// navigations, the never-passing double exhausts the bounded wait. Runs fully only
+// where chromium is installed (CI installs it before the battery; the skip is
+// registered honestly, the pypdf precedent).
+let browserLeg=0;
+let chromiumModule=null;try{chromiumModule=await import('@playwright/test')}catch{}
+let browserAvailable=false;
+if(chromiumModule){try{const probe=await chromiumModule.chromium.launch({headless:true});await probe.close();browserAvailable=true}catch{}}
+if(!browserAvailable){console.log('  [skip înregistrat] Chromiumul Playwright nu este instalat aici — picioarele de browser ale pasului BIA rulează integral doar unde chromium este instalat (CI îl instalează înaintea bateriei).')}
+else{
+const browserBoardText=otpBoard();
+const startBrowserDouble=async behavior=>{
+ const log={sourceHits:[],workerPosts:[]};
+ let hits=0;
+ const server=createServer((request,response)=>{
+  const url=new URL(request.url,'http://127.0.0.1');
+  if(url.pathname===relay.SEED_ROUTE){
+   let raw='';request.setEncoding('utf8');request.on('data',chunk=>raw+=chunk);
+   request.on('end',()=>{
+    const body=JSON.parse(raw);
+    log.workerPosts.push({method:request.method,authorization:request.headers.authorization||null,userAgent:request.headers['user-agent']||null,body});
+    if(behavior.workerStatus){response.writeHead(behavior.workerStatus,{'Content-Type':'application/json'});response.end(JSON.stringify({error:'Acces interzis.'}));return}
+    response.setHeader('Content-Type','application/json');
+    response.end(JSON.stringify({result:'ok',airport:body.airport,arrivals:2,departures:1,dropped:2,servedAt:new Date().toISOString()}))});
+   return}
+  hits++;
+  log.sourceHits.push({hits,airport:url.searchParams.get('airport'),language:url.searchParams.get('language'),userAgent:request.headers['user-agent']||null,accept:request.headers.accept||null,authorization:request.headers.authorization||undefined});
+  if(behavior.alwaysChallenge||hits<=behavior.challengeFlipsAfter){response.writeHead(403,{'Content-Type':'text/html','cf-mitigated':'challenge'});response.end('<html><body>Just a moment…</body></html>');return}
+  response.writeHead(200,{'Content-Type':'application/json'});response.end(browserBoardText)});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ const origin='http://127.0.0.1:'+server.address().port;
+ return {origin,log,close:async()=>{server.closeAllConnections?.();await new Promise(resolve=>server.close(resolve))}}};
+const runBrowser=overrides=>{const env={...process.env};delete env.AFLIVRA_BIA_SOURCE_BASE;delete env.AFLIVRA_SEED_BASE;delete env.AFLIVRA_REFRESH_TOKEN;delete env.AFLIVRA_BIA_CHALLENGE_WAIT_MS;Object.assign(env,overrides);
+ return new Promise(resolve=>{const child=spawn(process.execPath,[join(root,'scripts','fetch-bia-browser.mjs')],{env,stdio:['ignore','pipe','pipe']});let stdout='',stderr='';child.stdout.on('data',chunk=>stdout+=chunk);child.stderr.on('data',chunk=>stderr+=chunk);const timer=setTimeout(()=>child.kill('SIGKILL'),120_000);child.on('close',(code,signal)=>{clearTimeout(timer);resolve({status:signal!==null?null:code,stdout,stderr})})})};
+
+await leg('pasul de browser fără challenge: panourile citite prin sesiune de browser, preluate byte cu byte la rută, ieșire 0',async()=>{
+ const d=await startBrowserDouble({challengeFlipsAfter:0});
+ try{
+  const run=await runBrowser({AFLIVRA_BIA_SOURCE_BASE:d.origin,AFLIVRA_SEED_BASE:d.origin,AFLIVRA_REFRESH_TOKEN:'token-de-verificare'});
+  assert.equal(run.status,0,'exit 0 — the browser session reads both boards and the relay completes');
+  assert.equal(d.log.workerPosts.length,2,'one POST per airport');
+  for(const post of d.log.workerPosts){
+   assert.equal(post.authorization,'Bearer token-de-verificare','the seed POST authenticates');
+   assert.equal(post.body.body,browserBoardText,'the raw board text is handed over byte for byte');
+   assert.ok(relay.BIA_AIRPORTS.includes(post.body.airport),'the POST names one of the registered airports')}
+  assert.ok(d.log.sourceHits.every(hit=>hit.language==='ro'),'every request to the airport reads the board in Romanian, like the app loader');
+  assert.equal(d.log.sourceHits.length,4,'one page navigation carries the challenge carrier, then the context probe and the two board reads');
+  const boardReads=d.log.sourceHits.filter(hit=>hit.accept==='application/json');
+  assert.equal(boardReads.length,3,'the context reads (probe + both boards) ask for the JSON the app loader reads');
+  assert.ok(d.log.sourceHits.some(hit=>hit.accept!=='application/json'),'the page navigation keeps the browser own headers — it is the challenge carrier, not the board reader');
+  assert.ok(d.log.sourceHits.every(hit=>/Mozilla/.test(hit.userAgent||'')),'the browser session keeps the browser user agent — the challenge clearance is bound to it');
+  assert.ok(d.log.sourceHits.every(hit=>hit.authorization===undefined),'the worker token never reaches the airport');
+  assert.ok(run.stdout.includes('sosiri 2')&&run.stdout.includes('plecări 1'),'the route confirmations are consumed and printed');
+ }finally{await d.close()}});
+browserLeg++;
+
+await leg('challenge-ul aeroportului trece după reîncercare mărginită: sesiunea de browser ajunge la panou, ieșire 0',async()=>{
+ const d=await startBrowserDouble({challengeFlipsAfter:2});
+ try{
+  const run=await runBrowser({AFLIVRA_BIA_SOURCE_BASE:d.origin,AFLIVRA_SEED_BASE:d.origin,AFLIVRA_REFRESH_TOKEN:'token-de-verificare'});
+  assert.equal(run.status,0,'exit 0 — the bounded challenge retry clears and both boards publish');
+  assert.ok(run.stdout.includes('Testul de browser al aeroportului a trecut'),'the challenge pass is stated');
+  assert.equal(d.log.workerPosts.length,2,'both boards are still POSTed after the challenge pass');
+  assert.ok(d.log.sourceHits.length>=4,'the challenge reties and the board reads are all honest requests — primit: '+d.log.sourceHits.length);
+ }finally{await d.close()}});
+browserLeg++;
+
+await leg('challenge-ul nu trece niciodată: așteptarea mărginită renunță onest, fără livrare, ieșire 2',async()=>{
+ const d=await startBrowserDouble({alwaysChallenge:true});
+ try{
+  const started=Date.now();
+  const run=await runBrowser({AFLIVRA_BIA_SOURCE_BASE:d.origin,AFLIVRA_SEED_BASE:d.origin,AFLIVRA_REFRESH_TOKEN:'token-de-verificare',AFLIVRA_BIA_CHALLENGE_WAIT_MS:'3000'});
+  assert.equal(run.status,2,'exit 2 — the challenge never passed, informational');
+  assert.ok(Date.now()-started>=2500,'the bounded wait actually elapsed before giving up');
+  assert.equal(d.log.workerPosts.length,0,'nothing is handed over through an uncleared session');
+  assert.ok(run.stdout.includes('nu a trecut în timpul alocat'),'the honest give-up line is printed');
+ }finally{await d.close()}});
+browserLeg++;
+
+await leg('pasul de browser, autentificare respinsă la rută (HTTP 401): ieșire 1',async()=>{
+ const d=await startBrowserDouble({challengeFlipsAfter:0,workerStatus:401});
+ try{
+  const run=await runBrowser({AFLIVRA_BIA_SOURCE_BASE:d.origin,AFLIVRA_SEED_BASE:d.origin,AFLIVRA_REFRESH_TOKEN:'token-gresit-401'});
+  assert.equal(run.status,1,'exit 1 — the browser fetch worked, the seed auth did not');
+  assert.equal(d.log.workerPosts.length,1,'the relay stops at the first rejected POST');
+  assert.ok(run.stdout.includes('Autentificare respinsă'),'the auth failure is stated');
+ }finally{await d.close()}});
+browserLeg++;
+}
+
+console.log('Pasul de browser al relației BIA verificat pe dublă loopback: sesiunea chromium cu versiunea fixată a depozitului navighează pe adresa panoului, trece challenge-ul simulat prin reîncercare mărginită, citește panourile brute prin cererea de context și le predă byte cu byte la ruta de depunere; challenge-ul care nu trece niciodată consumă așteptarea mărginită și iese cu clasa 2, fără nicio livrare — fără nicio adresă reală. Trecerea reală a challenge-ului de către runner se confirmă la prima tură reală (sondele noastre au întâlnit testul de browser al sursei).');
+console.log(JSON.stringify({result:'ok',legs:11+browserLeg,browserLegs:browserLeg,airports:relay.BIA_AIRPORTS.length,boardCap:relay.MAX_BODY_BYTES,route:relay.SEED_ROUTE}));

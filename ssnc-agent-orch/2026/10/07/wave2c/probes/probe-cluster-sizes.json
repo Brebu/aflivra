@@ -1,0 +1,599 @@
+{
+ "pins": 267,
+ "width": 820,
+ "thresholds": {
+  "1.5px@zoom1": {
+   "unitThreshold": 1.171,
+   "clusterCount": 29,
+   "members": 179,
+   "histogram": {
+    "2": 13,
+    "3": 4,
+    "4": 2,
+    "5": 1,
+    "6": 4,
+    "7": 1,
+    "8": 3,
+    "73": 1
+   },
+   "biggest": [
+    {
+     "n": 73,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "AFI Cotroceni",
+      "Arhivele Naționale",
+      "Autogara Filaret",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "București Mall",
+      "Cafeneaua Veche 9",
+      "Cercul Militar Național",
+      "Circul Globus",
+      "Colegiul Național \"Gheorghe Șincai\""
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Monumentul Aripi",
+      "Muzeul de Artă Veche Apuseană Dumitru Minovici",
+      "Muzeul Național al Satului Dimitrie Gusti",
+      "Muzeul Nicolae Minovici",
+      "Palatul Primăverii (fosta locuință a lui Nicolae Ceaușescu)",
+      "Rompetrol",
+      "Stadionul Arcul de Triumf",
+      "Universitatea de Știinte Agronomice și Medicină Veterinară București"
+     ]
+    }
+   ]
+  },
+  "1.5px@zoom2.8": {
+   "unitThreshold": 0.418,
+   "clusterCount": 30,
+   "members": 136,
+   "histogram": {
+    "2": 17,
+    "3": 3,
+    "4": 1,
+    "5": 3,
+    "6": 2,
+    "7": 1,
+    "8": 2,
+    "39": 1
+   },
+   "biggest": [
+    {
+     "n": 39,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "Arhivele Naționale",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "Cafeneaua Veche 9",
+      "Cercul Militar Național",
+      "Colegiul Național \"Matei Basarab\"",
+      "Colegiul Național Gheorghe Lazăr",
+      "Corinthia",
+      "Dealul Mitropoliei",
+      "Grand Hotel Bucharest"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 7,
+     "members": [
+      "Halele Centrale",
+      "Muzeul \"Ion Luca Caragiale\"",
+      "Muzeul Ceasului \"Nicolae Simache\"",
+      "Muzeul Județean de Artă Prahova \"Ion Ionescu-Quintus\"",
+      "Muzeul Județean de Istorie și Arheologie Prahova",
+      "Muzeul Național al Petrolului",
+      "Muzeul Omului - Muzeul Județean de Științele Naturii Prahova"
+     ]
+    }
+   ]
+  },
+  "2px@zoom1": {
+   "unitThreshold": 1.561,
+   "clusterCount": 31,
+   "members": 188,
+   "histogram": {
+    "2": 15,
+    "3": 5,
+    "4": 2,
+    "5": 1,
+    "6": 4,
+    "7": 1,
+    "8": 2,
+    "83": 1
+   },
+   "biggest": [
+    {
+     "n": 83,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "AFI Cotroceni",
+      "Arhivele Naționale",
+      "Autogara Filaret",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "București Mall",
+      "Cafeneaua Veche 9",
+      "Centrul de Recreere și Dezvoltare Personală \"Conacul Golescu Grant\"",
+      "Cercul Militar Național",
+      "Circul Globus"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 7,
+     "members": [
+      "Halele Centrale",
+      "Muzeul \"Ion Luca Caragiale\"",
+      "Muzeul Ceasului \"Nicolae Simache\"",
+      "Muzeul Județean de Artă Prahova \"Ion Ionescu-Quintus\"",
+      "Muzeul Județean de Istorie și Arheologie Prahova",
+      "Muzeul Național al Petrolului",
+      "Muzeul Omului - Muzeul Județean de Științele Naturii Prahova"
+     ]
+    }
+   ]
+  },
+  "2px@zoom2.8": {
+   "unitThreshold": 0.557,
+   "clusterCount": 30,
+   "members": 153,
+   "histogram": {
+    "2": 14,
+    "3": 6,
+    "4": 2,
+    "5": 1,
+    "6": 3,
+    "7": 1,
+    "8": 2,
+    "53": 1
+   },
+   "biggest": [
+    {
+     "n": 53,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "Arhivele Naționale",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "Cafeneaua Veche 9",
+      "Cercul Militar Național",
+      "Colegiul Național \"Matei Basarab\"",
+      "Colegiul Național Gheorghe Lazăr",
+      "Complexul Studențesc Polizu",
+      "Corinthia",
+      "Dealul Mitropoliei"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 7,
+     "members": [
+      "Halele Centrale",
+      "Muzeul \"Ion Luca Caragiale\"",
+      "Muzeul Ceasului \"Nicolae Simache\"",
+      "Muzeul Județean de Artă Prahova \"Ion Ionescu-Quintus\"",
+      "Muzeul Județean de Istorie și Arheologie Prahova",
+      "Muzeul Național al Petrolului",
+      "Muzeul Omului - Muzeul Județean de Științele Naturii Prahova"
+     ]
+    }
+   ]
+  },
+  "2.5px@zoom1": {
+   "unitThreshold": 1.951,
+   "clusterCount": 29,
+   "members": 190,
+   "histogram": {
+    "2": 13,
+    "3": 5,
+    "4": 1,
+    "5": 2,
+    "6": 4,
+    "7": 1,
+    "8": 2,
+    "88": 1
+   },
+   "biggest": [
+    {
+     "n": 88,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "Aeroportul Internațional București-Băneasa „Aurel Vlaicu”",
+      "AFI Cotroceni",
+      "Arena Națională",
+      "Arhivele Naționale",
+      "Autogara Filaret",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "București Mall",
+      "Băneasa Shopping City",
+      "Cafeneaua Veche 9"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 7,
+     "members": [
+      "Halele Centrale",
+      "Muzeul \"Ion Luca Caragiale\"",
+      "Muzeul Ceasului \"Nicolae Simache\"",
+      "Muzeul Județean de Artă Prahova \"Ion Ionescu-Quintus\"",
+      "Muzeul Județean de Istorie și Arheologie Prahova",
+      "Muzeul Național al Petrolului",
+      "Muzeul Omului - Muzeul Județean de Științele Naturii Prahova"
+     ]
+    }
+   ]
+  },
+  "2.5px@zoom2.8": {
+   "unitThreshold": 0.697,
+   "clusterCount": 26,
+   "members": 161,
+   "histogram": {
+    "2": 11,
+    "3": 4,
+    "4": 1,
+    "5": 2,
+    "6": 3,
+    "7": 2,
+    "8": 2,
+    "65": 1
+   },
+   "biggest": [
+    {
+     "n": 65,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "Arhivele Naționale",
+      "Autogara Filaret",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "Cafeneaua Veche 9",
+      "Cercul Militar Național",
+      "Colegiul Național \"Gheorghe Șincai\"",
+      "Colegiul Național \"Iulia Hașdeu\"",
+      "Colegiul Național \"Matei Basarab\"",
+      "Colegiul Național \"Mihai Viteazul\""
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 7,
+     "members": [
+      "Halele Centrale",
+      "Muzeul \"Ion Luca Caragiale\"",
+      "Muzeul Ceasului \"Nicolae Simache\"",
+      "Muzeul Județean de Artă Prahova \"Ion Ionescu-Quintus\"",
+      "Muzeul Județean de Istorie și Arheologie Prahova",
+      "Muzeul Național al Petrolului",
+      "Muzeul Omului - Muzeul Județean de Științele Naturii Prahova"
+     ]
+    }
+   ]
+  },
+  "3px@zoom1": {
+   "unitThreshold": 2.341,
+   "clusterCount": 29,
+   "members": 192,
+   "histogram": {
+    "2": 12,
+    "3": 6,
+    "4": 1,
+    "5": 2,
+    "6": 4,
+    "7": 1,
+    "8": 2,
+    "89": 1
+   },
+   "biggest": [
+    {
+     "n": 89,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "Aeroportul Internațional București-Băneasa „Aurel Vlaicu”",
+      "AFI Cotroceni",
+      "Arena Națională",
+      "Arhivele Naționale",
+      "Autogara Filaret",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "București Mall",
+      "Băneasa Shopping City",
+      "Cafeneaua Veche 9"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 7,
+     "members": [
+      "Halele Centrale",
+      "Muzeul \"Ion Luca Caragiale\"",
+      "Muzeul Ceasului \"Nicolae Simache\"",
+      "Muzeul Județean de Artă Prahova \"Ion Ionescu-Quintus\"",
+      "Muzeul Județean de Istorie și Arheologie Prahova",
+      "Muzeul Național al Petrolului",
+      "Muzeul Omului - Muzeul Județean de Științele Naturii Prahova"
+     ]
+    }
+   ]
+  },
+  "3px@zoom2.8": {
+   "unitThreshold": 0.836,
+   "clusterCount": 27,
+   "members": 169,
+   "histogram": {
+    "2": 11,
+    "3": 4,
+    "4": 2,
+    "5": 2,
+    "6": 3,
+    "7": 2,
+    "8": 2,
+    "69": 1
+   },
+   "biggest": [
+    {
+     "n": 69,
+     "members": [
+      "Ateneul Român",
+      "\"Curtea Veche\" - Palatul Voievodal",
+      "Academia de Studii Economice",
+      "Arhivele Naționale",
+      "Autogara Filaret",
+      "Biblioteca Națională a României",
+      "Biserica „Sfânta Maria a Darurilor” - Bărăției",
+      "Blocul Adriatica-Trieste",
+      "Cafeneaua Veche 9",
+      "Cercul Militar Național",
+      "Circul Globus",
+      "Colegiul Național \"Gheorghe Șincai\"",
+      "Colegiul Național \"Iulia Hașdeu\"",
+      "Colegiul Național \"Matei Basarab\""
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa Albastră",
+      "Casa cu Cariatide",
+      "Muzeul de Istorie Casa Altemberger",
+      "Muzeul Național Brukenthal",
+      "Podul Minciunilor",
+      "Poliția Centrul Istoric",
+      "Turnul Dulgherilor",
+      "Turnul Sfatului"
+     ]
+    },
+    {
+     "n": 8,
+     "members": [
+      "Casa cu Cerb",
+      "Scara Acoperită",
+      "Turnul Cizmarilor",
+      "Turnul Cojocarilor",
+      "Turnul Cositorarilor",
+      "Turnul Croitorilor",
+      "Turnul Frânghierilor",
+      "Turnul Măcelarilor"
+     ]
+    },
+    {
+     "n": 7,
+     "members": [
+      "Halele Centrale",
+      "Muzeul \"Ion Luca Caragiale\"",
+      "Muzeul Ceasului \"Nicolae Simache\"",
+      "Muzeul Județean de Artă Prahova \"Ion Ionescu-Quintus\"",
+      "Muzeul Județean de Istorie și Arheologie Prahova",
+      "Muzeul Național al Petrolului",
+      "Muzeul Omului - Muzeul Județean de Științele Naturii Prahova"
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -44,6 +44,10 @@ async function postBoard(seedBase,token,airport,body){
   try{return {kind:'ok',status:response.status,payload:await response.json()}}
   catch{return {kind:'json',status:response.status}}
 }
+// Piesa de predare este partajată cu pasul de browser (fetch-bia-browser.mjs): aceeași
+// forma {airport, body}, același Bearer, aceleași clase de ieșire — un singur contract.
+export {postBoard};
+export const biaBoardUrl=(base,airport)=>base+BIA_FLIGHTS_PATH+'?'+new URLSearchParams({airport,language:'ro'});
 
 export async function relayBia(env=process.env){
   const sourceBase=((env.AFLIVRA_BIA_SOURCE_BASE||'').trim()||BIA_SOURCE_BASE_DEFAULT).replace(/\/+$/,'');
@@ -55,7 +59,7 @@ export async function relayBia(env=process.env){
   // one, and the tour publishes everything it could fetch in one pass.
   const boards=[];
   for(const airport of BIA_AIRPORTS){
-   const url=sourceBase+BIA_FLIGHTS_PATH+'?'+new URLSearchParams({airport,language:'ro'});
+   const url=biaBoardUrl(sourceBase,airport);
    try{
     const response=await fetchBounded(url,{headers:{'User-Agent':RELAY_UA,Accept:SOURCE_ACCEPT},timeoutMs:FETCH_TIMEOUT_MS});
     if(!response.ok){try{await response.body?.cancel()}catch{}line('[sursă]',airport,'a răspuns cu HTTP '+response.status+' — panoul acestui aeroport nu se predă în această tură; celălalt continuă.');boards.push({airport,body:null});continue}
