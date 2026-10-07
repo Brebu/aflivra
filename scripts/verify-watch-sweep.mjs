@@ -180,7 +180,7 @@ console.log('Leg 6 — notificarea push: antet VAPID ES256 valid, corp aes128gcm
   const payload=JSON.parse(Buffer.from(payloadText,'base64url').toString());
   assert.equal(payload.aud,'https://push.example','aud = originea endpointului de push');
   assert.ok(payload.exp>Date.now()/1000&&payload.exp<Date.now()/1000+13*3600,'experare la 12h±1h');
-  assert.match(payload.sub,/^mailto:/,'contactul RFC 8292 este mailto');
+   assert.equal(payload.sub,'mailto:contactretetesecrete@gmail.com','contactul RFC 8292 este adresa reală a operatorului, nu un internal placeholder');
   const verifyKey=await crypto.subtle.importKey('jwk',{kty:'EC',crv:'P-256',x:b64url(vapidPublicRaw.slice(1,33)),y:b64url(vapidPublicRaw.slice(33))},{name:'ECDSA',namedCurve:'P-256',hash:'SHA-256'},false,['verify']);
   assert.ok(await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},verifyKey,Buffer.from(signature,'base64url'),new TextEncoder().encode(head+'.'+payloadText)),'semnătura ES256 se verifică cu cheia publică VAPID');
   assert.equal(call.headers['content-encoding'],'aes128gcm');assert.equal(call.headers['ttl'],'86400');assert.equal(call.headers['content-type'],'application/octet-stream');
@@ -257,5 +257,46 @@ console.log('Leg 10 — curățarea șterge toate datele instalației:');
  assert.deepEqual(await watch.purgeInstall(db,install),{purged:{watches:0,events:0,subscriptions:0}},'o instalație fără date se curăță cu zero contabile, nu cu eroare');
 }
 console.log('  acord: „Șterge-mi datele” șterge integral și numai instalația care cere.');
+
+console.log('Leg 11 — retenția: urmărirea fără interacțiune de 180 de zile se curăță singură; evenimentul de 365 de zile la fel:');
+{
+  const stale='a1b2c3d4-0000-4000-8000-000000000001',fresh='a1b2c3d4-0000-4000-8000-000000000002',active='a1b2c3d4-0000-4000-8000-000000000003';
+  const daysAgo=n=>new Date(Date.now()-n*864e5).toISOString();
+  // o urmărire de 400 de zile fără vreun eveniment — se elimină la tură;
+  await watch.addWatch(db,stale,'meteo','Cluj',null);
+  sqlite.prepare('UPDATE watch_items SET created_at=? WHERE install_id=?').run(daysAgo(400),stale);
+  // o urmărire veche dar cu activitate recentă (eveniment de acum 10 zile) — rămâne;
+  await watch.addWatch(db,active,'meteo','Ilfov',null);
+  sqlite.prepare('UPDATE watch_items SET created_at=? WHERE install_id=?').run(daysAgo(400),active);
+  sqlite.prepare('INSERT INTO watch_events (id,install_id,kind,ref,title,body,url,created_at,seen,sig) VALUES (?,?,?,?,?,?,?,?,0,?)').run('retention-active-probe',active,'meteo','Ilfov','Avertizare recentă de probă',null,'/#view=watch&event=retention-active-probe',daysAgo(10),'meteo:if:retention-probe-1');
+  // o urmărire proaspătă — rămâne.
+  await watch.addWatch(db,fresh,'meteo','Constanța',null);
+  // două evenimente de 400 de zile — se elimină la cele 365 de zile ale politicii.
+  for(let at=1;at<=2;at++)sqlite.prepare('INSERT INTO watch_events (id,install_id,kind,ref,title,body,url,created_at,seen,sig) VALUES (?,?,?,?,?,?,?,?,0,?)').run('retention-old-'+at,fresh,'meteo','Constanța','Avertizare veche de probă '+at,null,'/#view=watch&event=retention-old-'+at,daysAgo(400),'meteo:ct:retention-old-'+at);
+  await expireSources();
+  const state=await watch.runWatchSweep(db);
+  assert.ok(state);
+  assert.equal(state.retentionWatches,1,'doar urmăirea fără nicio activitate de 180+ zile se elimină');
+  assert.equal(state.retentionEvents,2,'evenimentele mai vechi de 365 de zile se elimină, numărate onest');
+  assert.ok(state.notes.some(note=>note.includes('180')),'tura înregistrează o notă de retenție cu numărul politicilor');
+  assert.equal(await count('SELECT COUNT(*) AS n FROM watch_items WHERE install_id=?',[stale]),0,'urmărirea de 400 de zile fără evenimente dispare');
+  assert.equal(await count('SELECT COUNT(*) AS n FROM watch_items WHERE install_id=?',[active]),1,'urmărirea veche cu activitate recentă rămâne');
+  assert.equal(await count('SELECT COUNT(*) AS n FROM watch_items WHERE install_id=?',[fresh]),1,'urmărirea proaspătă rămâne');
+  assert.equal(await count('SELECT COUNT(*) AS n FROM watch_events WHERE sig LIKE \'meteo:ct:retention-old%\''),0,'evenimentele de 400 de zile dispar');
+  assert.equal(await count('SELECT COUNT(*) AS n FROM watch_events WHERE sig=\'meteo:if:retention-probe-1\''),1,'evenimentul recent de probă rămâne');
+}
+console.log('  acord: 180 de zile fără interacțiune elimină urmărirea; evenimentele trăiesc maximum 365 de zile — politica și tura spun aceleași numere.');
+
+console.log('Leg 12 — numerele politicii de pe /confidentialitate sunt cele ale turei, nu ale unui text rupt de cod:');
+{
+  const policy=await readFile(join(root,'app/confidentialitate/page.tsx'),'utf8');
+  assert.ok(policy.includes(String(watch.WATCH_INACTIVE_DAYS)+' de zile'),'pagina spune numărul exact de zile de inactivitate al turei ('+watch.WATCH_INACTIVE_DAYS+')');
+  assert.ok(policy.includes(String(watch.EVENT_RETENTION_DAYS)+' de zile'),'pagina spune numărul exact de zile de viață al evenimentelor ('+watch.EVENT_RETENTION_DAYS+')');
+  assert.ok(policy.includes('contactretetesecrete@gmail.com'),'pagina poartă contactul real al operatorului — același din antetul VAPID');
+  assert.ok(policy.includes('anpdcp.ro'),'pagina arată autoritatea de supraveghere');
+  for(const surface of ['app/site-footer.tsx','app/page.tsx'])
+    assert.ok((await readFile(join(root,surface),'utf8')).includes('mailto:contactretetesecrete@gmail.com'),'contactul apare și în subsol ('+surface+')');
+}
+console.log('  acord: schimbarea constantelor de retenție sau a contactului fără actualizarea paginii rupe tura de contract — intenționat.');
 console.log('Tura „Urmărește”: contract verificat — '+pushCalls.length+' trimisuri push modelate, evenimente deduplicate pe semnătură, buget și plafoane raportate onest.');
 }catch(error){console.error((error&&error.stack)||error);process.exitCode=1}finally{globalThis.fetch=originalFetch;delete globalThis.__aflivraTestEnv;delete globalThis.__aflivraResourceCopies;await rm(temp,{recursive:true,force:true})}

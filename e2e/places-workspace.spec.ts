@@ -83,4 +83,70 @@ test.describe('Places workspace', () => {
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  // The places map layer needs a map-sized page: the cards keep 18 per page while
+  // the map view requests the fuller page, so the radius selection visibly changes
+  // the pin set instead of always painting the 18 nearest cards.
+  test('the map view serves a fuller page (pageSize 200) and the cards keep 18', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/#view=explore');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'explore');
+    await waitForClientReady(page);
+
+    const workspace = page.locator('section.places-workspace').first();
+    const scopeSelect = workspace.locator('label', {hasText: 'Unde cauți'}).locator('select');
+    await scopeSelect.selectOption('nearby');
+    const radiusSelect = workspace.locator('.entity-location label', {hasText: 'Rază'}).locator('select');
+    await radiusSelect.selectOption('100');
+
+    // The list page stays 18 per page against the local API.
+    const listPage = await page.waitForResponse(response => response.url().includes('/api/places') && !response.url().includes('pageSize=') && response.request().method() === 'GET');
+    const listBody = await listPage.json();
+    expect(listBody.data.pageSize).toBe(18);
+    expect(listBody.data.items.length).toBe(Math.min(18, listBody.data.total));
+
+    // Switching to the map view requests the map-sized page.
+    const mapPageRequest = page.waitForResponse(response => response.url().includes('/api/places') && response.url().includes('pageSize=200'), {timeout: 60_000});
+    await workspace.getByRole('button', {name: 'Harta paginii'}).click();
+    const mapBody = await (await mapPageRequest).json();
+    expect(mapBody.data.pageSize).toBe(200);
+    expect(mapBody.data.items.length).toBe(Math.min(200, mapBody.data.total));
+    expect(mapBody.data.items.length, 'the map page must carry more pins than the card page').toBeGreaterThan(18);
+
+    const map = workspace.locator('.public-map');
+    await expect(map).toBeVisible({timeout: 60_000});
+    await expect(map.locator('canvas')).toBeVisible();
+
+    // Back on the cards view the page size returns to 18.
+    const cardsRequest = page.waitForResponse(response => response.url().includes('/api/places') && !response.url().includes('pageSize='));
+    await workspace.getByRole('button', {name: 'Fișe', exact: true}).click();
+    const cardsBody = await (await cardsRequest).json();
+    expect(cardsBody.data.pageSize).toBe(18);
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  // The page-size contract is validated at the boundary: only bounded integers
+  // are served an honest bigger page — everything else is rejected, never clamped.
+  test('the places page size is a validated request parameter (1–200), never silently clamped', async ({request}) => {
+    const nearby = 'category=cultura&scope=nearby&radius=100&sort=distance&lat=44.4268&lon=26.1025&page=0';
+
+    const oversized = await request.get(`/api/places?${nearby}&pageSize=200`);
+    expect(oversized.status()).toBe(200);
+    const wideBody = await oversized.json();
+    expect(wideBody.data.pageSize).toBe(200);
+    expect(wideBody.data.items.length).toBe(Math.min(200, wideBody.data.total));
+
+    const listed = await request.get(`/api/places?${nearby}`);
+    expect(listed.status()).toBe(200);
+    const listBody = await listed.json();
+    expect(listBody.data.pageSize).toBe(18);
+    expect(listBody.data.items.length).toBe(Math.min(18, listBody.data.total));
+
+    for (const invalid of ['0', '201', '500', 'abc', '18.5']) {
+      const rejected = await request.get(`/api/places?${nearby}&pageSize=${invalid}`);
+      expect(rejected.status(), `pageSize=${invalid} must be rejected, not clamped`).toBe(400);
+      expect(await rejected.json()).toEqual({error: 'Alege o localitate și filtre valide.'});
+    }
+  });
 });

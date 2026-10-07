@@ -1,0 +1,64 @@
+{
+  "startedAt": "2026-10-07T16:24:28.588Z",
+  "surfaces": [
+    {
+      "surface": "A: #view=map — RomaniaMap (SVG, Natural Earth)",
+      "static": {
+        "transform": "translate(0 0) scale(1)",
+        "touchAction": "pan-y",
+        "rect": {
+          "cx": 195,
+          "cy": 412,
+          "w": 358,
+          "h": 320,
+          "inViewport": true
+        },
+        "pointerDownTargetProbe": "see centerHit"
+      },
+      "drag1": {
+        "moveCount": 12,
+        "cancelCount": 0,
+        "scrollEvents": 0,
+        "scrollYDelta": 0,
+        "transformBefore": "translate(0 0) scale(1)",
+        "transformAfter": "translate(0 0) scale(1)",
+        "panRegistered": false
+      },
+      "dragVertical": {
+        "cancelCount": 1,
+        "scrollEvents": 0,
+        "scrollYDelta": 0,
+        "transformBefore": "translate(0 0) scale(1)",
+        "transformAfter": "translate(0 0) scale(1)",
+        "panRegistered": false
+      },
+      "pinch": {
+        "touchTwoFingerMove": 10,
+        "cancelCount": 2,
+        "transformBefore": "translate(0 0) scale(1)",
+        "transformAfter": "translate(0 0) scale(1)",
+        "zoomBefore": 1,
+        "zoomAfter": 1,
+        "zoomRegistered": false
+      },
+      "centerHit": {
+        "tag": "P",
+        "cls": "",
+        "text": "Localizarea nu a fost permisă. Folosim România și București; poți alege localita",
+        "html": "<p role=\"status\">Localizarea nu a fost permisă. Folosim România și București; poți alege localitatea manual.</p>"
+      },
+      "svgHitAtCenter": "P > DIV.location-control > DIV.vwrap > MAIN > DIV.v2 > BODY.antialiased",
+      "dragTargets": {
+        "note": "from the drag1 pointer stream, distinct pointerdown tags",
+        "tags": [
+          "P"
+        ]
+      }
+    },
+    {
+      "surface": "B: #view=domain&id=mediu (places tab) — leaflet PublicMap (OSM tiles)",
+      "error": "TimeoutError: page.waitForSelector: Timeout 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.public-map .leaflet-container')\u001b[22m\n"
+    }
+  ],
+  "finishedAt": "2026-10-07T16:25:18.848Z"
+}

@@ -3,10 +3,12 @@ import {normalizeSearch} from './live/query';
 import {publicImageUrl} from './live/media';
 export type AssetProof={file:string;bytes:number;sha256:string;start?:number;count?:number};
 export type PlacesManifest={schema:string;count:number;fetchedAt:string;dataAsOf:string;note:string;sourceUrl:string;licenseUrl:string;attribution:string;categories:Record<string,number>;subcategories:Record<string,string[]>;cities:AssetProof;chunks:Record<string,AssetProof>;indices:Record<string,{name:AssetProof[];recent:AssetProof[]}>;spatial:{lat:number;lon:number;parts:AssetProof[]}[]};
-export type PlacesQuery={category:string;q:string;sub:string;contact:string;scope:string;lat:number;lon:number;radius:number;sort:string;page:number;photos?:boolean};
+export type PlacesQuery={category:string;q:string;sub:string;contact:string;scope:string;lat:number;lon:number;radius:number;sort:string;page:number;photos?:boolean;pageSize?:number};
 export function km(a:{lat:number;lon:number},b:{lat:number;lon:number}){const rad=Math.PI/180,dlat=(b.lat-a.lat)*rad,dlon=(b.lon-a.lon)*rad,x=Math.sin(dlat/2)**2+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dlon/2)**2;return 6371*2*Math.atan2(Math.sqrt(x),Math.sqrt(Math.max(0,1-x)))}
 export async function queryPlaces(manifest:PlacesManifest,query:PlacesQuery,read:(proof:AssetProof)=>Promise<{items:PlaceIndex[]}>) {
- const size=18,category=query.category==='local'?'local-all':query.category,terms=[...normalizeSearch(query.q).matchAll(/"([^"]+)"|(\S+)/g)].map(m=>m[1]||m[2]),center={lat:query.lat,lon:query.lon};
+ // The page size is the caller's honest choice: 18 per page for the card lists,
+ // a bounded larger page (200) when the consuming surface is the map layer.
+ const size=query.pageSize??18,category=query.category==='local'?'local-all':query.category,terms=[...normalizeSearch(query.q).matchAll(/"([^"]+)"|(\S+)/g)].map(m=>m[1]||m[2]),center={lat:query.lat,lon:query.lon};
  let parts=manifest.indices[category][query.sort==='recent'?'recent':'name'];
  if(query.scope==='nearby'){const dy=query.radius/110,dx=query.radius/(110*Math.cos(query.lat*Math.PI/180));parts=manifest.spatial.filter(c=>c.lat+1>=query.lat-dy&&c.lat<=query.lat+dy&&c.lon+1>=query.lon-dx&&c.lon<=query.lon+dx).flatMap(c=>c.parts)}
  const bare=query.scope==='all'&&!query.sub&&!query.contact&&!query.photos&&!terms.length&&query.sort!=='distance';

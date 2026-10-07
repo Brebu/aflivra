@@ -133,6 +133,92 @@ test.describe('Transit network view', () => {
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 
+  // A stale feed keeps every last-known position on the map, honestly labeled by
+  // age (the flights pattern): the map surface must not disappear behind the
+  // 120-second freshness rule — the age is the label, the positions stay drawn.
+  test('a stale operator copy keeps every vehicle position on the map, labeled „poziții de acum ~7 minute”', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    const minutes = 7;
+    const observedAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    await page.route('**/api/transport-live*', async route => {
+      const vehicle = (id: string, name: string, extra: Record<string, unknown>) => ({
+        id, routeId: 'test-route', tripId: 'test-trip', vehicleName: name, licensePlate: '',
+        lat: 44.427, lon: 26.103, stopId: '', observedAt,
+        wheelchairAccessible: null, currentStatus: 'IN_TRANSIT_TO', details: {},
+        bearing: 87, speed: 12.5, occupancy: null, occupancyPercentage: null, ...extra,
+      });
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({status: 'ok', data: {kind: 'vehicles', observedAt, isLive: false, stalenessMinutes: minutes, page: 0, pages: 1, total: 2, entityCount: 2, items: [
+          vehicle('veh-stale-1', 'Autobuzul cu direcție', {}),
+          vehicle('veh-stale-2', 'Autobuzul fără direcție', {bearing: null}),
+        ]}}),
+      });
+    });
+
+    await page.goto('/#view=domain&id=transport&tab=vehicles');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+    const workspace = page.locator('section.transit-workspace');
+    await expect(workspace).toBeVisible();
+    await expect(workspace.getByRole('heading', {level: 2, name: 'Vehicule în circulație'})).toBeVisible();
+
+    // The record list always kept the stale copy; the map must keep it too.
+    await expect(workspace.locator('.transit-live-record')).toHaveCount(2, {timeout: 60_000});
+    await expect(workspace.locator('.public-map')).toBeVisible({timeout: 60_000});
+    // The aged positions stay drawable: the vehicle with a bearing keeps its arrow.
+    await expect(workspace.locator('.public-map [role="img"]')).toHaveCount(1);
+    await expect(workspace.locator('.public-map canvas')).toBeVisible();
+
+    // The honest age label replaces the live claim — arithmetic stays honest.
+    await expect(workspace.getByText(/poziții de acum ~7 minute/)).toBeVisible();
+    await expect(workspace.getByText(/Date recente ale operatorului/)).toHaveCount(0);
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  // The radius selector threads its value into the live request; the help copy
+  // names the active radius and keeps the honest coverage note — the radius
+  // filters, it never invents TPBI coverage beyond București–Ilfov.
+  test('the vehicles view threads the chosen radius into the live request and the honest coverage copy', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    const requests: string[] = [];
+    await page.route('**/api/transport-live*', async route => {
+      requests.push(route.request().url());
+      const now = new Date().toISOString();
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({status: 'ok', data: {kind: 'vehicles', observedAt: now, isLive: true, page: 0, pages: 1, total: 1, entityCount: 1, items: [
+          {id: 'veh-radius', routeId: 'test-route', tripId: 'test-trip', vehicleName: 'Autobuzul de rază', licensePlate: '',
+           lat: 44.427, lon: 26.103, stopId: '', observedAt: now, bearing: 87, speed: 11,
+           occupancy: null, occupancyPercentage: null, wheelchairAccessible: null, currentStatus: null, details: {}},
+        ]}}),
+      });
+    });
+
+    await page.goto('/#view=domain&id=transport&tab=vehicles');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+    const workspace = page.locator('section.transit-workspace');
+    await expect(workspace.getByRole('heading', {level: 2, name: 'Vehicule în circulație'})).toBeVisible();
+
+    // The selector defaults to 15 km and the request carries it server-side.
+    const radiusSelect = workspace.locator('label', {hasText: 'Rază'}).locator('select');
+    await expect(radiusSelect).toBeVisible({timeout: 60_000});
+    await expect.poll(() => requests.some(url => url.includes('radius=15')), {timeout: 30_000}).toBe(true);
+    await expect(workspace.locator('.field-help', {hasText: /raza de 15 km de București/})).toBeVisible();
+
+    await radiusSelect.selectOption('100');
+    await expect.poll(() => requests.some(url => url.includes('radius=100')), {timeout: 30_000}).toBe(true);
+    await expect(workspace.locator('.field-help', {hasText: /raza de 100 km de București/})).toBeVisible();
+    // The honest coverage note stays: a bigger radius never extends the network.
+    await expect(workspace.locator('.field-help', {hasText: /nu extinde acoperirea rețelei operatorului/i})).toBeVisible();
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
   // Rotation is static orientation, not animation: under prefers-reduced-motion the
   // heading marker must still render with its bearing rotation.
   test('heading markers stay rotated under prefers-reduced-motion', async ({page}) => {

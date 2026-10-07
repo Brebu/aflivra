@@ -107,4 +107,101 @@ test.describe('Tranzy live vehicles outside the TPBI coverage', () => {
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  // A stale Tranzy copy keeps its positions on the map with the honest age label —
+  // the same flights pattern: the age is labeled, the surface never disappears.
+  test('a stale Tranzy copy keeps the vehicle map rendered, labeled „poziții de acum ~9 minute”', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    const minutes = 9;
+    const observedAt = new Date(Date.now() - minutes * 60_000).toISOString();
+    await page.route('**/api/tranzy-live*', async route => {
+      const items = [
+        {id: 'tz-stale-1', routeId: '25', tripId: 'tz-trip-25', vehicleName: 'Tramvaiul păstrat', licensePlate: '',
+         lat: 46.7712, lon: 23.6236, stopId: '', observedAt, bearing: null, speed: 9.7,
+         occupancy: null, occupancyPercentage: null, wheelchairAccessible: null, currentStatus: null,
+         details: {label: 'Tramvaiul păstrat'}},
+        {id: 'tz-stale-2', routeId: '30', tripId: 'tz-trip-30', vehicleName: 'Autobuzul păstrat', licensePlate: '',
+         lat: 46.77, lon: 23.6, stopId: '', observedAt, bearing: null, speed: null,
+         occupancy: null, occupancyPercentage: null, wheelchairAccessible: null, currentStatus: null,
+         details: {label: 'Autobuzul păstrat'}},
+      ];
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          key: 'transport:tranzy:vehicles:1', name: 'Tranzy · CTP Cluj de verificare',
+          url: 'https://api.tranzy.ai/v1/opendata/vehicles', adapterVersion: 'tranzy.vehicles.v1',
+          status: 'fresh', publishedAt: observedAt, lastSuccessAt: observedAt, lastAttemptAt: new Date().toISOString(),
+          nextAttemptAt: null, error: null, ttlSeconds: 30,
+          data: {kind: 'vehicles', observedAt, isLive: false, stalenessMinutes: minutes, agency: 'CTP Cluj de verificare',
+            page: 0, pages: 1, total: 2, entityCount: 2, items},
+        }),
+      });
+    });
+
+    await page.goto('/#view=domain&id=transport&tab=vehicles');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+
+    await switchLocality(page, 'Cluj-Napoca');
+    const workspace = page.locator('section.transit-workspace');
+    await expect(workspace.getByRole('heading', {level: 2, name: 'Vehicule în circulație'})).toBeVisible();
+
+    // The stale positions stay listed and drawn — both marker kinds on canvas.
+    await expect(workspace.locator('.transit-live-record')).toHaveCount(2);
+    await expect(workspace.locator('.public-map')).toBeVisible({timeout: 60_000});
+    await expect(workspace.locator('.public-map canvas')).toBeVisible();
+    await expect(workspace.locator('.public-map [role="img"]')).toHaveCount(0);
+
+    // The honest age label replaces the live claim.
+    await expect(workspace.getByText(/poziții de acum ~9 minute/)).toBeVisible();
+    await expect(workspace.getByText(/Date recente ale operatorului/)).toHaveCount(0);
+    // Every kept position still names its own snapshot moment.
+    await expect(workspace.locator('.transit-live-record').first()).toContainText('Actualizat');
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  // The Tranzy vehicles view carries the same radius selector: the chosen radius
+  // threads into the live request, and the help copy keeps the honest note that a
+  // radius cannot invent a Tranzy operator for an uncovered locality.
+  test('the Tranzy vehicles view threads the chosen radius into the live request', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    const requests: string[] = [];
+    await page.route('**/api/tranzy-live*', async route => {
+      requests.push(route.request().url());
+      const now = new Date().toISOString();
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({...tranzyState([]), data: {kind: 'vehicles', observedAt: now, isLive: true, agency: 'CTP Cluj de verificare', page: 0, pages: 1, total: 1, entityCount: 1, items: [
+          {id: 'tz-radius', routeId: '25', tripId: 'tz-trip-25', vehicleName: 'Tramvaiul de rază', licensePlate: '',
+           lat: 46.7712, lon: 23.6236, stopId: '', observedAt: now, bearing: null, speed: null,
+           occupancy: null, occupancyPercentage: null, wheelchairAccessible: null, currentStatus: null,
+           details: {label: 'Tramvaiul de rază'}},
+        ]}}),
+      });
+    });
+
+    await page.goto('/#view=domain&id=transport&tab=vehicles');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+
+    await switchLocality(page, 'Cluj-Napoca');
+    const workspace = page.locator('section.transit-workspace');
+    await expect(workspace.getByRole('heading', {level: 2, name: 'Vehicule în circulație'})).toBeVisible();
+
+    const radiusSelect = workspace.locator('label', {hasText: 'Rază'}).locator('select');
+    await expect(radiusSelect).toBeVisible({timeout: 60_000});
+    await expect.poll(() => requests.some(url => url.includes('radius=15')), {timeout: 30_000}).toBe(true);
+    await expect(workspace.locator('.field-help', {hasText: /raza de 15 km de Cluj-Napoca/})).toBeVisible();
+
+    await radiusSelect.selectOption('100');
+    await expect.poll(() => requests.some(url => url.includes('radius=100')), {timeout: 30_000}).toBe(true);
+    await expect(workspace.locator('.field-help', {hasText: /raza de 100 km de Cluj-Napoca/})).toBeVisible();
+    // The honest operator note stays: the radius filters, it never invents coverage.
+    await expect(workspace.locator('.field-help', {hasText: /nu extinde acoperirea/i})).toBeVisible();
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });

@@ -1,0 +1,2715 @@
+{
+  "meta": {
+    "startedAt": "2026-10-07T17:11:26.918Z",
+    "version": 3
+  },
+  "matrix": [
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "home",
+      "sameState": true,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "note": "already on view — press keeps state"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 2019.4000000059605,
+          "tag": "svg",
+          "txt": "",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 96,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 280,
+      "barFlipMs": 46,
+      "headerFlipMs": 46,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 2719.0999999940395,
+          "tag": "svg",
+          "txt": "",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 164,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 68,
+      "barFlipMs": 15,
+      "headerFlipMs": 15,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 3250.300000011921,
+          "tag": "path",
+          "txt": "",
+          "label": "Compară",
+          "onBtn": true,
+          "x": 225,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 142,
+      "barFlipMs": 61,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "watch",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 3849.699999988079,
+          "tag": "path",
+          "txt": "",
+          "label": "Urmărite",
+          "onBtn": true,
+          "x": 289,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 24,
+      "barFlipMs": 15,
+      "headerFlipMs": null,
+      "hash": "#view=watch"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "saved",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 4316.9000000059605,
+          "tag": "svg",
+          "txt": "",
+          "label": "Salvate",
+          "onBtn": true,
+          "x": 352,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 58,
+      "barFlipMs": 51,
+      "headerFlipMs": null,
+      "hash": "#view=saved"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "menu-sheet Dashboard (settled)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true
+    },
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "menu-sheet Dashboard (fast tap at rest position during slide-in)",
+      "presses": "dismissed-or-missed",
+      "activated": false,
+      "sheetClosed": true,
+      "note": "tap issued ~60ms after open; item measured at l=388"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 7949.5999999940395,
+          "tag": "circle",
+          "txt": "",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 38,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 164,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "dashboard",
+      "sameState": true,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "note": "already on view — press keeps state"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 8749.5,
+          "tag": "svg",
+          "txt": "",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 164,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 148,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 9316,
+          "tag": "path",
+          "txt": "",
+          "label": "Compară",
+          "onBtn": true,
+          "x": 225,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 121,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "watch",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 9931.800000011921,
+          "tag": "path",
+          "txt": "",
+          "label": "Urmărite",
+          "onBtn": true,
+          "x": 289,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 19,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=watch"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "saved",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 10348.800000011921,
+          "tag": "svg",
+          "txt": "",
+          "label": "Salvate",
+          "onBtn": true,
+          "x": 352,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 78,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=saved"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "menu-sheet Dashboard (settled)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "target": "menu-sheet Dashboard (fast tap at rest position during slide-in)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true,
+      "note": "tap issued ~60ms after open; item measured at l=418"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 13850.40000000596,
+          "tag": "circle",
+          "txt": "",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 38,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 171,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 14348.59999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 96,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 333,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "map",
+      "sameState": true,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "note": "already on view — press keeps state"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 15148.199999988079,
+          "tag": "path",
+          "txt": "",
+          "label": "Compară",
+          "onBtn": true,
+          "x": 225,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 29,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "watch",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 15482.5,
+          "tag": "path",
+          "txt": "",
+          "label": "Urmărite",
+          "onBtn": true,
+          "x": 289,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 157,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=watch"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "saved",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 16065.59999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Salvate",
+          "onBtn": true,
+          "x": 352,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 18,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=saved"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "menu-sheet Dashboard (settled)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "target": "menu-sheet Dashboard (fast tap at rest position during slide-in)",
+      "presses": "dismissed-or-missed",
+      "activated": false,
+      "sheetClosed": true,
+      "note": "tap issued ~60ms after open; item measured at l=418"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 19314.80000001192,
+          "tag": "circle",
+          "txt": "",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 38,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 240,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 19814.59999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 96,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 268,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 20347.90000000596,
+          "tag": "svg",
+          "txt": "",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 164,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 50,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 20648.30000001192,
+          "tag": "path",
+          "txt": "",
+          "label": "Compară",
+          "onBtn": true,
+          "x": 225,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 29,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "watch",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 20932,
+          "tag": "path",
+          "txt": "",
+          "label": "Urmărite",
+          "onBtn": true,
+          "x": 289,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 74,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=watch"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "saved",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 21315.09999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Salvate",
+          "onBtn": true,
+          "x": 352,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 74,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=saved"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "menu-sheet Dashboard (settled)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "menu-sheet Dashboard (fast tap at rest position during slide-in)",
+      "presses": "dismissed-or-missed",
+      "activated": false,
+      "sheetClosed": true,
+      "note": "tap issued ~60ms after open; item measured at l=418"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 24431.5,
+          "tag": "circle",
+          "txt": "",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 38,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 263,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 24964.69999998808,
+          "tag": "svg",
+          "txt": "",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 96,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 147,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 25381.40000000596,
+          "tag": "svg",
+          "txt": "",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 164,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 50,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 25798.09999999404,
+          "tag": "path",
+          "txt": "",
+          "label": "Compară",
+          "onBtn": true,
+          "x": 225,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 88,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "watch",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 26164.59999999404,
+          "tag": "path",
+          "txt": "",
+          "label": "Urmărite",
+          "onBtn": true,
+          "x": 289,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 18,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=watch"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "saved",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 26448.30000001192,
+          "tag": "svg",
+          "txt": "",
+          "label": "Salvate",
+          "onBtn": true,
+          "x": 352,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 52,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=saved"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "menu-sheet Dashboard (settled)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "menu-sheet Dashboard (fast tap at rest position during slide-in)",
+      "presses": "dismissed-or-missed",
+      "activated": false,
+      "sheetClosed": true,
+      "note": "tap issued ~60ms after open; item measured at l=418"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 29481.40000000596,
+          "tag": "circle",
+          "txt": "",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 38,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 240,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 29964.59999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 96,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 171,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 30464.59999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 164,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 83,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 30847.90000000596,
+          "tag": "path",
+          "txt": "",
+          "label": "Compară",
+          "onBtn": true,
+          "x": 225,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 28,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "watch",
+      "sameState": false,
+      "presses": 0,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [],
+      "viewFlipMs": null,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=watch"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "saved",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 31347.80000001192,
+          "tag": "svg",
+          "txt": "",
+          "label": "Salvate",
+          "onBtn": true,
+          "x": 352,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 40,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=saved"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "menu-sheet Dashboard (settled)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "target": "menu-sheet Dashboard (fast tap at rest position during slide-in)",
+      "presses": "dismissed-or-missed",
+      "activated": false,
+      "sheetClosed": true,
+      "note": "tap issued ~60ms after open; item measured at l=418"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 34264.40000000596,
+          "tag": "circle",
+          "txt": "",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 38,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 240,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 34764.59999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 96,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 170,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 35231.09999999404,
+          "tag": "svg",
+          "txt": "",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 164,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 107,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 35614.19999998808,
+          "tag": "path",
+          "txt": "",
+          "label": "Compară",
+          "onBtn": true,
+          "x": 225,
+          "y": 802
+        }
+      ],
+      "viewFlipMs": 26,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "watch",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 35898.19999998808,
+          "tag": "path",
+          "txt": "",
+          "label": "Urmărite",
+          "onBtn": true,
+          "x": 289,
+          "y": 806
+        }
+      ],
+      "viewFlipMs": 41,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=watch"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "saved",
+      "sameState": true,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "note": "already on view — press keeps state"
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "menu-sheet Dashboard (settled)",
+      "presses": 1,
+      "activated": true,
+      "sheetClosed": true
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "target": "menu-sheet Dashboard (fast tap at rest position during slide-in)",
+      "presses": "dismissed-or-missed",
+      "activated": false,
+      "sheetClosed": true,
+      "note": "tap issued ~60ms after open; item measured at l=418"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "home",
+      "target": "home",
+      "sameState": true,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "note": "already on view — press keeps state"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "home",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 1334.7000000178814,
+          "tag": "BUTTON",
+          "txt": "Dashboard",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 567,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 271,
+      "barFlipMs": 44,
+      "headerFlipMs": 44,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "home",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 2008,
+          "tag": "BUTTON",
+          "txt": "Hartă",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 652,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 58,
+      "barFlipMs": 16,
+      "headerFlipMs": 16,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "home",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 2494.4000000059605,
+          "tag": "BUTTON",
+          "txt": "Compară2",
+          "label": "Compară2",
+          "onBtn": true,
+          "x": 746,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 141,
+      "barFlipMs": 61,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "home",
+      "target": "home (brand)",
+      "sameState": false,
+      "presses": 0,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [],
+      "viewFlipMs": null,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "dashboard",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 3685.2000000178814,
+          "tag": "BUTTON",
+          "txt": "Descoperă",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 464,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 289,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "dashboard",
+      "target": "dashboard",
+      "sameState": true,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "note": "already on view — press keeps state"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "dashboard",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 4566.5,
+          "tag": "BUTTON",
+          "txt": "Hartă",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 652,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 33,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "dashboard",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 5032.300000011921,
+          "tag": "BUTTON",
+          "txt": "Compară2",
+          "label": "Compară2",
+          "onBtn": true,
+          "x": 746,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 127,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "dashboard",
+      "target": "home (brand)",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [
+        {
+          "t": 5544.9000000059605,
+          "tag": "SPAN",
+          "txt": "aflivra.",
+          "label": "",
+          "onBtn": false,
+          "x": 108,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 168,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "map",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 6187.600000023842,
+          "tag": "BUTTON",
+          "txt": "Descoperă",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 464,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 329,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "map",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 6786.9000000059605,
+          "tag": "BUTTON",
+          "txt": "Dashboard",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 567,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 324,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "map",
+      "target": "map",
+      "sameState": true,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "note": "already on view — press keeps state"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "map",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 7582.800000011921,
+          "tag": "BUTTON",
+          "txt": "Compară2",
+          "label": "Compară2",
+          "onBtn": true,
+          "x": 746,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 23,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "map",
+      "target": "home (brand)",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [
+        {
+          "t": 7891.200000017881,
+          "tag": "SPAN",
+          "txt": "aflivra.",
+          "label": "",
+          "onBtn": false,
+          "x": 108,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 331,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "deep domain tab",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 8668.40000000596,
+          "tag": "BUTTON",
+          "txt": "Descoperă",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 464,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 158,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "deep domain tab",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 9075.90000000596,
+          "tag": "BUTTON",
+          "txt": "Dashboard",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 567,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 261,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "deep domain tab",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 9618.600000023842,
+          "tag": "BUTTON",
+          "txt": "Hartă",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 652,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 46,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "deep domain tab",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 9918.40000000596,
+          "tag": "BUTTON",
+          "txt": "Compară2",
+          "label": "Compară2",
+          "onBtn": true,
+          "x": 746,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 22,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "deep domain tab",
+      "target": "home (brand)",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [
+        {
+          "t": 10198.100000023842,
+          "tag": "SPAN",
+          "txt": "aflivra.",
+          "label": "",
+          "onBtn": false,
+          "x": 108,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 303,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "place profile",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 10964.5,
+          "tag": "BUTTON",
+          "txt": "Descoperă",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 464,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 166,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "place profile",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 11381.600000023842,
+          "tag": "BUTTON",
+          "txt": "Dashboard",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 567,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 256,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "place profile",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 11906.800000011921,
+          "tag": "BUTTON",
+          "txt": "Hartă",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 652,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 35,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "place profile",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 12207.600000023842,
+          "tag": "BUTTON",
+          "txt": "Compară2",
+          "label": "Compară2",
+          "onBtn": true,
+          "x": 746,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 15,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "place profile",
+      "target": "home (brand)",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [
+        {
+          "t": 12500.40000000596,
+          "tag": "SPAN",
+          "txt": "aflivra.",
+          "label": "",
+          "onBtn": false,
+          "x": 108,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 288,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "watch center",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 13243.40000000596,
+          "tag": "BUTTON",
+          "txt": "Descoperă",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 464,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 171,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "watch center",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 13712.5,
+          "tag": "BUTTON",
+          "txt": "Dashboard",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 567,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 233,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "watch center",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 14220.800000011921,
+          "tag": "BUTTON",
+          "txt": "Hartă",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 652,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 26,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "watch center",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 14509.800000011921,
+          "tag": "BUTTON",
+          "txt": "Compară2",
+          "label": "Compară2",
+          "onBtn": true,
+          "x": 746,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 84,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "watch center",
+      "target": "home (brand)",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [
+        {
+          "t": 14912.600000023842,
+          "tag": "SPAN",
+          "txt": "aflivra.",
+          "label": "",
+          "onBtn": false,
+          "x": 108,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 214,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "saved",
+      "target": "home",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 15569.40000000596,
+          "tag": "BUTTON",
+          "txt": "Descoperă",
+          "label": "Descoperă",
+          "onBtn": true,
+          "x": 464,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 266,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "saved",
+      "target": "dashboard",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 16091.200000017881,
+          "tag": "BUTTON",
+          "txt": "Dashboard",
+          "label": "Dashboard",
+          "onBtn": true,
+          "x": 567,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 132,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=dashboard"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "saved",
+      "target": "map",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 16481.5,
+          "tag": "BUTTON",
+          "txt": "Hartă",
+          "label": "Hartă",
+          "onBtn": true,
+          "x": 652,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 27,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=map"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "saved",
+      "target": "compare",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": true,
+      "rawClicks": [
+        {
+          "t": 16764.5,
+          "tag": "BUTTON",
+          "txt": "Compară2",
+          "label": "Compară2",
+          "onBtn": true,
+          "x": 746,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 84,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=compare"
+    },
+    {
+      "viewport": "desktop",
+      "entry": "saved",
+      "target": "home (brand)",
+      "sameState": false,
+      "presses": 1,
+      "activated": true,
+      "clickOnButton": false,
+      "rawClicks": [
+        {
+          "t": 17168.90000000596,
+          "tag": "SPAN",
+          "txt": "aflivra.",
+          "label": "",
+          "onBtn": false,
+          "x": 108,
+          "y": 38
+        }
+      ],
+      "viewFlipMs": 228,
+      "barFlipMs": null,
+      "headerFlipMs": null,
+      "hash": "#view=home"
+    }
+  ],
+  "dialogLegs": [
+    {
+      "viewport": "mobile",
+      "dialog": "lightbox",
+      "closeVia": "esc",
+      "activated": true,
+      "clickOnButton": true,
+      "presses": 1,
+      "unblockMs": 0,
+      "overlayGoneMs": 213,
+      "overflowRestoredMs": 13,
+      "series": [
+        "0:btn+ov+cc",
+        "13:btn+ov+cc",
+        "30:btn+ov+cc",
+        "46:btn+ov+cc",
+        "63:btn+ov+cc",
+        "79:btn+ov+cc",
+        "96:btn+ov+cc",
+        "113:btn+ov+cc",
+        "130:btn+ov+cc",
+        "147:btn+ov+cc",
+        "165:btn+cc",
+        "180:btn+cc",
+        "197:btn+cc",
+        "213:btn"
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "dialog": "lightbox",
+      "closeVia": "x",
+      "activated": true,
+      "clickOnButton": true,
+      "presses": 1,
+      "unblockMs": 0,
+      "overlayGoneMs": 242,
+      "overflowRestoredMs": 9,
+      "series": [
+        "0:btn+ov+cc",
+        "9:btn+ov+cc",
+        "26:btn+ov+cc",
+        "42:btn+ov+cc",
+        "59:btn+ov+cc",
+        "76:btn+ov+cc",
+        "92:btn+ov+cc",
+        "108:btn+ov+cc",
+        "126:btn+ov+cc",
+        "142:btn+ov+cc",
+        "159:btn+ov+cc",
+        "176:btn+ov+cc",
+        "194:btn+cc",
+        "209:btn+cc",
+        "226:btn+cc",
+        "242:btn"
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "dialog": "act-reader",
+      "closeVia": "esc",
+      "activated": true,
+      "clickOnButton": true,
+      "presses": 1,
+      "unblockMs": 0,
+      "overlayGoneMs": 231,
+      "overflowRestoredMs": 15,
+      "series": [
+        "0:btn+ov+cc",
+        "15:btn+ov+cc",
+        "31:btn+ov+cc",
+        "48:btn+ov+cc",
+        "64:btn+ov+cc",
+        "81:btn+ov+cc",
+        "98:btn+ov+cc",
+        "114:btn+ov+cc",
+        "131:btn+ov+cc",
+        "148:btn+ov+cc",
+        "165:btn+ov+cc",
+        "183:btn+cc",
+        "198:btn+cc",
+        "215:btn+cc",
+        "231:btn"
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "dialog": "act-reader",
+      "closeVia": "x",
+      "activated": true,
+      "clickOnButton": true,
+      "presses": 1,
+      "unblockMs": 0,
+      "overlayGoneMs": 225,
+      "overflowRestoredMs": 9,
+      "series": [
+        "0:btn+ov+cc",
+        "9:btn+ov+cc",
+        "26:btn+ov+cc",
+        "42:btn+ov+cc",
+        "59:btn+ov+cc",
+        "76:btn+ov+cc",
+        "92:btn+ov+cc",
+        "109:btn+ov+cc",
+        "126:btn+ov+cc",
+        "142:btn+ov+cc",
+        "159:btn+ov+cc",
+        "178:btn+cc",
+        "192:btn+cc",
+        "209:btn+cc",
+        "225:btn"
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "dialog": "cinema-film",
+      "closeVia": "esc",
+      "activated": true,
+      "clickOnButton": true,
+      "presses": 1,
+      "unblockMs": 0,
+      "overlayGoneMs": 254,
+      "overflowRestoredMs": 4,
+      "series": [
+        "0:btn+ov+cc",
+        "4:btn+ov+cc",
+        "21:btn+ov+cc",
+        "38:btn+ov+cc",
+        "54:btn+ov+cc",
+        "71:btn+ov+cc",
+        "88:btn+ov+cc",
+        "104:btn+ov+cc",
+        "121:btn+ov+cc",
+        "138:btn+ov+cc",
+        "154:btn+ov+cc",
+        "171:btn+ov+cc",
+        "189:btn+cc",
+        "204:btn+cc",
+        "221:btn+cc",
+        "238:btn+cc",
+        "254:btn"
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "dialog": "lightbox",
+      "closeVia": "esc",
+      "activated": false,
+      "clickOnButton": false,
+      "presses": "dropped-or-2+",
+      "unblockMs": null,
+      "overlayGoneMs": 215,
+      "overflowRestoredMs": 15,
+      "series": [
+        "0:+ov+cc",
+        "15:+ov+cc",
+        "31:+ov+cc",
+        "48:+ov+cc",
+        "65:+ov+cc",
+        "81:+ov+cc",
+        "98:+ov+cc",
+        "115:+ov+cc",
+        "131:+ov+cc",
+        "148:+ov+cc",
+        "165:+ov+cc",
+        "184:+cc",
+        "198:+cc",
+        "215:",
+        "231:",
+        "247:",
+        "264:",
+        "281:",
+        "298:",
+        "314:",
+        "331:",
+        "348:",
+        "364:",
+        "381:"
+      ]
+    }
+  ],
+  "backLegs": [
+    {
+      "viewport": "mobile",
+      "flow": "home → Dashboard → back → Dashboard-press",
+      "backLandedHome": true,
+      "backHash": "#view=home",
+      "backThenPressActivated": true,
+      "presses": 1
+    },
+    {
+      "viewport": "mobile",
+      "flow": "home → deep domain → back → Dashboard-press",
+      "backLandedHome": false,
+      "backThenPressActivated": true,
+      "presses": 1
+    },
+    {
+      "viewport": "desktop",
+      "flow": "home → Dashboard → back → Dashboard-press",
+      "backLandedHome": true,
+      "backHash": "#view=home",
+      "backThenPressActivated": true,
+      "presses": 1
+    },
+    {
+      "viewport": "desktop",
+      "flow": "home → deep domain → back → Dashboard-press",
+      "backLandedHome": false,
+      "backThenPressActivated": true,
+      "presses": 1
+    }
+  ],
+  "coverChecks": [
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 38,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 101,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 164,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară",
+          "x": 226,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Compară"
+        },
+        {
+          "label": "Urmărite",
+          "x": 289,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Urmărite"
+        },
+        {
+          "label": "Salvate",
+          "x": 352,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Salvate"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "entry": "dashboard",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 38,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 101,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 164,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară",
+          "x": 226,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Compară"
+        },
+        {
+          "label": "Urmărite",
+          "x": 289,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Urmărite"
+        },
+        {
+          "label": "Salvate",
+          "x": 352,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Salvate"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "entry": "map",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 38,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 101,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 164,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară",
+          "x": 226,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Compară"
+        },
+        {
+          "label": "Urmărite",
+          "x": 289,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Urmărite"
+        },
+        {
+          "label": "Salvate",
+          "x": 352,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Salvate"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 38,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 101,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 164,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară",
+          "x": 226,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Compară"
+        },
+        {
+          "label": "Urmărite",
+          "x": 289,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Urmărite"
+        },
+        {
+          "label": "Salvate",
+          "x": 352,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Salvate"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 38,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 101,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 164,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară",
+          "x": 226,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Compară"
+        },
+        {
+          "label": "Urmărite",
+          "x": 289,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Urmărite"
+        },
+        {
+          "label": "Salvate",
+          "x": 352,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Salvate"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "entry": "watch center",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 38,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 101,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 164,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară",
+          "x": 226,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Compară"
+        },
+        {
+          "label": "Urmărite",
+          "x": 289,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Urmărite"
+        },
+        {
+          "label": "Salvate",
+          "x": 352,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Salvate"
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "entry": "saved",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 38,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 101,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 164,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară",
+          "x": 226,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Compară"
+        },
+        {
+          "label": "Urmărite",
+          "x": 289,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Urmărite"
+        },
+        {
+          "label": "Salvate",
+          "x": 352,
+          "y": 806,
+          "inBtn": true,
+          "hit": "Salvate"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "entry": "home",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 464,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 567,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 652,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară2",
+          "x": 746,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Compară2"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "entry": "dashboard",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 464,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 567,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 652,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară2",
+          "x": 746,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Compară2"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "entry": "map",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 464,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 567,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 652,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară2",
+          "x": 746,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Compară2"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "entry": "deep domain tab",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 464,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 567,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 652,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară2",
+          "x": 746,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Compară2"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "entry": "place profile",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 464,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 567,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 652,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară2",
+          "x": 746,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Compară2"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "entry": "watch center",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 464,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 567,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 652,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară2",
+          "x": 746,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Compară2"
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "entry": "saved",
+      "cover": [
+        {
+          "label": "Descoperă",
+          "x": 464,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Descoperă"
+        },
+        {
+          "label": "Dashboard",
+          "x": 567,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Dashboard"
+        },
+        {
+          "label": "Hartă",
+          "x": 652,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Hartă"
+        },
+        {
+          "label": "Compară2",
+          "x": 746,
+          "y": 38,
+          "inBtn": true,
+          "hit": "Compară2"
+        }
+      ]
+    }
+  ],
+  "cpuLegs": [
+    {
+      "viewport": "mobile",
+      "entry": "home",
+      "target": "dashboard",
+      "presses": 1,
+      "activated": true,
+      "viewFlipMs": 1129,
+      "barFlipMs": 126,
+      "headerFlipMs": 126
+    },
+    {
+      "viewport": "mobile",
+      "entry": "deep domain tab",
+      "target": "dashboard",
+      "presses": 1,
+      "activated": true,
+      "viewFlipMs": 1060,
+      "barFlipMs": null,
+      "headerFlipMs": null
+    },
+    {
+      "viewport": "mobile",
+      "entry": "place profile",
+      "target": "home",
+      "presses": 1,
+      "activated": true,
+      "viewFlipMs": 1025,
+      "barFlipMs": null,
+      "headerFlipMs": null
+    },
+    {
+      "viewport": "desktop",
+      "entry": "home",
+      "target": "dashboard",
+      "presses": 1,
+      "activated": true,
+      "viewFlipMs": 1605,
+      "barFlipMs": 201,
+      "headerFlipMs": 201
+    },
+    {
+      "viewport": "desktop",
+      "entry": "deep domain tab",
+      "target": "dashboard",
+      "presses": 1,
+      "activated": true,
+      "viewFlipMs": 1063,
+      "barFlipMs": null,
+      "headerFlipMs": null
+    },
+    {
+      "viewport": "desktop",
+      "entry": "place profile",
+      "target": "home",
+      "presses": 1,
+      "activated": true,
+      "viewFlipMs": 1158,
+      "barFlipMs": null,
+      "headerFlipMs": null
+    }
+  ],
+  "notes": [
+    "mobile dialog leg menu-sheet errored: TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.menu-sheet') to be visible\u001b[22m\n",
+    "mobile dialog leg prefs-sheet errored: TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.preferences-sheet') to be visible\u001b[22m\n",
+    "purge dialog leg skipped: button disabled by design on an empty watch center (app/watch-center.tsx:93)",
+    "desktop dialog leg prefs-sheet errored: TimeoutError: page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.preferences-sheet') to be visible\u001b[22m\n",
+    "purge dialog leg skipped: button disabled by design on an empty watch center (app/watch-center.tsx:93)"
+  ]
+}

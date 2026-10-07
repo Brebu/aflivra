@@ -1,0 +1,112 @@
+{
+  "startedAt": "2026-10-07T16:48:06.260Z",
+  "surfaces": [
+    {
+      "surface": "A: #view=map — RomaniaMap (SVG, Natural Earth)",
+      "pageErrors": [],
+      "static": {
+        "touchAction": "none",
+        "hasTouchZoomHandler": false,
+        "romapTouchAction": "auto"
+      },
+      "mouseControl": {
+        "transformBefore": "translate(0 0) scale(1)",
+        "transformAfter": "translate(171.62011173184362 110.25) scale(1)",
+        "panRegistered": true,
+        "pointerMoves": 13,
+        "targetTags": [
+          "svg"
+        ]
+      },
+      "touchDragDiagonal": {
+        "coords": {
+          "x": 195,
+          "y": 405,
+          "top": 245,
+          "inViewport": true
+        },
+        "transformBefore": "translate(0 0) scale(1)",
+        "transformAfter": "translate(196.64804469273747 130.15625) scale(1)",
+        "panRegistered": true,
+        "touchMovesDisp": 12,
+        "pointerMovesDelivered": 12,
+        "pointerCancel": 0,
+        "targetTags": [
+          "circle"
+        ],
+        "scrollEvents": 0
+      },
+      "touchDragVertical": {
+        "transformBefore": "translate(0 0) scale(1)",
+        "transformAfter": "translate(14.30167597765363 229.6875) scale(1)",
+        "panRegistered": true,
+        "pointerMovesDelivered": 12,
+        "pointerCancel": 0,
+        "scrollEvents": 0
+      },
+      "touchPinch": {
+        "transformBefore": "translate(0 0) scale(1)",
+        "transformAfter": "translate(-407.27272727272737 -312.3869984763841) scale(2.272727272727273)",
+        "zoomBefore": 1,
+        "zoomAfter": 2.272727272727273,
+        "zoomRegistered": true,
+        "pointerCancel": 0,
+        "movesDelivered": 20
+      },
+      "centerHitFresh": {
+        "chain": "svg>DIV>DIV>DIV>DIV",
+        "text": "UCRAINAUNGARIABULGARIAMAREANEAGRĂCastelu"
+      }
+    },
+    {
+      "surface": "B: #view=domain&id=mediu — leaflet PublicMap (OSM stubbed)",
+      "pageErrors": [],
+      "tileZs": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "static": {
+        "touchAction": "none",
+        "classes": "public-map leaflet-container leaflet-touch leaflet-retina leaflet-grab leaflet-touch-drag leaflet-touch-zoom",
+        "tilePaneChild": true
+      },
+      "touchDrag": {
+        "coords": {
+          "x": 195,
+          "y": 405,
+          "inViewport": true
+        },
+        "paneBefore": "translate3d(0px, 0px, 0px)",
+        "paneAfter": "translate3d(102px, 82px, 0px)",
+        "panRegistered": true,
+        "pointerMovesDelivered": 12,
+        "pointerCancel": 0,
+        "targetTags": [
+          "CANVAS"
+        ],
+        "scrollEvents": 0,
+        "tileZsSoFar": [
+          6,
+          5
+        ]
+      },
+      "touchPinch": {
+        "paneBefore": "translate3d(102px, 82px, 0px)",
+        "paneAfter": "translate3d(0px, 0px, 0px)",
+        "changed": true,
+        "pointerCancel": 0,
+        "tileZsDuringPinch": [
+          6
+        ],
+        "maxZ": 6,
+        "zoomRegistered": false
+      },
+      "centerHitFresh": {
+        "chain": "CANVAS.leaflet-zoom-animated > DIV.leaflet-pane > DIV.leaflet-pane > DIV.public-map > DIV.public-map-wrap"
+      }
+    }
+  ],
+  "finishedAt": "2026-10-07T16:48:15.804Z"
+}

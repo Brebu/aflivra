@@ -5,7 +5,7 @@ import urbanLocalities from '@/public/data/geographic-localities.json';
 export {countyLookup};
 
 export type GeographicScope='context'|'local'|'national';
-export type GeographicContext={locality:string;county:string;point:GeoPoint|null;active:boolean;scope:GeographicScope};
+export type GeographicContext={locality:string;county:string;point:GeoPoint|null;active:boolean;scope:GeographicScope;radius:number};
 export type Geography={level:'locality'|'county'|'national'|'unknown';localities:string[];counties:string[];label:string};
 const fold=(s:unknown)=>normalizeSearch(String(s??'')).replace(/[^a-z0-9]+/g,' ').trim();
 const countyCodes:Record<string,string>={AB:'Alba',AR:'Arad',AG:'Argeș',BC:'Bacău',BH:'Bihor',BN:'Bistrița-Năsăud',BT:'Botoșani',BV:'Brașov',BR:'Brăila',BZ:'Buzău',CS:'Caraș-Severin',CL:'Călărași',CJ:'Cluj',CT:'Constanța',CV:'Covasna',DB:'Dâmbovița',DJ:'Dolj',GL:'Galați',GR:'Giurgiu',GJ:'Gorj',HR:'Harghita',HD:'Hunedoara',IL:'Ialomița',IS:'Iași',IF:'Ilfov',MM:'Maramureș',MH:'Mehedinți',MS:'Mureș',NT:'Neamț',OT:'Olt',PH:'Prahova',SM:'Satu Mare',SJ:'Sălaj',SB:'Sibiu',SV:'Suceava',TR:'Teleorman',TM:'Timiș',TL:'Tulcea',VS:'Vaslui',VL:'Vâlcea',VN:'Vrancea',B:'București'};
@@ -15,14 +15,16 @@ export function localityName(value:unknown){return fold(value).replace(/^(?:muni
 export function sameLocality(a:unknown,b:unknown){const alias=(v:unknown)=>{const name=localityName(v);return name==='cluj'?'cluj napoca':name};return !!alias(a)&&alias(a)===alias(b)}
 export function withLocalCounty<T extends LocalCity>(city:T):T{const kind=(city as LocalCity&{type?:string}).type,county=countyName(city.county)||countyName((countyLookup.items as Record<string,string>)[localityName(city.name)])||(['city','town'].includes(kind||'')?countyName((countyLookup.urbanItems as Record<string,string>)[localityName(city.name)]):'');return county?{...city,county}:city}
 export const geographicLocalities:LocalCity[]=urbanLocalities.items;
-export function geographicParams(geo:{hasLocal:boolean;locality:LocalCity|null;center:GeoPoint},scope:GeographicScope='context',cityDefault=false){const city=geo.locality?withLocalCounty(geo.locality):!geo.hasLocal&&cityDefault?defaultCity:null;return{geoScope:scope,locality:scope==='national'?'':city?.name||'',county:scope==='national'?'':city?.county||'',...(scope!=='national'&&(geo.hasLocal||cityDefault)?{lat:geo.center.lat.toFixed(3),lon:geo.center.lon.toFixed(3)}:{})}}
+export function geographicParams(geo:{hasLocal:boolean;locality:LocalCity|null;center:GeoPoint},scope:GeographicScope='context',cityDefault=false,radius?:number){const city=geo.locality?withLocalCounty(geo.locality):!geo.hasLocal&&cityDefault?defaultCity:null;return{geoScope:scope,locality:scope==='national'?'':city?.name||'',county:scope==='national'?'':city?.county||'',...(scope!=='national'&&(geo.hasLocal||cityDefault)?{lat:geo.center.lat.toFixed(3),lon:geo.center.lon.toFixed(3)}:{}),...(Number.isFinite(radius)?{radius:String(radius)}:{})}}
 export function readGeographicContext(p:URLSearchParams):GeographicContext|null{
- const locality=(p.get('locality')||'').trim(),county=(p.get('county')||'').trim(),scope=(p.get('geoScope')||'context') as GeographicScope,hasPoint=p.has('lat')||p.has('lon');
+ const locality=(p.get('locality')||'').trim(),county=(p.get('county')||'').trim(),scope=(p.get('geoScope')||'context') as GeographicScope,hasPoint=p.has('lat')||p.has('lon'),radiusText=p.get('radius'),radius=radiusText===null?15:Number(radiusText);
  let point=hasPoint?{lat:Number(p.get('lat')),lon:Number(p.get('lon'))}:null;
- if(locality.length>100||county.length>100||!['context','local','national'].includes(scope)||hasPoint&&(!p.get('lat')||!p.get('lon')||!point||!validPoint(point)))return null;
+ // The nearby radius is validated, never clamped: a whole 1–100 km range reaches the
+ // nearby filters, and anything outside it is an honest rejection.
+ if(locality.length>100||county.length>100||!['context','local','national'].includes(scope)||hasPoint&&(!p.get('lat')||!p.get('lon')||!point||!validPoint(point))||radiusText!==null&&(!Number.isFinite(radius)||!Number.isInteger(radius)||radius<1||radius>100))return null;
  const city=withLocalCounty({name:locality,county,lat:point?.lat||0,lon:point?.lon||0}),active=scope!=='national'&&(!!locality||hasPoint);
  if(active&&!point&&locality){const known=geographicLocalities.filter(c=>sameLocality(c.name,locality)&&(!city.county||countyName(c.county)===city.county));if(known.length===1)point={lat:known[0].lat,lon:known[0].lon}}
- return{locality,county:city.county||countyName(county),point:active?point:null,active,scope};
+ return{locality,county:city.county||countyName(county),point:active?point:null,active,scope,radius};
 }
 
 type Trie={children:Map<string,Trie>;names?:string[];qualified?:boolean};
@@ -45,4 +47,4 @@ export function classifyGeography(record:any,kind:'catalog'|'feed'='catalog',ind
 export function matchesGeography(coverage:Geography,context:GeographicContext){if(!context.active||context.scope==='national')return true;if(coverage.level==='national')return context.scope!=='local';if(!context.locality&&!context.county)return false;if(coverage.level==='locality')return coverage.localities.some(name=>sameLocality(name,context.locality))&&(!coverage.counties.length||!!context.county&&coverage.counties.some(c=>countyName(c)===countyName(context.county)));if(coverage.level==='county')return !!context.county&&coverage.counties.some(c=>countyName(c)===countyName(context.county));return false}
 export function registryMatchesLocation(record:any,context:GeographicContext,kind:string){if(!context.active)return true;if(!context.locality&&!context.county)return false;if(kind==='schools'){const locality=record['Localitate unitate']||record.locality||record.city,county=countyName(record['Judet PJ']||record.county);return !!context.county&&sameLocality(locality,context.locality)&&county===context.county}const county=countyName(record['Cod CAS']||record['Nume CAS']||record.county);return !!context.county&&county===context.county}
 export function nearbyRecord(record:{lat?:number;lon?:number;latitude?:number;longitude?:number},point:GeoPoint,radius=15){const target={lat:Number(record.lat??record.latitude),lon:Number(record.lon??record.longitude)};return validPoint(target)&&distanceKm(point,target)<=radius}
-export function availableContext(name:string,point:GeoPoint,scope:GeographicScope='context',county=''):GeographicContext{const city=withLocalCounty({name,county,...point});return{locality:name,county:city.county||'',point,active:scope!=='national',scope}}
+export function availableContext(name:string,point:GeoPoint,scope:GeographicScope='context',county='',radius=15):GeographicContext{const city=withLocalCounty({name,county,...point});return{locality:name,county:city.county||'',point,active:scope!=='national',scope,radius}}
