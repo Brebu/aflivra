@@ -640,3 +640,40 @@ The existing live-map markers grant keyboard nothing (vehicle arrows are `role="
 - **Testing**: every ported behavior has a leg that was RED for the documented reason on the old tree; the full-suite 2 failures are proven pre-existing on clean main.
 
 **Status: DONE** — the national map is the same kind of interactive map as the live one (OSM tiles, native finger pan/pinch/zoom, keyboard-reachable repere buttons, honest attribution), 267-pin corpus + radius + navigation contracts all ported and green; gates: tsc 0 / lint 0 errors·115 warnings / batteries green / full e2e 144 passed with 2 pre-existing date-expired events-venue failures (verified on clean main, registered); probe z6+z12 captured.
+
+## Builder Findings (event fixtures expiry)
+
+Follow-up task (2026-10-08): root-cause and fix the two registered date-expired Opera Cluj e2e legs, at the fixture level, without touching the map commit.
+
+### Root cause
+
+`e2e/events-venues.spec.ts` pinned **absolute** calendar dates in its route-stub fixture builders (captured 2026-10-07): `operaclujEvent` default `start: '2026-10-07T18:30'` (BAL MASCAT), the FÂNTÂNA DIN BAHCISARAI override `2026-10-09T18:30`, and the Odeon fixture event `2026-10-08T19:30`. The EventsWorkspace default Perioadă filter is „De astăzi înainte": a card renders only when `x.start.slice(0,10) >= bucharestDate()` — today-or-later on the **Europe/Bucharest** clock (`app/events-workspace.tsx:19`, `lib/transit-view.ts:1`). BAL MASCAT fell out of the window on 2026-10-08, so legs 1 („renders its events, images and countText") and 3 („the ticket deep-link appears only…") failed on the never-rendering BAL MASCAT heading / „2 spectacole" count; the Odeon leg (leg 2) would have failed identically one day later. RED confirmed on this branch before any edit: `2 failed / 1 passed`, both at the `BAL MASCAT` heading.
+
+### Fix mechanism
+
+Forward date offsets computed at test time, inside the existing route-stub state builders (same convention the suite already uses for `lastSuccessAt`/`observedAt` stamps — flights/tranzy/watch fixtures do exactly this):
+
+- New `bucharestDay(offsetDays)` helper mirrors the app's own `bucharestDate()` formatter (`Intl 'en-CA'` + `Europe/Bucharest` → `YYYY-MM-DD`), so the fixture and the filter read the same clock.
+- `operaclujEvent()` (BAL MASCAT) now dates `start`/`end` at `bucharestDay(2)` 18:30–19:00, computed once per factory call; the duplicated inline FÂNTÂNA override in legs 1 & 3 became a shared `fantanaEvent()` at `bucharestDay(3)` 18:30–20:30; `odeonState()`'s single event dates at `bucharestDay(2)` 19:30–21:00.
+- +2/+3-day buffers absorb every boundary: a midnight straddle between fixture-build and the app's `bucharestDate()` read (≤ one test duration apart), and the October DST transition. The captured deep-link slugs (`balmascat-7-octombrie-2026-18-30`…) stay verbatim — they are stable identifiers of the captured feed shape (like `stagiunea-2026-2027` and the `2023/12/` media path), nothing parses them, and the href assertions stay exact.
+- **No assertion weakened**: titles, image cover, „2 spectacole" count, ticket-link presence/absence and both href pins are unchanged; only the values the filter gates on became relative. The Odeon fixture is included because it is the same expiry mechanism in the same spec file (its `2026-10-08` pin expires at Bucharest midnight tonight) — leaving it would have re-broken leg 2 one day after this fix.
+
+### Verification
+
+- Events spec, run 1: **3 passed** (14.2 s) — the two previously-failing legs green.
+- Events spec, run 2 (consecutive): **3 passed** (13.7 s).
+- Full suite: **146 passed, 0 failed, 0 skipped** (1.9 m); `playwright test --list` enumerates **146 tests in 29 files** — exactly the branch's total (the builder's 144 passed + 2 failed ≡ 146). The mission's „expect 156" does not exist on this branch: the 99e665c port retired/consolidated the SVG-emulation map legs (578-line diff in map-markers.spec.ts), and the +2 already-failing legs were always part of the 146. **Exact count: 146/146.**
+- `corepack pnpm exec eslint e2e/events-venues.spec.ts` → clean.
+
+TDD cycle: RED (the 2 e2e legs themselves, failing for the documented reason, output above) → GREEN (fixture-level fix, 3/3 ×2) → REFACTOR (the duplicated FÂNTÂNA override collapsed into `fantanaEvent()`, dates computed once per factory — suite still green ×2).
+
+Files: `e2e/events-venues.spec.ts` only (+ this STATUS append). The watch-flows `/api/events` stubs serve `items: []` with `now()` stamps — no pinned dates anywhere else in the suite (verified by grep over `e2e/`).
+
+### Four-lens self-review
+
+- **Completeness**: both expired legs fixed at the root (fixture dating), plus the same-mechanism Odeon pin that would expire tonight; nothing else in the suite pins event dates.
+- **Quality**: mirrors the app's own Bucharest formatter rather than inventing an offset scheme; follows the suite's existing compute-at-test-time fixture convention; one date computed per factory call (no intra-factory midnight split).
+- **Discipline**: one file in my partition touched; no app/lib code, no other specs, deep-link slugs and all assertion values untouched; the branch's map commit (`99e665c`) is intact at HEAD, `git log -2` = `99e665c` → `a66f633`.
+- **Testing**: RED evidence captured before the edit, GREEN ×2 consecutive on the spec, full suite green with the enumerated exact count.
+
+**Status: DONE** — the Opera Cluj (and Odeon) calendar legs can no longer expire: every fixture event is dated forward from the Bucharest day the run starts on; 146/146 green ×(spec ×2, full suite ×1); map commit intact.
