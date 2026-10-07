@@ -27,20 +27,38 @@ async function switchLocality(page: Page, locality: string) {
 // operator-published media, official deep-links, ticket deep-link only where the
 // venue itself publishes one (the guided-tour fixture carries none — live reality).
 const now = () => new Date().toISOString();
+// The workspace's implicit period filter is „De astăzi înainte": an event card renders
+// only when its calendar day is today or later on the Europe/Bucharest clock the app
+// filters with, so fixture events are dated forward from the Bucharest day the run
+// starts on. A captured absolute date falls out of the window the following day.
+const bucharestDay = (offsetDays: number) => new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'Europe/Bucharest', year: 'numeric', month: '2-digit', day: '2-digit',
+}).format(Date.now() + offsetDays * 86_400_000);
 const operaclujVenue = {
   id: 'operacluj', name: 'Opera Națională Română Cluj-Napoca', short: 'Opera Cluj',
   city: 'Cluj-Napoca', county: 'Cluj', address: 'Bulevardul Eroilor nr. 27',
   latitude: 46.7694, longitude: 23.5899, url: 'https://operacluj.ro/', kind: 'tribe-events-v1',
 };
-const operaclujEvent = (over: Record<string, unknown> = {}) => ({
-  id: '23317', title: 'BAL MASCAT',
-  content: 'Operă în trei acte pe un libret de Antonio Somma.\nSpectacolul este interpretat în limba italiană cu supratitrare în limba română.',
-  start: '2026-10-07T18:30', end: '2026-10-07T19:00',
-  url: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/balmascat-7-octombrie-2026-18-30/',
-  category: 'operă', sourceName: 'Opera Națională Română Cluj-Napoca',
-  media: [{kind: 'image', url: 'https://images.operacluj.ro/2023/12/HEADER-site-1920x839-px-2.jpg', caption: 'BAL MASCAT', sourceUrl: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/balmascat-7-octombrie-2026-18-30/', credit: 'Opera Națională Română Cluj-Napoca · materialul publicat de instituție'}],
-  ...over,
-});
+const operaclujEvent = (over: Record<string, unknown> = {}) => {
+  const day = bucharestDay(2);
+  return {
+    id: '23317', title: 'BAL MASCAT',
+    content: 'Operă în trei acte pe un libret de Antonio Somma.\nSpectacolul este interpretat în limba italiană cu supratitrare în limba română.',
+    start: `${day}T18:30`, end: `${day}T19:00`,
+    url: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/balmascat-7-octombrie-2026-18-30/',
+    category: 'operă', sourceName: 'Opera Națională Română Cluj-Napoca',
+    media: [{kind: 'image', url: 'https://images.operacluj.ro/2023/12/HEADER-site-1920x839-px-2.jpg', caption: 'BAL MASCAT', sourceUrl: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/balmascat-7-octombrie-2026-18-30/', credit: 'Opera Națională Română Cluj-Napoca · materialul publicat de instituție'}],
+    ...over,
+  };
+};
+const fantanaEvent = () => {
+  const day = bucharestDay(3);
+  return operaclujEvent({
+    id: '23319', title: 'FÂNTÂNA DIN BAHCISARAI',
+    start: `${day}T18:30`, end: `${day}T20:30`,
+    category: 'balet', url: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/fantanadinbahcisarai-9-octombrie-2026-18-30/',
+  });
+};
 const operaclujState = (items: Array<Record<string, unknown>>, over: Record<string, unknown> = {}) => {
   const stamp = now();
   return {
@@ -57,12 +75,12 @@ const odeonVenue = {
   latitude: 44.43667, longitude: 26.09738, url: 'https://teatrul-odeon.ro/', kind: 'jsonld',
 };
 const odeonState = () => {
-  const stamp = now();
+  const stamp = now(), day = bucharestDay(2);
   return {
     key: 'events:odeon', name: 'Teatrul Odeon · calendarul public', url: 'https://teatrul-odeon.ro/',
     adapterVersion: 'events.jsonld.v2', status: 'fresh', publishedAt: null, lastSuccessAt: stamp, lastAttemptAt: stamp,
     nextAttemptAt: null, error: null, ttlSeconds: 3600,
-    data: {venue: odeonVenue, items: [{id: 'https://teatrul-odeon.ro/spectacol-de-verificare', title: 'Spectacol de verificare', content: 'Descrierea spectacolului de verificare.', start: '2026-10-08T19:30', end: '2026-10-08T21:00', url: 'https://teatrul-odeon.ro/spectacol-de-verificare', sourceName: 'Teatrul Odeon', media: []}], venueCount: 1, sourceUrl: 'https://teatrul-odeon.ro/', note: 'Program publicat de Teatrul Odeon.'},
+    data: {venue: odeonVenue, items: [{id: 'https://teatrul-odeon.ro/spectacol-de-verificare', title: 'Spectacol de verificare', content: 'Descrierea spectacolului de verificare.', start: `${day}T19:30`, end: `${day}T21:00`, url: 'https://teatrul-odeon.ro/spectacol-de-verificare', sourceName: 'Teatrul Odeon', media: []}], venueCount: 1, sourceUrl: 'https://teatrul-odeon.ro/', note: 'Program publicat de Teatrul Odeon.'},
   };
 };
 
@@ -86,7 +104,7 @@ test.describe('Spectacole — venue registry calendars (beyond Odeon)', () => {
       odeon: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(odeonState())}),
       operacluj: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(operaclujState([
         operaclujEvent(),
-        operaclujEvent({id: '23319', title: 'FÂNTÂNA DIN BAHCISARAI', start: '2026-10-09T18:30', end: '2026-10-09T20:30', category: 'balet', url: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/fantanadinbahcisarai-9-octombrie-2026-18-30/'}),
+        fantanaEvent(),
       ]))}),
     });
     await page.route('**/api/events*', handler);
@@ -148,7 +166,7 @@ test.describe('Spectacole — venue registry calendars (beyond Odeon)', () => {
     const {handler} = venueRoute({
       operacluj: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(operaclujState([
         operaclujEvent({ticketUrl: 'https://entertix.ro/spectacol/bal-mascat-cluj'}),
-        operaclujEvent({id: '23319', title: 'FÂNTÂNA DIN BAHCISARAI', start: '2026-10-09T18:30', end: '2026-10-09T20:30', category: 'balet', url: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/fantanadinbahcisarai-9-octombrie-2026-18-30/'}),
+        fantanaEvent(),
       ]))}),
       odeon: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(odeonState())}),
     });

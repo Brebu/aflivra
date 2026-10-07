@@ -582,3 +582,98 @@ Pan mechanics end-to-end: settled gesture → debounced notify → `setMapCenter
 4. `/api/places` `view=map` responses for the biggest sets are multi-MB JSON (uncompressed locally; the platform compresses text responses in transit). Bounded by the corpus, measured, honest.
 
 **Status: DONE** — root cause measured (nearest-200 slice capping the visible radius at 0.3–23.7 km depending on density), the honored-radius pin set wired with no silent caps (validated boundary, honest labels), pan-aware debounced refetch from the map's own center (cancel-in-flight, byte-identical no-op), all gates green: tsc 0 / lint 0 errors·115 warnings / verify-geographic-scope ×2 exit 0 / verify-ro-text 0 / full e2e **153 passed**.
+
+---
+
+## Builder Findings (national map → Leaflet)
+
+Branch `feat/national-map-leaflet` (cut from main @ a66f633). USER REQUEST (verbatim): „natural earth map vreau să fie schimbat cu aia unde am și live, celălalt tip de hartă" — the national repere map (#view=map, hand-built SVG `.romap`) becomes the same kind of interactive map as the live one. All work in the worktree; committed locally, not pushed.
+
+### What was ported (exactly)
+
+- **`app/public-map.tsx` (extended, additive)**: new optional props `onSelect?: (id) => void`, `selectedId?: string`, `regionLabel?: string`. When `onSelect` is present, every non-vehicle point renders as a Leaflet divIcon marker containing a **real `<button type="button" class="repere-pin(chosen)" aria-label="Selectează {name}">`** — the same divIcon convention the flight-arrow markers use, extended where Leaflet gives nothing (see a11y below). All existing PublicMap consumers (transit, tranzy, flights, cinema, places) pass none of the new props — byte-identical behavior for them.
+- **`app/page.tsx`**: the `#view=map` workspace swaps `<RomaniaMap …/>` for `<PublicMap points=… selectedId={activePin} onSelect={id=>{setActivePin(id);go('place',id)}} viewKey={'repere:'+exploreRadius+':'+(geo.hasLocal?geo.label:'na')} regionLabel="Harta României cu repere selectabile"/>`. Ported with it, unchanged in behavior: the radius selector (the 1–100 km `nearbyRecord` threading — Brașov 15 km→3 repere, 100 km→47), the sidebar list, the active-place preview card, the „Vezi ca listă" toggle, and the honest positioning notes. `viewKey` refits the bounds when radius/locality changes. The un-deduplicated corpus is unchanged (273 source entries − 6 same-place repeats = 267 pins).
+- **`mapPlaces` memo (`app/page.tsx`)**: the Leaflet points array is memoized on `localPlaces` — an inline array handed PublicMap a **new identity on every Aflivra re-render** (live polls land mid-view), tearing down and rebuilding all 267 pin buttons while a test or a finger was on one (`Element is not attached to the DOM` — the full-run RED that isolation hid). One memo, fixed.
+- **`app/workspaces.css`**: `.repere-pin` styles (26 px hit area, 16 px navy/white dot, hover, `.chosen` gold — the old `.map-pin.chosen` treatment); focus-visible ring is the app-global `.v2 button:focus-visible` gold outline, free from the real `<button>`.
+- **`app/v2.css`**: the workspace height ladder ports to the new surface — `.map-workspace .public-map{height:590px}` (desktop, was `.map-workspace>.romap`), `430px` at ≤900 px (was the 430 romap pair), `320px` at ≤640 px (was the 320 romap pair); the dead 310 romap pair at ≤640 removed. OSM attribution is Leaflet's own control (`Leaflet | © OpenStreetMap contributors` — probe-verified), same as the live maps.
+
+### Sunk complexity — what stayed vs. what died
+
+**Nothing in `app/v2-charts.tsx` died**: the RomaniaMap machine (nearest-pin resolver, declutter offsets + leader hairlines, pinch emulation, pan-from-any-pointerdown, zoom buttons, `.romap` css, Natural Earth credit) is still consumed by the compact mini-maps (home discovery-split, place overview „Locul în context", planner aside) — kept untouched per the partition. What died is only the #view=map-scoped css (the 4 workspace `.romap` rules above) and the **e2e legs pinned to the emulated canvas** (listed below).
+
+### A11y approach (mission item 3)
+
+The existing live-map markers grant keyboard nothing (vehicle arrows are `role="img"` divs; plain circles are canvas — neither focusable). The old national map had 267 keyboard-reachable `g.map-pin[role=button][tabindex=0]`. Preserved on Leaflet by making the pin a **native `<button>`**: real tab stop, real Enter/Space activation (no synthetic key handlers), accessible name `Selectează {name}` (the exact old aria-label), `title` = place name, focus rings from the global button rule. A click navigates only when the pointer stayed within the old map's own ≥5 px slop (a drag stays a pan — same rule the SVG map shipped).
+
+### TDD evidence — RED → GREEN → REFACTOR
+
+- **RED**: rewrote `e2e/map-markers.spec.ts` (Leaflet surface, OSM tiles stubbed TINY_PNG + `no-store` — zero external fetches) and ported the `#view=map` describe of `e2e/map-touch-gestures.spec.ts`. First run on the unmodified tree: **12/13 failed for the intended reason** (`.map-workspace .public-map.leaflet-container` never appears — the SVG map still owns the view); the 1 pass was the untouched leaflet places-guard leg.
+- **GREEN**: implementation above; 13/13 pass (incl. desktop click/keyboard/list-toggle/click-far/dedup census 267/radius 3→47/Sinaia real-zoom separation, mobile stack-tap, CDP touch pan-from-pin / vertical drag 0-cancel-0-scroll / pinch raising real tile zoom / tap-navigates).
+- **REFACTOR**: `mapPlaces` memo (the full-run detach bug), census locator fix (`pinsLabeled` counts by label — `filter({has:…})` checks descendants, never the button itself), scroll-anchor fixes (the 267-entry sidebar is a ~20k px column — `scrollIntoView` must target the map element, a lesson the specs now document).
+
+### Legs ported / retired (honest list)
+
+**Ported** (8 map-marker legs — click→place, keyboard Enter→place, „Vezi ca listă"→explore, click-far-selects-nothing, one-pin-per-place census (267 + label census + sidebar), radius 3→47, Sinaia trio separation at real zoom (Leaflet box-zoom + each pin opens its own place), mobile stack-tap; 4 touch legs — drag-from-pin pans, vertical drag own-gesture audit (0 pointercancel / 0 scroll / scrollY unchanged), pinch raises served tile zoom, tap navigates.
+
+**Retired** (SVG-emulation contracts that existed only for the constrained canvas, documented in the spec headers): ownedPixels nearest-pin-to-click-point resolution (overlap-pair + sub-pixel Sinaia ×2/pixel); declutter legs (offset ≥2 css px, offsets recomposing per zoom converging to truth, hairline leaders anchoring displaced pins ≤19 units); the SVG transform gauge + Resetează-harta reset leg (no emulated transform to reset; viewKey refits on corpus change). Replaced by their real-surface equivalents: hit-testing = the browser's own (click each own button at real zoom), separation = native meters-per-pixel zoom (the separation leg + mobile pixel-ownership leg).
+- **Mobile stack-tap reformulated honestly**: the old leg asserted "opens one of the stacked trio" — a property of the resolver's nearest-pin arithmetic. On real DOM hit-testing, the pixel at Peleș's center at phone scale is genuinely owned by whichever button paints on top (often a 4th Sinaia repere) — the honest port asserts the tap opens **exactly the pin `elementFromPoint` reports**, same one every time. Which sibling you get is what zoom is for (the separation leg).
+
+### Gates (final tree, this session)
+
+- `corepack pnpm exec tsc --noEmit` → **exit 0, 0 errors** (spec type errors fixed during GREEN: TS field names + Shift via keyboard.down — mouse.down takes no modifiers).
+- `corepack pnpm lint` → **0 errors, 115 warnings — exactly the repo baseline** (re-run after the memo fix and final css).
+- `node scripts/verify-css-keyframes.mjs` → exit 0 (22 animation references / 16 definitions intact).
+- `node scripts/audit-controls.mjs` → exit 0; `node scripts/verify-ro-text.mjs` → exit 0; `node scripts/verify-model-contracts.mjs` → exit 0.
+- **No battery script pins `.romap` behavior** (grep romap|map-pin|RomaniaMap over scripts/ → none); the map-affecting gates are the css-keyframes/model/audit trio above, all green.
+- Full `corepack pnpm test:e2e` on the final tree: **144 passed, 2 failed** — both failures are the SAME two `events-venues` Opera Cluj legs, **verified failing identically on the clean main tree (a66f633, my changes stashed)**: their fixtures hardcode `BAL MASCAT`/`FÂNTÂNA…` at 2026-10-07 (written yesterday, expired at midnight — the workspace honestly filters past events). **Registered, not fixed** (outside my partition — events surface; a fixture refresh ticket belongs to whoever owns events-venues).
+- Probe (`probe/national-map-leaflet-probe.mjs`, own dev server, killed after): initial fit = **z7, 267/267 pins visible**; zoom 6 via the map's own − control = **z6, 267 visible, 15 tiles**; zoom 12 via 6 dblclicks beside Peleș = **z12 (displayed tile URL z=12), 6 repere visible in-viewport, 15 tiles**, `chosen:1` at every step, attribution „Leaflet | © OpenStreetMap contributors", **zero page errors**. Screenshots `national-map-zoom6.png` / `national-map-zoom12.png` captured; this session could not visually re-inspect them (no image input) — the DOM/zoom/census assertions above are the evidence, PNGs await eyeballs.
+
+### AIGA registration (mission item 4)
+
+`inspire.geomil.ro` is **completely down — 20 s connection timeout from residential too** (my own `curl --max-time 20` → exit 28, matching the orchestrator's 2026-10-07 probe). The overlay keeps its honest error + retry path (already pinned by `imobiliare-ortho.spec.ts`'s "service does not answer" leg); **no further action from us until their host recovers**.
+
+### Four-lens self-review
+
+- **Completeness**: mission items 1–6 all done (port, sunk-complexity check, a11y, AIGA line, e2e RED-first with honest retirements, all gates + probe). No stubs, no TODOs.
+- **Quality**: additive extension of the shared component (existing consumers untouched — the 5 other PublicMap surfaces render byte-identical markup without the new props); pin conventions match the flight-arrow divIcon family; the slop guard copies the old map's own rule.
+- **Discipline**: only the assigned files touched (public-map.tsx, page.tsx #view=map section + one memo, two css files' map parts, two e2e specs); compact mini-maps and v2-charts untouched; the pr49 png in the working tree is another session's and is excluded from the commit.
+- **Testing**: every ported behavior has a leg that was RED for the documented reason on the old tree; the full-suite 2 failures are proven pre-existing on clean main.
+
+**Status: DONE** — the national map is the same kind of interactive map as the live one (OSM tiles, native finger pan/pinch/zoom, keyboard-reachable repere buttons, honest attribution), 267-pin corpus + radius + navigation contracts all ported and green; gates: tsc 0 / lint 0 errors·115 warnings / batteries green / full e2e 144 passed with 2 pre-existing date-expired events-venue failures (verified on clean main, registered); probe z6+z12 captured.
+
+## Builder Findings (event fixtures expiry)
+
+Follow-up task (2026-10-08): root-cause and fix the two registered date-expired Opera Cluj e2e legs, at the fixture level, without touching the map commit.
+
+### Root cause
+
+`e2e/events-venues.spec.ts` pinned **absolute** calendar dates in its route-stub fixture builders (captured 2026-10-07): `operaclujEvent` default `start: '2026-10-07T18:30'` (BAL MASCAT), the FÂNTÂNA DIN BAHCISARAI override `2026-10-09T18:30`, and the Odeon fixture event `2026-10-08T19:30`. The EventsWorkspace default Perioadă filter is „De astăzi înainte": a card renders only when `x.start.slice(0,10) >= bucharestDate()` — today-or-later on the **Europe/Bucharest** clock (`app/events-workspace.tsx:19`, `lib/transit-view.ts:1`). BAL MASCAT fell out of the window on 2026-10-08, so legs 1 („renders its events, images and countText") and 3 („the ticket deep-link appears only…") failed on the never-rendering BAL MASCAT heading / „2 spectacole" count; the Odeon leg (leg 2) would have failed identically one day later. RED confirmed on this branch before any edit: `2 failed / 1 passed`, both at the `BAL MASCAT` heading.
+
+### Fix mechanism
+
+Forward date offsets computed at test time, inside the existing route-stub state builders (same convention the suite already uses for `lastSuccessAt`/`observedAt` stamps — flights/tranzy/watch fixtures do exactly this):
+
+- New `bucharestDay(offsetDays)` helper mirrors the app's own `bucharestDate()` formatter (`Intl 'en-CA'` + `Europe/Bucharest` → `YYYY-MM-DD`), so the fixture and the filter read the same clock.
+- `operaclujEvent()` (BAL MASCAT) now dates `start`/`end` at `bucharestDay(2)` 18:30–19:00, computed once per factory call; the duplicated inline FÂNTÂNA override in legs 1 & 3 became a shared `fantanaEvent()` at `bucharestDay(3)` 18:30–20:30; `odeonState()`'s single event dates at `bucharestDay(2)` 19:30–21:00.
+- +2/+3-day buffers absorb every boundary: a midnight straddle between fixture-build and the app's `bucharestDate()` read (≤ one test duration apart), and the October DST transition. The captured deep-link slugs (`balmascat-7-octombrie-2026-18-30`…) stay verbatim — they are stable identifiers of the captured feed shape (like `stagiunea-2026-2027` and the `2023/12/` media path), nothing parses them, and the href assertions stay exact.
+- **No assertion weakened**: titles, image cover, „2 spectacole" count, ticket-link presence/absence and both href pins are unchanged; only the values the filter gates on became relative. The Odeon fixture is included because it is the same expiry mechanism in the same spec file (its `2026-10-08` pin expires at Bucharest midnight tonight) — leaving it would have re-broken leg 2 one day after this fix.
+
+### Verification
+
+- Events spec, run 1: **3 passed** (14.2 s) — the two previously-failing legs green.
+- Events spec, run 2 (consecutive): **3 passed** (13.7 s).
+- Full suite: **146 passed, 0 failed, 0 skipped** (1.9 m); `playwright test --list` enumerates **146 tests in 29 files** — exactly the branch's total (the builder's 144 passed + 2 failed ≡ 146). The mission's „expect 156" does not exist on this branch: the 99e665c port retired/consolidated the SVG-emulation map legs (578-line diff in map-markers.spec.ts), and the +2 already-failing legs were always part of the 146. **Exact count: 146/146.**
+- `corepack pnpm exec eslint e2e/events-venues.spec.ts` → clean.
+
+TDD cycle: RED (the 2 e2e legs themselves, failing for the documented reason, output above) → GREEN (fixture-level fix, 3/3 ×2) → REFACTOR (the duplicated FÂNTÂNA override collapsed into `fantanaEvent()`, dates computed once per factory — suite still green ×2).
+
+Files: `e2e/events-venues.spec.ts` only (+ this STATUS append). The watch-flows `/api/events` stubs serve `items: []` with `now()` stamps — no pinned dates anywhere else in the suite (verified by grep over `e2e/`).
+
+### Four-lens self-review
+
+- **Completeness**: both expired legs fixed at the root (fixture dating), plus the same-mechanism Odeon pin that would expire tonight; nothing else in the suite pins event dates.
+- **Quality**: mirrors the app's own Bucharest formatter rather than inventing an offset scheme; follows the suite's existing compute-at-test-time fixture convention; one date computed per factory call (no intra-factory midnight split).
+- **Discipline**: one file in my partition touched; no app/lib code, no other specs, deep-link slugs and all assertion values untouched; the branch's map commit (`99e665c`) is intact at HEAD, `git log -2` = `99e665c` → `a66f633`.
+- **Testing**: RED evidence captured before the edit, GREEN ×2 consecutive on the spec, full suite green with the enumerated exact count.
+
+**Status: DONE** — the Opera Cluj (and Odeon) calendar legs can no longer expire: every fixture event is dated forward from the Bucharest day the run starts on; 146/146 green ×(spec ×2, full suite ×1); map commit intact.
