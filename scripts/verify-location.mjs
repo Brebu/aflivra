@@ -8,8 +8,8 @@ function host(){let slots=[],cursor=0,effects=[],cleanups=[];const same=(a,b)=>a
  useState(initial){const i=cursor++;if(!(i in slots))slots[i]=typeof initial==='function'?initial():initial;return[slots[i],value=>{slots[i]=typeof value==='function'?value(slots[i]):value}]},
  useRef(initial){const i=cursor++;return slots[i]??={current:initial}},
  useEffect(fn,deps){const i=cursor++,old=slots[i];if(!same(old,deps)){slots[i]=deps;effects.push(()=>{cleanups[i]?.();cleanups[i]=fn()})}},
- useMemo(fn,deps){const i=cursor++;if(!same(slots[i]?.deps,deps))slots[i]={deps,value:fn()};return slots[i].value},
- useCallback(fn,deps){return h.useMemo(()=>fn,deps)},createContext(value){return{Provider:Symbol('Provider'),value}},useContext(context){return context.value},useId(){return 'test-picker'},
+  useMemo(fn,deps){const i=cursor++;if(!same(slots[i]?.deps,deps))slots[i]={deps,value:fn()};return slots[i].value},
+  useCallback(fn,deps){return h.useMemo(()=>fn,deps)},useDeferredValue(value){return value},createContext(value){return{Provider:Symbol('Provider'),value}},useContext(context){return context.value},useId(){return 'test-picker'},
  React:{createElement(type,props,...children){return{type,props,children}}},
  render(fn){cursor=0;return fn()},commit(){const queue=effects;effects=[];queue.forEach(fn=>fn())},destroy(){cleanups.forEach(fn=>fn?.())},reset(){h.destroy();slots=[];cursor=0;effects=[];cleanups=[]}
  };return h}
@@ -52,9 +52,10 @@ try{
  const exploration=await readFile(join(root,'public/places/exploration.json'),'utf8');
  await compile('model','app/v2-model.ts',s=>s.replace("import expandedPlaces from '@/public/places/exploration.json';",'const expandedPlaces='+exploration+';'));
  const location=await compile('location','app/location.tsx',s=>s
-  .replace(/import React,\{[^\n]+from 'react';/,'const React=globalThis.__geoHost.React;const {createContext,useCallback,useContext,useEffect,useId,useMemo,useRef,useState}=globalThis.__geoHost;')
+  .replace(/import React,\{[^\n]+from 'react';/,'const React=globalThis.__geoHost.React;const {createContext,useCallback,useContext,useDeferredValue,useEffect,useId,useMemo,useRef,useState}=globalThis.__geoHost;')
   .replace(/import \{LocateFixed,MapPin\} from 'lucide-react';/, 'const LocateFixed=()=>null,MapPin=()=>null;')
   .replace(/import \{Button\}[^\n]+/, 'const Button=()=>null,Input=()=>null;')
+  .replace(/import \{WatchButton\} from '\.\/watch-button';/, 'const WatchButton=()=>null;')
   .replace("export const useLocation=()=>useContext(LocationContext);","export const useLocation=()=>globalThis.__pickerGeo||useContext(LocationContext);")
   .replace("from '@/lib/location-context'","from './geo'").replace("from '@/lib/geographic-scope'","from './scope'").replace("from './v2-model'","from './model'").replace("from '@/lib/live/query'","from './query'")
   .replace("import {snapshotJson} from './snapshot-store';", "const snapshotJson=async path=>path.includes('cities')?{items:globalThis.__geoCities}:{cities:{}};"));

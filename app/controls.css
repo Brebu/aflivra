@@ -35,6 +35,16 @@
 .v2 .prefs-data>.import-label{display:flex;align-items:center;justify-content:center;min-height:48px;height:auto;padding:12px 16px;line-height:1.5}
 .v2 .location-city-input{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:stretch;min-width:0}
 .v2 .location-city-input input,.v2 .location-city-input button{width:100%;min-width:0;flex:unset}
+.v2 .location-suggestions{list-style:none;margin:0;padding:0;border:1px solid #d8dde3;border-radius:8px;background:#fff;max-height:min(42vh,340px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.v2 .location-suggestions li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;min-height:48px;cursor:pointer;border-bottom:1px solid #e7ebf0;color:#324157;font-size:13px;text-align:left}
+.v2 .location-suggestions li:last-child{border-bottom:0}
+.v2 .location-suggestions li[aria-selected=true]{background:#e9eff7}
+.v2 .location-suggestions li>span{display:grid;gap:3px;min-width:0}
+.v2 .location-suggestions li strong{font-weight:560;font-size:13px;overflow-wrap:anywhere}
+.v2 .location-suggestions li small{font-size:11px;color:#6e747c;line-height:1.5}
+.v2 .location-suggestions li>svg{color:#7d8794;flex-shrink:0}
+.v2 .location-suggestions li.current{box-shadow:inset 3px 0 0 #b1832f}
+.v2 .deferred-mount{display:block;padding:18px 2px;color:#787f88;font-size:12px;margin:0}
 .v2 .live-search,.v2 .hero-search,.v2 .explore-search{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;min-width:0}
 .v2 .live-search>input,.v2 .hero-search>input,.v2 .explore-search>input{min-width:0;width:100%}
 .v2 .table-filter{display:flex;flex-wrap:wrap;gap:12px;align-items:center;min-width:0}
