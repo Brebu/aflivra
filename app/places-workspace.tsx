@@ -64,7 +64,9 @@ export function PlacesWorkspace({category,preferredCity='București',photosDefau
  useEffect(()=>{setDraft(initialQuery);setQ(initialQuery);setSub(initialSub);setPage(0)},[initialQuery,initialSub]);
  const center=geo.center,activeScope=scope==='context'?(geo.hasLocal?'nearby':'all'):scope,activeSort=sort==='context'?(geo.hasLocal?'distance':'name'):sort;
  const categoryKey=category==='local'?'local-all':category,labels=manifest?.subcategories[categoryKey]||[];
- const state=useSource(manifest&&(activeScope==='all'||center)?'/api/places?'+new URLSearchParams({category,q,sub,contact,scope:activeScope,radius,sort:activeSort,photos:String(photos),page:String(page),...(center?{lat:center.lat.toFixed(3),lon:center.lon.toFixed(3)}:{})}):null);
+ // The cards page keeps 18 per page; the map layer requests a fuller, bounded page so
+ // the radius selection visibly changes the pin set instead of painting the nearest 18.
+ const state=useSource(manifest&&(activeScope==='all'||center)?'/api/places?'+new URLSearchParams({category,q,sub,contact,scope:activeScope,radius,sort:activeSort,photos:String(photos),page:String(page) ,...(view==='map'?{pageSize:'200'}:{}),...(center?{lat:center.lat.toFixed(3),lon:center.lon.toFixed(3)}:{})}):null);
  const result=state.data?.data||{items:[],total:0,page:0,pages:1};const resetPage=()=>setPage(0),busy=loading||state.busy;
 
 

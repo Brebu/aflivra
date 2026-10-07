@@ -80,6 +80,16 @@ async function openMapFresh(page: Page) {
   await waitForClientReady(page);
 }
 
+async function switchLocality(page: Page, locality: string) {
+  await page.getByRole('button', {name: 'Pentru tine: localitate, interese și aspect'}).click();
+  const sheet = page.getByRole('dialog');
+  await expect(sheet).toBeVisible();
+  await sheet.getByLabel('Localitate', {exact: true}).fill(locality);
+  await sheet.getByRole('button', {name: 'Aplică localitatea'}).click();
+  await page.keyboard.press('Escape');
+  await expect(sheet).toBeHidden();
+}
+
 async function scrollMapIntoView(page: Page, label: string) {
   const pin = page.locator(`.map-workspace .romap g.map-pin[aria-label="${label}"]`).first();
   await pin.scrollIntoViewIfNeeded();
@@ -233,6 +243,36 @@ test.describe('Hartă — clusterele de repere rămân selectabile', () => {
     await expect(sidebar.locator('.map-result', {hasText: 'Salina Praid'})).toHaveCount(1);
     // The three stacked neighbouring places of the Sinaia cluster all keep their pin.
     for (const clusterPin of CLUSTER) await expect(map.locator(`g.map-pin[aria-label="${clusterPin.label}"]`)).toHaveCount(1);
+  });
+
+  // With an active locality the repere layer obeys the chosen radius: the same
+  // selector family as the places inventory. Brașov's editorial set is small at
+  // 15 km (3 repere) and grows to 47 at 100 km — deterministic corpus counts with
+  // the nearest place 60 m inside the 100 km line and the next 5 km outside it.
+  test('the repere map obeys the chosen radius around the active locality', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await openMapFresh(page);
+    await switchLocality(page, 'Brașov');
+
+    const map = page.locator('.map-workspace .romap');
+    const sidebar = page.locator('.map-workspace .map-sidebar');
+    // 15 km is the resting radius and its copy names it.
+    await expect(map.locator('g.map-pin')).toHaveCount(3);
+    await expect(sidebar.locator('.map-result')).toHaveCount(3);
+    await expect(sidebar.getByText(/raza de 15 km/)).toBeVisible();
+
+    const radiusSelect = sidebar.locator('label', {hasText: 'Rază'}).locator('select');
+    await expect(radiusSelect).toBeVisible();
+    await radiusSelect.selectOption('100');
+
+    // The repere layer grows with the radius, on the map and in the sidebar alike.
+    await expect(map.locator('g.map-pin')).toHaveCount(47);
+    await expect(sidebar.locator('.map-result')).toHaveCount(47);
+    await expect(sidebar.getByText(/raza de 100 km/)).toBeVisible();
+
+    // The selector exists only with an active locality; the national default keeps
+    // the full editorial set (asserted by the one-pin-per-place leg above).
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });
 

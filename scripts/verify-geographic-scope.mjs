@@ -39,6 +39,15 @@ try{
  assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca'})).point.lat,geo.geographicLocalities.find(c=>c.name==='Cluj-Napoca').lat);
  assert.equal(geo.readGeographicContext(new URLSearchParams({geoScope:'national',lat:'46.77',lon:'23.62'})).point,null);
  assert.equal(geo.readGeographicContext(new URLSearchParams({lat:'90.1',lon:'23.6'})),null);
+ // The live-vehicle radius is a validated context parameter: absent keeps the 15 km
+ // default, present must be an integer 1–100 — anything else is rejected, never clamped.
+ assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca'})).radius,15);
+ assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca',radius:'100'})).radius,100);
+ assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca',radius:'0'})),null);
+ assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca',radius:'101'})),null);
+ assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca',radius:'15.5'})),null);
+ assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca',radius:'abc'})),null);
+ assert.deepEqual(geo.geographicParams({hasLocal:true,locality:{name:'Brașov',county:'Brașov',lat:45.65,lon:25.6},center:{lat:45.65,lon:25.6}},'context',false,50),{geoScope:'context',locality:'Brașov',county:'Brașov',lat:'45.650',lon:'25.600',radius:'50'});
  const cluj=locations[1],buc=locations[0],index=geo.createGeographyIndex([...cities, {name:'Moroeni',...locations[3].point}]);
  assert(!geo.matchesGeography(geo.classifyGeography({title:'Transport local București'},'catalog',index),cluj));
  assert(geo.matchesGeography(geo.classifyGeography({title:'Transport Cluj-Napoca'},'catalog',index),cluj));
@@ -56,7 +65,17 @@ try{
 
  const places=await load('lib/places-query.ts'),read=async proof=>json('public/places/'+proof.file);let clujStops=0;
  for(const context of locations)for(const category of Object.keys(manifest.categories).filter(k=>k!=='local-all')){const result=await places.queryPlaces(manifest,{category,q:'',sub:'',contact:'',scope:'nearby',lat:context.point.lat,lon:context.point.lon,radius:15,sort:'distance',photos:false,page:0},read);assert(result.items.every(r=>r.distance<=15));if(context.locality==='Cluj-Napoca'&&category==='transport')clujStops=result.total}
- assert(clujStops>0);console.log('Every mapped category checked around București, Cluj, Brașov and Moroeni; Cluj has real local transport stops and services.');
+  assert(clujStops>0);console.log('Every mapped category checked around București, Cluj, Brașov and Moroeni; Cluj has real local transport stops and services.');
+
+  const wide=await places.queryPlaces(manifest,{category:'transport',q:'',sub:'',contact:'',scope:'nearby',lat:cluj.point.lat,lon:cluj.point.lon,radius:100,sort:'distance',photos:false,page:0,pageSize:200},read);
+  assert.equal(wide.pageSize,200);assert.equal(wide.items.length,Math.min(200,wide.total));
+  const tight=await places.queryPlaces(manifest,{category:'transport',q:'',sub:'',contact:'',scope:'nearby',lat:cluj.point.lat,lon:cluj.point.lon,radius:100,sort:'distance',photos:false,page:0},read);
+  assert.equal(tight.pageSize,18);assert.equal(tight.items.length,Math.min(18,tight.total));
+  assert(tight.items.length>0,'Cluj transport within 100 km must have results');
+  const tightIds=tight.items.map(r=>r.id),wideIds=wide.items.map(r=>r.id);
+  assert(wide.items.length>=tight.items.length,'the map-sized page carries at least the list page');
+  assert(tightIds.every((id,at)=>wideIds[at]===id),'the 18-item list page keeps being the distance-sorted prefix of the 200-item map page');
+  console.log('Map-sized place pages checked around Cluj: the map view serves up to the 200 nearest places in the radius while every list page keeps 18 — the first 18 stay identical.');
 
  const packed=(await json('lib/live/seed-snapshots.json')).server,raw=gunzipSync(Buffer.from(packed.gzipBase64,'base64'));assert.equal(createHash('sha256').update(raw).digest('hex'),packed.sha256);const seeds=JSON.parse(raw),directory=await load('app/api/directory/route.ts'),localities=await load('app/api/localities/route.ts');
  for(const kind of ['health','pharmacies','hospitals'])for(const context of [buc,cluj]){const entry=seeds['directory:'+kind];assert(entry);globalThis.__geographicFixture=source(entry.data);const page=await (await directory.GET(new Request('https://example.test/api/directory?'+new URLSearchParams({kind,locality:context.locality,county:context.county,geoScope:'context',page:'0'})))).json();assert(page.data.records.length);assert(page.data.records.every(r=>geo.countyName(r['Cod CAS']||r['Nume CAS'])===context.county));assert(page.data.total>=page.data.records.length)}
@@ -72,7 +91,23 @@ try{
  calls=[];assert((await (await transport.GET(new Request('https://example.test/api/transport?kind=routes&locality=Cluj-Napoca'))).json()).data.outOfCoverage);assert.equal(calls.length,0);assert((await (await events.GET(new Request('https://example.test/api/events?locality=Cluj-Napoca'))).json()).data.outOfCoverage);assert.equal(calls.length,0);
  const bucCinema=cinemas.find(c=>geo.sameLocality(c.address.city,'București')),clujCinema=cinemas.find(c=>geo.sameLocality(c.address.city,'Cluj-Napoca'));assert(bucCinema&&clujCinema);
  const cinemaRequest=c=>new Request('https://example.test/api/cinema?'+new URLSearchParams({id:c.externalCode,date:'2026-10-05',locality:'Cluj-Napoca',lat:'46.771',lon:'23.624'}));assert.equal((await cinema.GET(cinemaRequest(bucCinema))).status,400);assert.equal(calls.length,0);globalThis.__geographicFixture=source({films:[]});assert.equal((await cinema.GET(cinemaRequest(clujCinema))).status,200);assert.equal(calls.length,1);
- console.log('Transport, all live transport subcategories, events and cinema APIs reject unrelated coverage before contacting an operator. No București fallback is returned for Cluj.');
+  console.log('Transport, all live transport subcategories, events and cinema APIs reject unrelated coverage before contacting an operator. No București fallback is returned for Cluj.');
+
+  const tpbiVehicle=(id,name,lat,lon,at)=>({id,routeId:'tpbi-test',tripId:'t-'+id,vehicleName:name,licensePlate:'',lat,lon,stopId:'',observedAt:at,bearing:90,speed:10,occupancy:null,occupancyPercentage:null,wheelchairAccessible:null,currentStatus:null,details:{}});
+  const nowIso=new Date().toISOString(),bucRequest=radius=>new Request('https://example.test/api/transport-live?'+new URLSearchParams({kind:'vehicles',locality:'București',county:'București',lat:'44.4268',lon:'26.1025',radius:String(radius)}));
+  const vehNear=tpbiVehicle('veh-near','Vehiculul aproape',44.4268,26.1025,nowIso),vehFar=tpbiVehicle('veh-far','Vehiculul depărtat',44.55,26.35,nowIso);
+  for(const radius of [15,30]){calls=[];globalThis.__geographicFixture={status:'fresh',data:{kind:'vehicles',observedAt:nowIso,entityCount:2,items:[vehNear,vehFar]}};const served=await (await live.GET(bucRequest(radius))).json();assert.equal(served.data.total,radius===15?1:2,'TPBI vehicles at ~24 km must be served only within the chosen radius');if(radius===15)assert.deepEqual(served.data.items.map(r=>r.id),['veh-near'])}
+  assert.equal((await live.GET(bucRequest(101))).status,400,'an out-of-range radius must be rejected, never clamped');
+  const staleAt=new Date(Date.now()-8*60000).toISOString();globalThis.__geographicFixture={status:'stale',lastSuccessAt:staleAt,lastAttemptAt:new Date().toISOString(),data:{kind:'vehicles',observedAt:staleAt,entityCount:2,items:[vehNear,vehFar]}};const staleCopy=await (await live.GET(bucRequest(30))).json();
+  assert.equal(staleCopy.data.isLive,false);assert.equal(staleCopy.data.stalenessMinutes,8);assert.equal(staleCopy.data.total,2,'the stale copy keeps serving its last positions for the map to label');
+  const tranzy=await load('app/api/tranzy-live/route.ts'),tzNear={id:'tz-near',routeId:'25',tripId:'t-n',vehicleName:'Tramvaiul aproape',licensePlate:'',lat:46.77,lon:23.6,stopId:'',observedAt:nowIso,bearing:null,speed:null,occupancy:null,occupancyPercentage:null,wheelchairAccessible:null,currentStatus:null,details:{}},tzFar={...tzNear,id:'tz-far',vehicleName:'Autobuzul depărtat',lat:46.9,lon:23.85};
+  const clujRequest=radius=>new Request('https://example.test/api/tranzy-live?'+new URLSearchParams({kind:'vehicles',q:'',page:'0',locality:'Cluj-Napoca',county:'Cluj',lat:'46.7712',lon:'23.6236',radius:String(radius)}));
+  globalThis.__geographicFixture={status:'fresh',data:{agencies:[{agency_id:7,agency_name:'CTP Cluj-Napoca'}],kind:'vehicles',observedAt:nowIso,entityCount:2,items:[tzNear,tzFar]}};
+  for(const radius of [15,30]){const served=await (await tranzy.GET(clujRequest(radius))).json();assert.equal(served.data.total,radius===15?1:2,'Tranzy vehicles at ~22 km must be served only within the chosen radius');assert.equal(served.data.agency,'CTP Cluj-Napoca')}
+  globalThis.__geographicFixture={status:'stale',lastSuccessAt:staleAt,lastAttemptAt:new Date().toISOString(),data:{agencies:[{agency_id:7,agency_name:'CTP Cluj-Napoca'}],kind:'vehicles',observedAt:staleAt,entityCount:2,items:[tzNear,tzFar]}};
+  const tranzyStale=await (await tranzy.GET(clujRequest(30))).json();
+  assert.equal(tranzyStale.data.isLive,false);assert.equal(tranzyStale.data.stalenessMinutes,8);assert.equal(tranzyStale.data.total,2);
+  console.log('Both live-vehicle APIs thread the validated 1–100 km radius into their nearby filters and label stale copies with the minutes since the last successful fetch.');
 
  const institutions=(await json('public/courts/institutions.json')).items,legal=await load('app/api/legal/route.ts'),clujCourt=institutions.find(c=>c.id==='JudecatoriaCLUJNAPOCA'),bucCourt=institutions.find(c=>c.id==='JudecatoriaSECTORUL1BUCURESTI');assert(clujCourt&&bucCourt);
  const courtRequest=institution=>new Request('https://example.test/api/legal',{method:'POST',body:JSON.stringify({kind:'court',name:'Test local',institution,geoScope:'context',locality:'Cluj-Napoca',county:'Cluj'})});calls=[];assert.equal((await legal.POST(courtRequest(bucCourt.id))).status,400);assert.equal(calls.length,0);globalThis.__geographicFixture=source({items:[{court:clujCourt.id},{court:bucCourt.id}]});const courtResult=await (await legal.POST(courtRequest(clujCourt.id))).json();assert.equal(courtResult.data.items.length,1);assert.equal(courtResult.data.items[0].court,clujCourt.id);

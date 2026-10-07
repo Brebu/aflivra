@@ -36,6 +36,10 @@ export const runsWatchSweep=(controller:{cron:string;scheduledTime:number|Date})
 const INSTALL_PATTERN=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 export const validInstallId=(value:unknown):value is string=>typeof value==='string'&&INSTALL_PATTERN.test(value);
 export const WATCH_LIMIT=100,EVENT_PAGE=50,ACK_LIMIT=200,SUBSCRIPTION_LIMIT=5;
+// Retenția politicii de confidentialitate, ca numere unice în cod: o urmărire fără
+// nicio interacțiune de la WATCH_INACTIVE_DAYS și un eveniment de la EVENT_RETENTION_DAYS
+// se elimină la tura de verificare. Politica de pe /confidentialitate le citește pe acestea.
+export const WATCH_INACTIVE_DAYS=180,EVENT_RETENTION_DAYS=365;
 const DOSAR_CHECK_CAP=20,ACT_CHECK_CAP=8,FIRMA_CHECK_CAP=6,VENUE_CHECK_CAP=6,METEO_EVENT_CAP=6,FEED_EVENT_CAP=8,VENUE_EVENT_CAP=8;
 const DETECTION_FETCH_BUDGET=25,PUSH_SEND_BUDGET=15;
 const FEED_KINDS=['stiri','munca','sanatate','educatie','justitie'];
@@ -130,7 +134,7 @@ export async function purgeInstall(db:D1Database,installId:string){
   return{purged:{watches:watches.meta.changes||0,events:events.meta.changes||0,subscriptions:subscriptions.meta.changes||0}};
 }
 
-export type WatchSweepState={startedAt:string;finishedAt:string;itemsChecked:number;baselined:number;eventsEmitted:number;pushesSent:number;pushGone:number;pushFailed:number;pushDeferred:number;pushSkipped:number;budgetSkipped:number;degraded:number;failed:number;notes:string[];perKind:Record<string,{checked:number;events:number;skipped:number}>};
+export type WatchSweepState={startedAt:string;finishedAt:string;itemsChecked:number;baselined:number;eventsEmitted:number;pushesSent:number;pushGone:number;pushFailed:number;pushDeferred:number;pushSkipped:number;budgetSkipped:number;retentionWatches:number;retentionEvents:number;degraded:number;failed:number;notes:string[];perKind:Record<string,{checked:number;events:number;skipped:number}>};
 export const WATCH_SWEEP_KEY='sweep:watch',WATCH_SWEEP_VERSION='watch.sweep.v1';
 const countNounRo=(n:number)=>n===1?'o dată':n+' ori';
 /** Starea publică a turei pentru eticheta onestă „verificăm de X ori pe zi”. */
@@ -148,8 +152,21 @@ export async function runWatchSweep(db:D1Database|undefined=env.DB):Promise<Watc
   if(!db)return null;
   const startedAt=new Date().toISOString();
   const budget=makeBudget(DETECTION_FETCH_BUDGET);
-  const state:WatchSweepState={startedAt,finishedAt:'',itemsChecked:0,baselined:0,eventsEmitted:0,pushesSent:0,pushGone:0,pushFailed:0,pushDeferred:0,pushSkipped:0,budgetSkipped:0,degraded:0,failed:0,notes:[],perKind:{}};
+  const state:WatchSweepState={startedAt,finishedAt:'',itemsChecked:0,baselined:0,eventsEmitted:0,pushesSent:0,pushGone:0,pushFailed:0,pushDeferred:0,pushSkipped:0,budgetSkipped:0,retentionWatches:0,retentionEvents:0,degraded:0,failed:0,notes:[],perKind:{}};
   const bump=(kind:string,field:'checked'|'events'|'skipped')=>{state.perKind[kind]??={checked:0,events:0,skipped:0};state.perKind[kind][field]++};
+  // Retenția curăță înainte de verificare: o urmărire fără nicio interacțiune (creată
+  // și fără vreun eveniment de la pragul de inactivitate) nu mai e verificată zadarnic,
+  // iar evenimentele peste vechimea lor maximă dispar indiferent de urmări.
+  {
+    const watchCutoff=new Date(Date.now()-WATCH_INACTIVE_DAYS*86400000).toISOString(),eventCutoff=new Date(Date.now()-EVENT_RETENTION_DAYS*86400000).toISOString();
+    const inactive=(await db.prepare('SELECT id FROM watch_items WHERE created_at<? AND COALESCE((SELECT MAX(created_at) FROM watch_events WHERE install_id=watch_items.install_id AND kind=watch_items.kind AND ref=watch_items.ref),created_at)<?').bind(watchCutoff,watchCutoff).all<{id:string}>()).results;
+    for(let at=0;at<inactive.length;at+=80){const slice=inactive.slice(at,at+80);await db.prepare('DELETE FROM watch_items WHERE id IN ('+slice.map(()=>'?').join(',')+')').bind(...slice.map(row=>row.id)).run()}
+    state.retentionWatches=inactive.length;
+    const staleEvents=await db.prepare('DELETE FROM watch_events WHERE created_at<?').bind(eventCutoff).run();
+    state.retentionEvents=staleEvents.meta.changes||0;
+    if(inactive.length)state.notes.push('retenție: '+inactive.length+(inactive.length===1?' urmărire fără':' urmăriri fără')+' interacțiune de '+WATCH_INACTIVE_DAYS+' de zile eliminată');
+    if(state.retentionEvents)state.notes.push('retenție: '+state.retentionEvents+(state.retentionEvents===1?' eveniment mai vechi':' evenimente mai vechi')+' de '+EVENT_RETENTION_DAYS+' de zile eliminat');
+  }
   const rows=(await db.prepare('SELECT * FROM watch_items ORDER BY COALESCE(checked_at,created_at) ASC').all<WatchRow>()).results;
   const pushQueue:{installId:string;payload:PushPayload}[]=[];
   const touch=async(row:WatchRow,fingerprint:string|null,sigs:string[]|null)=>{await db.prepare('UPDATE watch_items SET checked_at=?, fingerprint=COALESCE(?,fingerprint), sigs=COALESCE(?,sigs) WHERE id=?').bind(new Date().toISOString(),fingerprint,sigs?JSON.stringify(sigs):null,row.id).run();state.itemsChecked++;bump(row.kind,'checked')};

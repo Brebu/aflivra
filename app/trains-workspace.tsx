@@ -26,7 +26,7 @@ export function TrainsWorkspace({initialQuery=''}:{initialQuery?:string}){
  return <section className="live-section">
   <span className="kicker">MERSUL TRENURILOR · OPERATORI FEROVIARI</span>
   <h2><TrainFront size={22}/> Gări și mersul trenurilor</h2>
-  <p>Orarele planificate ale operatorilor de transport feroviar de călători, edițiile publicate pe data.gov.ro de S.C. Informatică Feroviară S.A. Caută gara sau stația și deschide tabla de plecări și sosiri planificate.</p>
+   <p>Orarele planificate ale operatorilor de transport feroviar de călători, edițiile publicate pe data.gov.ro de S.C. Informatică Feroviară S.A. Caută gara sau stația și deschide tabla de plecări și sosiri planificate. Edițiile publicate sunt doar ore planificate — pozițiile în timp real ale trenurilor nu sunt disponibile de la operator, deci această pagină nu desenează trenuri pe hartă și nu inventează poziții.</p>
   <SearchForm className="live-search" value={draft} onSearch={value=>{setDraft(value);setQ(value);setPage(0);setStation(null)}} inputProps={{'aria-label':'Caută gara sau stația de tren','maxLength':100,placeholder:'Gară, stație sau haltă — de ex. Brașov'}}/>
   {state.busy&&!d&&<p role="status">Se încarcă indicele stațiilor…</p>}
   {(state.error||state.data?.status==='unavailable')&&<div className="live-error"><p>{state.error||state.data?.error||'Orarul trenurilor nu poate fi citit acum.'}</p><Button variant="outline" onClick={state.retry}><RefreshCw size={16}/>Reîncearcă</Button></div>}

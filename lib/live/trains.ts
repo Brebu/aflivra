@@ -12,6 +12,11 @@ import proofs from '@/public/data/snapshot-transport.json';
  (/trains/stations.json, gz + SHA-256-proven) plus 128 sharded per-station boards
  (/trains/boards/NN.json). Everything is part of the deployed app (Workers Static Assets),
  never re-fetched per request; boards carry each operator's own edition name and validity.
+
+ The published editions are planned times only: no operator publishes real-time train
+ positions, and the corpus carries no station coordinates (TrainStation has no lat/lon),
+ so no train or station can be placed on a map today. A station-map view stays a registered
+ option until an Infofer edition exposes coordinates — positions are never invented.
 */
 
 export type TrainStation={code:number;name:string;search:string;operators:string[];trains:number;shard:number};

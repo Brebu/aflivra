@@ -9,7 +9,7 @@ const unb64=(value:string):Uint8Array<ArrayBuffer>=>{const normalized=value.repl
 export type PushPayload={title:string;body:string;url:string};
 export type PushSubscriptionLike={endpoint:string;p256dh:string;auth:string};
 
-const VAPID_CONTACT='mailto:contact@aflivra.brebu.workers.dev';
+const VAPID_CONTACT='mailto:contactretetesecrete@gmail.com';
 let signingKey:CryptoKey|null|undefined;
 /** Cheia publică expusă clienților la abonare; null când push-ul nu este configurat onest. */
 export const vapidPublicKey=():string|null=>env.VAPID_PUBLIC&&env.VAPID_PRIVATE?env.VAPID_PUBLIC:null;
