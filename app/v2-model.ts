@@ -162,7 +162,14 @@ const originalPlaces:Place[]=[
     ]
   }
 ];
-export const places:Place[]=[...originalPlaces,...expandedPlaces];
+const placeKey=(name:string)=>name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const placeKm=(lat1:number,lon1:number,lat2:number,lon2:number)=>{const dy=(lat1-lat2)*111.32,dx=(lon1-lon2)*111.32*Math.cos((lat1+lat2)*Math.PI/360);return Math.hypot(dx,dy)};
+// One pin per physical place: the hand-attested editorial set is kept, and an entry
+// repeating a kept place under the same name within 1 km is the same attraction seen
+// twice (a monument split into an OSM node plus its way or relation). "Izbucul Bigăr"
+// is the spring that feeds "Cascada Bigăr" — one visiting site.
+const placeAlias=(key:string)=>key==='izbucul bigar'?'cascada bigar':key;
+export const places:Place[]=(()=>{const kept:Place[]=[],seen:{key:string;lat:number;lon:number}[]=[];for(const p of [...originalPlaces,...expandedPlaces]){const key=placeAlias(placeKey(p.name));if(!seen.some(s=>s.key===key&&placeKm(s.lat,s.lon,p.lat,p.lon)<1)){kept.push(p);seen.push({key,lat:p.lat,lon:p.lon})}}return kept})();
 export const domains=[
   {
     "id": "local",

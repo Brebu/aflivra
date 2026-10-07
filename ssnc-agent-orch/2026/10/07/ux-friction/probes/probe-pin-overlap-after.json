@@ -1,0 +1,117 @@
+[
+  {
+    "tag": "A-inventory",
+    "ready": true,
+    "pageErrors": [],
+    "pinCount": 267,
+    "duplicateLabels": [
+      {
+        "label": "Selectează Muzeul de Artă",
+        "pins": 3
+      },
+      {
+        "label": "Selectează Muzeul de Etnografie",
+        "pins": 2
+      }
+    ],
+    "sidebarRows": 267,
+    "ateneul": [
+      {
+        "transform": "translate(371.92920000000004,391.3308000000003)"
+      }
+    ],
+    "peles": [
+      {
+        "transform": "translate(338.1242199999999,314.1744480000001)"
+      }
+    ],
+    "sinaia": [
+      {
+        "transform": "translate(338.5038840000001,314.5530359999998)"
+      }
+    ],
+    "cascadaBigar": [
+      {
+        "transform": "translate(119.53136660000004,344.1080160000002)"
+      }
+    ],
+    "izbuculBigar": [],
+    "salinaPraid": [
+      {
+        "transform": "translate(312.3519091,214.1418720000003)"
+      }
+    ],
+    "podulTraian": [
+      {
+        "transform": "translate(162.6916543000001,376.00235400000014)"
+      }
+    ]
+  },
+  {
+    "tag": "B-desktop-cluster",
+    "ready": true,
+    "pageErrors": [],
+    "pelesPin": {
+      "transform": "translate(338.1242199999999,314.1744480000001)",
+      "center": [
+        845.2,
+        273.4
+      ],
+      "topAtCenter": "circle r=3 in g[Selectează Mănăstirea Sinaia]"
+    },
+    "sinaiaPin": {
+      "transform": "translate(338.5038840000001,314.5530359999998)",
+      "center": [
+        845.7,
+        273.8
+      ],
+      "topAtCenter": "circle r=3 in g[Selectează Mănăstirea Sinaia]"
+    },
+    "centerDistanceSvgUnits": 0.54,
+    "clickAtPelesCenter": {
+      "hash": "#view=place&id=osm-w242580048",
+      "view": "place"
+    },
+    "clickAtSinaiaCenter": {
+      "hash": "#view=place&id=osm-w242580048",
+      "view": "place"
+    }
+  },
+  {
+    "tag": "C-mobile-tap",
+    "ready": true,
+    "pageErrors": [],
+    "tapAtPelesCenter": [
+      205.1,
+      404.9
+    ],
+    "hashBefore": "#view=map",
+    "hashAfterTap": {
+      "hash": "#view=place&id=osm-w242580048",
+      "view": "place"
+    }
+  },
+  {
+    "tag": "D-header-band",
+    "ready": true,
+    "pageErrors": [],
+    "pinCenterY": 433,
+    "headerRect": {
+      "top": 0,
+      "bottom": 77,
+      "height": 77
+    },
+    "pinUnderHeader": false,
+    "pinTop": 419,
+    "topAtPinCenter": "circle.[object SVGAnimatedString] [snd=Selectează Biserica Rotondă din Geoagiu]",
+    "headerBackground": "rgba(255, 255, 255, 0.937)",
+    "headerBackdropFilter": "blur(18px)",
+    "headerPosition": "sticky",
+    "headerZ": "35",
+    "scrollPaddingTop": "96px",
+    "clickAtLandedPinCenter": {
+      "hash": "#view=place&id=osm-w780297975",
+      "view": "place"
+    }
+  }
+]
