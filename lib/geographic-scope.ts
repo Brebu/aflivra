@@ -2,6 +2,7 @@ import {normalizeSearch} from './live/query';
 import {defaultCity,distanceKm,validPoint,type LocalCity,type GeoPoint} from './location-context';
 import countyLookup from '@/public/data/locality-counties.json';
 import urbanLocalities from '@/public/data/geographic-localities.json';
+export {countyLookup};
 
 export type GeographicScope='context'|'local'|'national';
 export type GeographicContext={locality:string;county:string;point:GeoPoint|null;active:boolean;scope:GeographicScope};

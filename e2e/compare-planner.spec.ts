@@ -78,7 +78,7 @@ test.describe('Compare, planner and the standalone catalog route', () => {
     await expect(catalog.getByRole('heading', {level: 2, name: 'Toate datele publice, într-un singur catalog'})).toBeVisible();
     await expect(catalog.locator('.catalog-category-tabs')).toBeVisible();
     await expect(catalog.locator('.live-result-count')).toContainText(/seturi · \d+ pe această pagină/);
-    await expect(page.getByLabel('Localitate')).toBeVisible();
+    await expect(page.getByLabel('Localitate', {exact: true})).toBeVisible();
     await expect(page.getByRole('button', {name: 'Aplică localitatea'})).toBeVisible();
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);

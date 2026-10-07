@@ -10,6 +10,7 @@ const BAR_ITEMS = [
   {id: 'dashboard', label: 'Dashboard'},
   {id: 'map', label: 'Hartă'},
   {id: 'compare', label: 'Compară'},
+  {id: 'watch', label: 'Urmărite'},
   {id: 'saved', label: 'Salvate'},
 ];
 
@@ -26,7 +27,7 @@ async function barGeometry(page: Page): Promise<BarGeometry> {
     const navR = nav.getBoundingClientRect();
     const buttons = [...nav.querySelectorAll('button')].map((btn, i) => {
       const r = btn.getBoundingClientRect();
-      return {id: ['home', 'dashboard', 'map', 'compare', 'saved'][i] ?? String(i), cx: Math.round(r.left + r.width / 2), top: Math.round(r.top), bottom: Math.round(r.bottom)};
+      return {id: ['home', 'dashboard', 'map', 'compare', 'watch', 'saved'][i] ?? String(i), cx: Math.round(r.left + r.width / 2), top: Math.round(r.top), bottom: Math.round(r.bottom)};
     });
     return {navBottom: Math.round(navR.bottom), buttons, lowBandY: Math.round(navR.bottom - 5)};
   });
@@ -76,7 +77,7 @@ async function tap(page: Page, x: number, y: number) {
 test.describe('Bara de jos — tap-urile de la mobil se înregistrează din prima', () => {
   test('fiecare buton acoperă toată înălțimea barei, inclusiv banda de safe-area (elementFromPoint)', async ({page}) => {
     await page.goto('/');
-    await expect(page.locator('.vbottom-nav button')).toHaveCount(5);
+    await expect(page.locator('.vbottom-nav button')).toHaveCount(6);
     await waitForClientReady(page);
     const g = await barGeometry(page);
 
@@ -165,7 +166,7 @@ test.describe('Bara de jos — tap-urile de la mobil se înregistrează din prim
       await page.waitForTimeout(450);
     }
     let m = await readMonitor(page);
-    expect(m.clicks.filter((c: any) => c.inButton).length, 'all five taps registered on buttons').toBe(5);
+    expect(m.clicks.filter((c: any) => c.inButton).length, 'all six taps registered on buttons').toBe(6);
 
     // Tap targets deliberately at the base of the bar (safe-area band): these are the
     // taps the reporter describes as "ignored on the first tries".

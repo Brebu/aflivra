@@ -76,6 +76,8 @@ jobs:
           node scripts/verify-relay-flights.mjs
           node scripts/verify-court-links.mjs
           node scripts/verify-packed-seeds.mjs
+          node scripts/verify-watch-sweep.mjs
+          node scripts/verify-watch-api.mjs
       - name: verify-downloads
         run: node scripts/verify-downloads.mjs
       - name: verify-legal-pdf — runs where pypdf is installed; recorded skip otherwise

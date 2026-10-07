@@ -12,7 +12,10 @@ const map=JSON.parse(await readFile(join(root,'lib/live/refresh-groups.json'),'u
 assert.equal(map.groups.length,5,'The free plan allows at most five cron triggers');
 assert.ok(map.groups.length<=5);
 assert.deepEqual(map.groups.map(g=>g.name),['live','weather','news','legislation','registers']);
-assert.deepEqual(map.groups.map(g=>g.cron),['0 0 * * *','7 0 * * *','14 0 * * *','21 0 * * *','28 0 * * *']);
+assert.deepEqual(map.groups.map(g=>g.cron),['0 0 * * *','7 0 * * *','14 0 * * *','21 0 * * *','28 0,4,10,16 * * *']);
+// Declanșătorul registers poartă, pe lângă tura de dimineață de la 00:28 UTC, și turele de
+// urmărire de la 04:28/10:28/16:28 UTC — planul gratuit plafonează contul la cinci crons, deci
+// a șasea expresie ar împiedica publicarea; dispatch-ul pe oră separă cele două tururi.
 assert.equal(new Set(map.groups.map(g=>g.cron)).size,5,'Each cron expression maps to exactly one group');
 assert.equal(new Set(map.groups.map(g=>g.name)).size,5,'Each group maps to exactly one cron expression');
 const expectedMembers={live:['bnr','weather.anm','company.default','catalog.default'],weather:['weather.alerts','forecast.bucuresti','events.odeon','cinema.bucuresti.today'],news:['feed.munca','feed.stiri','feed.sanatate','feed.educatie','feed.justitie'],legislation:['law.search.default','law.search.codcivil','lawyers.default','knowledge.company.default'],registers:['directory.schools.page0','catalog.category.bani','catalog.category.sanatate']};
