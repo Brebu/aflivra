@@ -1,0 +1,22 @@
+{
+  "jitter": {
+    "box1": {
+      "x": 646.3339233398438,
+      "y": 84.0604248046875,
+      "width": 32.03125,
+      "height": 32.03125
+    },
+    "box2": {
+      "x": 646.3339233398438,
+      "y": 84.0604248046875,
+      "width": 32.03125,
+      "height": 32.03125
+    },
+    "movedPx": "0.0"
+  },
+  "topAtCenter": "circle@(662,100) owner=[Selectează Biserica Rotondă din Geoagiu]",
+  "clickLandedOn": "circle@(662,100) owner=[Selectează Biserica Rotondă din Geoagiu]",
+  "hash": "#view=place&id=osm-w780297975",
+  "view": "place",
+  "hero": "Biserica Rotondă din Geoagiu"
+}

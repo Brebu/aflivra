@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ro">
-      <head><link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/></head><body className="antialiased"><TooltipProvider delayDuration={350}>{children}</TooltipProvider></body>
+      <body className="antialiased"><TooltipProvider delayDuration={350}>{children}</TooltipProvider></body>
     </html>
   );
 }

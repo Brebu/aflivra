@@ -1,0 +1,175 @@
+[
+  {
+    "tag": "A-local-desktop-mapview",
+    "ready": true,
+    "target": "Selectează Biserica Rotondă din Geoagiu",
+    "ateneulStackProbe": [
+      {
+        "box": {
+          "x": 874,
+          "y": 1037,
+          "w": 28,
+          "h": 28
+        },
+        "point": [
+          889,
+          1051
+        ],
+        "topElement": null
+      },
+      {
+        "box": {
+          "x": 874,
+          "y": 1037,
+          "w": 28,
+          "h": 28
+        },
+        "point": [
+          889,
+          1051
+        ],
+        "topElement": null
+      }
+    ],
+    "pinClassBefore": "map-pin ",
+    "pinClassAfter": "map-pin chosen",
+    "hashBefore": "#view=map",
+    "hashAfter": "#view=map",
+    "viewBefore": "map",
+    "viewAfter": "map",
+    "hashchangeEventsAfterClick": [],
+    "navigatedToPlace": false,
+    "pageErrors": []
+  },
+  {
+    "tag": "B-local-mobile-touch-mapview",
+    "ready": true,
+    "target": "Selectează Biserica Rotondă din Geoagiu",
+    "ateneulStackProbe": [
+      {
+        "box": {
+          "x": 218,
+          "y": 861,
+          "w": 12,
+          "h": 12
+        },
+        "point": [
+          224,
+          867
+        ],
+        "topElement": null
+      },
+      {
+        "box": {
+          "x": 218,
+          "y": 861,
+          "w": 12,
+          "h": 12
+        },
+        "point": [
+          224,
+          867
+        ],
+        "topElement": null
+      }
+    ],
+    "pinClassBefore": "map-pin ",
+    "pinClassAfter": "map-pin chosen",
+    "hashBefore": "#view=map",
+    "hashAfter": "#view=map",
+    "viewBefore": "map",
+    "viewAfter": "map",
+    "hashchangeEventsAfterClick": [],
+    "navigatedToPlace": false,
+    "pageErrors": []
+  },
+  {
+    "tag": "C-local-desktop-home-control",
+    "ready": true,
+    "target": "Selectează Biserica Rotondă din Geoagiu",
+    "ateneulStackProbe": [
+      {
+        "box": {
+          "x": 910,
+          "y": 592,
+          "w": 25,
+          "h": 25
+        },
+        "point": [
+          923,
+          604
+        ],
+        "topElement": "circle. in [Selectează Școala Generală nr. 11 \"Ion Heliade Rădulescu\"]"
+      },
+      {
+        "box": {
+          "x": 910,
+          "y": 592,
+          "w": 25,
+          "h": 25
+        },
+        "point": [
+          923,
+          604
+        ],
+        "topElement": "circle. in [Selectează Școala Generală nr. 11 \"Ion Heliade Rădulescu\"]"
+      }
+    ],
+    "pinClassBefore": "map-pin ",
+    "pinClassAfter": null,
+    "hashBefore": "#view=home",
+    "hashAfter": "#view=place&id=osm-w780297975",
+    "viewBefore": "home",
+    "viewAfter": "place",
+    "hashchangeEventsAfterClick": [
+      [
+        "hashchange",
+        "#view=place&id=osm-w780297975"
+      ]
+    ],
+    "navigatedToPlace": true,
+    "pageErrors": []
+  },
+  {
+    "tag": "LIVE-mobile-mapview",
+    "ready": true,
+    "target": "Selectează Biserica Rotondă din Geoagiu",
+    "ateneulStackProbe": [
+      {
+        "box": {
+          "x": 218,
+          "y": 861,
+          "w": 12,
+          "h": 12
+        },
+        "point": [
+          224,
+          867
+        ],
+        "topElement": null
+      },
+      {
+        "box": {
+          "x": 218,
+          "y": 861,
+          "w": 12,
+          "h": 12
+        },
+        "point": [
+          224,
+          867
+        ],
+        "topElement": null
+      }
+    ],
+    "pinClassBefore": "map-pin ",
+    "pinClassAfter": "map-pin chosen",
+    "hashBefore": "#view=map",
+    "hashAfter": "#view=map",
+    "viewBefore": "map",
+    "viewAfter": "map",
+    "hashchangeEventsAfterClick": [],
+    "navigatedToPlace": false,
+    "pageErrors": []
+  }
+]

@@ -1,0 +1,282 @@
+{
+ "label": "LIVE",
+ "base": "https://aflivra.brebu.workers.dev",
+ "runs": [
+  {
+   "name": "deeplink",
+   "hash": "view=domain&id=transport",
+   "state": {
+    "title": "Aflivra — România la îndemână",
+    "dataView": "domain",
+    "heroImgInDom": false,
+    "fontFetches": [
+     {
+      "name": "InterVariable.woff2",
+      "initiator": "link",
+      "transfer": 352540,
+      "encoded": 352240,
+      "cache": "/h2"
+     }
+    ],
+    "heroFetches": [
+     {
+      "name": "hero-graphite-blue.webp",
+      "initiator": "link",
+      "transfer": 318602,
+      "encoded": 318302,
+      "cache": "/h2"
+     }
+    ],
+    "preloadLinks": [
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/index-CrTTuty3.js",
+      "crossorigin": null
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/layout-segment-context-D5REJj-B.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/tooltip-BswsodVM.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/utils-WMzaB3JW.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/page-D5j_OnJw.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/live-data-dGNKHoqw.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/legal-consolidation-lCY63pde.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "preload",
+      "as": "font",
+      "href": "/fonts/InterVariable.woff2",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/index-CrTTuty3.js",
+      "crossorigin": null
+     },
+     {
+      "rel": "modulepreload",
+      "as": "script",
+      "href": "/_next/static/chunks/rolldown-runtime-C60lm6uB.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "script",
+      "href": "/_next/static/chunks/framework-D_rUT4EX.js",
+      "crossorigin": "anonymous"
+     }
+    ],
+    "fontPreloadCopies": 1,
+    "fontStatus": [
+     "Inter Aflivra:loaded"
+    ],
+    "fontCheck": {
+     "interAflivra": true,
+     "body": "\"Inter Aflivra\", -apple-system, \"system-ui\", \"Segoe UI\", san"
+    },
+    "swControlled": true
+   },
+   "preloadConsoleWarnings": [],
+   "allConsole": [],
+   "fontHeroReqRes": [
+    {
+     "phase": "request",
+     "url": "/fonts/InterVariable.woff2",
+     "type": "font"
+    },
+    {
+     "phase": "request",
+     "url": "/media/hero-graphite-blue.webp",
+     "type": "image"
+    },
+    {
+     "phase": "response",
+     "status": 200,
+     "url": "/media/hero-graphite-blue.webp",
+     "headers": {
+      "cache-control": "public, max-age=0, must-revalidate",
+      "vary": "",
+      "content-type": "image/webp"
+     }
+    },
+    {
+     "phase": "response",
+     "status": 200,
+     "url": "/fonts/InterVariable.woff2",
+     "headers": {
+      "cache-control": "public, max-age=0, must-revalidate",
+      "vary": "",
+      "content-type": "font/woff2"
+     }
+    }
+   ]
+  },
+  {
+   "name": "home",
+   "hash": "view=home",
+   "state": {
+    "title": "Aflivra — România la îndemână",
+    "dataView": "home",
+    "heroImgInDom": true,
+    "fontFetches": [
+     {
+      "name": "InterVariable.woff2",
+      "initiator": "link",
+      "transfer": 352540,
+      "encoded": 352240,
+      "cache": "/h2"
+     }
+    ],
+    "heroFetches": [
+     {
+      "name": "hero-graphite-blue.webp",
+      "initiator": "link",
+      "transfer": 318602,
+      "encoded": 318302,
+      "cache": "/h2"
+     }
+    ],
+    "preloadLinks": [
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/index-CrTTuty3.js",
+      "crossorigin": null
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/layout-segment-context-D5REJj-B.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/tooltip-BswsodVM.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/utils-WMzaB3JW.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/page-D5j_OnJw.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/live-data-dGNKHoqw.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/legal-consolidation-lCY63pde.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "preload",
+      "as": "font",
+      "href": "/fonts/InterVariable.woff2",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "-",
+      "href": "/_next/static/chunks/index-CrTTuty3.js",
+      "crossorigin": null
+     },
+     {
+      "rel": "modulepreload",
+      "as": "script",
+      "href": "/_next/static/chunks/rolldown-runtime-C60lm6uB.js",
+      "crossorigin": "anonymous"
+     },
+     {
+      "rel": "modulepreload",
+      "as": "script",
+      "href": "/_next/static/chunks/framework-D_rUT4EX.js",
+      "crossorigin": "anonymous"
+     }
+    ],
+    "fontPreloadCopies": 1,
+    "fontStatus": [
+     "Inter Aflivra:loaded"
+    ],
+    "fontCheck": {
+     "interAflivra": true,
+     "body": "\"Inter Aflivra\", -apple-system, \"system-ui\", \"Segoe UI\", san"
+    },
+    "swControlled": true
+   },
+   "preloadConsoleWarnings": [],
+   "allConsole": [],
+   "fontHeroReqRes": [
+    {
+     "phase": "request",
+     "url": "/fonts/InterVariable.woff2",
+     "type": "font"
+    },
+    {
+     "phase": "request",
+     "url": "/media/hero-graphite-blue.webp",
+     "type": "image"
+    },
+    {
+     "phase": "response",
+     "status": 200,
+     "url": "/media/hero-graphite-blue.webp",
+     "headers": {
+      "cache-control": "public, max-age=0, must-revalidate",
+      "vary": "",
+      "content-type": "image/webp"
+     }
+    },
+    {
+     "phase": "response",
+     "status": 200,
+     "url": "/fonts/InterVariable.woff2",
+     "headers": {
+      "cache-control": "public, max-age=0, must-revalidate",
+      "vary": "",
+      "content-type": "font/woff2"
+     }
+    }
+   ]
+  }
+ ]
+}

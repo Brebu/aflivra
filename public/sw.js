@@ -1,4 +1,4 @@
-const CACHE='aflivra-static-v18';
+const CACHE='aflivra-static-v19';
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['/offline.html','/favicon.svg','/fonts/InterVariable.woff2'])));self.skipWaiting();});
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(keys=>Promise.all(keys.filter(k=>(k.startsWith('reper-static-')||k.startsWith('aflivra-static-'))&&k!==CACHE).map(k=>caches.delete(k))))])));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==self.location.origin)return;if(e.request.mode==='navigate'){e.respondWith(fetch(e.request).catch(()=>caches.match('/offline.html')));return;}if(u.pathname==='/fonts/InterVariable.woff2'){e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));return;}if(u.pathname.startsWith('/data/'))e.respondWith(fetch(e.request).then(r=>{if(r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));}return r;}).catch(()=>caches.match(e.request).then(r=>r||Response.error())));});

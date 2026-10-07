@@ -1,0 +1,252 @@
+{
+ "target": "http://127.0.0.1:5173",
+ "label": "local-dev",
+ "cpu": 4,
+ "device": "iPhone13,390x844,DPR3",
+ "coldHome": {
+  "ttfb": 35,
+  "dcl": 689,
+  "load": 764,
+  "lcp": {
+   "t": 684,
+   "el": "IMG src=/media/hero-graphite-blue.webp"
+  },
+  "longtasks": {
+   "count": 6,
+   "over100ms": 5,
+   "maxMs": 559,
+   "top": [
+    {
+     "ms": 3093,
+     "dur": 559
+    },
+    {
+     "ms": 2385,
+     "dur": 380
+    },
+    {
+     "ms": 3683,
+     "dur": 215
+    },
+    {
+     "ms": 2792,
+     "dur": 112
+    },
+    {
+     "ms": 1980,
+     "dur": 102
+    },
+    {
+     "ms": 1129,
+     "dur": 61
+    }
+   ]
+  },
+  "cdp": {
+   "ScriptDuration": 1.92,
+   "TaskDuration": 3.21,
+   "LayoutDuration": 0.11,
+   "RecalcStyle": 0.16,
+   "LayoutCount": 78,
+   "RecalcStyleCount": 197
+  },
+  "bytes": {
+   "jsTx": 7232787,
+   "jsDec": 7197087,
+   "jsFiles": 119,
+   "cssTx": 613644,
+   "cssDec": 611544,
+   "cssFiles": 7,
+   "imgTx": 1191324,
+   "imgDec": 1189224,
+   "imgFiles": 7,
+   "htmlTx": 219145,
+   "htmlDec": 218845
+  },
+  "jsTop": [
+   "recharts.js 1280KB",
+   "lucide-react.js 1121KB",
+   "react-dom_client.js 802KB",
+   "radix-ui.js 587KB",
+   "app-browser-entry.js 314KB",
+   "navigation.js 228KB",
+   "dev-error-overlay.js 228KB",
+   "sonner.js 162KB",
+   "navigation-planner.js 149KB",
+   "react-server-dom-webpack_client__browser.js 131KB"
+  ],
+  "imgTop": [
+   "InterVariable.woff2 344KB",
+   "hero-graphite-blue.webp 311KB",
+   "illustration-local.webp 134KB",
+   "illustration-bani.webp 128KB",
+   "illustration-firme.webp 96KB",
+   "illustration-mediu.webp 90KB",
+   "illustration-vreme-v30.webp 59KB"
+  ],
+  "viewportImgs": [
+   {
+    "src": "hero-graphite-blue.webp",
+    "cssW": 390,
+    "cssH": 556,
+    "natW": 1864,
+    "loaded": true,
+    "fetchP": "high"
+   }
+  ],
+  "status": 200
+ },
+ "homeScrolled": [
+  {
+   "f": "hero-graphite-blue.webp",
+   "dec": 318302
+  },
+  {
+   "f": "illustration-local.webp",
+   "dec": 137212
+  },
+  {
+   "f": "illustration-vreme-v30.webp",
+   "dec": 60490
+  },
+  {
+   "f": "illustration-bani.webp",
+   "dec": 130908
+  },
+  {
+   "f": "illustration-firme.webp",
+   "dec": 97844
+  },
+  {
+   "f": "illustration-mediu.webp",
+   "dec": 92228
+  }
+ ],
+ "tapLatency": [
+  {
+   "to": "Dashboard",
+   "flipMs": 186
+  },
+  {
+   "to": "Descoperă",
+   "flipMs": 177
+  },
+  {
+   "to": "Hartă",
+   "flipMs": 224
+  },
+  {
+   "to": "Compară",
+   "flipMs": 331
+  },
+  {
+   "to": "Salvate",
+   "flipMs": 218
+  },
+  {
+   "to": "Descoperă",
+   "flipMs": 56
+  }
+ ],
+ "views": [
+  {
+   "name": "places",
+   "hash": "#view=explore",
+   "flipFromTap": 1113,
+   "paintMs": 1147,
+   "payloadTx": 50498,
+   "payloadDec": 306905,
+   "reqs": 6,
+   "top": [
+    "manifest.json 122KB tx0 dur1",
+    "manifest.json 122KB tx0 dur1",
+    "domain 28KB tx28 dur21",
+    "places 10KB tx10 dur15",
+    "places 10KB tx10 dur10",
+    "map.json 7KB tx0 dur1"
+   ],
+   "longtasks": {
+    "n": 5,
+    "maxMs": 442
+   },
+   "scrolledImgs": [],
+   "scrolledData": [
+    {
+     "f": "manifest.json",
+     "dec": 125324
+    },
+    {
+     "f": "map.json",
+     "dec": 7559
+    },
+    {
+     "f": "manifest.json",
+     "dec": 125324
+    }
+   ],
+   "scrolledTotals": {
+    "imgBytes": 0,
+    "dataBytes": 258207
+   }
+  },
+  {
+   "name": "domain",
+   "hash": "#view=domain&id=transport",
+   "flipFromTap": 323,
+   "paintMs": 372,
+   "payloadTx": 2926852,
+   "payloadDec": 2926252,
+   "reqs": 2,
+   "top": [
+    "manifest.json 1664KB tx1665 dur9",
+    "network.json 1193KB tx1194 dur8"
+   ],
+   "longtasks": {
+    "n": 2,
+    "maxMs": 169
+   },
+   "scrolledImgs": [],
+   "scrolledData": [
+    {
+     "f": "manifest.json",
+     "dec": 1704337
+    },
+    {
+     "f": "network.json",
+     "dec": 1221915
+    }
+   ],
+   "scrolledTotals": {
+    "imgBytes": 0,
+    "dataBytes": 2926252
+   }
+  },
+  {
+   "name": "map",
+   "hash": "#view=map",
+   "flipFromTap": 556,
+   "paintMs": 602,
+   "payloadTx": 300,
+   "payloadDec": 7559,
+   "reqs": 1,
+   "top": [
+    "map.json 7KB tx0 dur1"
+   ],
+   "longtasks": {
+    "n": 2,
+    "maxMs": 244
+   },
+   "scrolledImgs": [],
+   "scrolledData": [
+    {
+     "f": "map.json",
+     "dec": 7559
+    }
+   ],
+   "scrolledTotals": {
+    "imgBytes": 0,
+    "dataBytes": 7559
+   }
+  }
+ ]
+}

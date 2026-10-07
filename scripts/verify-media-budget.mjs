@@ -45,8 +45,23 @@ const claims=new Set();
 for(const asset of manifest.assets)claims.add(asset.app_file.replace('/media/',''));
 for(const entry of categoryPhotos)claims.add(entry.file);
 for(const entry of illustrations)claims.add(entry.file);
+for(const variant of illustrations.flatMap(entry=>entry.variants||[]))claims.add(variant.file);
 claims.add(heroStyle.file);if(heroStyle.sourcePhoto)claims.add(heroStyle.sourcePhoto.replace('/media/',''));
+for(const variant of heroStyle.variants||[])claims.add(variant.file);
 for(const entry of weather.assets)claims.add(entry.file);
+// Width variants carry the full provenance proof of the asset they derive
+// from: registered bytes and SHA-256 for the exact shipped file.
+for(const variant of [...(heroStyle.variants||[]),...illustrations.flatMap(entry=>entry.variants||[])]){
+  const bytes=fs.readFileSync(fileURLToPath(new URL('public/media/'+variant.file,root)));
+  assert(variant.bytes===bytes.length,'Variant byte count must match the shipped file: '+variant.file);
+  assert(variant.sha256===createHash('sha256').update(bytes).digest('hex'),'SHA-256 proof for variant '+variant.file);
+}
+// A registered variant nothing renders is an orphan in the other direction:
+// the hero srcSet must offer every hero variant behind the mobile sizes gate,
+// and the cover srcSet must offer every illustration variant.
+const pageSource=fs.readFileSync(fileURLToPath(new URL('app/page.tsx',root)),'utf8'),coverSource=fs.readFileSync(fileURLToPath(new URL('app/category-photo.tsx',root)),'utf8');
+for(const variant of heroStyle.variants||[])assert(pageSource.includes('/media/'+variant.file),'Hero variant must be offered in the hero srcSet: '+variant.file);
+for(const entry of illustrations)for(const variant of entry.variants||[])assert(coverSource.includes('/media/'+variant.file)||coverSource.includes('artwork.variants'),'Cover rendering must offer illustration variants for '+entry.id);
 const binaries=mediaFiles.filter(f=>/\.(?:webp|webm|png|jpe?g|gif|avif)$/i.test(f)),orphans=binaries.filter(f=>!claims.has(f));
 assert(orphans.length===0,'Unlicensed media files with no provenance register: '+orphans.join(', '));
 // True-or-honest image coverage: every corpus card renders one of the three

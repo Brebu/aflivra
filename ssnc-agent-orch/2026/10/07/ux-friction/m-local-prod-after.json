@@ -1,0 +1,1282 @@
+{
+ "target": "http://127.0.0.1:8787",
+ "label": "local-prod-after",
+ "cpu": 4,
+ "device": "iPhone13,390x844,DPR3",
+ "coldHome": {
+  "ttfb": 18,
+  "dcl": 293,
+  "load": 349,
+  "lcp": {
+   "t": 308,
+   "el": "IMG src=/media/hero-graphite-blue.webp"
+  },
+  "longtasks": {
+   "count": 5,
+   "over100ms": 3,
+   "maxMs": 483,
+   "top": [
+    {
+     "ms": 1475,
+     "dur": 483
+    },
+    {
+     "ms": 833,
+     "dur": 448
+    },
+    {
+     "ms": 568,
+     "dur": 133
+    },
+    {
+     "ms": 358,
+     "dur": 91
+    },
+    {
+     "ms": 767,
+     "dur": 63
+    }
+   ]
+  },
+  "cdp": {
+   "ScriptDuration": 0.91,
+   "TaskDuration": 2,
+   "LayoutDuration": 0.11,
+   "RecalcStyle": 0.13,
+   "LayoutCount": 78,
+   "RecalcStyleCount": 120
+  },
+  "bytes": {
+   "jsTx": 541117,
+   "jsDec": 2041139,
+   "jsFiles": 9,
+   "cssTx": 68112,
+   "cssDec": 373299,
+   "cssFiles": 3,
+   "imgTx": 435480,
+   "imgDec": 433380,
+   "imgFiles": 7,
+   "htmlTx": 28037,
+   "htmlDec": 201202
+  },
+  "jsTop": [
+   "live-data-CHh591Y6.js 1140KB",
+   "page-p9ePZgj8.js 379KB",
+   "index-CuHIQf5B.js 202KB",
+   "framework-D_rUT4EX.js 186KB",
+   "utils-WMzaB3JW.js 70KB",
+   "tooltip-BswsodVM.js 9KB",
+   "legal-consolidation-QSO4X677.js 7KB",
+   "rolldown-runtime-C60lm6uB.js 1KB",
+   "layout-segment-context-lWHuibv8.js 0KB"
+  ],
+  "imgTop": [
+   "InterVariable.woff2 161KB",
+   "hero-graphite-blue-1170.webp 133KB",
+   "illustration-local-960.webp 41KB",
+   "illustration-bani-960.webp 26KB",
+   "illustration-firme-960.webp 26KB",
+   "illustration-mediu-960.webp 23KB",
+   "illustration-vreme-v30-960.webp 14KB"
+  ],
+  "viewportImgs": [
+   {
+    "src": "hero-graphite-blue-1170.webp",
+    "cssW": 390,
+    "cssH": 556,
+    "natW": 390,
+    "loaded": true,
+    "fetchP": "high"
+   }
+  ],
+  "status": 200
+ },
+ "homeScrolled": [
+  {
+   "f": "hero-graphite-blue-1170.webp",
+   "dec": 136268
+  },
+  {
+   "f": "illustration-local-960.webp",
+   "dec": 41500
+  },
+  {
+   "f": "illustration-mediu-960.webp",
+   "dec": 23286
+  },
+  {
+   "f": "illustration-firme-960.webp",
+   "dec": 26302
+  },
+  {
+   "f": "illustration-vreme-v30-960.webp",
+   "dec": 13924
+  },
+  {
+   "f": "illustration-bani-960.webp",
+   "dec": 26988
+  },
+  {
+   "f": "illustration-transport-960.webp",
+   "dec": 36976
+  },
+  {
+   "f": "illustration-sanatate-960.webp",
+   "dec": 29152
+  },
+  {
+   "f": "illustration-educatie-960.webp",
+   "dec": 32854
+  },
+  {
+   "f": "illustration-cultura-960.webp",
+   "dec": 38616
+  },
+  {
+   "f": "illustration-munca-960.webp",
+   "dec": 31462
+  },
+  {
+   "f": "illustration-justitie-960.webp",
+   "dec": 29490
+  },
+  {
+   "f": "illustration-energie-960.webp",
+   "dec": 30022
+  },
+  {
+   "f": "illustration-agricultura-960.webp",
+   "dec": 51066
+  },
+  {
+   "f": "illustration-filme-960.webp",
+   "dec": 35986
+  },
+  {
+   "f": "illustration-stiri-960.webp",
+   "dec": 21244
+  }
+ ],
+ "tapLatency": [
+  {
+   "to": "Dashboard",
+   "flipMs": 42
+  },
+  {
+   "to": "Descoperă",
+   "flipMs": 23
+  },
+  {
+   "to": "Hartă",
+   "flipMs": 33
+  },
+  {
+   "to": "Compară",
+   "flipMs": 12
+  },
+  {
+   "to": "Salvate",
+   "flipMs": 9
+  },
+  {
+   "to": "Descoperă",
+   "flipMs": 4
+  }
+ ],
+ "views": [
+  {
+   "name": "places",
+   "hash": "#view=explore",
+   "flipFromTap": 597,
+   "paintMs": 620,
+   "payloadTx": 3093,
+   "payloadDec": 135469,
+   "reqs": 2,
+   "top": [
+    "manifest.json 122KB tx0 dur2",
+    "places 10KB tx3 dur10"
+   ],
+   "longtasks": {
+    "n": 2,
+    "maxMs": 416
+   },
+   "scrolledImgs": [],
+   "scrolledData": [
+    {
+     "f": "manifest.json",
+     "dec": 125324
+    }
+   ],
+   "scrolledTotals": {
+    "imgBytes": 0,
+    "dataBytes": 125324
+   }
+  },
+  {
+   "name": "domain",
+   "hash": "#view=domain&id=transport",
+   "flipFromTap": 53,
+   "paintMs": 113,
+   "payloadTx": 471819,
+   "payloadDec": 3083036,
+   "reqs": 3,
+   "top": [
+    "manifest.json 1664KB tx177 dur19",
+    "network.json 1193KB tx130 dur8",
+    "illustration-transport.webp 153KB tx153 dur3"
+   ],
+   "longtasks": {
+    "n": 0,
+    "maxMs": 0
+   },
+   "scrolledImgs": [
+    {
+     "f": "illustration-transport.webp",
+     "dec": 156784
+    }
+   ],
+   "scrolledData": [
+    {
+     "f": "manifest.json",
+     "dec": 1704337
+    },
+    {
+     "f": "network.json",
+     "dec": 1221915
+    }
+   ],
+   "scrolledTotals": {
+    "imgBytes": 156784,
+    "dataBytes": 2926252
+   }
+  },
+  {
+   "name": "map",
+   "hash": "#view=map",
+   "flipFromTap": 216,
+   "paintMs": 232,
+   "payloadTx": 75000,
+   "payloadDec": 33984148,
+   "reqs": 250,
+   "top": [
+    "wlm-w132318311-1.webp 344KB tx0 dur41",
+    "explore-r21021040-1.webp 300KB tx0 dur42",
+    "explore-n2634651900-1.webp 298KB tx0 dur53",
+    "explore-w23557199-1.webp 298KB tx0 dur55",
+    "explore-w74463768.webp 294KB tx0 dur18",
+    "explore-n3412928381.webp 279KB tx0 dur64"
+   ],
+   "longtasks": {
+    "n": 1,
+    "maxMs": 54
+   },
+   "scrolledImgs": [
+    {
+     "f": "delta-main.webp",
+     "dec": 145854
+    },
+    {
+     "f": "explore-w244033697-1.webp",
+     "dec": 213792
+    },
+    {
+     "f": "wlm-n469184814-1.webp",
+     "dec": 222850
+    },
+    {
+     "f": "wlm-n2634652134-1.webp",
+     "dec": 64762
+    },
+    {
+     "f": "wlm-w38705683-1.webp",
+     "dec": 163152
+    },
+    {
+     "f": "wlm-w84575254-1.webp",
+     "dec": 113378
+    },
+    {
+     "f": "wlm-n2634652227-1.webp",
+     "dec": 147240
+    },
+    {
+     "f": "explore-n12299722784.webp",
+     "dec": 111260
+    },
+    {
+     "f": "explore-w13450166-1.webp",
+     "dec": 262392
+    },
+    {
+     "f": "wlm-w157316487-1.webp",
+     "dec": 99330
+    },
+    {
+     "f": "wlm-w843403214-1.webp",
+     "dec": 74680
+    },
+    {
+     "f": "wlm-w366401828-1.webp",
+     "dec": 211536
+    },
+    {
+     "f": "wlm-w16291602-1.webp",
+     "dec": 106808
+    },
+    {
+     "f": "wlm-w95075032-1.webp",
+     "dec": 101804
+    },
+    {
+     "f": "wlm-r1670647-1.webp",
+     "dec": 131442
+    },
+    {
+     "f": "wlm-w45373928-1.webp",
+     "dec": 183110
+    },
+    {
+     "f": "explore-w780297975.webp",
+     "dec": 99834
+    },
+    {
+     "f": "explore-w122651438.webp",
+     "dec": 62000
+    },
+    {
+     "f": "wlm-w685047508-1.webp",
+     "dec": 130712
+    },
+    {
+     "f": "explore-w74463768.webp",
+     "dec": 301462
+    },
+    {
+     "f": "wlm-w1448388407-1.webp",
+     "dec": 54462
+    },
+    {
+     "f": "wlm-n469184586-1.webp",
+     "dec": 190380
+    },
+    {
+     "f": "wlm-w1456412455-1.webp",
+     "dec": 134936
+    },
+    {
+     "f": "explore-w16286695-1.webp",
+     "dec": 186312
+    },
+    {
+     "f": "explore-w241256765-1.webp",
+     "dec": 39768
+    },
+    {
+     "f": "wlm-n6164079125-1.webp",
+     "dec": 134840
+    },
+    {
+     "f": "wlm-r6522406-1.webp",
+     "dec": 104894
+    },
+    {
+     "f": "wlm-r6496708-1.webp",
+     "dec": 107948
+    },
+    {
+     "f": "explore-n1788346553-1.webp",
+     "dec": 68948
+    },
+    {
+     "f": "wlm-w272841126-1.webp",
+     "dec": 62762
+    },
+    {
+     "f": "explore-n2634651844-1.webp",
+     "dec": 75616
+    },
+    {
+     "f": "wlm-n2634651984-1.webp",
+     "dec": 113458
+    },
+    {
+     "f": "explore-n2634651894.webp",
+     "dec": 246396
+    },
+    {
+     "f": "wlm-n2634652282-1.webp",
+     "dec": 112504
+    },
+    {
+     "f": "wlm-n2634652156-1.webp",
+     "dec": 196934
+    },
+    {
+     "f": "wlm-w586675118-1.webp",
+     "dec": 123854
+    },
+    {
+     "f": "explore-n3038878029.webp",
+     "dec": 243944
+    },
+    {
+     "f": "wlm-r3300200-1.webp",
+     "dec": 29844
+    },
+    {
+     "f": "wlm-w1327914056-1.webp",
+     "dec": 221218
+    },
+    {
+     "f": "wlm-w284620275-1.webp",
+     "dec": 51430
+    },
+    {
+     "f": "wlm-w245590656-1.webp",
+     "dec": 142900
+    },
+    {
+     "f": "explore-w222148705.webp",
+     "dec": 134918
+    },
+    {
+     "f": "wlm-w242580048-1.webp",
+     "dec": 110338
+    },
+    {
+     "f": "wlm-w24786437-1.webp",
+     "dec": 127650
+    },
+    {
+     "f": "wlm-w136984428-1.webp",
+     "dec": 155334
+    },
+    {
+     "f": "explore-w705080782-1.webp",
+     "dec": 85362
+    },
+    {
+     "f": "wlm-w132066800-1.webp",
+     "dec": 192452
+    },
+    {
+     "f": "explore-n2832321027.webp",
+     "dec": 281166
+    },
+    {
+     "f": "wlm-r2230393-1.webp",
+     "dec": 232128
+    },
+    {
+     "f": "wlm-n2634652302-1.webp",
+     "dec": 187032
+    },
+    {
+     "f": "wlm-w345215627-1.webp",
+     "dec": 184718
+    },
+    {
+     "f": "wlm-w74301876-1.webp",
+     "dec": 130100
+    },
+    {
+     "f": "wlm-n2634652858-1.webp",
+     "dec": 114026
+    },
+    {
+     "f": "wlm-w132318311-1.webp",
+     "dec": 352522
+    },
+    {
+     "f": "explore-n1270293744.webp",
+     "dec": 26112
+    },
+    {
+     "f": "wlm-w256169771-1.webp",
+     "dec": 109386
+    },
+    {
+     "f": "wlm-n1908098535-1.webp",
+     "dec": 223088
+    },
+    {
+     "f": "explore-n2837609287-1.webp",
+     "dec": 145250
+    },
+    {
+     "f": "wlm-n469184263-1.webp",
+     "dec": 178612
+    },
+    {
+     "f": "wlm-w43450039-1.webp",
+     "dec": 69888
+    },
+    {
+     "f": "wlm-w209222867-1.webp",
+     "dec": 103606
+    },
+    {
+     "f": "wlm-n11096757209-1.webp",
+     "dec": 179976
+    },
+    {
+     "f": "explore-n8607503223.webp",
+     "dec": 136800
+    },
+    {
+     "f": "wlm-n2634652270-1.webp",
+     "dec": 107308
+    },
+    {
+     "f": "explore-w23611484-1.webp",
+     "dec": 58852
+    },
+    {
+     "f": "wlm-n2634652030-1.webp",
+     "dec": 175958
+    },
+    {
+     "f": "wlm-n2634652253-1.webp",
+     "dec": 154778
+    },
+    {
+     "f": "wlm-n2634652859-1.webp",
+     "dec": 159612
+    },
+    {
+     "f": "wlm-n2634652913-1.webp",
+     "dec": 27938
+    },
+    {
+     "f": "explore-w43158975-1.webp",
+     "dec": 211460
+    },
+    {
+     "f": "wlm-n2634652891-1.webp",
+     "dec": 179478
+    },
+    {
+     "f": "explore-r21021040-1.webp",
+     "dec": 307496
+    },
+    {
+     "f": "explore-w23648411-1.webp",
+     "dec": 169478
+    },
+    {
+     "f": "explore-w514854242-1.webp",
+     "dec": 129426
+    },
+    {
+     "f": "explore-w39517794-1.webp",
+     "dec": 130814
+    },
+    {
+     "f": "explore-w152650048-1.webp",
+     "dec": 114268
+    },
+    {
+     "f": "explore-w515133710-1.webp",
+     "dec": 192072
+    },
+    {
+     "f": "explore-w26625071-1.webp",
+     "dec": 170056
+    },
+    {
+     "f": "wlm-w727569828-1.webp",
+     "dec": 188592
+    },
+    {
+     "f": "wlm-n2634652135-1.webp",
+     "dec": 198478
+    },
+    {
+     "f": "wlm-w137689140-1.webp",
+     "dec": 117542
+    },
+    {
+     "f": "wlm-w242357261-1.webp",
+     "dec": 29662
+    },
+    {
+     "f": "explore-n9680128587-1.webp",
+     "dec": 101420
+    },
+    {
+     "f": "explore-n10731450471.webp",
+     "dec": 157264
+    },
+    {
+     "f": "wlm-w272823081-1.webp",
+     "dec": 119400
+    },
+    {
+     "f": "explore-w31137490-1.webp",
+     "dec": 42846
+    },
+    {
+     "f": "wlm-w233094996-1.webp",
+     "dec": 76254
+    },
+    {
+     "f": "wlm-w860110002-1.webp",
+     "dec": 144800
+    },
+    {
+     "f": "wlm-w360924129-1.webp",
+     "dec": 136424
+    },
+    {
+     "f": "explore-w174727595-1.webp",
+     "dec": 127206
+    },
+    {
+     "f": "explore-w1111645542-1.webp",
+     "dec": 55364
+    },
+    {
+     "f": "wlm-w214438877-1.webp",
+     "dec": 170848
+    },
+    {
+     "f": "explore-n3152794786.webp",
+     "dec": 195860
+    },
+    {
+     "f": "wlm-w164369116-1.webp",
+     "dec": 138494
+    },
+    {
+     "f": "explore-n2634651900-1.webp",
+     "dec": 304806
+    },
+    {
+     "f": "wlm-w23892944-1.webp",
+     "dec": 204636
+    },
+    {
+     "f": "explore-w62743951-1.webp",
+     "dec": 233544
+    },
+    {
+     "f": "explore-w23557199-1.webp",
+     "dec": 304806
+    },
+    {
+     "f": "wlm-w40666664-1.webp",
+     "dec": 80498
+    },
+    {
+     "f": "wlm-w11139267-1.webp",
+     "dec": 134516
+    },
+    {
+     "f": "wlm-r19931391-1.webp",
+     "dec": 58478
+    },
+    {
+     "f": "explore-r19804537-1.webp",
+     "dec": 76942
+    },
+    {
+     "f": "wlm-r19803024-1.webp",
+     "dec": 73086
+    },
+    {
+     "f": "explore-w129321564-1.webp",
+     "dec": 123206
+    },
+    {
+     "f": "explore-w207162868-1.webp",
+     "dec": 151770
+    },
+    {
+     "f": "wlm-w30641877-1.webp",
+     "dec": 132300
+    },
+    {
+     "f": "explore-w1201727812.webp",
+     "dec": 67042
+    },
+    {
+     "f": "explore-n5966825327.webp",
+     "dec": 152442
+    },
+    {
+     "f": "explore-r2317481.webp",
+     "dec": 67400
+    },
+    {
+     "f": "explore-n2295508687.webp",
+     "dec": 272414
+    },
+    {
+     "f": "wlm-w658012750-1.webp",
+     "dec": 107220
+    },
+    {
+     "f": "explore-n7746093685-1.webp",
+     "dec": 211456
+    },
+    {
+     "f": "explore-w105889107-1.webp",
+     "dec": 174234
+    },
+    {
+     "f": "explore-n3412928381.webp",
+     "dec": 285976
+    },
+    {
+     "f": "wlm-w129316965-1.webp",
+     "dec": 118448
+    },
+    {
+     "f": "explore-w467247268-1.webp",
+     "dec": 162872
+    },
+    {
+     "f": "wlm-n2634651865-1.webp",
+     "dec": 77726
+    },
+    {
+     "f": "wlm-n2634651991-1.webp",
+     "dec": 95532
+    },
+    {
+     "f": "wlm-n415470699-1.webp",
+     "dec": 46860
+    },
+    {
+     "f": "explore-n26864032.webp",
+     "dec": 63634
+    },
+    {
+     "f": "wlm-w272883778-1.webp",
+     "dec": 78974
+    },
+    {
+     "f": "wlm-n2634652136-1.webp",
+     "dec": 98898
+    },
+    {
+     "f": "wlm-n2634652516-1.webp",
+     "dec": 262712
+    },
+    {
+     "f": "wlm-n2634652528-1.webp",
+     "dec": 93156
+    },
+    {
+     "f": "explore-n2634652186-1.webp",
+     "dec": 223052
+    },
+    {
+     "f": "wlm-w917573151-1.webp",
+     "dec": 146588
+    },
+    {
+     "f": "explore-w999873708-1.webp",
+     "dec": 66432
+    },
+    {
+     "f": "explore-n2634652190-1.webp",
+     "dec": 143242
+    },
+    {
+     "f": "wlm-n2634652192-1.webp",
+     "dec": 122208
+    },
+    {
+     "f": "wlm-n2634652196-1.webp",
+     "dec": 118074
+    },
+    {
+     "f": "wlm-w364305385-1.webp",
+     "dec": 113450
+    },
+    {
+     "f": "wlm-w529040882-1.webp",
+     "dec": 123048
+    },
+    {
+     "f": "wlm-n2634652166-1.webp",
+     "dec": 137892
+    },
+    {
+     "f": "wlm-n2634652175-1.webp",
+     "dec": 89182
+    },
+    {
+     "f": "explore-w328129631-1.webp",
+     "dec": 79320
+    },
+    {
+     "f": "wlm-w364305386-1.webp",
+     "dec": 169480
+    },
+    {
+     "f": "wlm-n2634651981-1.webp",
+     "dec": 187868
+    },
+    {
+     "f": "wlm-w24786295-1.webp",
+     "dec": 64266
+    },
+    {
+     "f": "wlm-n2634652421-1.webp",
+     "dec": 80952
+    },
+    {
+     "f": "wlm-n2634652433-1.webp",
+     "dec": 102990
+    },
+    {
+     "f": "wlm-w464274171-1.webp",
+     "dec": 174590
+    },
+    {
+     "f": "wlm-w136915293-1.webp",
+     "dec": 136552
+    },
+    {
+     "f": "wlm-n2634652925-1.webp",
+     "dec": 213080
+    },
+    {
+     "f": "wlm-n2634652329-1.webp",
+     "dec": 130888
+    },
+    {
+     "f": "wlm-n2634652181-1.webp",
+     "dec": 255866
+    },
+    {
+     "f": "wlm-n2634652238-1.webp",
+     "dec": 115124
+    },
+    {
+     "f": "wlm-w32535890-1.webp",
+     "dec": 78968
+    },
+    {
+     "f": "wlm-w113512088-1.webp",
+     "dec": 127818
+    },
+    {
+     "f": "wlm-n8551893673-1.webp",
+     "dec": 152412
+    },
+    {
+     "f": "wlm-w1534596467-1.webp",
+     "dec": 99546
+    },
+    {
+     "f": "explore-n4505417867-1.webp",
+     "dec": 74392
+    },
+    {
+     "f": "wlm-n2634652864-1.webp",
+     "dec": 131462
+    },
+    {
+     "f": "wlm-w154167993-1.webp",
+     "dec": 91358
+    },
+    {
+     "f": "wlm-n2634651946-1.webp",
+     "dec": 150062
+    },
+    {
+     "f": "wlm-w243925663-1.webp",
+     "dec": 113324
+    },
+    {
+     "f": "wlm-n2634652841-1.webp",
+     "dec": 102818
+    },
+    {
+     "f": "wlm-w29701978-1.webp",
+     "dec": 227748
+    },
+    {
+     "f": "explore-w392466489-1.webp",
+     "dec": 76952
+    },
+    {
+     "f": "explore-n2634652845.webp",
+     "dec": 74948
+    },
+    {
+     "f": "wlm-n2634652844-1.webp",
+     "dec": 196648
+    },
+    {
+     "f": "wlm-n2634652230-1.webp",
+     "dec": 147682
+    },
+    {
+     "f": "explore-n12601324233-1.webp",
+     "dec": 53398
+    },
+    {
+     "f": "wlm-w23610985-1.webp",
+     "dec": 91720
+    },
+    {
+     "f": "explore-n2634652838-1.webp",
+     "dec": 62382
+    },
+    {
+     "f": "wlm-w23611090-1.webp",
+     "dec": 108208
+    },
+    {
+     "f": "wlm-w220667665-1.webp",
+     "dec": 208666
+    },
+    {
+     "f": "wlm-w38234390-1.webp",
+     "dec": 186614
+    },
+    {
+     "f": "wlm-n2634652884-1.webp",
+     "dec": 100168
+    },
+    {
+     "f": "explore-n2634652301.webp",
+     "dec": 169988
+    },
+    {
+     "f": "wlm-n2634652098-1.webp",
+     "dec": 108788
+    },
+    {
+     "f": "wlm-n2634652552-1.webp",
+     "dec": 219080
+    },
+    {
+     "f": "wlm-n2634652931-1.webp",
+     "dec": 60426
+    },
+    {
+     "f": "explore-n2634652697.webp",
+     "dec": 192262
+    },
+    {
+     "f": "wlm-w346559298-1.webp",
+     "dec": 112008
+    },
+    {
+     "f": "wlm-n10746784795-1.webp",
+     "dec": 98406
+    },
+    {
+     "f": "wlm-n2634652174-1.webp",
+     "dec": 105882
+    },
+    {
+     "f": "wlm-w1076307879-1.webp",
+     "dec": 107290
+    },
+    {
+     "f": "wlm-w25511874-1.webp",
+     "dec": 255736
+    },
+    {
+     "f": "explore-n672149975-1.webp",
+     "dec": 126836
+    },
+    {
+     "f": "explore-w209192293-1.webp",
+     "dec": 75612
+    },
+    {
+     "f": "explore-w23556393-1.webp",
+     "dec": 81432
+    },
+    {
+     "f": "wlm-r2311501-1.webp",
+     "dec": 113994
+    },
+    {
+     "f": "wlm-r19919941-1.webp",
+     "dec": 63208
+    },
+    {
+     "f": "explore-w38236017-1.webp",
+     "dec": 93698
+    },
+    {
+     "f": "wlm-r399268-1.webp",
+     "dec": 54646
+    },
+    {
+     "f": "explore-w658220894-1.webp",
+     "dec": 142704
+    },
+    {
+     "f": "wlm-w568315986-1.webp",
+     "dec": 83762
+    },
+    {
+     "f": "explore-w232472401-1.webp",
+     "dec": 173582
+    },
+    {
+     "f": "wlm-w16291869-1.webp",
+     "dec": 207948
+    },
+    {
+     "f": "wlm-w866363006-1.webp",
+     "dec": 223194
+    },
+    {
+     "f": "wlm-w13853540-1.webp",
+     "dec": 78112
+    },
+    {
+     "f": "wlm-w445113480-1.webp",
+     "dec": 137018
+    },
+    {
+     "f": "wlm-w11139468-1.webp",
+     "dec": 206796
+    },
+    {
+     "f": "explore-w88105780-1.webp",
+     "dec": 159948
+    },
+    {
+     "f": "explore-w14360895-1.webp",
+     "dec": 118852
+    },
+    {
+     "f": "explore-w349611445.webp",
+     "dec": 181924
+    },
+    {
+     "f": "explore-w568313205.webp",
+     "dec": 82990
+    },
+    {
+     "f": "explore-w595512647.webp",
+     "dec": 94092
+    },
+    {
+     "f": "explore-w673907755.webp",
+     "dec": 81292
+    },
+    {
+     "f": "wlm-n8658300937-1.webp",
+     "dec": 229724
+    },
+    {
+     "f": "explore-w217573594-1.webp",
+     "dec": 107090
+    },
+    {
+     "f": "explore-n2269091535-1.webp",
+     "dec": 221604
+    },
+    {
+     "f": "explore-w216878111-1.webp",
+     "dec": 49706
+    },
+    {
+     "f": "explore-n1419098099.webp",
+     "dec": 175526
+    },
+    {
+     "f": "explore-r20620026-1.webp",
+     "dec": 61918
+    },
+    {
+     "f": "explore-n2269091539-1.webp",
+     "dec": 129072
+    },
+    {
+     "f": "wlm-w30679830-1.webp",
+     "dec": 148968
+    },
+    {
+     "f": "wlm-n620038855-1.webp",
+     "dec": 74234
+    },
+    {
+     "f": "explore-r6271685-1.webp",
+     "dec": 161286
+    },
+    {
+     "f": "explore-w198362240-1.webp",
+     "dec": 187078
+    },
+    {
+     "f": "wlm-n10737988718-1.webp",
+     "dec": 171384
+    },
+    {
+     "f": "explore-w288470871-1.webp",
+     "dec": 60690
+    },
+    {
+     "f": "wlm-w610656824-1.webp",
+     "dec": 186890
+    },
+    {
+     "f": "explore-n10941648019-1.webp",
+     "dec": 109814
+    },
+    {
+     "f": "wlm-w401562887-1.webp",
+     "dec": 127366
+    },
+    {
+     "f": "explore-w274933064.webp",
+     "dec": 144818
+    },
+    {
+     "f": "explore-n473428600-1.webp",
+     "dec": 99636
+    },
+    {
+     "f": "explore-w232472620-1.webp",
+     "dec": 91644
+    },
+    {
+     "f": "explore-n2180418244-1.webp",
+     "dec": 20834
+    },
+    {
+     "f": "explore-w1308097888-1.webp",
+     "dec": 20834
+    },
+    {
+     "f": "explore-w13860708-1.webp",
+     "dec": 219604
+    },
+    {
+     "f": "explore-w19545147.webp",
+     "dec": 127030
+    },
+    {
+     "f": "explore-n5728549121-1.webp",
+     "dec": 195070
+    },
+    {
+     "f": "explore-w29819032-1.webp",
+     "dec": 221818
+    },
+    {
+     "f": "explore-w193602657-1.webp",
+     "dec": 230394
+    },
+    {
+     "f": "wlm-r2184619-1.webp",
+     "dec": 83124
+    },
+    {
+     "f": "explore-w23610940-1.webp",
+     "dec": 109326
+    },
+    {
+     "f": "wlm-w274648109-1.webp",
+     "dec": 184406
+    },
+    {
+     "f": "wlm-r1404199-1.webp",
+     "dec": 81872
+    },
+    {
+     "f": "explore-w860306171-1.webp",
+     "dec": 102650
+    },
+    {
+     "f": "explore-w847208795-1.webp",
+     "dec": 55166
+    },
+    {
+     "f": "explore-w28212482-1.webp",
+     "dec": 77350
+    },
+    {
+     "f": "explore-w858962728-1.webp",
+     "dec": 181538
+    },
+    {
+     "f": "wlm-n2722959639-1.webp",
+     "dec": 59424
+    },
+    {
+     "f": "wlm-r7211172-1.webp",
+     "dec": 70394
+    },
+    {
+     "f": "explore-w197841644-1.webp",
+     "dec": 235992
+    },
+    {
+     "f": "explore-w165253337-1.webp",
+     "dec": 133118
+    },
+    {
+     "f": "explore-w167182972-1.webp",
+     "dec": 172180
+    },
+    {
+     "f": "wlm-w259023164-1.webp",
+     "dec": 130454
+    },
+    {
+     "f": "explore-w82950585-1.webp",
+     "dec": 128872
+    },
+    {
+     "f": "wlm-w194401985-1.webp",
+     "dec": 96028
+    },
+    {
+     "f": "wlm-w586666594-1.webp",
+     "dec": 84098
+    },
+    {
+     "f": "wlm-w202370085-1.webp",
+     "dec": 115818
+    },
+    {
+     "f": "explore-w1372102662.webp",
+     "dec": 194428
+    },
+    {
+     "f": "explore-w1124714987.webp",
+     "dec": 260648
+    },
+    {
+     "f": "wlm-w1130933459-1.webp",
+     "dec": 82232
+    },
+    {
+     "f": "wlm-w228772727-1.webp",
+     "dec": 107928
+    },
+    {
+     "f": "wlm-w986744769-1.webp",
+     "dec": 117386
+    },
+    {
+     "f": "wlm-w364133500-1.webp",
+     "dec": 98818
+    },
+    {
+     "f": "explore-w264048661.webp",
+     "dec": 127680
+    }
+   ],
+   "scrolledData": [],
+   "scrolledTotals": {
+    "imgBytes": 33984148,
+    "dataBytes": 0
+   }
+  }
+ ]
+}

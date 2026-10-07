@@ -22,5 +22,23 @@
     "quality": 90,
     "sha256": "8335200fce91a0f13f0fa8202920e89fd58a81403083fdc3c80ab8a6307681c6",
     "changes": "WebP encoding only; dimensions, aspect ratio and framing preserved. No additional creative edits."
-  }
+  },
+  "variants": [
+    {
+      "file": "hero-graphite-blue-960.webp",
+      "width": 960,
+      "height": 843,
+      "bytes": 115084,
+      "sha256": "a78b1ff42bcd34f17bd01f0d176b26ece72bc33e0a58ed2b2e4fd5145a2912fc",
+      "objectPositionX": 0.59
+    },
+    {
+      "file": "hero-graphite-blue-1170.webp",
+      "width": 1170,
+      "height": 843,
+      "bytes": 136268,
+      "sha256": "d992d9860a3ecf93781e4704eb1b751532e258ebdf7d1ebae175f486295469da",
+      "objectPositionX": 0.59
+    }
+  ]
 }

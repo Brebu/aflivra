@@ -1,0 +1,81 @@
+{
+ "label": "DEV-AFTER",
+ "base": "http://127.0.0.1:5173",
+ "runs": [
+  {
+   "name": "deeplink",
+   "hash": "view=domain&id=transport",
+   "state": {
+    "dataView": "domain",
+    "heroImgInDom": false,
+    "fontFetches": [
+     {
+      "initiator": "css",
+      "transfer": 352540,
+      "delivery": ""
+     },
+     {
+      "initiator": "css",
+      "transfer": 300,
+      "delivery": ""
+     }
+    ],
+    "heroFetches": [
+     {
+      "initiator": "img",
+      "transfer": 318602,
+      "delivery": ""
+     }
+    ],
+    "fontPreloadCopies": 0,
+    "fontCheck": true,
+    "swControlled": true,
+    "linkLog": []
+   },
+   "logEntries": [],
+   "allLog": [],
+   "console": [
+    {
+     "type": "debug",
+     "text": "[vite] connecting..."
+    },
+    {
+     "type": "debug",
+     "text": "[vite] connected."
+    },
+    {
+     "type": "info",
+     "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    },
+    {
+     "type": "debug",
+     "text": "[vite] css hot updated: /app/globals.css"
+    },
+    {
+     "type": "debug",
+     "text": "[vite] hot updated: /app/page.tsx"
+    },
+    {
+     "type": "debug",
+     "text": "[vite] css hot updated: /app/globals.css"
+    },
+    {
+     "type": "debug",
+     "text": "[vite] hot updated: /app/page.tsx"
+    },
+    {
+     "type": "debug",
+     "text": "[vite] css hot updated: /app/globals.css"
+    },
+    {
+     "type": "debug",
+     "text": "[vite] hot updated: /app/page.tsx"
+    },
+    {
+     "type": "debug",
+     "text": "[vite] css hot updated: /app/globals.css"
+    }
+   ]
+  }
+ ]
+}
