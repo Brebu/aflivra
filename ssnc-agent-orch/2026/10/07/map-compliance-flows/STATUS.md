@@ -582,3 +582,61 @@ Pan mechanics end-to-end: settled gesture → debounced notify → `setMapCenter
 4. `/api/places` `view=map` responses for the biggest sets are multi-MB JSON (uncompressed locally; the platform compresses text responses in transit). Bounded by the corpus, measured, honest.
 
 **Status: DONE** — root cause measured (nearest-200 slice capping the visible radius at 0.3–23.7 km depending on density), the honored-radius pin set wired with no silent caps (validated boundary, honest labels), pan-aware debounced refetch from the map's own center (cancel-in-flight, byte-identical no-op), all gates green: tsc 0 / lint 0 errors·115 warnings / verify-geographic-scope ×2 exit 0 / verify-ro-text 0 / full e2e **153 passed**.
+
+---
+
+## Builder Findings (national map → Leaflet)
+
+Branch `feat/national-map-leaflet` (cut from main @ a66f633). USER REQUEST (verbatim): „natural earth map vreau să fie schimbat cu aia unde am și live, celălalt tip de hartă" — the national repere map (#view=map, hand-built SVG `.romap`) becomes the same kind of interactive map as the live one. All work in the worktree; committed locally, not pushed.
+
+### What was ported (exactly)
+
+- **`app/public-map.tsx` (extended, additive)**: new optional props `onSelect?: (id) => void`, `selectedId?: string`, `regionLabel?: string`. When `onSelect` is present, every non-vehicle point renders as a Leaflet divIcon marker containing a **real `<button type="button" class="repere-pin(chosen)" aria-label="Selectează {name}">`** — the same divIcon convention the flight-arrow markers use, extended where Leaflet gives nothing (see a11y below). All existing PublicMap consumers (transit, tranzy, flights, cinema, places) pass none of the new props — byte-identical behavior for them.
+- **`app/page.tsx`**: the `#view=map` workspace swaps `<RomaniaMap …/>` for `<PublicMap points=… selectedId={activePin} onSelect={id=>{setActivePin(id);go('place',id)}} viewKey={'repere:'+exploreRadius+':'+(geo.hasLocal?geo.label:'na')} regionLabel="Harta României cu repere selectabile"/>`. Ported with it, unchanged in behavior: the radius selector (the 1–100 km `nearbyRecord` threading — Brașov 15 km→3 repere, 100 km→47), the sidebar list, the active-place preview card, the „Vezi ca listă" toggle, and the honest positioning notes. `viewKey` refits the bounds when radius/locality changes. The un-deduplicated corpus is unchanged (273 source entries − 6 same-place repeats = 267 pins).
+- **`mapPlaces` memo (`app/page.tsx`)**: the Leaflet points array is memoized on `localPlaces` — an inline array handed PublicMap a **new identity on every Aflivra re-render** (live polls land mid-view), tearing down and rebuilding all 267 pin buttons while a test or a finger was on one (`Element is not attached to the DOM` — the full-run RED that isolation hid). One memo, fixed.
+- **`app/workspaces.css`**: `.repere-pin` styles (26 px hit area, 16 px navy/white dot, hover, `.chosen` gold — the old `.map-pin.chosen` treatment); focus-visible ring is the app-global `.v2 button:focus-visible` gold outline, free from the real `<button>`.
+- **`app/v2.css`**: the workspace height ladder ports to the new surface — `.map-workspace .public-map{height:590px}` (desktop, was `.map-workspace>.romap`), `430px` at ≤900 px (was the 430 romap pair), `320px` at ≤640 px (was the 320 romap pair); the dead 310 romap pair at ≤640 removed. OSM attribution is Leaflet's own control (`Leaflet | © OpenStreetMap contributors` — probe-verified), same as the live maps.
+
+### Sunk complexity — what stayed vs. what died
+
+**Nothing in `app/v2-charts.tsx` died**: the RomaniaMap machine (nearest-pin resolver, declutter offsets + leader hairlines, pinch emulation, pan-from-any-pointerdown, zoom buttons, `.romap` css, Natural Earth credit) is still consumed by the compact mini-maps (home discovery-split, place overview „Locul în context", planner aside) — kept untouched per the partition. What died is only the #view=map-scoped css (the 4 workspace `.romap` rules above) and the **e2e legs pinned to the emulated canvas** (listed below).
+
+### A11y approach (mission item 3)
+
+The existing live-map markers grant keyboard nothing (vehicle arrows are `role="img"` divs; plain circles are canvas — neither focusable). The old national map had 267 keyboard-reachable `g.map-pin[role=button][tabindex=0]`. Preserved on Leaflet by making the pin a **native `<button>`**: real tab stop, real Enter/Space activation (no synthetic key handlers), accessible name `Selectează {name}` (the exact old aria-label), `title` = place name, focus rings from the global button rule. A click navigates only when the pointer stayed within the old map's own ≥5 px slop (a drag stays a pan — same rule the SVG map shipped).
+
+### TDD evidence — RED → GREEN → REFACTOR
+
+- **RED**: rewrote `e2e/map-markers.spec.ts` (Leaflet surface, OSM tiles stubbed TINY_PNG + `no-store` — zero external fetches) and ported the `#view=map` describe of `e2e/map-touch-gestures.spec.ts`. First run on the unmodified tree: **12/13 failed for the intended reason** (`.map-workspace .public-map.leaflet-container` never appears — the SVG map still owns the view); the 1 pass was the untouched leaflet places-guard leg.
+- **GREEN**: implementation above; 13/13 pass (incl. desktop click/keyboard/list-toggle/click-far/dedup census 267/radius 3→47/Sinaia real-zoom separation, mobile stack-tap, CDP touch pan-from-pin / vertical drag 0-cancel-0-scroll / pinch raising real tile zoom / tap-navigates).
+- **REFACTOR**: `mapPlaces` memo (the full-run detach bug), census locator fix (`pinsLabeled` counts by label — `filter({has:…})` checks descendants, never the button itself), scroll-anchor fixes (the 267-entry sidebar is a ~20k px column — `scrollIntoView` must target the map element, a lesson the specs now document).
+
+### Legs ported / retired (honest list)
+
+**Ported** (8 map-marker legs — click→place, keyboard Enter→place, „Vezi ca listă"→explore, click-far-selects-nothing, one-pin-per-place census (267 + label census + sidebar), radius 3→47, Sinaia trio separation at real zoom (Leaflet box-zoom + each pin opens its own place), mobile stack-tap; 4 touch legs — drag-from-pin pans, vertical drag own-gesture audit (0 pointercancel / 0 scroll / scrollY unchanged), pinch raises served tile zoom, tap navigates.
+
+**Retired** (SVG-emulation contracts that existed only for the constrained canvas, documented in the spec headers): ownedPixels nearest-pin-to-click-point resolution (overlap-pair + sub-pixel Sinaia ×2/pixel); declutter legs (offset ≥2 css px, offsets recomposing per zoom converging to truth, hairline leaders anchoring displaced pins ≤19 units); the SVG transform gauge + Resetează-harta reset leg (no emulated transform to reset; viewKey refits on corpus change). Replaced by their real-surface equivalents: hit-testing = the browser's own (click each own button at real zoom), separation = native meters-per-pixel zoom (the separation leg + mobile pixel-ownership leg).
+- **Mobile stack-tap reformulated honestly**: the old leg asserted "opens one of the stacked trio" — a property of the resolver's nearest-pin arithmetic. On real DOM hit-testing, the pixel at Peleș's center at phone scale is genuinely owned by whichever button paints on top (often a 4th Sinaia repere) — the honest port asserts the tap opens **exactly the pin `elementFromPoint` reports**, same one every time. Which sibling you get is what zoom is for (the separation leg).
+
+### Gates (final tree, this session)
+
+- `corepack pnpm exec tsc --noEmit` → **exit 0, 0 errors** (spec type errors fixed during GREEN: TS field names + Shift via keyboard.down — mouse.down takes no modifiers).
+- `corepack pnpm lint` → **0 errors, 115 warnings — exactly the repo baseline** (re-run after the memo fix and final css).
+- `node scripts/verify-css-keyframes.mjs` → exit 0 (22 animation references / 16 definitions intact).
+- `node scripts/audit-controls.mjs` → exit 0; `node scripts/verify-ro-text.mjs` → exit 0; `node scripts/verify-model-contracts.mjs` → exit 0.
+- **No battery script pins `.romap` behavior** (grep romap|map-pin|RomaniaMap over scripts/ → none); the map-affecting gates are the css-keyframes/model/audit trio above, all green.
+- Full `corepack pnpm test:e2e` on the final tree: **144 passed, 2 failed** — both failures are the SAME two `events-venues` Opera Cluj legs, **verified failing identically on the clean main tree (a66f633, my changes stashed)**: their fixtures hardcode `BAL MASCAT`/`FÂNTÂNA…` at 2026-10-07 (written yesterday, expired at midnight — the workspace honestly filters past events). **Registered, not fixed** (outside my partition — events surface; a fixture refresh ticket belongs to whoever owns events-venues).
+- Probe (`probe/national-map-leaflet-probe.mjs`, own dev server, killed after): initial fit = **z7, 267/267 pins visible**; zoom 6 via the map's own − control = **z6, 267 visible, 15 tiles**; zoom 12 via 6 dblclicks beside Peleș = **z12 (displayed tile URL z=12), 6 repere visible in-viewport, 15 tiles**, `chosen:1` at every step, attribution „Leaflet | © OpenStreetMap contributors", **zero page errors**. Screenshots `national-map-zoom6.png` / `national-map-zoom12.png` captured; this session could not visually re-inspect them (no image input) — the DOM/zoom/census assertions above are the evidence, PNGs await eyeballs.
+
+### AIGA registration (mission item 4)
+
+`inspire.geomil.ro` is **completely down — 20 s connection timeout from residential too** (my own `curl --max-time 20` → exit 28, matching the orchestrator's 2026-10-07 probe). The overlay keeps its honest error + retry path (already pinned by `imobiliare-ortho.spec.ts`'s "service does not answer" leg); **no further action from us until their host recovers**.
+
+### Four-lens self-review
+
+- **Completeness**: mission items 1–6 all done (port, sunk-complexity check, a11y, AIGA line, e2e RED-first with honest retirements, all gates + probe). No stubs, no TODOs.
+- **Quality**: additive extension of the shared component (existing consumers untouched — the 5 other PublicMap surfaces render byte-identical markup without the new props); pin conventions match the flight-arrow divIcon family; the slop guard copies the old map's own rule.
+- **Discipline**: only the assigned files touched (public-map.tsx, page.tsx #view=map section + one memo, two css files' map parts, two e2e specs); compact mini-maps and v2-charts untouched; the pr49 png in the working tree is another session's and is excluded from the commit.
+- **Testing**: every ported behavior has a leg that was RED for the documented reason on the old tree; the full-suite 2 failures are proven pre-existing on clean main.
+
+**Status: DONE** — the national map is the same kind of interactive map as the live one (OSM tiles, native finger pan/pinch/zoom, keyboard-reachable repere buttons, honest attribution), 267-pin corpus + radius + navigation contracts all ported and green; gates: tsc 0 / lint 0 errors·115 warnings / batteries green / full e2e 144 passed with 2 pre-existing date-expired events-venue failures (verified on clean main, registered); probe z6+z12 captured.

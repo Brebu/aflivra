@@ -1,0 +1,31 @@
+{
+  "initialFit": {
+    "pins": 267,
+    "visiblePins": 267,
+    "chosen": 1,
+    "loadedTiles": 12,
+    "displayedTileZoom": 7,
+    "attribution": "Leaflet | © OpenStreetMap contributors"
+  },
+  "atZoom6": {
+    "pins": 267,
+    "visiblePins": 267,
+    "chosen": 1,
+    "loadedTiles": 15,
+    "displayedTileZoom": 6,
+    "attribution": "Leaflet | © OpenStreetMap contributors"
+  },
+  "afterDblclickZoomTo12": {
+    "pins": 267,
+    "visiblePins": 6,
+    "chosen": 1,
+    "loadedTiles": 15,
+    "displayedTileZoom": 12,
+    "attribution": "Leaflet | © OpenStreetMap contributors"
+  },
+  "zoomSteps": {
+    "zoomOutClicks": 1,
+    "dblclicksBesideAPin": 6
+  },
+  "pageErrors": []
+}
