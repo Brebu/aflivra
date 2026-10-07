@@ -568,6 +568,9 @@ test.describe('Watch — notificări push, onest pe platformă', () => {
     await expect(page.getByText('Nu urmărești nimic încă')).toBeVisible();
     // Honest guidance: where the follow buttons live.
     await expect(page.getByText(/dosar|firmă|localitate/i).first()).toBeVisible();
+    // Pre-identity state says the device has no anonymous identifier yet — not that the server is unconfigured.
+    await expect(page.getByText(/abia atunci se creează identificatorul anonim al dispozitivului/)).toBeVisible();
+    await expect(page.getByText('Notificările push nu sunt configurate pe server acum.')).toHaveCount(0);
     expect(watch.calls.filter(call => call.method === 'GET' && call.pathname === '/api/watch')).toHaveLength(1); // still no extra identity calls
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });

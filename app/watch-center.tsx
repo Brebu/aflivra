@@ -215,7 +215,8 @@ export function PushSection(){
     <h2>Notificări pe acest dispozitiv</h2>
     {state==='unsupported'&&<p className="field-help">Acest browser nu suportă notificări push. Schimbările rămân vizibile aici, în centru.</p>}
     {state==='ios-browser'&&<><p>Pe iPhone și iPad, notificările sosesc în aplicația instalată pe ecranul de start.</p><p className="field-help">Instalează aplicația și activează notificările: meniul Safari → „Adaugă la ecranul de start”, apoi deschide Aflivra din ecranul de start.</p></>}
-    {state==='ready'&&!watch.vapidPublicKey&&<p className="field-help">Notificările push nu sunt configurate pe server acum. Schimbările rămân vizibile aici, în centru.</p>}
+    {state==='ready'&&!watch.id&&!watch.vapidPublicKey&&<p className="field-help">Notificările se pot activa pe acest dispozitiv după ce adaugi prima urmărire — abia atunci se creează identificatorul anonim al dispozitivului.</p>}
+    {state==='ready'&&watch.id&&!watch.vapidPublicKey&&<p className="field-help">Notificările push nu sunt configurate pe server acum. Schimbările rămân vizibile aici, în centru.</p>}
     {state==='ready'&&watch.vapidPublicKey&&<>
       {subscribed?<>
         <p>Notificările sunt active pe acest dispozitiv.</p>
