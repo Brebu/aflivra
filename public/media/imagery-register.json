@@ -1,15 +1,15 @@
 {
   "schema": "aflivra-imagery-v1",
-  "generatedAt": "2026-10-08T20:18:26.134Z",
+  "generatedAt": "2026-10-08T21:56:13.980Z",
   "source": "Wikidata (P18/P158) · Wikimedia Commons",
   "classes": {
     "park": {
       "records": 54,
-      "imaged": 6
+      "imaged": 37
     },
     "school": {
       "records": 30,
-      "imaged": 3
+      "imaged": 13
     },
     "pharmacy": {
       "records": 1267,
@@ -370,11 +370,1046 @@
       "sha256": "18d3f46eabd8f7da9e1d0efa38ad0e495fc720bf24e9a9495e81dba318798033",
       "retrieval_date": "2026-10-08",
       "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q132449",
+      "app_file": "/media/wiki-q132449.jpg",
+      "qid": "Q132449",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Rozelor",
+      "title": "Parcul Rozelor Timisoara - roses.jpg",
+      "original_title": "Parcul Rozelor Timisoara - roses.jpg",
+      "caption_ro": "Parcul Rozelor · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Rozelor_Timisoara_-_roses.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Rozelor_Timisoara_-_roses.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Rozelor%20Timisoara%20-%20roses.jpg?width=800",
+      "author": "Turbojet",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Parcul Rozelor Timisoara - roses.jpg — Turbojet / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 290693,
+      "sha256": "704d4ddce8b3a26860b6eb2f004e7a858fe7eb0a45227397b7265d8358cc8171",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q2340319",
+      "app_file": "/media/wiki-q2340319.jpg",
+      "qid": "Q2340319",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Tineretului",
+      "title": "Parcul Tineretului.jpg",
+      "original_title": "Parcul Tineretului.jpg",
+      "caption_ro": "Parcul Tineretului · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Tineretului.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Tineretului.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Tineretului.jpg?width=800",
+      "author": "Mihai Petre",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "attribution": "Parcul Tineretului.jpg — Mihai Petre / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 259617,
+      "sha256": "e08def6ff0db6d33186611cfc3b6cbebc2eaed2b978502ee62c72d10c0e4dcfe",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q4093496",
+      "app_file": "/media/wiki-q4093496.jpg",
+      "qid": "Q4093496",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Bordei",
+      "title": "Bucharest - waterfront building, Parcul Bordei.jpg",
+      "original_title": "Bucharest - waterfront building, Parcul Bordei.jpg",
+      "caption_ro": "Parcul Bordei · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Bucharest_-_waterfront_building,_Parcul_Bordei.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Bucharest_-_waterfront_building,_Parcul_Bordei.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bucharest%20-%20waterfront%20building%2C%20Parcul%20Bordei.jpg?width=800",
+      "author": "Joe Mabel",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Bucharest - waterfront building, Parcul Bordei.jpg — Joe Mabel / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 251287,
+      "sha256": "7e73cbcf41f73c5cbe08fb43662bac525cb379cf1e1625ce62a1420b09bf81d1",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q5612919",
+      "app_file": "/media/wiki-q5612919.jpg",
+      "qid": "Q5612919",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Grădina Icoanei",
+      "title": "Parcul Gradina Icoanei - statuie.jpg",
+      "original_title": "Parcul Gradina Icoanei - statuie.jpg",
+      "caption_ro": "Grădina Icoanei · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Gradina_Icoanei_-_statuie.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Gradina_Icoanei_-_statuie.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Gradina%20Icoanei%20-%20statuie.jpg?width=800",
+      "author": "claudiu nh from BUCURESTI, ROMANIA",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "attribution": "Parcul Gradina Icoanei - statuie.jpg — claudiu nh from BUCURESTI, ROMANIA / Wikimedia Commons / CC BY-SA 2.0",
+      "bytes": 243416,
+      "sha256": "6f57b68dcaca17cd5bdea0faa20c6c797970fe5aaacfe44688436145d57558eb",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q5983519",
+      "app_file": "/media/wiki-q5983519.jpg",
+      "qid": "Q5983519",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Expoziției din Iași",
+      "title": "Parcul Expoziţiei din Iaşi4.jpg",
+      "original_title": "Parcul Expoziţiei din Iaşi4.jpg",
+      "caption_ro": "Parcul Expoziției din Iași · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Expoziţiei_din_Iaşi4.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Expoziţiei_din_Iaşi4.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Expozi%C5%A3iei%20din%20Ia%C5%9Fi4.jpg?width=800",
+      "author": "Cezar Suceveanu",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution": "Parcul Expoziţiei din Iaşi4.jpg — Cezar Suceveanu / Wikimedia Commons / CC BY 3.0",
+      "bytes": 222533,
+      "sha256": "c6a6f1a0edee4a2a1f1db2f572148dd917b50a9b1fe4b75b9a80d35c3860ac4a",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12207333",
+      "app_file": "/media/wiki-q12207333.jpg",
+      "qid": "Q12207333",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Alexandru Ioan Cuza",
+      "title": "2019 Titan Park Spring (11).jpg",
+      "original_title": "2019 Titan Park Spring (11).jpg",
+      "caption_ro": "Parcul Alexandru Ioan Cuza · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:2019_Titan_Park_Spring_(11).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:2019_Titan_Park_Spring_(11).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/2019%20Titan%20Park%20Spring%20(11).jpg?width=800",
+      "author": "Babu",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "2019 Titan Park Spring (11).jpg — Babu / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 280044,
+      "sha256": "1eae14631f258c08274e6e87d189064733dcb9af88a61d742cb90d63dd8c28b4",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12736100",
+      "app_file": "/media/wiki-q12736100.jpg",
+      "qid": "Q12736100",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Muzeul Satului Maramureșean",
+      "title": "Casa Hodor-Pop - Muzeul Satului Maramureșean (2023) - img 02.jpg",
+      "original_title": "Casa Hodor-Pop - Muzeul Satului Maramureșean (2023) - img 02.jpg",
+      "caption_ro": "Muzeul Satului Maramureșean · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Casa_Hodor-Pop_-_Muzeul_Satului_Maramureșean_(2023)_-_img_02.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Casa_Hodor-Pop_-_Muzeul_Satului_Maramureșean_(2023)_-_img_02.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Casa%20Hodor-Pop%20-%20Muzeul%20Satului%20Maramure%C8%99ean%20(2023)%20-%20img%2002.jpg?width=800",
+      "author": "Chainwit.",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "attribution": "Casa Hodor-Pop - Muzeul Satului Maramureșean (2023) - img 02.jpg — Chainwit. / Wikimedia Commons / CC BY 4.0",
+      "bytes": 290027,
+      "sha256": "955b049bfc7e806bbd171ef211a2517baeaf5b2b8f9068479ecc86ec9cc2420c",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12737515",
+      "app_file": "/media/wiki-q12737515.jpg",
+      "qid": "Q12737515",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Floreasca",
+      "title": "Parcul Floreasca - loc de joaca.jpg",
+      "original_title": "Parcul Floreasca - loc de joaca.jpg",
+      "caption_ro": "Parcul Floreasca · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Floreasca_-_loc_de_joaca.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Floreasca_-_loc_de_joaca.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Floreasca%20-%20loc%20de%20joaca.jpg?width=800",
+      "author": "--Miehs (discuție) 25 august 2012 13:38 (EEST)",
+      "license": "Public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/File:Parcul_Floreasca_-_loc_de_joaca.jpg",
+      "attribution": "Parcul Floreasca - loc de joaca.jpg — --Miehs (discuție) 25 august 2012 13:38 (EEST) / Wikimedia Commons / Public domain",
+      "bytes": 264993,
+      "sha256": "8a78550e65f96050c6a4e4a2e83e63181a282d1931e20b5b5ad79ce8b8af043c",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12737517",
+      "app_file": "/media/wiki-q12737517.jpg",
+      "qid": "Q12737517",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Bazilescu",
+      "title": "Parcul Bazilescu.jpg",
+      "original_title": "Parcul Bazilescu.jpg",
+      "caption_ro": "Parcul Bazilescu · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Bazilescu.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Bazilescu.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Bazilescu.jpg?width=800",
+      "author": "Asybaris01",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Parcul Bazilescu.jpg — Asybaris01 / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 196496,
+      "sha256": "d73a88369c09c469bd449287b257f3782a4e8a35deeef3b7bfe3f87fb628ef85",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12737520",
+      "app_file": "/media/wiki-q12737520.jpg",
+      "qid": "Q12737520",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Central „Anton Scudier” din Timișoara",
+      "title": "Central Park Timisoara - entrance.jpg",
+      "original_title": "Central Park Timisoara - entrance.jpg",
+      "caption_ro": "Parcul Central „Anton Scudier” din Timișoara · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Central_Park_Timisoara_-_entrance.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Central_Park_Timisoara_-_entrance.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Central%20Park%20Timisoara%20-%20entrance.jpg?width=800",
+      "author": "Turbojet",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Central Park Timisoara - entrance.jpg — Turbojet / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 184115,
+      "sha256": "96aad458b539e6f16944525b3a7c0a68bf92c6bd65b303a696ef7f3287209769",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12737529",
+      "app_file": "/media/wiki-q12737529.jpg",
+      "qid": "Q12737529",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Izvor",
+      "title": "Parcul Izvor 2016.05.02.1 (26164817183).jpg",
+      "original_title": "Parcul Izvor 2016.05.02.1 (26164817183).jpg",
+      "caption_ro": "Parcul Izvor · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Izvor_2016.05.02.1_(26164817183).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Izvor_2016.05.02.1_(26164817183).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Izvor%202016.05.02.1%20(26164817183).jpg?width=800",
+      "author": "M Marius",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "attribution": "Parcul Izvor 2016.05.02.1 (26164817183).jpg — M Marius / Wikimedia Commons / CC BY-SA 2.0",
+      "bytes": 293404,
+      "sha256": "038b6009a0b97a3c85e532f3cae0d5149ccc4c4d4c6aa5ff424aa673e1b80919",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12737531",
+      "app_file": "/media/wiki-q12737531.jpg",
+      "qid": "Q12737531",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Ion Voicu",
+      "title": "Parcul Ioanid.jpg",
+      "original_title": "Parcul Ioanid.jpg",
+      "caption_ro": "Parcul Ion Voicu · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Ioanid.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Ioanid.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Ioanid.jpg?width=800",
+      "author": "Adriana ctin",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Parcul Ioanid.jpg — Adriana ctin / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 257606,
+      "sha256": "062d301251e94fa0387e180171746d87ce3e0cf9fd2d79b58bdf69ea0b8bfd21",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12737533",
+      "app_file": "/media/wiki-q12737533.jpg",
+      "qid": "Q12737533",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Justiției",
+      "title": "Parcul Justitiei Timisoara.jpg",
+      "original_title": "Parcul Justitiei Timisoara.jpg",
+      "caption_ro": "Parcul Justiției · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Justitiei_Timisoara.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Justitiei_Timisoara.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Justitiei%20Timisoara.jpg?width=800",
+      "author": "Turbojet",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Parcul Justitiei Timisoara.jpg — Turbojet / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 261048,
+      "sha256": "0e55a2bfe28e8a4123da8f1f12c68d167f8016d3a706be9a9a495fd0dbd556ee",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12737534",
+      "app_file": "/media/wiki-q12737534.jpg",
+      "qid": "Q12737534",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Kiseleff",
+      "title": "2007 Parcul Kiseleff B-II-a-B-18982.jpg",
+      "original_title": "2007 Parcul Kiseleff B-II-a-B-18982.jpg",
+      "caption_ro": "Parcul Kiseleff · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:2007_Parcul_Kiseleff_B-II-a-B-18982.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:2007_Parcul_Kiseleff_B-II-a-B-18982.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/2007%20Parcul%20Kiseleff%20B-II-a-B-18982.jpg?width=800",
+      "author": "CristianChirita",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "2007 Parcul Kiseleff B-II-a-B-18982.jpg — CristianChirita / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 331246,
+      "sha256": "1205ef5008fa5e9cffd57e8cfb6be6eff47fe5bfe0210ae514f3280a0d758d78",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18539021",
+      "app_file": "/media/wiki-q18539021.jpg",
+      "qid": "Q18539021",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Circul de Stat",
+      "title": "Afternoon - panoramio - Mihai Burlacu (1).jpg",
+      "original_title": "Afternoon - panoramio - Mihai Burlacu (1).jpg",
+      "caption_ro": "Parcul Circul de Stat · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Afternoon_-_panoramio_-_Mihai_Burlacu_(1).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Afternoon_-_panoramio_-_Mihai_Burlacu_(1).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Afternoon%20-%20panoramio%20-%20Mihai%20Burlacu%20(1).jpg?width=800",
+      "author": "Mihai Burlacu",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "attribution": "Afternoon - panoramio - Mihai Burlacu (1).jpg — Mihai Burlacu / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 308918,
+      "sha256": "43e7b80bd89a8f6727244a1f3118ffa97ffa95553597cd0b3d8f24a3502db092",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18548495",
+      "app_file": "/media/wiki-q18548495.jpg",
+      "qid": "Q18548495",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Tei",
+      "title": "Parcul Tei, Bucuresti.JPG",
+      "original_title": "Parcul Tei, Bucuresti.JPG",
+      "caption_ro": "Parcul Tei · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Tei,_Bucuresti.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Tei,_Bucuresti.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Tei%2C%20Bucuresti.JPG?width=800",
+      "author": "User:Olahus",
+      "license": "Public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/File:Parcul_Tei,_Bucuresti.JPG",
+      "attribution": "Parcul Tei, Bucuresti.JPG — User:Olahus / Wikimedia Commons / Public domain",
+      "bytes": 332852,
+      "sha256": "b3dd1051093c8ccddf0ce02bf466ea886c82c0cf6b981892660d7000431347f7",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q19708159",
+      "app_file": "/media/wiki-q19708159.jpg",
+      "qid": "Q19708159",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul „Dimitrie Ghica” din Sinaia",
+      "title": "RO PH Sinaia park 02.jpg",
+      "original_title": "RO PH Sinaia park 02.jpg",
+      "caption_ro": "Parcul „Dimitrie Ghica” din Sinaia · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:RO_PH_Sinaia_park_02.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:RO_PH_Sinaia_park_02.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/RO%20PH%20Sinaia%20park%2002.jpg?width=800",
+      "author": "Whitepixels",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution": "RO PH Sinaia park 02.jpg — Whitepixels / Wikimedia Commons / CC0",
+      "bytes": 269859,
+      "sha256": "3cb272d6f2d71d2398b3081ba0d79e4f257b0ff8b0891694d760cac175acc936",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q22691547",
+      "app_file": "/media/wiki-q22691547.jpg",
+      "qid": "Q22691547",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Carmen Sylva",
+      "title": "Parcul Doina 1.jpg",
+      "original_title": "Parcul Doina 1.jpg",
+      "caption_ro": "Parcul Carmen Sylva · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Doina_1.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Doina_1.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Doina%201.jpg?width=800",
+      "author": "LBE",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution": "Parcul Doina 1.jpg — LBE / Wikimedia Commons / CC0",
+      "bytes": 297789,
+      "sha256": "f3eba0b6b3cb46bfbc9a3414c3e4f80b1faf407677ffa46e7bf8d18f42fc5ad7",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q22692035",
+      "app_file": "/media/wiki-q22692035.jpg",
+      "qid": "Q22692035",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Q22692035",
+      "title": "Parcul Gheorghe Doja.jpg",
+      "original_title": "Parcul Gheorghe Doja.jpg",
+      "caption_ro": "Q22692035 · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Gheorghe_Doja.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Gheorghe_Doja.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Gheorghe%20Doja.jpg?width=800",
+      "author": "Honza9513",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution": "Parcul Gheorghe Doja.jpg — Honza9513 / Wikimedia Commons / CC0",
+      "bytes": 301163,
+      "sha256": "b46c3cabd093bdaa37638b2334933223b9638f286d1c19f3f914a5e3d8efa057",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q22693419",
+      "app_file": "/media/wiki-q22693419.jpg",
+      "qid": "Q22693419",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Alpinet",
+      "title": "Alpinet Park.jpg",
+      "original_title": "Alpinet Park.jpg",
+      "caption_ro": "Parcul Alpinet · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Alpinet_Park.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Alpinet_Park.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Alpinet%20Park.jpg?width=800",
+      "author": "Ionpetrache at English Wikipedia",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Alpinet Park.jpg — Ionpetrache at English Wikipedia / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 226904,
+      "sha256": "6ba95b5eb96b811c4dc1a07a2d4472b671d48ce6a801ef6905a5de131188f434",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q22693420",
+      "app_file": "/media/wiki-q22693420.jpg",
+      "qid": "Q22693420",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Civic din Timișoara",
+      "title": "Civic Park, Timișoara.jpg",
+      "original_title": "Civic Park, Timișoara.jpg",
+      "caption_ro": "Parcul Civic din Timișoara · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Civic_Park,_Timișoara.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Civic_Park,_Timișoara.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Civic%20Park%2C%20Timi%C8%99oara.jpg?width=800",
+      "author": "Ionlizarazu",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Civic Park, Timișoara.jpg — Ionlizarazu / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 224454,
+      "sha256": "ea35b8fae162ebcffa5f7e6559a8ed0ac36eacecd4a92d8dd52a2cd9324f196a",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q25459266",
+      "app_file": "/media/wiki-q25459266.jpg",
+      "qid": "Q25459266",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Expo",
+      "title": "Lac expo.jpg",
+      "original_title": "Lac expo.jpg",
+      "caption_ro": "Parcul Expo · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Lac_expo.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Lac_expo.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lac%20expo.jpg?width=800",
+      "author": "Shell890",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Lac expo.jpg — Shell890 / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 255970,
+      "sha256": "6b89394f0f9a7df14c16f71f82db8ea59009fce88f9bea3255f4347bfc38be74",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q26257222",
+      "app_file": "/media/wiki-q26257222.jpg",
+      "qid": "Q26257222",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul municipal „Mihai Eminescu” din Galați",
+      "title": "Parcul \"Mihai Eminescu\", Galati (12).JPG",
+      "original_title": "Parcul \"Mihai Eminescu\", Galati (12).JPG",
+      "caption_ro": "Parcul municipal „Mihai Eminescu” din Galați · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_\"Mihai_Eminescu\",_Galati_(12).JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_\"Mihai_Eminescu\",_Galati_(12).JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20%22Mihai%20Eminescu%22%2C%20Galati%20(12).JPG?width=800",
+      "author": "Mihai Lutasu",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Parcul \"Mihai Eminescu\", Galati (12).JPG — Mihai Lutasu / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 320811,
+      "sha256": "290a9c79628488b783b2a506c3c0d9d222b96255649ade309de453192f49dcc1",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q26257384",
+      "app_file": "/media/wiki-q26257384.jpg",
+      "qid": "Q26257384",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Zona cu parcul din Buziaș",
+      "title": "Buzias Ansamblu balnear (5).jpg",
+      "original_title": "Buzias Ansamblu balnear (5).jpg",
+      "caption_ro": "Zona cu parcul din Buziaș · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Buzias_Ansamblu_balnear_(5).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Buzias_Ansamblu_balnear_(5).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Buzias%20Ansamblu%20balnear%20(5).jpg?width=800",
+      "author": "Andrei kokelburg",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Buzias Ansamblu balnear (5).jpg — Andrei kokelburg / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 276537,
+      "sha256": "831ab9fec77dfac5711a24eb0da0ee0ad6fc92982e2c6724b5794bf73cb42382",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q42758778",
+      "app_file": "/media/wiki-q42758778.jpg",
+      "qid": "Q42758778",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Pantelimon",
+      "title": "Poplars (AP4P1277 1PS) (29555186106).jpg",
+      "original_title": "Poplars (AP4P1277 1PS) (29555186106).jpg",
+      "caption_ro": "Parcul Pantelimon · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Poplars_(AP4P1277_1PS)_(29555186106).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Poplars_(AP4P1277_1PS)_(29555186106).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Poplars%20(AP4P1277%201PS)%20(29555186106).jpg?width=800",
+      "author": "Alexandru Panoiu from Bucharest, Romania",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "attribution": "Poplars (AP4P1277 1PS) (29555186106).jpg — Alexandru Panoiu from Bucharest, Romania / Wikimedia Commons / CC BY 2.0",
+      "bytes": 224203,
+      "sha256": "e4099a32fd88b283017f65448a2fcb066173ce7ea597f2c7efd63b6455e69ac8",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q42888116",
+      "app_file": "/media/wiki-q42888116.jpg",
+      "qid": "Q42888116",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul",
+      "title": "Park Elżbiety w Sfântu Gheorghe.jpg",
+      "original_title": "Park Elżbiety w Sfântu Gheorghe.jpg",
+      "caption_ro": "Parcul · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Park_Elżbiety_w_Sfântu_Gheorghe.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Park_Elżbiety_w_Sfântu_Gheorghe.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Park%20El%C5%BCbiety%20w%20Sf%C3%A2ntu%20Gheorghe.jpg?width=800",
+      "author": "1DEurovisionGag",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Park Elżbiety w Sfântu Gheorghe.jpg — 1DEurovisionGag / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 398773,
+      "sha256": "fd48372ff3a49215296900416f29d9cc62f4bb281509b0f4a16749f43d43436a",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q42912625",
+      "app_file": "/media/wiki-q42912625.jpg",
+      "qid": "Q42912625",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Ansamblul urban „Parcul Alei, cu imobilele limitrofe”",
+      "title": "Grădina Alei 6.JPG",
+      "original_title": "Grădina Alei 6.JPG",
+      "caption_ro": "Ansamblul urban „Parcul Alei, cu imobilele limitrofe” · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Grădina_Alei_6.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Grădina_Alei_6.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gr%C4%83dina%20Alei%206.JPG?width=800",
+      "author": "Stancosty",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Grădina Alei 6.JPG — Stancosty / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 337097,
+      "sha256": "3e334fa03279287848657d72845ed4a0a8806a092f3c14af5d04d13ffe23cbb0",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q42922919",
+      "app_file": "/media/wiki-q42922919.jpg",
+      "qid": "Q42922919",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Piața Unirii din Deva",
+      "title": "RO HD Deva Piata Unirii (1).jpg",
+      "original_title": "RO HD Deva Piata Unirii (1).jpg",
+      "caption_ro": "Piața Unirii din Deva · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:RO_HD_Deva_Piata_Unirii_(1).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:RO_HD_Deva_Piata_Unirii_(1).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/RO%20HD%20Deva%20Piata%20Unirii%20(1).jpg?width=800",
+      "author": "Țetcu Mircea Rareș",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "RO HD Deva Piata Unirii (1).jpg — Țetcu Mircea Rareș / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 385848,
+      "sha256": "3d0d4f5c15e1303db48bec8fb7bfdb94d1b2d6255155b7bab8107e39a4ab45a5",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q130493404",
+      "app_file": "/media/wiki-q130493404.jpg",
+      "qid": "Q130493404",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Liniei",
+      "title": "Parcul Liniei - (Sector 6 - Bucharest) - Zona Shopping Center Lujerului (20).jpg",
+      "original_title": "Parcul Liniei - (Sector 6 - Bucharest) - Zona Shopping Center Lujerului (20).jpg",
+      "caption_ro": "Parcul Liniei · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Liniei_-_(Sector_6_-_Bucharest)_-_Zona_Shopping_Center_Lujerului_(20).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Liniei_-_(Sector_6_-_Bucharest)_-_Zona_Shopping_Center_Lujerului_(20).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Liniei%20-%20(Sector%206%20-%20Bucharest)%20-%20Zona%20Shopping%20Center%20Lujerului%20(20).jpg?width=800",
+      "author": "Miguel Á. Sancha M.",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "attribution": "Parcul Liniei - (Sector 6 - Bucharest) - Zona Shopping Center Lujerului (20).jpg — Miguel Á. Sancha M. / Wikimedia Commons / CC BY 4.0",
+      "bytes": 263746,
+      "sha256": "f460416338fdeb3b171d19fba496fe4739fe294ef5c013e3c2363433609660a3",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q135526433",
+      "app_file": "/media/wiki-q135526433.jpg",
+      "qid": "Q135526433",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Tudor Arghezi",
+      "title": "Pista de atletism.jpg",
+      "original_title": "Pista de atletism.jpg",
+      "caption_ro": "Parcul Tudor Arghezi · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Pista_de_atletism.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Pista_de_atletism.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pista%20de%20atletism.jpg?width=800",
+      "author": "Ovidiup76",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Pista de atletism.jpg — Ovidiup76 / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 355511,
+      "sha256": "fbe611705ca7c3b92d3907d3a073d4419d09ce3bfd9ed75ccb725b7fe47ad46c",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q1108065",
+      "app_file": "/media/wiki-q1108065.jpg",
+      "qid": "Q1108065",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național „Constantin Diaconovici Loga” din Timișoara",
+      "title": "Colegiul-C.D.Loga.JPG",
+      "original_title": "Colegiul-C.D.Loga.JPG",
+      "caption_ro": "Colegiul Național „Constantin Diaconovici Loga” din Timișoara · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Colegiul-C.D.Loga.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Colegiul-C.D.Loga.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Colegiul-C.D.Loga.JPG?width=800",
+      "author": "Elisabeth Packi",
+      "license": "Public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/File:Colegiul-C.D.Loga.JPG",
+      "attribution": "Colegiul-C.D.Loga.JPG — Elisabeth Packi / Wikimedia Commons / Public domain",
+      "bytes": 393856,
+      "sha256": "2fe9248ae8176c7969de249327404382b475a3a43bcc49e387e541c85d633050",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q1212435",
+      "app_file": "/media/wiki-q1212435.jpg",
+      "qid": "Q1212435",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Liceul teoretic „Márton Áron”",
+      "title": "Csikszereda14 Gimnázium 2005.JPG",
+      "original_title": "Csikszereda14 Gimnázium 2005.JPG",
+      "caption_ro": "Liceul teoretic „Márton Áron” · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Csikszereda14_Gimnázium_2005.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Csikszereda14_Gimnázium_2005.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Csikszereda14%20Gimn%C3%A1zium%202005.JPG?width=800",
+      "author": "Laslovarga",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Csikszereda14 Gimnázium 2005.JPG — Laslovarga / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 169665,
+      "sha256": "0bd0722b62790eb74d89f7bdffa86c621195caa008b84967e05ff5574e2b5103",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q5044392",
+      "app_file": "/media/wiki-q5044392.jpg",
+      "qid": "Q5044392",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național Carol I din Craiova",
+      "title": "Carol 6.jpg",
+      "original_title": "Carol 6.jpg",
+      "caption_ro": "Colegiul Național Carol I din Craiova · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Carol_6.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Carol_6.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Carol%206.jpg?width=800",
+      "author": "Calusarul",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Carol 6.jpg — Calusarul / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 239413,
+      "sha256": "cf1854a2eb4a42bc76d47ad721ee089d83e4164906bfc47cd2c1c06faa25444f",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q6062912",
+      "app_file": "/media/wiki-q6062912.jpg",
+      "qid": "Q6062912",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național Ion C. Brătianu",
+      "title": "RO AG - Liceul \"I.C. Brătianu\".jpg",
+      "original_title": "RO AG - Liceul \"I.C. Brătianu\".jpg",
+      "caption_ro": "Colegiul Național Ion C. Brătianu · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:RO_AG_-_Liceul_\"I.C._Brătianu\".jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:RO_AG_-_Liceul_\"I.C._Brătianu\".jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/RO%20AG%20-%20Liceul%20%22I.C.%20Br%C4%83tianu%22.jpg?width=800",
+      "author": "Alexandru Ene",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "RO AG - Liceul \"I.C. Brătianu\".jpg — Alexandru Ene / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 438128,
+      "sha256": "7bcd777c994a0181a7c84ccf71aaeeb90026cf8bcfa8dfe2390b08b4f215212d",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q6845068",
+      "app_file": "/media/wiki-q6845068.jpg",
+      "qid": "Q6845068",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Naţional Mihai Eminescu, Bucureşti",
+      "title": "Coelgiul Mihai Eminescu.jpg",
+      "original_title": "Coelgiul Mihai Eminescu.jpg",
+      "caption_ro": "Colegiul Naţional Mihai Eminescu, Bucureşti · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Coelgiul_Mihai_Eminescu.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Coelgiul_Mihai_Eminescu.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Coelgiul%20Mihai%20Eminescu.jpg?width=800",
+      "author": "Vladutzvlx",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution": "Coelgiul Mihai Eminescu.jpg — Vladutzvlx / Wikimedia Commons / CC0",
+      "bytes": 168129,
+      "sha256": "6899be7de7cf6a0ea0ed5a5252de13bd7b9965de117e5f310b75d8acccaa1ace",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q7851326",
+      "app_file": "/media/wiki-q7851326.jpg",
+      "qid": "Q7851326",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național de Informatică Tudor Vianu",
+      "title": "Bucharest - Colegiul Național de Informatică Tudor Vianu 01.jpg",
+      "original_title": "Bucharest - Colegiul Național de Informatică Tudor Vianu 01.jpg",
+      "caption_ro": "Colegiul Național de Informatică Tudor Vianu · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Bucharest_-_Colegiul_Național_de_Informatică_Tudor_Vianu_01.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Bucharest_-_Colegiul_Național_de_Informatică_Tudor_Vianu_01.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bucharest%20-%20Colegiul%20Na%C8%9Bional%20de%20Informatic%C4%83%20Tudor%20Vianu%2001.jpg?width=800",
+      "author": "Joe Mabel",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Bucharest - Colegiul Național de Informatică Tudor Vianu 01.jpg — Joe Mabel / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 267424,
+      "sha256": "af476a5b1f2b36bbf039ee9fef7ccac241ee9f8271b1109f734ae12909ce8425",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12724335",
+      "app_file": "/media/wiki-q12724335.jpg",
+      "qid": "Q12724335",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național Liceal „Zinca Golescu”",
+      "title": "Pit Egalitatii Zinca 1.jpg",
+      "original_title": "Pit Egalitatii Zinca 1.jpg",
+      "caption_ro": "Colegiul Național Liceal „Zinca Golescu” · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Pit_Egalitatii_Zinca_1.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Pit_Egalitatii_Zinca_1.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pit%20Egalitatii%20Zinca%201.jpg?width=800",
+      "author": "Dahn",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution": "Pit Egalitatii Zinca 1.jpg — Dahn / Wikimedia Commons / CC0",
+      "bytes": 222851,
+      "sha256": "cd93730710d60ab9aca92bd6f54c487c813c440137553f7649f5be34099288f4",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12724340",
+      "app_file": "/media/wiki-q12724340.jpg",
+      "qid": "Q12724340",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național Mihai Viteazul din București",
+      "title": "Liceul Mihai Viteazu IMG 7290.JPG",
+      "original_title": "Liceul Mihai Viteazu IMG 7290.JPG",
+      "caption_ro": "Colegiul Național Mihai Viteazul din București · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Liceul_Mihai_Viteazu_IMG_7290.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Liceul_Mihai_Viteazu_IMG_7290.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Liceul%20Mihai%20Viteazu%20IMG%207290.JPG?width=800",
+      "author": "CristianChirita",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Liceul Mihai Viteazu IMG 7290.JPG — CristianChirita / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 217154,
+      "sha256": "4f0ccb69e7272113cdf704e1d95015b0d4db27a933069072976ed169681a9b54",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12724348",
+      "app_file": "/media/wiki-q12724348.jpg",
+      "qid": "Q12724348",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național „Gheorghe Șincai” din București",
+      "title": "Gheorghe Șincai National College.jpg",
+      "original_title": "Gheorghe Șincai National College.jpg",
+      "caption_ro": "Colegiul Național „Gheorghe Șincai” din București · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Gheorghe_Șincai_National_College.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Gheorghe_Șincai_National_College.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gheorghe%20%C8%98incai%20National%20College.jpg?width=800",
+      "author": "Turgidson",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Gheorghe Șincai National College.jpg — Turgidson / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 254423,
+      "sha256": "80c06e57ecaefb29e9a93fe7284f6cfdf1600f93824b1081260ebb25e70f2fa3",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12724354",
+      "app_file": "/media/wiki-q12724354.jpg",
+      "qid": "Q12724354",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național „Ștefan cel Mare” din Suceava",
+      "title": "Liceul Ștefan cel Mare din Suceava.jpg",
+      "original_title": "Liceul Ștefan cel Mare din Suceava.jpg",
+      "caption_ro": "Colegiul Național „Ștefan cel Mare” din Suceava · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Liceul_Ștefan_cel_Mare_din_Suceava.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Liceul_Ștefan_cel_Mare_din_Suceava.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Liceul%20%C8%98tefan%20cel%20Mare%20din%20Suceava.jpg?width=800",
+      "author": "Cezar Suceveanu",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution": "Liceul Ștefan cel Mare din Suceava.jpg — Cezar Suceveanu / Wikimedia Commons / CC BY 3.0",
+      "bytes": 175362,
+      "sha256": "a2dc8cbfaf99c274c4f6c0f5dba54094dbe7b6b8061417ffe8592e6b7f93f1ae",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
     }
   ],
   "records": {
+    "w43158975": {
+      "a": "wiki-q12724348",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w238795032": {
+      "a": "wiki-q6845068",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w23648411": {
+      "a": "wiki-q12724340",
+      "c": "school",
+      "t": "wikidata"
+    },
     "w23771041": {
       "a": "wiki-q12744205",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w136269115": {
+      "a": "wiki-q12724335",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w172692818": {
+      "a": "wiki-q5044392",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w195276809": {
+      "a": "wiki-q1108065",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w27621229": {
+      "a": "wiki-q7851326",
       "c": "school",
       "t": "wikidata"
     },
@@ -383,8 +1418,23 @@
       "c": "school",
       "t": "wikidata"
     },
+    "w31605593": {
+      "a": "wiki-q12724354",
+      "c": "school",
+      "t": "wikidata"
+    },
     "n316394639": {
       "a": "wiki-q18539127",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "r1835650": {
+      "a": "wiki-q6062912",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w437250056": {
+      "a": "wiki-q1212435",
       "c": "school",
       "t": "wikidata"
     },
@@ -2593,6 +3643,11 @@
       "c": "pharmacy",
       "t": "brand:wikidata"
     },
+    "w62743951": {
+      "a": "wiki-q5612919",
+      "c": "park",
+      "t": "wikidata"
+    },
     "n12036113532": {
       "a": "wiki-q56317371",
       "c": "pharmacy",
@@ -2603,13 +3658,58 @@
       "c": "pharmacy",
       "t": "brand:wikidata"
     },
+    "w301774676": {
+      "a": "wiki-q12736100",
+      "c": "park",
+      "t": "wikidata"
+    },
     "r14225591": {
       "a": "wiki-q43113639",
       "c": "court",
       "t": "wikidata"
     },
+    "w23595493": {
+      "a": "wiki-q42912625",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "r8321292": {
+      "a": "wiki-q12207333",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "r8321313": {
+      "a": "wiki-q12207333",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w24377933": {
+      "a": "wiki-q22693419",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w23692562": {
+      "a": "wiki-q12737517",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "r13220503": {
+      "a": "wiki-q4093496",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w34023595": {
+      "a": "wiki-q22691547",
+      "c": "park",
+      "t": "wikidata"
+    },
     "w13853540": {
       "a": "wiki-q2052075",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w4975934": {
+      "a": "wiki-q12737520",
       "c": "park",
       "t": "wikidata"
     },
@@ -2618,8 +3718,18 @@
       "c": "park",
       "t": "wikidata"
     },
+    "w23612226": {
+      "a": "wiki-q18539021",
+      "c": "park",
+      "t": "wikidata"
+    },
     "w16291869": {
       "a": "wiki-q959632",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w438016914": {
+      "a": "wiki-q22693420",
       "c": "park",
       "t": "wikidata"
     },
@@ -2628,13 +3738,108 @@
       "c": "park",
       "t": "wikidata"
     },
+    "w467442561": {
+      "a": "wiki-q26257384",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w87243091": {
+      "a": "wiki-q19708159",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w34698858": {
+      "a": "wiki-q42888116",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w11139468": {
+      "a": "wiki-q26257222",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w525195063": {
+      "a": "wiki-q25459266",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w103674847": {
+      "a": "wiki-q5983519",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w586357887": {
+      "a": "wiki-q12737515",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w106286544": {
+      "a": "wiki-q22692035",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w23770990": {
+      "a": "wiki-q12737531",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w14262324": {
+      "a": "wiki-q12737529",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w195566035": {
+      "a": "wiki-q12737533",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w23611141": {
+      "a": "wiki-q12737534",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "r21298944": {
+      "a": "wiki-q130493404",
+      "c": "park",
+      "t": "wikidata"
+    },
     "w28132031": {
       "a": "wiki-q2284372",
       "c": "park",
       "t": "wikidata"
     },
+    "w23581105": {
+      "a": "wiki-q42758778",
+      "c": "park",
+      "t": "wikidata"
+    },
     "w88337012": {
       "a": "wiki-q2074133",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "r1250434": {
+      "a": "wiki-q132449",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w23583220": {
+      "a": "wiki-q18548495",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w14360895": {
+      "a": "wiki-q2340319",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w1054221333": {
+      "a": "wiki-q135526433",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w32030407": {
+      "a": "wiki-q42922919",
       "c": "park",
       "t": "wikidata"
     },
