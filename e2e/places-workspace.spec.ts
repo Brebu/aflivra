@@ -360,8 +360,14 @@ test.describe('Places map — pin radius and pan refresh', () => {
     expect(pinUrls.length, 'one drag must fire exactly one debounced pin fetch').toBe(before + 1);
 
     // A zoom around the same center keeps the request unchanged: no refetch storm.
+    // The driver is the browser's own double-click zoom struck exactly at the container
+    // center — geometrically center-stable on every hardware class. A synthesized two-finger
+    // pinch drifts the center by up to a pixel on the two-core CI runner, and that drift is
+    // a REAL center change: the app would be right to refetch, so the pinch cannot drive
+    // this leg there (the pinch's moveend+zoomend debounce pair stays covered by
+    // map-touch-gestures.spec.ts).
     const beforePinch = pinUrls.length;
-    await touchPinch(page, x, y, 55, 170);
+    await page.mouse.dblclick(x, y);
     await page.waitForTimeout(process.env.CI ? 3500 : 1600);
     expect(pinUrls.length, 'a zoom without a center change must not refetch the pins').toBe(beforePinch);
 
