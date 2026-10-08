@@ -7,7 +7,7 @@ import ts from 'typescript';
 const require=createRequire(import.meta.url),React=require('react'),jsx=require('react/jsx-runtime'),originalFetch=globalThis.fetch;
 const walk=node=>[node,...React.Children.toArray(node?.props?.children).flatMap(child=>React.isValidElement(child)?walk(child):[])];
 const text=node=>typeof node==='string'||typeof node==='number'?String(node):React.Children.toArray(node?.props?.children).map(text).join(' ').replace(/\s+/g,' ').trim();
-const components={'@/components/ui/button':['Button'],'@/components/ui/input':['Input'],'@/components/ui/tabs':['Tabs','TabsList','TabsTrigger','TabsContent'],'./draft-form':['DraftForm'],'./select-field':['SelectField'],'./search-input':['SearchInput'],'./export-actions':['ExportActions'],'./pagination':['Pagination']};
+const components={'@/components/ui/button':['Button'],'@/components/ui/input':['Input'],'@/components/ui/tabs':['Tabs','TabsList','TabsTrigger','TabsContent'],'@/components/ui/tooltip':['Tooltip','TooltipTrigger','TooltipContent'],'@/components/ui/popover':['Popover','PopoverTrigger','PopoverContent'],'./draft-form':['DraftForm'],'./select-field':['SelectField'],'./search-input':['SearchInput'],'./export-actions':['ExportActions'],'./pagination':['Pagination']};
 let activeGeo={key:'manual:Cluj',label:'Cluj-Napoca',hasLocal:true,locality:{name:'Cluj-Napoca',county:'Cluj',lat:46.771,lon:23.624},center:{lat:46.771,lon:23.624}};
 function host(){let slots=[],cursor=0,effects=[],cleanups=[];return{
  hooks:{...React,memo:fn=>fn,

@@ -1,0 +1,11 @@
+
+Running 6 tests using 3 workers
+
+  ✓  1 [chromium] › e2e/company-registries.spec.ts:57:3 › Company registries joined on CUI (Wave B) › the balance CAEN label renders typed beside the code, and the VAT interval as a date range (2.4s)
+  ✓  3 [chromium] › e2e/court-institution.spec.ts:36:3 › Court institution metadata on dosar stages (Wave B) › stage rows carry the institution type and locality from the registry label (2.5s)
+  ✓  2 [chromium] › e2e/legal-act-facts.spec.ts:48:3 › Legal act facts for the same act id (Wave B) › the reader renders the official version history of the same act id, each event on its official address (2.8s)
+  ✓  4 [chromium] › e2e/company-registries.spec.ts:78:3 › Company registries joined on CUI (Wave B) › the CKAN CNAS registries join on the exact CUI, grouped by source, with honest absence (2.7s)
+  ✓  6 [chromium] › e2e/legal-act-facts.spec.ts:83:3 › Legal act facts for the same act id (Wave B) › when the portal page cannot be read, the act keeps its official-search bibliographic facts (3.1s)
+  ✓  5 [chromium] › e2e/court-institution.spec.ts:64:3 › Court institution metadata on dosar stages (Wave B) › the dosar document tab discloses the act-citation absence without search guesses (4.7s)
+
+  6 passed (9.2s)

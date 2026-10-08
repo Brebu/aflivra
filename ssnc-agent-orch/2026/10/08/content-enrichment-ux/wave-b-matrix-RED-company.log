@@ -1,0 +1,21 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: company/anaf / success: compozitul păstrează ambele surse și registrele CKAN citibile
+
+2 !== 5
+
+    at familyExpectations (file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:420:11)
+    at file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:968:10
+    at async withMocks (file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:390:17)
+    at async file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:971:121 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 5,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

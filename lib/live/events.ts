@@ -1,6 +1,10 @@
 import {getSource,SourceError} from './adapters';import {sourceText} from './text';import {publicUrl} from './media';import type {Loader,Loaded} from './types';import venuesCatalog from '@/public/events/venues.json';
 export type EventVenueKind='jsonld'|'tribe-events-v1';
-export type EventVenue={id:string;name:string;short:string;type:string;city:string;county:string;latitude:number;longitude:number;url:string;kind:EventVenueKind};
+// Registry fields joined back onto calendar items on the venue id the loaders stamp:
+// `address` and `placeId` are validated at registry-commit time — the address against
+// the institution's own published contact page, the placeId against the committed
+// OSM record id — never name-matched at runtime.
+export type EventVenue={id:string;name:string;short:string;type:string;city:string;county:string;address?:string;latitude:number;longitude:number;url:string;kind:EventVenueKind;placeId?:string};
 export const eventVenues=venuesCatalog.items as EventVenue[];
 export function eventVenue(id:string){return eventVenues.find(venue=>venue.id===id)||null}
 const venueHost=(venue:EventVenue)=>new URL(venue.url).hostname.replace(/^www\./,'');

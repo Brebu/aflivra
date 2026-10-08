@@ -105,7 +105,7 @@ try{
    'transport.realtime':{parity:'transport/realtime'},'transport.tranzy':{parity:'transport/tranzy'},'transport.flights':{harness:'verify-relay-flights.mjs',parity:'flights/adsb'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
   'company-knowledge':{parity:'company/anaf'},
  'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
- 'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:'legal/law'},
+ 'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:['legal/law','legal/act-page']},
  'justice.notari':{parity:'justice/notari'},'justice.experti-judiciari':{parity:'justice/experti-judiciari'},
   'justice.experti-tehnici':{parity:'justice/experti-tehnici'},'justice.traducatori':{parity:'justice/traducatori'},
    'trains':{parity:'transport/trains'},'flights.bia':{parity:'flights/bia'},

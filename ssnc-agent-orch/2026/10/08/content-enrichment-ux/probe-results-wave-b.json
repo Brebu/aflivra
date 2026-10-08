@@ -1,0 +1,127 @@
+{
+  "probedAt": "2026-10-08T04:57:55.699Z",
+  "politeness": {
+    "window": "Wave B spent every probe this ledger records — no request outside it",
+    "note": "P1 rides the app's own resource download URL already fetched read-only in production; the first P1 attempt (CKAN view page, HTML) is recorded as spent; P2 is one page GET, no SOAP token spent"
+  },
+  "results": [
+    {
+      "name": "ckan-cnas-farm-schema",
+      "attemptedAt": "2026-10-08T04:56:01.223Z",
+      "url": "https://data.gov.ro/dataset/0793fa57-1565-4109-8aae-02d28819e9af/resource/72d0bd2f-c55d-4e8c-8ad3-3ed4f4452287",
+      "method": "GET",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-length": null,
+        "server": "nginx",
+        "retry-after": null,
+        "last-modified": null,
+        "cache-control": "private"
+      },
+      "finalUrl": "https://data.gov.ro/dataset/0793fa57-1565-4109-8aae-02d28819e9af/resource/72d0bd2f-c55d-4e8c-8ad3-3ed4f4452287",
+      "bytes": 32243,
+      "elapsedMs": 679,
+      "shape": {
+        "sheetNames": [
+          "Sheet1"
+        ],
+        "sheets": [
+          {
+            "header": [
+              "Câmp",
+              "Valoare"
+            ],
+            "sampleRows": [
+              [
+                "Ultima actualizare",
+                "15 Aprilie 2026"
+              ],
+              [
+                "Created",
+                "necunoscut"
+              ],
+              [
+                "Format",
+                "XLS"
+              ]
+            ],
+            "rowEstimate": 19
+          }
+        ]
+      },
+      "findings": "no CUI column in the FARM export header"
+    },
+    {
+      "name": "mj-legislatie-act-page",
+      "attemptedAt": "2026-10-08T04:56:07.539Z",
+      "url": "https://legislatie.just.ro/Public/DetaliiDocument/41627",
+      "method": "GET",
+      "outcome": "connection-failed",
+      "error": "UND_ERR_SOCKET"
+    },
+    {
+      "name": "ckan-cnas-farm-schema",
+      "attemptedAt": "2026-10-08T04:57:49.499Z",
+      "url": "https://data.gov.ro/dataset/0793fa57-1565-4109-8aae-02d28819e9af/resource/72d0bd2f-c55d-4e8c-8ad3-3ed4f4452287/download/contracte-farm-31.03.2026.xls",
+      "method": "GET",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/vnd.ms-excel",
+        "content-length": null,
+        "server": "nginx",
+        "retry-after": null,
+        "last-modified": "Wed, 15 Apr 2026 10:52:08 GMT",
+        "cache-control": "no-cache"
+      },
+      "finalUrl": "https://data.gov.ro/dataset/0793fa57-1565-4109-8aae-02d28819e9af/resource/72d0bd2f-c55d-4e8c-8ad3-3ed4f4452287/download/contracte-farm-31.03.2026.xls",
+      "bytes": 345600,
+      "elapsedMs": 1165,
+      "shape": {
+        "sheetNames": [
+          "Contracte"
+        ],
+        "sheets": [
+          {
+            "header": [
+              "Numar contract",
+              "Cod fiscal furnizor",
+              "Tip furnizor",
+              "Nume furnizor",
+              "Cod CAS",
+              "Nume CAS"
+            ],
+            "sampleRows": [
+              [
+                "478",
+                "10055437",
+                "Farmacie",
+                "SC TERRA FARM SRL",
+                "CAS-AR",
+                "CAS ARAD"
+              ],
+              [
+                "452",
+                "10802826",
+                "Farmacie",
+                "SC  MIRAFARM  SRL",
+                "CAS-AR",
+                "CAS ARAD"
+              ],
+              [
+                "417",
+                "11039561",
+                "Farmacie",
+                "S.C. DERYYFARM 2000 S.R.L.",
+                "CAS-AR",
+                "CAS ARAD"
+              ]
+            ],
+            "rowEstimate": 2285
+          }
+        ]
+      },
+      "findings": "no CUI column in the FARM export header"
+    }
+  ]
+}

@@ -9,9 +9,15 @@ export type CourtReference={
 export type CourtStage={
  id:string;label:string;court:string;courtLabel:string;recordIds:string[];
  hearingCount:number;evidence:CourtReference[];availability:'record'|'reference';
+ institution:CourtInstitutionProfile|null;
 };
 export type CourtHistory={number:string;recordIds:string[];stages:CourtStage[];relatedCases:CourtReference[];historyComplete:false};
+export type CourtInstitutionProfile={type:string;locality:string|null};
 const validNumber=(value:string)=>/^\d{1,8}\/\d{1,5}\/\d{4}(?:\/[a-zA-Z0-9.]{1,20})?$/.test(value);
+// The portal's programmatic responses cite acts by number and year inside the solution text
+// only; no act identifier is published, so the surfaces state the absence instead of linking
+// a search guess (probe-settled with both the live SOAP response and the dosar page shape).
+export const ACT_LINKS_ABSENCE_NOTE='Actele normative citate în soluții sunt publicate ca număr și an în textul oficial; portalul nu furnizează legături programatice către fișele actelor, deci aici nu sunt disponibile ca legături directe.';
 // The Ministry of Justice's own systems replaced ș/ț with «?» inside words
 // before publication; a fișa reproduces the official text verbatim instead of
 // inventing the missing letters, and the loss is disclosed where it appears.
@@ -19,6 +25,15 @@ export const upstreamDiacriticLoss=(text:string)=>/[a-zăâîșțşţA-ZĂÂÎȘ
 export const DIACRITIC_LOSS_NOTE='Textul oficial al sursei conține «?» în locul unor litere ș/ț pierdute în sistemul Ministerului Justiției înainte de publicare; fișa redă primit textul oficial, fără a completa caracterele lipsă.';
 const normalized=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
 const courtByLabel=new Map(institutions.items.map(c=>[normalized(c.label),c]));
+const courtById=new Map(institutions.items.map(c=>[c.id,c]));
+// The institution registry publishes one label per court; the label's own words split into the
+// court type and the locality/territory it names (a tribunal label names its jurisdiction
+// county, a judecătorie label names its locality — the registry's words are kept as published).
+const institutionTypeLabels:[string,string][]=[['Curtea Militară de Apel','Curte Militară de Apel'],['Tribunalul Militar Teritorial','Tribunal Militar Teritorial'],['Tribunalul Militar','Tribunal Militar'],['Curtea de Apel','Curte de Apel'],['Tribunalul','Tribunal'],['Judecătoria','Judecătorie']];
+export function institutionProfile(courtId:string):CourtInstitutionProfile|null{
+ const institution=courtById.get(courtId);if(!institution)return null;
+ for(const [prefix,type] of institutionTypeLabels)if(institution.label.startsWith(prefix))return{type,locality:institution.label.slice(prefix.length).trim()||null};
+ return null}
 const stageLabel=(stage:string)=>({fond:'Fond',apel:'Apel',recurs:'Recurs'}[normalized(stage)]||stage||'Stadiu neprecizat');
 const stageRank=(stage:string)=>({Fond:0,Apel:1,Recurs:2}[stage]??3);
 const referenceId=(r:Omit<CourtReference,'id'>)=>[r.number,r.court,r.stage,r.documentNumber,r.documentDate,r.source.number,r.source.court,r.source.hearingDate].join('|');
@@ -47,12 +62,12 @@ export function buildCourtHistories(items:any[],references:CourtReference[]=[],r
  const numbers=[...new Set([...items.map(item=>normalizeCourtNumber(String(item.number||''))).filter(validNumber),...(requestedNumber?[normalizeCourtNumber(requestedNumber)]:[])])];
  return numbers.map(number=>{
   const records=items.filter(item=>normalizeCourtNumber(String(item.number))===number),stages=new Map<string,CourtStage>();
-  for(const record of records){const label=stageLabel(String(record.stage||'')),id=record.court+'|'+label,stage:CourtStage=stages.get(id)||{id,label,court:record.court,courtLabel:record.courtLabel||record.court,recordIds:[],hearingCount:0,evidence:[],availability:'record'};stage.recordIds.push(record.id);stage.hearingCount+=(record.hearings||[]).length;stages.set(id,stage)}
-  for(const reference of uniqueCourtReferences(references).filter(r=>r.number===number)){
-   const id=reference.court+'|'+reference.stage,stage:CourtStage=stages.get(id)||{id,label:reference.stage,court:reference.court,courtLabel:reference.courtLabel,recordIds:[],hearingCount:0,evidence:[],availability:'reference'};
-   stage.evidence.push(reference);stages.set(id,stage);
-  }
+   for(const record of records){const label=stageLabel(String(record.stage||'')),id=record.court+'|'+label,stage:CourtStage=stages.get(id)||{id,label,court:record.court,courtLabel:record.courtLabel||record.court,recordIds:[],hearingCount:0,evidence:[],availability:'record',institution:institutionProfile(record.court)};stage.recordIds.push(record.id);stage.hearingCount+=(record.hearings||[]).length;stages.set(id,stage)}
+   for(const reference of uniqueCourtReferences(references).filter(r=>r.number===number)){
+    const id=reference.court+'|'+reference.stage,stage:CourtStage=stages.get(id)||{id,label:reference.stage,court:reference.court,courtLabel:reference.courtLabel,recordIds:[],hearingCount:0,evidence:[],availability:'reference',institution:institutionProfile(reference.court)};
+    stage.evidence.push(reference);stages.set(id,stage);
+   }
   return{number,recordIds:records.map(item=>item.id),stages:[...stages.values()].sort((a,b)=>stageRank(a.label)-stageRank(b.label)||a.courtLabel.localeCompare(b.courtLabel,'ro')),relatedCases:uniqueCourtReferences(references).filter(r=>r.source.number===number&&r.number!==number),historyComplete:false as const};
  }).filter(history=>history.recordIds.length||history.stages.length);
 }
-export function courtHistoryText(history:CourtHistory){return ['Dosar '+history.number,'ETAPE CONFIRMATE',...history.stages.map(stage=>[stage.label+' · '+stage.courtLabel,stage.availability==='record'?stage.recordIds.length+' fișe disponibile · '+stage.hearingCount+' ședințe publicate':'Etapă confirmată prin trimitere oficială. Fișa și ședințele acestei etape nu sunt disponibile.',...stage.evidence.map(r=>r.document+' '+r.documentNumber+' din '+r.documentDate+'; confirmată în dosarul '+r.source.number+' la '+r.source.courtLabel+', soluția din '+r.source.hearingDate+'; verificată la '+r.verifiedAt+'; '+r.source.url)].join('\n')),...history.relatedCases.map(r=>'Dosar menționat: '+r.number+' · '+r.document+' '+r.documentNumber+' · '+r.courtLabel),'Sursa fișelor: https://portal.just.ro/SitePages/dosare.aspx','Etapele și ședințele sunt păstrate separat. Istoricul complet nu este garantat de serviciul public.'].join('\n\n')}
+export function courtHistoryText(history:CourtHistory){return ['Dosar '+history.number,'ETAPE CONFIRMATE',...history.stages.map(stage=>[stage.label+' · '+stage.courtLabel,...(stage.institution?[stage.institution.type+(stage.institution.locality?' · '+stage.institution.locality:'')]:[]),stage.availability==='record'?stage.recordIds.length+' fișe disponibile · '+stage.hearingCount+' ședințe publicate':'Etapă confirmată prin trimitere oficială. Fișa și ședințele acestei etape nu sunt disponibile.',...stage.evidence.map(r=>r.document+' '+r.documentNumber+' din '+r.documentDate+'; confirmată în dosarul '+r.source.number+' la '+r.source.courtLabel+', soluția din '+r.source.hearingDate+'; verificată la '+r.verifiedAt+'; '+r.source.url)].join('\n')),...history.relatedCases.map(r=>'Dosar menționat: '+r.number+' · '+r.document+' '+r.documentNumber+' · '+r.courtLabel),'Sursa fișelor: https://portal.just.ro/SitePages/dosare.aspx','Etapele și ședințele sunt păstrate separat. Istoricul complet nu este garantat de serviciul public.',ACT_LINKS_ABSENCE_NOTE].join('\n\n')}

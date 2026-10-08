@@ -37,10 +37,19 @@ Contract (consumed by T2.2 FederatedResults, T2.3 navigation seeds, T2.4 e2e):
   route is invented, the source publishes state vectors, not schedules). The BIA airport
   board stays out of the family plan: a per-airport day board, not a discovery corpus.
   Families v4 (the live-venues spectacole wave): events (/api/events?q= — the registry's own
-  published calendars merged server-side; the row lands the Spectacole tab seeded with the
-  event's title, the institution's own page stays on the row) and anl-sites (/api/anl — the
-  ANL reception-site registry; the row lands the Imobiliare & locuințe tab seeded with the
-  site's own name, completing parity with the notaries registry family).
+   published calendars merged server-side; the row lands the Spectacole tab seeded with the
+   event's title, the institution's own page stays on the row) and anl-sites (/api/anl — the
+   ANL reception-site registry; the row lands the Imobiliare & locuințe tab seeded with the
+   site's own name, completing parity with the notaries registry family).
+   Cross-entity links v5 (the enrichment wave): discovery + deep-link, explicitly NOT merges
+   (D4's honest ceiling — where no validated key crosses two families, a link is the honest
+   answer). Three families of links: place → venue-calendar (an OSM place row whose record
+   id the venue registry carries as placeId — validated key, never the name; a registry with
+   zero or several matches for one record id stays linkless), dosar → court registry (a
+   discovery link to the institutions inventory of justice — the dosar and the institution
+   are never auto-joined) and CUI → firm watch (the CUI is the validated watch key; the link
+   lands the „Ce s-a schimbat" center). Links render as sibling anchors of the row button,
+   never as merged row data.
 
 Excluded (rationale, recorded not silent): cinema (locality/day-scoped corpus with no
   national query contract — reachable through its own workspace); events joined the family
@@ -59,16 +68,20 @@ same change (conventions.md, closed-resolver constraint).
 */
 import {matchesQuery,countText} from '@/lib/live/query';
 import {topicSections} from '@/lib/dashboard-topics';
+import {eventVenues} from './events';
 
 export type FederatedKind='place'|'company'|'lawyer'|'dataset'|'record'|'article'|'story'|'dosar'|'notary'|'station'|'flight'|'event';
 export type FederatedFamilyId='places'|'catalog'|'lawyers'|'directory-schools'|'directory-health'|'directory-pharmacies'|'directory-hospitals'|'stiri'|'agricultura'|'stories'|'gallery'|'cui'|'dosare'|'notaries'|'experts-judiciari'|'experts-tehnici'|'translators'|'trains'|'flights'|'events'|'anl-sites';
-export type FederatedTarget={view:'place'|'company'|'domain';domain?:string;tab?:string;id?:string;query?:string;sub?:string;courtNumber?:string};
-export type FederatedItem={family:FederatedFamilyId;category:string;subcategory?:string;id:string;title:string;subtitle?:string;snippet?:string;kind:FederatedKind;source:string;url?:string;target:FederatedTarget};
+export type FederatedTarget={view:'place'|'company'|'domain'|'watch';domain?:string;tab?:string;id?:string;query?:string;sub?:string;courtNumber?:string};
+export type FederatedItem={family:FederatedFamilyId;category:string;subcategory?:string;id:string;title:string;subtitle?:string;snippet?:string;kind:FederatedKind;source:string;url?:string;target:FederatedTarget;crossLinks?:FederatedCrossLink[]};
+// A cross-entity link: discovery + deep-link between related entities of different
+// families, joined only on validated keys — a link never merges the rows it connects.
+export type FederatedCrossLink={id:string;label:string;note:string;href:string};
 export type FederatedFamilyState={family:FederatedFamilyId;status:'pending'|'done'|'gate'|'unavailable';total?:number;note?:string};
 export type FederatedGroupResult={id:string;label:string;items:FederatedItem[];count:number;families:FederatedFamilyState[]};
 export type FederatedRequest={family:FederatedFamilyId;url:string};
 export type FederatedSearchResult={term:string;maxPerFamily:number;groups:FederatedGroupResult[];families:FederatedFamilyState[];requests:FederatedRequest[];note:string|null};
-export type FederatedPlace={id:string;name:string;kind?:string;city?:string;region?:string;tag?:string;summary?:string;features?:string[];interests?:string[]};
+export type FederatedPlace={id:string;name:string;kind?:string;city?:string;region?:string;tag?:string;summary?:string;features?:string[];interests?:string[];recordId?:string};
 export type FederatedStory={id:string|number;title:string;categories?:string[];authors?:string[];url?:string;search?:string};
 export type FederatedOptions={gallery?:readonly FederatedPlace[];stories?:readonly FederatedStory[];maxPerFamily?:number};
 
@@ -119,10 +132,29 @@ export const federatedFamilies:readonly FederatedFamilyDescriptor[]=[
 const descriptorById=new Map(federatedFamilies.map(f=>[f.id,f]));
 
 export function validDomainTab(domain:string,tab:string):boolean{
- // The tab hash parameter is accepted only against the topicSections registry, like every registry-validated parameter ('data' is the auto tab of every domain).
- if(!tab||!groupLabels.has(domain))return false;
- return tab==='data'||(topicSections[domain]||[]).some(s=>s.id===tab);
+  // The tab hash parameter is accepted only against the topicSections registry, like every registry-validated parameter ('data' is the auto tab of every domain).
+  if(!tab||!groupLabels.has(domain))return false;
+  return tab==='data'||(topicSections[domain]||[]).some(s=>s.id===tab);
 }
+// The deep-link address of a federated target, serialized exactly like the app's own
+// go() (view, id, q, then tab — a tab the registry does not validate is dropped, never guessed).
+export function federatedRoute(target:FederatedTarget):string{
+  if(target.view==='company'&&target.id)return '#view=company&id='+encodeURIComponent(target.id);
+  if(target.view==='place'&&target.id)return '#view=place&id='+encodeURIComponent(target.id);
+  if(target.view==='watch')return '#view=watch';
+  const domain=String(target.domain||''),params=new URLSearchParams({view:'domain',...(domain?{id:domain}:{}),...(target.query?{q:target.query}:{})});
+  if(target.tab&&validDomainTab(domain,target.tab))params.set('tab',target.tab);
+  return '#'+params.toString();
+}
+// The place → venue-calendar join: ONLY the validated OSM record id the venue registry
+// carries as placeId (never the institution's name). Zero matches or several matches
+// for the same record id both stay linkless — the honest answer, never a merge.
+export function venueForPlaceRecord(recordId:unknown):{id:string;name:string;short:string}|null{
+  if(typeof recordId!=='string'||recordId.length===0)return null;
+  const matches=eventVenues.filter(venue=>venue.placeId===recordId);
+  return matches.length===1?matches[0]:null;
+}
+const venueCalendarLink=(venue:{id:string;name:string;short:string}):FederatedCrossLink=>({id:'venue-calendar:'+venue.id,label:'Spectacole la '+(venue.short||venue.name),note:'Instituția are calendar public validat în registrul spectacolelor; legătura este o descoperire, nu o îmbinare de fișe.',href:federatedRoute({view:'domain',domain:'cultura',tab:'events'})});
 export function courtNumberTerm(value:unknown):string|null{
  const term=String(value??'').trim().replace(/\s*\/\s*/g,'/');
  return /^\d{1,8}\/\d{1,5}\/\d{4}(?:\/[a-zA-Z0-9.]{1,20})?$/.test(term)?term:null;
@@ -139,9 +171,10 @@ function placeCategory(record:Record<string,unknown>):string{
  return 'local';
 }
 function placeItem(record:Record<string,unknown>):FederatedItem{
- const category=placeCategory(record),name=text(record.name)||'Loc fără nume publicat';
- const label=[...new Set((asObjects(record.types)||[]).map(t=>text(t.label)).filter((l):l is string=>!!l))][0];
- return {family:'places',category,subcategory:label,id:String(record.id??name),title:name,subtitle:text(record.address)||text(record.city),kind:'place',source:'OpenStreetMap',url:text(record.sourceUrl),target:{view:'domain',domain:category,tab:'places',query:name,...(label?{sub:label}:{})}};
+  const category=placeCategory(record),name=text(record.name)||'Loc fără nume publicat';
+  const label=[...new Set((asObjects(record.types)||[]).map(t=>text(t.label)).filter((l):l is string=>!!l))][0];
+  const venue=venueForPlaceRecord(record.id);
+  return {family:'places',category,subcategory:label,id:String(record.id??name),title:name,subtitle:text(record.address)||text(record.city),kind:'place',source:'OpenStreetMap',url:text(record.sourceUrl),target:{view:'domain',domain:category,tab:'places',query:name,...(label?{sub:label}:{})},...(venue?{crossLinks:[venueCalendarLink(venue)]}:{})};
 }
 function catalogItem(record:Record<string,unknown>):FederatedItem{
  const title=text(record.title)||'Set de date publice';
@@ -208,8 +241,9 @@ function articleItem(family:'stiri'|'agricultura',record:Record<string,unknown>,
  return {family,category:family,subcategory:label,id:String(record.id??record.url??title),title,subtitle:text(record.sourceName)||label,snippet:snip(record.summary),kind:'article',source:family==='stiri'?'Anunțuri oficiale · surse reunite':'afir.ro',url:text(record.url),target:{view:'domain',domain:family,tab:'news'}};
 }
 function galleryItem(place:FederatedPlace):FederatedItem{
- const location=[place.city,place.region].filter(Boolean).join(', ');
- return {family:'gallery',category:'cultura',subcategory:place.kind||undefined,id:place.id,title:place.name,subtitle:[place.kind,location].filter(Boolean).join(' · '),snippet:snip(place.summary),kind:'place',source:'Prezentare editorială',target:{view:'place',id:place.id}};
+  const location=[place.city,place.region].filter(Boolean).join(', ');
+  const venue=venueForPlaceRecord(place.recordId);
+  return {family:'gallery',category:'cultura',subcategory:place.kind||undefined,id:place.id,title:place.name,subtitle:[place.kind,location].filter(Boolean).join(' · '),snippet:snip(place.summary),kind:'place',source:'Prezentare editorială',target:{view:'place',id:place.id},...(venue?{crossLinks:[venueCalendarLink(venue)]}:{})};
 }
 function storyItem(story:FederatedStory):FederatedItem{
  return {family:'stories',category:'povesti',subcategory:story.categories?.[0],id:String(story.id),title:story.title,subtitle:(story.authors||[]).join(' · ')||undefined,snippet:snip(story.search),kind:'story',source:'Wikisource',url:story.url,target:{view:'domain',domain:'povesti',tab:'stories',query:story.title}};
@@ -289,13 +323,13 @@ export function federatedSearch(term:unknown,options:FederatedOptions={}):Federa
  if(text.length>200)return {term:text,maxPerFamily,groups:[],families:[],requests:[],note:'Căutarea este prea lungă. Folosește cel mult 200 de caractere.'};
  if(!text)return {term:'',maxPerFamily,groups:[],families:[],requests:[],note:null};
  const families:FederatedFamilyState[]=[],requests:FederatedRequest[]=[],items:FederatedItem[]=[];
- const cui=cuiTerm(text);
- if(cui){families.push({family:'cui',status:'done',total:1});
-  items.push({family:'cui',category:'firme',id:cui,title:'Firma cu CUI '+cui,subtitle:'Identitate și bilanț · ANAF',kind:'company',source:'ANAF',target:{view:'company',id:cui}})}
- const dosar=courtNumberTerm(text);
- if(dosar){families.push({family:'dosare',status:'done',total:1});
-  const number=courtNumberTerm(text)!;
-  items.push({family:'dosare',category:'justitie',subcategory:'Dosare în instanță',id:number,title:'Dosarul '+number,subtitle:'Dosare în instanță · portal.just.ro',kind:'dosar',source:'portal.just.ro',target:{view:'domain',domain:'justitie',tab:'legal',courtNumber:number}})}
+  const cui=cuiTerm(text);
+  if(cui){families.push({family:'cui',status:'done',total:1});
+   items.push({family:'cui',category:'firme',id:cui,title:'Firma cu CUI '+cui,subtitle:'Identitate și bilanț · ANAF',kind:'company',source:'ANAF',target:{view:'company',id:cui},crossLinks:[{id:'firm-watch:'+cui,label:'Urmărirea firmelor în „Ce s-a schimbat"',note:'CUI-ul este cheia de urmărire a firmei; legătura deschide centrul „Ce s-a schimbat", fără cont.',href:federatedRoute({view:'watch'})}]})}
+  const dosar=courtNumberTerm(text);
+  if(dosar){families.push({family:'dosare',status:'done',total:1});
+   const number=courtNumberTerm(text)!;
+   items.push({family:'dosare',category:'justitie',subcategory:'Dosare în instanță',id:number,title:'Dosarul '+number,subtitle:'Dosare în instanță · portal.just.ro',kind:'dosar',source:'portal.just.ro',target:{view:'domain',domain:'justitie',tab:'legal',courtNumber:number},crossLinks:[{id:'court-registry',label:'Instanțele din Inventarul național',note:'Legătură de descoperire: dosarul și instanța nu sunt unite automat.',href:federatedRoute({view:'domain',domain:'justitie',tab:'places'})}]})}
  if(options.gallery){
   const rows=options.gallery.filter(p=>matchesQuery({name:p.name,kind:p.kind,city:p.city,region:p.region,tag:p.tag,features:p.features,interests:p.interests},text));
   families.push({family:'gallery',status:'done',total:rows.length});

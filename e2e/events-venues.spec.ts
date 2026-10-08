@@ -36,13 +36,14 @@ const bucharestDay = (offsetDays: number) => new Intl.DateTimeFormat('en-CA', {
 }).format(Date.now() + offsetDays * 86_400_000);
 const operaclujVenue = {
   id: 'operacluj', name: 'Opera Națională Română Cluj-Napoca', short: 'Opera Cluj',
-  city: 'Cluj-Napoca', county: 'Cluj', address: 'Bulevardul Eroilor nr. 27',
-  latitude: 46.7694, longitude: 23.5899, url: 'https://operacluj.ro/', kind: 'tribe-events-v1',
+  city: 'Cluj-Napoca', county: 'Cluj', address: 'Piața Ștefan cel Mare nr. 20',
+  latitude: 46.770105, longitude: 23.597573, url: 'https://operacluj.ro/', kind: 'tribe-events-v1',
+  placeId: 'w202370085',
 };
 const operaclujEvent = (over: Record<string, unknown> = {}) => {
   const day = bucharestDay(2);
   return {
-    id: '23317', title: 'BAL MASCAT',
+    id: '23317', title: 'BAL MASCAT', venue: 'operacluj',
     content: 'Operă în trei acte pe un libret de Antonio Somma.\nSpectacolul este interpretat în limba italiană cu supratitrare în limba română.',
     start: `${day}T18:30`, end: `${day}T19:00`,
     url: 'https://operacluj.ro/spectacole/stagiunea-2026-2027/balmascat-7-octombrie-2026-18-30/',
@@ -71,8 +72,9 @@ const operaclujState = (items: Array<Record<string, unknown>>, over: Record<stri
 };
 const odeonVenue = {
   id: 'odeon', name: 'Teatrul Odeon', short: 'Teatrul Odeon',
-  city: 'București', county: 'București', address: 'Str. Aristide Briand nr. 27',
+  city: 'București', county: 'București', address: 'Calea Victoriei nr. 40-42',
   latitude: 44.43667, longitude: 26.09738, url: 'https://teatrul-odeon.ro/', kind: 'jsonld',
+  placeId: 'w158239853',
 };
 const odeonState = () => {
   const stamp = now(), day = bucharestDay(2);
@@ -80,7 +82,7 @@ const odeonState = () => {
     key: 'events:odeon', name: 'Teatrul Odeon · calendarul public', url: 'https://teatrul-odeon.ro/',
     adapterVersion: 'events.jsonld.v2', status: 'fresh', publishedAt: null, lastSuccessAt: stamp, lastAttemptAt: stamp,
     nextAttemptAt: null, error: null, ttlSeconds: 3600,
-    data: {venue: odeonVenue, items: [{id: 'https://teatrul-odeon.ro/spectacol-de-verificare', title: 'Spectacol de verificare', content: 'Descrierea spectacolului de verificare.', start: `${day}T19:30`, end: `${day}T21:00`, url: 'https://teatrul-odeon.ro/spectacol-de-verificare', sourceName: 'Teatrul Odeon', media: []}], venueCount: 1, sourceUrl: 'https://teatrul-odeon.ro/', note: 'Program publicat de Teatrul Odeon.'},
+    data: {venue: odeonVenue, items: [{id: 'https://teatrul-odeon.ro/spectacol-de-verificare', venue: 'odeon', title: 'Spectacol de verificare', content: 'Descrierea spectacolului de verificare.', start: `${day}T19:30`, end: `${day}T21:00`, url: 'https://teatrul-odeon.ro/spectacol-de-verificare', sourceName: 'Teatrul Odeon', media: []}], venueCount: 1, sourceUrl: 'https://teatrul-odeon.ro/', note: 'Program publicat de Teatrul Odeon.'},
   };
 };
 
@@ -194,6 +196,99 @@ test.describe('Spectacole — venue registry calendars (beyond Odeon)', () => {
     await expect(tickets).toBeVisible();
     await expect(tickets.getByRole('link', {name: 'Bilete la operator'})).toHaveCount(0);
     await expect(tickets.getByRole('link', {name: 'Pagina oficială a spectacolului'})).toBeVisible();
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});
+
+test.describe('Spectacole — the venue registry join (fields reunited on the venue id the loader stamps)', () => {
+  test('the venue registry facts render on the panel and inside the event dialog, joined on the venue id', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    const {handler} = venueRoute({
+      odeon: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(odeonState())}),
+      operacluj: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(operaclujState([
+        operaclujEvent(),
+        fantanaEvent(),
+      ]))}),
+    });
+    await page.route('**/api/events*', handler);
+
+    await page.goto('/#view=domain&id=cultura&tab=events');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+    await switchLocality(page, 'Cluj-Napoca');
+
+    const workspace = page.locator('section.live-section');
+    // The registry group carries the validated venue record: address, city/county,
+    // coordinates and the institution URL — reunited on the registry's venue id.
+    const registry = workspace.locator('[data-testid="venue-registry"]');
+    await expect(registry).toBeVisible();
+    await expect(registry).toContainText('Registrul validat al instituțiilor');
+    await expect(registry.locator('.entity-facts')).toContainText('Piața Ștefan cel Mare nr. 20');
+    await expect(registry.locator('.entity-facts')).toContainText('Cluj-Napoca · Cluj');
+    await expect(registry.locator('.entity-facts')).toContainText('46.7701 · 23.5976');
+    await expect(registry.getByRole('link', {name: 'Site-ul oficial al instituției'})).toHaveAttribute('href', 'https://operacluj.ro/');
+    // The join statement is visible provenance: the group names its own join key.
+    await expect(registry).toContainText('identificatorul instituției');
+
+    // The venue→places cross-link is a deep link, never a merge: the registry carries
+    // the institution's validated OSM record id and the link lands the cultura places
+    // tab seeded with the institution's own name.
+    const placesLink = registry.getByRole('link', {name: 'Fișa obiectivului în Inventarul național de locuri'});
+    await expect(placesLink).toHaveAttribute('href', '#view=domain&id=cultura&q=' + encodeURIComponent('Opera Națională Română Cluj-Napoca') + '&tab=places');
+
+    // The event dialog resolves the same registry record through the venue id the
+    // loader stamps on every calendar item.
+    await workspace.locator('.news-card', {hasText: 'BAL MASCAT'}).getByRole('button', {name: 'Toate detaliile spectacolului'}).click();
+    const dialog = page.locator('.reader-dialog');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator('[data-testid="venue-registry"]')).toContainText('Piața Ștefan cel Mare nr. 20');
+    await expect(dialog.locator('[data-testid="venue-registry"]')).toContainText('Registrul validat al instituțiilor');
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
+
+    // The cross-link lands the places tab with the seeded institution search — the
+    // seed surfaces exactly the institution's own OSM record. (location.hash reads
+    // back percent-decoded in Chromium; the href attribute above stays pinned encoded.)
+    await placesLink.click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await expect.poll(() => page.evaluate(() => decodeURIComponent(location.hash))).toBe('#view=domain&id=cultura&q=Opera Națională Română Cluj-Napoca&tab=places');
+    await expect(page.getByLabel('Caută locuri, servicii, adrese și contacte')).toHaveValue('Opera Națională Română Cluj-Napoca', {timeout: 30_000});
+    await expect(page.locator('.entity-card h3', {hasText: 'Teatrul Național Lucian Blaga'}).first()).toBeVisible({timeout: 30_000});
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  test('an item whose venue id resolves nowhere in the registry keeps its panel record and invents no registry group in the dialog', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    const {handler} = venueRoute({
+      odeon: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(odeonState())}),
+      operacluj: route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(operaclujState([
+        // A payload item carrying an unregistered venue id: the honest answer is the
+        // event without a registry group, never fields borrowed from another venue.
+        operaclujEvent({id: 'străin', title: 'SPECTACOL FĂRĂ REGISTRU', venue: 'instituție-nevalidată'}),
+        fantanaEvent(),
+      ]))}),
+    });
+    await page.route('**/api/events*', handler);
+
+    await page.goto('/#view=domain&id=cultura&tab=events');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+    await switchLocality(page, 'Cluj-Napoca');
+
+    const workspace = page.locator('section.live-section');
+    // The panel keeps its own registry record (the workspace's chosen venue).
+    await expect(workspace.locator('[data-testid="venue-registry"]')).toBeVisible();
+    await expect(workspace.locator('[data-testid="venue-registry"]')).toContainText('Piața Ștefan cel Mare nr. 20');
+
+    // The unregistered-venue event renders, but its dialog joins no registry record.
+    await workspace.locator('.news-card', {hasText: 'SPECTACOL FĂRĂ REGISTRU'}).getByRole('button', {name: 'Toate detaliile spectacolului'}).click();
+    const dialog = page.locator('.reader-dialog');
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole('heading', {name: 'SPECTACOL FĂRĂ REGISTRU'})).toBeVisible();
+    await expect(dialog.locator('[data-testid="venue-registry"]')).toHaveCount(0);
+    await page.keyboard.press('Escape');
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
