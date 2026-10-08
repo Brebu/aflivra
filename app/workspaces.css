@@ -16,7 +16,11 @@
 .v2 .entity-card:hover .entity-card-image>img{transform:scale(1.025)}
 .v2 .entity-card-image>figcaption,.v2 .story-cover>figcaption{position:absolute;right:12px;bottom:12px;background:#07162acc;color:#fff;border-radius:6px;padding:5px 9px;font-size:.75rem;line-height:1.4}
 .v2 .entity-card-content{padding:24px;min-width:0}
-.v2 .entity-card-content h3{font-size:1.2rem;line-height:1.5;margin:8px 0 12px;overflow-wrap:anywhere}
+.v2 .entity-card-content h3{font-size:1.2rem;line-height:1.5;margin:8px 0 12px;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* Cardul arată scurt, fișa complet: liniile esențiale (adresă, program, contacte)
+   se taie la o linie pe card — textul integral rămâne în fișa deschisă. */
+.v2 .entity-essentials span{-webkit-line-clamp:1;-webkit-box-orient:vertical;display:-webkit-box;overflow:hidden}
+.v2 .entity-card-content>p:not(.small-muted){display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .v2 .entity-essentials{display:grid;gap:10px;margin:14px 0 18px}
 .v2 .entity-essentials p,.v2 .entity-essentials a{display:flex;align-items:flex-start;gap:10px;font-size:1rem;line-height:1.6;margin:0;overflow-wrap:anywhere;min-width:0}
 .v2 .entity-essentials svg{flex:none;color:#2463d3;margin-top:3px}

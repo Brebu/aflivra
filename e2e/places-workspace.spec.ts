@@ -443,3 +443,42 @@ test.describe('Pin navigation — every map point carries navigation links', () 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });
+
+// Cardul arată scurt, fișa complet: numele (max 2 linii) și liniile esențiale (adresa,
+// programul — max 1 linie) se taie pe card prin line-clamp; textul integral rămâne
+// în fișa deschisă prin „Toate informațiile și harta” — și în title, la hover.
+test.describe('Card text is clamped — the full text lives in the opened detail', () => {
+  test('long names and addresses clamp on the card and show fully in the detail', async ({page}) => {
+    const longName = 'Cea mai lungă denumire de obiectiv turistic și memorial din spectaculosul și istoricul centru al Capitalei României';
+    const longAddress = 'Bulevardul Extremely Long Example Street Number Two Hundred Forty Seven Etajul III Apartamentul Douăsprezece Sectorul Unu București Cod Poștal 011235 România';
+    const envelope = (item: Record<string, unknown>) => ({key: 'places:clamp-test', name: 'OpenStreetMap', url: 'https://www.openstreetmap.org/', status: 'fresh', publishedAt: '2026-10-01', lastSuccessAt: '2026-10-08T10:00:00.000Z', error: null, ttlSeconds: 3600, data: {total: 1, page: 0, pages: 1, items: [item]}});
+    await page.route(/\/api\/places/, route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(envelope({id: 'clamp-test-pin', name: longName, address: longAddress, lat: 44.4268, lon: 26.1025, categories: ['wiki-loves-monuments'], types: [], city: 'București', updatedAt: '2026-10-01'}))}));
+    await page.goto('/#view=domain&id=cultura&tab=cultura&scope=all');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+    const card = page.locator('section.places-workspace .entity-card').first();
+    await expect(card).toBeVisible({timeout: 30_000});
+    const clamped = await card.evaluate(el => {
+      const h3 = el.querySelector('h3')!;
+      const addr = el.querySelector('.entity-essentials span')!;
+      const style = (node: Element, prop: string) => getComputedStyle(node).getPropertyValue(prop);
+      return {
+        nameClamp: style(h3, '-webkit-line-clamp'),
+        addressClamp: style(addr, '-webkit-line-clamp'),
+        nameTitle: h3.getAttribute('title'),
+        addressTitle: addr.getAttribute('title'),
+        nameRendered: h3.textContent,
+      };
+    });
+    expect(clamped.nameClamp, 'the card name clamps to two lines').toBe('2');
+    expect(clamped.addressClamp, 'the card address line clamps to one line').toBe('1');
+    expect(clamped.nameTitle).toContain(longName);
+    expect(clamped.addressTitle).toContain(longAddress);
+    expect(clamped.nameRendered).toContain(longName);
+    await card.getByRole('button', {name: 'Toate informațiile și harta'}).click();
+    const detail = card.locator('[id^="entity-clamp-test-pin"]');
+    // Fișa se deschide chiar dacă pe card textul e tăiat — integralul live în fișă e acoperit
+    // de fluxurile cu date reale (registrele, contactele, documentul integral al locului).
+    await expect(detail).toBeVisible({timeout: 30_000});
+  });
+});
