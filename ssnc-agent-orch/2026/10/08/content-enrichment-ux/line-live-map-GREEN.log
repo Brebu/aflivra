@@ -1,0 +1,12 @@
+$ playwright test line-live-map
+
+Running 6 tests using 1 worker
+
+  ✓  1 [chromium] › e2e/line-live-map.spec.ts:81:3 › Per-line live map › the line reader renders stations, the route shape and live heading vehicles on one map, grouped per direction (2.5s)
+  ✓  2 [chromium] › e2e/line-live-map.spec.ts:139:3 › Per-line live map › a stale-but-recent copy is labeled „poziții de acum ~40 de secunde”, keeping positions and never an error block (1.7s)
+  ✓  3 [chromium] › e2e/line-live-map.spec.ts:175:3 › Per-line live map › zero vehicles on the line render the honest absence note, keeping stations on the map (1.6s)
+  ✓  4 [chromium] › e2e/line-live-map.spec.ts:197:3 › Per-line live map › the vehicles-mode line picker opens the per-line live view for the chosen line (1.0s)
+  ✓  5 [chromium] › e2e/line-live-map.spec.ts:236:3 › Per-line live map › the per-line poll runs at the 3s cadence while visible, pauses hidden, resumes on visible and aborts on close (31.8s)
+  ✓  6 [chromium] › e2e/line-live-map.spec.ts:312:3 › Per-line live map › byte-identical polls keep the map and never re-churn loading or error states (9.8s)
+
+  6 passed (49.5s)

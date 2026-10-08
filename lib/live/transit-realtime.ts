@@ -21,7 +21,7 @@ export function parseRealtime(bytes:Uint8Array,kind:RealtimeKind):Loaded{
  });
  return{publishedAt:observedAt,data:{kind,observedAt,items,entityCount:entities.length,header:decoded.header,note:'Poziții și estimări publicate de TPBI. Un vehicul lipsă din flux nu înseamnă că linia nu circulă.'}};
 }
-export const realtimeLoader=(kind:RealtimeKind):Loader=>({key:'transport:realtime:'+kind,name:'TPBI · '+({vehicles:'poziții vehicule',arrivals:'estimări de sosire',alerts:'alerte de circulație'}[kind]),url:'https://gtfs.tpbi.ro/regional/',version:'gtfs.realtime.v1',ttl:30,load:async()=>{
+export const realtimeLoader=(kind:RealtimeKind):Loader=>({key:'transport:realtime:'+kind,name:'TPBI · '+({vehicles:'poziții vehicule',arrivals:'estimări de sosire',alerts:'alerte de circulație'}[kind]),url:'https://gtfs.tpbi.ro/regional/',version:'gtfs.realtime.v1',ttl:kind==='vehicles'?15:30,load:async()=>{
  const r=await fetchWithServerRetry('https://gtfs.tpbi.ro/api/gtfs-rt/'+endpoints[kind],{headers:{'User-Agent':'Aflivra/1.0 cached public transit reader',Accept:'application/octet-stream'},signal:AbortSignal.timeout(12000),redirect:'manual'});
  if(!r.ok)throw new SourceError('Fluxul TPBI răspunde cu HTTP '+r.status+'.',r.status===429?60:0);
  if(Number(r.headers.get('content-length'))>5000000)throw new SourceError('Fluxul live este prea mare.');

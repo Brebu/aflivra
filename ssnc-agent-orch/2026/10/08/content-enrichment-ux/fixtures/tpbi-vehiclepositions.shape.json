@@ -1,0 +1,43 @@
+{
+  "headerKeys": [
+    "gtfsRealtimeVersion",
+    "incrementality",
+    "timestamp"
+  ],
+  "vehicleKeys": [
+    "trip",
+    "position",
+    "currentStopSequence",
+    "currentStatus",
+    "timestamp",
+    "stopId",
+    "vehicle"
+  ],
+  "tripKeys": [
+    "tripId",
+    "startDate",
+    "scheduleRelationship",
+    "routeId"
+  ],
+  "positionKeys": [
+    "latitude",
+    "longitude",
+    "bearing"
+  ],
+  "vehicleDescriptorKeys": [
+    "id",
+    "licensePlate"
+  ],
+  "oneVehicleSample": {
+    "routeId": "PV9_462",
+    "tripId": "PV9_PV9_462_1_33887",
+    "licensePlate": "IF 25 POB",
+    "occupancyStatus": null,
+    "occupancyPercentage": null,
+    "stopId": "PV9_682",
+    "currentStatus": "IN_TRANSIT_TO",
+    "timestampType": "string"
+  },
+  "entityCount": 596,
+  "headerTimestampType": "string"
+}

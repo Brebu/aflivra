@@ -1,0 +1,771 @@
+
+
+<!doctype html>
+<html lang="ro">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Acas&#x103; - Portalul AFIR - informa&#x21B;ii PS 2027 &#x219;i depunere proiecte Online</title>
+    <meta name="description" content="Pagina principal&#x103; a Agen&#x21B;iei pentru Finan&#x21B;area Investi&#x21B;iilor Rurale (AFIR)">
+    <meta name="keywords" content="AFIR,APDRP,SAPARD,Agen&#x21B;ia pentru Finan&#x21B;area Investi&#x21B;iilor Rurale,Agentia pentru Finantarea Investitiilor Rurale,FEADR,PNDR,PNDR 2020,fonduri europene,agricultur&#x103;,agricultura,dezvoltare rural&#x103;,investi&#x21B;ii,investitii,fermieri,procesatori,PS PAC,PS 2027,PS 2023-2027,PS PAC 2023-2027,PS PAC 2027,mediul rural,PNDR 2024-2020,fonduri nerambursabile,LEADER,grupuri de produc&#x103;tori,tineri fermieri,t&#xE2;n&#x103;r fermier,pomicultura,pomicultur&#x103;,INVESTALIM,investalim,neagricol,nonagricol,utilaje agricole,utilaje,iriga&#x21B;ii,drumuri,Licee agricole,fermier,dezvoltare rurala,energie,schema pe energie,sechema de energie,energie regenerabil&#x103;,schema energie regenerabil&#x103;,energie solar&#x103;,energie eolian&#x103;">
+    <meta name="author" content="">
+
+    <link rel="icon" type="image/x-icon" sizes="32x32" href="/Content/Icons/favicon-32.png">
+    <link rel="icon" type="image/x-icon" sizes="128x128" href="/Content/Icons/favicon-128.png">
+    <link rel="icon" type="image/x-icon" sizes="180x180" href="/Content/Icons/favicon-180.png">
+    <link rel="icon" type="image/x-icon" sizes="192x192" href="/Content/Icons/favicon-192.png">
+
+    <link rel="stylesheet" type="text/css" href="/Content/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-ui.structure.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/magnific-popup.css" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFVT50ZSF"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XGFVT50ZSF'); </script>
+    <link rel="stylesheet" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script type="text/javascript" src="/scripts/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script type="text/javascript" src="/scripts/modernizr-2.8.3.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-3.6.1.min.js"></script>
+    <script src="/scripts/jquery-ui.min.js"></script>
+    <script type="module" src="/scripts/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/scripts/js.cookie.min.js"></script>
+    
+    <script type="text/javascript" src="/scripts/powerbi-client/powerbi.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.magnific-popup.min.js"></script>
+    
+        <script type="text/javascript" src="/scripts/lib/scripts.min.js"></script>
+    
+    <script type="text/javascript" src="https://use.fontawesome.com/c4cd7f4764.js"></script>
+    <script nomodule>window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="/Content/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/combine/npm/ie11-custom-properties@4,npm/element-qsa-scope@1"><\/script><script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default%2CNumber.parseInt%2CNumber.parseFloat%2CArray.prototype.find%2CArray.prototype.includes"><\/script><script src=/scripts/picturefill.min.js type="text/javascript"><\/script>');</script>
+
+    <link rel="stylesheet" type="text/css" href="/Content/Formate/Stiluri.css" />
+    
+    
+        <link rel="stylesheet" type="text/css" href="/Content/site.min.css" />
+    
+    
+</head>
+
+<body class="frontpage" data-bs-spy="scroll" data-bs-target="#mainNav" data-style="display:flex">
+
+    
+
+    <header class="page-header no-print">
+
+
+<nav id="mainNav" class="navbar navbar-expand-sm fixed-top">
+    <header class="header d-flex flex-column justify-content-center align-items-center">
+        <div class="header-content d-flex flex-row align-items-center">
+            <a href="/">
+                <div class="top-logotip-afir d-flex flex-row align-items-center">
+                    <div class="top-logo-afir">
+                        <img src="/Content/Icons/AFIR_LOGOTIP.png" alt="Logo AFIR" />
+                    </div>
+                </div>
+            </a>
+
+            <div class="utilizator ms-auto d-flex">
+                    <div>
+                        <a href="/umbraco/surface/authentication/LogIn?redirectUrl=%2F&amp;culture=ro"><div class="btn">Autentificare</div></a>
+                    </div>
+
+                <div class="dropdown dropdown-culture">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonLang" data-bs-toggle="dropdown" aria-expanded="false">
+                            RO
+                        </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonLang">
+                                        <li>
+                                            <a class="dropdown-item" href="/en/">
+                                                EN
+                                            </a>
+                                        </li>
+                            </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid" id="top-menu">
+        <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0 d-flex">
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Despre AFIR</a>
+                            <div class="dropdown-container d-none">
+                                <div class="dropdown-content">
+                                            <link rel="preload" as="image" href="/media/3agfx5si/despre-afir.jpg?width=525&amp;height=525&amp;v=1d8b3d931a1ebc0&amp;quality=50">
+                                            <div class="dropdown-image-with-description" style="background-image: url('/media/3agfx5si/despre-afir.jpg?width=525&amp;height=525&amp;v=1d8b3d931a1ebc0&quality=50')">
+                                                <div class="dropdown-image-text">
+                                                    AFIR este una dintre cele mai performante institu&#x21B;ii din Rom&#xE2;nia &#x2013; din 2000 &#x219;i p&#xE2;n&#x103; &#xEE;n prezent, Agen&#x21B;ia a efectuat pl&#x103;&#x21B;i de peste 21 miliarde &#x20AC; c&#x103;tre fermieri, procesatori, antreprenori din mediul rural &#x219;i c&#x103;tre autorit&#x103;&#x21B;i publice locale pentru modernizarea agriculturii &#x219;i dezvoltarea satelor din Rom&#xE2;nia.
+                                                </div>
+                                            </div>
+                                    <div class="dropdown-links">
+                                        <div class="dropdown-link-groups  mh-400  ">
+                                                <div class="dropdown-link-group">
+                                                    <h6>AFIR</h6>
+                                                            <a href="/despre-afir/afir/agentia/" title="Agen&#x21B;ia" >
+                                                                    <span>Agen&#x21B;ia</span>
+                                                            </a>
+                                                            <a href="/despre-afir/afir/conducere-afir/" title="Conducere AFIR" >
+                                                                    <span>Conducere</span>
+                                                                    <span>AFIR</span>
+                                                            </a>
+                                                            <a href="/despre-afir/afir/structuri-teritoriale/" title="Structuri teritoriale" >
+                                                                    <span>Structuri</span>
+                                                                    <span>teritoriale</span>
+                                                            </a>
+                                                            <a href="/despre-afir/afir/servicii/" title="Servicii" >
+                                                                    <span>Servicii</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Cariere</h6>
+                                                            <a href="/despre-afir/cariere/declaratii-de-avere-si-interese/" title="Declara&#x21B;ii de avere &#x219;i interese" >
+                                                                    <span>Declara&#x21B;ii</span>
+                                                                    <span>de</span>
+                                                                    <span>avere</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>interese</span>
+                                                            </a>
+                                                            <a href="/despre-afir/cariere/concursuri-si-examene/" title="Concursuri &#x219;i Examene" >
+                                                                    <span>Concursuri</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>Examene</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Transparen&#x21B;&#x103;</h6>
+                                                            <a href="/despre-afir/transparenta/documente-publice/" title="Documente publice" >
+                                                                    <span>Documente</span>
+                                                                    <span>publice</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/bugetul-agentiei/" title="Bugetul Agen&#x21B;iei" >
+                                                                    <span>Bugetul</span>
+                                                                    <span>Agen&#x21B;iei</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/bilantul-contabil/" title="Bilan&#x21B;ul contabil" >
+                                                                    <span>Bilan&#x21B;ul</span>
+                                                                    <span>contabil</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/venituri-salariale/" title="Venituri salariale" >
+                                                                    <span>Venituri</span>
+                                                                    <span>salariale</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/paap/" title="PAAP" >
+                                                                    <span>PAAP</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/integritate-institutionala/" title="Integritate institu&#x21B;ional&#x103;" >
+                                                                    <span>Integritate</span>
+                                                                    <span>institu&#x21B;ional&#x103;</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/achizitii-derulate-de-afir/" title="Achizi&#x21B;ii derulate de AFIR" >
+                                                                    <span>Achizi&#x21B;ii</span>
+                                                                    <span>derulate</span>
+                                                                    <span>de</span>
+                                                                    <span>AFIR</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/rapoarte-de-activitate/" title="Rapoarte de activitate" >
+                                                                    <span>Rapoarte</span>
+                                                                    <span>de</span>
+                                                                    <span>activitate</span>
+                                                            </a>
+                                                            <a href="/despre-afir/transparenta/standarde-de-calitate-afir/" title="Standarde de calitate AFIR" >
+                                                                    <span>Standarde</span>
+                                                                    <span>de</span>
+                                                                    <span>calitate</span>
+                                                                    <span>AFIR</span>
+                                                            </a>
+                                                </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Finan&#x21B;are</a>
+                            <div class="dropdown-container d-none">
+                                <div class="dropdown-content">
+                                            <link rel="preload" as="image" href="/media/ql5p2u12/finantare.jpg?cc=0.3346269183277474,0,0,0&amp;width=525&amp;height=525&amp;v=1d8b3d9334b2ef0&amp;quality=50">
+                                            <div class="dropdown-image" style="background-image: url('/media/ql5p2u12/finantare.jpg?cc=0.3346269183277474,0,0,0&amp;width=525&amp;height=525&amp;v=1d8b3d9334b2ef0&quality=50')"></div>
+                                    <div class="dropdown-links">
+                                        <div class="dropdown-link-groups    ">
+                                                <div class="dropdown-link-group">
+                                                    <h6>Finan&#x21B;are &#xEE;n agricultur&#x103;</h6>
+                                                            <a href="/finantare/finantare-in-agricultura/exploatatii-agricole/" title="Exploata&#x21B;ii agricole" >
+                                                                    <span>Exploata&#x21B;ii</span>
+                                                                    <span>agricole</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-agricultura/procesare-agricola/" title="Procesare agricol&#x103;" >
+                                                                    <span>Procesare</span>
+                                                                    <span>agricol&#x103;</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-agricultura/pomicultura/" title="Pomicultur&#x103;" >
+                                                                    <span>Pomicultur&#x103;</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-agricultura/grupuri-de-producatori/" title="Grupuri de Produc&#x103;tori" >
+                                                                    <span>Grupuri</span>
+                                                                    <span>de</span>
+                                                                    <span>Produc&#x103;tori</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-agricultura/investalim/" title="INVESTALIM" >
+                                                                    <span>INVESTALIM</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-agricultura/fondul-pentru-modernizare/" title="Fondul pentru Modernizare" >
+                                                                    <span>Fondul</span>
+                                                                    <span>pentru</span>
+                                                                    <span>Modernizare</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Finan&#x21B;are &#xEE;n mediul rural</h6>
+                                                            <a href="/finantare/finantare-in-mediul-rural/utilitate-publica/" title="Utilitate public&#x103;" >
+                                                                    <span>Utilitate</span>
+                                                                    <span>public&#x103;</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-mediul-rural/licee-agricole/" title="Licee agricole" >
+                                                                    <span>Licee</span>
+                                                                    <span>agricole</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-mediul-rural/exploatatii-forestiere/" title="Exploata&#x21B;ii forestiere" >
+                                                                    <span>Exploata&#x21B;ii</span>
+                                                                    <span>forestiere</span>
+                                                            </a>
+                                                            <a href="/finantare/finantare-in-mediul-rural/mediu-si-clima/" title="Mediu &#x219;i Clim&#x103;" >
+                                                                    <span>Mediu</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>Clim&#x103;</span>
+                                                            </a>
+                                                </div>
+                                                    <div class="dropdown-link-group">
+                                                            <a href="/finantare/leader/" title="LEADER" >
+                                                                    <span>LEADER</span>
+                                                            </a>
+                                                            <a href="/finantare/masuri-de-sprijin-sm171/" title="M&#x103;suri de sprijin - sM17.1" >
+                                                                    <span>M&#x103;suri</span>
+                                                                    <span>de</span>
+                                                                    <span>sprijin</span>
+                                                                    <span>-</span>
+                                                                    <span>sM17.1</span>
+                                                            </a>
+                                                            <a href="/finantare/transfer-de-cunostinte-dr37/" title="Transfer de cuno&#x219;tin&#x21B;e - DR37" >
+                                                                    <span>Transfer</span>
+                                                                    <span>de</span>
+                                                                    <span>cuno&#x219;tin&#x21B;e</span>
+                                                                    <span>-</span>
+                                                                    <span>DR37</span>
+                                                            </a>
+                                                    </div>
+
+
+                                        </div>
+
+                                            <div class="dropdown-footer-link d-flex justify-content-between">
+                                                    <div>
+
+        <a target="_blank" href="/finantare/etape-accesare-fonduri-europene/" title="Link meniu footer">
+            Etape accesare fonduri europene
+        </a>
+                                                    </div>
+                                                    <div>
+
+        <a target="_blank" href="https://depunerepspac.afir.ro" title="Link meniu footer">
+            Depunere cerere finan&#x21B;are
+        </a>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Rapoarte</a>
+                            <div class="dropdown-container d-none">
+                                <div class="dropdown-content">
+                                            <link rel="preload" as="image" href="/media/lanp4zxp/poze-meniu-rapoarte-v2.jpg?width=525&amp;height=525&amp;v=1d914652809e5d0&amp;quality=50">
+                                            <div class="dropdown-image" style="background-image: url('/media/lanp4zxp/poze-meniu-rapoarte-v2.jpg?width=525&amp;height=525&amp;v=1d914652809e5d0&quality=50')"></div>
+                                    <div class="dropdown-links">
+                                        <div class="dropdown-link-groups no-wrap   ">
+                                                <div class="dropdown-link-group">
+                                                    <h6>Rapoarte FEADR</h6>
+                                                            <a href="/rapoarte/rapoarte-feadr/depuse/" title="Depuse" >
+                                                                    <span>Depuse</span>
+                                                            </a>
+                                                            <a href="/rapoarte/rapoarte-feadr/evaluare/" title="Evaluare" >
+                                                                    <span>Evaluare</span>
+                                                            </a>
+                                                            <a href="/rapoarte/rapoarte-feadr/selectie/" title="Selectie" >
+                                                                    <span>Selectie</span>
+                                                            </a>
+                                                            <a href="/rapoarte/rapoarte-feadr/contestatii/" title="Contesta&#x21B;ii" >
+                                                                    <span>Contesta&#x21B;ii</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Beneficiari de fonduri europene</h6>
+                                                            <a href="/rapoarte/beneficiari-de-fonduri-europene/date-deschise/" title="Date deschise" >
+                                                                    <span>Date</span>
+                                                                    <span>deschise</span>
+                                                            </a>
+                                                            <a href="/rapoarte/beneficiari-de-fonduri-europene/beneficiari-fega-si-feadr/" title="Beneficiari FEGA &#x219;i FEADR" >
+                                                                    <span>Beneficiari</span>
+                                                                    <span>FEGA</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>FEADR</span>
+                                                            </a>
+                                                            <a href="/rapoarte/beneficiari-de-fonduri-europene/contracte-dr-24/" title="Contracte DR 24" >
+                                                                    <span>Contracte</span>
+                                                                    <span>DR</span>
+                                                                    <span>24</span>
+                                                            </a>
+                                                </div>
+                                                    <div class="dropdown-link-group">
+                                                            <a href="/rapoarte/creante/" title="Crean&#x21B;e" >
+                                                                    <span>Crean&#x21B;e</span>
+                                                            </a>
+                                                    </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Instrumente</a>
+                            <div class="dropdown-container d-none">
+                                <div class="dropdown-content">
+                                            <link rel="preload" as="image" href="/media/x3ebzhfh/intrumente_noi.jpg?width=525&amp;height=525&amp;v=1db8c1f4e485680&amp;quality=50">
+                                            <div class="dropdown-image" style="background-image: url('/media/x3ebzhfh/intrumente_noi.jpg?width=525&amp;height=525&amp;v=1db8c1f4e485680&quality=50')"></div>
+                                    <div class="dropdown-links">
+                                        <div class="dropdown-link-groups  mh-400 mh-500 mh-600">
+                                                <div class="dropdown-link-group">
+                                                    <h6>Sesiuni</h6>
+                                                            <a href="/instrumente/sesiuni/sesiuni-primire-proiecte/" title="Sesiuni primire proiecte" >
+                                                                    <span>Sesiuni</span>
+                                                                    <span>primire</span>
+                                                                    <span>proiecte</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Instrumente de lucru</h6>
+                                                            <a href="/instrumente/instrumente-de-lucru/proceduri-si-formulare-ps-si-alte-programe/" title="Proceduri &#x219;i Formulare PS &#x219;i alte Programe" >
+                                                                    <span>Proceduri</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>Formulare</span>
+                                                                    <span>PS</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>alte</span>
+                                                                    <span>Programe</span>
+                                                            </a>
+                                                                <a href="https://so.afir.info/" title="Calcul SOC"  target=&#x27;_blank&#x27;>
+                                                                        <span>Calcul</span>
+                                                                        <span>SOC</span>
+                                                                </a>
+                                                            <a href="/instrumente/instrumente-de-lucru/proceduri-si-formulare-pndr-2020/" title="Proceduri &#x219;i Formulare PNDR 2020" >
+                                                                    <span>Proceduri</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>Formulare</span>
+                                                                    <span>PNDR</span>
+                                                                    <span>2020</span>
+                                                            </a>
+                                                            <a href="/instrumente/instrumente-de-lucru/preturi-de-referinta-afir/" title="Pre&#x21B;uri de referin&#x21B;&#x103; AFIR" >
+                                                                    <span>Pre&#x21B;uri</span>
+                                                                    <span>de</span>
+                                                                    <span>referin&#x21B;&#x103;</span>
+                                                                    <span>AFIR</span>
+                                                            </a>
+                                                            <a href="/instrumente/instrumente-de-lucru/bd-leader/" title="BD LEADER" >
+                                                                    <span>BD</span>
+                                                                    <span>LEADER</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Normative</h6>
+                                                            <a href="/instrumente/normative/legislatie-nationala/" title="Legisla&#x21B;ie na&#x21B;ional&#x103;" >
+                                                                    <span>Legisla&#x21B;ie</span>
+                                                                    <span>na&#x21B;ional&#x103;</span>
+                                                            </a>
+                                                            <a href="/instrumente/normative/legislatie-specifica/" title="Legisla&#x21B;ie specific&#x103;" >
+                                                                    <span>Legisla&#x21B;ie</span>
+                                                                    <span>specific&#x103;</span>
+                                                            </a>
+                                                            <a href="/instrumente/normative/legislatie-europeana/" title="Legisla&#x21B;ie european&#x103;" >
+                                                                    <span>Legisla&#x21B;ie</span>
+                                                                    <span>european&#x103;</span>
+                                                            </a>
+                                                            <a href="/instrumente/normative/protocoale-de-colaborare/" title="Protocoale de colaborare" >
+                                                                    <span>Protocoale</span>
+                                                                    <span>de</span>
+                                                                    <span>colaborare</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Nomenclator</h6>
+                                                            <a href="/instrumente/nomenclator/firme-de-consultanta/" title="Firme de consultan&#x21B;&#x103;" >
+                                                                    <span>Firme</span>
+                                                                    <span>de</span>
+                                                                    <span>consultan&#x21B;&#x103;</span>
+                                                            </a>
+                                                            <a href="/instrumente/nomenclator/institutii-financiare/" title="Institu&#x21B;ii financiare" >
+                                                                    <span>Institu&#x21B;ii</span>
+                                                                    <span>financiare</span>
+                                                            </a>
+                                                            <a href="/instrumente/nomenclator/lista-gal/" title="Lista GAL" >
+                                                                    <span>Lista</span>
+                                                                    <span>GAL</span>
+                                                            </a>
+                                                            <a href="/instrumente/nomenclator/registru-asociatii-fundatii-si-federatii/" title="Registru asocia&#x21B;ii, funda&#x21B;ii &#x219;i federa&#x21B;ii" >
+                                                                    <span>Registru</span>
+                                                                    <span>asocia&#x21B;ii,</span>
+                                                                    <span>funda&#x21B;ii</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>federa&#x21B;ii</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Informa&#x21B;ii utile</h6>
+                                                            <a href="/instrumente/informatii-utile/instructiuni-aplicatii-afir/" title="Instruc&#x21B;iuni aplica&#x21B;ii AFIR" >
+                                                                    <span>Instruc&#x21B;iuni</span>
+                                                                    <span>aplica&#x21B;ii</span>
+                                                                    <span>AFIR</span>
+                                                            </a>
+                                                            <a href="/instrumente/informatii-utile/definitii-si-explicatii/" title="Defini&#x21B;ii &#x219;i explica&#x21B;ii" >
+                                                                    <span>Defini&#x21B;ii</span>
+                                                                    <span>&#x219;i</span>
+                                                                    <span>explica&#x21B;ii</span>
+                                                            </a>
+                                                            <a href="/instrumente/informatii-utile/cpac/" title="CPAC" >
+                                                                    <span>CPAC</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Achizi&#x21B;ii</h6>
+                                                            <a href="/instrumente/achizitii/achizitii-privati-pndr/" title="Achizi&#x21B;ii priva&#x21B;i PNDR" >
+                                                                    <span>Achizi&#x21B;ii</span>
+                                                                    <span>priva&#x21B;i</span>
+                                                                    <span>PNDR</span>
+                                                            </a>
+                                                            <a href="/instrumente/achizitii/achizitii-privati-ps/" title="Achizi&#x21B;ii priva&#x21B;i PS" >
+                                                                    <span>Achizi&#x21B;ii</span>
+                                                                    <span>priva&#x21B;i</span>
+                                                                    <span>PS</span>
+                                                            </a>
+                                                            <a href="/instrumente/achizitii/achizitii-publici/" title="Achizi&#x21B;ii publici" >
+                                                                    <span>Achizi&#x21B;ii</span>
+                                                                    <span>publici</span>
+                                                            </a>
+                                                </div>
+
+
+                                        </div>
+
+                                            <div class="dropdown-footer-link d-flex justify-content-between">
+                                                    <div>
+
+        <a target="_blank" href="/finantare/etape-accesare-fonduri-europene/" title="Link meniu footer">
+            Etape accesare fonduri europene
+        </a>
+                                                    </div>
+                                                    <div>
+
+        <a target="_blank" href="https://depunerepspac.afir.ro" title="Link meniu footer">
+            Depunere cerere finan&#x21B;are
+        </a>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Comunicare</a>
+                            <div class="dropdown-container d-none">
+                                <div class="dropdown-content">
+                                            <link rel="preload" as="image" href="/media/otin50et/rom_2917.jpg?width=525&amp;height=525&amp;v=1d9147c97ee7e30&amp;quality=50">
+                                            <div class="dropdown-image" style="background-image: url('/media/otin50et/rom_2917.jpg?width=525&amp;height=525&amp;v=1d9147c97ee7e30&quality=50')"></div>
+                                    <div class="dropdown-links">
+                                        <div class="dropdown-link-groups    ">
+                                                    <div class="fill-vertical-space"></div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Programe financiare</h6>
+                                                            <a href="/comunicare/programe-financiare/program-actual/" title="Program actual" >
+                                                                    <span>Program</span>
+                                                                    <span>actual</span>
+                                                            </a>
+                                                                <a class="dropdown-link-element" href="/programe-anterioare/" title="Programe anterioare">
+                                                                        <span>Programe</span>
+                                                                        <span>anterioare</span>
+                                                                </a>
+                                                </div>
+                                                    <div class="fill-vertical-space"></div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Media</h6>
+                                                                <a class="dropdown-link-element" href="/comunicate/" title="Comunicate">
+                                                                        <span>Comunicate</span>
+                                                                </a>
+                                                            <a href="/comunicare/media/publicatii/" title="Publica&#x21B;ii" >
+                                                                    <span>Publica&#x21B;ii</span>
+                                                            </a>
+                                                            <a href="/comunicare/media/stiri-din-presa/" title="&#x218;tiri din pres&#x103;" >
+                                                                    <span>&#x218;tiri</span>
+                                                                    <span>din</span>
+                                                                    <span>pres&#x103;</span>
+                                                            </a>
+                                                            <a href="/comunicare/media/combaterea-dezinformarii/" title="Combaterea dezinform&#x103;rii" >
+                                                                    <span>Combaterea</span>
+                                                                    <span>dezinform&#x103;rii</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Utile</h6>
+                                                            <a href="/comunicare/utile/dezbatere-publica/" title="Dezbatere public&#x103;" >
+                                                                    <span>Dezbatere</span>
+                                                                    <span>public&#x103;</span>
+                                                            </a>
+                                                            <a href="/comunicare/utile/identitatea-vizuala/" title="Identitatea vizual&#x103;" >
+                                                                    <span>Identitatea</span>
+                                                                    <span>vizual&#x103;</span>
+                                                            </a>
+                                                            <a href="/comunicare/utile/snlaf/" title="SNLAF" >
+                                                                    <span>SNLAF</span>
+                                                            </a>
+                                                            <a href="/comunicare/utile/termeni-conditii/" title="Termeni &amp; Condi&#x21B;ii" >
+                                                                    <span>Termeni</span>
+                                                                    <span>&amp;</span>
+                                                                    <span>Condi&#x21B;ii</span>
+                                                            </a>
+                                                </div>
+                                                    <div class="fill-vertical-space"></div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Exemple</h6>
+                                                                <a class="dropdown-link-element" href="/exemple-de-buna-practica/" title="Bun&#x103; practic&#x103;">
+                                                                        <span>Bun&#x103;</span>
+                                                                        <span>practic&#x103;</span>
+                                                                </a>
+                                                </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Contact</a>
+                            <div class="dropdown-container d-none">
+                                <div class="dropdown-content">
+                                            <link rel="preload" as="image" href="/media/ijdflwcy/contact.jpg?rxy=0.39228487727787914,0.14500367762950508&amp;width=525&amp;height=525&amp;v=1d8b3d934a58ed0&amp;quality=50">
+                                            <div class="dropdown-image-with-description" style="background-image: url('/media/ijdflwcy/contact.jpg?rxy=0.39228487727787914,0.14500367762950508&amp;width=525&amp;height=525&amp;v=1d8b3d934a58ed0&quality=50')">
+                                                <div class="dropdown-image-text">
+                                                    AFIR, Str. &#x218;tirbei Vod&#x103;, nr. 43, sector 1, Bucure&#x219;ti&#xA;WEB: www.afir.ro; TELEFON: 0728.107.516;  cabinet@afir.ro;  relatii.publice@afir.ro
+                                                </div>
+                                            </div>
+                                    <div class="dropdown-links">
+                                        <div class="dropdown-link-groups    ">
+                                                <div class="dropdown-link-group">
+                                                    <h6>Date de contact</h6>
+                                                            <a href="/contact/contact/sediul-central/" title="Sediul central" >
+                                                                    <span>Sediul</span>
+                                                                    <span>central</span>
+                                                            </a>
+                                                                <a class="dropdown-link-element" href="/despre-afir/centre-regionale/" title="Centre regionale">
+                                                                        <span>Centre</span>
+                                                                        <span>regionale</span>
+                                                                </a>
+                                                                <a class="dropdown-link-element" href="/despre-afir/oficii-judetene/" title="Oficii jude&#x21B;ene">
+                                                                        <span>Oficii</span>
+                                                                        <span>jude&#x21B;ene</span>
+                                                                </a>
+                                                            <a href="/contact/contact/linkuri-utile/" title="Linkuri utile" >
+                                                                    <span>Linkuri</span>
+                                                                    <span>utile</span>
+                                                            </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Ajutor</h6>
+                                                                <a class="dropdown-link-element" href="https://suport.afir.info" title="Asisten&#x21B;&#x103; aplica&#x21B;ii AFIR">
+                                                                        <span>Asisten&#x21B;&#x103;</span>
+                                                                        <span>aplica&#x21B;ii</span>
+                                                                        <span>AFIR</span>
+                                                                </a>
+                                                </div>
+                                                <div class="dropdown-link-group">
+                                                    <h6>Rela&#x21B;ii cu publicul</h6>
+                                                            <a href="/contact/relatii-cu-publicul/solicitari-de-informatii/" title="Solicit&#x103;ri de informa&#x21B;ii" >
+                                                                    <span>Solicit&#x103;ri</span>
+                                                                    <span>de</span>
+                                                                    <span>informa&#x21B;ii</span>
+                                                            </a>
+                                                            <a href="/contact/relatii-cu-publicul/solicitari-de-presa/" title="Solicit&#x103;ri de pres&#x103;" >
+                                                                    <span>Solicit&#x103;ri</span>
+                                                                    <span>de</span>
+                                                                    <span>pres&#x103;</span>
+                                                            </a>
+                                                            <a href="/contact/relatii-cu-publicul/reclamatii/" title="Reclama&#x21B;ii" >
+                                                                    <span>Reclama&#x21B;ii</span>
+                                                            </a>
+                                                            <a href="/contact/relatii-cu-publicul/avertizor-de-integritate/" title="Avertizor de integritate" >
+                                                                    <span>Avertizor</span>
+                                                                    <span>de</span>
+                                                                    <span>integritate</span>
+                                                            </a>
+                                                            <a href="/contact/relatii-cu-publicul/sesizari-mita/" title="Sesiz&#x103;ri mit&#x103;" >
+                                                                    <span>Sesiz&#x103;ri</span>
+                                                                    <span>mit&#x103;</span>
+                                                            </a>
+                                                            <a href="/contact/relatii-cu-publicul/sesizari-frauda/" title="Sesiz&#x103;ri fraud&#x103;" >
+                                                                    <span>Sesiz&#x103;ri</span>
+                                                                    <span>fraud&#x103;</span>
+                                                            </a>
+                                                            <a href="/contact/relatii-cu-publicul/audiente/" title="Audien&#x21B;e" >
+                                                                    <span>Audien&#x21B;e</span>
+                                                            </a>
+                                                </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+            </ul>
+            <div id="search-box" class="search-box">
+                <form action="/cautare/" method="get" class="position-relative">
+                    <input name="term" class="search-field" type="search" placeholder="Caut&#x103; articole, comunic&#x103;ri, rapoarte, instrumente, etc" />
+                    <input name="mculture" id="page-culture" type="hidden" value="ro" />
+                    <div aria-label="Clear" role="button" class="search-bar-x hidden">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </form>
+
+                <span class="search-label paragraph-blue-link">Caut&#x103;</span>
+
+                <div class="search-icon-background" role="button" aria-label="Search">
+                    <img class="search-icon" src="/Content/Icons/Search icon.svg" alt="Search icon" />
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<nav id="mobileNav" class="header-content flex-column align-items-center">
+    <header class="header">
+        <a class="me-auto" href="/">
+            <div class="top-logotip-afir d-flex flex-row align-items-center">
+                <div class="top-logo-afir">
+                    <img src="/Content/Icons/AFIR_LOGOTIP.png" alt="Logo AFIR" />
+                </div>
+            </div>
+        </a>
+        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMobileSupportedContent" aria-controls="navbarMobileSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </header>
+    <div id="navbarMobileSupportedContent" class="collapse">
+        <div id="search-box-mobile" class="search-box">
+            <span class="search-label paragraph-blue-link">Caut&#x103;</span>
+            <form action="/cautare" class="position-relative">
+                <input name="term" class="search-field" type="search" placeholder="Caută articole, comunicări, rapoarte, instrumente, etc" />
+            </form>
+
+            <div class="search-icon-background" role="button" aria-label="Search">
+                <img class="search-icon" src="/Content/Icons/Search icon.svg" alt="Search" />
+            </div>
+        </div>
+        <ul class="navbar-nav navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Despre AFIR</a>
+                        <div class="dropdown-container">
+                            <div class="dropdown-content">
+                                <div class="dropdown-back" role="button">Despre AFIR</div>
+                                <div class="dropdown-links">
+                                    <div class="dropdown-link-groups">
+
+
+                                            <div class="dropdown-link-group">
+                                                <h6>AFIR</h6>
+                                                        <a href="/despre-afir/afir/agentia/" title="Agen&#x21B;ia">Agen&#x21B;ia</a>
+                                                        <a href="/despre-afir/afir/conducere-afir/" title="Conducere AFIR">Conducere AFIR</a>
+                                                        <a href="/despre-afir/afir/structuri-teritoriale/" title="Structuri teritoriale">Structuri teritoriale</a>
+                                                        <a href="/despre-afir/afir/servicii/" title="Servicii">Servicii</a>
+                                                        <a href="/despre-afir/afir/arhiva-documente/" title="ARHIV&#x102; DOCUMENTE">ARHIV&#x102; DOCUMENTE</a>
+                                            </div>
+                                            <div class="dropdown-link-group">
+                                                <h6>Cariere</h6>
+                                                        <a href="/despre-afir/cariere/declaratii-de-avere-si-interese/" title="Declara&#x21B;ii de avere &#x219;i interese">Declara&#x21B;ii de avere &#x219;i interese</a>
+                                                        <a href="/despre-afir/cariere/concursuri-si-examene/" title="Concursuri &#x219;i Examene">Concursuri &#x219;i Examene</a>
+                                            </div>
+                                            <div class="dropdown-link-group">
+                                                <h6>Transparen&#x21B;&#x103;</h6>
+                                                        <a href="/despre-afir/transparenta/documente-publice/" title="Documente publice">Documente publice</a>
+                                                        <a href="/despre-afir/transparenta/bugetul-agentiei/" title="Bugetul Agen&#x21B;iei">Bugetul Agen&#x21B;iei</a>
+                                                        <a href="/despre-afir/transparenta/bilantul-contabil/" title="Bilan&#x21B;ul contabil">Bilan&#x21B;ul contabil</a>
+                                                        <a href="/despre-afir/transparenta/venituri-salariale/" title="Venituri salariale">Venituri salariale</a>
+                                                        <a href="/despre-afir/transparenta/paap/" title="PAAP">PAAP</a>
+                                                        <a href="/despre-afir/transparenta/integritate-institutionala/" title="Integritate institu&#x21B;ional&#x103;">Integritate institu&#x21B;ional&#x103;</a>
+                                                        <a href="/despre-afir/transparenta/achizitii-derulate-de-afir/" title="Achizi&#x21B;ii derulate de AFIR">Achizi&#x21B;ii derulate de AFIR</a>
+                                                        <a href="/despre-afir/transparenta/rapoarte-de-activitate/" title="Rapoarte de activitate">Rapoarte de activitate</a>
+                                                        <a href="/despre-afir/transparenta/standarde-de-calitate-afir/" title="Standarde de calitate AFIR">Standarde de calitate AFIR</a>
+                                            </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-expanded="false">Finan&#x21B;are</a>
+                        <div class="dropdown-container">
+                            <div class="dropdown-content">
+                                <div class="dropdown-back" role="button">Finan&#x21B;are</div>
+                                <div class="dropdown-links">
+                                    <div class="dropdown-link-groups">
+
+                                            <div class="dropdown-footer-link">
+                                                    <div>
+
+        <a target="_blank" href="/finantare/etape-accesare-fonduri-europene/" title="Link meniu footer">
+            Etape accesare fonduri europene
+        </a>
+                                                    </div>
+                                                    <div>
+
+        <a target="_blank" href="https://depunerepspac.afir.ro" title="Link meniu footer">
+            Depunere cerere finan&#x21B;are
+        </a>
+                                                    </div>
+                                            </div>
+
+                                            <div class="dropdown-link-group">
+                                                <h6>Finan&#x21B;are &#xEE;n agricultur&#x103;</h6>
+                                                        <a href="/finantare/finantare-in-agricultura/exploatatii-agricole/" title="Exploata&#x21B;ii agricole">Exploata&#x21B;ii agricole</a>
+                                                        <a href="/finantare/finantare-in-agricultura/procesare-agricola/" title="Procesare agricol&#x103;">Procesare agricol&#x103;</a>
+                                                        <a href="/finantare/finantare-in-agricultura/pomicultura/" title="Pomicultur&#x103;">Pomicultur&#x103;</a>
+                                                        <a href="/finantare/finantare-in-agricultura/grupuri-de-producatori/" title="Grupuri de Produc&#x103;tori">Grupuri de Produc&#x103;tori</a>
+                                                        <a href="/finantare/finantare-in-agricultura/investalim/" title="INVESTALIM">INVESTALIM</a>
+                                                        <a href="/finantare/finantare-in-agricultura/fondul-pentru-modernizare/" title="Fondul pentru Modernizare">Fondul pentru Modernizare</a>
+                                            </div>
+                                            <div class="dropdown-link-group">
+                                                <h6>Finan&#x21B;are &#xEE;n mediul rural</h6>
+                                                        <a href="/finantare/finantare-in-mediul-rural/utilitate-publica/" title="Utilitate public&#x103;">Utilitate public&#x103;</a>
+                                                        <a href="/finantare/finantare-in-mediul-rural/licee-agricole/" title="Licee agricole">Licee agricole</a>
+                                                        <a href="/finantare/finantare-in-mediul-rural/exploatatii-forestiere/" title="Exploata&#x21B;ii forestiere">Exploata&#x21B;ii forestiere</a>
+                                                        <a href="/finantare/finantare-in-mediul-rural/mediu-si-clima/" title="Mediu &#x219;i Clim&#x103;">Mediu &#x219;i Clim&#x103;</a>
+                                            </div>
+
+                                                <div class="dropdown-link-group">
+                                                        <a href="/finantare/etape-accesare-fonduri-europene/" title="Etape accesare fonduri europene" >Etape accesare fonduri europene</a>
+                                                        <a href="/finantare/leader/" title="LEADER" >LEADER</a>
+                                                        <a href="/finantare/masuri-de-sprijin-sm171/" title="M&#x103;suri de sprijin - sM17.1" >M&#x103;suri de sprijin - sM17.1</a>
+                                                        <a href="/finantare/contor-fonduri-disponibile/" title="Contor fonduri disponibile" >Contor fonduri disponibile</a>
+                                                        <a href="/finantare/transfer-de-cunostinte-dr37/" title="Transfer de cuno&#x219;tin&#x21B;e - DR37" 
+… [truncated at 64KB; full length 282309]

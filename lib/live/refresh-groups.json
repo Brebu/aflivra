@@ -30,7 +30,7 @@
     {"family": "resource.datastores", "reason": "Resursele și depozitele de date ale catalogului se verifică la deschiderea fiecărui set de date."}
   ],
   "onDemand": [
-    {"family": "transport.realtime", "reason": "Pozițiile, sesizările și disfuncționalitățile în timp real au un TTL de 30 de secunde și nu pot fi pre-împrospătate."},
+    {"family": "transport.realtime", "reason": "Pozițiile vehiculelor au un TTL de 15 secunde, iar estimările de sosire și sesizările un TTL de 30 de secunde; nu pot fi pre-împrospătate."},
     {"family": "transport.tranzy", "reason": "Pozițiile vehiculelor Tranzy au un TTL de 30 de secunde și se citesc la cerere pentru operatorul localizat; sursa este în plus o poartă de mediu — fără cheia TRANZY_API_KEY configurată nu se interoghează nicio adresă."},
     {"family": "courts", "reason": "Dosarele se verifică la cerere după număr, cu un TTL de 5 minute."},
     {"family": "forecast", "reason": "Prognoza se calculează pentru coordonatele alese; doar orașul implicit este pre-împrospătat."},
