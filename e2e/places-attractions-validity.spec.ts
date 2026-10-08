@@ -91,13 +91,14 @@ test.describe('Locuri de vizitat — doar articole valide', () => {
 
     const subSelect = workspace.locator('label', {hasText: 'Subcategorie'}).locator('select');
     await subSelect.selectOption(ATTRACTIONS);
-    await expect(workspace.locator('.entity-results-header')).toContainText(/rezultat/, {timeout: 30_000});
+    // Runnerul CI cu două nuclee plătește prima răsfoire a corpusului cultura mai lent.
+    await expect(workspace.locator('.entity-results-header')).toContainText(/rezultat/, {timeout: process.env.CI ? 70_000 : 30_000});
 
     // A famous target stays a rendered attractions article.
     const search = workspace.getByLabel('Caută locuri, servicii, adrese și contacte');
     await search.fill('Salina Turda');
     await search.press('Enter');
-    await expect(workspace.locator('.entity-card h3', {hasText: 'Salina Turda'}).first()).toBeVisible({timeout: 30_000});
+    await expect(workspace.locator('.entity-card h3', {hasText: 'Salina Turda'}).first()).toBeVisible({timeout: process.env.CI ? 70_000 : 30_000});
 
     // The audited junk classes are gone from the served set: the very queries
     // that surfaced "3rd enclosure" before the gate now find nothing. Each

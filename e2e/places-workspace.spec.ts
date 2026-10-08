@@ -327,9 +327,11 @@ test.describe('Places map — pin radius and pan refresh', () => {
     await expect(map).toBeVisible({timeout: 60_000});
     await expect(map).toHaveAttribute('data-pins', String(firstBody.data.total));
 
-    // Settle the initial fit before the gesture (the pacing the leaflet gesture leg proved).
+    // Settle the initial fit before the gesture (the pacing the leaflet gesture leg proved;
+    // runnerul CI cu două nuclee are nevoie de mai mult timp până harta e complet liniștită).
+    const settleMs = process.env.CI ? 3500 : 1200;
     await page.evaluate(() => document.querySelector('.public-map')!.scrollIntoView({block: 'center', behavior: 'instant'}));
-    await page.waitForTimeout(1200);
+    await page.waitForTimeout(settleMs);
 
     const {x, y} = await page.evaluate(() => {
       const el = document.querySelector('.public-map')!;
@@ -354,13 +356,13 @@ test.describe('Places map — pin radius and pan refresh', () => {
     expect(secondBody.data.total, 'the new zone must have its own pins rendered').toBeGreaterThan(0);
     await expect(map).toHaveAttribute('data-pins', String(secondBody.data.total));
 
-    await page.waitForTimeout(1600);
+    await page.waitForTimeout(process.env.CI ? 3000 : 1600);
     expect(pinUrls.length, 'one drag must fire exactly one debounced pin fetch').toBe(before + 1);
 
     // A zoom around the same center keeps the request unchanged: no refetch storm.
     const beforePinch = pinUrls.length;
     await touchPinch(page, x, y, 55, 170);
-    await page.waitForTimeout(1600);
+    await page.waitForTimeout(process.env.CI ? 3500 : 1600);
     expect(pinUrls.length, 'a zoom without a center change must not refetch the pins').toBe(beforePinch);
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
