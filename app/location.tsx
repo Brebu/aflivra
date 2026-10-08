@@ -9,13 +9,13 @@ import {WatchButton} from './watch-button';import {normalizeSearch} from '@/lib/
 export {distanceKm};
 export type Position={lat:number;lon:number;accuracy:number};
 type Mode='default'|'manual'|'device';
-type LocationState={position:Position|null;city:LocalCity;locality:LocalCity|null;center:{lat:number;lon:number};country:string;mode:Mode;hasLocal:boolean;key:string;label:string;cities:LocalCity[];busy:boolean;error:string;request:()=>void;clear:()=>void;selectCity:(city:LocalCity)=>void};
+type LocationState={position:Position|null;city:LocalCity;locality:LocalCity|null;center:{lat:number;lon:number};country:string;mode:Mode;hasLocal:boolean;key:string;areaKey:string;label:string;cities:LocalCity[];busy:boolean;error:string;request:()=>void;clear:()=>void;selectCity:(city:LocalCity)=>void};
 const storageKey='aflivra.location.v1';
-const initial:LocationState={position:null,city:defaultCity,locality:null,center:defaultCity,country:defaultCountry,mode:'default',hasLocal:false,key:'default',label:'România · oraș implicit București',cities:cityPositions,busy:false,error:'',request:()=>{},clear:()=>{},selectCity:()=>{}};
+const initial:LocationState={position:null,city:defaultCity,locality:null,center:defaultCity,country:defaultCountry,mode:'default',hasLocal:false,key:'default',areaKey:'default',label:'România · oraș implicit București',cities:cityPositions,busy:false,error:'',request:()=>{},clear:()=>{},selectCity:()=>{}};
 const LocationContext=createContext<LocationState>(initial);
 export function LocationProvider({children}:{children:React.ReactNode}){
  const [position,setPosition]=useState<Position|null>(null),[mode,setMode]=useState<Mode>('default'),[manual,setManual]=useState<LocalCity>(defaultCity),[cities,setCities]=useState<LocalCity[]>(cityPositions),[busy,setBusy]=useState(false),[error,setError]=useState('');
- const watcher=useRef<number|null>(null),generation=useRef(0),cell=useRef('');
+ const watcher=useRef<number|null>(null),generation=useRef(0),cell=useRef(''),lastFix=useRef<Position|null>(null);
  const save=useCallback((value:object)=>{try{localStorage.setItem(storageKey,JSON.stringify(value))}catch{}},[]);
  const stop=useCallback(()=>{generation.current++;cell.current='';if(watcher.current!==null){navigator.geolocation?.clearWatch(watcher.current);watcher.current=null}setBusy(false)},[]);
  const request=useCallback(()=>{
@@ -29,16 +29,21 @@ export function LocationProvider({children}:{children:React.ReactNode}){
        un fix în aceeași celulă nu schimbă nimic din ce se afișează, așa că nu re-randăm pagina pentru el. */
     const nextCell=point.lat.toFixed(3)+':'+point.lon.toFixed(3);
     if(nextCell===cell.current)return;
-    cell.current=nextCell;
+    cell.current=nextCell;lastFix.current=point;
     setPosition(point);setMode('device');setBusy(false);setError('');
    },e=>{
-    if(current!==generation.current)return;stop();setPosition(null);setManual(defaultCity);setMode('default');
+    if(current!==generation.current)return;
+    /* Eroarea tranzitorie (POSITION_UNAVAILABLE, code 3) apare la fiecare schimbare de sursă
+       a poziției și nu trebuie să demoleze un context funcțional: păstrăm ultima poziție bună
+       până la următorul fix; doar refuzul permisiunii (code 1) oprește onest. */
+    if(e.code===3&&lastFix.current){if(current!==generation.current)return;setError('');return}
+    stop();setPosition(null);setManual(defaultCity);setMode('default');
     if(e.code===1)save({mode:'default'});
     setError(e.code===1?'Localizarea nu a fost permisă. Folosim România și București; poți alege localitatea manual.':e.code===3?'Poziția nu a fost primită la timp. Folosim România și București până la o nouă localizare.':'Poziția nu este disponibilă. Folosim România și București; poți alege localitatea manual.');
    },{enableHighAccuracy:false,timeout:12000,maximumAge:60000});
   },[save,stop]);
-  const clear=useCallback(()=>{stop();setPosition(null);setManual(defaultCity);setMode('default');setError('');save({mode:'default'})},[stop,save]);
-  const selectCity=useCallback((city:LocalCity)=>{if(!city.name?.trim()||!validPoint(city))return;stop();setPosition(null);setManual(withLocalCounty(city));setMode('manual');setError('');save({mode:'manual',city})},[stop,save]);
+  const clear=useCallback(()=>{stop();setPosition(null);lastFix.current=null;setManual(defaultCity);setMode('default');setError('');save({mode:'default'})},[stop,save]);
+  const selectCity=useCallback((city:LocalCity)=>{if(!city.name?.trim()||!validPoint(city))return;stop();setPosition(null);lastFix.current=null;setManual(withLocalCounty(city));setMode('manual');setError('');save({mode:'manual',city})},[stop,save]);
   useEffect(()=>{
    try{const saved=JSON.parse(localStorage.getItem(storageKey)||'null');if(saved?.mode==='manual'&&saved.city?.name&&validPoint(saved.city)){selectCity(saved.city);return stop}if(saved?.mode==='default')return stop;
     if(!saved){const old=JSON.parse(localStorage.getItem('reper.v2.preferences')||'null'),city=cityPositions.find(c=>c.name===old?.city&&c.name!==defaultCity.name);if(city){selectCity(city);return stop}}
@@ -47,9 +52,16 @@ export function LocationProvider({children}:{children:React.ReactNode}){
   },[request,selectCity,stop]);
   useEffect(()=>{const controller=new AbortController();snapshotJson('/places/manifest.json',undefined,controller.signal).then(m=>snapshotJson('/places/cities.json',m.cities,controller.signal)).then(d=>{if(Array.isArray(d.items))setCities(d.items.filter((c:LocalCity)=>c.name&&validPoint(c)).map(withLocalCounty))}).catch(()=>{});return()=>controller.abort()},[]);
   const locality=useMemo(()=>{const city=position?nearestLocality(position,cities):mode==='manual'?manual:null;return city?withLocalCounty(city):null},[position,cities,mode,manual]),city=locality?withLocalCounty(locality):defaultCity,center=position||city,hasLocal=!!position||mode==='manual';
-  const key=position?`device:${position.lat.toFixed(3)}:${position.lon.toFixed(3)}:${locality?.name||''}`:mode==='manual'?`manual:${city.name}:${city.lat}:${city.lon}`:'default';
-  const label=position?(locality?'Aproape de '+locality.name:'Poziția dispozitivului'):hasLocal?city.name:initial.label;
-  return <LocationContext.Provider value={{position,city,locality,center,country:defaultCountry,mode,hasLocal,key,label,cities,busy,error,request,clear,selectCity}}>{children}</LocationContext.Provider>;
+ const key=position?`device:${position.lat.toFixed(3)}:${position.lon.toFixed(3)}:${locality?.name||''}`:mode==='manual'?`manual:${city.name}:${city.lat}:${city.lon}`:'default';
+ /* Area identity for state that follows WHERE you are, not the raw fix: the resolved
+    locality (name + county), the manual city, or the default. A GPS fix quantizing
+    into the next ~100 m cell — or the async city list re-resolving the same nearest
+    locality — keeps this key, so dialogs and readers survive background drift; only
+    an actual locality change re-keys it. The cell key above stays for consumers where
+    the coordinates themselves matter (radius filters, map view keys). */
+ const areaKey=position?locality?`local:${locality.name}|${locality.county||''}`:'device:none':mode==='manual'?`manual:${city.name}|${city.county||''}`:'default';
+ const label=position?(locality?'Aproape de '+locality.name:'Poziția dispozitivului'):hasLocal?city.name:initial.label;
+ return <LocationContext.Provider value={{position,city,locality,center,country:defaultCountry,mode,hasLocal,key,areaKey,label,cities,busy,error,request,clear,selectCity}}>{children}</LocationContext.Provider>;
 }
 export const useLocation=()=>useContext(LocationContext);
 

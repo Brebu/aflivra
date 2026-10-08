@@ -17,6 +17,10 @@ playwright-report/
 test-results/
 .DS_Store
 
+twa/build/
+*.keystore
+*.jks
+
 ssnc-agent-orch/2026/10/06/design-alignment-pass/screens/
 public/downloads/source-packages.json
 public/downloads/index.html

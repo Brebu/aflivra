@@ -1,0 +1,149 @@
+
+Running 6 tests using 1 worker
+
+  ✘  1 [chromium] › e2e/geo-drift-dialogs.spec.ts:36:3 › Geo drift dialogs › a registry record dialog survives a same-locality position drift (31.9s)
+  ✘  2 [chromium] › e2e/geo-drift-dialogs.spec.ts:60:3 › Geo drift dialogs › the transit line reader survives a same-locality position drift (16.8s)
+  ✘  3 [chromium] › e2e/geo-drift-dialogs.spec.ts:95:3 › Geo drift dialogs › a cinema film dialog survives a same-locality position drift (1.3s)
+  ✓  4 [chromium] › e2e/geo-drift-dialogs.spec.ts:119:3 › Geo drift dialogs › a real locality change closes and rescopes the open record (1.8s)
+  ✘  5 [chromium] › e2e/geo-drift-dialogs.spec.ts:148:3 › Geo drift dialogs › the own position layer renders on the national map and follows the live fix (1.0m)
+  ✘  6 [chromium] › e2e/geo-drift-dialogs.spec.ts:168:3 › Geo drift dialogs › the own position layer renders on the places map view (1.0m)
+
+
+  1) [chromium] › e2e/geo-drift-dialogs.spec.ts:36:3 › Geo drift dialogs › a registry record dialog survives a same-locality position drift 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.location-strip [role="status"]').first()
+    Expected substring: "precizie aproximativă 80 m"
+    Received string:    "România · oraș implicit București. Contextul local se aplică datelor care au informații geografic."
+    Timeout: 30000ms
+
+    Call log:
+      - Expect "toContainText" locator('.location-strip [role="status"]').first() with timeout 30000ms
+      - waiting for locator('.location-strip [role="status"]').first()
+        - locator resolved to <p role="status">…</p>
+        - unexpected value "Aproape de București · precizie aproximativă 65 m. Poziția și datele locale se actualizează automat."
+        63 × locator resolved to <p role="status">…</p>
+           - unexpected value "România · oraș implicit București. Contextul local se aplică datelor care au informații geografic."
+
+
+      28 | async function driftDevicePosition(page: Page) {
+      29 |   await page.context().setGeolocation(DRIFT);
+    > 30 |   await expect(stripStatus(page)).toContainText('precizie aproximativă 80 m', {timeout: 30_000});
+         |                                   ^
+      31 | }
+      32 |
+      33 | test.describe('Geo drift dialogs', () => {
+        at driftDevicePosition (/Users/cbrebu/Projects/alfivra/e2e/geo-drift-dialogs.spec.ts:30:35)
+        at /Users/cbrebu/Projects/alfivra/e2e/geo-drift-dialogs.spec.ts:52:5
+
+    Error Context: test-results/geo-drift-dialogs-Geo-drif-d44bd-ame-locality-position-drift-chromium/error-context.md
+
+  2) [chromium] › e2e/geo-drift-dialogs.spec.ts:60:3 › Geo drift dialogs › the transit line reader survives a same-locality position drift 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.transit-dialog').locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('.transit-dialog').locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]') with timeout 15000ms
+      - waiting for locator('.transit-dialog').locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')
+
+
+      78 |     // Requirement 2 wiring: the own-position dot renders on the per-line map
+      79 |     // while positioning is on, from the raw reported fix (not the quantized cell).
+    > 80 |     await expect(dialog.locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')).toBeVisible();
+         |                                                                                                                      ^
+      81 |
+      82 |     await driftDevicePosition(page);
+      83 |     await expect(dialog).toBeVisible();
+        at /Users/cbrebu/Projects/alfivra/e2e/geo-drift-dialogs.spec.ts:80:118
+
+    Error Context: test-results/geo-drift-dialogs-Geo-drif-6950c-ame-locality-position-drift-chromium/error-context.md
+
+  3) [chromium] › e2e/geo-drift-dialogs.spec.ts:95:3 › Geo drift dialogs › a cinema film dialog survives a same-locality position drift 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByLabel('Cinematograf')
+    Expected: visible
+    Error: strict mode violation: getByLabel('Cinematograf') resolved to 2 elements:
+        1) <select class="select-field-control ">…</select> aka getByLabel('CinematografBucurești Sun')
+        2) <div hidden="" tabindex="0" role="tabpanel" data-state="inactive" data-slot="tabs-content" class="flex-1 outline-none" data-orientation="horizontal" id="radix-_r_g_-content-places" aria-labelledby="radix-_r_g_-trigger-places"></div> aka getByLabel('Cinematografe')
+
+    Call log:
+      - Expect "toBeVisible" getByLabel('Cinematograf') with timeout 15000ms
+      - waiting for getByLabel('Cinematograf')
+
+
+      101 |     await expect(filmDetail).toBeVisible({timeout: 90_000});
+      102 |     const cinemaSelect = page.getByLabel('Cinematograf');
+    > 103 |     await expect(cinemaSelect).toBeVisible();
+          |                                ^
+      104 |     const chosenCinema = await cinemaSelect.inputValue();
+      105 |     await filmDetail.click();
+      106 |     const dialog = page.locator('.reader-dialog');
+        at /Users/cbrebu/Projects/alfivra/e2e/geo-drift-dialogs.spec.ts:103:32
+
+    Error Context: test-results/geo-drift-dialogs-Geo-drif-1b930-ame-locality-position-drift-chromium/error-context.md
+
+  4) [chromium] › e2e/geo-drift-dialogs.spec.ts:148:3 › Geo drift dialogs › the own position layer renders on the national map and follows the live fix 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')
+    Expected: visible
+    Timeout: 60000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]') with timeout 60000ms
+      - waiting for locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')
+
+
+      151 |     await waitForDeviceFix(page);
+      152 |
+    > 153 |     await expect(page.locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')).toBeVisible({timeout: 60_000});
+          |                                                                                                                    ^
+      154 |
+      155 |     await driftDevicePosition(page);
+      156 |     // The dot re-renders from the new fix (accuracy 65 -> 80) and stays one layer,
+        at /Users/cbrebu/Projects/alfivra/e2e/geo-drift-dialogs.spec.ts:153:116
+
+    Error Context: test-results/geo-drift-dialogs-Geo-drif-9b9c4-ap-and-follows-the-live-fix-chromium/error-context.md
+
+  5) [chromium] › e2e/geo-drift-dialogs.spec.ts:168:3 › Geo drift dialogs › the own position layer renders on the places map view 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')
+    Expected: visible
+    Timeout: 60000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]') with timeout 60000ms
+      - waiting for locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')
+
+
+      172 |
+      173 |     await page.getByRole('button', {name: 'Harta paginii'}).click({timeout: 60_000});
+    > 174 |     await expect(page.locator('.public-map div[role="img"][aria-label="Ești aici · precizie aproximativă 65 m"]')).toBeVisible({timeout: 60_000});
+          |                                                                                                                    ^
+      175 |     await expect(page.locator('.public-map div[role="img"][aria-label^="Ești aici"]')).toHaveCount(1);
+      176 |     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+      177 |   });
+        at /Users/cbrebu/Projects/alfivra/e2e/geo-drift-dialogs.spec.ts:174:116
+
+    Error Context: test-results/geo-drift-dialogs-Geo-drif-8a22e-ders-on-the-places-map-view-chromium/error-context.md
+
+  5 failed
+    [chromium] › e2e/geo-drift-dialogs.spec.ts:36:3 › Geo drift dialogs › a registry record dialog survives a same-locality position drift 
+    [chromium] › e2e/geo-drift-dialogs.spec.ts:60:3 › Geo drift dialogs › the transit line reader survives a same-locality position drift 
+    [chromium] › e2e/geo-drift-dialogs.spec.ts:95:3 › Geo drift dialogs › a cinema film dialog survives a same-locality position drift 
+    [chromium] › e2e/geo-drift-dialogs.spec.ts:148:3 › Geo drift dialogs › the own position layer renders on the national map and follows the live fix 
+    [chromium] › e2e/geo-drift-dialogs.spec.ts:168:3 › Geo drift dialogs › the own position layer renders on the places map view 
+  1 passed (3.0m)

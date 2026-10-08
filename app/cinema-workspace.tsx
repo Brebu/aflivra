@@ -15,12 +15,12 @@ import cinemaCatalog from '@/public/cinema/cinemas.json';
 const attributeNames:Record<string,string>={action:'Acțiune',adventure:'Aventură',animation:'Animație',comedy:'Comedie',crime:'Polițist',drama:'Dramă',family:'Familie',fantasy:'Fantastic',horror:'Horror',musical:'Muzical',romance:'Romantic',thriller:'Thriller',documentary:'Documentar','sci-fi':'SF','2d':'2D','3d':'3D',imax:'IMAX','4dx':'4DX',dubbed:'Dublat',subbed:'Subtitrat',original:'Versiune originală',ag:'Audiență generală','ap-12':'Acord parental sub 12 ani','n-15':'Nerecomandat sub 15 ani','im-18':'Interzis minorilor',vip:'VIP'};
 export function CinemaWorkspace({preferredCity='București'}:{preferredCity?:string}){
  const geo=useLocation(),[geoScope,setGeoScope]=useGeographicScope(),ordered=useMemo(()=>cinemaCatalog.items.filter(c=>geoScope==='national'||!geo.hasLocal||nearbyRecord(c,geo.center)||sameLocality(c.address.city,geo.locality?.name)).sort((a,b)=>distanceKm(geo.center,{lat:a.latitude,lon:a.longitude})-distanceKm(geo.center,{lat:b.latitude,lon:b.longitude})),[geo.key,geoScope]),initial=ordered[0]?.externalCode||'';
- const [choice,setChoice]=useState({id:initial,key:geo.key}),[date,setDate]=useState(bucharestDate()),[q,setQ]=useState(''),[filter,setFilter]=useState(''),[sort,setSort]=useState('time'),[page,setPage]=useLocationState(0),[selected,setSelected]=useLocationState<any>(null),[map,setMap]=useState(false);
- const cinemaId=choice.key===geo.key&&ordered.some(c=>c.externalCode===choice.id)?choice.id:initial;
- const setCinemaId=(id:string)=>setChoice({id,key:geo.key});
+ const [choice,setChoice]=useState({id:initial,key:geo.areaKey}),[date,setDate]=useState(bucharestDate()),[q,setQ]=useState(''),[filter,setFilter]=useState(''),[sort,setSort]=useState('time'),[page,setPage]=useLocationState(0),[selected,setSelected]=useLocationState<any>(null),[map,setMap]=useState(false);
+ const cinemaId=choice.key===geo.areaKey&&ordered.some(c=>c.externalCode===choice.id)?choice.id:initial;
+ const setCinemaId=(id:string)=>setChoice({id,key:geo.areaKey});
  const state=useSource(cinemaId?'/api/cinema?'+new URLSearchParams({id:cinemaId,date,...geographicParams(geo,geoScope)}):null,{timeoutMs:15000}),d=state.data?.data;
  const cinema=cinemaCatalog.items.find(c=>c.externalCode===cinemaId);
- useEffect(()=>{setSelected(null);setPage(0);setFilter('')},[cinemaId,date,geo.key]);
+ useEffect(()=>{setSelected(null);setPage(0);setFilter('')},[cinemaId,date,geo.areaKey]);
  const index=useMemo(()=>createSearchIndex<any>(d?.films||[]),[d]);const films=useMemo(()=>searchIndex(index,q).filter((f:any)=>(!filter||f.attributeIds.includes(filter))).sort((a:any,b:any)=>sort==='title'?compareNames(a.title,b.title):String(a.shows[0]?.eventDateTime).localeCompare(String(b.shows[0]?.eventDateTime))),[index,q,filter,sort]),selection=paginate<any>(films,page,12);
  const attributes=[...new Set<string>((d?.films||[]).flatMap((f:any)=>f.attributeIds))].filter(x=>attributeNames[x]);
  if(!cinema)return <section className="live-section cinema-workspace"><h2>Cinematografe în {geo.locality?.name||'apropierea ta'}</h2><GeographicScopeField value={geoScope} onChange={setGeoScope}/><p className="live-empty">Nu avem un cinematograf din rețeaua conectată în raza de 15 km. Poți alege Toată România pentru a căuta în alt oraș.</p></section>;

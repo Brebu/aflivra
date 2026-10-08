@@ -1,0 +1,29 @@
+{
+  "packageId": "ro.aflivra.app",
+  "host": "aflivra.brebu.workers.dev",
+  "name": "Aflivra",
+  "launcherName": "Aflivra",
+  "display": "standalone",
+  "themeColor": "#0071e3",
+  "themeColorDark": "#0071e3",
+  "navigationColor": "#f5f5f7",
+  "navigationColorDark": "#f5f5f7",
+  "navigationDividerColor": "#f5f5f7",
+  "navigationDividerColorDark": "#f5f5f7",
+  "backgroundColor": "#f5f5f7",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://aflivra.brebu.workers.dev/icon-512.png",
+  "maskableIconUrl": "https://aflivra.brebu.workers.dev/icon-512.png",
+  "webManifestUrl": "https://aflivra.brebu.workers.dev/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {"enabled": true}
+  },
+  "orientation": "default",
+  "signingKey": {"path": "", "alias": ""},
+  "shortcuts": [],
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "targetSdkVersion": 36
+}

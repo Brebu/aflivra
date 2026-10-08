@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {publicUrl} from './media';
 import {env} from 'cloudflare:workers';
 import {getSource,SourceError} from './adapters';
+import {xmlTableRowSet} from './source-xml';
 import {matchesQuery,paginate,compareValues} from './query';
 import type {Loader,Loaded,SourceState} from './types';
 import {savedResourceMetadata} from './catalog-metadata';
@@ -14,8 +15,18 @@ export type ResourceSheet={name:string;columns:string[];rows:string[][];total:nu
 export type ResourceQuery={q:string;page:number;sheet:number;sort:number;desc:boolean;geographicContext?:GeographicContext};
 const cell=(v:unknown)=>v===null||v===undefined?'':typeof v==='object'?JSON.stringify(v):String(v);
 const byteLength=(v:string)=>new TextEncoder().encode(v).length;
-export function parseResource(bytes:Uint8Array,format:string):Loaded {
- const kind=format.toUpperCase().replace(/^\./,'');
+// Fișa publicată la sursă poartă formatele așa cum le scrie editorul: variante cu majuscule
+// lipsă („XSLX"), despărțite prin separatori („JSON, SOAP, XML") sau cu punct final („XML.").
+// Normalizarea ia primul jeton, curăță punctele și spațiile de la capete și aplică aliasurile
+// cunoscute; „ZIP, SHP" rămâne la absența onestă a cititorului, cu prima formă numită.
+const FORMAT_ALIASES:Record<string,string>={XSLX:'XLSX',XLSXL:'XLS',XLSL:'XLS'};
+const normalizeResourceFormat=(format:string)=>{
+ const token=format.toUpperCase().split(/[,;/ ]/)[0]||'';
+ const clean=token.replace(/^[.\s]+/,'').replace(/[.\s]+$/,'');
+ return FORMAT_ALIASES[clean]??clean;
+};
+export function parseResource(bytes:Uint8Array,format:string,title?:string):Loaded {
+ const kind=normalizeResourceFormat(format);
  if(kind==='PDF'){
   if(new TextDecoder().decode(bytes.slice(0,5))!=='%PDF-')throw new SourceError('Fișierul primit nu este un PDF valid.');
   if(bytes.length>1_400_000)return{publishedAt:null,data:{kind:'pdf',binary:bytes,size:bytes.length}};
@@ -33,7 +44,13 @@ export function parseResource(bytes:Uint8Array,format:string):Loaded {
   sheets=book.SheetNames.map(name=>{const array=utils.sheet_to_json<unknown[]>(book.Sheets[name],{header:1,defval:'',blankrows:false,raw:false});const header=array.shift()||[];let width=header.length;for(const row of array)width=Math.max(width,row.length);const columns=Array.from({length:width},(_,i)=>cell(header[i])||'Coloana '+(i+1));return{name,columns,rows:array.map(r=>columns.map((_,i)=>cell(r[i]))),total:array.length,truncated:false}});
  }else if(['XML','TXT','TEXT'].includes(kind)){
   const text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);if(/<!DOCTYPE|<!ENTITY/i.test(text))throw new SourceError('Documentul XML conține declarații care nu sunt acceptate.');
-  return{publishedAt:null,data:{kind:'text',text,format:kind,textComplete:true}};
+  if(kind==='XML'){
+   // Stratul de tabel: mulțimea dominantă de rânduri aplatizează XML-ul în foaie; fără ea,
+   // conținutul rămâne document integral, etichetat onest cu formatul lui.
+   const table=xmlTableRowSet(text);
+   if(table)sheets=[{name:table.name||title||'XML',columns:table.columns,rows:table.rows,total:table.rows.length,truncated:false}];
+   else return{publishedAt:null,data:{kind:'text',text,format:'XML',textComplete:true}};
+  }else return{publishedAt:null,data:{kind:'text',text,format:kind,textComplete:true}};
  }else throw new SourceError('Formatul '+kind+' nu are încă un cititor integrat. Metadatele rămân disponibile.');
  if(!sheets.some(s=>s.columns.length))throw new SourceError('Fișierul nu conține un tabel utilizabil.');
  return{data:{kind:'table',sheets},publishedAt:null};
@@ -56,13 +73,13 @@ export async function downloadResource(url:URL){
  let response:Response;for(let hop=0;;hop++){response=await fetchWithServerRetry(url,{redirect:'manual',signal:AbortSignal.timeout(25000),headers:{'User-Agent':'Aflivra/1.0 public-data-reader'}});if(![301,302,303,307,308].includes(response.status))break;const location=response.headers.get('location');if(!location||hop>=3)throw new SourceError('Redirecționarea fișierului nu a putut fi confirmată.');const next=new URL(location,url);if(next.protocol!=='https:'||next.username||next.password||!resourceHosts.has(next.hostname)||next.port&&next.port!=='443')throw new SourceError('Fișierul a fost mutat la un editor care trebuie conectat.');url=next}if(!response.ok)throw new SourceError('Fișierul public răspunde cu HTTP '+response.status+'.');if(Number(response.headers.get('content-length'))>25_000_000)throw new SourceError('Fișierul depășește capacitatea de 25 MB a importului. Documentul nu a fost scurtat.');
  const reader=response.body?.getReader();if(!reader)throw new SourceError('Fișierul nu are conținut.');const chunks:Uint8Array[]=[];let length=0;while(true){const {done,value}=await reader.read();if(done)break;length+=value.length;if(length>25_000_000){await reader.cancel();throw new SourceError('Fișierul depășește capacitatea de 25 MB a importului.')}chunks.push(value)}const bytes=new Uint8Array(length);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length}return bytes;
 }
-export const resourceLoader=(id:string):Loader=>({key:'resource:'+id,name:'Resursă publică · data.gov.ro',url:'https://data.gov.ro/api/3/action/resource_show?id='+id,version:'resource.complete-index.v5',ttl:86400,load:async()=>{
+export const resourceLoader=(id:string):Loader=>({key:'resource:'+id,name:'Resursă publică · data.gov.ro',url:'https://data.gov.ro/api/3/action/resource_show?id='+id,version:'resource.complete-index.v6',ttl:86400,load:async()=>{
  const snapshot=await savedResourceMetadata(id);let r:any,metadataNotice='';try{const meta=JSON.parse(await getSource('https://data.gov.ro/api/3/action/resource_show?id='+id,undefined,{timeoutMs:snapshot?3500:18000}));if(meta.success!==true||!meta.result?.url)throw new SourceError('Metadatele resursei nu sunt disponibile.');r=meta.result}catch(error){if(!snapshot)throw error;r=snapshot.resource;metadataNotice='Fișier citit folosind fișa din inventarul verificat; API-ul metadatelor nu a răspuns. Fișa a trecut verificarea SHA-256.'}
  const publishedAt=r.last_modified||r.created||null,title=String(r.name||id);
  if(r.datastore_active){try{const d=JSON.parse(await getSource('https://data.gov.ro/api/3/action/datastore_search?'+new URLSearchParams({resource_id:id,limit:'0'}),undefined,{timeoutMs:snapshot?3500:18000}));if(d.success!==true||!Array.isArray(d.result?.fields)||!Number.isInteger(d.result.total))throw new SourceError('Structura tabelului public nu este disponibilă.');return{publishedAt,data:{kind:'datastore',title,sourceUrl:r.url,columns:d.result.fields.map((f:any)=>String(f.id)),total:d.result.total,metadataNotice}}}catch{metadataNotice+=' Tabelul API nu a răspuns; verificăm fișierul publicat.'}}
  const url=new URL(r.url);if(url.protocol==='http:'&&url.hostname==='data.gov.ro')url.protocol='https:';
  const mediaFormat=String(r.format||'').toUpperCase();if(/^(?:JPG|JPEG|PNG|WEBP|GIF|MP4|WEBM|OGV)$/.test(mediaFormat)){const mediaUrl=publicUrl(url.href);if(!mediaUrl)throw new SourceError('Materialul media nu are o adresă HTTPS utilizabilă.');return{publishedAt,data:{kind:'media',title,sourceUrl:url.href,media:[{kind:/MP4|WEBM|OGV/.test(mediaFormat)?'video':'image',url:mediaUrl,caption:title,sourceUrl:'https://data.gov.ro/dataset/'+String(r.package_id||'')}]}}}
- const parsed=parseResource(await downloadResource(url),String(r.format||url.pathname.split('.').at(-1)||''));const data=parsed.data.kind==='table'?await indexTable(id,parsed.data,publishedAt):parsed.data.binary||parsed.data.kind==='text'&&byteLength(parsed.data.text)>1_000_000?await indexDocument(id,parsed.data,publishedAt):parsed.data;return{publishedAt,data:{...data,title,sourceUrl:url.href,metadataNotice}};
+ const parsed=parseResource(await downloadResource(url),String(r.format||url.pathname.split('.').at(-1)||''),title);const data=parsed.data.kind==='table'?await indexTable(id,parsed.data,publishedAt):parsed.data.binary||parsed.data.kind==='text'&&byteLength(parsed.data.text)>1_000_000?await indexDocument(id,parsed.data,publishedAt):parsed.data;return{publishedAt,data:{...data,title,sourceUrl:url.href,metadataNotice}};
 }});
 export function selectResourceRows(rows:string[][],query:ResourceQuery){const found=rows.filter(r=>matchesQuery(r,query.q));if(query.sort>=0)found.sort((a,b)=>compareValues(a[query.sort],b[query.sort])*(query.desc?-1:1));return paginate(found,query.page,50)}
 export async function resourceSheetRows(d:any,sheetIndex:number){

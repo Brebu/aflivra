@@ -62,8 +62,12 @@ try{
  const renderLocation=()=>{const result=globalThis.__geoHost.render(()=>location.LocationProvider({children:null}));globalThis.__geoHost.commit();return result.props.value};
  let current=renderLocation();assert.equal(current.city.name,'București');assert.equal(current.hasLocal,false);assert.equal(watches,1);await tick();
  const send=(id,lat,lon)=>callbacks.get(id).ok({coords:{latitude:lat,longitude:lon,accuracy:15}});
- send(1,44.4268,26.1025);current=renderLocation();assert.equal(current.mode,'device');assert.equal(current.center.lat,44.4268);const firstKey=current.key;
- send(1,45.6579,25.6012);current=renderLocation();assert.notEqual(current.key,firstKey);assert.equal(current.city.name,'Brașov');assert(!stored.get('aflivra.location.v1').includes('latitude'),'Precise device coordinates must not be persisted');
+ send(1,44.4268,26.1025);current=renderLocation();assert.equal(current.mode,'device');assert.equal(current.center.lat,44.4268);const firstKey=current.key,firstArea=current.areaKey;assert.equal(typeof firstArea,'string','the provider must publish a semantic area key');
+ // The area-key reset contract: a ~200 m fix crosses one 3-decimal (~100 m) cell —
+ // the cell key moves for radius/map consumers, but the resolved locality (and so
+ // the area key) stays, and area-bound state must NOT reset on it.
+ send(1,44.4288,26.1025);current=renderLocation();assert.equal(current.city.name,'București');assert.notEqual(current.key,firstKey);assert.equal(current.areaKey,firstArea,'a same-locality cell drift keeps the semantic area key');
+ send(1,45.6579,25.6012);current=renderLocation();assert.notEqual(current.key,firstKey);assert.notEqual(current.areaKey,firstArea,'a real locality change re-keys the area');assert.equal(current.city.name,'Brașov');assert(!stored.get('aflivra.location.v1').includes('latitude'),'Precise device coordinates must not be persisted');
  current.selectCity({name:'Cluj-Napoca',lat:46.7712,lon:23.6236});current=renderLocation();assert.equal(current.mode,'manual');assert.equal(current.position,null);assert(cleared.includes(1));send(1,44.4268,26.1025);current=renderLocation();assert.equal(current.city.name,'Cluj-Napoca','A late GPS callback must not overwrite a manual choice');
  current.clear();current=renderLocation();assert.equal(current.city.name,'București');assert.equal(current.hasLocal,false);current.request();callbacks.get(watches).error({code:1});current=renderLocation();assert.equal(current.hasLocal,false);assert.equal(current.city.name,'București');assert(current.error.includes('nu a fost permisă'));
  globalThis.__geoHost.destroy();
@@ -77,12 +81,15 @@ try{
  pickerInput().props.onChange({target:{value:'Unknown incomplete place'}});assert.equal(pickerApply().props.disabled,true);pickerApply().props.onClick();assert.equal(selections.length,2);globalThis.__geoHost.destroy();delete globalThis.__pickerGeo;
  console.log('Actual city picker verified with the full local catalog: typing performs no location changes, Apply/Enter commits once, and invalid text cannot apply.');
 
- const scopedHost=host();globalThis.__scopedHost=scopedHost;globalThis.__scopedLocation={key:'manual:București'};
+ const scopedHost=host();globalThis.__scopedHost=scopedHost;globalThis.__scopedLocation={key:'manual:București:44.4268:26.1025',areaKey:'manual:București|București'};
  const scoped=await compile('location-scope','app/location-scope.tsx',s=>s.replace("import {useRef,useState} from 'react';",'const {useRef,useState}=globalThis.__scopedHost;').replace("import {useLocation} from './location';",'const useLocation=()=>globalThis.__scopedLocation;').replace("import {SelectField} from './select-field';",'const SelectField=()=>null;'));
  const renderScoped=()=>scopedHost.render(()=>({page:scoped.useLocationState(0),scope:scoped.useGeographicScope(),selection:scoped.useLocationState(null)}));
  let localState=renderScoped();localState.page[1](7);localState.scope[1]('national');localState.selection[1]({city:'București'});const delayedSetter=localState.selection[1];localState=renderScoped();assert.equal(localState.page[0],7);
- globalThis.__scopedLocation={key:'manual:Cluj-Napoca'};localState=renderScoped();assert.equal(localState.page[0],0);assert.equal(localState.scope[0],'context');assert.equal(localState.selection[0],null);delayedSetter({city:'București'});assert.equal(renderScoped().selection[0],null,'A delayed result may not reopen a previous-city selection');localState.selection[1]({city:'Cluj-Napoca'});localState.page[1](p=>p+1);localState.page[1](p=>p+1);delayedSetter({city:'București'});localState=renderScoped();assert.equal(localState.selection[0].city,'Cluj-Napoca','Delayed old-city callbacks must not discard a new-city selection');assert.equal(localState.page[0],2,'Functional page updates must compose');scopedHost.destroy();delete globalThis.__scopedHost;delete globalThis.__scopedLocation;
- console.log('Actual location-bound state verified: pages, geographic scopes and open selections reset in the first new-city render; delayed previous-city updates remain hidden.');
+ // Same-locality drift: the cell part of the key moves, the semantic area stays —
+ // pages, scopes and open selections survive the background fix.
+ globalThis.__scopedLocation={key:'manual:București:44.4288:26.1025',areaKey:'manual:București|București'};localState=renderScoped();assert.equal(localState.page[0],7,'a same-locality cell drift keeps the page');assert.equal(localState.scope[0],'national','a same-locality cell drift keeps the chosen scope');assert.equal(localState.selection[0].city,'București','a same-locality cell drift keeps the open selection');
+ globalThis.__scopedLocation={key:'manual:Cluj-Napoca:46.7712:23.6236',areaKey:'manual:Cluj-Napoca|Cluj'};localState=renderScoped();assert.equal(localState.page[0],0);assert.equal(localState.scope[0],'context');assert.equal(localState.selection[0],null);delayedSetter({city:'București'});assert.equal(renderScoped().selection[0],null,'A delayed result may not reopen a previous-area selection');localState.selection[1]({city:'Cluj-Napoca'});localState.page[1](p=>p+1);localState.page[1](p=>p+1);delayedSetter({city:'București'});localState=renderScoped();assert.equal(localState.selection[0].city,'Cluj-Napoca','Delayed previous-area callbacks must not discard a new-area selection');assert.equal(localState.page[0],2,'Functional page updates must compose');scopedHost.destroy();delete globalThis.__scopedHost;delete globalThis.__scopedLocation;
+ console.log('Actual location-bound state verified: pages, geographic scopes and open selections reset on the first new-AREA render, survive a same-locality cell drift, and reject delayed previous-area updates.');
 
 
  const h=host();globalThis.__sourceHost=h;

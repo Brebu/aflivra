@@ -65,7 +65,7 @@ for(const name of ['records','text','media','query','source-xml','source-html','
  output=output.replace(/import\('\.\/([a-z][a-z0-9-]*)'\)/g,(_,p)=>"import('./"+p+".mjs')");for(const pkg of ['xlsx','gtfs-realtime-bindings'])output=output.replace("from '"+pkg+"'","from '"+pathToFileURL(require.resolve(pkg)).href+"'");
  await writeFile(join(temp,name+'.mjs'),output);
 }
-const companyRegistriesModule=await import(pathToFileURL(join(temp,'company-registries.mjs'))),adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs'))),justiceModule=await import(pathToFileURL(join(temp,'justice.mjs'))),trainsModule=await import(pathToFileURL(join(temp,'trains.mjs'))),flightsModule=await import(pathToFileURL(join(temp,'flights.mjs'))),housingModule=await import(pathToFileURL(join(temp,'housing.mjs')));
+const companyRegistriesModule=await import(pathToFileURL(join(temp,'company-registries.mjs'))),adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs'))),justiceModule=await import(pathToFileURL(join(temp,'justice.mjs'))),trainsModule=await import(pathToFileURL(join(temp,'trains.mjs'))),flightsModule=await import(pathToFileURL(join(temp,'flights.mjs'))),housingModule=await import(pathToFileURL(join(temp,'housing.mjs'))),resourceModule=await import(pathToFileURL(join(temp,'resources.mjs')));
 const feedHosts=Object.entries(feedsModule.feedConfigs).map(([key])=>new URL(feedsModule.feedConfigs[key].url).host);
 const lawQuery={title:'CODUL CIVIL',text:'',number:'',year:'',page:0,full:false};
 // Familia Tranzy este poartă de mediu (TRANZY_API_KEY); fixture-urile oglindesc
@@ -144,6 +144,7 @@ const ancpiXlsx=()=>{const XLSX=require('xlsx');const rows=[['JUDET','LUNA_RAPOR
  for(const [ci,county] of anlCounties.entries())for(const [ti,type] of ancpiTypes.entries())rows.push([county,'31.01.2024',type,'Ipoteca înscrisă',(county==='BUCUREŞTI'?30:8)+((ci*5+ti*3)%20)]);
  const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),'ipoteci');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
 const ancpiBody=()=>({success:true,result:{resources:[{name:'Numarul imobilelor ipotecate in cartea funciara ianuarie 2024',url:'https://data.gov.ro/dataset/ancpi-ipoteci/resource/ipoteci-de-verificare-ianuarie-2024.xlsx',format:'XLSX',last_modified:'2024-02-05T00:00:00'}]}});
+const xmlResourceUuid='2f6a4c1e-8b3d-4e57-9c2a-6d1f0b8e7a3c';
 const families=[
  {family:'weather/open-meteo',routeName:'weather',route:'/api/weather?lat=44.43&lon=26.1',host:'api.open-meteo.com',allowed:['api.open-meteo.com'],key:()=>weatherModule.forecastLoader(44.43,26.1).key,loader:()=>weatherModule.forecastLoader(44.43,26.1)},
  {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org','data.gov.ro'],key:()=>companyRegistriesModule.companyLoader('427282').key,loader:()=>companyRegistriesModule.companyLoader('427282')},
@@ -193,8 +194,13 @@ const families=[
   // avaria unei instituții degradează onest reuniunea, nu o ascunde.
   {family:'events/search',routeName:'events',route:'/api/events?q=verificare',host:'operacluj.ro',allowed:['teatrul-odeon.ro','operacluj.ro'],scenarios:['http500','http429','timeout','malformed','invalid','success'],scenarioRoutes:{invalid:'/api/events?q='+('x'.repeat(201))},key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj'))},
   {family:'events/operanationalacluj',routeName:'events',route:'/api/events?venue=operacluj',host:'operacluj.ro',allowed:['operacluj.ro'],key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj'))},
-  {family:'housing/anl',routeName:'anl',route:'/api/anl',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.anlLoader.key,loader:()=>housingModule.anlLoader},
-  {family:'housing/ancpi',routeName:'ancpi',route:'/api/ancpi',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.ancpiLoader.key,loader:()=>housingModule.ancpiLoader}];
+   {family:'housing/anl',routeName:'anl',route:'/api/anl',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.anlLoader.key,loader:()=>housingModule.anlLoader},
+   {family:'housing/ancpi',routeName:'ancpi',route:'/api/ancpi',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.ancpiLoader.key,loader:()=>housingModule.ancpiLoader},
+   // Resursa publică CKAN cu export XML: fișa metadatelor și fișierul se citesc pe rutele
+   // proprii ale catalogului, iar celulele urmăresc stratul de tabel — rândul dominant,
+   // atributele + copiii pe coloane cu punct, copiii repețiți enumerați, netabelabilul
+   // rămas document, XXE respins înainte de aplatizare și variantele de format publicate.
+   {family:'resource/xml-table',routeName:'resource',route:'/api/resource?id='+xmlResourceUuid,host:'data.gov.ro',allowed:['data.gov.ro'],scenarios:['http500','http429','timeout','malformed','xxe','format-zip-shp','success','success-dots','success-repeats','success-document','success-two-lists','success-tie','success-sections','format-xslx','format-json-soap','format-xml-dot'],key:()=>resourceModule.resourceLoader(xmlResourceUuid).key,loader:()=>resourceModule.resourceLoader(xmlResourceUuid)}];
 if(live){
  let routes=null;
  try{routes=await Promise.all(families.map(async family=>[family.family,await (async()=>{const init=family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};return fetch(base+family.route,{...init,signal:AbortSignal.timeout(60000)})})()]))}catch(error){console.error('Serverul local de dezvoltare nu răspunde la '+base+' — pornit cu „npm start” înainte de --live. Detaliu: '+error.message);process.exitCode=2}
@@ -241,7 +247,7 @@ if(live){
   if(ourBug){console.error('Verdict our-bug: sursa răspunde corect direct sau workerul nostru publicat eșuează, dar ruta raportează eroarea sursei. Diferențele de mai sus sunt bug-ul nostru.');process.exitCode=1}
  }
 }else{
-    for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts'],['tranzy-live','app/api/tranzy-live/route.ts'],['flights','app/api/flights/route.ts'],['flight-board','app/api/flight-board/route.ts'],['seed-bia','app/api/seed/bia/route.ts'],['seed-flights','app/api/seed/flights/route.ts'],['anl','app/api/anl/route.ts'],['ancpi','app/api/ancpi/route.ts']]){
+    for(const [name,file] of [['weather','app/api/weather/route.ts'],['company','app/api/company/route.ts'],['legal','app/api/legal/route.ts'],['domain','app/api/domain/route.ts'],['catalog','app/api/catalog/route.ts'],['transport','app/api/transport/route.ts'],['directory','app/api/directory/route.ts'],['lawyers','app/api/lawyers/route.ts'],['localities','app/api/localities/route.ts'],['events','app/api/events/route.ts'],['cinema','app/api/cinema/route.ts'],['story','app/api/story/route.ts'],['transport-live','app/api/transport-live/route.ts'],['notaries','app/api/notaries/route.ts'],['experts','app/api/experts/route.ts'],['trains','app/api/trains/route.ts'],['tranzy-live','app/api/tranzy-live/route.ts'],['flights','app/api/flights/route.ts'],['flight-board','app/api/flight-board/route.ts'],['seed-bia','app/api/seed/bia/route.ts'],['seed-flights','app/api/seed/flights/route.ts'],['resource','app/api/resource/route.ts'],['anl','app/api/anl/route.ts'],['ancpi','app/api/ancpi/route.ts']]){
   let source=await readFile(join(root,file),'utf8');
   source=source
    .replace("import network from '@/public/transit/network.json';",'const network='+await readFile(join(root,'public/transit/network.json'),'utf8')+';')
@@ -255,7 +261,7 @@ if(live){
   output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
   await writeFile(join(temp,'route-'+name+'.mjs'),output);
  }
-   const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains','tranzy-live','flights','flight-board','seed-bia','seed-flights','anl','ancpi'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
+    const routes={};for(const name of ['weather','company','legal','domain','catalog','transport','directory','lawyers','localities','events','cinema','story','transport-live','notaries','experts','trains','tranzy-live','flights','flight-board','seed-bia','seed-flights','resource','anl','ancpi'])routes[name]=await import(pathToFileURL(join(temp,'route-'+name+'.mjs')));
  const {zipSync,strToU8}=require('fflate');
  const gtfsBytes=()=>{const rows=(head,list)=>head+'\n'+list.join('\n')+'\n';const stops=Array.from({length:12},(_,i)=>'S'+i+',Stația de verificare '+i+',Descriere publică,'+(44.40+i/100)+','+(26.10+i/100)),routeRows=Array.from({length:12},(_,i)=>'R'+i+',A0,'+(100+i)+',Linia de verificare '+i+','+(i%2?'3':'0'));
   return zipSync({'agency.txt':strToU8(rows('agency_id,agency_name,agency_url',['A0,Operatorul de test,https://example.test'])),'stops.txt':strToU8(rows('stop_id,stop_name,stop_desc,stop_lat,stop_lon',stops)),'routes.txt':strToU8(rows('route_id,agency_id,route_short_name,route_long_name,route_type',routeRows)),'calendar.txt':strToU8(rows('service_id,monday,tuesday,start_date,end_date',['A0,1,1,20260101,20261231']))})};
@@ -304,7 +310,48 @@ if(live){
   const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),kind==='traducatori'?'Sheet2':'Sheet1');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
  const justiceResourceName={notari:'Notari 23.01.2025','experti-judiciari':'Experti judiciari 23.01.2025','experti-tehnici':'Lista experților tehnici atestați până la data de 08 iunie 2026.xlsx',traducatori:'Traducatori 23.01.2025'};
  const justiceBody=kind=>({success:true,result:{resources:[{name:justiceResourceName[kind],url:'https://data.gov.ro/dataset/fixture/resource/export-de-verificare-'+kind+'.xlsx',format:'.xlsx',last_modified:'2026-06-08T00:00:00'}]}});
- const sirutaMeta=()=>({success:true,result:{resources:[{name:'SIRUTA 2026 semestrul I',url:'https://data.gov.ro/dataset/siruta_s1-2026/resource/siruta-de-verificare.csv',format:'CSV',last_modified:'2026-03-01T00:00:00'}]}});
+  const sirutaMeta=()=>({success:true,result:{resources:[{name:'SIRUTA 2026 semestrul I',url:'https://data.gov.ro/dataset/siruta_s1-2026/resource/siruta-de-verificare.csv',format:'CSV',last_modified:'2026-03-01T00:00:00'}]}});
+  // Cititorul tabular al resurselor XML (bug-ul 3): fixture-urile oglindesc formele publicate
+  // ale exporturilor data.gov.ro — contracte cu atribute pe rând și copii terminali (CNAS/ANAF),
+  // adâncimi pe trei niveluri cu conținut de dincolo de limită lămurit în text, copii repețiți
+  // enumerați determinist, XML-ul netabelabil rămâne document onest, iar declarațiile XXE se
+  // resping înainte de orice aplatizare. Variantele de format urmează fișa publicată la sursă
+  // („XSLX", „JSON, SOAP, XML", „XML.", „ZIP, SHP") și se normalizează la cititorul potrivit.
+  const xmlTableFixture=()=>['<?xml version="1.0" encoding="UTF-8"?>','<Contracte>',...[1,2,3].map(n=>' <Contract id="'+n+'" tip="'+(n===1?'FARM':'SPITAL')+'" status="activ"><Furnizor>Furnizor public de verificare '+n+'</Furnizor><CUI>'+(10000+n)+'</CUI><Localitate>'+(n===2?'Cluj-Napoca':'București')+'</Localitate><Adresa><Strada>Str. Verificării '+n+'</Strada><Judet>'+(n===2?'Cluj':'București')+'</Judet></Adresa></Contract>'),'</Contracte>'].join('\n');
+  const xmlDotsFixture=()=>['<?xml version="1.0" encoding="UTF-8"?>','<Unitati>',
+   ' <Unitate codU="U1"><Denumire>Școala de verificare 1</Denumire><Adresa><Judet><Denumire>Cluj</Denumire><Cod>CJ</Cod></Judet></Adresa><Contact><Telefon tip="mobil">0722</Telefon></Contact><Istoric><Intrare>Admis în 2024</Intrare></Istoric><Nota><Anexa><Corp><Inner>text interior al corpusului</Inner></Corp></Anexa></Nota></Unitate>',
+   ' <Unitate codU="U2"><Denumire>Școala de verificare 2</Denumire><Adresa><Judet><Denumire>Ilfov</Denumire><Cod>IF</Cod></Judet></Adresa><Contact><Telefon tip="fix">0264</Telefon></Contact><Istoric><Intrare>Admis în 2025</Intrare></Istoric><Nota><Anexa><Corp>Corpus terminal de verificare</Corp></Anexa></Nota></Unitate>',
+   '</Unitati>'].join('\n');
+  const xmlRepeatsFixture=()=>['<Randuri>',
+   ' <Rand id="1"><Telefon>0722</Telefon><Telefon>0744</Telefon><Email>a@example.ro</Email></Rand>',
+   ' <Rand id="2"><Telefon>0760</Telefon><Email>b@example.ro</Email><Email>c@example.ro</Email><Email>d@example.ro</Email></Rand>',
+   ' <Rand id="3"><Telefon>0761</Telefon><Email>e@example.ro</Email></Rand>',
+   '</Randuri>'].join('\n');
+  const xmlDocumentFixture=()=>['<Comunicat>',' <Titlu>Comunicat public de verificare</Titlu>',' <Cuprins>',
+   '  <Articol nr="1"><Denumire>Dispoziții generale</Denumire><Text>Primul paragraf de verificare.</Text></Articol>',
+   '  <Articol nr="2"><Denumire>Măsuri</Denumire><Text>Al doilea paragraf de verificare.</Text></Articol>',
+   '  <Nota>Notă finală de verificare.</Nota>',' </Cuprins>','</Comunicat>'].join('\n');
+  const xmlTwoListsFixture=()=>['<Registrul>',' <ListaA>'+['a1','a2','a3','a4','a5'].map(id=>'<Rand id="'+id+'"/>').join('')+'</ListaA>',' <ListaB>'+['b1','b2','b3'].map(id=>'<Element id="'+id+'"/>').join('')+'</ListaB>','</Registrul>'].join('\n');
+  const xmlTieFixture=()=>['<Registrul>',' <ListaA><Rand id="a"/><Rand id="b"/></ListaA>',' <ListaB><Element id="c"/><Element id="d"/></ListaB>','</Registrul>'].join('\n');
+  const xmlSectionsFixture=()=>['<Registru>',' <Sectiune judet="Cluj"><Rand id="c1"/><Rand id="c2"/><Rand id="c3"/><Rand id="c4"/></Sectiune>',' <Sectiune judet="Ilfov"><Rand id="i1"/><Rand id="i2"/><Rand id="i3"/></Sectiune>',' <Alta><Rand id="solo"/></Alta>','</Registru>'].join('\n');
+  const xmlXxeFixture=()=>'<!DOCTYPE Contracte [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><Contracte><Contract id="1"><Denumire>&xxe;</Denumire></Contract></Contracte>';
+  const resourceXmlFormats={success:'XML','success-dots':'XML','success-repeats':'XML','success-document':'XML','success-two-lists':'XML','success-tie':'XML','success-sections':'XML','xxe':'XML','format-xslx':'XSLX','format-json-soap':'JSON, SOAP, XML','format-xml-dot':'XML.','format-zip-shp':'ZIP, SHP'};
+  // Fișa publicată la sursă poartă varianta de format așa cum o publică editorul; URL-ul rămâne
+  // pe gazda agreată a catalogului, iar descărcarea servește conținutul fiecărei celule.
+  const resourceXmlMeta=scenario=>({success:true,result:{name:'Contracte de verificare XML',url:'https://data.gov.ro/dataset/contracte-verificare/resource/export-de-verificare.xml',format:resourceXmlFormats[scenario]||'XML',last_modified:'2026-10-01T00:00:00'}});
+  const resourceXmlFixture=scenario=>{
+   if(scenario==='success'||scenario==='format-xml-dot')return new TextEncoder().encode(xmlTableFixture());
+   if(scenario==='format-xslx'){const XLSX=require('xlsx');const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet([['Nume furnizor','Cod fiscal'],['Furnizor public de verificare','12346']]),'Export');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))}
+   if(scenario==='format-json-soap')return new TextEncoder().encode(JSON.stringify([{Numar:1,Nume:'Registru de verificare'}]));
+   if(scenario==='format-zip-shp')return new TextEncoder().encode('PK\u0003\u0004 arhivă de verificare fără cititor integrat');
+   if(scenario==='xxe')return new TextEncoder().encode(xmlXxeFixture());
+   if(scenario==='success-dots')return new TextEncoder().encode(xmlDotsFixture());
+   if(scenario==='success-repeats')return new TextEncoder().encode(xmlRepeatsFixture());
+   if(scenario==='success-two-lists')return new TextEncoder().encode(xmlTwoListsFixture());
+   if(scenario==='success-tie')return new TextEncoder().encode(xmlTieFixture());
+   if(scenario==='success-sections')return new TextEncoder().encode(xmlSectionsFixture());
+   return new TextEncoder().encode(xmlDocumentFixture())};
+
  const sirutaCsv=()=>{const rows=['SIRUTA;DENLOC;NIV;JUD;SIRSUP;CODP;MED','40;București;1;40;0;0;1'];for(let i=1;i<=1001;i++)rows.push(String(10000+i)+';Localitatea de verificare '+i+';3;40;40;'+String(100000+i).slice(-6)+';'+(i%2?'1':'2'));return rows.join('\r\n')};
  const ifepPage=()=>{const rights='Drept de concluzii la: Judecătorii, Tribunale, Curți de Apel';const card='<a href=\'LawyerFile.aspx?RecordId=fixture-1&Panel=public\'><p><span title="Ultima actualizare"><em>05-10-2026 12:12</em></span><span class="pop" data-html="true" data-content=\'<p>'+rights+'</p>\'><img src="level.gif"></span><span>Fișă</span></p><h4>Avocat definitiv <font>POPESCU Ana</font>, Baroul Cluj [inactiv]</h4><p>Sediu principal: Cluj-Napoca, Strada Exemplu nr. 3</p><p>0700 000 000</p></a>';
   return new Response('<html><body><span id="MainContent_PagerTop_lblRecords">Înregistrări 1–1 din 40000</span><span id="MainContent_PagerTop_lblPages">Pagina 1 din 2</span>'+card+'</body></html>',{headers:{'content-type':'text/html'}})};
@@ -388,6 +435,10 @@ if(live){
     // poartă avaria celulei, iar celălalt calendar al registrului servește în continuare
     // prin propriul fixture — reuniunea degradează onest, nu dispare.
     if(family.family==='events/search'&&host==='teatrul-odeon.ro')return odeonPage();
+    // Familia resursei XML servește fișa și conținutul per celulă de formă: fișa poartă
+    // varianta de format publicată de editor, iar fișierul servește forma XML a celulei —
+    // avariile rămân pe clasificarea generală, doar celulele de formă își au fixture-ul propriu.
+    if(family.family==='resource/xml-table'&&host==='data.gov.ro'&&(scenario.startsWith('success')||scenario.startsWith('format')||scenario==='xxe'))return href.includes('resource_show')?Response.json(resourceXmlMeta(scenario)):new Response(resourceXmlFixture(scenario),{headers:{'content-type':'application/xml'}});
     // Registrul CKAN al firmelor se citește de rută în paralel cu ANAF: adresa are propria ei
     // gazdă, deci fixture-ul CNAS se servește pe gazdă, înaintea clasificării pe familia-gazdă.
     if(family.family==='company/anaf'&&host==='data.gov.ro')return href.includes('package_show')?Response.json(companyCnasMeta()):new Response(companyCnasXlsx(href),{headers:{'content-type':'application/vnd.ms-excel'}});
@@ -967,7 +1018,105 @@ if(live){
      if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
      if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată|Raportul ANCPI/,label+': plicul de eroare standard sau structura respinsă');
      assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
-  };
+    if(family.family==='resource/xml-table'){
+     const attempts=hostCount('data.gov.ro');
+     if(scenario==='success'){
+      assert.equal(payload.status,'fresh',label+': stare proaspătă — primit: '+payload.status+', eroare: '+payload.error);
+      assert.equal(payload.data.kind,'table',label+': exportul XML cu rând dominant devine tabel, nu document');
+      assert.equal(payload.data.title,'Contracte de verificare XML',label+': titlul fișei publicate se păstrează');
+      assert.equal(payload.data.sheets.length,1,label+': un singur set dominant, fără foi inventate');
+      assert.equal(payload.data.sheets[0].name,'Contract',label+': foia poartă numele local al rândului dominant');
+      assert.deepEqual(payload.data.sheets[0].columns,['@id','@tip','@status','Furnizor','CUI','Localitate','Adresa.Strada','Adresa.Judet'],label+': atributele rândului și copiii devin coloane în ordinea documentului');
+      assert.deepEqual(payload.data.sheets[0].rows,[['1','FARM','activ','Furnizor public de verificare 1','10001','București','Str. Verificării 1','București'],['2','SPITAL','activ','Furnizor public de verificare 2','10002','Cluj-Napoca','Str. Verificării 2','Cluj'],['3','SPITAL','activ','Furnizor public de verificare 3','10003','București','Str. Verificării 3','București']],label+': rândurile servite integral, cu textul terminal al copiilor');
+      assert.equal(payload.data.sheets[0].total,3,label+': totalul rândurilor dominante');
+      assert.equal(payload.data.navigation.total,3,label+': navigația păstrează totalul setului');
+      assert.equal(payload.data.indexed,true,label+': tabelul importat integral, niciodată scurtat');
+      assert.equal(payload.data.sheets[0].chunks,undefined,label+': pagina servită nu dezvăluie cheile interne de stocare');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='success-dots'){
+      assert.equal(payload.data.kind,'table',label+': structura pe niveluri devine tabel');
+      assert.equal(payload.data.sheets[0].name,'Unitate',label+': rândul dominant este unitatea');
+      assert.deepEqual(payload.data.sheets[0].columns,['@codU','Denumire','Adresa.Judet.Denumire','Adresa.Judet.Cod','Contact.Telefon.@tip','Contact.Telefon','Istoric.Intrare','Nota.Anexa.Corp'],label+': coloanele urmează drumurile cu punct până la trei niveluri, atributele înaintea textului elementului');
+      assert.equal(payload.data.sheets[0].rows[0][6],'Admis în 2024',label+': frunza de la al treilea nivel păstrează textul ei');
+      assert.equal(payload.data.sheets[0].rows[0][7],'text interior al corpusului',label+': conținutul de dincolo de limită se lămurește în textul coloanei de la nivelul trei');
+      assert.equal(payload.data.sheets[0].rows[1][7],'Corpus terminal de verificare',label+': frunza terminală de la nivelul trei rămâne valoarea coloanei');
+      assert.equal(payload.data.sheets[0].rows[0][4],'mobil',label+': atributul copilului își are coloana lui, marcată');
+      assert(!payload.data.sheets[0].columns.includes('Nota.Anexa.Corp.Inner'),label+': drumul de dincolo de al treilea nivel nu devine coloană');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='success-repeats'){
+      assert.equal(payload.data.kind,'table',label+': rândurile cu copii repețiți devin tabel');
+      assert.equal(payload.data.sheets[0].name,'Rand',label+': rândul dominant');
+      assert.deepEqual(payload.data.sheets[0].columns,['@id','Telefon[1]','Telefon[2]','Email[1]','Email[2]','Email[3]'],label+': copiii repețiți se enumerează determinist până la maximul publicat');
+      assert.deepEqual(payload.data.sheets[0].rows,[['1','0722','0744','a@example.ro','',''],['2','0760','','b@example.ro','c@example.ro','d@example.ro'],['3','0761','','e@example.ro','','']],label+': fiecare valoare stă exact într-o coloană, restul rămân goale');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='success-document'){
+      assert.equal(payload.data.kind,'text',label+': XML-ul fără un rând dominant rămâne document, fără tabel inventat');
+      assert.equal(payload.data.format,'XML',label+': documentul rămâne etichetat onest cu formatul lui');
+      assert(payload.data.text.includes('Primul paragraf de verificare.'),label+': textul integral se păstrează');
+      assert.equal(payload.data.textComplete,true,label+': documentul servit complet');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='success-two-lists'){
+      assert.equal(payload.data.kind,'table',label+': listele concurente aleg cea dominantă, cea cu mai multe rânduri');
+      assert.equal(payload.data.sheets[0].name,'Rand',label+': numele setului dominant');
+      assert.equal(payload.data.sheets[0].total,5,label+': cele cinci rânduri ale listei dominante');
+      assert.deepEqual(payload.data.sheets[0].columns,['@id'],label+': doar coloanele publicate de rând');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='success-tie'){
+      assert.equal(payload.data.kind,'text',label+': la ex-aequo nu se alege arbitrar — documentul onest servește');
+      assert(payload.data.text.includes('ListaA'),label+': textul integral al XML-ului cu listele egale se păstrează');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='success-sections'){
+      assert.equal(payload.data.kind,'table',label+': secțiunile repetitive se reunesc într-un singur set de rânduri');
+      assert.equal(payload.data.sheets[0].name,'Rand',label+': rândul dominant comun secțiunilor');
+      assert.equal(payload.data.sheets[0].total,7,label+': cele șapte rânduri ale secțiunilor dominante, reunite');
+      assert(payload.data.sheets[0].rows.every(row=>row[0]!=='solo'),label+': rândul solitar al listei nedominante rămâne în afara setului');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='xxe'){
+      assert.equal(payload.status,'unavailable',label+': declarațiile periculoase respinse onest');
+      assert.equal(payload.data,null,label+': fără date din documentul cu declarații');
+      assert.match(e,/Documentul XML conține declarații care nu sunt acceptate/,label+': respingerea XXE documentată în română');
+      assert.equal(attempts,2,label+': fișa și fișierul citite, declarația respinsă la analiză')}
+     else if(scenario==='format-xslx'){
+      assert.equal(payload.data.kind,'table',label+': varianta „XSLX" publicată de editor se normalizează la cititorul Excel');
+      assert.equal(payload.data.sheets[0].name,'Export',label+': foia registului Excel servită cu numele ei');
+      assert.deepEqual(payload.data.sheets[0].columns,['Nume furnizor','Cod fiscal'],label+': coloanele publicate se păstrează');
+      assert.deepEqual(payload.data.sheets[0].rows,[['Furnizor public de verificare','12346']],label+': rândul registrului servit integral');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='format-json-soap'){
+      assert.equal(payload.data.kind,'table',label+': varianta „JSON, SOAP, XML" se normalizează la cititorul JSON');
+      assert.equal(payload.data.sheets[0].name,'Date',label+': foia implicită a cititorului JSON');
+      assert.deepEqual(payload.data.sheets[0].columns,['Numar','Nume'],label+': câmpurile publicate se păstrează');
+      assert.deepEqual(payload.data.sheets[0].rows,[['1','Registru de verificare']],label+': rândul servit integral');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='format-xml-dot'){
+      assert.equal(payload.data.kind,'table',label+': varianta „XML." cu punct final se normalizează la cititorul XML');
+      assert.equal(payload.data.sheets[0].name,'Contract',label+': rândul dominant al exportului XML');
+      assert.equal(payload.data.sheets[0].columns.length,8,label+': coloanele aplatizate ale contractului');
+      assert.deepEqual(payload.data.sheets[0].rows,[['1','FARM','activ','Furnizor public de verificare 1','10001','București','Str. Verificării 1','București'],['2','SPITAL','activ','Furnizor public de verificare 2','10002','Cluj-Napoca','Str. Verificării 2','Cluj'],['3','SPITAL','activ','Furnizor public de verificare 3','10003','București','Str. Verificării 3','București']],label+': rândurile servite integral');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='format-zip-shp'){
+      assert.equal(payload.status,'unavailable',label+': arhiva fără cititor rămâne absență onestă');
+      assert.equal(payload.data,null,label+': fără date inventate din arhivă');
+      assert.match(e,/Formatul ZIP nu are încă un cititor integrat/,label+': primul format publicat se numește în respingere');
+      assert(!/ZIP, SHP/.test(e),label+': despărțirea pe separatori nu lasă lista întreagă în eticheta cititorului');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='warm-http500'){
+      assert.equal(payload.status,'stale',label+': copia validă a tabelului servește sub 500');
+      assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+      assert.equal(payload.data.kind,'table',label+': tabelul XML se păstrează din copia validă');
+      assert.equal(payload.data.sheets[0].name,'Contract',label+': foia rândului dominant se păstrează');
+      assert.equal(payload.data.sheets[0].total,3,label+': totalul se păstrează din copie');
+      assert.equal(payload.data.navigation.total,3,label+': navigația copiată păstrează totalul');
+      assert.equal(attempts,3,label+': metadatele reîncercate de trei ori fără a descărca din nou')}
+     else{
+      assert.equal(payload.status,'unavailable',label+': fără copie, starea documentată');
+      assert.equal(payload.data,null,label+': fără date inventate');
+      if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+      if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+      if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+      if(scenario==='malformed')assert.match(e,/Sursa nu a putut fi verificată/,label+': plicul de eroare standard');
+      assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+   };
  const runCell=(family,scenario)=>{const label=family.family+' / '+scenario,mock=scenario==='warm-http500'?'http500':scenario;
   return withMocks(family,mock,async(counts,unexpected)=>{
    assert.equal(unexpected.length,0,label+': doar adresele familiei sunt interogate ('+unexpected.join(', ')+')');
@@ -982,7 +1131,7 @@ if(live){
   sqlite.prepare('UPDATE source_cache SET expires_at=0 WHERE key=?').run(family.key());
   await runCell(family,'warm-http500');
  }
-   console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri și, suplimentată de intermediar, își parcurge celulele proprii — egress-ul respins (HTTP 429) se traduce onest în nota de tură de intermediar cu codul sursei păstrat, depunerea fără token, livrul scurt și panoul corupt se resping fără să publice nimic, iar după predarea celor patru panouri citirea servește pozițiile fără să reinterogheze sursa —, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
+   console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri și, suplimentată de intermediar, își parcurge celulele proprii — egress-ul respins (HTTP 429) se traduce onest în nota de tură de intermediar cu codul sursei păstrat, depunerea fără token, livrul scurt și panoul corupt se resping fără să publice nimic, iar după predarea celor patru panouri citirea servește pozițiile fără să reinterogheze sursa —, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate, iar resursa publică XML citește exportul cu strat de tabel: rândul dominant aplatizează atributele și copiii în coloane cu drumuri pe trei niveluri, copiii repețiți se enumerează determinist, listele concurente aleg cea dominantă iar la ex-aequo documentul onest servește, netabelabilul rămâne document etichetat, declarațiile XXE se resping înainte de orice aplatizare, iar variantele de format publicate („XSLX", „JSON, SOAP, XML", „XML.") se normalizează la cititorul potrivit, cu „ZIP, SHP" rămas absență cititorului; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
  console.log(JSON.stringify({result:'ok',mode:'mock',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
  }
 escapes.length=0;process.off('unhandledRejection',recordEscape);process.off('uncaughtExceptionMonitor',recordEscape);}

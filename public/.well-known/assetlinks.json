@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls", "delegate_permission/common.use_device_origin"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "ro.aflivra.app",
+    "sha256_cert_fingerprints": ["00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"]
+  }
+}]
