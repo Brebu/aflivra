@@ -1,0 +1,22 @@
+Full culture catalog: 8540 records, 83 displayable source-photo references; first/last photo pages and real București/Brașov nearby results verified.
+Actual announcements API verified: geography is applied before pagination, changing the city changes the filtered results, national items remain available and the explicit local filter works.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: the provider must publish a semantic area key
++ actual - expected
+
++ 'undefined'
+- 'string'
+
+    at file:///Users/cbrebu/Projects/alfivra/scripts/verify-location.mjs:65:188 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'undefined',
+  expected: 'string',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

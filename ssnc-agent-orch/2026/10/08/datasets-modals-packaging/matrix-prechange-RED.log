@@ -1,0 +1,21 @@
+{"event":"legal_source_failure","checkedAt":"2026-10-08T16:05:53.427Z","url":"https://legislatie.just.ro/Public/DetaliiDocument/70001","category":"http","httpStatus":500,"server":null,"rayId":null,"attempts":3,"retryAfterSeconds":60}
+{"event":"legal_source_failure","checkedAt":"2026-10-08T16:05:53.429Z","url":"https://legislatie.just.ro/Public/DetaliiDocument/70001","category":"http","httpStatus":429,"server":null,"rayId":null,"attempts":1,"retryAfterSeconds":120}
+{"event":"legal_source_failure","checkedAt":"2026-10-08T16:05:53.430Z","url":"https://legislatie.just.ro/Public/DetaliiDocument/70001","category":"timeout","retryAfterSeconds":60}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: resource/xml-table / format-zip-shp: primul format publicat se numește în respingere
+    at familyExpectations (file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:1100:14)
+    at file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:1127:10
+    at async withMocks (file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:451:17)
+    at async file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:1130:121 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'Formatul ZIP, SHP nu are încă un cititor integrat. Metadatele rămân disponibile.',
+  expected: /Formatul ZIP nu are încă un cititor integrat/,
+  operator: 'match',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

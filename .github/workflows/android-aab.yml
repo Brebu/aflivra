@@ -1,0 +1,63 @@
+name: android-aab
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ['twa/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-aab-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-twa:
+    name: TWA gate (offline)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Pure Node built-ins — no install needed; the gate always runs, cheap.
+      - name: Verify battery — TWA gate (targetSdk 36, assetlinks structure, no signing material)
+        run: node scripts/verify-twa.mjs
+
+  build-aab:
+    name: Unsigned AAB — Bubblewrap pinned, SDK 36 injected
+    needs: verify-twa
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      # The Play mandate (targetSdk 36) can lag the SDK platforms preinstalled
+      # on the runner image, so the declared pin is installed explicitly.
+      - name: Android SDK platform 36 + build tools (declared by twa-manifest.json)
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0"
+      # Honest pipeline: real Bubblewrap/Gradle run, or a REGISTERED skip when
+      # JDK/network prerequisites are missing — never a fake pass. The wrapper
+      # verifies the pinned package exists on the registry before building.
+      - name: Build unsigned AAB (signing is Play App Signing, console-side)
+        run: node twa/build-aab.mjs
+      - name: Upload unsigned AAB (workflow artifact only — twa/build/ is gitignored, never committed)
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: aflivra-twa-unsigned-aab
+          path: twa/build/twa-android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: ignore
+          retention-days: 14

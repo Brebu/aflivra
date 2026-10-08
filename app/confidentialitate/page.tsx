@@ -38,7 +38,7 @@ export default function Confidentialitate(){
         <h3>Abonamentul de notificări</h3>
         <p>Adresa abonamentului de push și cheile lui de criptare, furnizate de browserul tău la abonare. Se folosește doar pentru a-ți trimite notificările pe care le-ai permis.</p>
         <h3>Poziția aproximativă</h3>
-        <p>Doar dacă o ceri tu — „Folosește locația mea”/„Actualizează poziția” — și dacă permiți în browser. Coordonatele sunt <strong>rotunjite pe dispozitiv</strong> înainte să plece: la <strong>2 zecimale</strong> (aproximativ 1,1 km) pentru vreme și prognoză, la <strong>3 zecimale</strong> (aproximativ 110 m) pentru contextul geografic al altor date — și <strong>nu sunt salvate pe server</strong>: în baza de date nu există nicio coloană de poziție. Pe dispozitiv rămâne doar localitatea aleasă manual sau modul ales, în memoria browserului.</p>
+        <p>Doar dacă o ceri tu — „Folosește locația mea”/„Actualizează poziția” — și dacă permiți în browser. Coordonatele sunt <strong>rotunjite pe dispozitiv</strong> înainte să plece: la <strong>2 zecimale</strong> (aproximativ 1,1 km) pentru vreme și prognoză, la <strong>3 zecimale</strong> (aproximativ 110 m) pentru contextul geografic al altor date — și <strong>nu sunt salvate pe server</strong>: în baza de date nu există nicio coloană de poziție. Punctul „Ești aici” de pe hartă este desenat din poziția raportată chiar de dispozitivul tău, numai în pagina ta, și nu pleacă nicăieri. Pe dispozitiv rămâne doar localitatea aleasă manual sau modul ales, în memoria browserului.</p>
         <h3>Preferințele și colecțiile</h3>
         <p>Localitatea preferată, planul de explorare, elementele salvate și marcajele din cititorul de acte rămân exclusiv în memoria browserului tău — nu pleacă niciodată către server și le ștergi din setările browserului.</p>
       </article>
@@ -81,7 +81,7 @@ export default function Confidentialitate(){
       <article className="vpanel"><h2>Sursa informației și schimbările politicii</h2>
         <p>Datele descrise aici provin exclusiv de la tine (alegerile de pe dispozitiv) — nu colectăm niciodată date despre tine de la terți. Fiecare afirmație tehnică de pe această pagină corespunde mecanismului real din aplicație; dacă mecanismul se schimbă, pagina se schimbă odată cu el.</p>
         <p>Publicăm orice modificare pe această pagină. Termenii de utilizare ai aplicației sunt pe pagina <a href="/termeni">Termeni</a>.</p>
-        <p className="field-help">Ultima actualizare: 7 octombrie 2026.</p>
+        <p className="field-help">Ultima actualizare: 8 octombrie 2026.</p>
       </article>
     </div>
     <div className="service-links"><a href="/termeni">Termeni de utilizare</a><Link href="/#view=about">Despre date & platformă</Link><Link href="/">Înapoi la platformă</Link></div>

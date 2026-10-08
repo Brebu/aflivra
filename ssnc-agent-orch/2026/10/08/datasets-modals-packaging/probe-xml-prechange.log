@@ -1,0 +1,21 @@
+{
+ "probe": "pre-change parseResource",
+ "outcomes": [
+  {
+   "cell": "success (XML tabular → tabel)",
+   "today": "text"
+  },
+  {
+   "cell": "format-xml-dot (XML. → cititor XML)",
+   "today": "thrown: Formatul XML. nu are încă un cititor integrat. Metadatele rămân disponibile."
+  },
+  {
+   "cell": "format-xslx (XSLX → cititor Excel)",
+   "today": "thrown: Formatul XSLX nu are încă un cititor integrat. Metadatele rămân disponibile."
+  },
+  {
+   "cell": "format-json-soap ('JSON, SOAP, XML' → cititor JSON)",
+   "today": "thrown: Formatul JSON, SOAP, XML nu are încă un cititor integrat. Metadatele rămân disponibile."
+  }
+ ]
+}

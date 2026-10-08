@@ -305,3 +305,61 @@ rece + `CI=true` înainte de push.
 **Rămâne**: Wave C (finisaj UI per-domeniu + iconițe + carduri/dialoguri complexe +
 imagini prin atestare) — plan complet în PLAN.md; branch protection (required check
 `pr-validation`) — decizia utilizatorului, ne-răspunsă.
+
+## Architect Findings — three-topic analysis (2026-10-08, read-only; branch main @ 9377136)
+
+**Mode**: standalone analysis, no `.specify/memory/` (constitution absent — noted). Session sink: this
+file. Codebase untouched; all findings file:line-anchored to this worktree. CodeGraph does not index
+`alfivra` — direct read/grep only.
+
+**Detected stack** (package.json): Next.js 16.3/vinext + React 19.2 on Cloudflare Workers (D1 `DB`,
+5-cron cap frozen), TS 5.9, xlsx vendored (`file:vendor/xlsx-0.20.3.tgz`), fflate, Leaflet, Playwright
+e2e, corepack pnpm 11 / Node ≥22.13. **No XML parser in deps** (no fast-xml-parser/@xmldom/sax).
+
+### 1. XML tabular gap — engineering shape
+
+- Slot: `lib/live/resources.ts:34-36` (`parseResource` XML branch) — today raw text tier only. Table
+  return flows unchanged into `indexTable` (:44-49, D1 chunks 450 KB/1.6 MB per row) → `/api/resource`
+  + `/api/resource-file` CSV/XLSX exports — **no API surface change needed**.
+- Build on `lib/live/source-xml.ts` (regex tokenizer, XXE/DOCTYPE guard, depth cap 64, direct-children
+  only — the BNR precedent): dominant-repeatable-row detection, attribute+child flattening (dot-path
+  columns, `name[n]` repeats), namespace strip; honest fallback to document tier when no dominant
+  row-set (prose/KML/RSS). Zero new deps.
+- Format dispatch fix at resources.ts:18: token-split + alias map ('XSLX'→XLSX, 'XML.', 'JSON, SOAP,
+  XML' first-known-token; 'ZIP, SHP' stays honest no-reader).
+- Risks: 25 MB byte cap (:56-57) → ≤~50 MB transient string in Worker heap (regex streaming, no DOM);
+  `chunkRows` already enforces D1 row caps; no new cron (cap frozen, `scripts/deploy.mjs:9`).
+- Tests: `verify-source-errors.mjs` new `resource/xml-table` cells (module already in transpile list
+  :43) + new `e2e/resource-flow.spec.ts` (RED-first, intercept `/api/resource`; today **zero** e2e
+  legs and zero matrix cells cover the resource reader).
+
+### 2. Modal premature-close root cause (verified, with mechanism)
+
+Primary driver is **geo.key drift**, not the fetch itself: `app/location.tsx:25` continuous
+`watchPosition` — a fix crossing a 3-decimal cell (~100 m, :30-33) changes `geo.key` (:50); the async
+`/places/cities.json` load (:48) re-resolves locality name/county seconds after load — same effect
+without motion. On geo.key change: `useLocationState` resets to initial (`app/location-scope.tsx:7`)
+and `useGeographicScope` resets to 'context' (:8) → every workspace `/api/...` URL changes → the
+visible background refetch; plus explicit close-effects: transit :62, cinema :23, record :19/:21/:23,
+catalog :16, page :121. Closers mapped per surface (FeedCards/Record/Transport/Transit/Events/Cinema/
+Dataset+ResourceView query); SAFE holders: Legislation (legal-workspace.tsx:52 plain useState), Watch
+purge, page lightbox/reset/sheets, category-photo, StoryReader, ShareAction. `use-source.ts:40`
+byte-identical no-rerender is honored — polls are NOT the closer. Fix pattern: semantic area key
+(locality name/county or 'default') for state resets in `useLocationState` + the six reset effects;
+keep cell-precise key only for query params/radius; lifts/keys already correct elsewhere.
+
+### 3. Mobile packaging — inventory + waves
+
+Existing: manifest (192/512 maskable, standalone), sw.js **v21** (offline nav, /data/ cache, Web Push
+deep-link — works in TWA), apple-touch-icon + A2HS meta (layout.tsx:12-22), deploy via
+`scripts/deploy.mjs` (Worker assets serve `public/` — assetlinks delivery path), privacy/TOS pages
+`/confidentialitate` + `/termeni` now exist (research's ❌ is stale on this row). Missing repo-side:
+`public/.well-known/assetlinks.json` (dotfile serving through the assets pipeline must be verified),
+bubblewrap project + targetSdk 36 gate (new `verify-twa-*.mjs` fits battery culture), 1024×500 feature
+graphic (og-image is 1200×630 — ratio wrong), A2HS install-hint UI, unsigned-AAB CI (repo is public —
+free runners). User-side only: Play account $25 + closed-test gauntlet + two-pass SHA-256 fingerprint
+(internal test → read → publish assetlinks → verify), data-safety/IARC from research §4; iOS stays
+A2HS-only (4.2 risk, research §2). Waves: **M1 repo-only ship → M2 Play two-pass (user-gated) →
+M3 optional iOS bet**.
+
+Full analysis returned to the orchestrator in the Architect's reply this session.

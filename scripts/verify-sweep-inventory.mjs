@@ -101,7 +101,7 @@ try{
    'feed.agricultura':{harness:'verify-afir-relay.mjs',parity:'feeds/agricultura'},
   'directory.health':{parity:'directory/health'},'directory.pharmacies':{parity:'directory/pharmacies'},'directory.hospitals':{parity:'directory/hospitals'},
   'law.consolidated.full':{harness:'verify-legal-records.mjs'},
-  'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs'},
+  'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs',parity:'resource/xml-table'},
    'transport.realtime':{parity:'transport/realtime'},'transport.tranzy':{parity:'transport/tranzy'},'transport.flights':{harness:'verify-relay-flights.mjs',parity:'flights/adsb'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
   'company-knowledge':{parity:'company/anaf'},
  'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
