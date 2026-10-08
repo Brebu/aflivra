@@ -92,7 +92,7 @@ try{
   'bnr':{harness:'verify-refresh-sweep.mjs'},'weather.anm':{harness:'verify-refresh-sweep.mjs'},'weather.alerts':{harness:'verify-refresh-sweep.mjs'},
   'company.default':{parity:'company/anaf'},'knowledge.company.default':{parity:'company/anaf'},
   'catalog.default':{parity:'catalog/ckan'},'catalog.category.bani':{parity:'catalog/ckan'},'catalog.category.sanatate':{parity:'catalog/ckan'},
-  'forecast.bucuresti':{parity:'weather/open-meteo'},'events.odeon':{parity:'events/odeon'},'cinema.bucuresti.today':{parity:'cinema/cinemacity'},
+  'forecast.bucuresti':{parity:'weather/open-meteo'},'events.odeon':{parity:'events/odeon'},'events.teatruldearta':{parity:'events/teatruldearta'},'cinema.bucuresti.today':{parity:'cinema/cinemacity'},
    'feed.munca':{parity:'feeds/stiri'},'feed.stiri':{parity:'feeds/stiri'},'feed.sanatate':{parity:'feeds/stiri'},'feed.educatie':{parity:'feeds/stiri'},'feed.justitie':{parity:'feeds/stiri'},
    'law.search.default':{parity:'legal/law'},'law.search.codcivil':{parity:'legal/law'},'lawyers.default':{parity:'lawyers/ifep'},'directory.schools.page0':{parity:'directory/schools'}};
   const familyCoverage={

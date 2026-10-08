@@ -1,7 +1,7 @@
 {
   "groups": [
     {"name": "live", "cron": "0 0 * * *", "estimatedSubrequests": 33, "members": ["bnr", "weather.anm", "company.default", "catalog.default"]},
-    {"name": "weather", "cron": "7 0 * * *", "estimatedSubrequests": 29, "members": ["weather.alerts", "forecast.bucuresti", "events.odeon", "cinema.bucuresti.today"]},
+    {"name": "weather", "cron": "7 0 * * *", "estimatedSubrequests": 29, "members": ["weather.alerts", "forecast.bucuresti", "events.odeon", "events.teatruldearta", "cinema.bucuresti.today"]},
     {"name": "news", "cron": "14 0 * * *", "estimatedSubrequests": 35, "members": ["feed.munca", "feed.stiri", "feed.sanatate", "feed.educatie", "feed.justitie"]},
     {"name": "legislation", "cron": "21 0 * * *", "estimatedSubrequests": 33, "members": ["law.search.default", "law.search.codcivil", "lawyers.default", "knowledge.company.default"]},
     {"name": "registers", "cron": "28 0,4,10,16 * * *", "estimatedSubrequests": 30, "members": ["directory.schools.page0", "catalog.category.bani", "catalog.category.sanatate"]}
