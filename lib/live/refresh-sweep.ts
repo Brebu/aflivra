@@ -9,7 +9,7 @@ import {lawLoader,codeTopics} from './legal';
 import {lawyerLoader} from './lawyers';
 import {knowledgeLoader} from './knowledge';
 import {directoryLoader} from './directories';
-import {odeonLoader} from './events';
+import {odeonLoader,eventsLoader,eventVenue} from './events';
 import {cinemaLoader} from './cinema';
 import {defaultCity} from '../location-context';
 import sweepMap from './refresh-groups.json';
@@ -31,6 +31,7 @@ const memberLoaders:Record<string,()=>Loader>={
  'weather.alerts':()=>alertsLoader,
  'forecast.bucuresti':()=>forecastLoader(defaultCity.lat,defaultCity.lon),
  'events.odeon':()=>odeonLoader,
+ 'events.teatruldearta':()=>eventsLoader(eventVenue('teatruldearta')!),
  'cinema.bucuresti.today':()=>cinemaLoader('1824',todayIso()),
  'feed.munca':()=>feedLoader('munca'),
  'feed.stiri':()=>feedLoader('stiri'),

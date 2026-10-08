@@ -199,8 +199,9 @@ const families=[
   // propria gazdă (Opera Cluj — noul calendar din registru), iar calendarul Odeon, deja
   // acoperit de familia events/odeon, continuă să servească prin propriul lui fixture —
   // avaria unei instituții degradează onest reuniunea, nu o ascunde.
-  {family:'events/search',routeName:'events',route:'/api/events?q=verificare',host:'operacluj.ro',allowed:['teatrul-odeon.ro','operacluj.ro'],scenarios:['http500','http429','timeout','malformed','invalid','success'],scenarioRoutes:{invalid:'/api/events?q='+('x'.repeat(201))},key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj'))},
+  {family:'events/search',routeName:'events',route:'/api/events?q=verificare',host:'operacluj.ro',allowed:['teatrul-odeon.ro','operacluj.ro','teatruldearta.ro'],scenarios:['http500','http429','timeout','malformed','invalid','success'],scenarioRoutes:{invalid:'/api/events?q='+('x'.repeat(201))},key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj'))},
   {family:'events/operanationalacluj',routeName:'events',route:'/api/events?venue=operacluj',host:'operacluj.ro',allowed:['operacluj.ro'],key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('operacluj'))},
+  {family:'events/teatruldearta',routeName:'events',route:'/api/events?venue=teatruldearta',host:'teatruldearta.ro',allowed:['teatruldearta.ro'],key:()=>eventsModule.eventsLoader(eventsModule.eventVenue('teatruldearta')).key,loader:()=>eventsModule.eventsLoader(eventsModule.eventVenue('teatruldearta'))},
    {family:'housing/anl',routeName:'anl',route:'/api/anl',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.anlLoader.key,loader:()=>housingModule.anlLoader},
    {family:'housing/ancpi',routeName:'ancpi',route:'/api/ancpi',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>housingModule.ancpiLoader.key,loader:()=>housingModule.ancpiLoader},
    // Resursa publică CKAN cu export XML: fișa metadatelor și fișierul se citesc pe rutele
@@ -382,7 +383,8 @@ if(live){
   return new Response('<html><body><span id="MainContent_PagerTop_lblRecords">Înregistrări 1–1 din 40000</span><span id="MainContent_PagerTop_lblPages">Pagina 1 din 2</span>'+card+'</body></html>',{headers:{'content-type':'text/html'}})};
  const afirPage=()=>new Response('<html><body>'+('<div class="card-body news-content"><h4><a href="/comunicate/anunt-public-de-verificare">Anunț public de verificare AFIR</a></h4><p class="item-date">06 octombrie 2026</p></div><div class="news-border"></div>').repeat(3)+'</body></html>',{headers:{'content-type':'text/html'}});
  const filmsBody=()=>({results:{bindings:[{film:{type:'uri',value:'http://www.wikidata.org/entity/Q100001'},filmLabel:{type:'literal',value:'Film românesc de verificare'},date:{type:'literal',value:'2000-01-01'},directorLabel:{type:'literal',value:'Regizor de verificare'}}]}});
- const odeonPage=()=>new Response('<html><head><script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Spectacol de verificare","startDate":"2026-10-06T19:30:00","url":"https://teatrul-odeon.ro/spectacol/verificare","location":{"@type":"Place","name":"Sala Mare"}}</script></head><body></body></html>',{headers:{'content-type':'text/html'}});
+ const teatruldeartaPage=()=>new Response('<html><script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Fata din \u201eCurcubeu\u201d","startDate":"2026-10-09","url":"https://teatruldearta.ro/events/fata-din-curcubeu-689-414/","offers":{"url":"https://teatruldearta.ro/events/fata-din-curcubeu-689-414/","price":"0","priceCurrency":"RON"},"location":{"@type":"Place","name":"Teatrul de Artă București","address":"Str. Sfântul Ștefan nr. 21, sector 2, București"}}</script><script type="application/ld+json">[{"@type":"Event","name":"VOYEUR de Gardner McKay","startDate":"2026-10-11","url":"https://teatruldearta.ro/events/voyeur-365-684/"},{"@type":"CreativeWork","name":"banner"}]</script></html>',{headers:{'content-type':'text/html; charset=UTF-8'}});
+const odeonPage=()=>new Response('<html><head><script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Spectacol de verificare","startDate":"2026-10-06T19:30:00","url":"https://teatrul-odeon.ro/spectacol/verificare","location":{"@type":"Place","name":"Sala Mare"}}</script></head><body></body></html>',{headers:{'content-type':'text/html'}});
  const cinemaBody=()=>({body:{films:[{id:'f-verificare',name:'Filmul de verificare',link:'https://www.cinemacity.ro/ro/cinema/filmul-de-verificare',posterLink:'https://www.cinemacity.ro/ro/poster-de-verificare.jpg'}],events:[{filmId:'f-verificare',businessDay:todayIso(),eventDateTime:todayIso()+'T19:30:00'}]}});
  const storyBody=()=>({parse:{pageid:29611,title:'Aflatul',text:{'*':'<p>Povestea de verificare conține un text integral suficient de lung pentru cititorul public de povestiri.</p>'},links:[],revid:87065}});
  const realtimeBytes=()=>{const FeedMessage=require('gtfs-realtime-bindings').transit_realtime.FeedMessage;const now=Math.floor(Date.now()/1000);
@@ -406,6 +408,7 @@ if(live){
   if(family.family==='feeds/agricultura')return afirPage();
   if(family.family==='feeds/filme')return Response.json(filmsBody());
   if(family.family==='events/odeon')return odeonPage();
+  if(family.family==='events/teatruldearta')return teatruldeartaPage();
   if(family.family==='cinema/cinemacity')return Response.json(cinemaBody());
   if(family.family==='stories/wikisource')return Response.json(storyBody());
   if(family.family==='transport/realtime')return new Response(realtimeBytes(),{headers:{'content-type':'application/octet-stream'}});
@@ -461,6 +464,7 @@ if(live){
     // poartă avaria celulei, iar celălalt calendar al registrului servește în continuare
     // prin propriul fixture — reuniunea degradează onest, nu dispare.
     if(family.family==='events/search'&&host==='teatrul-odeon.ro')return odeonPage();
+    if(family.family==='events/search'&&host==='teatruldearta.ro')return teatruldeartaPage();
     // Familia resursei XML servește fișa și conținutul per celulă de formă: fișa poartă
     // varianta de format publicată de editor, iar fișierul servește forma XML a celulei —
     // avariile rămân pe clasificarea generală, doar celulele de formă își au fixture-ul propriu.
@@ -689,6 +693,12 @@ if(live){
     if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
     if(scenario==='malformed')assert.match(e,/Calendarul teatrului nu a transmis/,label+': calendarul nevalid respins în română');
     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+  if(family.family==='events/teatruldearta'){
+   const attempts=hostCount('teatruldearta.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.items.length,2,label+': spectacolele servite');assert.equal(payload.data.items[0].start,'2026-10-09',label+': startDate doar-dată păstrat ca zi, fără oră inventată');assert.equal(payload.data.items[1].start,'2026-10-11',label+': al doilea eveniment cu ziua lui');assert(payload.data.items[0].url.startsWith('https://teatruldearta.ro/'),label+': adresa oficială a spectacolului');assert.equal(attempts,1,label+': un singur acces la calendarul public')}
+   else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
+   else{assert(['unavailable','stale'].includes(payload.status),label+': starea documentată');assert.equal(payload.data,null,label+': fără spectacole inventate');if(scenario==='malformed')assert.match(e,/Calendarul teatrului nu a transmis|Calendarul instituției nu are formatul/,label+': calendarul nevalid respins în română')}
+  }
   if(family.family==='cinema/cinemacity'){
    const attempts=hostCount('www.cinemacity.ro');
    if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.filmCount,1,label+': filmul servit');assert.equal(payload.data.eventCount,1,label+': proiecția zilei servită');assert.equal(payload.data.date,todayIso(),label+': ziua programului păstrată');assert.equal(attempts,1,label+': un singur acces la programul operatorului')}
@@ -1008,8 +1018,8 @@ if(live){
      assert.ok(payload.data.items.every(item=>item.venueName&&item.city),label+': fiecare rând purtă instituția și orașul din registru');
      assert.ok(payload.data.items[0].start.localeCompare(payload.data.items[payload.data.items.length-1].start)<=0,label+': rândurile reunite sunt ordonate cronologic');
      const sources=payload.data.sources;
-     assert.equal(sources.length,2,label+': ambele calendare ale registrului sunt listate');
-     assert.deepEqual(sources.map(source=>source.venue).sort(),['odeon','operacluj'],label+': sursele poartă instituția registrului');
+     assert.equal(sources.length,3,label+': toate cele trei calendare ale registrului sunt listate');
+     assert.deepEqual(sources.map(source=>source.venue).sort(),['odeon','operacluj','teatruldearta'],label+': sursele poartă instituțiile registrului');
      assert.equal(operacluj,1,label+': un singur acces la calendarul instituției căutate');
      assert.equal(odeon,1,label+': un singur acces la calendarul implicit')}
     else if(scenario==='warm-http500'){

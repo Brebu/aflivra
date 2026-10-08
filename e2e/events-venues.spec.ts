@@ -293,3 +293,41 @@ test.describe('Spectacole — the venue registry join (fields reunited on the ve
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });
+
+// Teatrul de Artă (a treia instituție a registrului, calendar JSON-LD, probed live):
+// instituția publică startDate doar-dată — spectacolul servește cu ziua lui și cu
+// eticheta onestă „fără oră locală publicată”, niciodată cu o oră inventată.
+test.describe('Spectacole — Teatrul de Artă (JSON-LD, date-only)', () => {
+  test('the Teatrul de Artă calendar surfaces in Bucharest with date-only events honestly labeled', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    const tdaVenue = {
+      id: 'teatruldearta', name: 'Teatrul de Artă', short: 'Teatrul de Artă',
+      city: 'București', county: 'București', address: 'Str. Sfântul Ștefan nr. 21, sector 2, București',
+      latitude: 44.4370721, longitude: 26.116693, url: 'https://teatruldearta.ro/', kind: 'jsonld',
+      placeId: 'n7153728638',
+    };
+    const stamp = now();
+    const tdaState = () => ({
+      key: 'events:teatruldearta', name: 'Teatrul de Artă · calendarul public', url: 'https://teatruldearta.ro/',
+      adapterVersion: 'events.jsonld.v2', status: 'fresh', publishedAt: null, lastSuccessAt: stamp, lastAttemptAt: stamp,
+      nextAttemptAt: null, error: null, ttlSeconds: 3600,
+      data: {venue: tdaVenue, items: [{id: 'https://teatruldearta.ro/events/fata-din-curcubeu-689-414/', venue: 'teatruldearta', title: 'Fata din „Curcubeu”', content: 'Spectacolul teatrului, cu ziua publicată de instituție.', start: bucharestDay(2), end: '', url: 'https://teatruldearta.ro/events/fata-din-curcubeu-689-414/', sourceName: 'Teatrul de Artă', media: []}], venueCount: 1, sourceUrl: 'https://teatruldearta.ro/', note: 'Program publicat de Teatrul de Artă.'},
+    });
+    const empty = (venueId: string) => (route: any) => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({key: 'events:' + venueId, name: 'calendar', url: 'https://example.org/', status: 'fresh', publishedAt: null, lastSuccessAt: stamp, lastAttemptAt: stamp, error: null, ttlSeconds: 3600, data: {venue: {id: venueId, name: venueId, short: venueId, type: 'teatru', city: 'București', county: 'București', latitude: 44.43, longitude: 26.1, url: 'https://example.org/', kind: 'jsonld'}, items: [], venueCount: 1, sourceUrl: 'https://example.org/'}})});
+    await page.route(/\/api\/events/, route => {
+      const venue = new URL(route.request().url()).searchParams.get('venue') || '';
+      if (venue === 'teatruldearta' || venue === '') return route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(tdaState())});
+      return empty(venue)(route);
+    });
+    await page.goto('/#view=domain&id=cultura&tab=events');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+    const select = page.locator('section.live-section label', {hasText: 'Instituție'}).locator('select');
+    await select.selectOption('teatruldearta');
+    await expect(page.getByRole('heading', {name: /Spectacole la Teatrul de Artă/})).toBeVisible({timeout: 30_000});
+    await expect(page.getByText('fără oră locală publicată').first()).toBeVisible({timeout: 30_000});
+    await expect(page.getByText('Fata din „Curcubeu”').first()).toBeVisible({timeout: 30_000});
+    await expect(page.locator('.venue-registry').first()).toContainText('Sfântul Ștefan');
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});

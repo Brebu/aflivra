@@ -11,7 +11,10 @@ const venueHost=(venue:EventVenue)=>new URL(venue.url).hostname.replace(/^www\./
 const venueCalendar=(venue:EventVenue)=>venue.kind==='tribe-events-v1'?venue.url+'wp-json/tribe/events/v1/events?per_page=100&status=publish':venue.url;
 const publishedOn=(url:unknown,venue:EventVenue)=>{const link=publicUrl(url);if(!link)return '';return new URL(link).hostname.replace(/^www\./,'').endsWith(venueHost(venue))?link:''};
 // Calendar stamps arrive both as ISO (JSON-LD) and as „Y-m-d H:i:s” (The Events Calendar); local hours are preserved as published.
-const localStamp=(value:unknown)=>{if(typeof value!=='string')return undefined;const match=value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})[ T](\d{2}:\d{2})/);return match?`${match[1]}-${match[2].padStart(2,'0')}-${match[3].padStart(2,'0')}T${match[4]}`:undefined};
+const localStamp=(value:unknown)=>{if(typeof value!=='string')return undefined;const match=value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})[ T](\d{2}:\d{2})/);if(match)return `${match[1]}-${match[2].padStart(2,'0')}-${match[3].padStart(2,'0')}T${match[4]}`;
+ // Program publicat cu ziua, fără oră locală: schema.org acceptă startDate doar-dată, iar
+ // instituția publică exact atât. Evenimentul păstrează data; ora rămâne neanunțată, nu inventată.
+ const day=value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);return day?`${day[1]}-${day[2].padStart(2,'0')}-${day[3].padStart(2,'0')}`:undefined};
 const uniqueSorted=(items:any[])=>[...new Map(items.map(item=>[item.id,item])).values()].sort((a,b)=>String(a.start).localeCompare(String(b.start)));
 export function parseEvents(raw:string,venue:EventVenue=eventVenue('odeon') as EventVenue):Loaded{
  const items:any[]=[];

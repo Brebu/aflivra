@@ -76,7 +76,7 @@ test.describe('Refresh API', () => {
     const group = body.groups[0];
     expect(group.group).toBe('weather');
     expect(Array.isArray(group.sources)).toBe(true);
-    expect(group.sources.length).toBe(4);
+    expect(group.sources.length).toBe(5);
     for (const source of group.sources) {
       expect(validSourceStatuses.has(source.status), `invalid source status: ${source.status}`).toBe(true);
       expect(typeof source.key).toBe('string');
