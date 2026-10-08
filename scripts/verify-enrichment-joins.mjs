@@ -61,9 +61,9 @@ try{
   // CUI — the public CNAS registries join (parallel-owned, landed after LEG 1 was first written):
   // the join reads only the registries' own published CUI columns, with exact string equality;
   // several matched rows stay distinct entries (multiple contracts, no destructive merge).
-  const adaptersSource=await read('lib/live/adapters.ts');
-  assert.ok(adaptersSource.includes("registryCuiColumns=['CUI cod','Cod fiscal furnizor']"),'adapters: the CNAS registry join reads only the registries own published CUI columns');
-  assert.ok(adaptersSource.includes('String(record[column]).trim()===String(cui).trim()'),'adapters: the registry join is exact CUI equality against the published column, never a name match');
+  const registriesSource=await read('lib/live/company-registries.ts');
+  assert.ok(registriesSource.includes("registryCuiColumns=['CUI cod','Cod fiscal furnizor']"),'company-registries: the CNAS registry join reads only the registries own published CUI columns');
+  assert.ok(registriesSource.includes('String(record[column]).trim()===String(cui).trim()'),'company-registries: the registry join is exact CUI equality against the published column, never a name match');
  // dosar number + institution registry id — the court family (parallel-owned).
  const courtHistory=await read('lib/court-history.ts');
  assert.ok(courtHistory.includes('courtById.get(courtId)'),'court-history.ts: the institution metadata joins the courts registry on its own registry id');
@@ -100,7 +100,7 @@ try{
   const enrichmentFiles=[
    ['lib/live/events.ts',[]],['app/events-workspace.tsx',[]],['app/api/events/route.ts',[]],
    ['app/places-workspace.tsx',[]],['lib/live/federated.ts',[]],['lib/places-view.ts',[]],
-   ['lib/live/adapters.ts',[]],['lib/live/knowledge.ts',[]],['app/live-company.tsx',[]],['app/company-provenance.tsx',[]],
+   ['lib/live/adapters.ts',[]],['lib/live/company-registries.ts',[]],['lib/live/knowledge.ts',[]],['app/live-company.tsx',[]],['app/company-provenance.tsx',[]],
   ['app/courts-workspace.tsx',[]],['app/court-history-panel.tsx',[]],['app/legal-workspace.tsx',[]],
   ['lib/court-history.ts',[/courtByLabel=new Map\(institutions\.items\.map\(c=>\[normalized\(c\.label\),c\]\)\)/]],
   ['lib/live/legal-registry.ts',[]],['lib/live/legal-consolidation.ts',[/attrs\.name==='title'/]],

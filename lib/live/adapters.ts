@@ -37,40 +37,6 @@ export function parseRegistry(raw:string,cui:string,day:string){
 }
 // The registry CUI columns: every CNAS edition published today (clinici, farmacii, spitale —
 // 31.03.2026) carries „Cod fiscal furnizor" with a plain numeric CUI (probe-pinned: the FARM
-// export live probe plus own-infra reads of the deployed worker's cached editions,
-// 2026-10-08); „CUI cod" stays accepted as the column name the pinned directory fixtures
-// carry from earlier editions. An export without a recognized CUI column carries no joinable
-// key and stays out of the company card.
-const registryCuiColumns=['CUI cod','Cod fiscal furnizor'];
-export const companyRegistryKinds=['health','pharmacies','hospitals'] as const;
-// Reads ride the shared D1-cached copies of each registry (the directory loader rows), so every
-// company view reuses one registry fetch per day across all viewers. The imports resolve at
-// call time on purpose: the cache module circularly imports this one's helpers, and the parsers
-// here stay loadable wherever the registry join never runs.
-export async function companyPublicRegistries(cui:string){
- const {readSource}=await import('./cache'),{directoryLoader,directories}=await import('./directories');
- const reads:{kind:(typeof companyRegistryKinds)[number];registry?:any;unreadable?:boolean}[]=await Promise.all(companyRegistryKinds.map(async kind=>{
-  try{
-   const state=await readSource(directoryLoader(kind));if(!state.data)return{kind,unreadable:true};
-   const records:any[]=state.data.records||[],column=registryCuiColumns.find(name=>records.some(record=>Object.hasOwn(record,name)));
-   // Exact equality on the registry's own published CUI column — never a name match; several
-   // matching rows stay distinct entries (multiple contracts, no destructive merge).
-   const matched=column?records.filter(record=>String(record[column]).trim()===String(cui).trim()):[];
-   return{kind,registry:{kind,name:directories[kind].name,period:state.data.period||null,records:matched,source:{...state,data:undefined}}}
-  }catch{return{kind,unreadable:true}}
- }));
- return{registries:reads.filter(read=>read.registry).map(read=>read.registry),unreadable:reads.filter(read=>read.unreadable).map(read=>directories[read.kind].name)}
-}
-export async function loadCompany(cui:string):Promise<Loaded>{
- const lastYear=new Date().getUTCFullYear()-1,day=new Date().toISOString().slice(0,10);const years=Array.from({length:3},(_,i)=>lastYear-i);const warnings:string[]=[],history:any[]=[];let registry:any=null,registries:any=null; await Promise.all([
-  ...years.map(async year=>{try{history.push(parseBalance(await getSource(`https://webservicesp.anaf.ro/bilant?an=${year}&cui=${cui}`),cui,year))}catch(e){warnings.push(`Bilanț ${year}: ${e instanceof Error?e.message:'indisponibil'}`)}}),
-  (async()=>{try{registry=parseRegistry(await getSource('https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify([{cui:Number(cui),data:day}])}),cui,day);if(!registry)warnings.push('Identitatea fiscală nu a fost returnată.')}catch(e){warnings.push('Identitate fiscală: '+(e instanceof Error?e.message:'indisponibilă'))}})(),
-  (async()=>{try{registries=await companyPublicRegistries(cui)}catch{/* A registry that cannot be read now stays an absence, never a failure of the firm card. */}})()
- ]);
- if(!history.length&&!registry)throw new SourceError('ANAF nu a returnat identitate fiscală sau bilanțuri valide pentru acest CUI.');history.sort((a,b)=>a.year-b.year);const latest=history.at(-1);
- for(const name of registries?.unreadable||[])warnings.push('Registrul '+name+' nu a putut fi citit la această verificare.');
- return{publishedAt:latest?String(latest.year):registry.queriedDate,data:{cui,name:registry?.name||latest?.name,...(registry||{}),financialCaen:latest?.caen||null,caenLabel:latest?.caenLabel||null,vat:registry?.vat??null,inactive:registry?.inactive??null,queriedDate:registry?.queriedDate||null,year:latest?.year||null,indicators:latest?.entries||[],history,latestYearChecked:lastYear,publicRegistries:registries?.registries?.length?registries.registries:null,warnings}};
-}
 import {categoryQueries} from './catalog-categories';
 export {categoryQueries} from './catalog-categories';
 const safeUrl=(s:unknown)=>{try{const u=new URL(String(s));return ['http:','https:'].includes(u.protocol)?u.href:''}catch{return ''}};
@@ -82,5 +48,4 @@ export function parseCatalog(raw:string):Loaded{
 }
 export const bnrLoader:Loader={key:'bnr',name:'Banca Națională a României',url:'https://curs.bnr.ro/nbrfxrates10days.xml',version:'bnr.xml.v1',ttl:900,load:async()=>parseBnr(await getSource('https://curs.bnr.ro/nbrfxrates10days.xml'))};
 export const weatherLoader:Loader={key:'weather',name:'Administrația Națională de Meteorologie',url:'https://www.meteoromania.ro/wp-json/meteoapi/v2/starea-vremii',version:'anm.complete-detail.v3',ttl:600,load:async()=>parseWeather(await getSource('https://www.meteoromania.ro/wp-json/meteoapi/v2/starea-vremii'))};
-export const companyLoader=(cui='427282'):Loader=>({key:'company:'+cui,name:'ANAF',url:'https://webservicesp.anaf.ro/bilant',version:'anaf.profile.v3',ttl:86400,load:()=>loadCompany(cui)});
 export const catalogLoader=(category='',q='',page=0,organization='',format=''):Loader=>{const query=[categoryQueries[category]?'('+categoryQueries[category]+')':'',q.trim()?'('+q.trim()+')':''].filter(Boolean).join(' AND ');const quoted=(v:string)=>'"'+v.replace(/["\\]/g,'')+'"';const fq=[organization?'organization:'+quoted(organization):'',format?'res_format:'+quoted(format):''].filter(Boolean).join(' AND ');const params=new URLSearchParams({q:query,rows:'24',start:String(page*24),sort:'metadata_modified desc', 'facet.field':JSON.stringify(['organization','res_format']),'facet.limit':'500',...(fq?{fq}:{})});const url='https://data.gov.ro/api/3/action/package_search?'+params;return{key:organization||format?'catalog:v3:'+JSON.stringify({category,q,page,organization,format}):'catalog:v2:'+category+':'+q+':'+page,name:'Catalogul național de date deschise',url,version:'ckan.all-datasets.v3',ttl:3600,load:async()=>parseCatalog(await getSource(url))}};

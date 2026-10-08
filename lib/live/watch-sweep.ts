@@ -5,7 +5,7 @@ import {readSource} from './cache';
 import {feedLoader} from './feeds';
 import {alertsLoader} from './weather';
 import {eventsLoader,eventVenues} from './events';
-import {companyLoader} from './adapters';
+import {companyLoader} from './company-registries';
 import {lawLoader,courtLoader} from './legal';
 import {localityName,countyName,countyCode,sameLocality,classifyGeography,countyLookup} from '../geographic-scope';
 import {normalizeCourtNumber} from '../court-query';
