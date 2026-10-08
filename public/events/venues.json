@@ -1,4 +1,4 @@
 {"items":[
- {"id":"odeon","name":"Teatrul Odeon","short":"Teatrul Odeon","type":"teatru","city":"București","county":"București","latitude":44.43667,"longitude":26.09738,"url":"https://teatrul-odeon.ro/","kind":"jsonld"},
- {"id":"operacluj","name":"Opera Națională Română Cluj-Napoca","short":"Opera Cluj","type":"operă","city":"Cluj-Napoca","county":"Cluj","latitude":46.770105,"longitude":23.597573,"url":"https://operacluj.ro/","kind":"tribe-events-v1"}
+ {"id":"odeon","name":"Teatrul Odeon","short":"Teatrul Odeon","type":"teatru","city":"București","county":"București","address":"Calea Victoriei nr. 40-42","latitude":44.43667,"longitude":26.09738,"url":"https://teatrul-odeon.ro/","kind":"jsonld","placeId":"w158239853"},
+ {"id":"operacluj","name":"Opera Națională Română Cluj-Napoca","short":"Opera Cluj","type":"operă","city":"Cluj-Napoca","county":"Cluj","address":"Piața Ștefan cel Mare nr. 20","latitude":46.770105,"longitude":23.597573,"url":"https://operacluj.ro/","kind":"tribe-events-v1","placeId":"w202370085"}
 ]}

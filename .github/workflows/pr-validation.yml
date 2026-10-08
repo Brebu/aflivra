@@ -60,6 +60,7 @@ jobs:
           node scripts/verify-snapshot-transport.mjs
           node scripts/verify-refresh-sweep.mjs
           node scripts/verify-recency-policy.mjs
+          node scripts/verify-enrichment-joins.mjs
           node scripts/verify-ro-text.mjs
           node scripts/verify-source-errors.mjs
           node scripts/verify-sweep-inventory.mjs

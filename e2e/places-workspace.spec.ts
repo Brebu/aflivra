@@ -231,6 +231,69 @@ test.describe('Places workspace', () => {
   });
 });
 
+test.describe('Places workspace — external Wikidata link-outs built from the exact Q-ids of the source row', () => {
+  // The join key is the Q-id itself, read verbatim from the OpenStreetMap tags of
+  // the committed record; the link-out is an external reference, never a merge and
+  // never a runtime Wikidata fetch. „Teatrul Odeon" is the unique cultura record
+  // tagged wikidata=Q559214.
+  test('a record tagged wikidata renders the external Wikidata link-out built from the exact Q-id', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/#view=domain&id=cultura&tab=places');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+
+    const workspace = page.locator('section.places-workspace').first();
+    await expect(workspace).toBeVisible();
+    await waitForClientReady(page);
+    const search = workspace.getByLabel('Caută locuri, servicii, adrese și contacte');
+    await search.fill('Teatrul Odeon');
+    await search.press('Enter');
+
+    const card = workspace.locator('.entity-card', {hasText: 'Teatrul Odeon'}).first();
+    await expect(card).toBeVisible({timeout: 30_000});
+    await card.getByRole('button', {name: 'Toate informațiile și harta'}).click();
+
+    const detail = page.locator('#entity-w158239853');
+    await expect(detail).toBeVisible();
+    const wikidata = detail.locator('[data-testid="wikidata-links"]');
+    await expect(wikidata).toBeVisible();
+    await expect(wikidata.getByRole('link', {name: /Fișa locului pe Wikidata/})).toHaveAttribute('href', 'https://www.wikidata.org/wiki/Q559214');
+    // The disclosure stays honest: the group names its mechanism — exact identifiers, no Wikidata calls.
+    await expect(wikidata).toContainText('nu interog');
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  // „Cărturești Carusel" is the unique firme record tagged brand:wikidata=Q12726202
+  // with an operator tag — one card asserts both the typed operator row (the
+  // existing surface) and the brand's external reference.
+  test('brand Q-ids render their own labeled link-out alongside the typed operator row', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/#view=domain&id=firme&tab=places');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+
+    const workspace = page.locator('section.places-workspace').first();
+    await expect(workspace).toBeVisible();
+    await waitForClientReady(page);
+    const search = workspace.getByLabel('Caută locuri, servicii, adrese și contacte');
+    await search.fill('Cărturești Carusel');
+    await search.press('Enter');
+
+    const card = workspace.locator('.entity-card', {hasText: 'Cărturești Carusel'}).first();
+    await expect(card).toBeVisible({timeout: 30_000});
+    await card.getByRole('button', {name: 'Toate informațiile și harta'}).click();
+
+    const detail = page.locator('#entity-n3355049764');
+    await expect(detail).toBeVisible();
+    // The typed operator row stays a typed row (the already-shipped surface, pinned here).
+    await expect(detail.locator('.entity-facts')).toContainText('Cărturești');
+    const wikidata = detail.locator('[data-testid="wikidata-links"]');
+    await expect(wikidata).toBeVisible();
+    await expect(wikidata.getByRole('link', {name: /Fișa brandului pe Wikidata/})).toHaveAttribute('href', 'https://www.wikidata.org/wiki/Q12726202');
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});
+
 test.describe('Places map — pin radius and pan refresh', () => {
   // Mobile context, the reported surface: the same touch emulation the leaflet
   // gesture leg in map-touch-gestures.spec.ts proved against this map.

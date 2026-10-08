@@ -383,3 +383,82 @@ test.describe('Federated search — honest boundaries', () => {
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });
+
+test.describe('Federated search — cross-entity links (v5): discovery + deep-link, never merges', () => {
+  // A place whose OSM record id the venue registry carries (validated key, never
+  // the name) gains the cross-entity link to that institution's calendar tab.
+  test('an OSM place row whose record id the venue registry carries links to the institution calendar', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await openExplore(page);
+    await searchFromExplore(page, 'Teatrul Odeon');
+    await expect(page.getByTestId('federated-results')).toBeVisible();
+    await waitFamiliesSettled(page);
+    // The OSM places family row for the theatre (the unique cultura record).
+    const placeRow = page.locator('[data-testid="federated-group"][data-group="cultura"] li', {hasText: 'Teatrul Odeon'})
+      .filter({has: page.locator('small', {hasText: 'OpenStreetMap'})}).first();
+    await expect(placeRow.getByTestId('federated-row')).toBeVisible();
+    // The cross-entity link is a sibling anchor, never a merged row: calendar
+    // discovery for the same physical institution.
+    const calendarLink = placeRow.getByTestId('federated-cross-link');
+    await expect(calendarLink).toBeVisible();
+    await expect(calendarLink).toContainText('Spectacole la Teatrul Odeon');
+    await expect(calendarLink).toHaveAttribute('href', '#view=domain&id=cultura&tab=events');
+    await calendarLink.click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await expect.poll(() => page.evaluate(() => decodeURIComponent(location.hash))).toBe('#view=domain&id=cultura&tab=events');
+    await expect(page.getByRole('heading', {level: 2, name: /^Spectacole la/})).toBeVisible({timeout: 30_000});
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  // The dosar shortcut carries the discovery link to the court registry surface —
+  // explicitly a link: the dosar and the institution are never auto-joined.
+  test('a dosar shortcut row links to the institutions registry of justice', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await openExplore(page);
+    await searchFromExplore(page, '123/45/2024');
+    const dosarItem = page.locator('[data-testid="federated-group"][data-group="justitie"] li', {hasText: 'Dosarul 123/45/2024'});
+    await expect(dosarItem.getByTestId('federated-row')).toBeVisible();
+    const registryLink = dosarItem.getByTestId('federated-cross-link');
+    await expect(registryLink).toBeVisible();
+    await expect(registryLink).toContainText('Instanțele din Inventarul național');
+    await expect(registryLink).toHaveAttribute('href', '#view=domain&id=justitie&tab=places');
+    await registryLink.click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await expect.poll(() => page.evaluate(() => decodeURIComponent(location.hash))).toBe('#view=domain&id=justitie&tab=places');
+    await expect(page.getByRole('heading', {level: 2, name: 'Instanțe și servicii juridice'})).toBeVisible({timeout: 30_000});
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  // The CUI shortcut carries the deep link to the firm watch center — the CUI is
+  // the validated watch key, and the link stays a link (no row mutation).
+  test('a CUI shortcut row links to the firm watch center', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await openExplore(page);
+    await searchFromExplore(page, '427282');
+    const cuiItem = page.locator('[data-testid="federated-group"][data-group="firme"] li', {hasText: 'Firma cu CUI 427282'});
+    await expect(cuiItem.getByTestId('federated-row')).toBeVisible();
+    const watchLink = cuiItem.getByTestId('federated-cross-link');
+    await expect(watchLink).toBeVisible();
+    await expect(watchLink).toContainText('Urmărirea firmelor');
+    await expect(watchLink).toHaveAttribute('href', '#view=watch');
+    await watchLink.click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'watch');
+    await expect.poll(() => page.evaluate(() => decodeURIComponent(location.hash))).toBe('#view=watch');
+    await expect(page.getByRole('heading', {level: 1, name: 'Ce s-a schimbat.'})).toBeVisible({timeout: 30_000});
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+
+  // Where no validated key exists, no cross-entity link is invented: a place row
+  // the venue registry does not carry stays linkless.
+  test('a place row with no venue registry record grows no calendar cross-link', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await openExplore(page);
+    await searchFromExplore(page, 'Salina Turda');
+    await expect(page.getByTestId('federated-results')).toBeVisible();
+    await waitFamiliesSettled(page);
+    const placeRows = page.locator('[data-testid="federated-group"][data-group="cultura"] li').filter({has: page.locator('small', {hasText: 'OpenStreetMap'})});
+    await expect(placeRows.first()).toBeVisible();
+    await expect(placeRows.getByTestId('federated-cross-link')).toHaveCount(0);
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});

@@ -1,6 +1,6 @@
 import {decodeHtmlEntities as decodeEntities} from './text';
 
-export type LawConsolidation={kind:'consolidated'|'base';versionId:string;versionDate:string;asOf:string;checkedAt:string;sourceUrl:string;futureVersions:string[]};
+export type LawConsolidation={kind:'consolidated'|'base';versionId:string;versionDate:string;asOf:string;checkedAt:string;sourceUrl:string;futureVersions:string[];versionHistory:{id:string;date:string;kind:'consolidated'|'base'}[]};
 type Element={tag:string;attrs:Record<string,string>;start:number;openEnd:number;closeStart:number;end:number;parent:Element|null;children:Element[]};
 type Version={id:string;date:string;kind:'consolidated'|'base'};
 export type PortalLaw={text:string;title:string;issuer:string;publication:string;versions:Version[];relatedCodes:{id:string;title:string;sourceUrl:string}[]};
@@ -69,7 +69,7 @@ export async function consolidateLaw(act:any,fetchPage:(url:string)=>Promise<str
  const page=selected===base?first:parsePortalLaw(await fetchPage(selected),selected,String(act.date||'').split('T')[0]);
  if(selected!==base&&!page.versions.some(v=>v.id===latest.id&&v.date===latest.date))throw Error('Pagina versiunii selectate nu confirmă data consolidării din istoricul oficial.');
  if(selectLawVersion(page.versions,asOf).id!==latest.id)throw Error('Istoricul actului s-a schimbat în timpul preluării. Reîncearcă verificarea.');
- const consolidation:LawConsolidation={kind:latest.kind,versionId:latest.id,versionDate:latest.date,asOf,checkedAt:new Date().toISOString(),sourceUrl:selected,futureVersions:[...new Set(first.versions.filter(v=>v.date>asOf).map(v=>v.date))].sort()};
+  const consolidation:LawConsolidation={kind:latest.kind,versionId:latest.id,versionDate:latest.date,asOf,checkedAt:new Date().toISOString(),sourceUrl:selected,futureVersions:[...new Set(first.versions.filter(v=>v.date>asOf).map(v=>v.date))].sort(),versionHistory:[...new Map(page.versions.map(v=>[v.id+'|'+v.date,v])).values()].map(v=>({id:v.id,date:v.date,kind:v.kind})).sort((a,b)=>a.date.localeCompare(b.date))};
  return{...act,id:act.id||base,sourceUrl:selected,baseSourceUrl:base,title:page.title||act.title,issuer:page.issuer||act.issuer||'',publication:page.publication||act.publication||'',text:page.text,textProvided:true,consolidation,_relatedCodes:page.relatedCodes};
 }
 export const verifiedConsolidation=(act:any)=>!!act?.textProvided&&!!officialLawUrl(act.consolidation?.sourceUrl||'')&&['consolidated','base'].includes(act.consolidation?.kind)&&/^\d{4}-\d{2}-\d{2}$/.test(act.consolidation?.versionDate||'')&&/^\d{4}-\d{2}-\d{2}$/.test(act.consolidation?.asOf||'')&&act.consolidation.versionDate<=act.consolidation.asOf&&Number.isFinite(Date.parse(act.consolidation?.checkedAt||''));

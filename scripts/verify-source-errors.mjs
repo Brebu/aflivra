@@ -59,7 +59,10 @@ for(const name of ['records','text','media','query','source-xml','source-html','
   .replace("import audit from '@/public/catalog/audit.json';",'const audit='+await readFile(join(root,'public/catalog/audit.json'),'utf8')+';')
   .replace("import proofs from '@/public/data/snapshot-transport.json';",'const proofs='+await readFile(join(root,'public/data/snapshot-transport.json'),'utf8')+';');
  let output=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;
- output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace("from 'fflate'","from '"+fflateUrl+"'");output=output.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");for(const pkg of ['xlsx','gtfs-realtime-bindings'])output=output.replace("from '"+pkg+"'","from '"+pathToFileURL(require.resolve(pkg)).href+"'");
+ output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace("from 'fflate'","from '"+fflateUrl+"'");output=output.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
+ // Importurile dinamice de la nivelul încărcătorilor (reuniunea registrelor firmei citește
+ // cache-ul comun la momentul apelului) primesc aceeași extensie ca importurile statice.
+ output=output.replace(/import\('\.\/([a-z][a-z0-9-]*)'\)/g,(_,p)=>"import('./"+p+".mjs')");for(const pkg of ['xlsx','gtfs-realtime-bindings'])output=output.replace("from '"+pkg+"'","from '"+pathToFileURL(require.resolve(pkg)).href+"'");
  await writeFile(join(temp,name+'.mjs'),output);
 }
 const adapters=await import(pathToFileURL(join(temp,'adapters.mjs'))),weatherModule=await import(pathToFileURL(join(temp,'weather.mjs'))),legalModule=await import(pathToFileURL(join(temp,'legal.mjs'))),feedsModule=await import(pathToFileURL(join(temp,'feeds.mjs'))),transportModule=await import(pathToFileURL(join(temp,'transport.mjs'))),forecastModule=await import(pathToFileURL(join(temp,'forecast.mjs'))),directoriesModule=await import(pathToFileURL(join(temp,'directories.mjs'))),lawyersModule=await import(pathToFileURL(join(temp,'lawyers.mjs'))),eventsModule=await import(pathToFileURL(join(temp,'events.mjs'))),cinemaModule=await import(pathToFileURL(join(temp,'cinema.mjs'))),storiesModule=await import(pathToFileURL(join(temp,'stories.mjs'))),realtimeModule=await import(pathToFileURL(join(temp,'transit-realtime.mjs'))),justiceModule=await import(pathToFileURL(join(temp,'justice.mjs'))),trainsModule=await import(pathToFileURL(join(temp,'trains.mjs'))),flightsModule=await import(pathToFileURL(join(temp,'flights.mjs'))),housingModule=await import(pathToFileURL(join(temp,'housing.mjs')));
@@ -143,7 +146,7 @@ const ancpiXlsx=()=>{const XLSX=require('xlsx');const rows=[['JUDET','LUNA_RAPOR
 const ancpiBody=()=>({success:true,result:{resources:[{name:'Numarul imobilelor ipotecate in cartea funciara ianuarie 2024',url:'https://data.gov.ro/dataset/ancpi-ipoteci/resource/ipoteci-de-verificare-ianuarie-2024.xlsx',format:'XLSX',last_modified:'2024-02-05T00:00:00'}]}});
 const families=[
  {family:'weather/open-meteo',routeName:'weather',route:'/api/weather?lat=44.43&lon=26.1',host:'api.open-meteo.com',allowed:['api.open-meteo.com'],key:()=>weatherModule.forecastLoader(44.43,26.1).key,loader:()=>weatherModule.forecastLoader(44.43,26.1)},
- {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org'],key:()=>adapters.companyLoader('427282').key,loader:()=>adapters.companyLoader('427282')},
+ {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org','data.gov.ro'],key:()=>adapters.companyLoader('427282').key,loader:()=>adapters.companyLoader('427282')},
  {family:'courts/portal.just',routeName:'legal',route:'/api/legal',method:'POST',body:{kind:'court',number:'1/2/2026'},host:'portalquery.just.ro',allowed:['portalquery.just.ro'],key:()=>legalModule.courtLoader({number:'1/2/2026',name:'',subject:'',institution:'',from:'',to:''}).key,loader:()=>legalModule.courtLoader({number:'1/2/2026',name:'',subject:'',institution:'',from:'',to:''})},
  {family:'feeds/stiri',routeName:'domain',route:'/api/domain?kind=stiri',host:new URL(feedsModule.feedConfigs.stiri.url).host,allowed:feedHosts,key:()=>feedsModule.feedLoader('stiri').key,loader:()=>feedsModule.feedLoader('stiri')},
  {family:'catalog/ckan',routeName:'catalog',route:'/api/catalog',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>adapters.catalogLoader().key,loader:()=>adapters.catalogLoader()},
@@ -155,6 +158,10 @@ const families=[
  {family:'localities/siruta',routeName:'localities',route:'/api/localities',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>directoriesModule.sirutaLoader.key,loader:()=>directoriesModule.sirutaLoader},
  {family:'lawyers/ifep',routeName:'lawyers',route:'/api/lawyers',host:'www.ifep.ro',allowed:['www.ifep.ro'],key:()=>lawyersModule.lawyerLoader('',0,'recent').key,loader:()=>lawyersModule.lawyerLoader('',0,'recent')},
  {family:'legal/law',routeName:'legal',route:'/api/legal',method:'POST',body:{kind:'law',title:'CODUL CIVIL'},host:'legislatie.just.ro',allowed:['legislatie.just.ro'],key:()=>legalModule.lawLoader(lawQuery).key,loader:()=>legalModule.lawLoader(lawQuery)},
+ // Pagina oficială a actului deschis după identificatorul validat (sonda Wave B): fișa actului
+ // expune titlul, emitentul, publicația și istoricul versiunilor; avaria paginii degradează
+ // onest la copia înregistrată sau la absența documentată, fără consolidare inventată.
+ {family:'legal/act-page',routeName:'legal',route:'/api/legal',method:'POST',body:{kind:'law',title:'LEGE de verificare pentru fișa actului',full:true,id:'https://legislatie.just.ro/Public/DetaliiDocument/70001',exactTitle:'LEGE de verificare pentru fișa actului',selectedType:'lege',selectedNumber:'1',selectedDate:'2025-01-01'},host:'legislatie.just.ro',allowed:['legislatie.just.ro'],key:()=>legalModule.lawLoader({title:'',text:'',number:'',year:'',page:0,full:true,selectedId:'https://legislatie.just.ro/Public/DetaliiDocument/70001'}).key,loader:()=>legalModule.lawLoader({title:'',text:'',number:'',year:'',page:0,full:true,selectedId:'https://legislatie.just.ro/Public/DetaliiDocument/70001'})},
  {family:'feeds/agricultura',routeName:'domain',route:'/api/domain?kind=agricultura',host:'www.afir.ro',allowed:['www.afir.ro'],known:'source-blocks-egress',key:()=>feedsModule.afirLoader.key,loader:()=>feedsModule.afirLoader},
  {family:'feeds/filme',routeName:'domain',route:'/api/domain?kind=filme',host:'query.wikidata.org',allowed:['query.wikidata.org'],key:()=>feedsModule.filmsLoader.key,loader:()=>feedsModule.filmsLoader},
  {family:'events/odeon',routeName:'events',route:'/api/events',host:'teatrul-odeon.ro',allowed:['teatrul-odeon.ro'],key:()=>eventsModule.odeonLoader.key,loader:()=>eventsModule.odeonLoader},
@@ -254,18 +261,38 @@ if(live){
   return zipSync({'agency.txt':strToU8(rows('agency_id,agency_name,agency_url',['A0,Operatorul de test,https://example.test'])),'stops.txt':strToU8(rows('stop_id,stop_name,stop_desc,stop_lat,stop_lon',stops)),'routes.txt':strToU8(rows('route_id,agency_id,route_short_name,route_long_name,route_type',routeRows)),'calendar.txt':strToU8(rows('service_id,monday,tuesday,start_date,end_date',['A0,1,1,20260101,20261231']))})};
  const openMeteoBody=()=>{const now=Math.floor(Date.now()/1000);
   return {latitude:44.43,longitude:26.1,elevation:90,timezone:'Europe/Bucharest',current:{time:now,interval:900,...Object.fromEntries(forecastModule.currentVariables.map(key=>[key,key==='is_day'?1:3.5]))},current_units:Object.fromEntries(forecastModule.currentVariables.map(key=>[key,'unitate'])),hourly:{time:[now,now+3600,now+7200],...Object.fromEntries(forecastModule.hourlyVariables.map(key=>[key,[1,2,3]]))},hourly_units:{},daily:{time:[now+86400,now+172800],...Object.fromEntries(forecastModule.dailyVariables.map(key=>[key,[4,5]]))},daily_units:{}}};
- const anafBalance=href=>{const year=Number(href.match(/an=(\d+)/)[1]);return {cui:427282,an:year,deni:'Firma de verificare ANAF',caen:'1811',i:[{indicator:'I1',val_indicator:String(1000+year),val_den_indicator:'Rezultatul exercițiului'},{indicator:'I20',val_indicator:'50',val_den_indicator:'Cifra de afaceri'}]}};
- const anafRegistry={found:[{date_generale:{cui:427282,denumire:'Firma de verificare ANAF',adresa:'B-dul Unirii 1',nrRegCom:'J40/1/2026',cod_CAEN:'1811',telefon:'0210000000',forma_juridica:'Societate pe acțiuni'},inregistrare_scop_Tva:{scpTVA:true},stare_inactiv:{statusInactivi:false}}]};
+  const anafBalance=href=>{const year=Number(href.match(/an=(\d+)/)[1]);return {cui:427282,an:year,deni:'Firma de verificare ANAF',caen:'1811',den_caen:'Activitatea CAEN publicată în bilanț',i:[{indicator:'I1',val_indicator:String(1000+year),val_den_indicator:'Rezultatul exercițiului'},{indicator:'I20',val_indicator:'50',val_den_indicator:'Cifra de afaceri'}]}};
+  const anafRegistry={found:[{date_generale:{cui:427282,denumire:'Firma de verificare ANAF',adresa:'B-dul Unirii 1',nrRegCom:'J40/1/2026',cod_CAEN:'1811',telefon:'0210000000',forma_juridica:'Societate pe acțiuni'},inregistrare_scop_Tva:{scpTVA:true,dataInceputScpTVA:'2007-06-13'},stare_inactiv:{statusInactivi:false}}]};
  const soap=inner=>'<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body>'+inner+'</s:Body></s:Envelope>';
  const courtResponse=operation=>{const record='<Dosar><numar>1/2/2026</numar><institutie>PJ-CURTE-DE-TEST</institutie><data>2025-12-01</data><obiect>Verificare publică</obiect><stadiuProcesual>Fond</stadiuProcesual><dataModificare>2026-10-01</dataModificare><parti><DosarParte><nume>Parte publică</nume><calitateParte>Reclamant</calitateParte></DosarParte></parti><sedinte><DosarSedinta><data>2026-11-02</data><ora>10:00</ora><solutieSumar>Soluție publică integrală</solutieSumar></DosarSedinta></sedinte></Dosar>';
   return new Response(soap('<'+operation+'Response><'+operation+'Result>'+record+'</'+operation+'Result></'+operation+'Response>'),{headers:{'content-type':'text/xml'}})};
- const lawSoapResponse=body=>String(body).includes('<GetToken ')?new Response(soap('<GetTokenResult>test-token</GetTokenResult>'),{headers:{'content-type':'text/xml'}}):new Response(soap('<SearchResult><a:Legi><a:Titlu>LEGE de verificare</a:Titlu><a:TipAct>lege</a:TipAct><a:LinkHtml>https://legislatie.just.ro/Public/DetaliiDocument/70001</a:LinkHtml><a:Text>Text SOAP recent preluat.</a:Text></a:Legi></SearchResult>'),{headers:{'content-type':'text/xml'}});
+  const lawSoapResponse=body=>String(body).includes('<GetToken ')?new Response(soap('<GetTokenResult>test-token</GetTokenResult>'),{headers:{'content-type':'text/xml'}}):new Response(soap('<SearchResult><a:Legi><a:Titlu>LEGE de verificare</a:Titlu><a:TipAct>lege</a:TipAct><a:LinkHtml>https://legislatie.just.ro/Public/DetaliiDocument/70001</a:LinkHtml><a:Text>Text SOAP recent preluat.</a:Text></a:Legi></SearchResult>'),{headers:{'content-type':'text/xml'}});
+  // Pagina oficială DetaliiDocument (familia legal/act-page, sonda Wave B): fișa actului cu
+  // titlul, emitentul, publicația și istoricul versiunilor cu adresele oficiale — forma de
+  // bază + consolidarea aplicabilă astăzi + o versiune viitoare, după anatomia paginii reale.
+  const actPage=()=>{return '<!DOCTYPE html><html><head><meta name="title" content="LEGE de verificare pentru fișa actului"></head><body><span id="fisaact"></span><div id="istoric_fa"><span>Forma de bază</span><a href="/Public/DetaliiDocument/70001" title="Forma de bază">01.01.2025</a><a href="/Public/DetaliiDocument/70002" title="Consolidarea din 01.01.2026">01.01.2026</a><a href="/Public/DetaliiDocument/70003" title="Consolidarea viitoare">01.01.2027</a></div><span class="S_HDR">LEGE de verificare pentru fișa actului</span><span class="S_EMT_BDY">Parlamentul României</span><span class="S_PUB_BDY">Monitorul Oficial, Partea I nr. 1</span><span class="S_ART"><span class="S_ART_TTL">Articolul 1</span><span class="S_ART_BDY"><span class="S_PAR">Textul integral al actului de verificare, 1 & 2.</span></span></span><script>doNotRun()</script></body></html>'};
  const rssFixture=host=>{const item=n=>'<item><title>Anunț public '+(n+1)+' — '+host+'</title><link>https://'+host+'/anunt-'+n+'</link><pubDate>Tue, 06 Oct 2026 08:0'+n+':00 GMT</pubDate><description>Descriere integrală.</description><content:encoded><![CDATA[<p>Conținut complet '+host+'.</p>]]></content:encoded></item>';return new Response('<rss><channel>'+item(0)+item(1)+'</channel></rss>',{headers:{'content-type':'application/rss+xml'}})};
   const ckanBody={success:true,result:{count:1,results:[{id:'c20c6438-91ec-4204-a8df-c3d7c5fb47aa',name:'dataset-verificare',title:'Set de date de verificare',organization:{title:'Organizația publică de test'},metadata_modified:'2026-10-01T00:00:00',license_title:'Date deschise',num_resources:0,resources:[],notes:'Descriere completă.'}],search_facets:{organization:{items:[{name:'org-test',display_name:'Organizația publică de test'}]},res_format:{items:[{name:'csv',display_name:'CSV'}]}}}};
  const schoolsBody=()=>({success:true,result:{total:22,fields:[{id:'_id'},{id:'Numarul'},{id:'Nume scola'},{id:'Localitate unitate'},{id:'Judet PJ'}],records:Array.from({length:20},(_,i)=>({'_id':i,'Numarul':19561300+i,'Nume scola':'Școala Gimnazială de Verificare '+i,'Localitate unitate':'București','Judet PJ':'București'}))}});
- const cnasResource={health:'CLINIC',pharmacies:'FARM',hospitals:'SPITAL'};
- const cnasBody=family=>({success:true,result:{resources:[{name:'Lista furnizori cu drept de decont '+cnasResource[family.split('/')[1]]+' 31.03.2026',url:'https://data.gov.ro/dataset/lista-furnizori/resource/export-de-verificare.xlsx',format:'XLSX',last_modified:'2026-04-01T00:00:00'}]}});
- const cnasXlsx=()=>{const XLSX=require('xlsx');const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet([['Nume furnizor','CUI cod','Localitate','Judet'],['Furnizor public de verificare 1','12345','București','București'],['Furnizor public de verificare 2','12456','Cluj-Napoca','Cluj']]),'CLINIC');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
+  const cnasResource={health:'CLINIC',pharmacies:'FARM',hospitals:'SPITAL'};
+  const cnasBody=family=>({success:true,result:{resources:[{name:'Lista furnizori cu drept de decont '+cnasResource[family.split('/')[1]]+' 31.03.2026',url:'https://data.gov.ro/dataset/lista-furnizori/resource/export-de-verificare.xlsx',format:'XLSX',last_modified:'2026-04-01T00:00:00'}]}});
+  const cnasXlsx=()=>{const XLSX=require('xlsx');const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet([['Nume furnizor','CUI cod','Localitate','Judet'],['Furnizor public de verificare 1','12345','București','București'],['Furnizor public de verificare 2','12456','Cluj-Napoca','Cluj']]),'CLINIC');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
+   // Reuniunea firmelor cu registrele publice CKAN (Wave B). Dovezile coloanelor: sonda live a
+   // exportului FARM (data.gov.ro, 2026-10-08) și citirile edițiilor cache-uite ale propriului
+   // worker publicat arată că toate cele trei ediții CNAS 31.03.2026 publică „Cod fiscal
+   // furnizor”; „CUI cod” este numele de coloană fixat de fixture-ul pinned al directoarelor
+   // (edițiile anterioare), pe care reuniunea îl acceptă al doilea — mock-ul exercită câte un
+   // registru pe fiecare nume acceptat, ca ambele căi de potrivire să rămână fixate. Rândurile
+   // purtătoare de CUI-ul firmei de verificare dovedesc potrivirea exactă pe cheie; registrul
+   // fără potrivire dovedește absența onestă.
+  const companyCnasMeta=()=>({success:true,result:{resources:['health','pharmacies','hospitals'].map(kind=>({name:'Contracte '+cnasResource[kind]+' 31.03.2026.xls',url:'https://data.gov.ro/dataset/lista-furnizori/resource/export-firme-'+cnasResource[kind]+'-de-verificare.xls',format:'XLS',last_modified:'2026-04-01T00:00:00'}))}});
+  const companyCnasXlsx=href=>{const XLSX=require('xlsx');const kind=['health','pharmacies','hospitals'].find(candidate=>href.includes('export-firme-'+cnasResource[candidate]+'-de-verificare')),workbook=XLSX.utils.book_new();
+   const rows=kind==='pharmacies'
+    ?[['Numar contract','Cod fiscal furnizor','Tip furnizor','Nume furnizor','Cod CAS','Nume CAS'],['478','10055437','Farmacie','SC TERRA FARM SRL','CAS-AR','CAS ARAD'],['479','427282','Farmacie','Firma de verificare ANAF','CAS-B','CAS BUCUREŞTI']]
+    :kind==='health'
+     ?[['Nume furnizor','CUI cod','Localitate','Judet'],['Furnizor public de verificare 1','12345','București','București'],['Furnizor public de verificare 2','12456','Cluj-Napoca','Cluj']]
+     :[['Nume furnizor','CUI cod','Localitate','Judet'],['Spital public de verificare','427282','București','București'],['Spitalul filial al firmei de verificare','427282','Giurgiu','Giurgiu'],['Spital fără CUI comun','12456','Cluj-Napoca','Cluj']];
+   XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),'Contracte');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xls'}))};
  // Justice fixtures mirror the published structure of each registry workbook (real column
  // names; the experți tehnici sheet starts with a title row before the header, as published).
  const justiceFixture=(kind)=>{
@@ -291,6 +318,7 @@ if(live){
   const successFor=(family,href,host,init)=>{
    if(family.family==='weather/open-meteo')return Response.json(openMeteoBody());
    if(family.family==='company/anaf')return Response.json(href.includes('/api/PlatitorTvaRest/')?anafRegistry:anafBalance(href));
+   if(family.family==='legal/act-page')return new Response(actPage(),{headers:{'content-type':'text/html'}});
    if(family.family==='courts/portal.just')return courtResponse(String(init?.headers?.SOAPAction||'').includes('CautareDosare2')?'CautareDosare2':'CautareDosare');
    if(family.family==='feeds/stiri')return rssFixture(host);
    if(family.family==='catalog/ckan')return Response.json(ckanBody);
@@ -360,6 +388,9 @@ if(live){
     // poartă avaria celulei, iar celălalt calendar al registrului servește în continuare
     // prin propriul fixture — reuniunea degradează onest, nu dispare.
     if(family.family==='events/search'&&host==='teatrul-odeon.ro')return odeonPage();
+    // Registrul CKAN al firmelor se citește de rută în paralel cu ANAF: adresa are propria ei
+    // gazdă, deci fixture-ul CNAS se servește pe gazdă, înaintea clasificării pe familia-gazdă.
+    if(family.family==='company/anaf'&&host==='data.gov.ro')return href.includes('package_show')?Response.json(companyCnasMeta()):new Response(companyCnasXlsx(href),{headers:{'content-type':'application/vnd.ms-excel'}});
     if(host===family.host&&scenario!=='success')return failureFor(scenario,init);
    if(host===family.host)return successFor(family,href,host,init);
    if(host==='query.wikidata.org')return Response.json({results:{bindings:[]}});
@@ -395,13 +426,28 @@ if(live){
     if(scenario==='malformed')assert(e.length>0,label+': răspunsul nevalid are plic de eroare');
     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
   if(family.family==='company/anaf'){
-   const anaf=hostCount('webservicesp.anaf.ro'),wikidata=hostCount('query.wikidata.org');
-   assert.equal(Array.isArray(payload?.data?.sources)&&payload.data.sources.length,2,label+': compozitul păstrează ambele surse');
+   const anaf=hostCount('webservicesp.anaf.ro'),wikidata=hostCount('query.wikidata.org'),ckan=hostCount('data.gov.ro');
+   assert.equal(Array.isArray(payload?.data?.sources)&&payload.data.sources.length,scenario==='success'||scenario==='warm-http500'?5:2,label+': compozitul păstrează ambele surse'+(scenario==='success'||scenario==='warm-http500'?' și registrele CKAN citibile':''));
    const knowledge=payload.data.sources.find(source=>source.key==='knowledge-company:427282');
    assert(knowledge,label+': starea Wikidata este prezentă');assert(['fresh','cached'].includes(knowledge.status),label+': sursa sănătoasă rămâne disponibilă');
-   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.name,'Firma de verificare ANAF',label+': identitatea fiscală servită');assert.equal(payload.data.history.length,3,label+': toți cei trei ani de bilanț');assert.equal(anaf,4,label+': un acces per componentă ANAF');assert.equal(wikidata,1,label+': un acces Wikidata')}
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.name,'Firma de verificare ANAF',label+': identitatea fiscală servită');assert.equal(payload.data.history.length,3,label+': toți cei trei ani de bilanț');assert.equal(anaf,4,label+': un acces per componentă ANAF');assert.equal(wikidata,1,label+': un acces Wikidata');
+    assert.equal(payload.data.history.at(-1).caenLabel,'Activitatea CAEN publicată în bilanț',label+': denumirea codului CAEN din bilanț este păstrată, nu eliminată la analiză');
+    assert.equal(payload.data.vatFrom,'2007-06-13',label+': intervalul de înregistrare în scopuri TVA este promovat tipizat');
+    assert.equal(ckan,6,label+': registrele CKAN, metadatele și exportul pe fiecare fel, câte un acces');
+    const registries=payload.data.publicRegistries||[];
+    assert.equal(registries.length,3,label+': cele trei registre CNAS citibile alăturate firmei');
+    const farmacii=registries.find(registry=>registry.kind==='pharmacies');
+    assert(farmacii,label+': registrul farmaciilor este prezent');assert.equal(farmacii.records.length,1,label+': potrivirea pe coloana „Cod fiscal furnizor" publicată de registru');    assert.equal(farmacii.records[0]['Nume furnizor'],'Firma de verificare ANAF',label+': rândul servit este cel al cărui CUI corespunde exact');
+    const spitale=registries.find(registry=>registry.kind==='hospitals');
+    assert.equal(spitale.records.length,2,label+': mai multe rânduri cu același CUI rămân rânduri distincte, fără îmbinare');
+    const clinici=registries.find(registry=>registry.kind==='health');
+    assert.equal(clinici.records.length,0,label+': registrul fără potrivire rămâne absență onestă, nu câmp inventat');
+    for(const registry of [farmacii,spitale])assert(payload.data.sources.some(source=>source.key==='directory:'+registry.kind),label+': fiecare registru citibil își expune starea proprie');
+    assert(payload.data.provenance['cnasFarmacii']&&payload.data.provenance['cnasSpitale'],label+': proveniența fiecărui registru cu potrivire este înregistrată');
+    assert(!payload.data.provenance['cnasClinici'],label+': fără proveniență inventată pentru registrul fără potrivire')}
    else{assert.match(e,/ANAF nu a returnat/,label+': plicul de eroare ANAF documentat');
-    if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500 ANAF');assert.equal(payload.data.name,'Firma de verificare ANAF',label+': copia păstrată este cea verificată');assert.equal(anaf,12,label+': cele trei încercări per componentă');assert.equal(wikidata,0,label+': sursa sănătoasă nu se reinteroghează')}
+    if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500 ANAF');assert.equal(payload.data.name,'Firma de verificare ANAF',label+': copia păstrată este cea verificată');assert.equal(anaf,12,label+': cele trei încercări per componentă');assert.equal(wikidata,0,label+': sursa sănătoasă nu se reinteroghează');
+     assert.equal(payload.data.publicRegistries.length,3,label+': copia validă păstrează registrele CKAN alăturate');assert.equal(ckan,0,label+': registrele servite din copie nu se reinteroghează')}
     else{assert.equal(payload.status,'stale',label+': copia inițială verificată servește');assert(payload.data,label+': copia de rezervă se păstrează');assert.equal(anaf,scenario==='http500'?12:4,label+': numărul documentat de accesări');assert.equal(wikidata,1,label+': un acces Wikidata')}}}
   if(family.family==='courts/portal.just'){
    const attempts=hostCount('portalquery.just.ro');
@@ -492,7 +538,26 @@ if(live){
     if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
     if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
     if(scenario==='malformed')assert.match(e,/Structura serviciului juridic/,label+': structura SOAP respinsă în română');
-    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de operații')}}
+     assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de operații')}}
+  if(family.family==='legal/act-page'){
+   const attempts=hostCount('legislatie.just.ro');
+   if(scenario==='success'){assert.equal(payload.status,'fresh',label);const act=payload.data.items[0];
+    assert.equal(act.id,'https://legislatie.just.ro/Public/DetaliiDocument/70001',label+': identitatea oficială a actului deschis');
+    assert.equal(act.sourceUrl,'https://legislatie.just.ro/Public/DetaliiDocument/70002',label+': forma aplicabilă este cea din istoricul oficial');
+    assert(act.text.includes('Textul integral al actului de verificare'),label+': textul integral al paginii oficiului');
+    assert.equal(act.issuer,'Parlamentul României',label+': emitentul din fișa paginii');
+    assert.equal(act.publication,'Monitorul Oficial, Partea I nr. 1',label+': publicația din fișa paginii');
+    assert.equal(act.consolidation.versionId,'70002',label+': versiunea selectată în istoric');
+    assert.deepEqual(act.consolidation.versionHistory.map(version=>[version.id,version.kind,version.date]),[['70001','base','2025-01-01'],['70002','consolidated','2026-01-01'],['70003','consolidated','2027-01-01']],label+': istoricul versiunilor (datele evenimentelor) revine întreg, pe adresele oficiale');
+    assert(act.consolidation.versionHistory.every(version=>/^\d{1,9}$/.test(version.id)),label+': fiecare versiune poartă un identificator oficial validat');
+    assert.equal(attempts,2,label+': pagina de bază și forma selectată, câte un acces')}
+   else if(scenario==='warm-http500'){assert.ok(['cached','stale'].includes(payload.status),label+': copia înregistrată servește fără reinterogare');assert(payload.data.items[0].text.includes('Textul integral al actului de verificare'),label+': textul se păstrează din copia înregistrată');assert.equal(attempts,0,label+': înregistrarea proaspătă se reutilizează o oră fără să reinterogheze portalul')}
+   else{assert.equal(payload.status,'unavailable',label+': fără copie, starea documentată');assert.equal(payload.data,null,label+': fără formă sau istoric inventat');
+    // The portal circuit cushions every page failure class into its honest pause message; the
+    // underlying HTTP class stays recorded in the circuit row, not in the reader envelope.
+    if(scenario==='http500'||scenario==='http429'||scenario==='timeout')assert.match(e,/nu poate transmite textul acum/,label+': mesajul clasei de pauză al circuitului portalului');
+    if(scenario==='malformed')assert.match(e,/(?:integral|istoric)/,label+': pagina nevalidă respinsă în română, fără formă publicată');
+    assert.equal(attempts,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
   if(family.family==='feeds/agricultura'||family.family==='feeds/filme'){
    const host=hostCount(family.host);
    if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert(payload.data.items.length>0,label+': articolele sursei servite');assert(payload.data.items.every(item=>item.url&&item.title),label+': identitatea fiecărui articol se păstrează');assert.equal(host,1,label+': un singur acces la sursă')}

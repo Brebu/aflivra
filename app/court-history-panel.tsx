@@ -1,19 +1,20 @@
 'use client';
 import {useState} from 'react';
 import {Button} from '@/components/ui/button';
-import {courtHistoryText,type CourtHistory} from '@/lib/court-history';
+import {courtHistoryText,type CourtHistory,ACT_LINKS_ABSENCE_NOTE} from '@/lib/court-history';
 import {countText} from '@/lib/live/query';
 import {dateText} from './live-data';
 import {ExportActions} from './export-actions';
 import {WatchButton} from './watch-button';
 
 export function CourtHistoryPanel({history,onOpenRecord,onSearchNumber}:{history:CourtHistory;onOpenRecord:(id:string)=>void;onSearchNumber:(number:string)=>void}){
- const [evidenceOpen,setEvidenceOpen]=useState<string[]>([]);
- return <section className="court-history-panel" aria-label={'Etapele dosarului '+history.number}>
-  <div className="court-history-head"><h3>Parcursul dosarului {history.number}</h3><WatchButton kind="dosar" target={history.number} name={history.number} label={'Dosar '+history.number}/></div>
-  <div className="court-history-stages">{history.stages.map(stage=><article className="court-stage" key={stage.id}>
-   <h4>{stage.label}</h4><p>{stage.courtLabel}</p>
-    <p className="court-stage-status">{stage.availability==='record'?countText(stage.recordIds.length,'fișă disponibilă','fișe disponibile')+' · '+countText(stage.hearingCount,'ședință publicată','ședințe publicate'):'Confirmat prin trimitere oficială'}</p>
+  const [evidenceOpen,setEvidenceOpen]=useState<string[]>([]);
+  return <section className="court-history-panel" aria-label={'Etapele dosarului '+history.number}>
+   <div className="court-history-head"><h3>Parcursul dosarului {history.number}</h3><WatchButton kind="dosar" target={history.number} name={history.number} label={'Dosar '+history.number}/></div>
+   <div className="court-history-stages">{history.stages.map(stage=><article className="court-stage" key={stage.id}>
+    <h4>{stage.label}</h4><p>{stage.courtLabel}</p>
+    {stage.institution&&<p className="court-stage-institution">{stage.institution.type}{stage.institution.locality?' · '+stage.institution.locality:''}</p>}
+     <p className="court-stage-status">{stage.availability==='record'?countText(stage.recordIds.length,'fișă disponibilă','fișe disponibile')+' · '+countText(stage.hearingCount,'ședință publicată','ședințe publicate'):'Confirmat prin trimitere oficială'}</p>
    {stage.availability==='reference'&&<p className="field-help">Fișa și ședințele de la această etapă nu sunt disponibile în răspunsul portalului.</p>}
    {stage.evidence.map(reference=><p key={reference.id}>{reference.document} {reference.documentNumber} · {dateText(reference.documentDate)}</p>)}
    <div className="court-stage-actions">{stage.recordIds.map((id,index)=><Button key={id} variant="outline" onClick={()=>onOpenRecord(id)}>Vezi fișa de {stage.label.toLowerCase()}{stage.recordIds.length>1?' ('+(index+1)+')':''}</Button>)}
@@ -27,6 +28,7 @@ export function CourtHistoryPanel({history,onOpenRecord,onSearchNumber}:{history
   </article>)}</div>
   {!!history.relatedCases.length&&<div className="court-related-cases"><p>Hotărâri din alte dosare menționate în soluții:</p>{[...new Map(history.relatedCases.map(r=>[r.number,r])).values()].map(reference=><Button key={reference.number} variant="outline" onClick={()=>onSearchNumber(reference.number)}>Dosar {reference.number} · {reference.courtLabel}</Button>)}</div>}
   <p className="field-help">Sunt legate etapele confirmate de datele oficiale. Istoricul complet și existența altor etape nu sunt garantate de sursă.</p>
+  <p className="field-help">{ACT_LINKS_ABSENCE_NOTE}</p>
   <ExportActions input={{title:'Etapele dosarului '+history.number,text:courtHistoryText(history),data:history}} formats={['pdf','csv','xlsx']} label="Descarcă etapele și confirmările"/>
  </section>;
 }

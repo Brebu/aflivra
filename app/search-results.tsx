@@ -48,6 +48,8 @@ export function FederatedResults({term,gallery,onNavigate,onReset}:{term:string;
       <span className="federated-row-side"><small>{[item.subcategory&&item.subcategory!==item.title?item.subcategory:undefined,item.source].filter(Boolean).join(' · ')}</small><span className="federated-row-open">Deschide <ArrowUpRight size={15}/></span></span>
      </button>
      {item.url&&externalLinkKinds.includes(item.kind)&&<a className="federated-row-source text-link" href={item.url} target="_blank" rel="noreferrer">La sursă <ExternalLink size={14}/></a>}
+     {/* Cross-entity links (v5): discovery deep-links between related entities of different families — sibling anchors of the row button, never merged row data, so a nested interactive element never lands inside the button. */}
+     {item.crossLinks&&item.crossLinks.length>0&&item.crossLinks.map(link=><a key={link.id} className="federated-row-source text-link federated-cross-link" data-testid="federated-cross-link" href={link.href} title={link.note}>{link.label} <ArrowUpRight size={14}/></a>)}
     </li>)}</ul>:<p className="live-empty">Nicio potrivire în această categorie.</p>}
     {group.families.map(f=>{
      if(f.status==='gate'&&f.note)return <p key={f.family} className="small-muted" role="status">{familyById.get(f.family)?.label}: {f.note}</p>;

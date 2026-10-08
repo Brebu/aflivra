@@ -1,0 +1,158 @@
+
+Running 6 tests using 3 workers
+
+  ✘  1 [chromium] › e2e/court-institution.spec.ts:36:3 › Court institution metadata on dosar stages (Wave B) › stage rows carry the institution type and locality from the registry label (16.3s)
+  ✘  2 [chromium] › e2e/company-registries.spec.ts:57:3 › Company registries joined on CUI (Wave B) › the balance CAEN label renders typed beside the code, and the VAT interval as a date range (16.3s)
+  ✘  3 [chromium] › e2e/legal-act-facts.spec.ts:48:3 › Legal act facts for the same act id (Wave B) › the reader renders the official version history of the same act id, each event on its official address (16.6s)
+  ✘  4 [chromium] › e2e/court-institution.spec.ts:64:3 › Court institution metadata on dosar stages (Wave B) › the dosar document tab discloses the act-citation absence without search guesses (16.4s)
+  ✘  6 [chromium] › e2e/legal-act-facts.spec.ts:83:3 › Legal act facts for the same act id (Wave B) › when the portal page cannot be read, the act keeps its official-search bibliographic facts (22.5s)
+  ✘  5 [chromium] › e2e/company-registries.spec.ts:77:3 › Company registries joined on CUI (Wave B) › the CKAN CNAS registries join on the exact CUI, grouped by source, with honest absence (22.9s)
+
+
+  1) [chromium] › e2e/company-registries.spec.ts:57:3 › Company registries joined on CUI (Wave B) › the balance CAEN label renders typed beside the code, and the VAT interval as a date range 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.company-live .facts-table').first()
+    Expected substring: "5812 · Activități de editare a ziarelor"
+    Received string:    "DenumireMonitorul Oficial RACUI427282Registru comerțJ40/1/1991AdresăBucureștiCAEN curent58CAEN în bilanț5812Formă juridicăSocietate naționalăFormă de organizareIndisponibilData înregistrării7 mar. 1991Stare de înregistrareIndisponibilOrgan fiscal competentIndisponibilCod poștalIndisponibilInterogare fiscală8 oct. 2026"
+    Timeout: 15000ms
+
+    Call log:
+      - Expect "toContainText" locator('.company-live .facts-table').first() with timeout 15000ms
+      - waiting for locator('.company-live .facts-table').first()
+        34 × locator resolved to <table class="facts-table">…</table>
+           - unexpected value "DenumireMonitorul Oficial RACUI427282Registru comerțJ40/1/1991AdresăBucureștiCAEN curent58CAEN în bilanț5812Formă juridicăSocietate naționalăFormă de organizareIndisponibilData înregistrării7 mar. 1991Stare de înregistrareIndisponibilOrgan fiscal competentIndisponibilCod poștalIndisponibilInterogare fiscală8 oct. 2026"
+
+
+      63 |     // den_caen is a field the ANAF balance response carries (probe-pinned); the identity row
+      64 |     // renders it beside the code instead of dropping it at parse.
+    > 65 |     await expect(identity).toContainText('5812 · Activități de editare a ziarelor');
+         |                            ^
+      66 |     await expect(identity).toContainText('Înregistrare în scopuri TVA');
+      67 |     // The interval is typed with the locale date helpers — the pair 13 jun 2007 → open-ended.
+      68 |     await expect(identity).toContainText('13 iun. 2007');
+        at /Users/cbrebu/Projects/alfivra/e2e/company-registries.spec.ts:65:28
+
+    Error Context: test-results/company-registries-Company-741af-AT-interval-as-a-date-range-chromium/error-context.md
+
+  2) [chromium] › e2e/company-registries.spec.ts:77:3 › Company registries joined on CUI (Wave B) › the CKAN CNAS registries join on the exact CUI, grouped by source, with honest absence 
+
+    TimeoutError: locator.click: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for getByRole('tab', { name: 'Registre publice' })
+        - waiting for navigation to finish...
+
+
+      77 |   test('the CKAN CNAS registries join on the exact CUI, grouped by source, with honest absence', async ({page}) => {
+      78 |     await openCompany(page);
+    > 79 |     await page.getByRole('tab', {name: 'Registre publice'}).click();
+         |                                                             ^
+      80 |     const registries = page.locator('.company-registries');
+      81 |     await expect(registries).toBeVisible();
+      82 |     await expect(registries.getByRole('heading', {level: 2, name: 'Registrele publice pentru acest CUI'})).toBeVisible();
+        at /Users/cbrebu/Projects/alfivra/e2e/company-registries.spec.ts:79:61
+
+    Error Context: test-results/company-registries-Company-af2ab--source-with-honest-absence-chromium/error-context.md
+
+  3) [chromium] › e2e/court-institution.spec.ts:36:3 › Court institution metadata on dosar stages (Wave B) › stage rows carry the institution type and locality from the registry label 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.court-history-panel').filter({ hasText: 'Parcursul dosarului 6236/111/2017' }).locator('.court-stage').filter({ hasText: 'Fond' }).locator('.court-stage-institution')
+    Expected: "Tribunal · Bihor"
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" locator('.court-history-panel').filter({ hasText: 'Parcursul dosarului 6236/111/2017' }).locator('.court-stage').filter({ hasText: 'Fond' }).locator('.court-stage-institution') with timeout 15000ms
+      - waiting for locator('.court-history-panel').filter({ hasText: 'Parcursul dosarului 6236/111/2017' }).locator('.court-stage').filter({ hasText: 'Fond' }).locator('.court-stage-institution')
+
+
+      53 |     const fondStage = panel.locator('.court-stage', {hasText: 'Fond'});
+      54 |     await expect(fondStage).toBeVisible();
+    > 55 |     await expect(fondStage.locator('.court-stage-institution')).toHaveText('Tribunal · Bihor');
+         |                                                                 ^
+      56 |     const apelStage = panel.locator('.court-stage', {hasText: 'Apel'});
+      57 |     await expect(apelStage.locator('.court-stage-institution')).toHaveText('Curte de Apel · Oradea');
+      58 |     // The links honesty the probe settled: no act identifiers are published, so the surface
+        at /Users/cbrebu/Projects/alfivra/e2e/court-institution.spec.ts:55:65
+
+    Error Context: test-results/court-institution-Court-in-5e371-ity-from-the-registry-label-chromium/error-context.md
+
+  4) [chromium] › e2e/court-institution.spec.ts:64:3 › Court institution metadata on dosar stages (Wave B) › the dosar document tab discloses the act-citation absence without search guesses 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.court-case-group .court-case').filter({ hasText: 'Dosar 6236/111/2017' }).first()
+    Expected substring: "legături programatice"
+    Received string:    "Tribunalul BihorDosar 6236/111/2017Litigii de muncă · Obiect neprecizatFond · Secția civilă1 ședință publicată · Înregistrat: 1 dec. 2017 · Modificat: 5 oct. 2026Restrânge detaliileInstanțăTribunalul BihorSecțieSecția civilăMaterieLitigii de muncăÎnregistrat1 dec. 2017Ultima modificare indicată5 oct. 2026Număr vechiNefurnizat de sursăDescarcă fișa publică PDFFormat pentru toate datele dosaruluiCSVExcel (.xlsx)CSVToate datele dosaruluiȘedințe și soluții (1)Părți și calitățiAvocațiCăi de atacHotărâri și documenteDocumente indicate de instanțăHotărâre 1/2026 · 5 ian. 2026, 00:00Portalul a transmis identificatorii documentelor și soluțiile pe scurt, fără fișierul hotărârii. Hotărârile din ReJust sunt publicate în format anonimizat; potrivirea cu o persoană nu este confirmată automat.Jurisprudența publică ReJustSolicită copia hotărârii de la instanță"
+    Timeout: 15000ms
+
+    Call log:
+      - Expect "toContainText" locator('.court-case-group .court-case').filter({ hasText: 'Dosar 6236/111/2017' }).first() with timeout 15000ms
+      - waiting for locator('.court-case-group .court-case').filter({ hasText: 'Dosar 6236/111/2017' }).first()
+        34 × locator resolved to <article tabindex="-1" class="court-case" id="court-record-probe-tbihor">…</article>
+           - unexpected value "Tribunalul BihorDosar 6236/111/2017Litigii de muncă · Obiect neprecizatFond · Secția civilă1 ședință publicată · Înregistrat: 1 dec. 2017 · Modificat: 5 oct. 2026Restrânge detaliileInstanțăTribunalul BihorSecțieSecția civilăMaterieLitigii de muncăÎnregistrat1 dec. 2017Ultima modificare indicată5 oct. 2026Număr vechiNefurnizat de sursăDescarcă fișa publică PDFFormat pentru toate datele dosaruluiCSVExcel (.xlsx)CSVToate datele dosaruluiȘedințe și soluții (1)Părți și calitățiAvocațiCăi de atacHotărâri și documenteDocumente indicate de instanțăHotărâre 1/2026 · 5 ian. 2026, 00:00Portalul a transmis identificatorii documentelor și soluțiile pe scurt, fără fișierul hotărârii. Hotărârile din ReJust sunt publicate în format anonimizat; potrivirea cu o persoană nu este confirmată automat.Jurisprudența publică ReJustSolicită copia hotărârii de la instanță"
+
+
+      80 |     await card.getByRole('tab', {name: /Hotărâri și documente/}).click();
+      81 |     // The documents tab declares what the portal does and does not publish for act citations.
+    > 82 |     await expect(card).toContainText('legături programatice');
+         |                        ^
+      83 |     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+      84 |   });
+      85 | });
+        at /Users/cbrebu/Projects/alfivra/e2e/court-institution.spec.ts:82:24
+
+    Error Context: test-results/court-institution-Court-in-5fa10-ence-without-search-guesses-chromium/error-context.md
+
+  5) [chromium] › e2e/legal-act-facts.spec.ts:48:3 › Legal act facts for the same act id (Wave B) › the reader renders the official version history of the same act id, each event on its official address 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.reader-dialog').first().locator('.law-version-history')
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('.reader-dialog').first().locator('.law-version-history') with timeout 15000ms
+      - waiting for locator('.reader-dialog').first().locator('.law-version-history')
+
+
+      69 |     // selected version, each on its own official DetaliiDocument address.
+      70 |     const history = dialog.locator('.law-version-history');
+    > 71 |     await expect(history).toBeVisible();
+         |                           ^
+      72 |     await expect(history).toContainText('Istoricul formelor oficiale');
+      73 |     await expect(history).toContainText('17 iun. 2009');
+      74 |     await expect(history).toContainText('Formă de bază');
+        at /Users/cbrebu/Projects/alfivra/e2e/legal-act-facts.spec.ts:71:27
+
+    Error Context: test-results/legal-act-facts-Legal-act--cbc8b-ent-on-its-official-address-chromium/error-context.md
+
+  6) [chromium] › e2e/legal-act-facts.spec.ts:83:3 › Legal act facts for the same act id (Wave B) › when the portal page cannot be read, the act keeps its official-search bibliographic facts 
+
+    Error: page.evaluate: Execution context was destroyed, most likely because of a navigation
+
+      43 |
+      44 |   async function waitForClientReady(page: Page) {
+    > 45 |     await expect.poll(() => page.evaluate(() => localStorage.getItem('reper.v2.preferences') !== null), {timeout: 30_000}).toBe(true);
+         |                                  ^
+      46 |   }
+      47 |
+      48 |   test('the reader renders the official version history of the same act id, each event on its official address', async ({page}) => {
+        at expect.poll.timeout (/Users/cbrebu/Projects/alfivra/e2e/legal-act-facts.spec.ts:45:34)
+        at waitForClientReady (/Users/cbrebu/Projects/alfivra/e2e/legal-act-facts.spec.ts:45:5)
+        at /Users/cbrebu/Projects/alfivra/e2e/legal-act-facts.spec.ts:92:5
+
+    Error Context: test-results/legal-act-facts-Legal-act--03ec4--search-bibliographic-facts-chromium/error-context.md
+
+  6 failed
+    [chromium] › e2e/company-registries.spec.ts:57:3 › Company registries joined on CUI (Wave B) › the balance CAEN label renders typed beside the code, and the VAT interval as a date range 
+    [chromium] › e2e/company-registries.spec.ts:77:3 › Company registries joined on CUI (Wave B) › the CKAN CNAS registries join on the exact CUI, grouped by source, with honest absence 
+    [chromium] › e2e/court-institution.spec.ts:36:3 › Court institution metadata on dosar stages (Wave B) › stage rows carry the institution type and locality from the registry label 
+    [chromium] › e2e/court-institution.spec.ts:64:3 › Court institution metadata on dosar stages (Wave B) › the dosar document tab discloses the act-citation absence without search guesses 
+    [chromium] › e2e/legal-act-facts.spec.ts:48:3 › Legal act facts for the same act id (Wave B) › the reader renders the official version history of the same act id, each event on its official address 
+    [chromium] › e2e/legal-act-facts.spec.ts:83:3 › Legal act facts for the same act id (Wave B) › when the portal page cannot be read, the act keeps its official-search bibliographic facts 

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
-import {mkdtemp,writeFile,rm,readFile} from 'node:fs/promises';
+import {mkdtemp,writeFile,rm,readFile,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -14,12 +14,22 @@ async function compile(name,path,transform=s=>s){const source=transform(await re
 const snapshot=()=>JSON.stringify(result);
 let result=null;
 try{
- const query=await compile('query','lib/live/query.ts');
- const topics=await compile('topics','lib/dashboard-topics.ts');
- const federated=await compile('federated','lib/live/federated.ts',s=>s
-  .replace("from '@/lib/live/query'","from './query'")
-  .replace("from '@/lib/dashboard-topics'","from './topics'"));
- const {federatedSearch,federatedCollect,federatedFamilies,federatedGroups,courtNumberTerm,validDomainTab}=federated;
+  const query=await compile('query','lib/live/query.ts');
+  const topics=await compile('topics','lib/dashboard-topics.ts');
+  // Sibling modules for the federated layer's venue-registry import (v5): events.ts
+  // reads the committed registry (venues.json) and pulls only text/media besides the
+  // source adapter, which is offline-stubbed like every other compile in this harness.
+  const transpile=s=>ts.transpileModule(s,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
+  await writeFile(join(temp,'text.mjs'),transpile(await readFileRaw(join(root,'lib/live/text.ts'),'utf8')));
+  await writeFile(join(temp,'media.mjs'),transpile(await readFileRaw(join(root,'lib/live/media.ts'),'utf8')));
+  const venuesRaw=await readFileRaw(join(root,'public/events/venues.json'),'utf8');
+  await writeFile(join(temp,'events.mjs'),transpile((await readFileRaw(join(root,'lib/live/events.ts'),'utf8'))
+   .replace("import {getSource,SourceError} from './adapters';","const getSource=async()=>{throw Error('offline')};class SourceError extends Error{}")
+   .replace("import venuesCatalog from '@/public/events/venues.json';",'const venuesCatalog='+venuesRaw+';')));
+  const federated=await compile('federated','lib/live/federated.ts',s=>s
+   .replace("from '@/lib/live/query'","from './query'")
+   .replace("from '@/lib/dashboard-topics'","from './topics'"));
+  const {federatedSearch,federatedCollect,federatedFamilies,federatedGroups,courtNumberTerm,validDomainTab,federatedRoute,venueForPlaceRecord}=federated;
   const networkIds=['places','catalog','lawyers','directory-schools','directory-health','directory-pharmacies','directory-hospitals','stiri','agricultura','notaries','experts-judiciari','experts-tehnici','translators','trains','flights','events','anl-sites'];
  const eagerIds=['stories','gallery','cui','dosare'];
  const familyIds=[...networkIds,...eagerIds].sort();
@@ -233,5 +243,66 @@ try{
  assert.deepEqual(ordered,expectedOrder,'groups always render in domain-registry order regardless of response arrival order');
  assert.deepEqual(ordered,['sanatate','educatie','cultura'],'late responses never reorder the grouped list');
 
- console.log('Federated family layer verified: eager families (gallery, stories corpus, CUI shortcut, dosar gate) resolve locally; every network family plans a validated request against an existing cached route; responses map to one grouped list in registry order with honest per-family degrade.');
+  console.log('LEG 7 — cross-entity links (v5): validated keys, discovery + deep-link, never merges');
+  assert.equal(typeof federatedRoute,'function');
+  assert.equal(typeof venueForPlaceRecord,'function');
+  // The route helper serializes exactly like the app's own go(): view, id, q, then
+  // tab — and a tab the topic registry does not validate is dropped, never guessed.
+  assert.equal(federatedRoute({view:'company',id:'427282'}),'#view=company&id=427282');
+  assert.equal(federatedRoute({view:'place',id:'peles'}),'#view=place&id=peles');
+  assert.equal(federatedRoute({view:'watch'}),'#view=watch');
+  assert.equal(federatedRoute({view:'domain',domain:'cultura',tab:'events'}),'#view=domain&id=cultura&tab=events');
+  assert.equal(federatedRoute({view:'domain',domain:'justitie',tab:'places',query:'sala'}),'#view=domain&id=justitie&q=sala&tab=places');
+  assert.equal(federatedRoute({view:'domain',domain:'vreme',tab:'places'}),'#view=domain&id=vreme','a tab the registry does not validate never reaches the route');
+  assert.equal(venueForPlaceRecord('w158239853')?.id,'odeon','the place→venue join resolves on the registry placeId (validated OSM record id), never the name');
+  assert.equal(venueForPlaceRecord('n0000000000'),null,'a record id no registry venue carries yields no link');
+  assert.equal(venueForPlaceRecord(null),null);assert.equal(venueForPlaceRecord(12345),null);
+  // The registry's own placeIds are validated keys: every one of them resolves to a
+  // committed record of the places corpus.
+  const venuesRegistry=JSON.parse(venuesRaw).items;
+  assert.ok(venuesRegistry.every(venue=>venue.placeId),'every registry venue carries its validated place record id');
+  const chunkDir=join(root,'public/places/records');
+  const recordIds=new Set();
+  for(const file of (await readdir(chunkDir)).filter(f=>/[0-9a-f]\.json\.gz/.test(f))){
+   for(const record of JSON.parse((await readFileRaw(join(chunkDir,file),'utf8'))).items)recordIds.add(record.id);
+   if(recordIds.size>0&&venuesRegistry.every(venue=>recordIds.has(venue.placeId)))break;
+  }
+  for(const venue of venuesRegistry)assert(recordIds.has(venue.placeId),'registry placeId must resolve in the committed places corpus: '+venue.placeId+' ('+venue.id+')');
+  // An OSM places row carrying the Odeon record id gains the cross-entity calendar
+  // link; a generic place row without a registry venue stays linkless.
+  const odeonRow={id:'w158239853',name:'Teatrul Odeon',categories:['cultura'],types:[{category:'cultura',label:'Teatre'}],lat:44.435984,lon:26.099029,address:'București',city:'București',phone:'',email:'',website:'',openingHours:'',updatedAt:'2026-01-01',sourceUrl:'https://www.openstreetmap.org/w158239853',chunk:'0285',search:'teatrul odeon bucurești'};
+  collected=federatedCollect(federatedSearch('odeon'),'places',{status:'cached',data:{items:[odeonRow],total:1,page:0,pages:1}});
+  const linkedPlace=collected.groups.find(g=>g.id==='cultura').items.find(i=>i.title==='Teatrul Odeon');
+  assert.equal(linkedPlace.crossLinks?.length,1,'the registry venue place record gains exactly one calendar cross-link');
+  assert.equal(linkedPlace.crossLinks[0].id,'venue-calendar:odeon');
+  assert.equal(linkedPlace.crossLinks[0].label,'Spectacole la Teatrul Odeon');
+  assert.equal(linkedPlace.crossLinks[0].href,'#view=domain&id=cultura&tab=events');
+  collected=federatedCollect(federatedSearch('sala'),'places',placesState);
+  assert.ok(collected.groups.flatMap(g=>g.items).every(item=>!item.crossLinks),'place rows without a registry venue record stay linkless (honest absence)');
+  // The gallery family joins on the editorial recordId with the same key — and the
+  // negative proof of the no-name-join rule: two identically named places, only the
+  // one whose recordId the registry carries gets the link.
+  result=federatedSearch('teatrul odeon',{gallery:[
+   {id:'g-constanta',name:'Teatrul Odeon',city:'Constanța',region:'Constanța',kind:'Teatru',recordId:'n999999999'},
+   {id:'g-bucuresti',name:'Teatrul Odeon',city:'București',region:'București',kind:'Teatru',recordId:'w158239853'}]});
+  const galleryItems=result.groups.find(g=>g.id==='cultura').items.filter(i=>i.family==='gallery');
+  assert.equal(galleryItems.length,2,'both identically named gallery places surface for the term');
+  assert.ok(!galleryItems.find(i=>i.id==='g-constanta').crossLinks,'the same-named place whose record id the registry does NOT carry stays linkless — the join is never by name');
+  assert.equal(galleryItems.find(i=>i.id==='g-bucuresti').crossLinks?.[0]?.id,'venue-calendar:odeon','the recordId join attaches the calendar link to the validated place only');
+  // CUI shortcut → firm watch deep link (the CUI is the validated watch key).
+  result=federatedSearch('427282');
+  const cuiLinked=result.groups[0].items[0];
+  assert.equal(cuiLinked.kind,'company');
+  assert.equal(cuiLinked.crossLinks?.length,1);
+  assert.equal(cuiLinked.crossLinks[0].href,'#view=watch');
+  assert.match(cuiLinked.crossLinks[0].label,/Urmărirea firmelor/);
+  // Dosar shortcut → court-registry discovery link (no validated key between a dosar
+  // number and an institution — the link is the honest ceiling, never a merge).
+  result=federatedSearch('455/124/2024');
+  const dosarLinked=result.groups.find(g=>g.id==='justitie').items[0];
+  assert.equal(dosarLinked.crossLinks?.length,1);
+  assert.equal(dosarLinked.crossLinks[0].label,'Instanțele din Inventarul național');
+  assert.equal(dosarLinked.crossLinks[0].href,'#view=domain&id=justitie&tab=places');
+
+  console.log('Federated family layer verified: eager families (gallery, stories corpus, CUI shortcut, dosar gate) resolve locally; every network family plans a validated request against an existing cached route; responses map to one grouped list in registry order with honest per-family degrade. Cross-entity links (v5) join on validated keys only (registry placeId, CUI, dosar gate) and render as deep links, never merges.');
 }catch(error){fail('verify-federated-search failed: '+(error instanceof Error?error.message:String(error))+'\n'+(error instanceof Error&&error.stack||''))}finally{await rm(temp,{recursive:true,force:true})}

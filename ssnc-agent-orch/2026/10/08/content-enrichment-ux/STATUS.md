@@ -142,3 +142,133 @@ One live probe via the local dev server, no interception, through the app's own 
 - **Quality**: every ingredient composed from existing machinery (PublicMap markers/popups, useSource guardrails, countText plurals, the staleness label family); the two new code comments state contracts, not narration; Romanian UI text, English artifacts.
 - **Discipline**: strict file partition held (refresh-groups.json delegated, not touched; A2 confirmed symmetric restraint on my files); RED-first honored including keeping the RED log; no cron, no new endpoint, no new Map component, no DDG, no bulk anything; the one out-of-partition edit (use-source.ts) was pre-licensed by the brief for exactly this gap and is documented above.
 - **Testing**: RED→GREEN→REFACTOR evidenced with logs; the guardrail legs assert the hook's live behaviors, not mocks; full battery re-run green on the merged tree; probe evidence saved.
+
+## Builder-C Findings (Wave B registries)
+
+**Wave**: B-1 (CUI company card) + B-2 (dosar court card) + B-4 (act-id legal reader) · **Status: DONE** (all evidence below on the final tree; two disclosures: a B-1-semantics edit in `lib/live/cache.ts` outside the listed partition, and the resumed-arc provenance — see "Session recovery")
+
+### Session recovery
+
+This wave resumed mid-flight: the prior arc of the same role spent the probes (07:57), wrote the three RED spec files + matrix cells (RED logs 08:09–08:13), landed the implementation, ran the 6 legs GREEN (08:49), then made three further edits (08:53: `app/legal-workspace.tsx`, `lib/live/legal-consolidation.ts`, `app/live-company.tsx` — the version-history + bibliographic-fallback work) and one fleet run (08:56: 180/182 — the 2 failures were this arc's mid-edit `legal-act-facts:48` and the parallel agent's `place-image-stability`) before being cut off without a STATUS entry. I verified the final tree end-to-end rather than reverting anything (each 08:53 edit is load-bearing for leg 3/6 and green), diagnosed both fleet failures as mid-edit transients, corrected two comment-accuracy defects my own-infra reads exposed (below), and completed the ×2 gate matrix.
+
+### Probes ledger (every spend this wave)
+
+| # | When (UTC) | Request | Result |
+|---|---|---|---|
+| P1a | 10-08 04:56:01 | GET `data.gov.ro/dataset/0793f…/resource/72d0bd2f…` (no `/download`) | 200 HTML CKAN view page 32,243 B — recorded as spent (first attempt kept in ledger) |
+| P1b | 10-08 04:57:49 | GET `…/download/contracte-farm-31.03.2026.xls` — the FARM/pharmacies export, the loader's own URL | 200 XLS 345,600 B — **columns: Numar contract / Cod fiscal furnizor / Tip furnizor / Nume furnizor / Cod CAS / Nume CAS, 2,284 rows, CUI plain-numeric** (fixture `fixtures/cnas-farm.xls`) |
+| P2 | 10-08 04:56:07 | GET `legislatie.just.ro/Public/DetaliiDocument/41627` (one act page, no SOAP token) | **connection refused (UND_ERR_SOCKET)** — consistent with A2's 02:53/02:57Z GetToken 500s: the MJ legislation portal is source-down at probe time → the honest-absence basis for B-4's fallback leg |
+| own-infra ×4 | 10-08 (this session) | GET deployed worker `/api/directory?kind=health|pharmacies|hospitals` (+ the 427282 match checks) | A2's own-infra precedent (outside the source budget; served from the app's own D1-cached editions): **all three 31.03.2026 CNAS editions (clinici 4,117 / farmacii 2,284 / spitale 731 records) publish the same contract column set including „Cod fiscal furnizor"**; CUI 427282 matches 0 rows in clinici/spitale today (live honest absence). No CKAN/data.gov.ro request triggered. |
+| B-2 act-links | — | no new probe | no spend needed: A2's live SOAP capture (`fixtures/courts-portal-just.txt`) already pins that dosar responses cite acts **by number and year inside `solutieSumar` text only — no act identifiers** → the „nu sunt disponibile legături programatice" note is probe-backed |
+
+DDG: none (D6). No new CKAN probes were needed beyond P1: A2's shared-endpoint fixture covers the `lista-furnizori` metadata, and the live column facts came from P1b + the own-infra reads.
+
+**Live-truth correction (made this session):** the landed code comment claimed clinic/hospital exports publish „CUI cod" „live-probed" — the own-infra reads show every current edition publishes the contract shape with „Cod fiscal furnizor"; „CUI cod" is the column name of the pinned directory fixtures/earlier editions. The accepted-column set (`['CUI cod','Cod fiscal furnizor']`) was already correct — **no behavior change**; the comments in `lib/live/adapters.ts`, the e2e spec header, and the matrix fixture comment were corrected to state the real evidence; matrix + 6 legs + tsc/lint re-proven green after the edit.
+
+### Per-task status
+
+| Task | Status | What landed |
+|---|---|---|
+| **B-1 CUI company card** | DONE | `den_caen` restored from parse-drop (`caenLabel`, probe-visible in `fixtures/company-anaf.txt`) rendered typed beside the CAEN code („5812 · Activități de editare a ziarelor") + provenance entry; TVA interval typed as a date range via the existing date helpers („13 iun. 2007 — în prezent", open-ended when `vatTo` absent) with provenance for `vatFrom`/`vatTo`; new „Registre publice" tab: the 3 CNAS registries joined **on the exact CUI column** (`companyPublicRegistries` — rides the existing daily-TTL `directory:*` D1-cached loaders, one fetch/day per registry across all viewers), per-registry Freshness + period, every published column of each matched record disclosed, multi-match rows kept **distinct**, unmatched registry = honest absence note, unreadable registry = warning only (never a card failure); sources extended with each registry's own source state; prior-copy merge keeps the new fields (`cache.ts` company line) |
+| **B-2 dosar court card** | DONE | `institutionProfile` (court id → `public/courts/institutions.json` registry label → type + locality, e.g. „Tribunal · Bihor"), rendered on every stage row + in the export text — **id-based registry lookup, never a name match**; dosar→act links: probe-settled honest absence (`ACT_LINKS_ABSENCE_NOTE`) on the history panel and the documents tab — no search guesses; stage grouping/evidence untouched |
+| **B-4 act-id legal reader** | DONE | «Istoricul formelor oficiale»: every version event the portal publishes for the same act id (date + Formă de bază/consolidată + the event's own official `DetaliiDocument` address) rendered below the selected version — **consolidation selection untouched**; portal-unreachable degrade keeps the act's own bibliographic facts from the official search row (tip+număr, emitent, publicație, data — same act id, labeled as such), never a bare error |
+
+### TDD cycle (RED → GREEN → REFACTOR)
+
+- **RED** (prior arc, logs kept in this dir): `wave-b-e2e-RED.log` — 3 new spec files, 6 legs, **all 6 failed for the intended reasons** (missing `.company-registries`/`.court-stage-institution`/`.law-version-history` surfaces, missing absence notes); **fixture rule honored**: `wave-b-matrix-RED-company.log` shows the extended `company/anaf` cells failing on unmodified loaders (composite kept 2 sources vs the asserted 5) — **cells before loader changes**.
+- **GREEN**: 6/6 legs isolated — run twice post-resume on the final tree (13s each run); full suite 182/182 (below).
+- **REFACTOR**: the live-truth comment corrections above (zero behavior change, all gates re-proven); no code-shape refactor needed — the provenance/join code is the `combineCompany` model extended in place, not reinvented.
+
+### Fields surfaced per surface
+
+- **`app/live-company.tsx`** (B-1): identity tab **+3 typed fields** (`caenLabel` beside the code, `vatFrom`+`vatTo` as a typed range); „Registre publice" tab: **3 registries × every published column of each matched row** (6 columns/record on the current contract-shaped editions) + per-registry period/Freshness/absence-note — max **~21 new rendered fields** on a fully matched card.
+- **`app/company-provenance.tsx`** (B-1): **+3 provenance keys** (`cnasClinici`/`cnasFarmacii`/`cnasSpitale`, recorded only where the registry matched — none invented for an unmatched registry) + up to 3 registry source states in the sources list.
+- **`app/court-history-panel.tsx` + `app/courts-workspace.tsx` + `lib/court-history.ts`** (B-2): **+2 fields per stage** (institution type, locality) + the act-links absence note on 2 surfaces; export text carries both.
+- **`app/legal-workspace.tsx` + `lib/live/legal-consolidation.ts`** (B-4): **+3 fields per version event** (date, kind, official address) + **4 bibliographic fields** on the unreachable-portal degrade.
+- Data layer (B-1): `parseBalance`/`parseRegistry` retain `den_caen`/`dataInceputScpTVA`/`dataSfarsitScpTVA`; `companyLoader` version bumped `anaf.profile.v2→v3` (shape change invalidates stale rows per the loader contract); `lib/live/cache.ts` prior-copy keep-list + `vatFrom`, `vatTo`, `publicRegistries`, `caenLabel`.
+
+### Verification (final tree, commands run this session)
+
+- `corepack pnpm exec tsc --noEmit` — **0 errors** (×2)
+- `corepack pnpm lint` — **0 errors, 115 warnings** (= the ≤115 budget, pre-existing baseline; zero added)
+- `node scripts/verify-source-errors.mjs` — GREEN **×2** — **32 families / 202 cells** (was 31/196: +`legal/act-page` family ×6 cells; `company/anaf` cells extended — CKAN join asserts 5 sources, `caenLabel`, `vatFrom`, 6 CKAN accesses, per-registry match counts, multi-match distinctness, no provenance invented for the unmatched registry)
+- Owning family gates — **each green ×2**: `verify-live.mjs`, `verify-court-links.mjs`, `verify-courts-workspace.mjs`, `verify-legal-records.mjs`, `verify-law-navigation.mjs`, and `verify-law-reader.mjs` — **name note**: the mission gate list says `verify-legal-reader.mjs`; no script by that name exists — the reader gate is `verify-law-reader.mjs` (6 real snapshots / 5,694 articles), which is what ran green ×2
+- Collateral gates green (my changed code feeds them): `verify-enrichment-joins.mjs` (the parallel agent's B-7 over my join sites — validated-keys only), `verify-recency-policy.mjs` (legal chain stays window-free with my consolidation edit), `audit-controls.mjs` (413 controls), `verify-ro-text.mjs`, `verify-model-contracts.mjs`, `verify-federated-search.mjs`, `verify-search-ui.mjs`, `verify-watch-api.mjs`, `verify-refresh-sweep.mjs`
+- `corepack pnpm test:e2e` — **182 passed / 0 failed** on the final tree; my 6 new legs green in both an isolated ×2 run and both full fleets. One transient fleet run post-verification-start (162 passed / exit 1, the 4 failures all `watch-flows` legs) coincided with the parallel agent's mid-run edits on the shared dev server: those legs pass 11/11 isolated immediately after and the immediate full re-run is 182/182 — explained, not papered over; final tree proven green twice.
+
+### Files (mine; partition respected)
+
+- **NEW**: `e2e/company-registries.spec.ts` (2 legs), `e2e/court-institution.spec.ts` (2 legs), `e2e/legal-act-facts.spec.ts` (2 legs)
+- **EDITED**: `lib/live/adapters.ts` (caenLabel, vatFrom/vatTo, `companyPublicRegistries`, loadCompany join, loader v3), `lib/live/knowledge.ts` (provenance + registry sources), `app/live-company.tsx` (vatText, CAEN row, registries tab), `app/company-provenance.tsx` (join sentence), **`lib/live/cache.ts` (disclosure: company prior-copy merge line only — file is outside my listed partition, but the edit is loadCompany's own keep-list semantics; without it a subsequent identity-less balance would drop the new fields)**, `lib/court-history.ts` (institutionProfile, absence note, stage.institution, export), `app/court-history-panel.tsx`, `app/courts-workspace.tsx` (documents-tab note), `lib/live/legal-consolidation.ts` (versionHistory), `app/legal-workspace.tsx` (history section + bibliographic fallback), `scripts/verify-source-errors.mjs` (my cells + dynamic-import rewrite), `scripts/verify-courts-workspace.mjs` + `scripts/verify-law-navigation.mjs` (compile-map rows for components my surfaces pull in)
+- **UNTOUCHED**: places/media/events/federated files, `verify-enrichment-joins.mjs`, `pr-validation.yml`, README (all the parallel agent's), `lib/live/court-references.ts` + `lib/live/legal-registry.ts` (index reuse — no change needed)
+
+### Self-review (four lenses)
+
+- **Completeness**: all three families delivered with their probe-gated honest absences (portal-down fallback, unmatched registry note, act-links absence note); no stubs, no TODOs (scanned).
+- **Quality**: joins resolve only on validated keys (CUI exact-string on the registry's own column; institution by registry id; version events on the portal's own ids) with per-field provenance and per-source Freshness; multi-match stays distinct (matrix-pinned: 2 hospital rows for one CUI remain 2 rows); unchecked claim about live columns found and corrected rather than left.
+- **Discipline**: strict partition held except the one disclosed `cache.ts` line (B-1 semantics, precedented by the Wave-A delegation pattern); no new cron, no new endpoint (registries ride existing loaders), no DDG, no bulk anything; raw `MetadataFields`/`RegistryFields` disclosures untouched beneath the typed rows.
+- **Testing**: RED evidenced for all 6 legs + the matrix cells; every gate re-run ×2 on the final tree; the own-infra live-column finding was turned into a correction and a re-proof, not an assumption.
+
+**Status: DONE** — the disclosures above (cache.ts line, the gate-name mapping, the resumed-arc provenance) are visible for the orchestrator's review; every gate is green ×2 on the final tree.
+
+## Builder-D Findings (Wave B links + gate)
+
+**Wave**: B — cross-source enrichment, links/venues/places families (B-3, B-5, B-6, B-7) · **Status: DONE**
+
+**Session context**: this run resumed an interrupted Builder-D session (implementations + RED evidence landed 08:09–08:56, STATUS write-up missing — the stray artifacts below are its fingerprints). This continuation verified the landed work end-to-end, repaired two defects, completed two registration gaps, and established the final green tree. All findings below are from commands run on the final tree this session.
+
+### TDD cycle (RED → GREEN → REFACTOR) — evidence from the interrupted run, re-verified
+
+**RED** — all specs written first against unmodified code, failure log `wave-B-RED.log` (08:09): **7 legs failed for the intended reasons** (169 passed) — 2× `events-venues.spec.ts` (venue-registry group + unregistered-venue honesty), 2× `places-workspace.spec.ts` (wikidata link-outs), 3× `federated-search.spec.ts` (place→calendar, dosar→court-registry, CUI→watch anchor links). The 8th new leg („a place row with no venue registry record grows no calendar cross-link") is a negative drift pin — green at birth by design; it guards the honest-absence side.
+
+**GREEN** — 8/8 new legs pass; full fleet **182/182** (`wave-B-d-fleet-final.log`, 2.0m, 35 files).
+
+**REFACTOR** — no behavior change needed beyond the repairs below.
+
+### Per-task status
+
+| Task | Status | What landed |
+|---|---|---|
+| B-3 place/Q-id | DONE | `operator` stays the typed row it already was (A2 gap-list top key ×2399 — now **pinned** by the gate at `lib/places-view.ts:7`, and e2e-asserted on the Cărturești Carusel detail); `wikidata`/`brand:wikidata`/`operator:wikidata`/`network:wikidata` surface as **external link-outs** built from the exact Q-id in the source row (`/^Q[1-9]\d{0,9}$/`, `https://www.wikidata.org/wiki/<Q-id>`; multi-valued/malformed stays in raw disclosure only) — **zero runtime Wikidata fetches**; imagery untouched per D5 (no new media; ceilings respected: 683 files/15,500, shipped census **7,467/20,000**); name+1km dedup guard **asserted, not relaxed** (`v2-model.ts` NOT modified — the gate pins the `placeKm(...)<1` co-predicate) |
+| B-5 venue id join | DONE | Registry record reunited on the venue id the loaders stamp: `VenueFacts` provenance group („Registrul validat al instituțiilor") with address, city·county, coordinates, official URL on the panel AND inside the event dialog via `eventVenue(selected.venue)`; registry commit gained `address`+`placeId` (validated at registry-commit time, never runtime name-matched); venue→places cross-link is a **deep link** through the registry `placeId`; unregistered venue id → no registry group in the dialog (honest-absence leg); fixtures updated to the committed registry values |
+| B-6 federated v5 cross links | DONE | `FederatedCrossLink` family in `lib/live/federated.ts`: place→venue-calendar (OSM record id === registry `placeId`; **zero or several matches both stay linkless**), dosar→court registry, CUI→firm watch; rendered as **sibling anchors** (`federated-cross-link`) of the row button in `app/search-results.tsx`, never merged row data; `verify-federated-search.mjs` LEG 7 (incl. the same-name-different-city negative proof — only the recordId-carrying place links) + 4 e2e legs |
+| B-7 verify-enrichment-joins.mjs | DONE | Structural join-truth gate, 5 LEGs: (1) validated key predicates at **every join call site** — venue (events loader/api/workspace), place record id + Q-id (places-workspace, federated placeId), CUI (live-company boundary regex, knowledge.ts P3608 exact VAT, **adapters.ts CNAS registry join on the published CUI columns**), dosar (`courtById` registry id, federated `\d{1,8}/\d{1,5}/\d{4}` gate), act (`officialLawUrl`), SIRUTA (published primary-key columns); (2) every enriched field renders inside a provenance/labeled group (venue registry, wikidata links, company provenance map, federated sibling anchors, court stage institution fact, legal act-facts + version-history sections); (3) multi-match → warning/linkless, never merge; (4) name-similarity detector over **16 enrichment files** with the sanctioned exceptions pinned; (5) RED-drift proof — deliberate name-only join, name-compare-in-selection, and relaxed name-without-1km guard fixtures each fail; AbortError check stays exempt (no false positive). Battery-registered: `pr-validation.yml` (after `verify-recency-policy`, i.e. after `verify-refresh-sweep` in battery order) + README battery sentence + the federated v5 README sentence |
+
+### This continuation run — repairs & completions (with evidence)
+
+1. **Stray file removed**: untracked `app/v2-model.tsx` — byte-identical accidental duplicate of the (unmodified) `app/v2-model.ts` from the interrupted run; import resolution prefers `.ts`, but it was tree pollution. Removed.
+2. **08:56 fleet failures triaged — environment, not code**: `place-image-stability` (Expected 12, Received 0) and `legal-act-facts:48` (fullLoads 0) both failed only in a fleet run whose dev server received the parallel agent's 08:53 file edits mid-run (`reuseExistingServer: !CI` + HMR full-page reload — the error-context shows `net::ERR_CONNECTION_REFUSED` reconnection during recompile; a reload recreates the DOM, wiping `data-stab`, and resets route-interception counters). **Both green in isolation** and in the final clean fleet **182/182**. No assertion weakened.
+3. **Parallel agent's registration gap completed**: their `legal/act-page` matrix family (32 families/202 cells now) was added to `verify-source-errors.mjs` without the inventory link → `verify-sweep-inventory` **FAIL** ("orice familie din tabela de paritate este legată de un registru"). Truthful one-line fix: `'law.search':{parity:['legal/law','legal/act-page']}` — their matrix cells construct `lawLoader({…selectedId})`, i.e. the `law.search` onDemand registry family (same one-registry/two-matrix-families pattern as `events.venues`). Green ×2; **181,537 places pin intact**, 49 registry families all covered. Recorded here as a cross-partition completion on the parallel agent's behalf — battery registration is this task's lane.
+4. **Gate extended to the parallel agent's FINAL call sites** (their adapters.ts CUI registry join landed 08:53, after the gate was written 08:40): LEG 1 pins the published CUI columns + exact-equality predicate; `lib/live/adapters.ts` added to the LEG 4 name-join scan (detector pre-checked clean: 0 hits); LEG 2 pins their court-stage institution fact and legal act-facts/version-history provenance groups. Detector dry-run + gate green ×2.
+
+### Fields / links surfaced (the wave's enrichment inventory)
+
+- **Places detail**: typed operator row (pinned); 4 Q-id external link-outs with per-tag labels + "construite din identificatorii exacți (Q…)" disclosure + explicit „aplicația nu interoghează Wikidata" note.
+- **Spectacole**: venue registry facts group on the workspace panel and inside every event dialog (address, locality, coordinates, official site link, join-key statement) + venue→places deep link where the registry carries the OSM record id.
+- **Federated search**: v5 cross-entity anchors on place rows (calendar discovery), dosar shortcut rows (institutions registry), CUI shortcut rows (firm watch center); linkless where no validated key.
+
+### Probes ledger (Wave B)
+
+This continuation spent **zero new source probes** — all verification is offline (gates) or against the local dev server (own infra). The wave's live probes were spent by the interrupted session at 07:57 (`probe-results-wave-b.json`): 2× CKAN CNAS farm resource (first HTML view attempt recorded as spent + the xls download — fed B-1, finding: no CUI column in the FARM export), 1× MJ `DetaliiDocument` act page (connection-failed — fed B-4's honest-absence path). My families join committed, registry-commit-validated data (venues.json, places corpus tags, refresh-group family routes) — **no new source fetches, so no new probe fixtures required**; the Wave-B fixture rule holds (no newly joined family reads a new source).
+
+### Verification (commands run on the final tree, this session)
+
+- `corepack pnpm exec tsc --noEmit` — **0 errors**
+- `corepack pnpm lint` — **0 errors, 115 warnings** (= ≤115 budget; baseline unchanged)
+- `corepack pnpm exec playwright test` — **182 passed / 0 failed** (`wave-B-d-fleet-final.log`), incl. my 8 new legs + the parallel agent's 6 legs + both previously-flaky legs
+- Gates **green ×2**: `verify-enrichment-joins.mjs` (pre- and post-extension), `verify-federated-search.mjs`, `verify-exploration-media.mjs`, `verify-media-budget.mjs` (683 files/15,500; shipped 7,467/20,000; 610 manifest rows), `verify-expanded.mjs`, `verify-sweep-inventory.mjs` (181,537 + 49 families), `verify-refresh-sweep.mjs` (5 crons frozen — no 6th), `verify-recency-policy.mjs`, `verify-source-errors.mjs` (32 families / 202 cells)
+
+### Files (mine, partition respected)
+
+- NEW: `scripts/verify-enrichment-joins.mjs`
+- EDITED: `lib/live/events.ts` (registry fields comment + address/placeId on the type), `public/events/venues.json` (address + validated placeId per institution), `app/events-workspace.tsx` (VenueFacts group, panel + dialog), `app/search-results.tsx` (cross-link sibling anchors), `lib/live/federated.ts` (v5 cross-links + venueForPlaceRecord), `scripts/verify-federated-search.mjs` (LEG 7), `app/places-workspace.tsx` (wikidata link-outs), `e2e/events-venues.spec.ts`, `e2e/federated-search.spec.ts`, `e2e/places-workspace.spec.ts` (8 new legs total), `.github/workflows/pr-validation.yml` + `README.md` (battery + prose, same change), `scripts/verify-sweep-inventory.mjs` (the one-line parity completion above)
+- NOT touched: company/court/legal family files (parallel agent's), transit files, corpus files, `public/media/manifest.json`, `app/v2-model.ts` (guard pinned, not relaxed), `lib/live/refresh-groups.json`, cron config, watch surfaces
+
+### Self-review (four lenses)
+
+- **Completeness**: B-3/B-5/B-6 delivered with their e2e legs; B-7 written, extended to the parallel families' final call sites, RED-drift-proofed, battery-registered. D5 honored: no bulk imagery, no new media rows. The zero-Wikidata-fetch and no-name-join contracts are pinned by the gate, not just implemented.
+- **Quality**: reuse over invention — the venue group reuses the `live-freshness`/`source-chip` idiom, cross-links reuse the existing `federated-row-source` anchor pattern, link-outs reuse `reader-links`; Romanian UI strings, English code comments; every enriched surface states its own join key in user-visible text.
+- **Discipline**: strict partition held (my only out-of-partition edits are the two documented registration completions, both in B-7's battery-registration lane with truthful, evidence-anchored mappings); no cron, no new endpoint, no new source fetch, no runtime DDG, no payload logging; RED evidence preserved; no assertion weakened to green.
+- **Testing**: 7 RED legs → GREEN (log inline above); the gate's detector proof covers the D4 failure shapes; both suspicious fleet legs reproduced green twice before being attributed to the dev-server environment; every verify command re-run ×2 with outputs read.
+
+**Status: DONE** — B-3, B-5, B-6, B-7 delivered and verified; exit gate green (tsc 0, lint 0/≤115, e2e 182/182, family gates ×2). Wave B stands complete on the merged tree pending the parallel agent's STATUS write-up for B-1/B-2/B-4 (their code is landed and green on my final tree).

@@ -20,7 +20,7 @@ function compile(file,hooks=React){
   if(name==='./live-data')return{Freshness:'Freshness',dateText:value=>String(value||'')};
   if(name==='@/public/legal-snapshots/manifest.json')return JSON.parse(fs.readFileSync('public/legal-snapshots/manifest.json'));
   if(name==='@/lib/http-retry.mjs')return{fetchWithServerRetry(){throw Error('Reading navigation must not fetch')}};
-  const components={'@/components/ui/button':['Button'],'@/components/ui/input':['Input'],'@/components/ui/dialog':['Dialog','DialogContent','DialogHeader','DialogTitle','DialogDescription'],'@/components/ui/tabs':['Tabs','TabsList','TabsTrigger','TabsContent'],'./draft-form':['DraftForm'],'./select-field':['SelectField'],'./search-input':['SearchInput'],'./export-actions':['ExportActions'],'./courts-workspace':['Courts'],'./control-hints':['InfoHint'],'./pagination':['Pagination']};
+  const components={'@/components/ui/button':['Button'],'@/components/ui/input':['Input'],'@/components/ui/dialog':['Dialog','DialogContent','DialogHeader','DialogTitle','DialogDescription'],'@/components/ui/tabs':['Tabs','TabsList','TabsTrigger','TabsContent'],'@/components/ui/tooltip':['Tooltip','TooltipTrigger','TooltipContent'],'@/components/ui/popover':['Popover','PopoverTrigger','PopoverContent'],'./draft-form':['DraftForm'],'./select-field':['SelectField'],'./search-input':['SearchInput'],'./export-actions':['ExportActions'],'./courts-workspace':['Courts'],'./control-hints':['InfoHint'],'./pagination':['Pagination'],'./watch-button':['WatchButton']};
   if(components[name])return Object.fromEntries(components[name].map(key=>[key,key]));
   return require(name);
  };
