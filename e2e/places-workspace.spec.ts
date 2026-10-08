@@ -369,7 +369,7 @@ test.describe('Places map — pin radius and pan refresh', () => {
     const beforePinch = pinUrls.length;
     await page.mouse.dblclick(x, y);
     await page.waitForTimeout(process.env.CI ? 3500 : 1600);
-    expect(pinUrls.length, 'a zoom without a center change must not refetch the pins').toBe(beforePinch);
+    expect(pinUrls.length, `a zoom without a center change must not refetch the pins — requests after the zoom: ${pinUrls.slice(beforePinch).join(' | ') || 'none'}`).toBe(beforePinch);
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
