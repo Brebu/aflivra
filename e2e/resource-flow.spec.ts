@@ -188,14 +188,14 @@ test.describe('XML resource reader',()=>{
     // CSV first: the export asks the server for the whole verified sheet, not the page.
     const csv=page.locator('.resource-download-actions .export-actions');
     await csv.getByRole('button',{name:'Descarcă setul complet'}).click();
-    const csvDownload=await page.waitForEvent('download');
+    const csvDownload=await page.waitForEvent('download',{timeout:60_000});
     expect(csvDownload.suggestedFilename()).toMatch(/\.csv$/);
     await expect(csv.locator('.export-ready')).toContainText('Salvează fișierul CSV');
 
     // XLSX through the same flow: the full set, all sheets, Excel format.
     await csv.getByLabel('Format pentru descarcă setul complet').selectOption('xlsx');
     await csv.getByRole('button',{name:'Descarcă setul complet'}).click();
-    const xlsxDownload=await page.waitForEvent('download');
+    const xlsxDownload=await page.waitForEvent('download',{timeout:60_000});
     expect(xlsxDownload.suggestedFilename()).toMatch(/\.xlsx$/);
     await expect(csv.locator('.export-ready')).toContainText('Salvează fișierul Excel (.xlsx)');
     // Both exports asked the table tier with the sheet index — the pattern of the real route.

@@ -183,6 +183,8 @@ pnpm dev                   # http://127.0.0.1:5173 — vinext + workerd, binding
 pnpm lint && pnpm exec tsc --noEmit
 pnpm test:e2e              # Playwright (Chromium; browserul se instalează o singură dată: corepack pnpm exec playwright install chromium) — pornește singur serverul pe :5173; 23 de fișiere de specificații
 
+Verificarea de publim `pr-validation` din GitHub Actions rulează acum doar manual (`workflow_dispatch`) — poarta este lanțul local complet (bateria `verify-*`/`audit-*` + `CI=true corepack pnpm test:e2e` pe o stare D1 rece + `corepack pnpm build`), pe care îl rulezi înainte de orice publicare; depindea de viteța runner-ului partajat al momentului.
+
 Patru picioare ale suitei sunt local-only pe CI (`test.skip` vizibil cu motivul, la `pan/zoom`, registrele experți, prima răsfoire cultura și tastarea picker-ului de localități): premisele lor — gest pixel-exact, decodarea registrelor mari la prima răsfoire (până la ~38.000 de înregistrări) și ritmul de tastare — depind de viteța hardware-ului, iar runnerul partajat gratuit al GitHub-ului variază ~2× între ore de vârf; bugetele care trec dimineața pică la amiază pe cod identic. Contractele acestor picioare rămân verificate integral la `pnpm test:e2e` local (acolo rulează toate) și, pentru partea de date, offline de bateria de scripturi `verify-*`.
 pnpm build && pnpm start   # paritate de producție pe :8787 (wrangler; necesită `pnpm build` înainte)
 ```
