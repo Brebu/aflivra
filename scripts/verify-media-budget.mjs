@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
 import ts from 'typescript';
 import {readSnapshotFile} from './snapshot-read.mjs';
+import {REGISTER_SCHEMA,WAVE_FILE_CAP} from './relay-imagery.mjs';
 const require=createRequire(import.meta.url),React=require('react'),jsx=require('react/jsx-runtime'),root=new URL('../',import.meta.url);
 let media;function compile(file,h=React){
  const code=ts.transpileModule(fs.readFileSync(new URL(file,root),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText,target={exports:{}};
@@ -95,3 +96,24 @@ const lines=[];
 for(const [category,c] of Object.entries(coverage)){const b=before[category]||{hotlink:0,attested:0};lines.push('  '+category.padEnd(12)+String(c.rows).padStart(7)+' rows · hotlink '+String(c.hotlink).padStart(5)+' (was '+String(b.hotlink).padStart(5)+') · attested '+String(c.attested).padStart(4)+' (was '+String(b.attested||0).padStart(4)+') · imaged '+((100*(c.hotlink+c.attested)/c.rows).toFixed(2))+'% (was '+(b.rows?(100*(b.hotlink+(b.attested||0))/b.rows).toFixed(2):'0.00')+'%)')}
 console.log(lines.join('\n'));
 console.log('Every remaining card renders the labeled AI editorial illustration of its category — no bare imageless card. ROW-COVERED: '+totals.hotlink+' hotlinked + '+totals.attested+' attested of '+totals.rows+' corpus rows ('+(100*(totals.hotlink+totals.attested)/totals.rows).toFixed(2)+'% imaged; the rest render honest AI-labeled illustrations, never invented photos).');
+{
+ // Registrul de imagini Wikidata/Commons — porțile de buget și de claims: fiecare fișier
+ // wiki- de pe disc aparține registrului, fiecare rând al registrului dovedește un fișier
+ // publicat cu licență, iar plafonul de val al unei valuri de imagini rămâne o decizie.
+ const imagery=JSON.parse(await readSnapshotFile(fileURLToPath(new URL('public/media/imagery-register.json',root))));
+ assert.equal(imagery.schema,REGISTER_SCHEMA,'The imagery register schema');
+ assert(Array.isArray(imagery.assets)&&imagery.assets.length>=1,'The imagery register carries its attested rows');
+ assert(imagery.assets.length<=WAVE_FILE_CAP,'Imagery wave cap of '+WAVE_FILE_CAP+' files: '+imagery.assets.length);
+ const registerFiles=new Set(imagery.assets.map(asset=>asset.app_file.replace('/media/','')));
+ for(const asset of imagery.assets){
+  assert(asset.app_id&&asset.app_file&&asset.author&&asset.license&&asset.license_url&&asset.source_page_url&&asset.sha256&&/^https:\/\//.test(asset.license_url),'Imagery register completeness for '+asset.app_id);
+  const bytes=fs.readFileSync(fileURLToPath(new URL('public/media/'+asset.app_file.replace('/media/',''),root)));
+  assert(asset.bytes===bytes.length,'Imagery byte count must match the shipped file: '+asset.app_id);
+  assert(asset.sha256===createHash('sha256').update(bytes).digest('hex'),'SHA-256 proof for the imagery file '+asset.app_id);
+  const row=manifest.assets.find(entry=>entry.app_id===asset.app_id);
+  assert(row&&row.app_file===asset.app_file,'Every imagery register row has its manifest face: '+asset.app_id);
+ }
+ const wikiFiles=mediaFiles.filter(f=>/^wiki-/.test(f)),outside=wikiFiles.filter(f=>!registerFiles.has(f));
+ assert(outside.length===0,'Imagery files on disk outside the register (orphan binaries): '+outside.join(', '));
+ console.log('Imagery budget verified: '+wikiFiles.length+' wiki-* files, all claimed by the imagery register ('+imagery.assets.length+' rows within the '+WAVE_FILE_CAP+' wave cap) with license faces in the media manifest.');
+}

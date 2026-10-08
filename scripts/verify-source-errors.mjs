@@ -147,7 +147,14 @@ const ancpiBody=()=>({success:true,result:{resources:[{name:'Numarul imobilelor 
 const xmlResourceUuid='2f6a4c1e-8b3d-4e57-9c2a-6d1f0b8e7a3c';
 const families=[
  {family:'weather/open-meteo',routeName:'weather',route:'/api/weather?lat=44.43&lon=26.1',host:'api.open-meteo.com',allowed:['api.open-meteo.com'],key:()=>weatherModule.forecastLoader(44.43,26.1).key,loader:()=>weatherModule.forecastLoader(44.43,26.1)},
- {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org','data.gov.ro'],key:()=>companyRegistriesModule.companyLoader('427282').key,loader:()=>companyRegistriesModule.companyLoader('427282')},
+  {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org','data.gov.ro'],key:()=>companyRegistriesModule.companyLoader('427282').key,loader:()=>companyRegistriesModule.companyLoader('427282')},
+  // Căutarea firmei după nume (T2, sonda 2026-10-08): registrele oficiale de nume (ONRC
+  // OD_FIRME, 693 MB; MFP, 2×~435 MB) nu au interogare pe nume la sursă și depășesc
+  // orice plafon de citire, iar pagina mfinante s-a retras — singura bază onestă de
+  // răspuns este registrul deschis de cunoștințe deja citit de familie, căutat după
+  // etichetă și restrâns la înregistrările cu identificator TVA românesc; rândul fără
+  // CUI valid rămâne nelistat, nu inventat.
+  {family:'company/name-search',routeName:'company',route:'/api/company?name=firma%20de%20verificare',host:'query.wikidata.org',allowed:['query.wikidata.org'],scenarios:['http500','http429','timeout','malformed','invalid','success'],scenarioRoutes:{invalid:'/api/company?name='+('x'.repeat(101))},key:()=>adapters.companyNameSearchLoader('firma de verificare').key,loader:()=>adapters.companyNameSearchLoader('firma de verificare')},
  {family:'courts/portal.just',routeName:'legal',route:'/api/legal',method:'POST',body:{kind:'court',number:'1/2/2026'},host:'portalquery.just.ro',allowed:['portalquery.just.ro'],key:()=>legalModule.courtLoader({number:'1/2/2026',name:'',subject:'',institution:'',from:'',to:''}).key,loader:()=>legalModule.courtLoader({number:'1/2/2026',name:'',subject:'',institution:'',from:'',to:''})},
  {family:'feeds/stiri',routeName:'domain',route:'/api/domain?kind=stiri',host:new URL(feedsModule.feedConfigs.stiri.url).host,allowed:feedHosts,key:()=>feedsModule.feedLoader('stiri').key,loader:()=>feedsModule.feedLoader('stiri')},
  {family:'catalog/ckan',routeName:'catalog',route:'/api/catalog',host:'data.gov.ro',allowed:['data.gov.ro'],key:()=>adapters.catalogLoader().key,loader:()=>adapters.catalogLoader()},
@@ -298,7 +305,25 @@ if(live){
     :kind==='health'
      ?[['Nume furnizor','CUI cod','Localitate','Judet'],['Furnizor public de verificare 1','12345','București','București'],['Furnizor public de verificare 2','12456','Cluj-Napoca','Cluj']]
      :[['Nume furnizor','CUI cod','Localitate','Judet'],['Spital public de verificare','427282','București','București'],['Spitalul filial al firmei de verificare','427282','Giurgiu','Giurgiu'],['Spital fără CUI comun','12456','Cluj-Napoca','Cluj']];
-   XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),'Contracte');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xls'}))};
+    XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),'Contracte');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xls'}))};
+  // Complementul Wikidata al firmei, oglinda răspunsului SPARQL real pe registrul de
+  // cunoștințe: entitatea cu identificatorul TVA al firmei de verificare, site-ul ei și
+  // persoanele indicate de sursă cu rolul ei (director executiv, președinte, director sau
+  // manager — rolurile pe care interogarea le cere), plus o entitate cu alt TVA care
+  // rămâne în afara potrivirii, nu unită cu firma.
+  const companyKnowledgeWikidata=()=>({results:{bindings:[
+   {item:{value:'http://www.wikidata.org/entity/Q2138580'},itemLabel:{value:'FIRMA DE VERIFICARE ANAF'},vat:{value:'RO427282'},website:{value:'https://firma-de-verificare.ro'}},
+   {item:{value:'http://www.wikidata.org/entity/Q2138580'},itemLabel:{value:'FIRMA DE VERIFICARE ANAF'},vat:{value:'RO427282'},person:{value:'http://www.wikidata.org/entity/Q556001'},personLabel:{value:'ION POPESCU DE VERIFICARE'},role:{value:'Director executiv indicat de sursă'}},
+   {item:{value:'http://www.wikidata.org/entity/Q2138580'},itemLabel:{value:'FIRMA DE VERIFICARE ANAF'},vat:{value:'RO427282'},person:{value:'http://www.wikidata.org/entity/Q556002'},personLabel:{value:'MARIA IONESCU DE VERIFICARE'},role:{value:'Director sau manager indicat de sursă'}},
+   {item:{value:'http://www.wikidata.org/entity/Q999999'},itemLabel:{value:'FIRMA DE VERIFICARE ALTA'},vat:{value:'RO999999999'}}]}});
+  // Răspunsul SPARQL al căutării pe nume: aceeași înregistrare de două ori (eticheta în
+  // două limbi rămâne o firmă), o a doua firmă cu CUI propriu și o înregistrare fără CUI
+  // valid, care rămâne nelistată — fără jumătăți de legături inventate.
+  const companyNameSearchWikidata=()=>({results:{bindings:[
+   {item:{value:'http://www.wikidata.org/entity/Q2138580'},itemLabel:{value:'FIRMA DE VERIFICARE ANAF'},vat:{value:'RO427282'},website:{value:'https://firma-de-verificare.ro'}},
+   {item:{value:'http://www.wikidata.org/entity/Q2138580'},itemLabel:{value:'FIRMA DE VERIFICARE ANAF'},vat:{value:'RO427282'}},
+   {item:{value:'http://www.wikidata.org/entity/Q998877'},itemLabel:{value:'FIRMA DE VERIFICARE EXEMPLU SRL'},vat:{value:'RO45548304'}},
+   {item:{value:'http://www.wikidata.org/entity/Q777888'},itemLabel:{value:'ÎNTREPRINDEREA FĂRĂ CUI VALID'},vat:{value:'RO0'}}]}});
  // Justice fixtures mirror the published structure of each registry workbook (real column
  // names; the experți tehnici sheet starts with a title row before the header, as published).
  const justiceFixture=(kind)=>{
@@ -364,7 +389,8 @@ if(live){
   return new Uint8Array(FeedMessage.encode(FeedMessage.fromObject({header:{gtfsRealtimeVersion:'2.0',timestamp:now},entity:[{id:'v-verificare',vehicle:{trip:{routeId:'R1',tripId:'T1'},position:{latitude:44.43,longitude:26.1,speed:8,bearing:90},vehicle:{label:'Tramvaiul de verificare'},currentStatus:'IN_TRANSIT_TO',stopId:'S1',timestamp:now}}]})).finish())};
   const successFor=(family,href,host,init)=>{
    if(family.family==='weather/open-meteo')return Response.json(openMeteoBody());
-   if(family.family==='company/anaf')return Response.json(href.includes('/api/PlatitorTvaRest/')?anafRegistry:anafBalance(href));
+    if(family.family==='company/anaf')return Response.json(href.includes('/api/PlatitorTvaRest/')?anafRegistry:anafBalance(href));
+    if(family.family==='company/name-search')return Response.json(companyNameSearchWikidata());
    if(family.family==='legal/act-page')return new Response(actPage(),{headers:{'content-type':'text/html'}});
    if(family.family==='courts/portal.just')return courtResponse(String(init?.headers?.SOAPAction||'').includes('CautareDosare2')?'CautareDosare2':'CautareDosare');
    if(family.family==='feeds/stiri')return rssFixture(host);
@@ -444,7 +470,10 @@ if(live){
     if(family.family==='company/anaf'&&host==='data.gov.ro')return href.includes('package_show')?Response.json(companyCnasMeta()):new Response(companyCnasXlsx(href),{headers:{'content-type':'application/vnd.ms-excel'}});
     if(host===family.host&&scenario!=='success')return failureFor(scenario,init);
    if(host===family.host)return successFor(family,href,host,init);
-   if(host==='query.wikidata.org')return Response.json({results:{bindings:[]}});
+    // Complementul de cunoștințe al firmei servește înregistrarea reală (identitate, site,
+    // persoane cu rolul sursei) ca să rămână tipizat de celulele firmei; celelalte familii
+    // care ajung la Wikidata primesc răspunsul gol consacrat.
+    if(host==='query.wikidata.org')return Response.json(family.family==='company/anaf'?companyKnowledgeWikidata():{results:{bindings:[]}});
    return rssFixture(host);
    };
    globalThis.__aflivraAssetFault=family.kind==='trains'&&scenario==='malformed'?'trains':null;
@@ -493,14 +522,45 @@ if(live){
     assert.equal(spitale.records.length,2,label+': mai multe rânduri cu același CUI rămân rânduri distincte, fără îmbinare');
     const clinici=registries.find(registry=>registry.kind==='health');
     assert.equal(clinici.records.length,0,label+': registrul fără potrivire rămâne absență onestă, nu câmp inventat');
-    for(const registry of [farmacii,spitale])assert(payload.data.sources.some(source=>source.key==='directory:'+registry.kind),label+': fiecare registru citibil își expune starea proprie');
-    assert(payload.data.provenance['cnasFarmacii']&&payload.data.provenance['cnasSpitale'],label+': proveniența fiecărui registru cu potrivire este înregistrată');
-    assert(!payload.data.provenance['cnasClinici'],label+': fără proveniență inventată pentru registrul fără potrivire')}
+     for(const registry of [farmacii,spitale])assert(payload.data.sources.some(source=>source.key==='directory:'+registry.kind),label+': fiecare registru citibil își expune starea proprie');
+     assert(payload.data.provenance['cnasFarmacii']&&payload.data.provenance['cnasSpitale'],label+': proveniența fiecărui registru cu potrivire este înregistrată');
+     assert(!payload.data.provenance['cnasClinici'],label+': fără proveniență inventată pentru registrul fără potrivire');
+     // Conducerea firmei: persoanele indicate de sursa complementară, cu rolul chiar al
+     // sursei, se servesc tipizat (director executiv, președinte sau director/manager —
+     // cele trei feluri pe care interogarea le cere de la registru).
+     const leadership=payload.data.leadership||[];
+     assert.equal(leadership.length,2,label+': persoanele indicate de sursa complementară se servesc tipizat');
+     assert(leadership.some(person=>person.role==='Director executiv indicat de sursă'),label+': rolul sursei se păstrează pe fiecare persoană');
+     assert(leadership.some(person=>person.role==='Director sau manager indicat de sursă'),label+': rolul de director sau manager se acceptă alături de director executiv și președinte');
+     assert.equal(payload.data.websites.length,1,label+': site-ul firmei vine din potrivirea exactă unică');
+     assert(payload.data.provenance.leadership&&payload.data.provenance.leadership.source==='Wikidata',label+': proveniența conducerii este înregistrată per-câmp')}
    else{assert.match(e,/ANAF nu a returnat/,label+': plicul de eroare ANAF documentat');
     if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500 ANAF');assert.equal(payload.data.name,'Firma de verificare ANAF',label+': copia păstrată este cea verificată');assert.equal(anaf,12,label+': cele trei încercări per componentă');assert.equal(wikidata,0,label+': sursa sănătoasă nu se reinteroghează');
      assert.equal(payload.data.publicRegistries.length,3,label+': copia validă păstrează registrele CKAN alăturate');assert.equal(ckan,0,label+': registrele servite din copie nu se reinteroghează')}
-    else{assert.equal(payload.status,'stale',label+': copia inițială verificată servește');assert(payload.data,label+': copia de rezervă se păstrează');assert.equal(anaf,scenario==='http500'?12:4,label+': numărul documentat de accesări');assert.equal(wikidata,1,label+': un acces Wikidata')}}}
-  if(family.family==='courts/portal.just'){
+     else{assert.equal(payload.status,'stale',label+': copia inițială verificată servește');assert(payload.data,label+': copia de rezervă se păstrează');assert.equal(anaf,scenario==='http500'?12:4,label+': numărul documentat de accesări');assert.equal(wikidata,1,label+': un acces Wikidata')}}}
+   if(family.family==='company/name-search'){
+    const wikidata=hostCount('query.wikidata.org');
+    if(scenario==='invalid'){
+     assert.equal(wikidata,0,label+': numele invalid se respinge la rută, fără nicio interogare a sursei')}
+    else if(scenario==='success'){
+     assert.equal(payload.status,'fresh',label);
+     const items=payload.data.items||[];
+     assert.equal(items.length,2,label+': firmele cu numele căutat se servesc, fără îmbinarea celor de pe alte TVA');
+     assert.equal(items.filter(item=>item.qid==='Q2138580').length,1,label+': aceeași înregistrare de pe două etichete rămâne o singură firmă');
+     assert.equal(items.find(item=>item.qid==='Q2138580').cui,'427282',label+': CUI-ul rezultă din identificatorul TVA citit de sursă');
+     assert.equal(items.find(item=>item.qid==='Q2138580').websites.length,1,label+': site-ul firmei găsite se păstrează');
+     assert(!items.some(item=>item.cui==='0'||/^\D|^0$/.test(String(item.cui))),label+': rândul fără CUI valid rămâne nelistat, nu inventat');
+     assert.equal(wikidata,1,label+': o singură interogare la sursă')}
+    else if(scenario==='warm-http500'){
+     assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
+     assert.equal(payload.data.items.length,2,label+': rezultatele căutării se păstrează din copie');assert.equal(wikidata,3,label+': cele trei încercări se epuizează')}
+    else{assert.equal(payload.status,'unavailable',label+': fără copie și fără sămânță, starea documentată');assert.equal(payload.data,null,label+': fără firme inventate');
+     if(scenario==='http500')assert.match(e,/HTTP 500/,label+': codul sursei păstrat');
+     if(scenario==='http429')assert.match(e,/HTTP 429/,label+': pauza sursei păstrată');
+     if(scenario==='timeout')assert.match(e,/nu a răspuns în timpul alocat/,label+': expirarea descrisă în română');
+     if(scenario==='malformed')assert.match(e,/Structura Wikidata/,label+': structura nevalidă respinsă în română');
+     assert.equal(wikidata,scenario==='http500'?3:1,label+': numărul documentat de accesări')}}
+   if(family.family==='courts/portal.just'){
    const attempts=hostCount('portalquery.just.ro');
    if(scenario==='success'){assert.equal(payload.status,'fresh',label);assert.equal(payload.data.items.length,1,label+': dosarul servit');assert.equal(payload.data.items[0].number,'1/2/2026',label+': numărul dosarului păstrat');assert.equal(attempts,2,label+': două operații SOAP oficiale')}
    else if(scenario==='warm-http500'){assert.equal(payload.status,'stale',label+': copia validă servește sub 500');assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');assert.equal(payload.data.items.length,1,label+': dosarul păstrat din copia validă');assert.equal(attempts,3,label+': cele trei încercări se epuizează')}
@@ -1131,7 +1191,7 @@ if(live){
   sqlite.prepare('UPDATE source_cache SET expires_at=0 WHERE key=?').run(family.key());
   await runCell(family,'warm-http500');
  }
-   console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri și, suplimentată de intermediar, își parcurge celulele proprii — egress-ul respins (HTTP 429) se traduce onest în nota de tură de intermediar cu codul sursei păstrat, depunerea fără token, livrul scurt și panoul corupt se resping fără să publice nimic, iar după predarea celor patru panouri citirea servește pozițiile fără să reinterogheze sursa —, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate, iar resursa publică XML citește exportul cu strat de tabel: rândul dominant aplatizează atributele și copiii în coloane cu drumuri pe trei niveluri, copiii repețiți se enumerează determinist, listele concurente aleg cea dominantă iar la ex-aequo documentul onest servește, netabelabilul rămâne document etichetat, declarațiile XXE se resping înainte de orice aplatizare, iar variantele de format publicate („XSLX", „JSON, SOAP, XML", „XML.") se normalizează la cititorul potrivit, cu „ZIP, SHP" rămas absență cititorului; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
+   console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri și, suplimentată de intermediar, își parcurge celulele proprii — egress-ul respins (HTTP 429) se traduce onest în nota de tură de intermediar cu codul sursei păstrat, depunerea fără token, livrul scurt și panoul corupt se resping fără să publice nimic, iar după predarea celor patru panouri citirea servește pozițiile fără să reinterogheze sursa —, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, căutarea firmei pe nume citește registrul deschis de cunoștințe — numele potrivit se servește cu CUI-ul din identificatorul TVA al sursei, dubla pe alte limbi rămâne o singură firmă, iar înregistrarea fără CUI valid rămâne nelistată, numele prea scurt sau prea lung se respinge cu 400 fără interogarea sursei —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate, iar resursa publică XML citește exportul cu strat de tabel: rândul dominant aplatizează atributele și copiii în coloane cu drumuri pe trei niveluri, copiii repețiți se enumerează determinist, listele concurente aleg cea dominantă iar la ex-aequo documentul onest servește, netabelabilul rămâne document etichetat, declarațiile XXE se resping înainte de orice aplatizare, iar variantele de format publicate („XSLX", „JSON, SOAP, XML", „XML.") se normalizează la cititorul potrivit, cu „ZIP, SHP" rămas absență cititorului; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
  console.log(JSON.stringify({result:'ok',mode:'mock',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
  }
 escapes.length=0;process.off('unhandledRejection',recordEscape);process.off('uncaughtExceptionMonitor',recordEscape);}

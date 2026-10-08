@@ -103,7 +103,7 @@ try{
   'law.consolidated.full':{harness:'verify-legal-records.mjs'},
   'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs',parity:'resource/xml-table'},
    'transport.realtime':{parity:'transport/realtime'},'transport.tranzy':{parity:'transport/tranzy'},'transport.flights':{harness:'verify-relay-flights.mjs',parity:'flights/adsb'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
-  'company-knowledge':{parity:'company/anaf'},
+   'company-knowledge':{parity:['company/anaf','company/name-search']},
  'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
  'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:['legal/law','legal/act-page']},
  'justice.notari':{parity:'justice/notari'},'justice.experti-judiciari':{parity:'justice/experti-judiciari'},

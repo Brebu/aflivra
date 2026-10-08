@@ -62,8 +62,11 @@ export async function readSource(loader:Loader,options:{background?:boolean;wait
   const acquired=await db.prepare("UPDATE source_cache SET lock_until=?,last_attempt_at=? WHERE key=? AND lock_until<=? AND (next_attempt_at<=? OR COALESCE(adapter_version,'')<>?) AND (expires_at<=? OR COALESCE(adapter_version,'')<>?) RETURNING key").bind(now+60000,iso(now),loader.key,now,now,loader.version,now,loader.version).first();
   if(!acquired)return await view(loader,await db.prepare('SELECT * FROM source_cache WHERE key=?').bind(loader.key).first<Row>());
   const refresh=async()=>{try{
-   if(loader.key.startsWith('company:'))await budget(db,'anaf',120);
-   if(loader.key.startsWith('forecast:'))await budget(db,'open-meteo',400);
+    if(loader.key.startsWith('company:'))await budget(db,'anaf',120);
+    // The Wikidata host serves the firm knowledge and the name search; both are
+    // user-driven, so they share one hourly budget on the host they both read.
+    if(loader.key.startsWith('company-name:')||loader.key.startsWith('knowledge-company:'))await budget(db,'wikidata',120);
+    if(loader.key.startsWith('forecast:'))await budget(db,'open-meteo',400);
    if(loader.key.startsWith('law:'))await budget(db,'legislation',120);
    if(loader.key.startsWith('court:'))await budget(db,'courts',60);
     if(loader.key.startsWith('catalog:')||loader.key.startsWith('resource:')||loader.key.startsWith('directory:schools')||loader.key.startsWith('justice:')||loader.key.startsWith('housing:'))await budget(db,'ckan',500);

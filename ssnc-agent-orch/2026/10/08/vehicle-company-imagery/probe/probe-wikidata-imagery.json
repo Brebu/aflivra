@@ -1,0 +1,535 @@
+{
+ "probed": 49,
+ "withImage": [
+  {
+   "qid": "Q12207333",
+   "label": "Parcul Alexandru Ioan Cuza",
+   "p18": "2019 Titan Park Spring (11).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q5612919",
+   "label": "Grădina Icoanei",
+   "p18": "Parcul Gradina Icoanei - statuie.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12736100",
+   "label": "Muzeul Satului Maramureșean",
+   "p18": "Casa Hodor-Pop - Muzeul Satului Maramureșean (2023) - img 02.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q42912625",
+   "label": "Ansamblul urban „Parcul Alei, cu imobilele limitrofe”",
+   "p18": "Grădina Alei 6.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q22693419",
+   "label": "Parcul Alpinet",
+   "p18": "Alpinet Park.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737517",
+   "label": "Parcul Bazilescu",
+   "p18": "Parcul Bazilescu.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q4093496",
+   "label": "Parcul Bordei",
+   "p18": "Bucharest - waterfront building, Parcul Bordei.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q22691547",
+   "label": "Parcul Carmen Sylva",
+   "p18": "Parcul Doina 1.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2052075",
+   "label": "Parcul Carol I",
+   "p18": "Parcul Carol din Bucuresti - aleea principala vazuta dinspre Mausoleu.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737520",
+   "label": "Parcul Central „Anton Scudier” din Timișoara",
+   "p18": "Central Park Timisoara - entrance.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q715958",
+   "label": "Parcul Central din Cluj",
+   "p18": "Central Park Cluj-Napoca1.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q18539021",
+   "label": "Parcul Circul de Stat",
+   "p18": "Afternoon - panoramio - Mihai Burlacu (1).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q959632",
+   "label": "Parcul Cișmigiu",
+   "p18": "Cismigiu-Garden-Bucharest-3.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q22693420",
+   "label": "Parcul Civic din Timișoara",
+   "p18": "Civic Park, Timișoara.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q4118458",
+   "label": "Parcul Copou",
+   "p18": "Mihai Eminescu's bust in Copou Garden 2.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q26257384",
+   "label": "Zona cu parcul din Buziaș",
+   "p18": "Buzias Ansamblu balnear (5).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q19708159",
+   "label": "Parcul „Dimitrie Ghica” din Sinaia",
+   "p18": "RO PH Sinaia park 02.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q42888116",
+   "label": "Parcul",
+   "p18": "Park Elżbiety w Sfântu Gheorghe.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q26257222",
+   "label": "Parcul municipal „Mihai Eminescu” din Galați",
+   "p18": "Parcul \"Mihai Eminescu\", Galati (12).JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q25459266",
+   "label": "Parcul Expo",
+   "p18": "Lac expo.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q5983519",
+   "label": "Parcul Expoziției din Iași",
+   "p18": "Parcul Expoziţiei din Iaşi4.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737515",
+   "label": "Parcul Floreasca",
+   "p18": "Parcul Floreasca - loc de joaca.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q22692035",
+   "label": "",
+   "p18": "Parcul Gheorghe Doja.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737531",
+   "label": "Parcul Ion Voicu",
+   "p18": "Parcul Ioanid.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737529",
+   "label": "Parcul Izvor",
+   "p18": "Parcul Izvor 2016.05.02.1 (26164817183).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737533",
+   "label": "Parcul Justiției",
+   "p18": "Parcul Justitiei Timisoara.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q56317371",
+   "label": "Dr. Max",
+   "p18": "Praha Vrsovice Kubanske namesti 5 Dr Max.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q117706903",
+   "label": "Podorozhnyk",
+   "p18": "Dan-83.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2689639",
+   "label": "Carrefour Market",
+   "p18": "Carrefour market fenestrelay.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q630125",
+   "label": "Gedeon Richter",
+   "p18": "Richter-Gedeon-Nyrt-P5010610.jpg",
+   "p158": null
+  }
+ ],
+ "commons": [
+  {
+   "title": "File:Cismigiu-Garden-Bucharest-3.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Cismigiu-Garden-Bucharest-3.jpg/960px-Cismigiu-Garden-Bucharest-3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 1024,
+   "height": 768,
+   "size": 186402,
+   "sha1": "862e5d9a8919",
+   "license": "CC BY-SA 3.0",
+   "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "artist": "Mastermindsro",
+   "credit": "Own work",
+   "objectName": "Cismigiu-Garden-Bucharest-3"
+  },
+  {
+   "title": "File:Central Park Cluj-Napoca1.jpg",
+   "thumburl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Central_Park_Cluj-Napoca1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+   "thumbwidth": 800,
+   "width": 768,
+   "height": 576,
+   "size": 454402,
+   "sha1": "86e2f7ad14c6",
+   "license": "CC BY-SA 3.0",
+   "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "artist": "Roamata",
+   "credit": "Own work",
+   "objectName": "Central Park Cluj-Napoca1"
+  },
+  {
+   "title": "File:Alpinet Park.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Alpinet_Park.jpg/960px-Alpinet_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 3264,
+   "height": 2448,
+   "size": 2416878,
+   "sha1": "878b8a9961d8",
+   "license": "CC BY-SA 3.0",
+   "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "artist": "Ionpetrache at English Wikipedia",
+   "credit": "Own work (Original text: self-made)",
+   "objectName": "Alpinet Park"
+  },
+  {
+   "title": "File:Parcul Expoziţiei din Iaşi4.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Parcul_Expozi%C5%A3iei_din_Ia%C5%9Fi4.jpg/960px-Parcul_Expozi%C5%A3iei_din_Ia%C5%9Fi4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 3072,
+   "height": 2304,
+   "size": 1016736,
+   "sha1": "c5a742364387",
+   "license": "CC BY 3.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+   "artist": "Cezar Suceveanu",
+   "credit": "Own work",
+   "objectName": "Parcul Expoziţiei din Iaşi4"
+  },
+  {
+   "title": "File:Parcul Gradina Icoanei - statuie.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Parcul_Gradina_Icoanei_-_statuie.jpg/960px-Parcul_Gradina_Icoanei_-_statuie.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 1024,
+   "height": 683,
+   "size": 677944,
+   "sha1": "a5f52c0876ee",
+   "license": "CC BY-SA 2.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+   "artist": "claudiu nh from BUCURESTI, ROMANIA",
+   "credit": "Gradina Icoanei",
+   "objectName": "Parcul Gradina Icoanei - statuie"
+  },
+  {
+   "title": "File:Mihai Eminescu's bust in Copou Garden 2.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Mihai_Eminescu%27s_bust_in_Copou_Garden_2.jpg/960px-Mihai_Eminescu%27s_bust_in_Copou_Garden_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 4320,
+   "height": 3240,
+   "size": 3843024,
+   "sha1": "d18ea242a6b7",
+   "license": "CC BY-SA 3.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "artist": "Argenna",
+   "credit": "Own work",
+   "objectName": "Mihai Eminescu's bust in Copou Garden 2"
+  },
+  {
+   "title": "File:Parcul Doina 1.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Parcul_Doina_1.jpg/960px-Parcul_Doina_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 4272,
+   "height": 2848,
+   "size": 1966050,
+   "sha1": "c6b13f539cdc",
+   "license": "CC0",
+   "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "artist": "LBE",
+   "credit": "Own work",
+   "objectName": "Parcul Doina 1"
+  },
+  {
+   "title": "File:Buzias Ansamblu balnear (5).jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Buzias_Ansamblu_balnear_%285%29.jpg/960px-Buzias_Ansamblu_balnear_%285%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 1936,
+   "height": 1296,
+   "size": 688023,
+   "sha1": "49d8d0ea50dd",
+   "license": "CC BY-SA 3.0 ro",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+   "artist": "Andrei kokelburg",
+   "credit": "Own work",
+   "objectName": "Buzias Ansamblu balnear (5)"
+  },
+  {
+   "title": "File:Grădina Alei 6.JPG",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Gr%C4%83dina_Alei_6.JPG/960px-Gr%C4%83dina_Alei_6.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 4320,
+   "height": 3240,
+   "size": 3413635,
+   "sha1": "b7d681ce9166",
+   "license": "CC BY-SA 3.0 ro",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+   "artist": "Stancosty",
+   "credit": "Own work",
+   "objectName": "Grădina Alei 6"
+  },
+  {
+   "title": "File:Parcul Carol din Bucuresti - aleea principala vazuta dinspre Mausoleu.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Parcul_Carol_din_Bucuresti_-_aleea_principala_vazuta_dinspre_Mausoleu.jpg/960px-Parcul_Carol_din_Bucuresti_-_aleea_principala_vazuta_dinspre_Mausoleu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 7672,
+   "height": 3401,
+   "size": 7204548,
+   "sha1": "47f261e96ca1",
+   "license": "Public domain",
+   "artist": "Miehs at Romanian Wikipedia",
+   "credit": "Photo is own work by original uploader",
+   "objectName": "Parcul Carol din Bucuresti - aleea principala vazuta dinspre"
+  },
+  {
+   "title": "File:Parcul Ioanid.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Parcul_Ioanid.jpg/960px-Parcul_Ioanid.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 2592,
+   "height": 1952,
+   "size": 1434873,
+   "sha1": "a0ddf2f2f947",
+   "license": "CC BY-SA 3.0 ro",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+   "artist": "Adriana ctin",
+   "credit": "Own work",
+   "objectName": "Parcul Ioanid"
+  },
+  {
+   "title": "File:Lac expo.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Lac_expo.jpg/960px-Lac_expo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 2048,
+   "height": 1536,
+   "size": 1044570,
+   "sha1": "00a2122ba978",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "Shell890",
+   "credit": "Own work",
+   "objectName": "Lac expo"
+  },
+  {
+   "title": "File:Parcul \"Mihai Eminescu\", Galati (12).JPG",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Parcul_%22Mihai_Eminescu%22%2C_Galati_%2812%29.JPG/960px-Parcul_%22Mihai_Eminescu%22%2C_Galati_%2812%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 3696,
+   "height": 2448,
+   "size": 5199984,
+   "sha1": "af20f9893392",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "Mihai Lutasu",
+   "credit": "Own work",
+   "objectName": "Parcul \"Mihai Eminescu\", Galati (12)"
+  },
+  {
+   "title": "File:Central Park Timisoara - entrance.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Central_Park_Timisoara_-_entrance.jpg/960px-Central_Park_Timisoara_-_entrance.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 2500,
+   "height": 1300,
+   "size": 793992,
+   "sha1": "e0d877819a6d",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "Turbojet",
+   "credit": "Own work",
+   "objectName": "Central Park Timisoara - entrance"
+  },
+  {
+   "title": "File:Afternoon - panoramio - Mihai Burlacu (1).jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Afternoon_-_panoramio_-_Mihai_Burlacu_%281%29.jpg/960px-Afternoon_-_panoramio_-_Mihai_Burlacu_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 2560,
+   "height": 1920,
+   "size": 1653295,
+   "sha1": "77c0774dc2df",
+   "license": "CC BY-SA 3.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "artist": "Mihai Burlacu",
+   "credit": "https://web.archive.org/web/201610170834",
+   "objectName": "Afternoon - panoramio - Mihai Burlacu (1)"
+  },
+  {
+   "title": "File:2019 Titan Park Spring (11).jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/2019_Titan_Park_Spring_%2811%29.jpg/960px-2019_Titan_Park_Spring_%2811%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 1534,
+   "height": 772,
+   "size": 664078,
+   "sha1": "0966d86e7dcc",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "Babu",
+   "credit": "Own work",
+   "objectName": "2019 Titan Park Spring (11)"
+  },
+  {
+   "title": "File:RO PH Sinaia park 02.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/RO_PH_Sinaia_park_02.jpg/960px-RO_PH_Sinaia_park_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 2400,
+   "height": 1800,
+   "size": 988220,
+   "sha1": "84b2b7b6445d",
+   "license": "CC0",
+   "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "artist": "Whitepixels",
+   "credit": "Own work",
+   "objectName": "RO PH Sinaia park 02"
+  },
+  {
+   "title": "File:Parcul Izvor 2016.05.02.1 (26164817183).jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Parcul_Izvor_2016.05.02.1_%2826164817183%29.jpg/960px-Parcul_Izvor_2016.05.02.1_%2826164817183%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 1600,
+   "height": 1200,
+   "size": 614248,
+   "sha1": "4c6c2b138098",
+   "license": "CC BY-SA 2.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+   "artist": "M Marius",
+   "credit": "Parcul Izvor 2016.05.02.1",
+   "objectName": "Parcul Izvor 2016.05.02.1 (26164817183)"
+  },
+  {
+   "title": "File:Civic Park, Timișoara.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Civic_Park%2C_Timi%C8%99oara.jpg/960px-Civic_Park%2C_Timi%C8%99oara.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 4000,
+   "height": 2252,
+   "size": 4009955,
+   "sha1": "c63a00dad5ff",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "Ionlizarazu",
+   "credit": "Own work",
+   "objectName": "Civic Park, Timișoara"
+  },
+  {
+   "title": "File:Parcul Bazilescu.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Parcul_Bazilescu.jpg/960px-Parcul_Bazilescu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 2048,
+   "height": 855,
+   "size": 516858,
+   "sha1": "be310f689436",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "Asybaris01",
+   "credit": "Own work",
+   "objectName": "Parcul Bazilescu"
+  },
+  {
+   "title": "File:Parcul Floreasca - loc de joaca.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Parcul_Floreasca_-_loc_de_joaca.jpg/960px-Parcul_Floreasca_-_loc_de_joaca.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 2048,
+   "height": 1536,
+   "size": 958311,
+   "sha1": "367f5de45989",
+   "license": "Public domain",
+   "artist": "--Miehs (discuție) 25 august 2012 13:38 (EEST)",
+   "credit": "Own work",
+   "objectName": "Parcul Floreasca - loc de joaca"
+  },
+  {
+   "title": "File:Parcul Gheorghe Doja.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Parcul_Gheorghe_Doja.jpg/960px-Parcul_Gheorghe_Doja.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 4608,
+   "height": 3456,
+   "size": 11043594,
+   "sha1": "731431916671",
+   "license": "CC0",
+   "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "artist": "Honza9513",
+   "credit": "Own work",
+   "objectName": "Parcul Gheorghe Doja"
+  },
+  {
+   "title": "File:Bucharest - waterfront building, Parcul Bordei.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Bucharest_-_waterfront_building%2C_Parcul_Bordei.jpg/960px-Bucharest_-_waterfront_building%2C_Parcul_Bordei.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 6000,
+   "height": 4000,
+   "size": 13593046,
+   "sha1": "0817dd7040e9",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "Joe Mabel",
+   "credit": "Photo by Joe Mabel.",
+   "objectName": "Bucharest - waterfront building, Parcul Bordei"
+  },
+  {
+   "title": "File:Park Elżbiety w Sfântu Gheorghe.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Park_El%C5%BCbiety_w_Sf%C3%A2ntu_Gheorghe.jpg/960px-Park_El%C5%BCbiety_w_Sf%C3%A2ntu_Gheorghe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 4032,
+   "height": 3024,
+   "size": 6820897,
+   "sha1": "bb990410e9bd",
+   "license": "CC BY-SA 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "artist": "1DEurovisionGag",
+   "credit": "Own work",
+   "objectName": "Park Elżbiety w Sfântu Gheorghe"
+  },
+  {
+   "title": "File:Casa Hodor-Pop - Muzeul Satului Maramureșean (2023) - img 02.jpg",
+   "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Casa_Hodor-Pop_-_Muzeul_Satului_Maramure%C8%99ean_%282023%29_-_img_02.jpg/960px-Casa_Hodor-Pop_-_Muzeul_Satului_Maramure%C8%99ean_%282023%29_-_img_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "thumbwidth": 800,
+   "width": 4032,
+   "height": 3024,
+   "size": 3628054,
+   "sha1": "1f6cff65cfdb",
+   "license": "CC BY 4.0",
+   "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+   "artist": "Chainwit.",
+   "credit": "Own work",
+   "objectName": "Casa Hodor-Pop - Muzeul Satului Maramureșean (2023) - img 02"
+  }
+ ]
+}

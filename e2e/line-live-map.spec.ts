@@ -342,4 +342,56 @@ test.describe('Per-line live map', () => {
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  // The per-line vehicle list: the dialog carries its own compact grid of the line's
+  // live vehicles, and an opened detail panel stays open while the 3s polls keep
+  // replacing the data — the same identity contract as the main vehicles list.
+  test('the per-line vehicle list renders in the dialog grid and an open detail survives the polls', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    let hits = 0;
+    // Each request answers with fresh timestamps, so every poll replaces the data
+    // object (bytes differ), exactly like the moving payload of the cadence leg.
+    await page.route('**/api/transport-live*', async route => {
+      hits++;
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: liveBody([
+          vehicle('veh-line-detail-1', 'Autobuzul cu detalii', {bearing: 87, speed: 12.5, occupancy: 'FEW_SEATS_AVAILABLE', occupancyPercentage: 45}),
+          vehicle('veh-line-detail-2', 'Autobuzul fără detalii', {speed: null}),
+        ]),
+      });
+    });
+
+    await page.goto('/#view=domain&id=transport');
+    await waitForClientReady(page);
+    const dialog = await openLineReader(page);
+
+    // The dialog's own vehicle grid: two compact records, several columns on desktop.
+    const grid = dialog.locator('.transit-vehicle-grid');
+    await expect(grid).toBeVisible({timeout: 60_000});
+    await expect(grid.locator('.transit-live-record')).toHaveCount(2);
+    await expect.poll(() => grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), {timeout: 10_000}).toBeGreaterThanOrEqual(2);
+
+    // The redesigned detail panel opens with the readable icon sections.
+    const record = grid.locator('.transit-live-record', {hasText: 'Autobuzul cu detalii'});
+    const panel = record.locator('details').first();
+    await panel.locator('summary').click();
+    await expect(panel).toHaveAttribute('open');
+    await expect(panel).toContainText('Viteza');
+    await expect(panel).toContainText('45.0 km/h');
+
+    // The DOM order stays the same list identity across the poll replacements.
+    const order = () => grid.locator('.transit-live-record').evaluateAll(els => els.map(el => (el.querySelector('h3')?.textContent || '').trim()));
+    const expected = [expect.stringContaining('Autobuzul cu detalii'), expect.stringContaining('Autobuzul fără detalii')];
+    await expect.poll(order).toEqual(expected);
+
+    // At least three further polls land with fresh bytes; the panel never closes.
+    await expect.poll(() => hits, {timeout: 20_000}).toBeGreaterThanOrEqual(4);
+    await expect(panel).toHaveAttribute('open');
+    await expect(panel).toContainText('Viteza');
+    await expect.poll(order).toEqual(expected);
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });

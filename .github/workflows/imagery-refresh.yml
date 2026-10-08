@@ -1,0 +1,58 @@
+name: imagery-refresh
+
+on:
+  schedule:
+    - cron: "0 6 * * 4"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: imagery-refresh
+  cancel-in-progress: true
+
+jobs:
+  relay:
+    name: Relay Wikidata imagery into the attested media register
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies (the media gates compile app sources with typescript)
+        run: corepack pnpm install --frozen-lockfile
+      - name: Relay (exit 2 = Wikidata/Commons themselves errored this tour, recorded as a warning; our own failures stay red)
+        run: |
+          set +e
+          node scripts/relay-imagery.mjs
+          code=$?
+          set -e
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::Wikidata/Commons au răspuns cu eroare în această tură (relaia nu a livrat fotografii) — reîmprospătarea reia la următoarea tură programată de joi."
+            exit 0
+          fi
+          exit "$code"
+      - name: Media gates before commit (licenses, sha256 proofs, register parity, file budgets)
+        run: |
+          if [ -z "$(git status --porcelain public/media)" ]; then
+            echo "Nicio schimbare în public/media — ciclul acestei ture este complet, fără comit."
+            exit 0
+          fi
+          node scripts/verify-exploration-media.mjs
+          node scripts/verify-media-budget.mjs
+      - name: Commit and push the attested imagery (images, manifest rows and the imagery register)
+        run: |
+          if [ -z "$(git status --porcelain public/media)" ]; then
+            echo "Nimic de comis în această tură."
+            exit 0
+          fi
+          git config user.name "aflivra-imagery-relay"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/media
+          git commit -m "imagery: relaia săptămânală Wikidata — fotografii atestate în registrul de imagini"
+          git push

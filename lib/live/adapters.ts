@@ -1,6 +1,7 @@
 import type {Loader,Loaded} from './types';
 import {uniqueRecords} from './records';
 import {sourceText} from './text';
+import {publicUrl} from './media';
 import {fetchWithServerRetry,retryAfterSeconds} from '@/lib/http-retry.mjs';
 export type SourceDiagnostic={url:string;category:'http'|'connection'|'tls'|'timeout'|'dns';httpStatus?:number;server?:string|null;rayId?:string|null;detail?:string;attempts?:number};
 export class SourceError extends Error {constructor(message:string,public retryAfter=0,public diagnostic?:SourceDiagnostic){super(message)}}
@@ -48,4 +49,38 @@ export function parseCatalog(raw:string):Loaded{
 }
 export const bnrLoader:Loader={key:'bnr',name:'Banca Națională a României',url:'https://curs.bnr.ro/nbrfxrates10days.xml',version:'bnr.xml.v1',ttl:900,load:async()=>parseBnr(await getSource('https://curs.bnr.ro/nbrfxrates10days.xml'))};
 export const weatherLoader:Loader={key:'weather',name:'Administrația Națională de Meteorologie',url:'https://www.meteoromania.ro/wp-json/meteoapi/v2/starea-vremii',version:'anm.complete-detail.v3',ttl:600,load:async()=>parseWeather(await getSource('https://www.meteoromania.ro/wp-json/meteoapi/v2/starea-vremii'))};
-export const catalogLoader=(category='',q='',page=0,organization='',format=''):Loader=>{const query=[categoryQueries[category]?'('+categoryQueries[category]+')':'',q.trim()?'('+q.trim()+')':''].filter(Boolean).join(' AND ');const quoted=(v:string)=>'"'+v.replace(/["\\]/g,'')+'"';const fq=[organization?'organization:'+quoted(organization):'',format?'res_format:'+quoted(format):''].filter(Boolean).join(' AND ');const params=new URLSearchParams({q:query,rows:'24',start:String(page*24),sort:'metadata_modified desc', 'facet.field':JSON.stringify(['organization','res_format']),'facet.limit':'500',...(fq?{fq}:{})});const url='https://data.gov.ro/api/3/action/package_search?'+params;return{key:organization||format?'catalog:v3:'+JSON.stringify({category,q,page,organization,format}):'catalog:v2:'+category+':'+q+':'+page,name:'Catalogul național de date deschise',url,version:'ckan.all-datasets.v3',ttl:3600,load:async()=>parseCatalog(await getSource(url))}};
+ export const catalogLoader=(category='',q='',page=0,organization='',format=''):Loader=>{const query=[categoryQueries[category]?'('+categoryQueries[category]+')':'',q.trim()?'('+q.trim()+')':''].filter(Boolean).join(' AND ');const quoted=(v:string)=>'"'+v.replace(/["\\]/g,'')+'"';const fq=[organization?'organization:'+quoted(organization):'',format?'res_format:'+quoted(format):''].filter(Boolean).join(' AND ');const params=new URLSearchParams({q:query,rows:'24',start:String(page*24),sort:'metadata_modified desc', 'facet.field':JSON.stringify(['organization','res_format']),'facet.limit':'500',...(fq?{fq}:{})});const url='https://data.gov.ro/api/3/action/package_search?'+params;return{key:organization||format?'catalog:v3:'+JSON.stringify({category,q,page,organization,format}):'catalog:v2:'+category+':'+q+':'+page,name:'Catalogul național de date deschise',url,version:'ckan.all-datasets.v3',ttl:3600,load:async()=>parseCatalog(await getSource(url))}};
+// The name→firm search. Probe-settled (2026-10-08): the official registries of names
+// publish no server-side query — ONRC's OD_FIRME (693 MB) and MFP's identification
+// exports (2×~435 MB) are integral files over every fetch cap, and mfinante's name
+// lookup page is retired — so the one honest upstream is the open-knowledge registry
+// the firm family already reads, searched through Wikidata's own indexed EntitySearch
+// service and restricted to entries carrying the Romanian VAT identifier (a plain
+// label-CONTAINS scan of every VAT holder exceeds the upstream time budget when the
+// endpoint has not cached the query — probe-measured). A row without a validated CUI
+// stays unlisted: it cannot reach a firm card, and a half link would be an invented
+// finding.
+const nameSearchLimit=50;
+export function parseCompanyNameSearch(raw:string,term:string):Loaded{
+ let parsed:any;try{parsed=JSON.parse(raw)}catch{throw new SourceError('Structura Wikidata nu poate fi validată.')}
+ const result=parsed;
+ if(!Array.isArray(result.results?.bindings))throw new SourceError('Structura Wikidata nu poate fi validată.');
+ const items=new Map<string,{cui:string;vat:string;qid:string;name:string;websites:string[];sourceUrl:string}>();
+ for(const row of result.results.bindings){
+  const id=row.item?.value?.match(/^https?:\/\/www\.wikidata\.org\/entity\/(Q[1-9]\d{0,9})$/)?.[1];
+  if(!id)continue;
+  const vat=clean(row.vat?.value)||'';
+  // The joinable key is the same VAT identifier the firm card validates — without a
+  // usable CUI the row cannot be opened, so it is left out rather than listed half.
+  const cui=vat.replace(/^RO/i,'');
+  const label=clean(row.itemLabel?.value);
+  if(!/^[1-9]\d{1,9}$/.test(cui)||!label)continue;
+  let record=items.get(id);
+  if(!record){record={cui,vat,qid:id,name:label,websites:[],sourceUrl:row.item.value.replace('/entity/','/wiki/').replace('http:','https:')};items.set(id,record)}
+  const website=publicUrl(row.website?.value);
+  if(website&&!record.websites.includes(website))record.websites.push(website);
+ }
+ const list=[...items.values()];
+ return{publishedAt:null,data:{query:term,items:list,count:list.length,limited:list.length>=nameSearchLimit}};
+}
+export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim();const quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://query.wikidata.org/',version:'wikidata.company-name.v1',ttl:3600,load:async()=>{if(term.length<2||term.length>100||!quoted)throw new SourceError('Termenul de căutat nu are lungimea acceptată.');const query='SELECT ?item ?itemLabel ?vat ?website WHERE { SERVICE wikibase:mwapi { bd:serviceParam wikibase:api "EntitySearch"; wikibase:endpoint "www.wikidata.org"; mwapi:search "'+quoted+'"; mwapi:language "ro"; mwapi:limit "'+nameSearchLimit+'". ?item wikibase:apiOutputItem mwapi:item. } ?item wdt:P3608 ?vat. OPTIONAL { ?item wdt:P856 ?website. } SERVICE wikibase:label { bd:serviceParam wikibase:language "ro,en". } }';return parseCompanyNameSearch(await getSource('https://query.wikidata.org/sparql?'+new URLSearchParams({query,format:'json'}),{headers:{Accept:'application/sparql-results+json'}}),term)}}};

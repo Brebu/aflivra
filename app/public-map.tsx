@@ -16,6 +16,14 @@ const AIGA_CREDIT='Ortoimagini 1:5000 · AIGA / MApN · CC BY 4.0';
 // so the accessible pin is a real <button> inside the marker icon — keyboard
 // Enter/Space, taps and clicks all select, the same ≥5px slop keeps a drag a pan,
 // and a transient onSelect identity never rebuilds the marker corpus.
+/* Tropăiala de dezmontare a canvasului Leaflet 1.9.4: la demontarea secțiunii care
+   conține harta, bilele de animație programate de redarea pe canvas pot rula după
+   ce onRemove a șters contextul (_ctx) și harta (_map) — o eroare neprinsă în
+   „clearRect of undefined". Panza redesenată pe un render distrus devine un
+   no-op: stratul oricum dispare odată cu harta. Aplicat o singură dată, pe
+   prototipul Canvas. */
+let canvasTeardownHardened=false;
+function hardenCanvasTeardown(L:typeof import('leaflet')){if(canvasTeardownHardened)return;canvasTeardownHardened=true;const redraw=(L as any).Canvas?.prototype?._redraw;if(typeof redraw!=='function')return;(L as any).Canvas.prototype._redraw=function(this:any,...args:any[]){if(!this._ctx||!this._map)return;return redraw.apply(this,args)}}
 export function PublicMap({points,paths=emptyPaths,viewKey='map',ownPosition=null,onViewportSettle,onSelect,selectedId,regionLabel}:{points:MapPoint[];paths?:{lat:number;lon:number}[][];viewKey?:string;ownPosition?:{lat:number;lon:number;accuracy:number}|null;onViewportSettle?:(center:{lat:number;lon:number})=>void;onSelect?:(id:string)=>void;selectedId?:string;regionLabel?:string}){
   const element=useRef<HTMLDivElement>(null),map=useRef<LeafletMap|null>(null),layers=useRef<LayerGroup|null>(null),ownLayer=useRef<LayerGroup|null>(null),lastView=useRef(''),orthoLayer=useRef<TileLayer.WMS|null>(null),orthoName=useRef(''),settleCb=useRef<((center:{lat:number;lon:number})=>void)|undefined>(undefined),quiet=useRef(false),settleTimer=useRef<ReturnType<typeof setTimeout>|null>(null),selectedRef=useRef<string|undefined>(selectedId),onSelectRef=useRef<((id:string)=>void)|undefined>(onSelect),repereRef=useRef(new Map<string,HTMLButtonElement>()),[ready,setReady]=useState(false),[error,setError]=useState(''),[ortho,setOrtho]=useState<{status:'off'|'loading'|'on'|'error';error:string}>({status:'off',error:''});
   /* Programmatic moves (initial view, pin-set refits, size changes) finish synchronously —
@@ -24,7 +32,7 @@ export function PublicMap({points,paths=emptyPaths,viewKey='map',ownPosition=nul
   useEffect(()=>{settleCb.current=onViewportSettle},[onViewportSettle]);
   useEffect(()=>{onSelectRef.current=onSelect},[onSelect]);
   useEffect(()=>{selectedRef.current=selectedId;for(const[id,button] of repereRef.current)button.classList.toggle('chosen',id===selectedId)},[selectedId]);
-  useEffect(()=>{let cancelled=false,frame=0;let observer:ResizeObserver|undefined;let owned:LeafletMap|undefined;import('leaflet').then(L=>{if(cancelled||!element.current)return;const m=L.map(element.current,{scrollWheelZoom:false,preferCanvas:true,zoomAnimation:false,fadeAnimation:false,markerZoomAnimation:false});owned=m;map.current=m;programmatic(()=>m.setView([45.9,25],6));
+  useEffect(()=>{let cancelled=false,frame=0;let observer:ResizeObserver|undefined;let owned:LeafletMap|undefined;import('leaflet').then(L=>{if(cancelled||!element.current)return;hardenCanvasTeardown(L);const m=L.map(element.current,{scrollWheelZoom:false,preferCanvas:true,zoomAnimation:false,fadeAnimation:false,markerZoomAnimation:false});owned=m;map.current=m;programmatic(()=>m.setView([45.9,25],6));
    // One settled gesture — one notification: the refetch follows the map's new center,
    // debounced past the moveend/zoomend pair a pinch produces, never a programmatic move.
    const settle=()=>{if(quiet.current)return;clearTimeout(settleTimer.current!);settleTimer.current=setTimeout(()=>{const cb=settleCb.current,view=map.current;if(!cb||!view)return;const center=view.getCenter();cb({lat:center.lat,lon:center.lng})},400)};m.on('moveend',settle);m.on('zoomend',settle);

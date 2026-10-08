@@ -20,7 +20,9 @@ const cache=await read('lib/live/cache.ts');
 pin(cache,'lib/live/cache.ts',15,'r.modified>=new Date(Date.now()-3*365.25*86400000).toISOString().slice(0,10)','D3 row „CKAN dataset browsing — modified >= 3y"');
 // Row 2 — ANAF company history: the rolling merge keeps the last 3 fiscal years
 // (full existence is exempt; the rolling window is only the balance history).
-pin(cache,'lib/live/cache.ts',70,'h.year>=new Date().getUTCFullYear()-3','D3 row „ANAF company history — last 3 fiscal years"');
+// The anchor moved 70 → 72 with the Wikidata host-budget lines this row keeps
+// sitting above the merge; the pinned content is unchanged.
+pin(cache,'lib/live/cache.ts',73,'h.year>=new Date().getUTCFullYear()-3','D3 row „ANAF company history — last 3 fiscal years"');
 const directories=await read('lib/live/directories.ts');
 // Row 3 — CNAS/registry resource editions: latest edition within 3 years.
 pin(directories,'lib/live/directories.ts',11,'r.date>=new Date(Date.now()-3*365.25*86400000).toISOString().slice(0,10)','D3 row „CNAS resource editions — latest within 3y"');

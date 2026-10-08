@@ -1,0 +1,23 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: company/name-search / http500: fără copie și fără sămânță, starea documentată
++ actual - expected
+
++ 'stale'
+- 'unavailable'
+
+    at familyExpectations (file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:555:17)
+    at file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:1185:10
+    at async withMocks (file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:480:17)
+    at async file:///Users/cbrebu/Projects/alfivra/scripts/verify-source-errors.mjs:1188:121 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 'stale',
+  expected: 'unavailable',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

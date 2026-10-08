@@ -2,7 +2,7 @@ name: flights-refresh
 
 on:
   schedule:
-    - cron: "0 5 * * 3"
+    - cron: "35 1,7,13,19 * * *"
   workflow_dispatch: {}
 
 permissions:

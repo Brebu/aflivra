@@ -1,0 +1,778 @@
+{
+ "pharmacy": {
+  "brand:wikidata": [
+   {
+    "qid": "Q56317371",
+    "count": 444,
+    "example": "n8601933502",
+    "name": "Dr Max",
+    "city": "Oradea"
+   },
+   {
+    "qid": "Q24035728",
+    "count": 403,
+    "example": "n10114423953",
+    "name": "Catena",
+    "city": "București"
+   },
+   {
+    "qid": "Q12729923",
+    "count": 192,
+    "example": "n10207153118",
+    "name": "Help Net",
+    "city": ""
+   },
+   {
+    "qid": "Q12726919",
+    "count": 186,
+    "example": "n10166375251",
+    "name": "Dona",
+    "city": ""
+   },
+   {
+    "qid": "Q114647927",
+    "count": 22,
+    "example": "n10113679949",
+    "name": "EvoFarm",
+    "city": ""
+   },
+   {
+    "qid": "Q12740640",
+    "count": 4,
+    "example": "n2175825108",
+    "name": "Dr. Max",
+    "city": ""
+   },
+   {
+    "qid": "Q1547749",
+    "count": 4,
+    "example": "n8731895659",
+    "name": "FARMACIA CRISFARM",
+    "city": ""
+   },
+   {
+    "qid": "Q117706903",
+    "count": 3,
+    "example": "n12998748526",
+    "name": "Подорожник",
+    "city": ""
+   },
+   {
+    "qid": "Q62562792",
+    "count": 2,
+    "example": "n13929090730",
+    "name": "Benu",
+    "city": ""
+   },
+   {
+    "qid": "Q85968400",
+    "count": 1,
+    "example": "n14158608366",
+    "name": "Catena",
+    "city": "Fetești-Gară"
+   },
+   {
+    "qid": "Q123271999",
+    "count": 1,
+    "example": "n6175191818",
+    "name": "Farmacia Sfanta Ana",
+    "city": "Siculeni / Madéfalva"
+   },
+   {
+    "qid": "Q2689639",
+    "count": 1,
+    "example": "n4973273650",
+    "name": "Farmacia Universul Sanatatii",
+    "city": "Bacău"
+   },
+   {
+    "qid": "Q630125",
+    "count": 1,
+    "example": "n2752792379",
+    "name": "Richter",
+    "city": "Târgu Mureș"
+   },
+   {
+    "qid": "Q117617038",
+    "count": 1,
+    "example": "n8788437055",
+    "name": "Аптека оптових ц‥",
+    "city": ""
+   },
+   {
+    "qid": "Q117706848",
+    "count": 1,
+    "example": "n13041297016",
+    "name": "Здорова Родина",
+    "city": ""
+   }
+  ],
+  "wikidata": [
+   {
+    "qid": "Q24035728",
+    "count": 1,
+    "example": "n1594374885",
+    "name": "Catena",
+    "city": ""
+   }
+  ]
+ },
+ "school": {
+  "wikidata": [
+   {
+    "qid": "Q6048855",
+    "count": 2,
+    "example": "n2495694242",
+    "name": "International British School of Bucharest",
+    "city": ""
+   },
+   {
+    "qid": "Q12724348",
+    "count": 1,
+    "example": "w43158975",
+    "name": "Colegiul Național \"Gheorghe Șincai\"",
+    "city": "București"
+   },
+   {
+    "qid": "Q18537034",
+    "count": 1,
+    "example": "w883454204",
+    "name": "Colegiul Național \"Ion Luca Caragiale\"",
+    "city": "Ploiești"
+   },
+   {
+    "qid": "Q28217435",
+    "count": 1,
+    "example": "w514854242",
+    "name": "Colegiul Național \"Iulia Hașdeu\"",
+    "city": "București"
+   },
+   {
+    "qid": "Q18389454",
+    "count": 1,
+    "example": "r21021040",
+    "name": "Colegiul Național \"Matei Basarab\"",
+    "city": "București"
+   },
+   {
+    "qid": "Q6845068",
+    "count": 1,
+    "example": "w238795032",
+    "name": "Colegiul Național \"Mihai Eminescu\"",
+    "city": ""
+   },
+   {
+    "qid": "Q12724340",
+    "count": 1,
+    "example": "w23648411",
+    "name": "Colegiul Național \"Mihai Viteazul\"",
+    "city": "București"
+   },
+   {
+    "qid": "Q12744205",
+    "count": 1,
+    "example": "w23771041",
+    "name": "Colegiul Național \"Școala Centrală\"",
+    "city": "București"
+   },
+   {
+    "qid": "Q12724335",
+    "count": 1,
+    "example": "w136269115",
+    "name": "Colegiul Național \"Zinca Golescu\"",
+    "city": "Pitești"
+   },
+   {
+    "qid": "Q18539107",
+    "count": 1,
+    "example": "n6959677402",
+    "name": "Colegiul Național Ana Aslan",
+    "city": ""
+   },
+   {
+    "qid": "Q18539115",
+    "count": 1,
+    "example": "w515133710",
+    "name": "Colegiul Național Cantemir Vodă",
+    "city": "București"
+   },
+   {
+    "qid": "Q5044392",
+    "count": 1,
+    "example": "w172692818",
+    "name": "Colegiul Național Carol I",
+    "city": "Craiova"
+   },
+   {
+    "qid": "Q1108065",
+    "count": 1,
+    "example": "w195276809",
+    "name": "Colegiul Național Constantin Diaconovici Loga",
+    "city": "Timișoara"
+   },
+   {
+    "qid": "Q7851326",
+    "count": 1,
+    "example": "w27621229",
+    "name": "Colegiul Național de Informatică Tudor Vianu",
+    "city": "București"
+   },
+   {
+    "qid": "Q2983884",
+    "count": 1,
+    "example": "w39517794",
+    "name": "Colegiul Național Gheorghe Lazăr",
+    "city": "București"
+   },
+   {
+    "qid": "Q12732152",
+    "count": 1,
+    "example": "w190269443",
+    "name": "Colegiul Național Pedagogic Carmen Sylva",
+    "city": ""
+   },
+   {
+    "qid": "Q3067523",
+    "count": 1,
+    "example": "w515126132",
+    "name": "Colegiul Național Sfântul Sava",
+    "city": "București"
+   },
+   {
+    "qid": "Q12724354",
+    "count": 1,
+    "example": "w31605593",
+    "name": "Colegiul National Stefan cel Mare",
+    "city": "Suceava"
+   },
+   {
+    "qid": "Q18539127",
+    "count": 1,
+    "example": "n316394639",
+    "name": "Colegiul Național “Costache Negruzzi”",
+    "city": "Iași"
+   },
+   {
+    "qid": "Q61085718",
+    "count": 1,
+    "example": "w215721981",
+    "name": "Colegiul Național „Andrei Mureșanu”",
+    "city": "Dej"
+   },
+   {
+    "qid": "Q6062912",
+    "count": 1,
+    "example": "r1835650",
+    "name": "Colegiul Național „Ion C. Brătianu\"",
+    "city": "Pitești"
+   },
+   {
+    "qid": "Q1212435",
+    "count": 1,
+    "example": "w437250056",
+    "name": "Colegiul Național „Márton Áron”",
+    "city": "Miercurea Ciuc"
+   },
+   {
+    "qid": "Q61086534",
+    "count": 1,
+    "example": "w84809368",
+    "name": "Colegiul Național „Mihai Viteazul”",
+    "city": "Ploiești"
+   },
+   {
+    "qid": "Q6873041",
+    "count": 1,
+    "example": "w627631357",
+    "name": "Colegiul Național „Mircea cel Bătrân”",
+    "city": "Constanța"
+   },
+   {
+    "qid": "Q19572716",
+    "count": 1,
+    "example": "w516664962",
+    "name": "Liceul Francez Anna de Noailles",
+    "city": "București"
+   },
+   {
+    "qid": "Q18549424",
+    "count": 1,
+    "example": "n202965818",
+    "name": "Liceul Joseph Haltrich",
+    "city": ""
+   },
+   {
+    "qid": "Q25466725",
+    "count": 1,
+    "example": "w1075076336",
+    "name": "Liceul Teologic Romano Catolic \"Ham Janos\"",
+    "city": ""
+   },
+   {
+    "qid": "Q12732160",
+    "count": 1,
+    "example": "w443143988",
+    "name": "Liceul Teoretic Bartók Béla",
+    "city": "Timișoara"
+   },
+   {
+    "qid": "Q18541331",
+    "count": 1,
+    "example": "w418820706",
+    "name": "Liceul Teoretic Grigore Moisil",
+    "city": ""
+   }
+  ],
+  "operator:wikidata": [
+   {
+    "qid": "Q1583546",
+    "count": 16,
+    "example": "w172180628",
+    "name": "Colegiul Național Pedagogic „Ștefan cel Mare\" Bacău",
+    "city": "Bacău"
+   }
+  ]
+ },
+ "court": {
+  "wikidata": [
+   {
+    "qid": "Q1743625",
+    "count": 1,
+    "example": "n3762010967",
+    "name": "Curtea Constituțională a României",
+    "city": "București"
+   },
+   {
+    "qid": "Q5755230",
+    "count": 1,
+    "example": "w87312970",
+    "name": "Curtea Supremă de Justiție",
+    "city": ""
+   },
+   {
+    "qid": "Q43113639",
+    "count": 1,
+    "example": "r14225591",
+    "name": "Palatul de Justiție",
+    "city": "Sibiu"
+   },
+   {
+    "qid": "Q18545122",
+    "count": 1,
+    "example": "r19176203",
+    "name": "Palatul de Justiție",
+    "city": "Suceava"
+   },
+   {
+    "qid": "Q18548695",
+    "count": 1,
+    "example": "w122215694",
+    "name": "Tribunalul București",
+    "city": "București"
+   },
+   {
+    "qid": "Q140632235",
+    "count": 1,
+    "example": "n14018082629",
+    "name": "Административен съд - Видин",
+    "city": ""
+   },
+   {
+    "qid": "Q140634363",
+    "count": 1,
+    "example": "n297276273",
+    "name": "Окръжен съд - Видин",
+    "city": ""
+   },
+   {
+    "qid": "Q133868099",
+    "count": 1,
+    "example": "n14015568979",
+    "name": "Районен съд - Видин",
+    "city": ""
+   },
+   {
+    "qid": "Q140638835",
+    "count": 1,
+    "example": "w437382788",
+    "name": "Районен съд - Никопол",
+    "city": ""
+   }
+  ]
+ },
+ "park": {
+  "wikidata": [
+   {
+    "qid": "Q12207333",
+    "count": 2,
+    "example": "r8321292",
+    "name": "Parcul Alexandru Ioan Cuza",
+    "city": ""
+   },
+   {
+    "qid": "Q5612919",
+    "count": 1,
+    "example": "w62743951",
+    "name": "Grădina Icoanei",
+    "city": ""
+   },
+   {
+    "qid": "Q132526736",
+    "count": 1,
+    "example": "w524769567",
+    "name": "Lunca Argeșului",
+    "city": "Pitești"
+   },
+   {
+    "qid": "Q43010539",
+    "count": 1,
+    "example": "w128393075",
+    "name": "Muzee",
+    "city": ""
+   },
+   {
+    "qid": "Q12736100",
+    "count": 1,
+    "example": "w301774676",
+    "name": "Muzeul Satului Maramureșean",
+    "city": "Sighetu Marmației"
+   },
+   {
+    "qid": "Q18544251",
+    "count": 1,
+    "example": "w348173667",
+    "name": "Muzeul Țării Oașului",
+    "city": "Negrești-Oaș"
+   },
+   {
+    "qid": "Q18545194",
+    "count": 1,
+    "example": "w449583197",
+    "name": "Parc Pitești",
+    "city": ""
+   },
+   {
+    "qid": "Q42912625",
+    "count": 1,
+    "example": "w23595493",
+    "name": "Parcul Alei",
+    "city": "Giurgiu"
+   },
+   {
+    "qid": "Q22693419",
+    "count": 1,
+    "example": "w24377933",
+    "name": "Parcul Alpinet",
+    "city": ""
+   },
+   {
+    "qid": "Q12737517",
+    "count": 1,
+    "example": "w23692562",
+    "name": "Parcul Bazilescu",
+    "city": ""
+   },
+   {
+    "qid": "Q4093496",
+    "count": 1,
+    "example": "r13220503",
+    "name": "Parcul Bordei",
+    "city": ""
+   },
+   {
+    "qid": "Q12737521",
+    "count": 1,
+    "example": "w88337200",
+    "name": "Parcul Cancicov",
+    "city": ""
+   },
+   {
+    "qid": "Q22691547",
+    "count": 1,
+    "example": "w34023595",
+    "name": "Parcul Carmen Sylva",
+    "city": ""
+   },
+   {
+    "qid": "Q2052075",
+    "count": 1,
+    "example": "w13853540",
+    "name": "Parcul Carol",
+    "city": ""
+   },
+   {
+    "qid": "Q22693423",
+    "count": 1,
+    "example": "w4975948",
+    "name": "Parcul Catedralei",
+    "city": ""
+   },
+   {
+    "qid": "Q12737520",
+    "count": 1,
+    "example": "w4975934",
+    "name": "Parcul Central Anton von Scudier",
+    "city": ""
+   },
+   {
+    "qid": "Q715958",
+    "count": 1,
+    "example": "w23893331",
+    "name": "Parcul Central Simion Bărnuțiu",
+    "city": "Cluj-Napoca"
+   },
+   {
+    "qid": "Q18539021",
+    "count": 1,
+    "example": "w23612226",
+    "name": "Parcul Circului",
+    "city": ""
+   },
+   {
+    "qid": "Q959632",
+    "count": 1,
+    "example": "w16291869",
+    "name": "Parcul Cișmigiu",
+    "city": ""
+   },
+   {
+    "qid": "Q22693420",
+    "count": 1,
+    "example": "w438016914",
+    "name": "Parcul Civic",
+    "city": "Timișoara"
+   },
+   {
+    "qid": "Q22692562",
+    "count": 1,
+    "example": "w195309870",
+    "name": "Parcul Copiilor Ion Creangă",
+    "city": ""
+   },
+   {
+    "qid": "Q4118458",
+    "count": 1,
+    "example": "w61750051",
+    "name": "Parcul Copou",
+    "city": ""
+   },
+   {
+    "qid": "Q26257384",
+    "count": 1,
+    "example": "w467442561",
+    "name": "Parcul Dendrologic Buziaș",
+    "city": ""
+   },
+   {
+    "qid": "Q19708159",
+    "count": 1,
+    "example": "w87243091",
+    "name": "Parcul Dimitrie Ghica",
+    "city": "Sinaia"
+   },
+   {
+    "qid": "Q12737518",
+    "count": 1,
+    "example": "w21802163",
+    "name": "Parcul Drumul Taberei",
+    "city": ""
+   },
+   {
+    "qid": "Q42888116",
+    "count": 1,
+    "example": "w34698858",
+    "name": "Parcul Elisabeta",
+    "city": ""
+   },
+   {
+    "qid": "Q26257222",
+    "count": 1,
+    "example": "w11139468",
+    "name": "Parcul Eminescu",
+    "city": ""
+   },
+   {
+    "qid": "Q25459266",
+    "count": 1,
+    "example": "w525195063",
+    "name": "Parcul Expo",
+    "city": "Pitești"
+   },
+   {
+    "qid": "Q5983519",
+    "count": 1,
+    "example": "w103674847",
+    "name": "Parcul Expoziției",
+    "city": ""
+   },
+   {
+    "qid": "Q12737515",
+    "count": 1,
+    "example": "w586357887",
+    "name": "Parcul Floreasca",
+    "city": "București"
+   },
+   {
+    "qid": "Q22692035",
+    "count": 1,
+    "example": "w106286544",
+    "name": "Parcul Gheorghe Doja",
+    "city": ""
+   },
+   {
+    "qid": "Q12737531",
+    "count": 1,
+    "example": "w23770990",
+    "name": "Parcul Ion Voicu",
+    "city": ""
+   },
+   {
+    "qid": "Q12737529",
+    "count": 1,
+    "example": "w14262324",
+    "name": "Parcul Izvor",
+    "city": "București"
+   },
+   {
+    "qid": "Q12737533",
+    "count": 1,
+    "example": "w195566035",
+    "name": "Parcul Justiției",
+    "city": ""
+   },
+   {
+    "qid": "Q12737534",
+    "count": 1,
+    "example": "w23611141",
+    "name": "Parcul Kiseleff",
+    "city": ""
+   },
+   {
+    "qid": "Q130493404",
+    "count": 1,
+    "example": "r21298944",
+    "name": "Parcul Liniei",
+    "city": "București"
+   },
+   {
+    "qid": "Q31180141",
+    "count": 1,
+    "example": "w23737310",
+    "name": "Parcul Motodrom",
+    "city": ""
+   },
+   {
+    "qid": "Q2284372",
+    "count": 1,
+    "example": "w28132031",
+    "name": "Parcul Nicolae Romanescu",
+    "city": ""
+   },
+   {
+    "qid": "Q18545193",
+    "count": 1,
+    "example": "w23705733",
+    "name": "Parcul Obor",
+    "city": "București"
+   },
+   {
+    "qid": "Q42758778",
+    "count": 1,
+    "example": "w23581105",
+    "name": "Parcul Pantelimon",
+    "city": ""
+   },
+   {
+    "qid": "Q28726273",
+    "count": 1,
+    "example": "w261093360",
+    "name": "Parcul Prundu",
+    "city": "Pitești"
+   },
+   {
+    "qid": "Q2074133",
+    "count": 1,
+    "example": "w88337012",
+    "name": "Parcul Regele Mihai I Al României (Herăstrău)",
+    "city": "București"
+   },
+   {
+    "qid": "Q132449",
+    "count": 1,
+    "example": "r1250434",
+    "name": "Parcul Rozelor",
+    "city": ""
+   },
+   {
+    "qid": "Q61086391",
+    "count": 1,
+    "example": "w88344087",
+    "name": "Parcul Ștrand",
+    "city": "Pitești"
+   },
+   {
+    "qid": "Q18548495",
+    "count": 1,
+    "example": "w23583220",
+    "name": "Parcul Tei",
+    "city": ""
+   },
+   {
+    "qid": "Q2340319",
+    "count": 1,
+    "example": "w14360895",
+    "name": "Parcul Tineretului",
+    "city": "București"
+   },
+   {
+    "qid": "Q97195048",
+    "count": 1,
+    "example": "w23751031",
+    "name": "Parcul Titănel",
+    "city": ""
+   },
+   {
+    "qid": "Q12737546",
+    "count": 1,
+    "example": "w37913532",
+    "name": "Parcul Trandafirilor Bacău",
+    "city": ""
+   },
+   {
+    "qid": "Q25463378",
+    "count": 1,
+    "example": "w668570107",
+    "name": "Parcul Trivale",
+    "city": "Pitești"
+   },
+   {
+    "qid": "Q135526433",
+    "count": 1,
+    "example": "w1054221333",
+    "name": "Parcul Tudor Arghezi",
+    "city": "București"
+   },
+   {
+    "qid": "Q12737541",
+    "count": 1,
+    "example": "w1466028819",
+    "name": "Parcul Vladimir Florea",
+    "city": ""
+   },
+   {
+    "qid": "Q42922919",
+    "count": 1,
+    "example": "w32030407",
+    "name": "Parcuri și natură",
+    "city": ""
+   },
+   {
+    "qid": "Q42923334",
+    "count": 1,
+    "example": "w222347298",
+    "name": "Piața Unirii",
+    "city": ""
+   }
+  ]
+ }
+}

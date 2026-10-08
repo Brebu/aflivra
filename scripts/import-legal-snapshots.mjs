@@ -20,7 +20,7 @@ async function siteInput(){
 // A failed import leaves the previous text, checksum and verification date intact.
 const root=resolve(import.meta.dirname,'..'),temp=await mkdtemp(join(tmpdir(),'aflivra-current-laws-'));
 try{
- for(const name of ['legal-consolidation','legal-portal','adapters','records','catalog-categories','text']){
+ for(const name of ['legal-consolidation','legal-portal','adapters','records','catalog-categories','text','media']){
   const source=(await readFile(join(root,'lib/live',name+'.ts'),'utf8')).replace("import {env} from 'cloudflare:workers';",'const env={};');
   const code=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replaceAll('@/lib/http-retry.mjs',pathToFileURL(join(root,'lib/http-retry.mjs')).href).replace(/from '(\.\/[^']+)'/g,(_,path)=>"from '"+path+".mjs'");
   await writeFile(join(temp,name+'.mjs'),code);

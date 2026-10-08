@@ -76,6 +76,8 @@ jobs:
           node scripts/verify-relay-afir.mjs
           node scripts/verify-relay-bia.mjs
           node scripts/verify-relay-flights.mjs
+          node scripts/verify-relay-imagery.mjs
+          node scripts/verify-relay-imagery.mjs
           node scripts/verify-court-links.mjs
           node scripts/verify-packed-seeds.mjs
           node scripts/verify-twa.mjs
