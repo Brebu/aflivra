@@ -132,3 +132,7 @@
 .v2 .watch-push{background:#fff;border:1px solid #dce5ed;border-radius:14px;padding:18px;display:grid;gap:8px}
 .v2 .vb-badge{background:#0f3975;color:#fff;border-radius:999px;font-size:.68rem;min-width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px}
 @media(max-width:640px){.v2 .watch-items,.v2 .watch-feed{grid-template-columns:1fr}}
+
+.leaflet-popup .pin-nav{margin:.35rem 0 0;font-size:.82rem}
+.leaflet-popup .pin-nav a{color:#0877ed;text-decoration:underline}
+.nav-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}

@@ -14,7 +14,7 @@ import {fileURLToPath} from 'node:url';
 // trăind doar pe mașina owner-ului) nu există în repo — build.gradle fără keystore
 // produce un app-release.aab nesignat. SKIP-ele sunt înregistrate onest
 // (java≥17 / rețea lipsă), eșecurile reale termină cu exit 1.
-const BUBBLEWRAP_VERSION = '2.2.0';
+const BUBBLEWRAP_VERSION = '1.25.0';
 const MIN_JAVA_MAJOR = 17;
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const TWA = join(ROOT, 'twa'), BUILD = join(TWA, 'build');
@@ -64,9 +64,25 @@ if (!Number.isInteger(targetSdk)) {
 //    directorul țintă (copiat mai jos), iar webmanifestul publicat e fallback.
 mkdirSync(BUILD, {recursive: true});
 copyFileSync(MANIFEST, join(BUILD, 'twa-manifest.json'));
+// Semnarea de upload e opțională și trăiește doar pe mașina owner-ului: keystore-ul
+// nu intră niciodată în repo — manifestul comis declară signingKey gol, iar copia
+// din build/ primește calea reală prin env (BUBBLEWRAP_*_PASSWORD se dau doar la
+// execuție, niciodată comise).
+const uploadKeystore = process.env.AFLIVRA_UPLOAD_KEYSTORE, uploadAlias = process.env.AFLIVRA_UPLOAD_ALIAS;
+if (uploadKeystore && uploadAlias) {
+  const buildManifest = JSON.parse(readFileSync(join(BUILD, 'twa-manifest.json'), 'utf8'));
+  buildManifest.signingKey = {path: uploadKeystore, alias: uploadAlias};
+  writeFileSync(join(BUILD, 'twa-manifest.json'), JSON.stringify(buildManifest, null, 2));
+  console.log(`Semnare de upload activată din env: ${uploadAlias} (keystore-ul rămâne în afara repo-ului).`);
+}
 const dlx = ['pnpm', 'dlx', `@bubblewrap/cli@${BUBBLEWRAP_VERSION}`];
-let generated = run('corepack', [...dlx, 'init', `--directory=${BUILD}`]);
-if (generated.status !== 0) generated = run('corepack', [...dlx, 'init', '--manifest', `https://${HOST}/manifest.webmanifest`, `--directory=${BUILD}`]);
+// init-ul Bubblewrap promptează interactiv (Domain, URL path, etc.) chiar și cu
+// twa-manifest.json complet — default-urile prompt-urilor sunt valorile din manifestul
+// nostru, deci un PTY care apasă Enter pe fiecare întrebare rezolvă non-interactiv.
+const expectInit = () => spawnSync('expect', ['-c',
+  `set timeout 1800; spawn corepack pnpm dlx @bubblewrap/cli@${BUBBLEWRAP_VERSION} init --manifest https://${HOST}/manifest.webmanifest --directory=${BUILD}; expect { -re {\? .*:} { send "\r"; exp_continue } eof { catch wait result; exit [lindex $result 3] } }`],
+  {stdio: 'inherit'});
+let generated = expectInit();
 if (generated.status !== 0) {
   console.error(`bubblewrap init a eșuat (exit ${generated.status}) — vezi output-ul de mai sus; twa-manifest.json complet ar trebui să evite orice prompt.`);
   process.exit(1);

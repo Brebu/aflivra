@@ -412,3 +412,34 @@ test.describe('Places map — pin radius and pan refresh', () => {
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });
+
+// Pin-ul hărții locurilor duce la navigație: popup-ul fiecărui punct poartă linkurile
+// Google Maps și Harta Apple cu coordonata exactă a punctului (cerința de navigație
+// de la punct, pe toate suprafețele cu PublicMap), indiferent de densitatea pin-urilor.
+test.describe('Pin navigation — every map point carries navigation links', () => {
+  test('a map pin opens its popup with Google Maps and Apple Maps navigation links', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    // Plicul sursei cere status valid — fără el, useSource refuză corpul onest.
+    const placesState = () => ({key: 'places:nav-test', name: 'OpenStreetMap', url: 'https://www.openstreetmap.org/', status: 'fresh', publishedAt: '2026-10-01', lastSuccessAt: '2026-10-08T10:00:00.000Z', error: null, ttlSeconds: 3600, data: {total: 1, page: 0, pages: 1, items: [{id: 'wlm-test-pin', name: 'Fosta Barieră de Test', lat: 44.4268, lon: 26.1025, address: 'Bulevardul Testului 1', categories: ['wiki-loves-monuments'], types: [], city: 'București', updatedAt: '2026-10-01'}]}});
+    await page.route(/\/api\/places/, route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(placesState())}));
+    await page.goto('/#view=domain&id=cultura&tab=cultura');
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'domain');
+    await waitForClientReady(page);
+    await page.getByRole('button', {name: 'Harta paginii'}).click();
+    const map = page.locator('section.places-workspace .public-map');
+    await expect(map).toBeVisible({timeout: 30_000});
+    await expect(map).toHaveAttribute('data-pins', '1', {timeout: 30_000});
+    await map.scrollIntoViewIfNeeded();
+    // Un singur pin → fitBounds îl centrează exact: click în centrul hărții deschide popup-ul.
+    const box = await map.boundingBox();
+    if (!box) throw new Error('map box missing');
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+    const popup = page.locator('.leaflet-popup').first();
+    await expect(popup).toContainText('Fosta Barieră de Test', {timeout: 10_000});
+    const google = popup.locator('a', {hasText: 'Google Maps'});
+    await expect(google).toHaveAttribute('href', 'https://www.google.com/maps/dir/?api=1&destination=44.4268,26.1025');
+    const apple = popup.locator('a', {hasText: 'Harta Apple'});
+    await expect(apple).toHaveAttribute('href', 'https://maps.apple.com/?daddr=44.4268,26.1025');
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});

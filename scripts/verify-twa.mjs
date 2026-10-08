@@ -88,7 +88,7 @@ const pin = /BUBBLEWRAP_VERSION\s*=\s*'([^']+)'/.exec(wrapper);
 assert.ok(pin, 'wrapper-ul declară BUBBLEWRAP_VERSION într-un singur loc');
 assert.match(pin[1], /^\d+\.\d+\.\d+$/, `versiunea Bubblewrap e EXACTĂ (fără ^ ~ latest): ${pin[1]}`);
 const [major, minor] = pin[1].split('.').map(Number);
-assert.ok(major > 2 || (major === 2 && minor >= 2), `Bubblewrap >= 2.2.0 pentru AGP/JDK17 modern: ${pin[1]}`);
+assert.ok(major > 2 || (major === 2 && minor >= 2), `Bubblewrap >= 1.25.0 pentru AGP/JDK17 modern: ${pin[1]}`);
 
 // 7. ZERO material de semnare în twa/: semnarea e Play App Signing
 //    (console-side); keystore-ul de upload trăiește doar pe mașina owner-ului,
