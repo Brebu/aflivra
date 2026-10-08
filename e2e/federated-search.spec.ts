@@ -159,9 +159,25 @@ test.describe('Federated search — one grouped list', () => {
   });
 });
 
+// The professional registry stays deterministic in CI: the IFEP panel is an on-demand
+// upstream (no committed seed), so the registry legs ride a page.route stub — the same
+// convention as sweep-regressions.spec.ts. The loader contract itself is covered offline
+// by the verify-source-errors matrix cells.
+const lawyersRegistryState = () => ({
+  key: 'lawyers:probe', name: 'IFEP / UNBR · tabloul național al avocaților', url: 'https://www.ifep.ro/Justice/Lawyers/LawyersPanel.aspx', adapterVersion: 'ifep.public-search.v2',
+  status: 'fresh', publishedAt: null, lastSuccessAt: new Date().toISOString(), lastAttemptAt: new Date().toISOString(), nextAttemptAt: null, error: null, ttlSeconds: 3600,
+  data: {
+    items: [{id: 'probe-1', name: 'POPESCU Ana', title: 'Avocat definitiv, Baroul Cluj', details: 'Sediu principal: Cluj-Napoca', rights: 'Drept de concluzii la: Judecătorii, Tribunale, Curți de Apel', updatedAt: '05-10-2026 12:12', paragraphs: [], url: 'https://www.ifep.ro/'}],
+    total: 1, page: 0, pages: 1, pageSize: 15,
+    note: 'Tabloul profesional este actualizat de barouri.', sourceUrl: 'https://www.ifep.ro/Justice/Lawyers/LawyersPanel.aspx',
+  },
+});
+const stubLawyersRegistry = (page: Page) => page.route('**/api/lawyers*', route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(lawyersRegistryState())}));
+
 test.describe('Federated search — professional and registry families', () => {
   test('„avocați" surfaces the OSM lawyer offices and the IFEP family state honestly', async ({page}) => {
     const pageErrors = collectPageErrors(page);
+    await stubLawyersRegistry(page);
     await openExplore(page);
     await searchFromExplore(page, 'avocați');
     await expect(page.getByTestId('federated-results')).toBeVisible();
@@ -194,6 +210,7 @@ test.describe('Federated search — professional and registry families', () => {
 
   test('a lawyers row click-through opens the justitie domain with the seeded registry search', async ({page}) => {
     const pageErrors = collectPageErrors(page);
+    await stubLawyersRegistry(page);
     await openExplore(page);
     await searchFromExplore(page, 'popescu');
     await expect(page.getByTestId('federated-results')).toBeVisible();

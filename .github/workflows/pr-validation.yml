@@ -138,5 +138,7 @@ jobs:
         run: cp .dev.vars.example .dev.vars
       - name: Install Playwright chromium with system dependencies
         run: corepack pnpm exec playwright install chromium --with-deps
+      - name: Apply the D1 schema to the dev server database (cold-start e2e legs)
+        run: node scripts/dev-d1-schema.mjs
       - name: Run the e2e suite (CI=true — playwright boots the vinext dev server, no server reuse)
         run: corepack pnpm test:e2e

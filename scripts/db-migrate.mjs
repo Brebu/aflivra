@@ -13,7 +13,7 @@ const RUNBOOK='Rulează mai întâi `corepack pnpm exec wrangler login` (o singu
 const wranglerEnv=()=>({...process.env,WRANGLER_SEND_METRICS:process.env.WRANGLER_SEND_METRICS||'false',WRANGLER_WRITE_LOGS:process.env.WRANGLER_WRITE_LOGS||'false'});
 export const runWrangler=(args,{capture=false}={})=>spawnSync(process.execPath,[WRANGLER_BIN,...args],{stdio:capture?['inherit','pipe','pipe']:'inherit',env:wranglerEnv()});
 
-const parseWranglerJson=(text)=>{const trimmed=String(text||'').trim();if(!trimmed)return null;try{return JSON.parse(trimmed)}catch{const start=trimmed.search(/[[{]/),end=Math.max(trimmed.lastIndexOf(']'),trimmed.lastIndexOf('}'));try{return start>=0&&end>start?JSON.parse(trimmed.slice(start,end+1)):null}catch{return null}}};
+export const parseWranglerJson=(text)=>{const trimmed=String(text||'').trim();if(!trimmed)return null;try{return JSON.parse(trimmed)}catch{const start=trimmed.search(/[[{]/),end=Math.max(trimmed.lastIndexOf(']'),trimmed.lastIndexOf('}'));try{return start>=0&&end>start?JSON.parse(trimmed.slice(start,end+1)):null}catch{return null}}};
 
 export const localExecuteArgs=()=>{if(!existsSync(DIST_CONFIG))throw new Error(`Lipsește ${DIST_CONFIG} — rulează \`corepack pnpm build\` întâi. / Build output missing, run corepack pnpm build first.`);return ['d1','execute','DB','--config',DIST_CONFIG,'--local','--persist-to','.wrangler/state']};
 
