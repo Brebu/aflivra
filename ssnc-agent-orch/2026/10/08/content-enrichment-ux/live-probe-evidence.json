@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-08T03:46:44.953Z",
+  "perLineResponses": [
+    {
+      "httpStatus": 200,
+      "sourceStatus": "stale",
+      "name": "TPBI · poziții vehicule",
+      "isLive": false,
+      "stalenessSeconds": 87,
+      "stalenessMinutes": 1,
+      "total": 759,
+      "observedAt": "2026-10-08T03:44:58.000Z",
+      "key": "transport:realtime:vehicles",
+      "ttlSeconds": 15
+    },
+    {
+      "httpStatus": 200,
+      "sourceStatus": "cached",
+      "name": "TPBI · poziții vehicule",
+      "isLive": true,
+      "total": 0,
+      "observedAt": "2026-10-08T03:46:26.000Z",
+      "key": "transport:realtime:vehicles",
+      "ttlSeconds": 15
+    },
+    {
+      "httpStatus": 200,
+      "sourceStatus": "cached",
+      "name": "TPBI · poziții vehicule",
+      "isLive": true,
+      "total": 0,
+      "observedAt": "2026-10-08T03:46:26.000Z",
+      "key": "transport:realtime:vehicles",
+      "ttlSeconds": 15
+    },
+    {
+      "httpStatus": 200,
+      "sourceStatus": "stale",
+      "name": "TPBI · poziții vehicule",
+      "isLive": false,
+      "stalenessSeconds": 17,
+      "stalenessMinutes": 0,
+      "total": 0,
+      "observedAt": "2026-10-08T03:46:26.000Z",
+      "key": "transport:realtime:vehicles",
+      "ttlSeconds": 15
+    }
+  ],
+  "allLiveCalls": [
+    "http://127.0.0.1:5173/api/transport-live?kind=vehicles&route=&q=&page=0&geoScope=context&locality=Bucure%C8%99ti&county=Bucure%C8%99ti&lat=44.427&lon=26.102&radius=15",
+    "http://127.0.0.1:5173/api/transport-live?kind=vehicles&route=PV1_403",
+    "http://127.0.0.1:5173/api/transport-live?kind=vehicles&route=PV1_403&q=&page=0&geoScope=context&locality=Bucure%C8%99ti&county=Bucure%C8%99ti&lat=44.427&lon=26.102&radius=15",
+    "http://127.0.0.1:5173/api/transport-live?kind=vehicles&route=PV1_403"
+  ]
+}

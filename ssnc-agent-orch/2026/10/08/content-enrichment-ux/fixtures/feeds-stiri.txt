@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>MINISTERUL AFACERILOR INTERNE</title>
+	<atom:link href="https://www.mai.gov.ro/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.mai.gov.ro</link>
+	<description>Site-ul MAI</description>
+	<lastBuildDate>Wed, 07 Oct 2026 11:56:27 +0000</lastBuildDate>
+	<language>ro-RO</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+
+<image>
+	<url>https://www.mai.gov.ro/wp-content/uploads/2019/07/cropped-stema_MAI-50x50.png</url>
+	<title>MINISTERUL AFACERILOR INTERNE</title>
+	<link>https://www.mai.gov.ro</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Intervenția secretarului de stat Bogdan Despescu, în cadrul evenimentului ”Conducerea defensivă la standard internațional”</title>
+		<link>https://www.mai.gov.ro/interventia-secretarului-de-stat-bogdan-despescu-in-cadrul-evenimentului-conducerea-defensiva-la-standard-international/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2026 11:56:27 +0000</pubDate>
+				<category><![CDATA[Comunicate de presă]]></category>
+		<category><![CDATA[Importante]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=80048</guid>
+
+					<description><![CDATA[Doamnelor și domnilor, Este o mare bucurie să fiu alături de dumneavoastră. Am acceptat cu mare plăcere și deschidere invitația. În primul rând, vreau să vă spun, din capul locului, că vă susținem total în ceea ce faceți. Faceți un lucru important [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Antena 1 &#8211; Pericolul de pe dark web pe stăzile din București. Cum acționează rețelele de droguri chiar sub ochii noștri</title>
+		<link>https://www.mai.gov.ro/antena-1-pericolul-de-pe-dark-web-pe-stazile-din-bucuresti-cum-actioneaza-retelele-de-droguri-chiar-sub-ochii-nostri/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2026 06:43:53 +0000</pubDate>
+				<category><![CDATA[Apariții MAI în mass-media]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=80023</guid>
+
+					<description><![CDATA[https://youtu.be/RKxeuUC2OMs Prezentatoare de știri: În fiecare minut, undeva, pe planetă, se vând droguri de peste un milion de dolari. O parte din ele în România. Sub formă de bomboane, prăjituri, sucuri sau cosmetice. Tranzacţiile s-au mutat, mult, pe internet. Stupefiantele comandate cu [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>România TV &#8211; Misiunile de însoțire a coloanelor oficiale, ce trebuie să facă polițiștii</title>
+		<link>https://www.mai.gov.ro/romania-tv-misiunile-de-insotire-a-coloanelor-oficiale-ce-trebuie-sa-faca-politistii/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Tue, 06 Oct 2026 11:58:05 +0000</pubDate>
+				<category><![CDATA[Apariții MAI în mass-media]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=80018</guid>
+
+					<description><![CDATA[Emisiunea: Puterile statului Moderatoare: Laura Duță Invitat în platou: Scms. Robert Iacob, instructor vehicule cu regim prioritar Moderatoare: Bun găsit, doamnelor și domnilor! Alături de mine este subcomisarul Robert Iacob. Bun găsit! Mulțumesc frumos! Scms. Robert Iacob: Bună ziua, bine v-am găsit! [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Intervenția secretarului de stat MAI, Bogdan Despescu, la deschiderea Salonului Auto București &#038; Smart Urban Mobility</title>
+		<link>https://www.mai.gov.ro/interventia-secretarului-de-stat-mai-bogdan-despescu-la-deschiderea-salonului-auto-bucuresti-smart-urban-mobility/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Tue, 06 Oct 2026 11:33:03 +0000</pubDate>
+				<category><![CDATA[Comunicate de presă]]></category>
+		<category><![CDATA[Importante]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=80012</guid>
+
+					<description><![CDATA[Bogdan Despescu, secretar de stat MAI: Bună ziua tuturor! Mă bucur că sunt prezent la cea de-a XXIII-a ediție a Salonului Auto și la cea de a doua ediție a Smart Urban Mobility, un eveniment care are în prim-plan mobilitatea urbană, care [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Comunicat de presă</title>
+		<link>https://www.mai.gov.ro/comunicat-de-presa-1247/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Tue, 06 Oct 2026 09:09:40 +0000</pubDate>
+				<category><![CDATA[Comunicate de presă]]></category>
+		<category><![CDATA[Importante]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=79998</guid>
+
+					<description><![CDATA[Ministerul Afacerilor Interne a prezentat astăzi, într-un webinar public, stadiul proiectului RO Wallet și rezultatele sondajului național privind portofelul digital. Lansarea pentru public este programată în etape, din ianuarie 2027. 95% dintre românii chestionați ar folosi RO Wallet, portofelul european pentru identitate [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Antena 3 &#8211; 500 de militari din 19 state se antrenează pentru restabilirea</title>
+		<link>https://www.mai.gov.ro/antena-3-500-de-militari-din-19-state-se-antreneaza-pentru-restabilirea/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Tue, 06 Oct 2026 08:17:10 +0000</pubDate>
+				<category><![CDATA[Apariții MAI în mass-media]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=79996</guid>
+
+					<description><![CDATA[Prezentatoare știri: Peste 500 de militari din 19 state participă chiar în aceste momente la cel mai mare exercițiu pentru restabilirea ordinii publice. Forțele de ordine vor folosi cele mai noi mijloace de intervenție și vedem împreună aceste imagini. Insert video exercițiu [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Antena 3 &#8211; 500 de militari din 19 state se antrenează pentru restabilirea ordinii</title>
+		<link>https://www.mai.gov.ro/antena-3-500-de-militari-din-19-state-se-antreneaza-pentru-restabilirea-ordinii/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Tue, 06 Oct 2026 08:12:41 +0000</pubDate>
+				<category><![CDATA[Apariții MAI în mass-media]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=79994</guid>
+
+					<description><![CDATA[Prezentatoare știri: Peste 500 de militari din 19 state participă chiar în aceste momente la cel mai mare exercițiu pentru restabilirea ordinii publice. Forțele de ordine vor folosi cele mai noi mijloace de intervenție și vedem împreună aceste imagini. Insert video exercițiu [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Comunicat de presă</title>
+		<link>https://www.mai.gov.ro/comunicat-de-presa-1246/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Tue, 06 Oct 2026 07:59:16 +0000</pubDate>
+				<category><![CDATA[Comunicate de presă]]></category>
+		<category><![CDATA[Importante]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=79984</guid>
+
+					<description><![CDATA[Titlu proiect                       Actualizarea soluției ROSIS existente în site-ul secundar al N.SIS România Acronim proiect                  ActualizareROSIS Cod proiect                        BV14C_02 Finanțat din                        Programul Național 2021-2027 Managementul frontierelor și vize Perioada de implementare  septembrie 2026 – octombrie 2027 Proiectul urmărește menținerea compatibilității N.SIS România &#8211; [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Structurile Ministerului Afacerilor Interne, misiune complexă pentru salvarea echipajului unei nave care s-a scufundat în Marea Neagră</title>
+		<link>https://www.mai.gov.ro/structurile-ministerului-afacerilor-interne-misiune-complexa-pentru-salvarea-echipajului-unei-nave-care-s-a-scufundat-in-marea-neagra/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Mon, 05 Oct 2026 10:22:12 +0000</pubDate>
+				<category><![CDATA[Comunicate de presă]]></category>
+		<category><![CDATA[Importante]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=79982</guid>
+
+					<description><![CDATA[Structurile Ministerului Afacerilor Interne desfășoară o misiune complexă pentru salvarea echipajului unei nave care s-a scufundat în Marea Neagră. Unsprezece membri ai echipajului au fost salvați. De asemenea, au fost identificate și două persoane decedate. Elicopterul din cadrul Inspectoratului General de Aviație [...]]]></description>
+		
+		
+		
+			</item>
+		<item>
+		<title>Ministrul Cătălin Predoiu la Carpathian Blue Shield 2026: cooperare internațională pentru creșterea siguranței publice</title>
+		<link>https://www.mai.gov.ro/ministrul-catalin-predoiu-la-carpathian-blue-shield-2026-cooperare-internationala-pentru-cresterea-sigurantei-publice/</link>
+		
+		<dc:creator><![CDATA[]]></dc:creator>
+		<pubDate>Thu, 01 Oct 2026 15:12:08 +0000</pubDate>
+				<category><![CDATA[Comunicate de presă]]></category>
+		<category><![CDATA[Importante]]></category>
+		<guid isPermaLink="false">https://www.mai.gov.ro/?p=79908</guid>
+
+					<description><![CDATA[Carpathian Blue Shield 2026 (CBS 26), exercițiu internațional de pregătire și interoperabilitate în domeniul securității publice, se desfășoară în România, în perioada 27 septembrie – 2 octombrie 2026, la Centrul de Pregătire al Jandarmeriei Române din localitatea Ochiuri, județul Dâmbovița, precum și [...]]]></description>
+		
+		
+		
+			</item>
+	</channel>
+</rss>

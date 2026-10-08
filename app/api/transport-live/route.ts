@@ -14,8 +14,11 @@ export async function GET(request:Request){
   const state=await readSource(realtimeLoader(kind));
   if(state.data){const now=Date.now(),resolved=state.data.items.map((r:any)=>({...r,...(kind!=='alerts'?{routeId:r.routeId||(transit.tripRoutes as Record<string,string>)[r.tripId]||''}:{})})),rows=resolved.filter((r:any)=>(!point||(kind==='vehicles'?nearbyRecord(r,point,context.radius):kind==='arrivals'?r.stops.some((s:any)=>nearStops.has(s.stopId)):!r.routeIds.length&&!r.stopIds.length||r.routeIds.some((id:string)=>nearRoutes.has(id))||r.stopIds.some((id:string)=>nearStops.has(id))))&&(!route||(kind==='alerts'?r.routeIds.includes(route):r.routeId===route))&&(!stop||(kind==='alerts'?r.stopIds.includes(stop):kind==='arrivals'?r.stops.some((s:any)=>s.stopId===stop):r.stopId===stop))&&matchesQuery({...r,line:routeNames.get(r.routeId),station:stopNames.get(r.stopId),stations:(r.stops||[]).map((s:any)=>stopNames.get(s.stopId)),lines:(r.routeIds||[]).map((id:string)=>routeNames.get(id))},q));const active=kind==='alerts'?rows.filter((r:any)=>!r.periods.length||r.periods.some((x:any)=>(!x.start||Date.parse(x.start)<=now)&&(!x.end||Date.parse(x.end)>=now))):rows;
   // O veche copie nu ascunde harta: poziția păstrată rămâne servită, iar vechimea
-  // (minutele de la ultima preluare validă) devine eticheta ce o însoțește.
-  const isLive=state.status!=='stale'&&now-Date.parse(state.data.observedAt)<120000,stalenessMinutes=isLive||!state.lastSuccessAt?null:Math.max(0,Math.round((now-Date.parse(state.lastSuccessAt))/60000));
-  state.data={...state.data,...paginate(active,page,60),isLive,...(stalenessMinutes!==null?{stalenessMinutes}:{})};}
+  // (secundele și minutele de la ultima preluare validă) devine eticheta ce o
+  // însoțește — sub un minut eticheta se citește în secunde, nu rotunjit în sus.
+  const isLive=state.status!=='stale'&&now-Date.parse(state.data.observedAt)<120000,
+   stalenessSeconds=isLive||!state.lastSuccessAt?null:Math.max(0,Math.floor((now-Date.parse(state.lastSuccessAt))/1000)),
+   stalenessMinutes=isLive||!state.lastSuccessAt?null:Math.max(0,Math.round((now-Date.parse(state.lastSuccessAt))/60000));
+  state.data={...state.data,...paginate(active,page,60),isLive,...(stalenessMinutes!==null?{stalenessMinutes,stalenessSeconds}:{})};}
   return Response.json(state,{headers:{'Cache-Control':'no-store'}});
 }

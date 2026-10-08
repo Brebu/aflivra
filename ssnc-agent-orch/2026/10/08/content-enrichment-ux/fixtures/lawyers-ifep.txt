@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><link href="../../App_Themes/DefaultTheme/Alphabet.css" type="text/css" rel="stylesheet" /><link href="../../App_Themes/DefaultTheme/Calendar.css" type="text/css" rel="stylesheet" /><link href="../../App_Themes/DefaultTheme/Checkbox.css" type="text/css" rel="stylesheet" /><link href="../../App_Themes/DefaultTheme/Slidebar.css" type="text/css" rel="stylesheet" /><link href="../../App_Themes/DefaultTheme/Stil.css" type="text/css" rel="stylesheet" /><meta http-equiv="X-UA-Compatible" content="IE=edge;charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta http-equiv="content-type" content="text/html;charset=utf-8" /><meta name="description" content="Tabloul oficial al avocaţilor din România" /><meta name="author" content="Ifep" /><title>
+	Tabloul avocatilor din România - Pagina principală (IFEP Portal)
+</title><link rel="Shortcut icon" href="../../IfepIcon.ico?v=4" /><link rel="icon" type="image/png" href="/Images/IfepIcon.png?v=4" />
+
+	<!-- Bootstrap Core CSS -->
+	<link href="../../Content/bootstrap.min.css" rel="stylesheet" /><link href="../../Content/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" /><link href="../../Content/bootstrap-theme.min.css" rel="stylesheet" /><link href="../../Content/bootstrap-datepicker.min.css?v=1.1" rel="stylesheet" /><link href="../../Content/normalize.css" rel="stylesheet" /><link href="../../Content/all.min.css?v=1.1" rel="stylesheet" /><link href="../../Content/MyBootstrapExtended.css?v=1.6" rel="stylesheet" /><link href="../../Content/MyBootstrapOverload.css?v=1.4" rel="stylesheet" />
+	<!-- Custom CSS -->
+	<link href="../../App_Themes/DefaultTheme/Stil.css?v=1.15" rel="stylesheet" type="text/css" /><link href="../../App_Themes/DefaultTheme/Calendar.css" rel="stylesheet" type="text/css" /><link href="../../Content/jQuery.FileUpload/css/jquery.fileupload.css" rel="stylesheet" /><link href="../../Content/intlTelInput.css" rel="stylesheet" /><link href="../../App_Themes/DefaultTheme/Checkbox.css?v=1.14" rel="stylesheet" type="text/css" />
+	<!--[if lt IE 9]>
+		<script src="Scripts/respond.min.js" type="text/javascript"></script>
+		<script src="Scripts/html5shiv.min.js" type="text/javascript"></script>
+	<![endif]-->
+</head>
+
+
+
+<script src='../../Scripts/jquery-3.7.1.min.js' type="text/javascript"></script>
+<script src='../../Scripts/jquery-ui-1.13.0.min.js' type="text/javascript"></script>
+<script src='../../Scripts/js-cookie/js.cookie-2.2.1.min.js' type="text/javascript"></script>
+<script src='../../Scripts/bootbox.min.js' type="text/javascript"></script>
+<script src='../../Scripts/bootstrap.min.js' type="text/javascript"></script>
+<script src='../../Scripts/bootstrap-switch.min.js' type="text/javascript"></script>
+
+
+<script src='../../Scripts/Custom.js?v=1.1' type="text/javascript"></script>
+
+<script src='../../Scripts/bootstrap-datepicker.min.js?v=1.1' type="text/javascript"></script>
+<script src='../../Scripts/locales/bootstrap-datepicker.ro.min.js?v=1.1' charset="UTF-8" type="text/javascript"></script>
+
+<script src='../../Scripts/jQuery.FileUpload/jquery.iframe-transport.js' type="text/javascript"></script>
+<script src='../../Scripts/jQuery.FileUpload/jquery.fileupload.js' type="text/javascript"></script>
+<script src='../../Scripts/jQuery.FileUpload/jquery.fileupload-process.js' type="text/javascript"></script>
+<script src='../../Scripts/jQuery.FileUpload/jquery.fileupload-validate.js' type="text/javascript"></script>
+<script src='../../Scripts/readmore.min.js' type="text/javascript"></script>
+
+<script src='../../Scripts/intlTelInput.min.js' type="text/javascript"></script>
+<script src='../../Scripts/ckeditor/ckeditor.js?v=1.3' type="text/javascript"></script>
+<script>
+	CKEDITOR.timestamp = '111';
+	CKEDITOR.config.htmlEncodeOutput = false;
+	CKEDITOR.config.entities = false;
+	CKEDITOR.config.basicEntities = false;
+</script>
+
+
+
+<body>
+
+	<form method="post" action="./LawyersPanel.aspx" id="form1" class="form-horizontal">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script type="text/javascript">
+//<![CDATA[
+var __cultureInfo = {"name":"ro-RO","numberFormat":{"CurrencyDecimalDigits":2,"CurrencyDecimalSeparator":",","IsReadOnly":true,"CurrencyGroupSizes":[3],"NumberGroupSizes":[3],"PercentGroupSizes":[3],"CurrencyGroupSeparator":".","CurrencySymbol":"RON","NaNSymbol":"NaN","CurrencyNegativePattern":8,"NumberNegativePattern":1,"PercentPositivePattern":0,"PercentNegativePattern":0,"NegativeInfinitySymbol":"-∞","NegativeSign":"-","NumberDecimalDigits":2,"NumberDecimalSeparator":",","NumberGroupSeparator":".","CurrencyPositivePattern":3,"PositiveInfinitySymbol":"∞","PositiveSign":"+","PercentDecimalDigits":2,"PercentDecimalSeparator":",","PercentGroupSeparator":".","PercentSymbol":"%","PerMilleSymbol":"‰","NativeDigits":["0","1","2","3","4","5","6","7","8","9"],"DigitSubstitution":1},"dateTimeFormat":{"AMDesignator":"a.m.","Calendar":{"MinSupportedDateTime":"\/Date(-62135596800000)\/","MaxSupportedDateTime":"\/Date(253402293599999)\/","AlgorithmType":1,"CalendarType":1,"Eras":[1],"TwoDigitYearMax":2029,"IsReadOnly":true},"DateSeparator":".","FirstDayOfWeek":1,"CalendarWeekRule":0,"FullDateTimePattern":"dddd, d MMMM yyyy HH:mm:ss","LongDatePattern":"dddd, d MMMM yyyy","LongTimePattern":"HH:mm:ss","MonthDayPattern":"d MMMM","PMDesignator":"p.m.","RFC1123Pattern":"ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027","ShortDatePattern":"dd.MM.yyyy","ShortTimePattern":"HH:mm","SortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss","TimeSeparator":":","UniversalSortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027","YearMonthPattern":"MMMM yyyy","AbbreviatedDayNames":["dum.","lun.","mar.","mie.","joi","vin.","sâm."],"ShortestDayNames":["du.","lu.","ma.","mi.","jo.","vi.","sâ."],"DayNames":["duminică","luni","marți","miercuri","joi","vineri","sâmbătă"],"AbbreviatedMonthNames":["ian.","feb.","mar.","apr.","mai","iun.","iul.","aug.","sept.","oct.","nov.","dec.",""],"MonthNames":["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie",""],"IsReadOnly":true,"NativeCalendarName":"calendar gregorian","AbbreviatedMonthGenitiveNames":["ian.","feb.","mar.","apr.","mai","iun.","iul.","aug.","sept.","oct.","nov.","dec.",""],"MonthGenitiveNames":["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie",""]},"eras":[1,"d.Hr.",null,0]};//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=D9drwtSJ4hBA6O8UhT6CQnmQbLapWqsjTDTjk5s0laJzsz3mHu33jZgnmM5f8h4jEfjziqzM0PBMIFr73Oy35RCT2g8W7BT-2-iR1mzYhfCIWZDI8s5TH6bNq9511fvOEzGjNldyVCT4cHv2kw43T-xB15oCNV_zFMFzwEwVV8o1&amp;t=2a9d95e3" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=pVdHczR8HTv0TYtXLibFoFMSMMb40NSSfBWt1PY2acVASELslmmPxBq2vLmT3kpeORXZjOe87GWpqH6rrXmVVjEgk2321wmPhNdHf2IcbZ8Xkp4UaGjngb_ihSk8AR-DOkoOdA6Y4-6CcarMkG006Q2&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=-qISl4-OkT-7X02E4FisrxUZkp7n_CiLIGjCqbwK7R4qSHvwHO5Q8oG8WrsPJX4ty7MJ7xdyxcyvrsTxeR-6OFsgGzDcY4wZ3VSCdrFQmDmupejKi0Y_SxTQC2g6xwA90&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=LpGQnoKUSgO3ODsBUs8GfboKlkAJNrB8A8-kmmMBgHwjemFArL2-0j78lnqdue4YGth2xJVS1Y8LxAFGqRlbgkwLSh73OfPNFzRHRUKF79jQIpartI-mbXv0VaKPzsNb0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=VXG5HWKmJ5VfT6XbkUxKRnQyIivRiGGfIWmCFMOTZQAqecqAH5QYlHIMoAOoWrFuhBK8LGQegf-lbd2uZDZkEQloDGi_uVlhISrm6KWAE39d6Iu8uHKop4KJzKQOnGUM0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=oyOxJ3b-NyFFPmpIxwoMQmDswUGSWNajso7v2Mp4fDul2vQiR7SfNdWa8GSlIKk_zO7kNDea8rZUjCV4JGNcx4VGmaMCQ7Ydetk_id75Jm4dRzA4j6k3LJy8z3KsBzfN0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=iC2sD0Al8A6ZX4AVmUco0R770fJoI3sv3nT8hB5y9O8nUIZIQG20F72o-iNCIcWXmDCFN9RS3X8zNIqIjWBwRF2o-I3myYu4Ggqc93JU4kGtiE3iaL5eDr5l2yyhGbsZ0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=q85rlLsZEVu9loex9kzISK6OfJFWqouHXe0vAKqi-wk3vJNxl54MSG_lVUBLSiSNFniqboDWBgXLTDzUE_5KMqR39lqYoi3cNAnCFyC_1tjqTcFPpnbWVVJ2dt3rVtRi0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=9fVK6SOzqud8-CG5DRcWdWYAAlR6NNStmmx-21oKCM0dgZXzSC5UQTVbwy6xAVIxSfSAoofS9sKnH1eGkEfhbbTsrwUi5RQeOub5hdSIbDJypdslcX1tkEnxlEAQQyvz0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=sjnc2GCx94Cxb1ZyngUXYlM-gCHAPwHpW5BXHlao2J-V9Jj7CLxVe-TBgt0hv0sXTTj-vf5Dv_HfAGy1nJ-a7OTlfxOYk2H5eo0lVjk5-HT0AH1eumBzAEs0TkNEEoa50&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=FJYGXcD0D1IU18YZcc5S5fV1-L4Zq-vJIwZmGtLFSB41RHIwd-OV-Xewlif6gt19kNooPZ0J4toxpuT9gaJT7FaXMZf1QGYMWBPBw3xkoW5G2UY6s9EKYIKG_HxnzyKD0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=PvEqtYBYMpzUfVYsjuVI5FQrWJ9endorAo1mnAtmv2gV7ZenrEB0W8g6jtWT8TGAPJv_eEZpiP-9QSslDixaXzLj_4pK9s_UNHAh0c92wp2DHCCm-VRq3gloHxoqxiVq0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=rFItVvyVSHru2mWi6oVDAb68BkFumDpdlELTl9-aPBlVTB6RdNb445gJzg5sy92PVmx9SqbaFcYzLP7aO1kTd3w0pemeugeke8GghvsY7O6-Y7GjnGnQQafTAU8Ig_z-0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=UOhNCrWepwbJqlILLLhLzQRmdDzCS3Upoe6fmq2AGxclsN6SWI0G_b8ffNvd5mVczZvsgPM387G5OfEKxz-XHBPVlecjUIo0JqwCytZJQvBGOIyew0cL7apCAbQ9atTO0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=5Ptu7TR6eeUMpbV-tOSG6rWpmok0Wl74rtYHlpZtBc5M_P8SK7VQ7w2JOZ00pTE72T3NFhQg2ooRESXXoe07xIdgFMeu62LDBmGA8lqU-B-GCA0e_K6xFdECKzreyIFM0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=yq2dglGiX2GonGqAbqjStviCZAvBTI0NdtjNGvLy0JUkQyzJikGy-wSPOyS6ZRs1_PUQFcX3bVRHNhrF9z3khINF2XZVPJLmCkCuV5ictSABHSKQ2vugpuz1uVLa91td0&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=qTnPOILsJCPbmGgsgyJ0eyt7Cnd9fpFAfYbNIk643X2uEqYOo4Jtbljxeig8xVrAfbsS1AgKzQO53lrJuIeNvBxzTbIUxBg-kvmNZR09OMDn-06DJOG6-9UZij0zcR-70&amp;t=7d5986a" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=bNiRhTx965PPeR3Igr1RyoyTER5BUcO_HGX7tQpqn8QZYzGsjc0VYTzFBWm6RxcuGytLzcoMmO3IOT0qPDDYnlOjQjI7RFd3uVWisK0RLkt6nt5DEMBh0t3TRkxmdtYG0&amp;t=7d5986a" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="EE7875AC" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+		
+
+		<div id="ToolsPanel" style="display: none; position: absolute; right: 5px;">
+			<div style="z-index: 2; position: absolute; right: 185px; top: 32px;">
+				<img src="../../Images/divPointer.gif" />
+			</div>
+			<div class="divPanel" style="background-color: #F9F9F9; z-index: 1; padding: 15px; position: absolute; right: 5px; top: 40px; width: 350px;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="border-left: 1px solid #FF8000; padding-left: 10px;">
+							<a id="hlRemo" href="../../Resources/REMO_v7.exe" target="_blank">
+								<div style="text-align: center;">
+									<div>
+										<img id="imgRemo" src="../../Images/down.png" border="0" height="48" />
+									</div>
+									<div>
+										<img id="imgUnbrInfo" src="../../Images/QuestionIcon.gif" height="20" style="cursor: pointer;" /><span id="lblRemoDownload">REMO</span>
+									</div>
+								</div>
+							</a>
+
+							
+							<div id="pUnbrInfo" class="InfoPanel" style="width: 490px;">
+	
+								<table style="border-collapse: collapse; padding: 5px; width: 100%;">
+									<tr>
+										<td style="padding-right: 5px; vertical-align: top;">
+											<p style="font-weight: bold;">REMO [acces la distanţă - remote]</p>
+											<p>Dacă aveţi nevoie de asistenţă securizată pentru probleme tehnice, prin acces la distanţă (REMOTE), descărcaţi REMO.</p>
+											<div>Recomandăm descărcarea programului pe desktop, pentru acces rapid.</div>
+											<div>După descărcare, furnizaţi consultantului ID-ul si parola afişate de program (prin telefon sau chat), sau apăsaţi butonul Allow (Acceptă), la solicitarea consultantului IT.</div>
+										</td>
+									</tr>
+								</table>
+								<hr />
+								<div style="color: red;">
+									Atenţie: acest instrument este destinat momentan doar operatorilor în portal (secretariat barou, decan). Dacă doriţi vizualizarea tabloului avocaţilor, efectuaţi click pe butonul specific sau efectuaţi click
+				<a id="hlLawyerPanelNavigate" href="LawyersPanel.aspx" target="_blank">[...aici]</a>
+								</div>
+							
+</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div id="divHeader" style="background-color:#FF8000;">
+			<div style="float: left; padding-left: 10px;">
+				<h1 style="margin: 0; padding: 0; padding-top: 5px; padding-bottom: 5px;">
+					
+						<span class="padding-right-md">
+							<img src="/Images/IfepPortalLogo-x8.gif?v=1" alt="ifep.ro" title="Logo IFEP" height="82px" /></span><a href="/Account/Login.aspx" title="ifep.ro" style="text-decoration: none;"><span style="color: #F9F9F9;">ifep</span><span style="color: #000000;">.ro</span></a>
+					
+					
+				</h1>
+			</div>
+			<div style="float: left; padding-left: 50px;">
+				
+				
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+
+		<div class="container">
+			
+			
+		</div>
+
+		<div class="container">
+			<div class="panel panel-success">
+				<div id="divHeading" class="panel-heading">
+					<h1>
+						
+	Tabloul avocaţilor din Romania<br />
+	<span class="text-muted small">Aplicaţia informatică "Tabloul naţional al avocaţilor" este compusă din tablourile avocaţilor puse la dispoziţie de barouri.</span>
+
+					</h1>
+				</div>
+				<div class="panel-body">
+					
+	<div id="MainContent_upPage">
+	
+			<div id="MainContent_upLoader_up" style="display:none;">
+		
+		<style>
+			#progressBackgroundFilter {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				overflow: hidden;
+				padding: 0;
+				margin: 0;
+				background-color: #000;
+				-moz-filter: alpha(opacity=20);
+				-o-filter: alpha(opacity=20);
+				filter: alpha(opacity=20);
+				-ms-opacity: 0.2;
+				opacity: 0.2;
+				z-index: 1000;
+			}
+
+			#processMessage {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translate(-50%, -50%);
+				-moz-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				-o-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				padding: 30px;
+				z-index: 1001;
+				background-color: #fff;
+				border: solid 3px #DC6D00;
+			}
+		</style>
+
+		<div id="progressBackgroundFilter"></div>
+		<div id="processMessage">
+			<h3 class="text-center">Pagina se încarcă</h3>
+			<div class="progress text-center">
+				<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+			</div>
+		</div>
+	
+	</div>
+
+			<span id="MainContent_lbLawyerFile" class="btn btn-primary btn-sm"></span>
+			
+			<div id="MainContent_pLawyerFile" style="display: none;">
+		
+				<div class="container">
+					<div class="row row-centered">
+						<div class="col-sm-12 col-md-9 col-lg-9 col-centered">
+							<div class="panel panel-success panel-border-03">
+
+								<div class="panel-heading clearfix">
+									<p class="pull-left large">Avocat</p>
+									<p class="pull-right large">
+										<span id="MainContent_lblCloseLawyerFile" class="pointer">
+											<span class="fal fa-times fa-lg"></span>
+										</span>
+									</p>
+								</div>
+
+								<div class="panel-body">
+									
+									
+
+									<div class="panel panel-info margin-top-10">
+										<div class="panel-heading panel-title clearfix">
+											Forme de exercitare a profesiei
+										</div>
+										<div class="panel-body">
+											
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+	</div>
+
+			<table style="width: 100%;">
+				<tr>
+					<td id="MainContent_tdLeftOff" style="display: none; background-color: #dff0d8; vertical-align: top; width: 10px;display:none;">
+						<input type="hidden" name="ctl00$MainContent$hfLeft" id="MainContent_hfLeft" />
+						<div style="padding: 3px; padding-top: 5px;">
+							<div style="cursor: pointer; text-align: right; border: 1px solid lightskyblue; padding: 3px;">
+								<span class="fal fa-thumbtack fa-lg fa-rotate-90" onclick="AutoHideLeft('on')" style="color: green;"></span>
+							</div>
+							<div style="padding: 3px; padding-top: 10px;">
+								<img id="MainContent_Image6" src="../../Images/CustomText1InLawyersPanel.gif" />
+							</div>
+						</div>
+					</td>
+	
+					<td id="MainContent_tdLeftOn" style="vertical-align: top; width: 300px; padding-right: 10px;display:table-cell;" class="hidden-xs">
+						<div class="panel panel-success">
+							<div class="panel-heading clearfix">
+								<p class="pull-left">
+									<a id="MainContent_lbClearAll" href="javascript:__doPostBack(&#39;ctl00$MainContent$lbClearAll&#39;,&#39;&#39;)"><b><font color="#CC0000">X Şterge toate filtrele</font></b></a>
+								</p>
+								<p class="pull-right" style="cursor: pointer; border: 1px solid lightskyblue; padding: 3px;">
+									<span class="fal fa-thumbtack fa-lg" onclick="AutoHideLeft('off')" style="color: green;"></span>
+								</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-6 col-md-6 col-lg-6 control-label text-nowrap">Număr afişate:</label>
+							<div class="col-sm-6 col-md-6 col-lg-6">
+								<select name="ctl00$MainContent$ddlRecords" id="MainContent_ddlRecords" class="form-control">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option selected="selected" value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+
+	</select>
+							</div>
+						</div>
+						<div id="MainContent_divCompany" class="form-group">
+							<label class="col-sm-3 col-md-3 col-lg-3 control-label">Baroul</label>
+							<div class="col-sm-9 col-md-9 col-lg-9">
+								<select name="ctl00$MainContent$ddlCompany" id="MainContent_ddlCompany" class="form-control">
+		<option selected="selected" value="0">---Alegeţi---</option>
+		<option value="1101">B Alba</option>
+		<option value="1102">B Arad</option>
+		<option value="1103">B Argeş</option>
+		<option value="1104">B Bacău</option>
+		<option value="1105">B Bihor</option>
+		<option value="1106">B Bistriţa Năsăud</option>
+		<option value="1107">B Botoşani</option>
+		<option value="1108">B Braşov</option>
+		<option value="1109">B Brăila</option>
+		<option value="1110">B Bucureşti</option>
+		<option value="1111">B Buzău</option>
+		<option value="1112">B Caraş Severin</option>
+		<option value="1113">B Călăraşi</option>
+		<option value="1114">B Cluj</option>
+		<option value="1115">B Constanţa</option>
+		<option value="1116">B Covasna</option>
+		<option value="1117">B D&#226;mboviţa</option>
+		<option value="1118">B Dolj</option>
+		<option value="1119">B Galaţi</option>
+		<option value="1120">B Giurgiu</option>
+		<option value="1121">B Gorj</option>
+		<option value="1122">B Harghita</option>
+		<option value="1123">B Hunedoara</option>
+		<option value="1124">B Ialomiţa</option>
+		<option value="1125">B Iaşi</option>
+		<option value="1126">B Ilfov</option>
+		<option value="1127">B Maramureş</option>
+		<option value="1128">B Mehedinţi</option>
+		<option value="1129">B Mureş</option>
+		<option value="1130">B Neamţ</option>
+		<option value="1131">B Olt</option>
+		<option value="1132">B Prahova</option>
+		<option value="1133">B Satu Mare</option>
+		<option value="1134">B Sălaj</option>
+		<option value="1135">B Sibiu</option>
+		<option value="1136">B Suceava</option>
+		<option value="1137">B Teleorman</option>
+		<option value="1138">B Timiş</option>
+		<option value="1139">B Tulcea</option>
+		<option value="1141">B V&#226;lcea</option>
+		<option value="1140">B Vaslui</option>
+		<option value="1142">B Vrancea</option>
+
+	</select>
+								
+							</div>
+						</div>
+						<div style="margin: 0;">
+							<div class="checkbox checkbox-success">
+								<span id="MainContent_ckAll" class="CustomCheckBoxList"><input id="MainContent_ckAll_0" type="checkbox" name="ctl00$MainContent$ckAll$0" checked="checked" value="0" /><label for="MainContent_ckAll_0">Toate înregistrările (40149)</label><br /><input id="MainContent_ckAll_1" type="checkbox" name="ctl00$MainContent$ckAll$1" value="Definitivi" /><label for="MainContent_ckAll_1"><span class="text-success"><strong>Tabloul avocaţilor definitivi</strong></span></label><br /><input id="MainContent_ckAll_2" type="checkbox" name="ctl00$MainContent$ckAll$2" value="Stagiari" /><label for="MainContent_ckAll_2"><span class="text-success"><strong>Tabloul avocaţilor stagiari</strong></span></label><br /><input id="MainContent_ckAll_3" type="checkbox" name="ctl00$MainContent$ckAll$3" value="Străini" /><label for="MainContent_ckAll_3">
+										<span class="text-success"><strong>Tabloul avocaţilor străini</strong></span>
+										<span class="pop small" type="button" title="Informaţii utile" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-content="<p>În acest tabloul sunt înscrişi avocaţii care au obţinut titlul profesional în afara României</p>">
+											 <span class="fas fa-info-circle text-info"></span> 
+										</span>
+									</label><br /><input id="MainContent_ckAll_4" type="checkbox" name="ctl00$MainContent$ckAll$4" value="Incompatibili" /><label for="MainContent_ckAll_4"><span class="text-danger"><strong>Tabloul avocaţilor incompatibili <br /><em class="small">(prin suspendare)</em></strong></span></label><br /><input id="MainContent_ckAll_5" type="checkbox" name="ctl00$MainContent$ckAll$5" value="Incompatibili (nu au exercitat profesia)" /><label for="MainContent_ckAll_5">
+										<span class="text-danger"><strong>Tabloul avocaţilor incompatibili <br /><em class="small">(nu au exercitat profesia)</em></strong></span>
+										<span class="pop" type="button" title="Informaţii utile" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-content="<p>În acest tablou sunt înscrise persoanele care au fost primite în profesie cu examen sau cu scutire de examen şi care nu au exercitat niciodată profesia de avocat şi nu au fost înscrise în Tabloul avocaţilor cu drept de exercitare a profesiei</p>">
+											 <span class="fas fa-info-circle text-info"></span> 
+										</span>
+									</label><br /><input id="MainContent_ckAll_6" type="checkbox" name="ctl00$MainContent$ckAll$6" value="Radiaţi" /><label for="MainContent_ckAll_6"><span class="text-danger"><strong>Tabloul avocaţilor radiaţi</strong></span></label></span>
+							</div>
+						</div>
+
+						<div class="panel panel-success margin-top-20">
+							<div class="panel-heading">
+								Situaţie actuală
+							</div>
+							<div class="panel-body" style="margin: 0 !important; padding: 0;">
+								<span id="MainContent_ckStatus" class="checkbox checkboxlist"><input id="MainContent_ckStatus_0" type="checkbox" name="ctl00$MainContent$ckStatus$0" value="1" /><label for="MainContent_ckStatus_0"><span class="text-success"><strong>Cu drept de exercitare</strong></span></label><br /><input id="MainContent_ckStatus_1" type="checkbox" name="ctl00$MainContent$ckStatus$1" value="0" /><label for="MainContent_ckStatus_1"><span class="text-danger"><strong>Fără drept de exercitare</strong></span></label></span>
+							</div>
+						</div>
+
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								Forme de exercitare a profesiei
+							</div>
+							<div class="panel-body" style="margin: 0 !important; padding: 0;">
+								<span id="MainContent_cbLawPracticeForms" class="checkbox checkboxlist"><input id="MainContent_cbLawPracticeForms_0" type="checkbox" name="ctl00$MainContent$cbLawPracticeForms$0" value="Cabinet individual" /><label for="MainContent_cbLawPracticeForms_0">Cabinet individual</label><br /><input id="MainContent_cbLawPracticeForms_1" type="checkbox" name="ctl00$MainContent$cbLawPracticeForms$1" value="Cabinete asociate" /><label for="MainContent_cbLawPracticeForms_1">Cabinete asociate</label><br /><input id="MainContent_cbLawPracticeForms_2" type="checkbox" name="ctl00$MainContent$cbLawPracticeForms$2" value="Cabinete grupate" /><label for="MainContent_cbLawPracticeForms_2">Cabinete grupate</label><br /><input id="MainContent_cbLawPracticeForms_3" type="checkbox" name="ctl00$MainContent$cbLawPracticeForms$3" value="Societate civilă profesională de avocaţi" /><label for="MainContent_cbLawPracticeForms_3">SCPA
+										<span class="pop small" type="button" title="" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-content="<p>Societate civilă profesională de avocaţi</p>">
+											 <span class="fas fa-info-circle text-info"></span> 
+										</span>
+									</label><br /><input id="MainContent_cbLawPracticeForms_4" type="checkbox" name="ctl00$MainContent$cbLawPracticeForms$4" value="Societate profesională de avocaţi cu răspundere limitată" /><label for="MainContent_cbLawPracticeForms_4">SCPARL
+										<span class="pop small" type="button" title="" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-content="<p>Societate profesională de avocaţi cu răspundere limitată</p>">
+											 <span class="fas fa-info-circle text-info"></span> 
+										</span>
+									</label></span>
+							</div>
+						</div>
+
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								Drept de concluzii
+							</div>
+							<div class="panel-body" style="margin: 0 !important; padding: 0;">
+								<span id="MainContent_cbConclusionsRights" class="checkbox checkboxlist"><input id="MainContent_cbConclusionsRights_0" type="checkbox" name="ctl00$MainContent$cbConclusionsRights$0" value="Judecătorii" /><label for="MainContent_cbConclusionsRights_0">Judecătorii</label><br /><input id="MainContent_cbConclusionsRights_1" type="checkbox" name="ctl00$MainContent$cbConclusionsRights$1" value="Judecătorii, Tribunale, Curţi de Apel" /><label for="MainContent_cbConclusionsRights_1">Judecătorii, Tribunale, Curţi de Apel</label><br /><input id="MainContent_cbConclusionsRights_2" type="checkbox" name="ctl00$MainContent$cbConclusionsRights$2" value="Toate instanţele" /><label for="MainContent_cbConclusionsRights_2">Toate instanţele</label></span>
+							</div>
+						</div>
+
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								Înscris în registrul
+							</div>
+							<div class="panel-body" style="margin: 0 !important; padding: 0;">
+								<span id="MainContent_cbInfoRegisters" class="checkbox checkboxlist"><input id="MainContent_cbInfoRegisters_0" type="checkbox" name="ctl00$MainContent$cbInfoRegisters$0" value="Curator special" /><label for="MainContent_cbInfoRegisters_0">Curator special</label><br /><input id="MainContent_cbInfoRegisters_1" type="checkbox" name="ctl00$MainContent$cbInfoRegisters$1" value="Curator fiscal" /><label for="MainContent_cbInfoRegisters_1">Curator fiscal</label><br /><input id="MainContent_cbInfoRegisters_2" type="checkbox" name="ctl00$MainContent$cbInfoRegisters$2" value="Acordă asistenţă judiciară" /><label for="MainContent_cbInfoRegisters_2">Asistenţă judiciară</label></span>
+							</div>
+						</div>
+
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								Actualizare pe site
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">Ultimele</label>
+									<div class="col-md-9 text-center">
+										<div class="input-group">
+											<input name="ctl00$MainContent$tbNoDays" type="text" maxlength="4" id="MainContent_tbNoDays" class="form-control" />
+											<span class="input-group-btn">
+												<button type="submit" class="btn btn-primary">zile<span class="fal fa-search padding-left-md"></span></button>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div>
+									<input name="ctl00$MainContent$tbDataStart" type="text" id="MainContent_tbDataStart" class="form-control myDatePicker" placeholder="de la" />
+								</div>
+								<div class="input-group margin-top-10">
+									<input name="ctl00$MainContent$tbDataStop" type="text" id="MainContent_tbDataStop" class="form-control myDatePicker" placeholder="până la" />
+									<span class="input-group-btn">
+										<button type="submit" class="btn btn-primary"><span class="fal fa-search"></span>&nbsp;</button>
+									</span>
+								</div>
+								<div style="padding-left: 20px;" class="margin-top-05">
+									
+								</div>
+							</div>
+						</div>
+					</td>
+	
+
+					<td style="vertical-align: top;">
+
+						<div class="input-group">
+							<input name="ctl00$MainContent$tbSearch" type="text" id="MainContent_tbSearch" class="form-control" placeholder="Informaţii avocat" />
+							<span class="input-group-btn">
+								<button class="btn btn-warning pop" type="button" title="" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<p class='small'>Informaţiile existente în prezentul portal reprezintă Tabloul avocatilor cuprinsi in barourile membre ale U.N.B.R. (<a href=http://www.unbr.ro target=_blank>www.unbr.ro</a>), persoana juridica de interes public, cu sediul in Bucuresti, Palatul de Justitie, Splaiul Independentei nr. 5, sector 5, cod 050091.</p>">
+									&nbsp;<span class="fal fa-info"></span>&nbsp;
+								</button>
+								<button type="submit" class="btn btn-primary">
+									<span class="fal fa-search padding-right-sm"></span>Caută!
+								</button>
+							</span>
+							
+						</div>
+						<div class="text-red text-right small">
+							<em>
+								<span id="MainContent_lblInfoOperators">Datele existente în aplicaţia informatică "Tabloul naţional al avocaţilor" sunt actualizate de către barouri.</span></em>
+						</div>
+						<div class="margin-top-05 clearfix">
+							
+									<a id="MainContent_rptAlphabets_lbAlphabet_0" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl00$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_0"><div id=container><ul id=alphabet><li>A</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_1" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl01$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_1"><div id=container><ul id=alphabet><li>B</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_2" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl02$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_2"><div id=container><ul id=alphabet><li>C</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_3" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl03$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_3"><div id=container><ul id=alphabet><li>D</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_4" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl04$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_4"><div id=container><ul id=alphabet><li>E</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_5" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl05$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_5"><div id=container><ul id=alphabet><li>F</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_6" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl06$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_6"><div id=container><ul id=alphabet><li>G</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_7" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl07$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_7"><div id=container><ul id=alphabet><li>H</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_8" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl08$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_8"><div id=container><ul id=alphabet><li>I</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_9" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl09$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_9"><div id=container><ul id=alphabet><li>Î</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_10" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl10$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_10"><div id=container><ul id=alphabet><li>J</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_11" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl11$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_11"><div id=container><ul id=alphabet><li>K</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_12" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl12$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_12"><div id=container><ul id=alphabet><li>L</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_13" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl13$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_13"><div id=container><ul id=alphabet><li>M</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_14" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl14$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_14"><div id=container><ul id=alphabet><li>N</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_15" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl15$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_15"><div id=container><ul id=alphabet><li>O</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_16" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl16$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_16"><div id=container><ul id=alphabet><li>P</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_17" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl17$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_17"><div id=container><ul id=alphabet><li>Q</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_18" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl18$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_18"><div id=container><ul id=alphabet><li>R</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_19" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl19$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_19"><div id=container><ul id=alphabet><li>S</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_20" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl20$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_20"><div id=container><ul id=alphabet><li>Ș</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_21" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl21$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_21"><div id=container><ul id=alphabet><li>T</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_22" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlphabets$ctl22$lbAlphabet&#39;,&#39;&#39;)"><span id="MainContent_rptAlphabets_Label3_22"><div id=container><ul id=alphabet><li>Ț</li></ul></div></span></a>
+								
+									<a id="MainContent_rptAlphabets_lbAlphabet_23" href="javascript:__doPostBack(&#39;ctl00$MainContent$rptAlph
+… [truncated at 64KB; full length 124986]

@@ -59,6 +59,7 @@ jobs:
           node scripts/verify-catalog.mjs
           node scripts/verify-snapshot-transport.mjs
           node scripts/verify-refresh-sweep.mjs
+          node scripts/verify-recency-policy.mjs
           node scripts/verify-ro-text.mjs
           node scripts/verify-source-errors.mjs
           node scripts/verify-sweep-inventory.mjs
@@ -70,6 +71,8 @@ jobs:
           node scripts/verify-legal-records.mjs
           node scripts/verify-expanded.mjs
           node scripts/audit-controls.mjs
+          node scripts/audit-dead-data.mjs
+          node scripts/audit-unused-fields.mjs
           node scripts/verify-css-keyframes.mjs
           node scripts/verify-afir-relay.mjs
           node scripts/verify-relay-afir.mjs

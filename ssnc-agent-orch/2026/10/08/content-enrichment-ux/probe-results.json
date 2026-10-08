@@ -1,0 +1,1302 @@
+{
+  "probedAt": "2026-10-08T02:57:29.008Z",
+  "politeness": {
+    "familiesProbed": 24,
+    "skipped": [
+      {
+        "family": "transport/trains",
+        "reason": "corpus-only family — the loader serves the committed Infofer corpus (public/trains/**) and never re-fetches; the politeness ledger spends no external request (matrix cell is corpus-only by design)"
+      },
+      {
+        "family": "transport/tranzy",
+        "reason": "env-gated family — TRANZY_API_KEY is not configured in this environment and the gate forbids interrogating any Tranzy address without a key; shape is pinned by the fixture matrix + the 2026/10/06 reference probe"
+      }
+    ],
+    "window": "≥5s between probes, ≥20s between TPBI probes, one request per family (shared endpoints once)"
+  },
+  "result": [
+    {
+      "family": "weather/open-meteo",
+      "method": "GET",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=44.43&longitude=26.1&current=temperature_2m%2Crelative_humidity_2m%2Capparent_temperature%2Cis_day%2Cprecipitation%2Crain%2Cshowers%2Csnowfall%2Cweather_code%2Ccloud_cover%2Cpressure_msl%2Csurface_pressure%2Cwind_speed_10m%2Cwind_direction_10m%2Cwind_gusts_10m&hourly=temperature_2m%2Crelative_humidity_2m%2Capparent_temperature%2Cprecipitation_probability%2Cprecipitation%2Cweather_code%2Cpressure_msl%2Ccloud_cover%2Cvisibility%2Cwind_speed_10m%2Cwind_direction_10m%2Cwind_gusts_10m%2Cuv_index%2Cis_day&daily=weather_code%2Ctemperature_2m_max%2Ctemperature_2m_min%2Capparent_temperature_max%2Capparent_temperature_min%2Csunrise%2Csunset%2Cdaylight_duration%2Cuv_index_max%2Cprecipitation_sum%2Cprecipitation_probability_max%2Cwind_speed_10m_max&forecast_days=7&timezone=auto&timeformat=unixtime&wind_speed_unit=kmh",
+      "attemptedAt": "2026-10-08T02:54:48.629Z",
+      "curl": "curl -sS -X GET 'https://api.open-meteo.com/v1/forecast?latitude=44.43&longitude=26.1&current=temperature_2m%2Crelative_humidity_2m%2Capparent_temperature%2Cis_day%2Cprecipitation%2Crain%2Cshowers%2Csnowfall%2Cweather_code%2Ccloud_cover%2Cpressure_msl%2Csurface_pressure%2Cwind_speed_10m%2Cwind_direction_10m%2Cwind_gusts_10m&hourly=temperature_2m%2Crelative_humidity_2m%2Capparent_temperature%2Cprecipitation_probability%2Cprecipitation%2Cweather_code%2Cpressure_msl%2Ccloud_cover%2Cvisibility%2Cwind_speed_10m%2Cwind_direction_10m%2Cwind_gusts_10m%2Cuv_index%2Cis_day&daily=weather_code%2Ctemperature_2m_max%2Ctemperature_2m_min%2Capparent_temperature_max%2Capparent_temperature_min%2Csunrise%2Csunset%2Cdaylight_duration%2Cuv_index_max%2Cprecipitation_sum%2Cprecipitation_probability_max%2Cwind_speed_10m_max&forecast_days=7&timezone=auto&timeformat=unixtime&wind_speed_unit=kmh'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8"
+      },
+      "shape": {
+        "envelope": [
+          "latitude",
+          "longitude",
+          "generationtime_ms",
+          "utc_offset_seconds",
+          "timezone",
+          "timezone_abbreviation",
+          "elevation",
+          "current_units",
+          "current",
+          "hourly_units",
+          "hourly",
+          "daily_units",
+          "daily"
+        ],
+        "current": [
+          "time",
+          "interval",
+          "temperature_2m",
+          "relative_humidity_2m",
+          "apparent_temperature",
+          "is_day",
+          "precipitation",
+          "rain",
+          "showers",
+          "snowfall",
+          "weather_code",
+          "cloud_cover",
+          "pressure_msl",
+          "surface_pressure",
+          "wind_speed_10m",
+          "wind_direction_10m",
+          "wind_gusts_10m"
+        ],
+        "currentUnits": {
+          "time": "unixtime",
+          "interval": "seconds",
+          "temperature_2m": "°C",
+          "relative_humidity_2m": "%",
+          "apparent_temperature": "°C",
+          "is_day": "",
+          "precipitation": "mm",
+          "rain": "mm",
+          "showers": "mm",
+          "snowfall": "cm",
+          "weather_code": "wmo code",
+          "cloud_cover": "%",
+          "pressure_msl": "hPa",
+          "surface_pressure": "hPa",
+          "wind_speed_10m": "km/h",
+          "wind_direction_10m": "°",
+          "wind_gusts_10m": "km/h"
+        },
+        "hourlySample": [
+          "time",
+          "temperature_2m",
+          "relative_humidity_2m",
+          "apparent_temperature",
+          "precipitation_probability",
+          "precipitation",
+          "weather_code",
+          "pressure_msl",
+          "cloud_cover",
+          "visibility",
+          "wind_speed_10m",
+          "wind_direction_10m",
+          "wind_gusts_10m",
+          "uv_index",
+          "is_day"
+        ],
+        "dailySample": [
+          "time",
+          "weather_code",
+          "temperature_2m_max",
+          "temperature_2m_min",
+          "apparent_temperature_max",
+          "apparent_temperature_min",
+          "sunrise",
+          "sunset",
+          "daylight_duration",
+          "uv_index_max",
+          "precipitation_sum",
+          "precipitation_probability_max",
+          "wind_speed_10m_max"
+        ],
+        "nowIsUnixSeconds": true,
+        "sunriseSample": 1791433308
+      }
+    },
+    {
+      "family": "company/anaf",
+      "method": "GET",
+      "url": "https://webservicesp.anaf.ro/bilant?an=2025&cui=427282",
+      "attemptedAt": "2026-10-08T02:54:54.023Z",
+      "curl": "curl -sS -X GET 'https://webservicesp.anaf.ro/bilant?an=2025&cui=427282'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=UTF-8"
+      },
+      "shape": {
+        "row": [
+          "an",
+          "cui",
+          "deni",
+          "caen",
+          "den_caen",
+          "i"
+        ],
+        "indicatorRows": [
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ],
+          [
+            "indicator",
+            "val_indicator",
+            "val_den_indicator"
+          ]
+        ],
+        "sample": [
+          {
+            "indicator": "I5",
+            "val_indicator": 8231444,
+            "val_den_indicator": "Casa şi conturi la bănci"
+          },
+          {
+            "indicator": "I6",
+            "val_indicator": 88250,
+            "val_den_indicator": "CHELTUIELI IN AVANS"
+          }
+        ]
+      }
+    },
+    {
+      "family": "courts/portal.just",
+      "method": "POST",
+      "url": "http://portalquery.just.ro/Query.asmx",
+      "attemptedAt": "2026-10-08T02:54:59.483Z",
+      "curl": "curl -sS -X POST 'http://portalquery.just.ro/Query.asmx' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"SOAPAction: \\\"portalquery.just.ro/CautareDosare2\\\"\" -H \"Content-Type: text/xml; charset=utf-8\" --data-binary '<?xml version=\"1.0\" encoding=\"utf-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><s:Body><CautareDosare2 xmlns=\"portalquery.just.ro\"><numarDosar>1/2/2026</numarDosar><obiectDosar i:nil=\"true\"/><numeParte i:nil=\"true\"/><institutie i:nil=\"true\"/><dataStart i:nil=\"true\"/><dataStop i:nil=\"true\"/><dataUltimaModificareStart i:nil=\"true\"/><dataUltimaModificareStop i:nil=\"true\"/></CautareDosare2></s:Body></s:Envelope>'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "text/xml; charset=utf-8",
+        "content-length": "2655",
+        "server": "cloudflare",
+        "cache-control": "private, max-age=0"
+      },
+      "shape": {
+        "soap": true
+      }
+    },
+    {
+      "family": "feeds/stiri",
+      "method": "GET",
+      "url": "https://www.mai.gov.ro/feed/",
+      "attemptedAt": "2026-10-08T02:55:04.820Z",
+      "curl": "curl -sS -X GET 'https://www.mai.gov.ro/feed/' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"Accept: application/rss+xml, application/xml\"",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/rss+xml; charset=UTF-8",
+        "last-modified": "Wed, 07 Oct 2026 12:01:16 GMT",
+        "server": "Server4k",
+        "cache-control": "no-store, no-cache, must-revalidate"
+      },
+      "shape": {
+        "rss": true
+      }
+    },
+    {
+      "family": "catalog/ckan",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/package_search?q=&rows=4&start=0&sort=metadata_modified+desc&facet.field=%5B%22organization%22%2C%22res_format%22%5D&facet.limit=500",
+      "attemptedAt": "2026-10-08T02:55:10.464Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/package_search?q=&rows=4&start=0&sort=metadata_modified+desc&facet.field=%5B%22organization%22%2C%22res_format%22%5D&facet.limit=500'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "205060",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "count",
+          "sort",
+          "facets",
+          "results",
+          "search_facets"
+        ],
+        "datasetKeys": null,
+        "searchResultRow": [
+          "rating",
+          "license_title",
+          "maintainer",
+          "relationships_as_object",
+          "private",
+          "maintainer_email",
+          "num_tags",
+          "id",
+          "metadata_created",
+          "metadata_modified",
+          "author",
+          "author_email",
+          "state",
+          "version",
+          "creator_user_id",
+          "type",
+          "resources",
+          "num_resources",
+          "tags",
+          "groups",
+          "license_id",
+          "relationships_as_subject",
+          "organization",
+          "name",
+          "isopen",
+          "url",
+          "notes",
+          "owner_org",
+          "extras",
+          "license_url",
+          "ratings_count",
+          "title",
+          "revision_id"
+        ],
+        "datastoreFields": null,
+        "searchRecordKeys": null
+      }
+    },
+    {
+      "family": "transport/tpbi",
+      "method": "GET",
+      "url": "https://gtfs.tpbi.ro/regional/BUCHAREST-REGION.zip",
+      "attemptedAt": "2026-10-08T02:55:16.294Z",
+      "curl": "curl -sS -X GET 'https://gtfs.tpbi.ro/regional/BUCHAREST-REGION.zip' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"Range: bytes=0-2047\" -H \"Accept: application/zip\"",
+      "httpStatus": 206,
+      "headers": {
+        "content-type": "application/zip",
+        "content-length": "2048",
+        "last-modified": "Wed, 07 Oct 2026 11:34:06 GMT",
+        "server": "cloudflare",
+        "cache-control": "max-age=14400"
+      },
+      "rangeHonored": true,
+      "magic": "PK",
+      "shape": {
+        "zipMagic": true,
+        "byteSample": 652
+      }
+    },
+    {
+      "family": "transport/realtime",
+      "method": "GET",
+      "url": "https://gtfs.tpbi.ro/api/gtfs-rt/vehiclePositions",
+      "attemptedAt": "2026-10-08T02:55:36.674Z",
+      "curl": "curl -sS -X GET 'https://gtfs.tpbi.ro/api/gtfs-rt/vehiclePositions' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"Accept: application/octet-stream\"",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/octet-stream",
+        "content-length": "64139",
+        "server": "cloudflare"
+      },
+      "shape": {
+        "headerKeys": [
+          "gtfsRealtimeVersion",
+          "incrementality",
+          "timestamp"
+        ],
+        "vehicleKeys": [
+          "trip",
+          "position",
+          "currentStopSequence",
+          "currentStatus",
+          "timestamp",
+          "stopId",
+          "vehicle"
+        ],
+        "tripKeys": [
+          "tripId",
+          "startDate",
+          "scheduleRelationship",
+          "routeId"
+        ],
+        "positionKeys": [
+          "latitude",
+          "longitude",
+          "bearing"
+        ],
+        "vehicleDescriptorKeys": [
+          "id",
+          "licensePlate"
+        ],
+        "oneVehicleSample": {
+          "routeId": "PV9_462",
+          "tripId": "PV9_PV9_462_1_33887",
+          "licensePlate": "IF 25 POB",
+          "occupancyStatus": null,
+          "occupancyPercentage": null,
+          "stopId": "PV9_682",
+          "currentStatus": "IN_TRANSIT_TO",
+          "timestampType": "string"
+        },
+        "entityCount": 596,
+        "headerTimestampType": "string"
+      }
+    },
+    {
+      "family": "directory/schools",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/datastore_search?resource_id=280d52b6-4c5e-489d-9b48-3dd8961f56e0&limit=2",
+      "attemptedAt": "2026-10-08T02:55:42.216Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/datastore_search?resource_id=280d52b6-4c5e-489d-9b48-3dd8961f56e0&limit=2'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "3137",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "include_total",
+          "resource_id",
+          "fields",
+          "records_format",
+          "records",
+          "limit",
+          "_links",
+          "total"
+        ],
+        "datasetKeys": null,
+        "searchResultRow": null,
+        "datastoreFields": [
+          "_id",
+          "An",
+          "Judet PJ",
+          "Localitate PJ",
+          "Cod SIRUTA PJ",
+          "Mediu loc. PJ",
+          "Cod SIIIR PJ",
+          "Denumire PJ",
+          "Localitate unitate",
+          "Cod SIRUTA unitate",
+          "Mediu loc. unitate",
+          "Cod SIRUES",
+          "Cod SIIIR unitate",
+          "Denumire scurta unitate",
+          "Denumire lunga unitate",
+          "Tip unitate",
+          "Statut unitate",
+          "Cod fiscal",
+          "Mod functionare",
+          "Forma finantare",
+          "Forma proprietate",
+          "Strada",
+          "Numar",
+          "Cod postal",
+          "Telefon",
+          "Fax",
+          "Email"
+        ],
+        "searchRecordKeys": [
+          "_id",
+          "An",
+          "Judet PJ",
+          "Localitate PJ",
+          "Cod SIRUTA PJ",
+          "Mediu loc. PJ",
+          "Cod SIIIR PJ",
+          "Denumire PJ",
+          "Localitate unitate",
+          "Cod SIRUTA unitate",
+          "Mediu loc. unitate",
+          "Cod SIRUES",
+          "Cod SIIIR unitate",
+          "Denumire scurta unitate",
+          "Denumire lunga unitate",
+          "Tip unitate",
+          "Statut unitate",
+          "Cod fiscal",
+          "Mod functionare",
+          "Forma finantare",
+          "Forma proprietate",
+          "Strada",
+          "Numar",
+          "Cod postal",
+          "Telefon",
+          "Fax",
+          "Email"
+        ]
+      }
+    },
+    {
+      "family": "directory/health|pharmacies|hospitals (shared endpoint)",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/package_show?id=lista-furnizori",
+      "attemptedAt": "2026-10-08T02:55:47.561Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/package_show?id=lista-furnizori'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "56304",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "rating",
+          "license_title",
+          "maintainer",
+          "relationships_as_object",
+          "private",
+          "maintainer_email",
+          "num_tags",
+          "id",
+          "metadata_created",
+          "metadata_modified",
+          "author",
+          "author_email",
+          "state",
+          "version",
+          "archiver",
+          "creator_user_id",
+          "type",
+          "resources",
+          "num_resources",
+          "tags",
+          "groups",
+          "license_id",
+          "relationships_as_subject",
+          "organization",
+          "name",
+          "isopen",
+          "url",
+          "notes",
+          "owner_org",
+          "qa",
+          "extras",
+          "license_url",
+          "ratings_count",
+          "title",
+          "revision_id"
+        ],
+        "datasetKeys": [
+          "cache_last_updated",
+          "datagovro_download_url",
+          "package_id",
+          "datastore_active",
+          "id",
+          "size",
+          "state",
+          "archiver",
+          "hash",
+          "description",
+          "format",
+          "last_modified",
+          "url_type",
+          "mimetype",
+          "cache_url",
+          "name",
+          "created",
+          "url",
+          "qa",
+          "mimetype_inner",
+          "position",
+          "revision_id",
+          "resource_type"
+        ],
+        "searchResultRow": null,
+        "datastoreFields": null,
+        "searchRecordKeys": null
+      }
+    },
+    {
+      "family": "localities/siruta",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/package_show?id=siruta_s1-2026",
+      "attemptedAt": "2026-10-08T02:55:53.121Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/package_show?id=siruta_s1-2026'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "7206",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "rating",
+          "license_title",
+          "maintainer",
+          "relationships_as_object",
+          "private",
+          "maintainer_email",
+          "num_tags",
+          "id",
+          "metadata_created",
+          "metadata_modified",
+          "author",
+          "author_email",
+          "state",
+          "version",
+          "archiver",
+          "creator_user_id",
+          "type",
+          "resources",
+          "num_resources",
+          "tags",
+          "groups",
+          "license_id",
+          "relationships_as_subject",
+          "organization",
+          "name",
+          "isopen",
+          "url",
+          "notes",
+          "owner_org",
+          "qa",
+          "extras",
+          "license_url",
+          "ratings_count",
+          "title",
+          "revision_id"
+        ],
+        "datasetKeys": [
+          "cache_last_updated",
+          "datagovro_download_url",
+          "package_id",
+          "datastore_active",
+          "id",
+          "size",
+          "state",
+          "archiver",
+          "hash",
+          "description",
+          "format",
+          "last_modified",
+          "url_type",
+          "mimetype",
+          "cache_url",
+          "name",
+          "created",
+          "url",
+          "qa",
+          "mimetype_inner",
+          "position",
+          "revision_id",
+          "resource_type"
+        ],
+        "searchResultRow": null,
+        "datastoreFields": null,
+        "searchRecordKeys": null
+      }
+    },
+    {
+      "family": "lawyers/ifep",
+      "method": "GET",
+      "url": "https://www.ifep.ro/Justice/Lawyers/LawyersPanel.aspx",
+      "attemptedAt": "2026-10-08T02:55:58.444Z",
+      "curl": "curl -sS -X GET 'https://www.ifep.ro/Justice/Lawyers/LawyersPanel.aspx' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"Accept: text/html\"",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "server": "cloudflare",
+        "cache-control": "private"
+      },
+      "shape": {
+        "textSample": "\r\n\r\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head><link href=\"../../App_Themes/DefaultTheme/Alphabet.css\" type"
+      }
+    },
+    {
+      "family": "legal/law",
+      "method": "POST",
+      "url": "http://legislatie.just.ro/apiws/FreeWebService.svc/SOAP",
+      "attemptedAt": "2026-10-08T02:56:04.999Z",
+      "curl": "curl -sS -X POST 'http://legislatie.just.ro/apiws/FreeWebService.svc/SOAP' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"SOAPAction: \\\"http://tempuri.org/IFreeWebService/GetToken\\\"\" -H \"Content-Type: text/xml; charset=utf-8\" --data-binary '<?xml version=\"1.0\" encoding=\"utf-8\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><s:Body><GetToken xmlns=\"http://tempuri.org/\"/></s:Body></s:Envelope>'",
+      "httpStatus": 500,
+      "headers": {
+        "content-length": "0",
+        "server": "nginx/1.24.0 (Ubuntu)"
+      },
+      "shape": {
+        "textSample": ""
+      }
+    },
+    {
+      "family": "feeds/agricultura",
+      "method": "GET",
+      "url": "https://www.afir.ro/",
+      "attemptedAt": "2026-10-08T02:56:10.260Z",
+      "curl": "curl -sS -X GET 'https://www.afir.ro/' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"Accept: text/html\"",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8"
+      },
+      "shape": {
+        "textSample": "\r\n\r\n<!doctype html>\r\n<html lang=\"ro\">\r\n<head>\r\n\r\n\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, "
+      }
+    },
+    {
+      "family": "feeds/filme",
+      "method": "GET",
+      "url": "https://query.wikidata.org/sparql?query=SELECT+%3Ffilm+%3FfilmLabel+%3Fdate+%3FdirectorLabel+%3Fimage+WHERE+%7B+%3Ffilm+wdt%3AP31%2Fwdt%3AP279*+wd%3AQ11424%3B+wdt%3AP495+wd%3AQ218.+OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3Fdate.+%7D+OPTIONAL+%7B+%3Ffilm+wdt%3AP57+%3Fdirector.+%7D+OPTIONAL+%7B+%3Ffilm+wdt%3AP18+%3Fimage.+%7D+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22ro%2Cen%22.+%7D+%7D+ORDER+BY+DESC%28%3Fdate%29+LIMIT+50&format=json",
+      "attemptedAt": "2026-10-08T02:56:16.208Z",
+      "curl": "curl -sS -X GET 'https://query.wikidata.org/sparql?query=SELECT+%3Ffilm+%3FfilmLabel+%3Fdate+%3FdirectorLabel+%3Fimage+WHERE+%7B+%3Ffilm+wdt%3AP31%2Fwdt%3AP279*+wd%3AQ11424%3B+wdt%3AP495+wd%3AQ218.+OPTIONAL+%7B+%3Ffilm+wdt%3AP577+%3Fdate.+%7D+OPTIONAL+%7B+%3Ffilm+wdt%3AP57+%3Fdirector.+%7D+OPTIONAL+%7B+%3Ffilm+wdt%3AP18+%3Fimage.+%7D+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22ro%2Cen%22.+%7D+%7D+ORDER+BY+DESC%28%3Fdate%29+LIMIT+50&format=json' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"Accept: application/sparql-results+json\"",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/sparql-results+json;charset=utf-8",
+        "server": "nginx/1.22.1",
+        "cache-control": "public, max-age=300"
+      },
+      "shape": {
+        "jsonKeys": [
+          "head",
+          "results"
+        ]
+      }
+    },
+    {
+      "family": "events/odeon",
+      "method": "GET",
+      "url": "https://teatrul-odeon.ro/",
+      "attemptedAt": "2026-10-08T02:56:27.586Z",
+      "curl": "curl -sS -X GET 'https://teatrul-odeon.ro/' -H \"User-Agent: Aflivra/1.0 public-data-source-check\" -H \"Accept: text/html\"",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "server": "Apache"
+      },
+      "shape": {
+        "rss": true
+      }
+    },
+    {
+      "family": "cinema/cinemacity",
+      "method": "GET",
+      "url": "https://www.cinemacity.ro/ro/data-api-service/v1/quickbook/10107/film-events/in-cinema/1824/at-date/2026-10-08?attr=",
+      "attemptedAt": "2026-10-08T02:56:35.367Z",
+      "curl": "curl -sS -X GET 'https://www.cinemacity.ro/ro/data-api-service/v1/quickbook/10107/film-events/in-cinema/1824/at-date/2026-10-08?attr='",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "last-modified": "Thu, 08 Oct 2026 02:56:35 GMT",
+        "server": "cloudflare",
+        "cache-control": "public, max-age=60"
+      },
+      "shape": {
+        "jsonKeys": [
+          "body"
+        ]
+      }
+    },
+    {
+      "family": "stories/wikisource",
+      "method": "GET",
+      "url": "https://ro.wikisource.org/w/api.php?action=parse&pageid=29611&prop=text%7Clinks%7Crevid%7Cimages%7Ccategories&format=json&redirects=1",
+      "attemptedAt": "2026-10-08T02:56:40.799Z",
+      "curl": "curl -sS -X GET 'https://ro.wikisource.org/w/api.php?action=parse&pageid=29611&prop=text%7Clinks%7Crevid%7Cimages%7Ccategories&format=json&redirects=1'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "server": "mw-api-ext.eqiad.main-9d4f9b7bc-62gkt",
+        "cache-control": "private, must-revalidate, max-age=0"
+      },
+      "shape": {
+        "jsonKeys": [
+          "parse"
+        ]
+      }
+    },
+    {
+      "family": "justice/notari",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/package_show?id=bc69c898-b356-4e2c-9251-1833857d1a6e",
+      "attemptedAt": "2026-10-08T02:56:46.672Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/package_show?id=bc69c898-b356-4e2c-9251-1833857d1a6e'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "3871",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "rating",
+          "license_title",
+          "maintainer",
+          "relationships_as_object",
+          "private",
+          "maintainer_email",
+          "num_tags",
+          "id",
+          "metadata_created",
+          "metadata_modified",
+          "author",
+          "author_email",
+          "state",
+          "version",
+          "archiver",
+          "creator_user_id",
+          "type",
+          "resources",
+          "num_resources",
+          "tags",
+          "groups",
+          "license_id",
+          "relationships_as_subject",
+          "organization",
+          "name",
+          "isopen",
+          "url",
+          "notes",
+          "owner_org",
+          "qa",
+          "extras",
+          "license_url",
+          "ratings_count",
+          "title",
+          "revision_id"
+        ],
+        "datasetKeys": [
+          "cache_last_updated",
+          "datagovro_download_url",
+          "package_id",
+          "datastore_active",
+          "id",
+          "size",
+          "state",
+          "archiver",
+          "hash",
+          "description",
+          "format",
+          "last_modified",
+          "url_type",
+          "mimetype",
+          "cache_url",
+          "name",
+          "created",
+          "url",
+          "qa",
+          "mimetype_inner",
+          "position",
+          "revision_id",
+          "resource_type"
+        ],
+        "searchResultRow": null,
+        "datastoreFields": null,
+        "searchRecordKeys": null
+      }
+    },
+    {
+      "family": "justice/experti-judiciari",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/package_show?id=476a8363-7c91-43e2-99d2-4fbe144c8e2a",
+      "attemptedAt": "2026-10-08T02:56:52.048Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/package_show?id=476a8363-7c91-43e2-99d2-4fbe144c8e2a'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "3921",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "rating",
+          "license_title",
+          "maintainer",
+          "relationships_as_object",
+          "private",
+          "maintainer_email",
+          "num_tags",
+          "id",
+          "metadata_created",
+          "metadata_modified",
+          "author",
+          "author_email",
+          "state",
+          "version",
+          "archiver",
+          "creator_user_id",
+          "type",
+          "resources",
+          "num_resources",
+          "tags",
+          "groups",
+          "license_id",
+          "relationships_as_subject",
+          "organization",
+          "name",
+          "isopen",
+          "url",
+          "notes",
+          "owner_org",
+          "qa",
+          "extras",
+          "license_url",
+          "ratings_count",
+          "title",
+          "revision_id"
+        ],
+        "datasetKeys": [
+          "cache_last_updated",
+          "datagovro_download_url",
+          "package_id",
+          "datastore_active",
+          "id",
+          "size",
+          "state",
+          "archiver",
+          "hash",
+          "description",
+          "format",
+          "last_modified",
+          "url_type",
+          "mimetype",
+          "cache_url",
+          "name",
+          "created",
+          "url",
+          "qa",
+          "mimetype_inner",
+          "position",
+          "revision_id",
+          "resource_type"
+        ],
+        "searchResultRow": null,
+        "datastoreFields": null,
+        "searchRecordKeys": null
+      }
+    },
+    {
+      "family": "justice/experti-tehnici",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/package_show?id=3f26ecb7-df7e-454e-a029-89dbd6d82c3f",
+      "attemptedAt": "2026-10-08T02:56:57.472Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/package_show?id=3f26ecb7-df7e-454e-a029-89dbd6d82c3f'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "9896",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "rating",
+          "license_title",
+          "maintainer",
+          "relationships_as_object",
+          "private",
+          "maintainer_email",
+          "num_tags",
+          "id",
+          "metadata_created",
+          "metadata_modified",
+          "author",
+          "author_email",
+          "state",
+          "version",
+          "archiver",
+          "creator_user_id",
+          "type",
+          "resources",
+          "num_resources",
+          "tags",
+          "groups",
+          "license_id",
+          "relationships_as_subject",
+          "organization",
+          "name",
+          "isopen",
+          "url",
+          "notes",
+          "owner_org",
+          "qa",
+          "extras",
+          "license_url",
+          "ratings_count",
+          "title",
+          "revision_id"
+        ],
+        "datasetKeys": [
+          "cache_last_updated",
+          "datagovro_download_url",
+          "package_id",
+          "datastore_active",
+          "id",
+          "size",
+          "state",
+          "archiver",
+          "hash",
+          "description",
+          "format",
+          "last_modified",
+          "url_type",
+          "mimetype",
+          "cache_url",
+          "name",
+          "created",
+          "url",
+          "qa",
+          "mimetype_inner",
+          "position",
+          "revision_id",
+          "resource_type"
+        ],
+        "searchResultRow": null,
+        "datastoreFields": null,
+        "searchRecordKeys": null
+      }
+    },
+    {
+      "family": "justice/traducatori",
+      "method": "GET",
+      "url": "https://data.gov.ro/api/3/action/package_show?id=b1c5ffa9-9dbc-4e71-82c5-6dbee3c806ff",
+      "attemptedAt": "2026-10-08T02:57:02.829Z",
+      "curl": "curl -sS -X GET 'https://data.gov.ro/api/3/action/package_show?id=b1c5ffa9-9dbc-4e71-82c5-6dbee3c806ff'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json;charset=utf-8",
+        "content-length": "3920",
+        "server": "nginx",
+        "cache-control": "no-cache"
+      },
+      "shape": {
+        "success": true,
+        "resultKeys": [
+          "rating",
+          "license_title",
+          "maintainer",
+          "relationships_as_object",
+          "private",
+          "maintainer_email",
+          "num_tags",
+          "id",
+          "metadata_created",
+          "metadata_modified",
+          "author",
+          "author_email",
+          "state",
+          "version",
+          "archiver",
+          "creator_user_id",
+          "type",
+          "resources",
+          "num_resources",
+          "tags",
+          "groups",
+          "license_id",
+          "relationships_as_subject",
+          "organization",
+          "name",
+          "isopen",
+          "url",
+          "notes",
+          "owner_org",
+          "qa",
+          "extras",
+          "license_url",
+          "ratings_count",
+          "title",
+          "revision_id"
+        ],
+        "datasetKeys": [
+          "cache_last_updated",
+          "datagovro_download_url",
+          "package_id",
+          "datastore_active",
+          "id",
+          "size",
+          "state",
+          "archiver",
+          "hash",
+          "description",
+          "format",
+          "last_modified",
+          "url_type",
+          "mimetype",
+          "cache_url",
+          "name",
+          "created",
+          "url",
+          "qa",
+          "mimetype_inner",
+          "position",
+          "revision_id",
+          "resource_type"
+        ],
+        "searchResultRow": null,
+        "datastoreFields": null,
+        "searchRecordKeys": null
+      }
+    },
+    {
+      "family": "flights/adsb",
+      "method": "GET",
+      "url": "https://api.adsb.lol/v2/lat/44.5/lon/26.1/dist/250",
+      "attemptedAt": "2026-10-08T02:57:08.173Z",
+      "curl": "curl -sS -X GET 'https://api.adsb.lol/v2/lat/44.5/lon/26.1/dist/250' -H \"User-Agent: Aflivra/1.0 public-flight-state reader\" -H \"Accept: application/json\"",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json",
+        "cache-control": "no-store"
+      },
+      "shape": {
+        "envelope": [
+          "ac",
+          "msg",
+          "now",
+          "total",
+          "ctime",
+          "ptime"
+        ],
+        "nowIsUnixMs": true,
+        "acRow": [
+          "hex",
+          "type",
+          "flight",
+          "r",
+          "t",
+          "alt_baro",
+          "alt_geom",
+          "gs",
+          "ias",
+          "tas",
+          "mach",
+          "wd",
+          "ws",
+          "oat",
+          "tat",
+          "track",
+          "track_rate",
+          "roll",
+          "mag_heading",
+          "true_heading",
+          "baro_rate",
+          "geom_rate",
+          "squawk",
+          "emergency",
+          "category",
+          "nav_qnh",
+          "nav_altitude_mcp",
+          "nav_heading",
+          "nav_modes",
+          "lat",
+          "lon",
+          "nic",
+          "rc",
+          "seen_pos",
+          "version",
+          "nic_baro",
+          "nac_p",
+          "nac_v",
+          "sil",
+          "sil_type",
+          "gva",
+          "sda",
+          "alert",
+          "spi",
+          "mlat",
+          "tisb",
+          "messages",
+          "seen",
+          "rssi",
+          "dst",
+          "dir"
+        ],
+        "sample": {
+          "hex": "06a0be",
+          "type": "adsb_icao",
+          "flight": "QTR035  ",
+          "r": "A7-BCZ",
+          "t": "B788",
+          "alt_baro": 37975,
+          "alt_geom": 39175,
+          "gs": 470.8,
+          "ias": 274,
+          "tas": 488,
+          "mach": 0.856,
+          "wd": 297,
+          "ws": 17,
+          "oat": -59,
+          "tat": -28,
+          "track": 302.51,
+          "track_rate": 0.16,
+          "roll": 4.04,
+          "mag_heading": 296.37,
+          "true_heading": 302.22,
+          "baro_rate": 32,
+          "geom_rate": -64,
+          "squawk": "5305",
+          "emergency": "none",
+          "category": "A5",
+          "nav_qnh": 1012.8,
+          "nav_altitude_mcp": 38016,
+          "nav_heading": 298.83,
+          "nav_modes": [
+            "autopilot",
+            "vnav",
+            "lnav",
+            "tcas"
+          ],
+          "lat": 46.152832,
+          "lon": 20.735957,
+          "nic": 8,
+          "rc": 186,
+          "seen_pos": 0.103,
+          "version": 2,
+          "nic_baro": 1,
+          "nac_p": 9,
+          "nac_v": 1,
+          "sil": 3,
+          "sil_type": "perhour",
+          "gva": 2,
+          "sda": 2,
+          "alert": 0,
+          "spi": 0,
+          "mlat": [],
+          "tisb": [],
+          "messages": 46980,
+          "seen": 0.1,
+          "rssi": -20.1,
+          "dst": 247.155,
+          "dir": 295.6
+        }
+      }
+    },
+    {
+      "family": "flights/bia",
+      "method": "GET",
+      "url": "https://bucharestairports.ro/wp-json/fds/v1/flights?airport=henri-coanda&language=ro",
+      "attemptedAt": "2026-10-08T02:57:13.673Z",
+      "curl": "curl -sS -X GET 'https://bucharestairports.ro/wp-json/fds/v1/flights?airport=henri-coanda&language=ro' -H \"User-Agent: Aflivra/1.0 public-flight-board reader\" -H \"Accept: application/json\"",
+      "httpStatus": 403,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "cf-mitigated": "challenge",
+        "server": "cloudflare"
+      },
+      "shape": {
+        "textSample": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><m"
+      }
+    },
+    {
+      "family": "events/search + events/operanationalacluj (shared calendar)",
+      "method": "GET",
+      "url": "https://operacluj.ro/wp-json/tribe/events/v1/events?per_page=100&status=publish",
+      "attemptedAt": "2026-10-08T02:57:19.349Z",
+      "curl": "curl -sS -X GET 'https://operacluj.ro/wp-json/tribe/events/v1/events?per_page=100&status=publish'",
+      "httpStatus": 200,
+      "headers": {
+        "content-type": "application/json; charset=UTF-8",
+        "server": "Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/8.1.13",
+        "cache-control": "max-age=172800"
+      },
+      "shape": {
+        "jsonKeys": [
+          "events",
+          "rest_url",
+          "next_rest_url",
+          "total",
+          "total_pages"
+        ]
+      }
+    },
+    {
+      "family": "transport/trains",
+      "skipped": "corpus-only family — the loader serves the committed Infofer corpus (public/trains/**) and never re-fetches; the politeness ledger spends no external request (matrix cell is corpus-only by design)"
+    },
+    {
+      "family": "transport/tranzy",
+      "skipped": "env-gated family — TRANZY_API_KEY is not configured in this environment and the gate forbids interrogating any Tranzy address without a key; shape is pinned by the fixture matrix + the 2026/10/06 reference probe"
+    }
+  ]
+}

@@ -1,0 +1,995 @@
+{
+  "head" : {
+    "vars" : [ "film", "filmLabel", "date", "directorLabel", "image" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q137652478"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2027-01-07T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Fjord"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Cristian Mungiu"
+      },
+      "image" : {
+        "type" : "uri",
+        "value" : "http://commons.wikimedia.org/wiki/Special:FilePath/Cristian%20Mungiu%20and%20co%20at%20the%202026%20Cannes%20Film%20Festival%20winners%20press%20conference.jpg"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q140812115"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-08-01T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Don't Ask Me If I Killed"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q140620152"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-07-03T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Malul Vânăt"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Andreea Cristina Borțun"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131840079"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-06-25T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Kontinental '25"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q140812115"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-06-08T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Don't Ask Me If I Killed"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q137652478"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-05-18T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Fjord"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Cristian Mungiu"
+      },
+      "image" : {
+        "type" : "uri",
+        "value" : "http://commons.wikimedia.org/wiki/Special:FilePath/Cristian%20Mungiu%20and%20co%20at%20the%202026%20Cannes%20Film%20Festival%20winners%20press%20conference.jpg"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q139377859"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-05-15T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Diary of a Chambermaid"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125563790"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-05-14T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Trei kilometri până la capătul lumii"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Emanuel Pârvu"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135241825"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-05-07T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Dracula"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      },
+      "image" : {
+        "type" : "uri",
+        "value" : "http://commons.wikimedia.org/wiki/Special:FilePath/Director%20Radu%20Jude%20with%20his%20cast%20at%20the%202025%20Locarno%20Film%20Festival%201.jpg"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q141374618"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-04-24T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Dosarele Orașului Alb"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Iura Luncașu"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q133852989"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-03-20T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Two Prosecutors"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Serhii Loznîțea"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q133852989"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-02-19T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Two Prosecutors"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Serhii Loznîțea"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q138314704"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-02-14T00:00:00Z"
+      },
+      "filmLabel" : {
+        "type" : "literal",
+        "value" : "Q138314704"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Marie-Rose Osta"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q104898644"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-01-01T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Gregorius, the Chosen One"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Tomasz Mielnik"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q138331981"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-01-01T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Atlas of the Universe"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Paul Negoescu"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q138456059"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-01-01T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Shot Reverse Shot"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q140433339"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2026-01-01T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Transit Times"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Ana-Felicia Scutelnicu"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q137373695"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-12-10T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Justiție capturată"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q137373695"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-12-09T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Justiție capturată"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q108585934"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-11-14T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Cravata galbenă"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Serge Ioan Celibidache"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131840079"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-11-13T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Kontinental '25"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q136436756"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-10-17T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Redemption"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Daniel Guzmán"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q136088499"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-08-28T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Dinți de lapte"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Mihai Mincan"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135454895"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-08-13T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Sorella Di Clausura"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Ivana Mladenović"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q135241825"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-08-10T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Dracula"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      },
+      "image" : {
+        "type" : "uri",
+        "value" : "http://commons.wikimedia.org/wiki/Special:FilePath/Director%20Radu%20Jude%20with%20his%20cast%20at%20the%202025%20Locarno%20Film%20Festival%201.jpg"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131730019"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-07-17T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Leonora in the Morning Light"
+      },
+      "directorLabel" : {
+        "type" : "literal",
+        "value" : "Q95714323"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131730019"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-07-17T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Leonora in the Morning Light"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Thorsten Klein"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q139573742"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-06-20T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Lucy"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Vinsent Mettel"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q119260334"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-05-21T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Libertate"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Tudor Giurgiu"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q133852989"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-05-14T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Two Prosecutors"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Serhii Loznîțea"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q132086872"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-04-19T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "And the Rest Will Follow"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Pelin Esmer"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131689435"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-04-11T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Goat Girl"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Ana Asensio"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131689435"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-03-18T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Goat Girl"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Ana Asensio"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q136436756"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-03-14T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Redemption"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Daniel Guzmán"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131840079"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-02-19T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Kontinental '25"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q132086872"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-02-01T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "And the Rest Will Follow"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Pelin Esmer"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q139573745"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-01-30T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Glass House"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Taras Dron"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q132858715"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2025-01-01T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "The Heaven of Animals"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Santi Amodeo"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q132676467"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-12-06T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Căsătoria"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Mihai Bendeac"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q121200137"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-11-21T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Nu aștepta prea mult de la sfârșitul lumii"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radu Jude"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125563790"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-10-23T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Trei kilometri până la capătul lumii"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Emanuel Pârvu"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q134398288"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-09-04T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "TWST - Things We Said Today"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Andrei Ujică"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q130304203"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-08-18T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Dad's Lullaby"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Lesia Diak"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q130418866"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-08-16T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "My Late Summer"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Danis Tanović"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q131363673"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-06-30T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Panopticon"
+      },
+      "directorLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "George Sikharulidze"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125563790"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-05-17T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Trei kilometri până la capătul lumii"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Emanuel Pârvu"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q104897943"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-04-25T00:00:00Z"
+      },
+      "filmLabel" : {
+        "type" : "literal",
+        "value" : "Q104897943"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Radim Špaček"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q125704916"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-04-23T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Buzz House: The Movie"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Florin Babei"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q130529617"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-04-20T00:00:00Z"
+      },
+      "filmLabel" : {
+        "type" : "literal",
+        "value" : "Q130529617"
+      }
+    }, {
+      "film" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q124576848"
+      },
+      "date" : {
+        "datatype" : "http://www.w3.org/2001/XMLSchema#dateTime",
+        "type" : "literal",
+        "value" : "2024-04-05T00:00:00Z"
+      },
+      "filmLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Birds Flying East"
+      },
+      "directorLabel" : {
+        "xml:lang" : "ro",
+        "type" : "literal",
+        "value" : "Pau Durà"
+      }
+    } ]
+  }
+}

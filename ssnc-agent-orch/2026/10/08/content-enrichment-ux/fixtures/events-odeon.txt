@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ro-RO" class="no-js preloading" itemscope itemtype="https://schema.org/WebPage" >
+
+<head>
+
+<meta charset="UTF-8" />
+<meta name='robots' content='index, follow, max-image-preview:none, max-snippet:-1, max-video-preview:-1, noimageindex' />
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: dark)">
+
+	<!-- This site is optimized with the Yoast SEO plugin v28.6 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>Teatrul Odeon</title>
+	<meta name="description" content="Teatrul ODEON este un teatru de repertoriu, subvenționat de Primăria Municipiului București, cu o echipă stabilă de 41 de actori, 2 regizori și un" />
+	<link rel="canonical" href="https://teatrul-odeon.ro/" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebPage","@id":"https:\/\/teatrul-odeon.ro\/","url":"https:\/\/teatrul-odeon.ro\/","name":"Teatrul Odeon","isPartOf":{"@id":"https:\/\/teatrul-odeon.ro\/#website"},"about":{"@id":"https:\/\/teatrul-odeon.ro\/#organization"},"datePublished":"2022-11-23T15:37:52+00:00","dateModified":"2026-09-29T14:34:29+00:00","description":"Teatrul ODEON este un teatru de repertoriu, subvenționat de Primăria Municipiului București, cu o echipă stabilă de 41 de actori, 2 regizori și un","breadcrumb":{"@id":"https:\/\/teatrul-odeon.ro\/#breadcrumb"},"inLanguage":"ro-RO","potentialAction":[{"@type":"ReadAction","target":["https:\/\/teatrul-odeon.ro\/"]}]},{"@type":"BreadcrumbList","@id":"https:\/\/teatrul-odeon.ro\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Prima pagină"}]},{"@type":"WebSite","@id":"https:\/\/teatrul-odeon.ro\/#website","url":"https:\/\/teatrul-odeon.ro\/","name":"Teatrul Odeon","description":"","publisher":{"@id":"https:\/\/teatrul-odeon.ro\/#organization"},"alternateName":"TO","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/teatrul-odeon.ro\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"ro-RO"},{"@type":"Organization","@id":"https:\/\/teatrul-odeon.ro\/#organization","name":"Teatrul Odeon","url":"https:\/\/teatrul-odeon.ro\/","logo":{"@type":"ImageObject","inLanguage":"ro-RO","@id":"https:\/\/teatrul-odeon.ro\/#\/schema\/logo\/image\/","url":"https:\/\/teatrul-odeon.ro\/wp-content\/uploads\/2023\/06\/logo_negru.png","contentUrl":"https:\/\/teatrul-odeon.ro\/wp-content\/uploads\/2023\/06\/logo_negru.png","width":2367,"height":1536,"caption":"Teatrul Odeon"},"image":{"@id":"https:\/\/teatrul-odeon.ro\/#\/schema\/logo\/image\/"},"sameAs":["https:\/\/www.facebook.com\/teatrul.odeon","https:\/\/www.instagram.com\/teatrul.odeon\/","https:\/\/www.youtube.com\/@TeatrulOdeon"]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//meet.jit.si' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='go-portfolio-magnific-popup-styles-css' href='https://teatrul-odeon.ro/wp-content/plugins/go_portfolio/assets/plugins/magnific-popup/magnific-popup.css?ver=1.8.3' media='all' />
+<style id="go-portfolio-magnific-popup-styles-inline-css">
+.mfp-bg { z-index:0 !important;} .mfp-wrap { z-index:1 !important;}
+/*# sourceURL=go-portfolio-magnific-popup-styles-inline-css */
+</style>
+<link rel='stylesheet' id='go-portfolio-styles-css' href='https://teatrul-odeon.ro/wp-content/plugins/go_portfolio/assets/css/go_portfolio_styles.css?ver=1.8.3' media='all' />
+<style id="go-portfolio-styles-inline-css">
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+		.gw-gopf-posts { letter-spacing:10px; }
+		.gw-gopf {
+			
+			margin:0 auto;
+		}
+		.gw-gopf-1col .gw-gopf-col-wrap {
+        	float:left !important;
+			margin-left:0 !important;
+        	width:100%;
+		}
+		.gw-gopf-2cols .gw-gopf-col-wrap,
+		.gw-gopf-3cols .gw-gopf-col-wrap,
+		.gw-gopf-4cols .gw-gopf-col-wrap,
+		.gw-gopf-5cols .gw-gopf-col-wrap,
+		.gw-gopf-6cols .gw-gopf-col-wrap,
+		.gw-gopf-7cols .gw-gopf-col-wrap,
+		.gw-gopf-8cols .gw-gopf-col-wrap,
+		.gw-gopf-9cols .gw-gopf-col-wrap,
+		.gw-gopf-10cols .gw-gopf-col-wrap { width:50% !important; }
+	}
+
+		@media only screen and (min-width: 480px) and (max-width: 767px) {
+		.gw-gopf-posts { letter-spacing:20px; }
+		.gw-gopf {
+			
+			margin:0 auto;
+		}
+		.gw-gopf-1col .gw-gopf-col-wrap,
+		.gw-gopf-2cols .gw-gopf-col-wrap,
+		.gw-gopf-3cols .gw-gopf-col-wrap,
+		.gw-gopf-4cols .gw-gopf-col-wrap,
+		.gw-gopf-5cols .gw-gopf-col-wrap,
+		.gw-gopf-6cols .gw-gopf-col-wrap,
+		.gw-gopf-7cols .gw-gopf-col-wrap,
+		.gw-gopf-8cols .gw-gopf-col-wrap,
+		.gw-gopf-9cols .gw-gopf-col-wrap,
+		.gw-gopf-10cols .gw-gopf-col-wrap {
+        	float:left !important;
+			margin-left:0 !important;
+        	width:100%;
+		}
+
+		/* RTL */
+		.gw-gopf-rtl.gw-gopf-1col .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-2cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-3cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-4cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-5cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-6cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-7cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-8cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-9cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-10cols .gw-gopf-col-wrap { float:right !important; }
+
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-1col .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-2cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-3cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-4cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-5cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-6cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-7cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-8cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-9cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-10cols .gw-gopf-col-wrap { float:left !important; }
+
+	}
+
+
+		@media only screen and (max-width: 479px) {
+		.gw-gopf-posts { letter-spacing:30px; }
+		.gw-gopf {
+			max-width:400px;
+			margin:0 auto;
+		}
+		.gw-gopf-1col .gw-gopf-col-wrap,
+		.gw-gopf-2cols .gw-gopf-col-wrap,
+		.gw-gopf-3cols .gw-gopf-col-wrap,
+		.gw-gopf-4cols .gw-gopf-col-wrap,
+		.gw-gopf-5cols .gw-gopf-col-wrap,
+		.gw-gopf-6cols .gw-gopf-col-wrap,
+		.gw-gopf-7cols .gw-gopf-col-wrap,
+		.gw-gopf-8cols .gw-gopf-col-wrap,
+		.gw-gopf-9cols .gw-gopf-col-wrap,
+		.gw-gopf-10cols .gw-gopf-col-wrap {
+        	margin-left:0 !important;
+        	float:left !important;
+        	width:100%;
+         }
+
+		/* RTL */
+		.gw-gopf-rtl.gw-gopf-1col .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-2cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-3cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-4cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-5cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-6cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-7cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-8cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-9cols .gw-gopf-col-wrap,
+		.gw-gopf-rtl.gw-gopf-10cols .gw-gopf-col-wrap { float:right !important; }
+
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-1col .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-2cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-3cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-4cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-5cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-6cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-7cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-8cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-9cols .gw-gopf-col-wrap,
+		.gw-gopf-slider-type.gw-gopf-rtl.gw-gopf-10cols .gw-gopf-col-wrap { float:left !important; }
+
+	}
+/*# sourceURL=go-portfolio-styles-inline-css */
+</style>
+<link rel='stylesheet' id='sr7css-css' href='//teatrul-odeon.ro/wp-content/plugins/revslider/public/css/sr7.css?ver=6.7.40' media='all' />
+<link rel='stylesheet' id='wpml-legacy-horizontal-list-0-css' href='https://teatrul-odeon.ro/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-list-horizontal/style.min.css?ver=1' media='all' />
+<style id="wpml-legacy-horizontal-list-0-inline-css">
+.wpml-ls-display{display:inline!important}
+/*# sourceURL=wpml-legacy-horizontal-list-0-inline-css */
+</style>
+<link rel='stylesheet' id='cmplz-general-css' href='https://teatrul-odeon.ro/wp-content/plugins/complianz-gdpr/assets/css/cookieblocker.min.css?ver=1788922468' media='all' />
+<link rel='stylesheet' id='mfn-be-css' href='https://teatrul-odeon.ro/wp-content/themes/betheme/css/be.min.css?ver=28.5.10' media='all' />
+<link rel='stylesheet' id='mfn-animations-css' href='https://teatrul-odeon.ro/wp-content/themes/betheme/assets/animations/animations.min.css?ver=28.5.10' media='all' />
+<link rel='stylesheet' id='mfn-font-awesome-css' href='https://teatrul-odeon.ro/wp-content/themes/betheme/fonts/fontawesome/fontawesome.min.css?ver=28.5.10' media='all' />
+<link rel='stylesheet' id='mfn-responsive-css' href='https://teatrul-odeon.ro/wp-content/themes/betheme/css/responsive.min.css?ver=28.5.10' media='all' />
+<link rel='stylesheet' id='mfn-local-fonts-css' href='https://teatrul-odeon.ro/wp-content/uploads/betheme/fonts/mfn-local-fonts.css?ver=28.5.10' media='all' />
+<link rel='stylesheet' id='evcal_google_fonts-css' href='https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic,700|Poppins:700,800,900&#038;subset=latin%2Clatin-ext&#038;ver=4.6.8' media='all' />
+<link rel='stylesheet' id='evcal_cal_default-css' href='//teatrul-odeon.ro/wp-content/plugins/eventON468/assets/css/eventon_styles.css?ver=4.6.8' media='all' />
+<link rel='stylesheet' id='evo_font_icons-css' href='//teatrul-odeon.ro/wp-content/plugins/eventON468/assets/fonts/all.css?ver=4.6.8' media='all' />
+<link rel='stylesheet' id='eventon_dynamic_styles-css' href='//teatrul-odeon.ro/wp-content/plugins/eventON468/assets/css/eventon_dynamic_styles.css?ver=4.6.8' media='all' />
+<link rel='stylesheet' id='js_composer_front-css' href='https://teatrul-odeon.ro/wp-content/plugins/js_composer/assets/css/js_composer.min.css?ver=8.7.2' media='all' />
+<link rel='stylesheet' id='mfn-static-css' href='https://teatrul-odeon.ro/wp-content/uploads/betheme/css/static.css?ver=28.5.10' media='all' />
+<link rel='stylesheet' id='mdp-readabler-css' href='https://teatrul-odeon.ro/wp-content/plugins/readabler/css/readabler.min.css?ver=2.0.15' media='all' />
+<style id="mdp-readabler-inline-css">
+
+		:root{
+			--readabler-overlay: rgba(2, 83, 238, 1);--readabler-bg: rgba(255, 255, 255, 1);--readabler-bg-dark: rgba(22, 25, 27, 1);--readabler-text: rgba(51, 51, 51, 1);--readabler-text-dark: rgba(222, 239, 253, 1);--readabler-color: rgba(0, 71, 171, 1);--readabler-color-dark: rgba(0, 71, 171, 1);--readabler-color-transparent: rgba(0,71,171,.2);--readabler-color-transparent-dark: rgba(0,71,171,.2);--readabler-color-transparent-15: rgba(0,71,171,.15);--readabler-color-transparent-15-dark: rgba(0,71,171,.15);--readabler-color-transparent-25: rgba(0,71,171,.25);--readabler-color-transparent-25-dark: rgba(0,71,171,.25);--readabler-color-transparent-50: rgba(0,71,171,.5);--readabler-color-transparent-50-dark: rgba(0,71,171,.5);--readabler-border-radius: 20px;--readabler-animate: 600ms;--readabler-reading-mask-color: rgba(0, 0, 0, 0.7);--readabler-text-magnifier-bg-color: rgba(51, 51, 51, 1);--readabler-text-magnifier-color: rgba(255, 255, 255, 1);--readabler-text-magnifier-font-size: 36px;--readabler-highlight-titles-style: solid;--readabler-highlight-titles-color: rgba(0, 71, 171, 1);--readabler-highlight-titles-width: 2px;--readabler-highlight-titles-offset: 2px;--readabler-highlight-links-style: solid;--readabler-highlight-links-color: rgba(0, 71, 171, 1);--readabler-highlight-links-width: 2px;--readabler-highlight-links-offset: 2px;--readabler-reading-guide-width: 500px;--readabler-reading-guide-height: 12px;--readabler-reading-guide-bg-color: rgba(0, 71, 171, 1);--readabler-reading-guide-border-color: rgba(0, 0, 0, 1);--readabler-reading-guide-border-width: 2px;--readabler-reading-guide-border-radius: 10px;--readabler-reading-guide-arrow: 10;--readabler-highlight-hover-style: solid;--readabler-highlight-hover-color: rgba(99, 154, 249, 1);--readabler-highlight-hover-width: 2px;--readabler-highlight-hover-offset: 2px;--readabler-highlight-focus-style: solid;--readabler-highlight-focus-color: rgba(0, 71, 171, 1);--readabler-highlight-focus-width: 2px;--readabler-highlight-focus-offset: 2px;
+		}
+		.mdp-readabler-tts {
+		
+			--readabler-tts-bg: transparent;
+			--readabler-tts-color: transparent;
+			
+		}
+        .mdp-readabler-trigger-button-box{
+        
+            --readabler-btn-margin: 10px;
+            --readabler-btn-padding: 20px;
+            --readabler-btn-radius: 50px;
+            --readabler-btn-color: rgba(255, 255, 255, 1);
+            --readabler-btn-color-hover: rgba(251, 251, 251, 1);
+            --readabler-btn-bg: rgba(171, 48, 130, 1);
+            --readabler-btn-bg-hover: rgba(212, 6, 99, 1);
+            --readabler-btn-size: 30px;
+            --readabler-btn-delay: 2s;
+        
+        }
+		#mdp-readabler-voice-navigation{
+			--readabler-bg: rgba(255, 255, 255, 1);
+            --readabler-bg-dark: rgba(22, 25, 27, 1);
+            --readabler-text: rgba(51, 51, 51, 1);
+            --readabler-text-dark: rgba(222, 239, 253, 1);
+            --readabler-color: rgba(0, 71, 171, 1);
+            --readabler-color-dark: rgba(0, 71, 171, 1);
+            --readabler-color-transparent: rgba(0,71,171,.2);
+            --readabler-color-transparent-dark: rgba(0,71,171,.2);
+            --readabler-border-radius: 20px;
+            --readabler-animate: 600ms;
+		}
+		
+	        #mdp-readabler-keyboard-box {
+	        
+	        	--readabler-keyboard-light-bg: rgba(236, 236, 236, 1);
+	        	--readabler-keyboard-light-key-bg: rgba(255, 255, 255, 1);
+	        	--readabler-keyboard-light-key: rgba(17, 17, 17, 1);	        	
+	        	--readabler-keyboard-dark-bg: rgba(0, 0, 0, 0.8);
+	        	--readabler-keyboard-dark-key-bg: rgba(0, 0, 0, 0.5);
+	        	--readabler-keyboard-dark-key: rgba(255, 255, 255, 1);
+	        
+	        }	        
+	        
+/*# sourceURL=mdp-readabler-inline-css */
+</style>
+<style id="mfn-dynamic-inline-css">
+@font-face{font-family:"Nomada sans regular";src:url("https://teatrul-odeon.ro/wp-content/uploads/2023/09/FontsFree-Net-nomada-sans-regular.ttf#1009829") format("truetype");font-weight:normal;font-style:normal;font-display:swap}@font-face{font-family:"Nomada sans medium";src:url("https://teatrul-odeon.ro/wp-content/uploads/2023/09/FontsFree-Net-nomada-sans-medium.ttf#1009831") format("truetype");font-weight:normal;font-style:normal;font-display:swap}@font-face{font-family:"Nomada sans bold";src:url("https://teatrul-odeon.ro/wp-content/uploads/2023/09/FontsFree-Net-nomada-sans-bold.ttf#1009835") format("truetype");font-weight:normal;font-style:normal;font-display:swap}@font-face{font-family:"Nomada sans thin";src:url("https://teatrul-odeon.ro/wp-content/uploads/2023/09/FontsFree-Net-nomada-sans-thin.ttf#1009833") format("truetype");font-weight:normal;font-style:normal;font-display:swap}@font-face{font-family:"ITC face font";src:url("https://teatrul-odeon.ro/wp-content/uploads/2023/06/59e27fc90cac5eb4789c706b3bae3407.woff") format("woff"),url("https://teatrul-odeon.ro/wp-content/uploads/2023/06/ITC-Lubalin-Graph-W03-Bd-CnObl.ttf") format("truetype");font-weight:normal;font-style:normal;font-display:swap}
+html{background-image:url(https://teatrul-odeon.ro/wp-content/uploads/2023/09/bleu-paper-texture.jpg#1009926);background-repeat:no-repeat;background-position:center top;background-attachment:fixed;background-size:cover}#Subheader{background-image:url(https://teatrul-odeon.ro/wp-content/uploads/2023/09/bleu-paper-texture.jpg#1009926);background-repeat:no-repeat;background-position:center;background-attachment:fixed;background-size:cover}
+form input.display-none{display:none!important}body{--mfn-featured-image: url();}
+/* Local Page Style 5 */
+section.mcb-section-50b81f911{padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;background-image:linear-gradient(0deg,  50%,  50%);}section.mcb-section-50b81f911 .mcb-section-inner-50b81f911{align-content:flex-start;align-items:center;}section.mcb-section-50b81f911 .mcb-background-overlay{background-repeat:no-repeat;background-position:top center;background-size:cover;}.mcb-section .mcb-wrap-iwgr3204 > .mcb-wrap-inner-iwgr3204{padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}.mcb-section .mcb-wrap-iwgr3204{align-self:center;z-index:1000;}
+/* Local Header Style 1017756 */
+.mcb-section .mcb-wrap .mcb-item-cc28fa364 .logo-wrapper{align-items:center;}.mcb-section .mcb-wrap .mcb-item-cc28fa364{width:50%;}.mcb-section .mcb-wrap .mcb-item-cc28fa364 .mcb-column-inner-cc28fa364{padding-top:15px;padding-bottom:15px;}.mcb-section .mcb-wrap-grid.mcb-wrap-3665fcf51 > .mcb-wrap-inner-3665fcf51{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-3665fcf51{flex-grow:unset;}.mcb-section .mcb-wrap-3665fcf51 > .mcb-wrap-inner-3665fcf51{align-items:center;}.mcb-section .mcb-wrap .mcb-item-e486e7d36 .mfn-header-menu{justify-content:flex-end;}.mcb-section .mcb-wrap .mcb-item-e486e7d36 .mfn-header-menu > li.mfn-menu-li > a.mfn-menu-link{font-size:17px;letter-spacing:1px;font-weight:300;color:#FFFFFF;}.mcb-section .mcb-wrap-grid.mcb-wrap-9a48e9c8f > .mcb-wrap-inner-9a48e9c8f{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-9a48e9c8f{flex-grow:1;}.mcb-section .mcb-wrap-9a48e9c8f > .mcb-wrap-inner-9a48e9c8f{align-items:center;}.mcb-section .mcb-wrap .mcb-item-hiuf8fp .mfn-icon-box .icon-wrapper .header-cart-count,.mcb-section .mcb-wrap .mcb-item-hiuf8fp .mfn-icon-box .icon-wrapper .header-wishlist-count{top:-9px;right:-11px;}.mcb-section .mcb-wrap .mcb-item-hiuf8fp .mfn-live-search-box .mfn-live-search-heading{opacity:0.6;}.mcb-section .mcb-wrap .mcb-item-hiuf8fp .icon-wrapper{border-style:solid;border-color:#FFFFFF;--mfn-header-icon-color:#FFFFFF;}.mcb-section .mcb-wrap .mcb-item-5qvhbq6q .mfn-icon-box .icon-wrapper .header-cart-count,.mcb-section .mcb-wrap .mcb-item-5qvhbq6q .mfn-icon-box .icon-wrapper .header-wishlist-count{top:-9px;right:-11px;}.mcb-section .mcb-wrap .mcb-item-5qvhbq6q .mfn-live-search-box .mfn-live-search-heading{opacity:0.6;}.mcb-section .mcb-wrap .mcb-item-5qvhbq6q .mcb-column-inner-5qvhbq6q{padding-bottom:7px;}.mcb-section .mcb-wrap .mcb-item-5qvhbq6q .mfn-icon-box .icon-wrapper{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;}.mcb-section .mcb-wrap .mcb-item-a77d6df7a .mfn-language-switcher ul li a img{width:18px;}.mcb-section .mcb-wrap .mcb-item-a77d6df7a .mfn-language-switcher-dropdown.mfn-language-switcher-dropdown-icon ul li a .mfn-arrow-icon{--mfn-wpml-arrow-size:10px;}.mcb-section .mcb-wrap-grid.mcb-wrap-b6cede75c > .mcb-wrap-inner-b6cede75c{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-b6cede75c{flex-grow:1;}.mcb-section .mcb-wrap-b6cede75c > .mcb-wrap-inner-b6cede75c{align-items:center;align-content:center;}section.mcb-section-71fa57dc4 .mcb-section-inner-71fa57dc4{align-items:center;justify-content:flex-start;}section.mcb-section-71fa57dc4{background-color:#AB3082;}.mcb-section .mcb-wrap .mcb-item-0771b72bc .logo-wrapper{align-items:center;}.mcb-section .mcb-wrap-grid.mcb-wrap-f23252ac6 > .mcb-wrap-inner-f23252ac6{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-f23252ac6{flex-grow:1;}.mcb-section .mcb-wrap-f23252ac6 > .mcb-wrap-inner-f23252ac6{align-items:center;}.mcb-section .mcb-wrap .mcb-item-57a4c65ca .mfn-language-switcher ul li a img{width:18px;}.mcb-section .mcb-wrap .mcb-item-57a4c65ca .mfn-language-switcher-dropdown.mfn-language-switcher-dropdown-icon ul li a .mfn-arrow-icon{--mfn-wpml-arrow-size:10px;}.mcb-section .mcb-wrap-grid.mcb-wrap-d1f7177d0 > .mcb-wrap-inner-d1f7177d0{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-d1f7177d0{flex-grow:1;}.mcb-section .mcb-wrap-d1f7177d0 > .mcb-wrap-inner-d1f7177d0{align-items:center;}.mcb-section .mcb-wrap .mcb-item-9d285e26e .mfn-header-tmpl-menu-sidebar .mfn-header-tmpl-menu-sidebar-wrapper{align-items:center;}.mcb-section .mcb-wrap .mcb-item-9d285e26e .mfn-header-tmpl-menu-sidebar .mfn-close-icon{font-size:20px;}.mcb-section .mcb-wrap .mcb-item-9d285e26e .mfn-header-menu-burger{border-style:solid;border-width:2px 2px 2px 2px;border-radius:5px 5px 5px 5px;border-color:#000000;}.mcb-section .mcb-wrap-grid.mcb-wrap-4d6dc2a4d > .mcb-wrap-inner-4d6dc2a4d{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-4d6dc2a4d{flex-grow:1;}.mcb-section .mcb-wrap-4d6dc2a4d > .mcb-wrap-inner-4d6dc2a4d{align-items:center;}section.mcb-section-aea2438aa .mcb-section-inner-aea2438aa{align-items:center;}section.mcb-section-aea2438aa{background-color:#FFFFFF;}.mcb-section .mcb-wrap .mcb-item-d0j75b0r .logo-wrapper{align-items:center;}.mcb-section .mcb-wrap .mcb-item-d0j75b0r{width:40%;}.mcb-section .mcb-wrap .mcb-item-d0j75b0r .mcb-column-inner-d0j75b0r{padding-top:15px;padding-bottom:15px;}.mcb-section .mcb-wrap-grid.mcb-wrap-j22ziayf > .mcb-wrap-inner-j22ziayf{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-j22ziayf{flex-grow:unset;}.mcb-section .mcb-wrap-j22ziayf .mcb-wrap-inner-j22ziayf{align-items:center;}.mcb-section .mcb-wrap .mcb-item-8rcx7mpr .mfn-header-menu{justify-content:flex-start;}.mcb-section .mcb-wrap .mcb-item-8rcx7mpr .mfn-header-menu > li.mfn-menu-li > a.mfn-menu-link{color:#FFFFFF;font-size:17px;font-weight:300;}.mcb-section .mcb-wrap-grid.mcb-wrap-hvd88b7n > .mcb-wrap-inner-hvd88b7n{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-hvd88b7n{flex-grow:1;}.mcb-section .mcb-wrap-hvd88b7n .mcb-wrap-inner-hvd88b7n{align-items:center;}.mcb-section .mcb-wrap .mcb-item-cqt9y4ho .mfn-icon-box .icon-wrapper .header-cart-count,.mcb-section .mcb-wrap .mcb-item-cqt9y4ho .mfn-icon-box .icon-wrapper .header-wishlist-count{top:-9px;right:-11px;}.mcb-section .mcb-wrap .mcb-item-cqt9y4ho .mfn-live-search-box .mfn-live-search-heading{opacity:0.6;}.mcb-section .mcb-wrap .mcb-item-vuczyuhk .mfn-language-switcher ul li a img{width:18px;}.mcb-section .mcb-wrap .mcb-item-vuczyuhk .mfn-language-switcher-dropdown.mfn-language-switcher-dropdown-icon ul li a .mfn-arrow-icon{--mfn-wpml-arrow-size:10px;}.mcb-section .mcb-wrap-grid.mcb-wrap-e8qt61ks > .mcb-wrap-inner-e8qt61ks{grid-template-columns:repeat(3, 1fr);}.mcb-section .mcb-wrap-e8qt61ks{flex-grow:1;}.mcb-section .mcb-wrap-e8qt61ks > .mcb-wrap-inner-e8qt61ks{align-items:center;}section.mcb-section-c9sateaa .mcb-section-inner-c9sateaa{align-items:center;}section.mcb-section-c9sateaa{background-color:#ab3082;}@media(max-width: 1440px){.mcb-section .mcb-wrap-3665fcf51{flex-grow:1;}.mcb-section .mcb-wrap-3665fcf51 > .mcb-wrap-inner-3665fcf51{align-items:center;}.mcb-section .mcb-wrap-9a48e9c8f{flex-grow:1;}.mcb-section .mcb-wrap-9a48e9c8f > .mcb-wrap-inner-9a48e9c8f{align-items:center;}.mcb-section .mcb-wrap-b6cede75c{flex-grow:1;}.mcb-section .mcb-wrap-b6cede75c > .mcb-wrap-inner-b6cede75c{align-items:center;}.mcb-section .mcb-wrap-f23252ac6{flex-grow:1;}.mcb-section .mcb-wrap-f23252ac6 > .mcb-wrap-inner-f23252ac6{align-items:center;}.mcb-section .mcb-wrap-d1f7177d0{flex-grow:1;}.mcb-section .mcb-wrap-d1f7177d0 > .mcb-wrap-inner-d1f7177d0{align-items:center;}.mcb-section .mcb-wrap-4d6dc2a4d{flex-grow:1;}.mcb-section .mcb-wrap-4d6dc2a4d > .mcb-wrap-inner-4d6dc2a4d{align-items:center;}.mcb-section .mcb-wrap-j22ziayf{flex-grow:1;}.mcb-section .mcb-wrap-j22ziayf .mcb-wrap-inner-j22ziayf{align-items:center;}.mcb-section .mcb-wrap-hvd88b7n{flex-grow:1;}.mcb-section .mcb-wrap-hvd88b7n .mcb-wrap-inner-hvd88b7n{align-items:center;}.mcb-section .mcb-wrap-e8qt61ks{flex-grow:1;}.mcb-section .mcb-wrap-e8qt61ks > .mcb-wrap-inner-e8qt61ks{align-items:flex-end;justify-content:center;align-content:center;}}@media(max-width: 959px){.mcb-section .mcb-wrap .mcb-item-cc28fa364{width:60%;}.mcb-section .mcb-wrap-3665fcf51{flex-grow:1;}.mcb-section .mcb-wrap-3665fcf51 > .mcb-wrap-inner-3665fcf51{align-items:center;}.mcb-section .mcb-wrap .mcb-item-e486e7d36 .mfn-header-menu{justify-content:center;}.mcb-section .mcb-wrap-9a48e9c8f{flex-grow:1;}.mcb-section .mcb-wrap-9a48e9c8f > .mcb-wrap-inner-9a48e9c8f{align-items:center;}.mcb-section .mcb-wrap-b6cede75c{flex-grow:1;}.mcb-section .mcb-wrap-b6cede75c > .mcb-wrap-inner-b6cede75c{align-items:center;justify-content:flex-end;}section.mcb-section-71fa57dc4 .mcb-section-inner-71fa57dc4{justify-content:flex-end;}.mcb-section .mcb-wrap-f23252ac6{flex-grow:1;}.mcb-section .mcb-wrap-f23252ac6 > .mcb-wrap-inner-f23252ac6{align-items:center;}.mcb-section .mcb-wrap-d1f7177d0{flex-grow:1;}.mcb-section .mcb-wrap-d1f7177d0 > .mcb-wrap-inner-d1f7177d0{align-items:center;}.mcb-section .mcb-wrap-4d6dc2a4d{flex-grow:1;}.mcb-section .mcb-wrap-4d6dc2a4d > .mcb-wrap-inner-4d6dc2a4d{align-items:center;}.mcb-section .mcb-wrap .mcb-item-d0j75b0r{width:50%;}.mcb-section .mcb-wrap-j22ziayf{flex-grow:1;}.mcb-section .mcb-wrap-j22ziayf .mcb-wrap-inner-j22ziayf{align-items:center;}.mcb-section .mcb-wrap-hvd88b7n{flex-grow:1;}.mcb-section .mcb-wrap-hvd88b7n .mcb-wrap-inner-hvd88b7n{align-items:center;}.mcb-section .mcb-wrap-e8qt61ks{flex-grow:1;}.mcb-section .mcb-wrap-e8qt61ks > .mcb-wrap-inner-e8qt61ks{align-items:center;justify-content:flex-end;}}@media(max-width: 767px){.mcb-section .mcb-wrap-3665fcf51{flex-grow:1;}.mcb-section .mcb-wrap-3665fcf51 > .mcb-wrap-inner-3665fcf51{align-items:center;}.mcb-section .mcb-wrap-9a48e9c8f{flex-grow:1;}.mcb-section .mcb-wrap-9a48e9c8f > .mcb-wrap-inner-9a48e9c8f{align-items:center;}.mcb-section .mcb-wrap-b6cede75c{flex-grow:1;}.mcb-section .mcb-wrap-b6cede75c > .mcb-wrap-inner-b6cede75c{align-items:center;}.mcb-section .mcb-wrap .mcb-item-0771b72bc{width:30%;}.mcb-section .mcb-wrap .mcb-item-0771b72bc .mcb-column-inner-0771b72bc{padding-top:10px;padding-bottom:10px;}.mcb-section .mcb-wrap-f23252ac6{flex-grow:1;}.mcb-section .mcb-wrap-f23252ac6 > .mcb-wrap-inner-f23252ac6{align-items:center;}.mcb-section .mcb-wrap-d1f7177d0{flex-grow:1;}.mcb-section .mcb-wrap-d1f7177d0 > .mcb-wrap-inner-d1f7177d0{align-items:center;justify-content:flex-end;}.mcb-section .mcb-wrap .mcb-item-9d285e26e .mfn-header-menu-burger{padding-top:5px;padding-right:5px;padding-bottom:5px;padding-left:5px;}.mcb-section .mcb-wrap-4d6dc2a4d{flex-grow:1;}.mcb-section .mcb-wrap-4d6dc2a4d > .mcb-wrap-inner-4d6dc2a4d{align-items:center;}section.mcb-section-aea2438aa .mcb-section-inner-aea2438aa{align-items:center;justify-content:flex-start;}.mcb-section .mcb-wrap-j22ziayf{flex-grow:1;}.mcb-section .mcb-wrap-j22ziayf .mcb-wrap-inner-j22ziayf{align-items:center;}.mcb-section .mcb-wrap-hvd88b7n{flex-grow:1;}.mcb-section .mcb-wrap-hvd88b7n .mcb-wrap-inner-hvd88b7n{align-items:center;}.mcb-section .mcb-wrap-e8qt61ks{flex-grow:1;}.mcb-section .mcb-wrap-e8qt61ks > .mcb-wrap-inner-e8qt61ks{align-items:center;}}
+/* CSS custom variables */
+
+/*# sourceURL=mfn-dynamic-inline-css */
+</style>
+<link rel='stylesheet' id='cmplz-banner-1-optin-css' href='https://teatrul-odeon.ro/wp-content/uploads/complianz/css/banner-1-optin.css?ver=1788922473' media='all' />
+<script id="jquery-core-js" src="https://teatrul-odeon.ro/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://teatrul-odeon.ro/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script async data-wp-strategy="async" id="tp-tools-js" src="//teatrul-odeon.ro/wp-content/plugins/revslider/public/js/libs/tptools.js?ver=6.7.40"></script>
+<script async data-wp-strategy="async" id="sr7-js" src="//teatrul-odeon.ro/wp-content/plugins/revslider/public/js/sr7.js?ver=6.7.40"></script>
+<script id="wonderplugin-videoembed-script-js" src="https://teatrul-odeon.ro/wp-content/plugins/wonderplugin-video-embed/engine/wonderpluginvideoembed.js?ver=2.4"></script>
+<script id="evo-inlinescripts-header-js-after">
+jQuery(document).ready(function($){});
+//# sourceURL=evo-inlinescripts-header-js-after
+</script>
+
+<!-- Google tag (gtag.js) snippet added by Site Kit -->
+<!-- Google Analytics snippet added by Site Kit -->
+<script id="google_gtagjs-js" src="https://www.googletagmanager.com/gtag/js?id=G-LGL3XTQ6B4" async></script>
+<script id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag("set","linker",{"domains":["teatrul-odeon.ro"]});
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "G-LGL3XTQ6B4");
+//# sourceURL=google_gtagjs-js-after
+</script>
+<script></script><meta name="generator" content="WPML ver:4.9.2 stt:1,45;" />
+<link rel="alternate" hreflang="ro" href="https://teatrul-odeon.ro/" />
+<link rel="alternate" hreflang="en" href="https://teatrul-odeon.ro/?lang=en" />
+<link rel="alternate" hreflang="x-default" href="https://teatrul-odeon.ro/" />
+<meta name="generator" content="Site Kit by Google 1.189.0" />
+<!-- Smooth Scroll by DarkWolf -->
+<script type="text/javascript" src="https://teatrul-odeon.ro/wp-content/plugins/smooth-page-scroll-to-top/files/smooth_scroll.js"></script>
+<style type="text/css">@import url('https://teatrul-odeon.ro/wp-content/plugins/smooth-page-scroll-to-top/files/smooth_scroll.css');</style>
+<!-- Smooth Scroll by DarkWolf -->
+
+			<style>.cmplz-hidden {
+					display: none !important;
+				}</style>
+				
+
+<!-- EventON Version -->
+<meta name="generator" content="EventON 4.6.8" />
+
+<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>
+<meta name="generator" content="Powered by Slider Revolution 6.7.40 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<link rel="icon" href="https://teatrul-odeon.ro/wp-content/uploads/2023/04/ms-icon-150x150-1-50x50.png" sizes="32x32" />
+<link rel="icon" href="https://teatrul-odeon.ro/wp-content/uploads/2023/04/ms-icon-150x150-1.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://teatrul-odeon.ro/wp-content/uploads/2023/04/ms-icon-150x150-1.png" />
+<meta name="msapplication-TileImage" content="https://teatrul-odeon.ro/wp-content/uploads/2023/04/ms-icon-150x150-1.png" />
+<script>
+	window._tpt			??= {};
+	window.SR7			??= {};
+	_tpt.R				??= {};
+	_tpt.R.fonts		??= {};
+	_tpt.R.fonts.customFonts??= {};
+	SR7.devMode			=  false;
+	SR7.F 				??= {};
+	SR7.G				??= {};
+	SR7.LIB				??= {};
+	SR7.E				??= {};
+	SR7.E.gAddons		??= {};
+	SR7.E.php 			??= {};
+	SR7.E.nonce			= '1c6389eaf8';
+	SR7.E.ajaxurl		= 'https://teatrul-odeon.ro/wp-admin/admin-ajax.php';
+	SR7.E.resturl		= 'https://teatrul-odeon.ro/wp-json/';
+	SR7.E.slug_path		= 'revslider/revslider.php';
+	SR7.E.slug			= 'revslider';
+	SR7.E.plugin_url	= 'https://teatrul-odeon.ro/wp-content/plugins/revslider/';
+	SR7.E.wp_plugin_url = 'https://teatrul-odeon.ro/wp-content/plugins/';
+	SR7.E.revision		= '6.7.40';
+	SR7.E.fontBaseUrl	= '//fonts.googleapis.com/css2?family=';
+	SR7.G.breakPoints 	= [1240,1024,778,480];
+	SR7.G.fSUVW 		= true;
+	SR7.E.modules 		= ['module','page','slide','layer','draw','animate','srtools','canvas','defaults','carousel','navigation','media','modifiers','migration'];
+	SR7.E.libs 			= ['WEBGL'];
+	SR7.E.css 			= ['csslp','cssbtns','cssfilters','cssnav','cssmedia'];
+	SR7.E.resources		= {};
+	SR7.E.ytnc			= false;
+	SR7.E.wpml			??= {};
+	SR7.E.wpml.lang		= 'ro';
+	SR7.JSON			??= {};
+/*! Slider Revolution 7.0 - Page Processor */
+!function(){"use strict";window.SR7??={},window._tpt??={},SR7.version="Slider Revolution 6.7.16",_tpt.getMobileZoom=()=>_tpt.is_mobile?document.documentElement.clientWidth/window.innerWidth:1,_tpt.getWinDim=function(t){_tpt.screenHeightWithUrlBar??=window.innerHeight;let e=SR7.F?.modal?.visible&&SR7.M[SR7.F.module.getIdByAlias(SR7.F.modal.requested)];_tpt.scrollBar=window.innerWidth!==document.documentElement.clientWidth||e&&window.innerWidth!==e.c.module.clientWidth,_tpt.winW=_tpt.getMobileZoom()*window.innerWidth-(_tpt.scrollBar||"prepare"==t?_tpt.scrollBarW??_tpt.mesureScrollBar():0),_tpt.winH=_tpt.getMobileZoom()*window.innerHeight,_tpt.winWAll=document.documentElement.clientWidth},_tpt.getResponsiveLevel=function(t,e){return SR7.G.fSUVW?_tpt.closestGE(t,window.innerWidth):_tpt.closestGE(t,_tpt.winWAll)},_tpt.mesureScrollBar=function(){let t=document.createElement("div");return t.className="RSscrollbar-measure",t.style.width="100px",t.style.height="100px",t.style.overflow="scroll",t.style.position="absolute",t.style.top="-9999px",document.body.appendChild(t),_tpt.scrollBarW=t.offsetWidth-t.clientWidth,document.body.removeChild(t),_tpt.scrollBarW},_tpt.loadCSS=async function(t,e,s){return s?_tpt.R.fonts.required[e].status=1:(_tpt.R[e]??={},_tpt.R[e].status=1),new Promise(((i,n)=>{if(_tpt.isStylesheetLoaded(t))s?_tpt.R.fonts.required[e].status=2:_tpt.R[e].status=2,i();else{const o=document.createElement("link");o.rel="stylesheet";let l="text",r="css";o["type"]=l+"/"+r,o.href=t,o.onload=()=>{s?_tpt.R.fonts.required[e].status=2:_tpt.R[e].status=2,i()},o.onerror=()=>{s?_tpt.R.fonts.required[e].status=3:_tpt.R[e].status=3,n(new Error(`Failed to load CSS: ${t}`))},document.head.appendChild(o)}}))},_tpt.addContainer=function(t){const{tag:e="div",id:s,class:i,datas:n,textContent:o,iHTML:l}=t,r=document.createElement(e);if(s&&""!==s&&(r.id=s),i&&""!==i&&(r.className=i),n)for(const[t,e]of Object.entries(n))"style"==t?r.style.cssText=e:r.setAttribute(`data-${t}`,e);return o&&(r.textContent=o),l&&(r.innerHTML=l),r},_tpt.collector=function(){return{fragment:new DocumentFragment,add(t){var e=_tpt.addContainer(t);return this.fragment.appendChild(e),e},append(t){t.appendChild(this.fragment)}}},_tpt.isStylesheetLoaded=function(t){let e=t.split("?")[0];return Array.from(document.querySelectorAll('link[rel="stylesheet"], link[rel="preload"]')).some((t=>t.href.split("?")[0]===e))},_tpt.preloader={requests:new Map,preloaderTemplates:new Map,show:function(t,e){if(!e||!t)return;const{type:s,color:i}=e;if(s<0||"off"==s)return;const n=`preloader_${s}`;let o=this.preloaderTemplates.get(n);o||(o=this.build(s,i),this.preloaderTemplates.set(n,o)),this.requests.has(t)||this.requests.set(t,{count:0});const l=this.requests.get(t);clearTimeout(l.timer),l.count++,1===l.count&&(l.timer=setTimeout((()=>{l.preloaderClone=o.cloneNode(!0),l.anim&&l.anim.kill(),void 0!==_tpt.gsap?l.anim=_tpt.gsap.fromTo(l.preloaderClone,1,{opacity:0},{opacity:1}):l.preloaderClone.classList.add("sr7-fade-in"),t.appendChild(l.preloaderClone)}),150))},hide:function(t){if(!this.requests.has(t))return;const e=this.requests.get(t);e.count--,e.count<0&&(e.count=0),e.anim&&e.anim.kill(),0===e.count&&(clearTimeout(e.timer),e.preloaderClone&&(e.preloaderClone.classList.remove("sr7-fade-in"),e.anim=_tpt.gsap.to(e.preloaderClone,.3,{opacity:0,onComplete:function(){e.preloaderClone.remove()}})))},state:function(t){if(!this.requests.has(t))return!1;return this.requests.get(t).count>0},build:(t,e="#ffffff",s="")=>{if(t<0||"off"===t)return null;const i=parseInt(t);if(t="prlt"+i,isNaN(i))return null;if(_tpt.loadCSS(SR7.E.plugin_url+"public/css/preloaders/t"+i+".css","preloader_"+t),isNaN(i)||i<6){const n=`background-color:${e}`,o=1===i||2==i?n:"",l=3===i||4==i?n:"",r=_tpt.collector();["dot1","dot2","bounce1","bounce2","bounce3"].forEach((t=>r.add({tag:"div",class:t,datas:{style:l}})));const d=_tpt.addContainer({tag:"sr7-prl",class:`${t} ${s}`,datas:{style:o}});return r.append(d),d}{let n={};if(7===i){let t;e.startsWith("#")?(t=e.replace("#",""),t=`rgba(${parseInt(t.substring(0,2),16)}, ${parseInt(t.substring(2,4),16)}, ${parseInt(t.substring(4,6),16)}, `):e.startsWith("rgb")&&(t=e.slice(e.indexOf("(")+1,e.lastIndexOf(")")).split(",").map((t=>t.trim())),t=`rgba(${t[0]}, ${t[1]}, ${t[2]}, `),t&&(n.style=`border-top-color: ${t}0.65); border-bottom-color: ${t}0.15); border-left-color: ${t}0.65); border-right-color: ${t}0.15)`)}else 12===i&&(n.style=`background:${e}`);const o=[10,0,4,2,5,9,0,4,4,2][i-6],l=_tpt.collector(),r=l.add({tag:"div",class:"sr7-prl-inner",datas:n});Array.from({length:o}).forEach((()=>r.appendChild(l.add({tag:"span",datas:{style:`background:${e}`}}))));const d=_tpt.addContainer({tag:"sr7-prl",class:`${t} ${s}`});return l.append(d),d}}},SR7.preLoader={show:(t,e)=>{"off"!==(SR7.M[t]?.settings?.pLoader?.type??"off")&&_tpt.preloader.show(e||SR7.M[t].c.module,SR7.M[t]?.settings?.pLoader??{color:"#fff",type:10})},hide:(t,e)=>{"off"!==(SR7.M[t]?.settings?.pLoader?.type??"off")&&_tpt.preloader.hide(e||SR7.M[t].c.module)},state:(t,e)=>_tpt.preloader.state(e||SR7.M[t].c.module)},_tpt.prepareModuleHeight=function(t){window.SR7.M??={},window.SR7.M[t.id]??={},"ignore"==t.googleFont&&(SR7.E.ignoreGoogleFont=!0);let e=window.SR7.M[t.id];if(null==_tpt.scrollBarW&&_tpt.mesureScrollBar(),e.c??={},e.states??={},e.settings??={},e.settings.size??={},t.fixed&&(e.settings.fixed=!0),e.c.module=document.querySelector("sr7-module#"+t.id),e.c.adjuster=e.c.module.getElementsByTagName("sr7-adjuster")[0],e.c.content=e.c.module.getElementsByTagName("sr7-content")[0],"carousel"==t.type&&(e.c.carousel=e.c.content.getElementsByTagName("sr7-carousel")[0]),null==e.c.module||null==e.c.module)return;t.plType&&t.plColor&&(e.settings.pLoader={type:t.plType,color:t.plColor}),void 0===t.plType||"off"===t.plType||SR7.preLoader.state(t.id)&&SR7.preLoader.state(t.id,e.c.module)||SR7.preLoader.show(t.id,e.c.module),_tpt.winW||_tpt.getWinDim("prepare"),_tpt.getWinDim();let s=""+e.c.module.dataset?.modal;"modal"==s||"true"==s||"undefined"!==s&&"false"!==s||(e.settings.size.fullWidth=t.size.fullWidth,e.LEV??=_tpt.getResponsiveLevel(window.SR7.G.breakPoints,t.id),t.vpt=_tpt.fillArray(t.vpt,5),e.settings.vPort=t.vpt[e.LEV],void 0!==t.el&&"720"==t.el[4]&&t.gh[4]!==t.el[4]&&"960"==t.el[3]&&t.gh[3]!==t.el[3]&&"768"==t.el[2]&&t.gh[2]!==t.el[2]&&delete t.el,e.settings.size.height=null==t.el||null==t.el[e.LEV]||0==t.el[e.LEV]||"auto"==t.el[e.LEV]?_tpt.fillArray(t.gh,5,-1):_tpt.fillArray(t.el,5,-1),e.settings.size.width=_tpt.fillArray(t.gw,5,-1),e.settings.size.minHeight=_tpt.fillArray(t.mh??[0],5,-1),e.cacheSize={fullWidth:e.settings.size?.fullWidth,fullHeight:e.settings.size?.fullHeight},void 0!==t.off&&(t.off?.t&&(e.settings.size.m??={})&&(e.settings.size.m.t=t.off.t),t.off?.b&&(e.settings.size.m??={})&&(e.settings.size.m.b=t.off.b),t.off?.l&&(e.settings.size.p??={})&&(e.settings.size.p.l=t.off.l),t.off?.r&&(e.settings.size.p??={})&&(e.settings.size.p.r=t.off.r),e.offsetPrepared=!0),_tpt.updatePMHeight(t.id,t,!0))},_tpt.updatePMHeight=(t,e,s)=>{let i=SR7.M[t];var n=i.settings.size.fullWidth?_tpt.winW:i.c.module.parentNode.offsetWidth;n=0===n||isNaN(n)?_tpt.winW:n;let o=i.settings.size.width[i.LEV]||i.settings.size.width[i.LEV++]||i.settings.size.width[i.LEV--]||n,l=i.settings.size.height[i.LEV]||i.settings.size.height[i.LEV++]||i.settings.size.height[i.LEV--]||0,r=i.settings.size.minHeight[i.LEV]||i.settings.size.minHeight[i.LEV++]||i.settings.size.minHeight[i.LEV--]||0;if(l="auto"==l?0:l,l=parseInt(l),"carousel"!==e.type&&(n-=parseInt(e.onw??0)||0),i.MP=!i.settings.size.fullWidth&&n<o||_tpt.winW<o?Math.min(1,n/o):1,e.size.fullScreen||e.size.fullHeight){let t=parseInt(e.fho)||0,s=(""+e.fho).indexOf("%")>-1;e.newh=_tpt.winH-(s?_tpt.winH*t/100:t)}else e.newh=i.MP*Math.max(l,r);if(e.newh+=(parseInt(e.onh??0)||0)+(parseInt(e.carousel?.pt)||0)+(parseInt(e.carousel?.pb)||0),void 0!==e.slideduration&&(e.newh=Math.max(e.newh,parseInt(e.slideduration)/3)),e.shdw&&_tpt.buildShadow(e.id,e),i.c.adjuster.style.height=e.newh+"px",i.c.module.style.height=e.newh+"px",i.c.content.style.height=e.newh+"px",i.states.heightPrepared=!0,i.dims??={},i.dims.moduleRect=i.c.module.getBoundingClientRect(),i.c.content.style.left="-"+i.dims.moduleRect.left+"px",!i.settings.size.fullWidth)return s&&requestAnimationFrame((()=>{n!==i.c.module.parentNode.offsetWidth&&_tpt.updatePMHeight(e.id,e)})),void _tpt.bgStyle(e.id,e,window.innerWidth==_tpt.winW,!0);_tpt.bgStyle(e.id,e,window.innerWidth==_tpt.winW,!0),requestAnimationFrame((function(){s&&requestAnimationFrame((()=>{n!==i.c.module.parentNode.offsetWidth&&_tpt.updatePMHeight(e.id,e)}))})),i.earlyResizerFunction||(i.earlyResizerFunction=function(){requestAnimationFrame((function(){_tpt.getWinDim(),_tpt.moduleDefaults(e.id,e),_tpt.updateSlideBg(t,!0)}))},window.addEventListener("resize",i.earlyResizerFunction))},_tpt.buildShadow=function(t,e){let s=SR7.M[t];null==s.c.shadow&&(s.c.shadow=document.createElement("sr7-module-shadow"),s.c.shadow.classList.add("sr7-shdw-"+e.shdw),s.c.content.appendChild(s.c.shadow))},_tpt.bgStyle=async(t,e,s,i,n)=>{const o=SR7.M[t];if((e=e??o.settings).fixed&&!o.c.module.classList.contains("sr7-top-fixed")&&(o.c.module.classList.add("sr7-top-fixed"),o.c.module.style.position="fixed",o.c.module.style.width="100%",o.c.module.style.top="0px",o.c.module.style.left="0px",o.c.module.style.pointerEvents="none",o.c.module.style.zIndex=5e3,o.c.content.style.pointerEvents="none"),null==o.c.bgcanvas){let t=document.createElement("sr7-module-bg"),l=!1;if("string"==typeof e?.bg?.color&&e?.bg?.color.includes("{"))if(_tpt.gradient&&_tpt.gsap)e.bg.color=_tpt.gradient.convert(e.bg.color);else try{let t=JSON.parse(e.bg.color);(t?.orig||t?.string)&&(e.bg.color=JSON.parse(e.bg.color))}catch(t){return}let r="string"==typeof e?.bg?.color?e?.bg?.color||"transparent":e?.bg?.color?.string??e?.bg?.color?.orig??e?.bg?.color?.color??"transparent";if(t.style["background"+(String(r).includes("grad")?"":"Color")]=r,("transparent"!==r||n)&&(l=!0),o.offsetPrepared&&(t.style.visibility="hidden"),e?.bg?.image?.src&&(t.style.backgroundImage=`url(${e?.bg?.image.src})`,t.style.backgroundSize=""==(e.bg.image?.size??"")?"cover":e.bg.image.size,t.style.backgroundPosition=e.bg.image.position,t.style.backgroundRepeat=""==e.bg.image.repeat||null==e.bg.image.repeat?"no-repeat":e.bg.image.repeat,l=!0),!l)return;o.c.bgcanvas=t,e.size.fullWidth?t.style.width=_tpt.winW-(s&&_tpt.winH<document.body.offsetHeight?_tpt.scrollBarW:0)+"px":i&&(t.style.width=o.c.module.offsetWidth+"px"),e.sbt?.use?o.c.content.appendChild(o.c.bgcanvas):o.c.module.appendChild(o.c.bgcanvas)}o.c.bgcanvas.style.height=void 0!==e.newh?e.newh+"px":("carousel"==e.type?o.dims.module.h:o.dims.content.h)+"px",o.c.bgcanvas.style.left=!s&&e.sbt?.use||o.c.bgcanvas.closest("SR7-CONTENT")?"0px":"-"+(o?.dims?.moduleRect?.left??0)+"px"},_tpt.updateSlideBg=function(t,e){const s=SR7.M[t];let i=s.settings;s?.c?.bgcanvas&&(i.size.fullWidth?s.c.bgcanvas.style.width=_tpt.winW-(e&&_tpt.winH<document.body.offsetHeight?_tpt.scrollBarW:0)+"px":preparing&&(s.c.bgcanvas.style.width=s.c.module.offsetWidth+"px"))},_tpt.moduleDefaults=(t,e)=>{let s=SR7.M[t];null!=s&&null!=s.c&&null!=s.c.module&&(s.dims??={},s.dims.moduleRect=s.c.module.getBoundingClientRect(),s.c.content.style.left="-"+s.dims.moduleRect.left+"px",s.c.content.style.width=_tpt.winW-_tpt.scrollBarW+"px","carousel"==e.type&&(s.c.module.style.overflow="visible"),_tpt.bgStyle(t,e,window.innerWidth==_tpt.winW))},_tpt.getOffset=t=>{var e=t.getBoundingClientRect(),s=window.pageXOffset||document.documentElement.scrollLeft,i=window.pageYOffset||document.documentElement.scrollTop;return{top:e.top+i,left:e.left+s}},_tpt.fillArray=function(t,e){let s,i;t=Array.isArray(t)?t:[t];let n=Array(e),o=t.length;for(i=0;i<t.length;i++)n[i+(e-o)]=t[i],null==s&&"#"!==t[i]&&(s=t[i]);for(let t=0;t<e;t++)void 0!==n[t]&&"#"!=n[t]||(n[t]=s),s=n[t];return n},_tpt.closestGE=function(t,e){let s=Number.MAX_VALUE,i=-1;for(let n=0;n<t.length;n++)t[n]-1>=e&&t[n]-1-e<s&&(s=t[n]-1-e,i=n);return++i}}();</script>
+<style id="wp-custom-css">
+/* Face fundalul elementelor de meniu din subsol transparent */
+#Footer .menu-item a, 
+#Footer .widget_mfn_menu ul li a {
+    background-color: transparent !important; 
+    border: none !important; /* Asigură că nu există margini vizibile */
+    padding: 5px 0 !important; /* Ajustați padding-ul vertical dacă este necesar pentru spațiere */
+}
+
+
+</style>
+<style type="text/css" data-type="vc_shortcodes-default-css">.vc_do_btn{margin-bottom:22px;}</style><style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1701186575212{margin-top: 15px !important;}.vc_custom_1779276027543{padding-top: 25px !important;padding-right: 45px !important;padding-bottom: 25px !important;padding-left: 45px !important;}.vc_custom_1779276050192{padding-top: 25px !important;padding-bottom: 25px !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
+<link rel='stylesheet' id='vc_animate-css-css' href='https://teatrul-odeon.ro/wp-content/plugins/js_composer/assets/lib/vendor/dist/animate.css/animate.min.css?ver=8.7.2' media='all' />
+<link rel='stylesheet' id='vc_font_awesome_5_shims-css' href='https://teatrul-odeon.ro/wp-content/plugins/js_composer/assets/lib/vendor/dist/@fortawesome/fontawesome-free/css/v4-shims.min.css?ver=8.7.2' media='all' />
+<link rel='stylesheet' id='vc_font_awesome_6-css' href='https://teatrul-odeon.ro/wp-content/plugins/js_composer/assets/lib/vendor/dist/@fortawesome/fontawesome-free/css/all.min.css?ver=8.7.2' media='all' />
+<link rel='stylesheet' id='vc_carousel_css-css' href='https://teatrul-odeon.ro/wp-content/plugins/js_composer/assets/lib/vc/vc_carousel/css/vc_carousel.min.css?ver=8.7.2' media='all' />
+<link rel='stylesheet' id='mfn-post-local-styles-10177551791428188-css' href='https://teatrul-odeon.ro/wp-content/uploads/betheme/css/post-1017755.css?ver=1791428188' media='all' />
+
+</head>
+
+<body data-rsssl=1 data-cmplz=2 class="home wp-singular page-template-default page page-id-5 wp-embed-responsive wp-theme-betheme preloader woocommerce-block-theme-has-button-styles mfn-header-template mfn-footer-default has-search-overlay has-search-blur  color-custom content-brightness-light input-brightness-light style-simple keyboard-support underline-links button-animation-fade layout-full-width if-modern-overlay no-content-padding cf7p-message no-shadows subheader-title-left responsive-overflow-x-disable no-hover-tablet mobile-tb-center mobile-side-slide mobile-menu mobile-mini-mr-lr mobile-tr-header mobile-header-mini mobile-icon-user-ss mobile-icon-wishlist-ss mobile-icon-search-ss mobile-icon-wpml-ss mobile-icon-action-ss tr-content be-page-5 be-reg-28510 wpb-js-composer js-comp-ver-8.7.2 vc_responsive" style="opacity:0">
+
+	
+		
+		<!-- mfn_hook_top --><!-- mfn_hook_top -->
+		
+		
+		<div id="Wrapper">
+
+	<style type="text/css">.mfn-content-blur #Content, .mfn-content-blur .mfn-main-slider{filter:blur(2px);}</style><div style="background-color:rgba(0,0,0,0.5);" class="mfn-header-overlay"></div><header id="mfn-header-template" data-id="1017756"  data-mobile-type="" data-type="" class="mfn-header-tmpl mfn-header-main mfn-header-tmpl-default mfn-header-content-blur mfn-hasSticky mfn-hasMobile mfn-mobile-header-tmpl-fixed"><div data-id="1017756" class="mfn-builder-content mfn-header-tmpl-builder"><section class="section mcb-section mfn-default-section mcb-section-71fa57dc4 mcb-header-section close-button-left hide-on-scroll"   style="" ><div class="mcb-background-overlay"></div><div class="section_wrapper mfn-wrapper-for-wraps mcb-section-inner mcb-section-inner-71fa57dc4"><div  class="wrap mcb-wrap mcb-wrap-3665fcf51 mcb-header-wrap one-third tablet-one-third laptop-one-third mobile-one vb-item clearfix" data-desktop-col="one-third" data-laptop-col="laptop-one-third" data-tablet-col="tablet-one-third" data-mobile-col="mobile-one" style=""   ><div class="mcb-wrap-inner mcb-wrap-inner-3665fcf51 mfn-module-wrapper mfn-wrapper-for-wraps"  ><div class="mcb-wrap-background-overlay"></div><div  class="column mcb-column mcb-item-cc28fa364 one laptop-one tablet-one mobile-one column_header_logo mfn-item-custom-width vb-item" style="" ><div class="mcb-column-inner mfn-module-wrapper mcb-column-inner-cc28fa364 mcb-item-header_logo-inner"><a class="logo-wrapper" href="https://teatrul-odeon.ro"><img src="https://teatrul-odeon.ro/wp-content/uploads/2026/02/logo_minim-1.png#1017735" alt="logo_minim" width="227" height="148"></a></div></div></div></div><div  class="wrap mcb-wrap mcb-wrap-9a48e9c8f mcb-header-wrap one-third tablet-one-third laptop-one-third mobile-one vb-item clearfix" data-desktop-col="one-third" data-laptop-col="laptop-one-third" data-tablet-col="tablet-one-third" data-mobile-col="mobile-one" style=""   ><div class="mcb-wrap-inner mcb-wrap-inner-9a48e9c8f mfn-module-wrapper mfn-wrapper-for-wraps"  ><div class="mcb-wrap-background-overlay"></div><div  class="column mcb-column mcb-item-e486e7d36 one laptop-one tablet-one mobile-one column_header_menu mfn-item-inline vb-item" style="" ><div class="mcb-column-inner mfn-module-wrapper mcb-column-inner-e486e7d36 mcb-item-header_menu-inner"><ul id="menu-main-menu" class="mfn-header-menu mfn-header-mainmenu mfn-menu-align-flex-start mfn-menu-tablet-align-flex-start mfn-menu-mobile-align-flex-start mfn-menu-icon-left mfn-menu-separator-off mfn-menu-submenu-on-hover mfn-menu-fold-last-to-right"><li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-5 current_page_item menu-item-33 mfn-menu-li"><a href="https://teatrul-odeon.ro/" aria-current="page" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Acasă</span></span><span class="menu-sub mfn-menu-subicon"><i class="icon-down-open"></i></span></a></li>
+<li id="menu-item-1018537" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1018537 mfn-menu-li"><a href="https://teatrul-odeon.ro/programul-teatrului-odeon-pe-zile/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Program</span></span><span class="menu-sub mfn-menu-subicon"><i class="icon-down-open"></i></span></a></li>
+<li id="menu-item-1072" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1072 mfn-menu-li"><a href="https://teatrul-odeon.ro/stagiune/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Stagiune</span></span><span class="menu-sub mfn-menu-subicon"><i class="icon-down-open"></i></span></a>
+<ul class="sub-menu mfn-submenu">
+	<li id="menu-item-1007279" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1007279 mfn-menu-li"><a href="https://teatrul-odeon.ro/proiecte/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Proiecte</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+	<li id="menu-item-1007360" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1007360 mfn-menu-li"><a href="https://teatrul-odeon.ro/turnee/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Turnee</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+	<li id="menu-item-1007359" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1007359 mfn-menu-li"><a href="https://teatrul-odeon.ro/evenimente/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Evenimente</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+</ul>
+</li>
+<li id="menu-item-1623" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1623 mfn-menu-li"><a href="https://teatrul-odeon.ro/despre-noi/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Despre noi</span></span><span class="menu-sub mfn-menu-subicon"><i class="icon-down-open"></i></span></a>
+<ul class="sub-menu mfn-submenu">
+	<li id="menu-item-1634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1634 mfn-menu-li"><a href="https://teatrul-odeon.ro/trupa/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Trupa</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+	<li id="menu-item-1629" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1629 mfn-menu-li"><a href="https://teatrul-odeon.ro/despre-noi/sala-majestic/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Sala Majestic</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a>
+	<ul class="sub-menu mfn-submenu">
+		<li id="menu-item-1633" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1633 mfn-menu-li"><a href="https://teatrul-odeon.ro/despre-noi/sala-majestic/majestic-sala/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Sala</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+		<li id="menu-item-1632" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1632 mfn-menu-li"><a href="https://teatrul-odeon.ro/despre-noi/sala-majestic/majestic-scena/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Scena</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+		<li id="menu-item-1631" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1631 mfn-menu-li"><a href="https://teatrul-odeon.ro/despre-noi/sala-majestic/majestic-lumini/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Lumini</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+		<li id="menu-item-1630" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1630 mfn-menu-li"><a href="https://teatrul-odeon.ro/despre-noi/sala-majestic/majestic-sonorizare/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Sonorizare</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a></li>
+	</ul>
+</li>
+	<li id="menu-item-1624" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1624 mfn-menu-li"><a href="https://teatrul-odeon.ro/despre-noi/sala-studio/" class="mfn-menu-link"><span class="menu-item-helper mfn-menu-item-helper"></span><span class="label-wrapper mfn-menu-label-wrapper"><span class="menu-label">Sala Studio</span></span><span class="menu-sub mfn-menu-sub-subicon"><i class="icon-down-open"></i></span></a>
+	<ul class="sub-menu mfn-submenu">
+		<li id="menu-item-16
+… [truncated at 64KB; full length 376673]
