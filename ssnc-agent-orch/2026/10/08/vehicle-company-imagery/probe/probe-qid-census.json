@@ -1,0 +1,92 @@
+{
+ "park": {
+  "records": 4930,
+  "recordsWithExactQid": 54,
+  "distinctQids": 53,
+  "byTag": {
+   "wikidata": 54
+  },
+  "sampleQids": [
+   "Q5612919 (w62743951 Grădina Icoanei)",
+   "Q132526736 (w524769567 Lunca Argeșului)",
+   "Q43010539 (w128393075 Muzee)",
+   "Q12736100 (w301774676 Muzeul Satului Maramureșean)",
+   "Q18544251 (w348173667 Muzeul Țării Oașului)",
+   "Q18545194 (w449583197 Parc Pitești)",
+   "Q42912625 (w23595493 Parcul Alei)",
+   "Q12207333 (r8321292 Parcul Alexandru Ioan Cuza)",
+   "Q22693419 (w24377933 Parcul Alpinet)",
+   "Q12737517 (w23692562 Parcul Bazilescu)",
+   "Q4093496 (r13220503 Parcul Bordei)",
+   "Q12737521 (w88337200 Parcul Cancicov)"
+  ]
+ },
+ "school": {
+  "records": 4651,
+  "recordsWithExactQid": 46,
+  "distinctQids": 30,
+  "byTag": {
+   "wikidata": 30,
+   "operator:wikidata": 16
+  },
+  "sampleQids": [
+   "Q12724348 (w43158975 Colegiul Național \"Gheorghe Șincai\")",
+   "Q18537034 (w883454204 Colegiul Național \"Ion Luca Caragiale\")",
+   "Q28217435 (w514854242 Colegiul Național \"Iulia Hașdeu\")",
+   "Q18389454 (r21021040 Colegiul Național \"Matei Basarab\")",
+   "Q6845068 (w238795032 Colegiul Național \"Mihai Eminescu\")",
+   "Q12724340 (w23648411 Colegiul Național \"Mihai Viteazul\")",
+   "Q12744205 (w23771041 Colegiul Național \"Școala Centrală\")",
+   "Q12724335 (w136269115 Colegiul Național \"Zinca Golescu\")",
+   "Q18539107 (n6959677402 Colegiul Național Ana Aslan)",
+   "Q18539115 (w515133710 Colegiul Național Cantemir Vodă)",
+   "Q5044392 (w172692818 Colegiul Național Carol I)",
+   "Q1108065 (w195276809 Colegiul Național Constantin Diaconovici Loga)"
+  ]
+ },
+ "pharmacy": {
+  "records": 4059,
+  "recordsWithExactQid": 1267,
+  "distinctQids": 15,
+  "byTag": {
+   "brand:wikidata": 1266,
+   "wikidata": 1
+  },
+  "sampleQids": [
+   "Q62562792 (n13929090730 Benu)",
+   "Q24035728 (n10114423953 Catena)",
+   "Q85968400 (n14158608366 Catena)",
+   "Q12726919 (n10166375251 Dona)",
+   "Q56317371 (n8601933502 Dr Max)",
+   "Q12740640 (n2175825108 Dr. Max)",
+   "Q114647927 (n10113679949 EvoFarm)",
+   "Q1547749 (n8731895659 FARMACIA CRISFARM)",
+   "Q123271999 (n6175191818 Farmacia Sfanta Ana)",
+   "Q2689639 (n4973273650 Farmacia Universul Sanatatii)",
+   "Q12729923 (n10207153118 Help Net)",
+   "Q630125 (n2752792379 Richter)"
+  ]
+ },
+ "court": {
+  "records": 207,
+  "recordsWithExactQid": 9,
+  "distinctQids": 9,
+  "byTag": {
+   "wikidata": 9
+  },
+  "sampleQids": [
+   "Q1743625 (n3762010967 Curtea Constituțională a României)",
+   "Q5755230 (w87312970 Curtea Supremă de Justiție)",
+   "Q43113639 (r14225591 Palatul de Justiție)",
+   "Q18545122 (r19176203 Palatul de Justiție)",
+   "Q18548695 (w122215694 Tribunalul București)",
+   "Q140632235 (n14018082629 Административен съд - Видин)",
+   "Q140634363 (n297276273 Окръжен съд - Видин)",
+   "Q133868099 (n14015568979 Районен съд - Видин)",
+   "Q140638835 (w437382788 Районен съд - Никопол)"
+  ]
+ },
+ "totals": {
+  "distinctQids": 107
+ }
+}

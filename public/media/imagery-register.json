@@ -1,0 +1,2672 @@
+{
+  "schema": "aflivra-imagery-v1",
+  "generatedAt": "2026-10-08T20:18:26.134Z",
+  "source": "Wikidata (P18/P158) · Wikimedia Commons",
+  "classes": {
+    "park": {
+      "records": 54,
+      "imaged": 6
+    },
+    "school": {
+      "records": 30,
+      "imaged": 3
+    },
+    "pharmacy": {
+      "records": 1267,
+      "imaged": 447
+    },
+    "court": {
+      "records": 9,
+      "imaged": 3
+    }
+  },
+  "assets": [
+    {
+      "app_id": "wiki-q959632",
+      "app_file": "/media/wiki-q959632.jpg",
+      "qid": "Q959632",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Cișmigiu",
+      "title": "Cismigiu-Garden-Bucharest-3.jpg",
+      "original_title": "Cismigiu-Garden-Bucharest-3.jpg",
+      "caption_ro": "Parcul Cișmigiu · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Cismigiu-Garden-Bucharest-3.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Cismigiu-Garden-Bucharest-3.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cismigiu-Garden-Bucharest-3.jpg?width=800",
+      "author": "Mastermindsro",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Cismigiu-Garden-Bucharest-3.jpg — Mastermindsro / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 248226,
+      "sha256": "7dcdef173f0f7e8cd3051af0b72901a9e91bb904ba3ab6eed493e553f46bb55a",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q2052075",
+      "app_file": "/media/wiki-q2052075.jpg",
+      "qid": "Q2052075",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Carol I",
+      "title": "Parcul Carol din Bucuresti - aleea principala vazuta dinspre Mausoleu.jpg",
+      "original_title": "Parcul Carol din Bucuresti - aleea principala vazuta dinspre Mausoleu.jpg",
+      "caption_ro": "Parcul Carol I · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Carol_din_Bucuresti_-_aleea_principala_vazuta_dinspre_Mausoleu.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Carol_din_Bucuresti_-_aleea_principala_vazuta_dinspre_Mausoleu.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Carol%20din%20Bucuresti%20-%20aleea%20principala%20vazuta%20dinspre%20Mausoleu.jpg?width=800",
+      "author": "Miehs at Romanian Wikipedia",
+      "license": "Public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/File:Parcul_Carol_din_Bucuresti_-_aleea_principala_vazuta_dinspre_Mausoleu.jpg",
+      "attribution": "Parcul Carol din Bucuresti - aleea principala vazuta dinspre Mausoleu.jpg — Miehs at Romanian Wikipedia / Wikimedia Commons / Public domain",
+      "bytes": 155601,
+      "sha256": "6ff0b8b3d0d2c9bdd63396b04b278f4c0760f96bebbbb1a418b9de4aeafe143a",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q2074133",
+      "app_file": "/media/wiki-q2074133.jpg",
+      "qid": "Q2074133",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Herăstrău",
+      "title": "Parcul Herastrau.jpg",
+      "original_title": "Parcul Herastrau.jpg",
+      "caption_ro": "Parcul Herăstrău · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Herastrau.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Herastrau.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Herastrau.jpg?width=800",
+      "author": "Al at Dutch Wikipedia",
+      "license": "Public domain",
+      "license_url": "https://commons.wikimedia.org/wiki/File:Parcul_Herastrau.jpg",
+      "attribution": "Parcul Herastrau.jpg — Al at Dutch Wikipedia / Wikimedia Commons / Public domain",
+      "bytes": 200181,
+      "sha256": "b7e81396ad509de8351549112aad6f2e66b8970c0f40fea18d5fff9e512b93f4",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q715958",
+      "app_file": "/media/wiki-q715958.jpg",
+      "qid": "Q715958",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Central din Cluj",
+      "title": "Central Park Cluj-Napoca1.jpg",
+      "original_title": "Central Park Cluj-Napoca1.jpg",
+      "caption_ro": "Parcul Central din Cluj · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Central_Park_Cluj-Napoca1.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Central_Park_Cluj-Napoca1.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Central%20Park%20Cluj-Napoca1.jpg?width=800",
+      "author": "Roamata",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Central Park Cluj-Napoca1.jpg — Roamata / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 454402,
+      "sha256": "5fee26df55acd175b27908e0db4e8bab263b103319739bae0214807760f9548e",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q4118458",
+      "app_file": "/media/wiki-q4118458.jpg",
+      "qid": "Q4118458",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Copou",
+      "title": "Mihai Eminescu's bust in Copou Garden 2.jpg",
+      "original_title": "Mihai Eminescu's bust in Copou Garden 2.jpg",
+      "caption_ro": "Parcul Copou · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Mihai_Eminescu's_bust_in_Copou_Garden_2.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Mihai_Eminescu's_bust_in_Copou_Garden_2.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mihai%20Eminescu's%20bust%20in%20Copou%20Garden%202.jpg?width=800",
+      "author": "Argenna",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "attribution": "Mihai Eminescu's bust in Copou Garden 2.jpg — Argenna / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 249674,
+      "sha256": "e9bef8ff0914587c3e54fa7dfe6fecedafeecf3b1182abed3f205cdaaad5c183",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q2284372",
+      "app_file": "/media/wiki-q2284372.jpg",
+      "qid": "Q2284372",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "park"
+      ],
+      "subject": "Parcul Nicolae Romanescu",
+      "title": "Parcul Nicolae Romanescu - podul suspendat 2.jpg",
+      "original_title": "Parcul Nicolae Romanescu - podul suspendat 2.jpg",
+      "caption_ro": "Parcul Nicolae Romanescu · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Parcul_Nicolae_Romanescu_-_podul_suspendat_2.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Parcul_Nicolae_Romanescu_-_podul_suspendat_2.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Parcul%20Nicolae%20Romanescu%20-%20podul%20suspendat%202.jpg?width=800",
+      "author": "Deedeeshor 77",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Parcul Nicolae Romanescu - podul suspendat 2.jpg — Deedeeshor 77 / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 267722,
+      "sha256": "a896095f394bf6dade3cbb74dc87fcd5046f5620c43eaaa74275db0788a1b740",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12744205",
+      "app_file": "/media/wiki-q12744205.jpg",
+      "qid": "Q12744205",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național „Școala Centrală” din București",
+      "title": "3-5 Strada Icoanei, Bucharest (48).jpg",
+      "original_title": "3-5 Strada Icoanei, Bucharest (48).jpg",
+      "caption_ro": "Colegiul Național „Școala Centrală” din București · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:3-5_Strada_Icoanei,_Bucharest_(48).jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:3-5_Strada_Icoanei,_Bucharest_(48).jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/3-5%20Strada%20Icoanei%2C%20Bucharest%20(48).jpg?width=800",
+      "author": "Neoclassicism Enthusiast",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "3-5 Strada Icoanei, Bucharest (48).jpg — Neoclassicism Enthusiast / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 230076,
+      "sha256": "c49124d03353f5115f597531e24f63a08c7d9d618663af8af7c0290bb9bf3a5d",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q3067523",
+      "app_file": "/media/wiki-q3067523.jpg",
+      "qid": "Q3067523",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național „Sfântul Sava” din București",
+      "title": "Saint Sava National College.jpg",
+      "original_title": "Saint Sava National College.jpg",
+      "caption_ro": "Colegiul Național „Sfântul Sava” din București · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Saint_Sava_National_College.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Saint_Sava_National_College.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Saint%20Sava%20National%20College.jpg?width=800",
+      "author": "Cristea Cristian",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution": "Saint Sava National College.jpg — Cristea Cristian / Wikimedia Commons / CC0",
+      "bytes": 238193,
+      "sha256": "e3c11cc149f52c860c103a5379229e18d4f44328dd485abc13af7531876277e6",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18539127",
+      "app_file": "/media/wiki-q18539127.jpg",
+      "qid": "Q18539127",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul „Costache Negruzzi” din Iași",
+      "title": "Iaşi , National College „Costache Negruzzi“ 1.jpg",
+      "original_title": "Iaşi , National College „Costache Negruzzi“ 1.jpg",
+      "caption_ro": "Colegiul „Costache Negruzzi” din Iași · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Iaşi_,_National_College_„Costache_Negruzzi“_1.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Iaşi_,_National_College_„Costache_Negruzzi“_1.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ia%C5%9Fi%20%2C%20National%20College%20%E2%80%9ECostache%20Negruzzi%E2%80%9C%201.jpg?width=800",
+      "author": "Argenna",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "attribution": "Iaşi , National College „Costache Negruzzi“ 1.jpg — Argenna / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 273991,
+      "sha256": "c630bdac3ce11f4964718ab88304c179a53b8c60c5e15cff0c0df5e034066a44",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q56317371",
+      "app_file": "/media/wiki-q56317371.jpg",
+      "qid": "Q56317371",
+      "claim": "P18",
+      "role": "brand",
+      "classes": [
+        "pharmacy"
+      ],
+      "subject": "Dr. Max",
+      "title": "Praha Vrsovice Kubanske namesti 5 Dr Max.jpg",
+      "original_title": "Praha Vrsovice Kubanske namesti 5 Dr Max.jpg",
+      "caption_ro": "Dr. Max · fotografie de brand Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Praha_Vrsovice_Kubanske_namesti_5_Dr_Max.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Praha_Vrsovice_Kubanske_namesti_5_Dr_Max.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Praha%20Vrsovice%20Kubanske%20namesti%205%20Dr%20Max.jpg?width=800",
+      "author": "JiriMatejicek",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "attribution": "Praha Vrsovice Kubanske namesti 5 Dr Max.jpg — JiriMatejicek / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 175027,
+      "sha256": "546995f7ffa96a69fb530fafdc14add78f859252c47b7f07ccfa4aadc1e41457",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q117706903",
+      "app_file": "/media/wiki-q117706903.jpg",
+      "qid": "Q117706903",
+      "claim": "P18",
+      "role": "brand",
+      "classes": [
+        "pharmacy"
+      ],
+      "subject": "Podorozhnyk",
+      "title": "Dan-83.jpg",
+      "original_title": "Dan-83.jpg",
+      "caption_ro": "Podorozhnyk · fotografie de brand Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Dan-83.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Dan-83.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Dan-83.jpg?width=800",
+      "author": "Проєктний менеджер",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Dan-83.jpg — Проєктний менеджер / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 105835,
+      "sha256": "7aca4f39737f93ddaffc903a68ba54f05df091096b67218157f273ba5f57c522",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q5755230",
+      "app_file": "/media/wiki-q5755230.jpg",
+      "qid": "Q5755230",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "court"
+      ],
+      "subject": "Înalta Curte de Casație și Justiție",
+      "title": "Bucharest - Supreme Court 02.jpg",
+      "original_title": "Bucharest - Supreme Court 02.jpg",
+      "caption_ro": "Înalta Curte de Casație și Justiție · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Bucharest_-_Supreme_Court_02.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Bucharest_-_Supreme_Court_02.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bucharest%20-%20Supreme%20Court%2002.jpg?width=800",
+      "author": "Joe Mabel",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution": "Bucharest - Supreme Court 02.jpg — Joe Mabel / Wikimedia Commons / CC BY 3.0",
+      "bytes": 257213,
+      "sha256": "238833dae3a066a5385d5b1f496e8aa89b981a23626ced62b8e30e389388639e",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q43113639",
+      "app_file": "/media/wiki-q43113639.jpg",
+      "qid": "Q43113639",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "court"
+      ],
+      "subject": "Tribunalul Sibiu",
+      "title": "TribunalulSibiu.JPG",
+      "original_title": "TribunalulSibiu.JPG",
+      "caption_ro": "Tribunalul Sibiu · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:TribunalulSibiu.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:TribunalulSibiu.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/TribunalulSibiu.JPG?width=800",
+      "author": "Țetcu Mircea Rareș",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "TribunalulSibiu.JPG — Țetcu Mircea Rareș / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 183290,
+      "sha256": "62a5b3cb7ebc0d8559f5737e2dd78de43492b6c3f3166017d78fe7f1c62d923c",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18548695",
+      "app_file": "/media/wiki-q18548695.jpg",
+      "qid": "Q18548695",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "court"
+      ],
+      "subject": "Tribunalul București",
+      "title": "Tribunalul București 1.jpg",
+      "original_title": "Tribunalul București 1.jpg",
+      "caption_ro": "Tribunalul București · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Tribunalul_București_1.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Tribunalul_București_1.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Tribunalul%20Bucure%C8%99ti%201.jpg?width=800",
+      "author": "kallerna",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Tribunalul București 1.jpg — kallerna / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 234307,
+      "sha256": "18d3f46eabd8f7da9e1d0efa38ad0e495fc720bf24e9a9495e81dba318798033",
+      "retrieval_date": "2026-10-08",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    }
+  ],
+  "records": {
+    "w23771041": {
+      "a": "wiki-q12744205",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w515126132": {
+      "a": "wiki-q3067523",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "n316394639": {
+      "a": "wiki-q18539127",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w87312970": {
+      "a": "wiki-q5755230",
+      "c": "court",
+      "t": "wikidata"
+    },
+    "n8601933502": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10035776666": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10066630361": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10161422157": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10207153117": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10211733656": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10219976391": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10248360581": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10250428988": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10255262532": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10258126135": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10294825486": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10302680757": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10308359369": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10570818353": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10572229049": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10572527935": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10587201387": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10589792134": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10591235635": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10595904401": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10637107649": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10732614219": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10732614222": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10732614237": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10761255106": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10763350549": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10816280522": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10819035424": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10939750967": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10961019577": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10983652798": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n10984834434": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11009381348": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11009891344": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11009898076": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11010467478": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11043439291": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11060659078": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11064750188": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11077275935": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11079103672": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11089362676": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11091238858": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11091238874": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11096882665": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11166434361": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11175938102": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11185716875": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11188390368": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11188709762": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11195402283": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11205629833": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11205629835": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11218045020": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11219532608": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11231032180": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11241835744": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11260230309": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11333290467": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367374": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367375": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367376": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367377": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367380": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367382": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367383": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367384": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367385": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367386": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11335367387": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11348262250": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11361456713": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11365035867": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11370725888": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11396504895": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11422530767": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11491195234": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1159339692": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11597632930": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1162997401": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11666025007": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11673277784": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11697169204": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11758062044": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11775112106": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11787242167": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11807708716": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11807989533": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11819677169": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11894862774": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11936817972": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n11947712272": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1204369300": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12050646018": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12055544925": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12063023272": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12077712568": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12091976435": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12128115494": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12153355885": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12163653888": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12182120678": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12182530720": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1219511213": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12197343659": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12204816531": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12213722169": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12237762190": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12281829280": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12291785233": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12327313905": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12365161661": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12376637496": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12469077385": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12469888533": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12469888534": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12560988282": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12778454926": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12846531122": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12862568211": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12886520280": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12914221556": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12922946255": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13028381656": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13039269504": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13096181273": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13100928889": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1311502532": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13118865698": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13135675249": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13203075601": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13266817301": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13277241181": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13335564651": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13336561712": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13336888261": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13343898547": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13350853302": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13355595719": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13363150061": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13383400512": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13383412476": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13410359386": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13429532580": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13439465174": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13464088384": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13500900555": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13518935986": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13526144534": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1352877467": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13596453250": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13638704884": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13644733639": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13651524062": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13651669672": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1368496395": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13697733057": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13703172956": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13736724297": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13740323406": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13751797887": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13823321288": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13829596729": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13913060112": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14040026262": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14061011084": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14087876405": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14087894992": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14104786937": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14128857522": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14173242039": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14214113924": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n14214449017": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1557241785": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1709556316": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1744636470": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1777049140": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1787869756": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1795596454": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1798750245": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1814904474": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1841804854": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1889364146": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1911247026": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1935441417": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1935441419": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n1977615022": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2002646384": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2030716931": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2161403660": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2296888447": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2329355681": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2411465578": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2420717693": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2437092729": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2443350178": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2448579147": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2536195293": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2548902968": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2548902969": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2548902970": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2579653046": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2591813145": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2613797683": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2635346554": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637394276": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637394469": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637394481": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637553913": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637553926": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637553932": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637637310": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637637340": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637637364": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637637374": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637676101": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637676108": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637716538": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637716569": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637716572": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637716577": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637716590": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755378": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755386": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755418": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755448": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755451": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755453": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755454": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2637755459": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2722558220": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2773919271": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2861290501": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2874579634": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2934032332": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2934038746": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n295352881": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n2960068229": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3225105245": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3228663269": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3336744767": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n336672676": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3373589970": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3382493935": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3430064286": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3495740724": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n352823977": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3623140905": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3685249154": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3685751404": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3703772483": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3759186611": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3829769717": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3831396360": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3835395648": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3853866389": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3863407525": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3875095827": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n3891462649": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n391471008": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4023815945": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4043195880": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n408137777": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4128155953": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4192269589": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4246103766": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4277123914": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4321785770": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4336680832": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4336887547": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4338113856": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4344188772": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4358276564": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4382675289": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4413009623": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n442897085": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n445630250": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4458777489": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n446038412": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4496768117": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4564413803": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4565578337": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4568243607": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4597437790": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4671696997": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4709535948": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4723412541": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4747374916": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4748632244": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n475522841": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n477200230": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4801995457": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n486342653": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n486342660": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4866258022": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5033696321": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n507893836": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n513119066": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5174912683": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5184053749": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5184096081": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5205853411": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5215019997": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n525474743": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n526427406": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5318415132": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5351072321": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5382916601": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5503844231": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5541492877": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5549740909": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5681555379": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n582765792": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5896017429": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5907844634": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5939260269": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n5981387942": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6023287120": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n602477828": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6033849639": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6041865369": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6053537394": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6053541809": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6053541828": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n615005163": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6163495785": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6242691741": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6248135031": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6250371713": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6258321387": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6262088271": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6266464904": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6361125643": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6385357742": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6468065886": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n650731208": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n653146613": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6532766590": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6588692077": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n660484067": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n660752019": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n663448765": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6660944065": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6691087890": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n676773081": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n676819216": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6857256672": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6899911377": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6932760148": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6935348988": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6939489489": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6939657700": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n6948589589": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7001442809": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7021685890": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7021692849": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7021781671": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7038346281": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7077030625": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7077122558": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7079466770": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7090553592": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7095733083": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7110109849": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7183659337": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053710": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053712": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053713": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053714": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053715": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053716": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053717": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053718": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053719": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053720": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7214053721": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7215973153": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7293870994": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7394648980": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7414510529": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7414521810": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7414567575": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7414669625": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7529675001": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7537007199": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7592892317": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n762054490": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7826745201": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7973901258": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7973901259": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7996013321": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n7999951554": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8205749998": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8244872609": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8244903933": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8280918512": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8287808279": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8300366004": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8303296128": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8325562443": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8438330915": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8566762615": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8629211476": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8709661327": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n873553657": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n8883611325": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9016621407": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n904838112": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9074062423": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9075588680": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9177540424": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9179276027": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9208323165": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9288834381": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9288834398": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9293132907": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9326871302": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9362431739": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9416312641": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9468628105": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9481223143": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n949633294": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9574558992": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9590788917": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9610390164": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n983131160": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9851800923": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9918751388": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9943186221": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9945702490": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9945721299": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n9966335636": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w1025823829": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w1284852905": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w1444764162": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w1446403101": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w357375530": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w925587840": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w951711425": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n12036113532": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w1327525073": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "r14225591": {
+      "a": "wiki-q43113639",
+      "c": "court",
+      "t": "wikidata"
+    },
+    "w13853540": {
+      "a": "wiki-q2052075",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w23893331": {
+      "a": "wiki-q715958",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w16291869": {
+      "a": "wiki-q959632",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w61750051": {
+      "a": "wiki-q4118458",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w28132031": {
+      "a": "wiki-q2284372",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "w88337012": {
+      "a": "wiki-q2074133",
+      "c": "park",
+      "t": "wikidata"
+    },
+    "n4934448621": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n4729604289": {
+      "a": "wiki-q56317371",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "w122215694": {
+      "a": "wiki-q18548695",
+      "c": "court",
+      "t": "wikidata"
+    },
+    "n12998748526": {
+      "a": "wiki-q117706903",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13470695993": {
+      "a": "wiki-q117706903",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
+    "n13513838343": {
+      "a": "wiki-q117706903",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    }
+  }
+}

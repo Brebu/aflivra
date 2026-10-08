@@ -102,3 +102,98 @@ test.describe('Company registries joined on CUI (Wave B)', () => {
     await expect(provenanceRow).toContainText('data.gov.ro · Farmacii în registrul CNAS');
   });
 });
+
+// T2 — „cine este în conducere": the directors of the firm render as their own section on
+// the company card, with per-row provenance and the honest-absence evidence. The probe
+// ledger (2026-10-08): ANAF's balance response carries only financial indicators (the
+// fixture company-anaf.txt has no person fields); the official ONRC registry of legal
+// representatives (OD_REPREZENTANTI_LEGALI.CSV, keyed by registration number) exists but
+// is published as a 336 MB integral file without a query API — unserveable; K-Reports is
+// DNS-dead; the Official Gazette publishes announcements, no per-firm list. The only
+// connected source that carries people is the open-knowledge registry joined by VAT id.
+test.describe('Company directors (Conducere)', () => {
+  const now = () => new Date().toISOString();
+
+  const anafSourceState = () => ({
+    key: 'company:427282', name: 'ANAF', url: 'https://webservicesp.anaf.ro', adapterVersion: 'anaf.profile.v3',
+    status: 'fresh', publishedAt: '2025', lastSuccessAt: now(), lastAttemptAt: now(), nextAttemptAt: null, error: null, ttlSeconds: 86400,
+  });
+  const knowledgeSourceState = () => ({
+    key: 'knowledge-company:427282', name: 'Wikidata · identificare după numărul TVA', url: 'https://www.wikidata.org/', adapterVersion: 'wikidata.company-vat.v1',
+    status: 'fresh', publishedAt: null, lastSuccessAt: now(), lastAttemptAt: now(), nextAttemptAt: null, error: null, ttlSeconds: 86400,
+  });
+
+  const leadershipState = () => ({
+    ...anafSourceState(),
+    data: {
+      name: 'Monitorul Oficial RA', cui: '427282', address: 'București', inactive: false, vat: true, year: 2025,
+      queriedDate: '2026-10-08', warnings: [],
+      sources: [anafSourceState(), knowledgeSourceState()],
+      provenance: {
+        name: {source: 'ANAF · registru fiscal', url: 'https://webservicesp.anaf.ro/api/PlatitorTvaRest/v9/tva', referenceDate: '2026-10-08', verifiedAt: now()},
+        leadership: {source: 'Wikidata', url: 'https://www.wikidata.org/wiki/Q2138580', referenceDate: null, verifiedAt: now()},
+      },
+      leadership: [
+        {id: 'Q556001', name: 'ION POPESCU DE VERIFICARE', role: 'Director executiv indicat de sursă', sourceUrl: 'https://www.wikidata.org/wiki/Q2138580'},
+        {id: 'Q556002', name: 'MARIA IONESCU DE VERIFICARE', role: 'Director sau manager indicat de sursă', sourceUrl: 'https://www.wikidata.org/wiki/Q2138580'},
+      ],
+      websites: [],
+      history: [{year: 2025, caen: '5812', entries: [{label: 'Cifra de afaceri', value: 123456789}], indicators: {}, url: 'https://webservicesp.anaf.ro/bilant?an=2025&cui=427282'}],
+    },
+  });
+
+  const noLeadershipState = () => {
+    const state = leadershipState();
+    const {leadership: _omitted, ...provenance} = state.data.provenance;
+    return {...state, data: {...state.data, leadership: [], provenance}};
+  };
+
+  async function waitForClientReady(page: Page) {
+    await expect.poll(() => page.evaluate(() => localStorage.getItem('reper.v2.preferences') !== null).catch(() => false), {timeout: 30_000}).toBe(true);
+  }
+
+  async function openCompany(page: Page, state: Record<string, any>) {
+    await page.route('**/api/company*', route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify(state)}));
+    await page.goto('/#view=company&id=427282');
+    await waitForClientReady(page);
+    await expect(page.getByRole('heading', {level: 1, name: 'Verifică o firmă după CUI.'})).toBeVisible();
+    await expect(page.locator('.company-live h2').first()).toHaveText('Monitorul Oficial RA');
+  }
+
+  test('the named directors render as their own section with per-row provenance', async ({page}) => {
+    await openCompany(page, leadershipState());
+    await page.getByRole('tab', {name: 'Conducere'}).click();
+    const section = page.locator('.company-management');
+    await expect(section).toBeVisible();
+    await expect(section.getByRole('heading', {level: 2, name: 'Conducerea firmei'})).toBeVisible();
+    // The section states its own join key — the identical VAT identifier, never a name match.
+    await expect(section).toContainText('identificatorul TVA identic');
+    // Each person row carries the role the source itself indicates, plus its provenance.
+    const rows = section.locator('.facts-table tr');
+    await expect(rows.filter({hasText: 'ION POPESCU DE VERIFICARE'})).toContainText('Director executiv indicat de sursă');
+    await expect(rows.filter({hasText: 'MARIA IONESCU DE VERIFICARE'})).toContainText('Director sau manager indicat de sursă');
+    await expect(section).toContainText('Wikidata · aceeași înregistrare TVA');
+    // The knowledge source's own freshness renders inside the section (per-source grouping).
+    await expect(section.locator('.live-freshness')).toContainText('Wikidata');
+    // The section keeps the honest caveat the surface has always carried.
+    await expect(section).toContainText('nu confirmă separat componența conducerii în ziua curentă');
+    // The per-field provenance table below the card carries the leadership field row.
+    const provenanceRow = page.locator('.company-live .facts-table tr', {hasText: 'leadership'});
+    await expect(provenanceRow).toBeVisible();
+    await expect(provenanceRow).toContainText('Wikidata');
+  });
+
+  test('without leadership the section stays an honest absence naming the official registry it cannot read', async ({page}) => {
+    await openCompany(page, noLeadershipState());
+    await page.getByRole('tab', {name: 'Conducere'}).click();
+    const section = page.locator('.company-management');
+    await expect(section).toBeVisible();
+    await expect(section).toContainText('Nicio sursă conectată nu publică');
+    // The absence names the probe-settled reality: the ONRC legal-representatives registry
+    // exists but is published as an integral file (336 MB) without a query at the source.
+    await expect(section).toContainText('reprezentanților legali');
+    await expect(section).toContainText('fără interogare la sursă');
+    // No person rows are invented for the absence.
+    await expect(section.locator('.company-management .facts-table tbody tr')).toHaveCount(0);
+  });
+});

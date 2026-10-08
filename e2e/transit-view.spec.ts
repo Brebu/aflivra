@@ -218,9 +218,184 @@ test.describe('Transit network view', () => {
 
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+});
 
-  // Rotation is static orientation, not animation: under prefers-reduced-motion the
-  // heading marker must still render with its bearing rotation.
+// The live vehicles list contract: a navigable desktop grid, one column on mobile.
+test.describe('Transit live vehicles layout', () => {
+  const liveVehiclesRoute = (page: Page, items: () => any[]) =>
+    page.route('**/api/transport-live*', async route => {
+      const now = new Date().toISOString();
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({status: 'ok', data: {kind: 'vehicles', observedAt: now, isLive: true, page: 0, pages: 1, total: items().length, entityCount: items().length, items: items().map(id => ({
+          id, routeId: 'test-route', tripId: 'test-trip', vehicleName: 'Autobuzul de pictură ' + id, licensePlate: '',
+          lat: 44.427, lon: 26.103, stopId: '', observedAt: now, bearing: 12, speed: 11,
+          occupancy: null, occupancyPercentage: null, wheelchairAccessible: null, currentStatus: null, details: {},
+        }))}}),
+      });
+    });
+
+  test('the vehicles list lays out as a responsive multi-column grid, single column on mobile', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await liveVehiclesRoute(page, () => ['veh-grid-1', 'veh-grid-2', 'veh-grid-3']);
+
+    await page.goto('/#view=domain&id=transport&tab=vehicles');
+    await waitForClientReady(page);
+    const workspace = page.locator('section.transit-workspace');
+    const grid = workspace.locator('.transit-vehicle-grid');
+    await expect(grid).toBeVisible({timeout: 60_000});
+    await expect(grid.locator('.transit-live-record')).toHaveCount(3);
+
+    // Desktop viewport: the grid packs 3–4 compact columns (never one stretched row).
+    const columns = () => grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+    await expect.poll(columns, {timeout: 10_000}).toBeGreaterThanOrEqual(3);
+
+    // Mobile viewport: one readable column, the .entity-grid house pattern.
+    await page.setViewportSize({width: 375, height: 667});
+    await expect.poll(columns, {timeout: 10_000}).toBe(1);
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});
+
+// The identity contract of the live lists: same content, same DOM order — the list
+// renders its own deterministic sort (line number, then vehicle), never the feed's
+// arrival order, which permutes between fetches.
+test.describe('Transit live vehicles order', () => {
+  test('the vehicles list keeps one DOM order across permuted data refreshes, sorted by line then vehicle', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    // The three vehicles return in a different array order on every request, like a
+    // real GTFS-RT feed permutes its entities; the lines are picked so lexicographic
+    // order (101 < 33 < 7) differs from natural numeric order (7 < 33 < 101).
+    const names: Record<string, string> = {'7': 'Vehiculul liniei 7', '33': 'Vehiculul liniei 33', '101': 'Vehiculul liniei 101'};
+    let hits = 0;
+    await page.route('**/api/transport-live*', async route => {
+      hits++;
+      const now = new Date().toISOString();
+      const ids = ['veh-101', 'veh-33', 'veh-7'];
+      const rotated = [...ids.slice(hits % 3), ...ids.slice(0, hits % 3)];
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({status: 'ok', data: {kind: 'vehicles', observedAt: now, isLive: true, page: 0, pages: 1, total: 3, entityCount: 3, items: rotated.map(id => ({
+          id, routeId: id.replace('veh-', ''), tripId: 'test-trip', vehicleName: names[id.replace('veh-', '')], licensePlate: '',
+          lat: 44.427, lon: 26.103, stopId: '', observedAt: now, bearing: null, speed: 9,
+          occupancy: null, occupancyPercentage: null, wheelchairAccessible: null, currentStatus: null, details: {},
+        }))}}),
+      });
+    });
+
+    await page.goto('/#view=domain&id=transport&tab=vehicles');
+    await waitForClientReady(page);
+    const workspace = page.locator('section.transit-workspace');
+    const records = workspace.locator('.transit-live-record');
+    await expect(records).toHaveCount(3, {timeout: 60_000});
+
+    const order = () => records.evaluateAll(els => els.map(el => (el.querySelector('h3')?.textContent || '').trim()));
+    const expected = [
+      expect.stringContaining(names['7']),
+      expect.stringContaining(names['33']),
+      expect.stringContaining(names['101']),
+    ];
+
+    // First load: the natural numeric line order, no matter the payload's own order.
+    await expect.poll(order).toEqual(expected);
+
+    // The sort is explained where the list is introduced: the help copy names the
+    // ordering and its tiebreaker so the stability is a promise, not a coincidence.
+    await expect(workspace.locator('.field-help', {hasText: /ordonată pe numărul liniei/i})).toBeVisible();
+
+    // A data refresh with a permuted payload (the radius change threads a new URL)
+    // must keep the exact same DOM order — the polls of real use do the same.
+    const radiusSelect = workspace.locator('label', {hasText: 'Rază'}).locator('select');
+    const refreshed = page.waitForRequest(/\/api\/transport-live\?.*radius=30/, {timeout: 30_000}).catch(() => null);
+    await radiusSelect.selectOption('30');
+    expect(await refreshed, 'the radius change refreshes the feed').not.toBeNull();
+    await expect.poll(order).toEqual(expected);
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});
+
+// The drift contract of the open vehicle detail: a GPS fix that crosses the next
+// ~100 m cell re-keys the live URL and refetches in the background — the open panel
+// must survive it, lifted out of the list remount.
+test.describe('Transit live vehicle detail stability', () => {
+  const HOME = {lat: 44.4268, lon: 26.1025, accuracy: 65};
+  // ~220 m north: the coordinates cross one 3-decimal cell (44.427 -> 44.429) while
+  // the resolved locality stays "București" — the same drift the geo-drift spec pins.
+  const DRIFT = {lat: 44.4288, lon: 26.1025, accuracy: 80};
+
+  // watchPosition fixes replayed to every active watch, like the geo-drift spec —
+  // Chromium's own override machinery injects transient errors into active watches.
+  function initMockedDeviceGeolocation(start: typeof HOME) {
+    type Fix = {lat: number; lon: number; accuracy: number};
+    const watches = new Map<number, {success: (position: unknown) => void; error: (error: unknown) => void}>();
+    let seq = 1, current: Fix | null = start;
+    const deliver = () => {
+      if (!current) return;
+      for (const watch of watches.values()) watch.success({coords: {latitude: current.lat, longitude: current.lon, accuracy: current.accuracy}, timestamp: Date.now()});
+    };
+    Object.defineProperty(navigator, 'geolocation', {configurable: true, value: {
+      watchPosition(success: (position: unknown) => void, error: (error: unknown) => void) { const id = seq++; watches.set(id, {success, error}); deliver(); return id; },
+      clearWatch(id: number) { watches.delete(id); },
+      getCurrentPosition(success: (position: unknown) => void, error: (error: unknown) => void) { if (current) success({coords: {latitude: current.lat, longitude: current.lon, accuracy: current.accuracy}, timestamp: Date.now()}); else error({code: 2, message: ''}); },
+    }});
+    (window as unknown as Record<string, unknown>).__devicePosition = (lat: number, lon: number, accuracy: number) => { current = {lat, lon, accuracy}; deliver(); };
+  }
+
+  test('an open vehicle detail panel survives a same-locality position drift', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.addInitScript(initMockedDeviceGeolocation, HOME);
+    await page.route('**/api/transport-live*', async route => {
+      const now = new Date().toISOString();
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({status: 'ok', data: {kind: 'vehicles', observedAt: now, isLive: true, page: 0, pages: 1, total: 2, entityCount: 2, items: [
+          {id: 'veh-drift-1', routeId: 'test-route', tripId: 'test-trip', vehicleName: 'Autobuzul cu detalii', licensePlate: '',
+           lat: 44.427, lon: 26.103, stopId: '', observedAt: now, bearing: 87, speed: 12.5,
+           occupancy: 'FEW_SEATS_AVAILABLE', occupancyPercentage: 45, wheelchairAccessible: null, currentStatus: 'IN_TRANSIT_TO', details: {}},
+          {id: 'veh-drift-2', routeId: 'test-route', tripId: 'test-trip', vehicleName: 'Autobuzul secundar', licensePlate: '',
+           lat: 44.428, lon: 26.104, stopId: '', observedAt: now, bearing: null, speed: null,
+           occupancy: null, occupancyPercentage: null, wheelchairAccessible: null, currentStatus: null, details: {}},
+        ]}}),
+      });
+    });
+
+    await page.goto('/#view=domain&id=transport&tab=vehicles');
+    await waitForClientReady(page);
+    const workspace = page.locator('section.transit-workspace');
+    const record = workspace.locator('.transit-live-record', {hasText: 'Autobuzul cu detalii'});
+    await expect(record).toBeVisible({timeout: 90_000});
+
+    // The redesigned detail panel opens with the readable icon sections.
+    const panel = record.locator('details').first();
+    await panel.locator('summary').click();
+    await expect(panel).toHaveAttribute('open');
+    await expect(panel).toContainText('Viteza');
+    await expect(panel).toContainText('45.0 km/h');
+
+    // The drift: same locality, next cell — the request legitimately re-keys (the
+    // center moved) and the refresh runs in the background.
+    const refetched = page.waitForRequest(/\/api\/transport-live\?.*lat=44\.429/, {timeout: 30_000}).catch(() => null);
+    await page.evaluate(fix => {
+      (window as unknown as {__devicePosition: (lat: number, lon: number, accuracy: number) => void}).__devicePosition(fix.lat, fix.lon, fix.accuracy);
+    }, DRIFT);
+    expect(await refetched, 'the same-locality drift still refreshes the feed in the background').not.toBeNull();
+
+    // The panel for the same vehicle is still open: the open state lives above the
+    // list remount, keyed by the vehicle id.
+    await expect(record).toBeVisible();
+    await expect(panel).toHaveAttribute('open', '', {timeout: 30_000});
+    await expect(panel).toContainText('Viteza');
+
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
+});
+
+test.describe('Transit network view (reduced motion)', () => {
   test('heading markers stay rotated under prefers-reduced-motion', async ({page}) => {
     const pageErrors = collectPageErrors(page);
     await page.emulateMedia({reducedMotion: 'reduce'});

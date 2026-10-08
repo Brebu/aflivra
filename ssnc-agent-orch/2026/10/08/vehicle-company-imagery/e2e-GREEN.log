@@ -1,0 +1,3 @@
+[7/8] [chromium] › e2e/company-name-search.spec.ts:110:3 › Company name search (Wikidata VAT registry) › no name match stays an honest absence naming the unqueryable national registry
+[8/8] [chromium] › e2e/company-name-search.spec.ts:128:3 › Company name search (Wikidata VAT registry) › a too-short name is rejected client-side without querying any source
+  8 passed (6.2s)

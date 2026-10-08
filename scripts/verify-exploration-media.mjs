@@ -5,12 +5,13 @@ import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
 import ts from 'typescript';
 import {readSnapshotFile} from './snapshot-read.mjs';
+import {classifyImageryRecords,readCorpusRecords,REGISTER_SCHEMA,WAVE_FILE_CAP,CLASS_ORDER} from './relay-imagery.mjs';
 const require=createRequire(import.meta.url),React=require('react'),jsx=require('react/jsx-runtime'),root=new URL('../',import.meta.url);
 let media;
 function compile(file,h=React){
- const code=ts.transpileModule(fs.readFileSync(new URL(file,root),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText,module={exports:{}};
+ const code=ts.transpileModule(fs.readFileSync(new URL(file,root),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText,compiled={exports:{}};
  const resolve=name=>name==='react'?h:name==='react/jsx-runtime'?jsx:name.endsWith('/media')||name==='./media'?media:name==='./text'?compile('lib/live/text.ts'):name==='./adapters'?{getSource(){throw Error('Fixture must not fetch')},SourceError:Error}:name.endsWith('/cinemas.json')?require('../public/cinema/cinemas.json'):name==='lucide-react'?new Proxy({},{get:(_,key)=>String(key)}):name.endsWith('/button')?{Button:'Button'}:require(name);
- new Function('require','module','exports',code)(resolve,module,module.exports);return module.exports;
+ new Function('require','module','exports',code)(resolve,compiled,compiled.exports);return compiled.exports;
 }
 media=compile('lib/live/media.ts');
 for(const url of ['https://youtu.be/seiqJySc2Wg','https://www.youtube.com/watch?v=seiqJySc2Wg','https://m.youtube.com/watch?v=seiqJySc2Wg','https://www.youtube-nocookie.com/embed/seiqJySc2Wg','https://www.youtube.com/shorts/seiqJySc2Wg'])assert.equal(media.youtubeVideoId(url),'seiqJySc2Wg');
@@ -79,5 +80,40 @@ for(const asset of localAssets)assert(referenced.has(asset.app_id),'No orphan lo
 const model=fs.readFileSync(new URL('app/v2-model.ts',root),'utf8'),page=fs.readFileSync(new URL('app/page.tsx',root),'utf8');
 assert(model.includes('[...originalPlaces,...expandedPlaces]'));assert(page.includes('Locuri cu galerii'));assert(!page.includes('<PlacesWorkspace category="cultura" photosDefault'));
 console.log(places.length+' anchored photographed destinations verified against exact national records ('+photoTotal+' local photos, '+wlmAssets.length+' from the Wiki Loves Monuments curation, '+videoTotal+' webm clips · '+videoBytes.toLocaleString()+' bytes); per-place caps, video size ceiling, authors, licenses, SHA-256 proofs and explorer navigation. Original editorial selection: 6. Total with editorial: '+(places.length+6)+'.');
+// Registrul de imagini Wikidata/Commons: fiecare rând atestat dovedește autorul, licența,
+// octeții exacți publicați și paritatea cu manifestul și cu corpusul comis — harta
+// rândurilor se recalculează integral din clasificatorul relației (id-uri exacte,
+// operator exclus, brand etichetat onest ca fotografie de brand).
+{
+ const imagery=JSON.parse(await readSnapshotFile(fileURLToPath(new URL('public/media/imagery-register.json',root))));
+ assert.equal(imagery.schema,REGISTER_SCHEMA,'The imagery register schema');
+ assert(Array.isArray(imagery.assets)&&imagery.assets.length>=1,'The imagery register carries its attested rows');
+ assert(imagery.assets.length<=WAVE_FILE_CAP,'Imagery wave cap of '+WAVE_FILE_CAP+' files: '+imagery.assets.length);
+ const manifestRows=new Map(manifest.assets.map(asset=>[asset.app_id,asset]));
+ const registerFiles=new Set(imagery.assets.map(asset=>asset.app_file.replace('/media/','')));
+ for(const asset of imagery.assets){
+  assert(/^Q[1-9]\d{0,9}$/.test(asset.qid),'Exact Q-id on the imagery row '+asset.app_id);
+  assert(['P18','P158'].includes(asset.claim),'P18/P158 image claim on '+asset.app_id);
+  assert(['entity','brand'].includes(asset.role),'Honest imagery role (entity/brand) on '+asset.app_id);
+  assert(asset.classes.length>=1&&asset.classes.every(cls=>CLASS_ORDER.includes(cls)),'Imagery class scoping (park/school/pharmacy/court) on '+asset.app_id);
+  assert(asset.author&&asset.license&&/^https:\/\//.test(asset.license_url)&&/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(asset.source_page_url),'Commons license and attribution face on '+asset.app_id);
+  const row=manifestRows.get(asset.app_id);
+  assert(row,'The media manifest carries the imagery row '+asset.app_id);
+  assert(row.sha256===asset.sha256&&row.bytes===asset.bytes&&row.app_file===asset.app_file&&row.license===asset.license&&row.author===asset.author,'Register↔manifest parity on '+asset.app_id);
+  const bytes=fs.readFileSync(new URL('public/media/'+asset.app_file.replace('/media/',''),root));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256,'SHA-256 proof on the exact shipped imagery bytes of '+asset.app_id);
+  assert.equal(bytes.length,asset.bytes,'Imagery byte count on '+asset.app_id);
+ }
+ assert(new Set(imagery.assets.map(asset=>asset.title)).size===imagery.assets.length,'No Commons title attested twice — the dedup guard owns one asset per file');
+ const corpusRoot=fileURLToPath(root);
+ const imageryRows=classifyImageryRecords(readCorpusRecords(corpusRoot));
+ const appByQid=new Map(imagery.assets.map(asset=>[asset.qid,asset.app_id]));
+ const expectedRecords={};for(const row of imageryRows){const appId=appByQid.get(row.qid);if(appId)expectedRecords[row.id]={a:appId,c:row.cls,t:row.tag}}
+ assert.equal(JSON.stringify(imagery.records),JSON.stringify(expectedRecords),'The imagery register maps exactly the corpus rows whose attested Q-id exists — no drift, no dangling record');
+ const byClass={};for(const cls of CLASS_ORDER)byClass[cls]=imageryRows.filter(row=>row.cls===cls);
+ const expectedClasses={};for(const cls of CLASS_ORDER)expectedClasses[cls]={records:byClass[cls].length,imaged:byClass[cls].filter(row=>appByQid.has(row.qid)).length};
+ assert.deepEqual(imagery.classes,expectedClasses,'The register class stats recompute exactly (coverage reported, never inflated)');
+ console.log('Imagery register verified: '+imagery.assets.length+' attested Commons images ('+CLASS_ORDER.map(cls=>cls+' '+imagery.classes[cls].imaged+'/'+imagery.classes[cls].records).join(' · ')+') mapping '+Object.keys(imagery.records).length+' corpus rows on exact Q-ids; authors, licenses, SHA-256 proofs and manifest parity intact.');
+}
 if(videosByPlace.length)console.log('Video clips: '+videosByPlace.map(v=>v.video+' '+v.bytes+' bytes ('+v.license+')').join(' · '));
 if(overPreferred.length)console.log('Videos over the 15 MiB preferred band, shipped under the 25 MiB hard ceiling (smallest relevant clip per place): '+overPreferred.join(', '));

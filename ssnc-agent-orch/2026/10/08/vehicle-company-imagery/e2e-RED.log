@@ -1,0 +1,15 @@
+      132 |     await expect(page.locator('.company-live [role="alert"]').last()).toContainText('Introdu cel puțin 2 caractere');
+      133 |     expect(requests()).toBe(0);
+        at /Users/cbrebu/Projects/alfivra/e2e/company-name-search.spec.ts:130:41
+
+    Error Context: test-results/company-name-search-Compan-f391d-without-querying-any-source-chromium/error-context.md
+
+
+  6 failed
+    [chromium] › e2e/company-name-search.spec.ts:80:3 › Company name search (Wikidata VAT registry) › typing a firm name returns the matching firms with their CUI, disclosed coverage 
+    [chromium] › e2e/company-name-search.spec.ts:97:3 › Company name search (Wikidata VAT registry) › clicking a result opens that firm card with the public registries tab 
+    [chromium] › e2e/company-name-search.spec.ts:110:3 › Company name search (Wikidata VAT registry) › no name match stays an honest absence naming the unqueryable national registry 
+    [chromium] › e2e/company-name-search.spec.ts:128:3 › Company name search (Wikidata VAT registry) › a too-short name is rejected client-side without querying any source 
+    [chromium] › e2e/company-registries.spec.ts:163:3 › Company directors (Conducere) › the named directors render as their own section with per-row provenance 
+    [chromium] › e2e/company-registries.spec.ts:186:3 › Company directors (Conducere) › without leadership the section stays an honest absence naming the official registry it cannot read 
+  2 passed (1.4m)

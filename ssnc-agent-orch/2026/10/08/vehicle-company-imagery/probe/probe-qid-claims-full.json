@@ -1,0 +1,395 @@
+{
+ "probed": 107,
+ "claims": [
+  {
+   "qid": "Q1108065",
+   "label": "Colegiul Național „Constantin Diaconovici Loga” din Timișoara",
+   "p18": "Colegiul-C.D.Loga.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q117706903",
+   "label": "Podorozhnyk",
+   "p18": "Dan-83.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q1212435",
+   "label": "Liceul teoretic „Márton Áron”",
+   "p18": "Csikszereda14 Gimnázium 2005.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q12207333",
+   "label": "Parcul Alexandru Ioan Cuza",
+   "p18": "2019 Titan Park Spring (11).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12724335",
+   "label": "Colegiul Național Liceal „Zinca Golescu”",
+   "p18": "Pit Egalitatii Zinca 1.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12724340",
+   "label": "Colegiul Național Mihai Viteazul din București",
+   "p18": "Liceul Mihai Viteazu IMG 7290.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q12724348",
+   "label": "Colegiul Național „Gheorghe Șincai” din București",
+   "p18": "Gheorghe Șincai National College.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12724354",
+   "label": "Colegiul Național „Ștefan cel Mare” din Suceava",
+   "p18": "Liceul Ștefan cel Mare din Suceava.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12732152",
+   "label": "Liceul Pedagogic „Carmen Sylva” din Timișoara",
+   "p18": "Liceul Pedagogic Carmen Sylva Timisoara.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12732160",
+   "label": "Liceul Teoretic „Bartók Béla” din Timișoara",
+   "p18": "Timisoara, Liceul Bartok Bela.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12736100",
+   "label": "Muzeul Satului Maramureșean",
+   "p18": "Casa Hodor-Pop - Muzeul Satului Maramureșean (2023) - img 02.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737515",
+   "label": "Parcul Floreasca",
+   "p18": "Parcul Floreasca - loc de joaca.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737517",
+   "label": "Parcul Bazilescu",
+   "p18": "Parcul Bazilescu.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737520",
+   "label": "Parcul Central „Anton Scudier” din Timișoara",
+   "p18": "Central Park Timisoara - entrance.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737529",
+   "label": "Parcul Izvor",
+   "p18": "Parcul Izvor 2016.05.02.1 (26164817183).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737531",
+   "label": "Parcul Ion Voicu",
+   "p18": "Parcul Ioanid.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737533",
+   "label": "Parcul Justiției",
+   "p18": "Parcul Justitiei Timisoara.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12737534",
+   "label": "Parcul Kiseleff",
+   "p18": "2007 Parcul Kiseleff B-II-a-B-18982.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q12744205",
+   "label": "Colegiul Național „Școala Centrală” din București",
+   "p18": "3-5 Strada Icoanei, Bucharest (48).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q130493404",
+   "label": "Parcul Liniei",
+   "p18": "Parcul Liniei - (Sector 6 - Bucharest) - Zona Shopping Center Lujerului (20).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q132449",
+   "label": "Parcul Rozelor",
+   "p18": "Parcul Rozelor Timisoara - roses.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q133868099",
+   "label": "Regional Court - Vidin",
+   "p18": "Районен съд Видин - Темида.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q135526433",
+   "label": "Parcul Tudor Arghezi",
+   "p18": "Pista de atletism.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q18537034",
+   "label": "Colegiul Național Ion Luca Caragiale",
+   "p18": "Colegiul Național 'Ion Luca Caragiale', Str. Gheorghe Doja nr.98.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q18539021",
+   "label": "Parcul Circul de Stat",
+   "p18": "Afternoon - panoramio - Mihai Burlacu (1).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q18539115",
+   "label": "Colegiul Național „Cantemir Vodă” din București",
+   "p18": "Liceul Dimitrie Cantemir pe Bd. Dacia nr. 117, Bucuresti (fatada).JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q18539127",
+   "label": "Colegiul „Costache Negruzzi” din Iași",
+   "p18": "Iaşi , National College „Costache Negruzzi“ 1.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q18545122",
+   "label": "Palatul de Justiție din Suceava",
+   "p18": "Clădirea Palatului de Justiţie din Suceava.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q18548495",
+   "label": "Parcul Tei",
+   "p18": "Parcul Tei, Bucuresti.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q18548695",
+   "label": "Tribunalul București",
+   "p18": "Tribunalul București 1.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q18549424",
+   "label": "Școala din deal din Sighișoara",
+   "p18": "Scoala din deal din Sighisoara.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q19708159",
+   "label": "Parcul „Dimitrie Ghica” din Sinaia",
+   "p18": "RO PH Sinaia park 02.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2052075",
+   "label": "Parcul Carol I",
+   "p18": "Parcul Carol din Bucuresti - aleea principala vazuta dinspre Mausoleu.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2074133",
+   "label": "Parcul Herăstrău",
+   "p18": "Parcul Herastrau.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q22691547",
+   "label": "Parcul Carmen Sylva",
+   "p18": "Parcul Doina 1.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q22692035",
+   "label": "",
+   "p18": "Parcul Gheorghe Doja.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q22693419",
+   "label": "Parcul Alpinet",
+   "p18": "Alpinet Park.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q22693420",
+   "label": "Parcul Civic din Timișoara",
+   "p18": "Civic Park, Timișoara.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2284372",
+   "label": "Parcul Nicolae Romanescu",
+   "p18": "Parcul Nicolae Romanescu - podul suspendat 2.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2340319",
+   "label": "Parcul Tineretului",
+   "p18": "Parcul Tineretului.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q25459266",
+   "label": "Parcul Expo",
+   "p18": "Lac expo.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q25466725",
+   "label": "Palatul Episcopiei romano-catolice din Satu Mare",
+   "p18": "Palatul Episcopiei romano-catolice.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q26257222",
+   "label": "Parcul municipal „Mihai Eminescu” din Galați",
+   "p18": "Parcul \"Mihai Eminescu\", Galati (12).JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q26257384",
+   "label": "Zona cu parcul din Buziaș",
+   "p18": "Buzias Ansamblu balnear (5).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2689639",
+   "label": "Carrefour Market",
+   "p18": "Carrefour market fenestrelay.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q2983884",
+   "label": "Colegiul Național „Gheorghe Lazăr” din București",
+   "p18": "Gheorghe Lazar - High School.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q3067523",
+   "label": "Colegiul Național „Sfântul Sava” din București",
+   "p18": "Saint Sava National College.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q4093496",
+   "label": "Parcul Bordei",
+   "p18": "Bucharest - waterfront building, Parcul Bordei.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q4118458",
+   "label": "Parcul Copou",
+   "p18": "Mihai Eminescu's bust in Copou Garden 2.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q42758778",
+   "label": "Parcul Pantelimon",
+   "p18": "Poplars (AP4P1277 1PS) (29555186106).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q42888116",
+   "label": "Parcul",
+   "p18": "Park Elżbiety w Sfântu Gheorghe.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q42912625",
+   "label": "Ansamblul urban „Parcul Alei, cu imobilele limitrofe”",
+   "p18": "Grădina Alei 6.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q42922919",
+   "label": "Piața Unirii din Deva",
+   "p18": "RO HD Deva Piata Unirii (1).jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q43113639",
+   "label": "Tribunalul Sibiu",
+   "p18": "TribunalulSibiu.JPG",
+   "p158": null
+  },
+  {
+   "qid": "Q5044392",
+   "label": "Colegiul Național Carol I din Craiova",
+   "p18": "Carol 6.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q5612919",
+   "label": "Grădina Icoanei",
+   "p18": "Parcul Gradina Icoanei - statuie.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q56317371",
+   "label": "Dr. Max",
+   "p18": "Praha Vrsovice Kubanske namesti 5 Dr Max.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q5755230",
+   "label": "Înalta Curte de Casație și Justiție",
+   "p18": "Bucharest - Supreme Court 02.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q5983519",
+   "label": "Parcul Expoziției din Iași",
+   "p18": "Parcul Expoziţiei din Iaşi4.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q6062912",
+   "label": "Colegiul Național Ion C. Brătianu",
+   "p18": "RO AG - Liceul \"I.C. Brătianu\".jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q630125",
+   "label": "Gedeon Richter",
+   "p18": "Richter-Gedeon-Nyrt-P5010610.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q6845068",
+   "label": "Colegiul Naţional Mihai Eminescu, Bucureşti",
+   "p18": "Coelgiul Mihai Eminescu.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q715958",
+   "label": "Parcul Central din Cluj",
+   "p18": "Central Park Cluj-Napoca1.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q7851326",
+   "label": "Colegiul Național de Informatică Tudor Vianu",
+   "p18": "Bucharest - Colegiul Național de Informatică Tudor Vianu 01.jpg",
+   "p158": null
+  },
+  {
+   "qid": "Q959632",
+   "label": "Parcul Cișmigiu",
+   "p18": "Cismigiu-Garden-Bucharest-3.jpg",
+   "p158": null
+  }
+ ]
+}

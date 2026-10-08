@@ -1,0 +1,304 @@
+{
+ "qids": {
+  "Q959632": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w16291869",
+     "name": "Parcul Cișmigiu",
+     "city": "",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q2052075": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w13853540",
+     "name": "Parcul Carol",
+     "city": "",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q2074133": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w88337012",
+     "name": "Parcul Regele Mihai I Al României (Herăstrău)",
+     "city": "București",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q715958": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w23893331",
+     "name": "Parcul Central Simion Bărnuțiu",
+     "city": "Cluj-Napoca",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q4118458": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w61750051",
+     "name": "Parcul Copou",
+     "city": "",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q2284372": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w28132031",
+     "name": "Parcul Nicolae Romanescu",
+     "city": "",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q12744205": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w23771041",
+     "name": "Colegiul Național \"Școala Centrală\"",
+     "city": "București",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q3067523": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w515126132",
+     "name": "Colegiul Național Sfântul Sava",
+     "city": "București",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q18539127": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "n316394639",
+     "name": "Colegiul Național “Costache Negruzzi”",
+     "city": "Iași",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q56317371": {
+   "rows": 444,
+   "records": [
+    {
+     "id": "n8601933502",
+     "name": "Dr Max",
+     "city": "Oradea",
+     "tag": "brand:wikidata"
+    },
+    {
+     "id": "n10035776666",
+     "name": "Dr. Max",
+     "city": "",
+     "tag": "brand:wikidata"
+    },
+    {
+     "id": "n10066630361",
+     "name": "Dr. Max",
+     "city": "",
+     "tag": "brand:wikidata"
+    },
+    {
+     "id": "n10161422157",
+     "name": "Dr. Max",
+     "city": "",
+     "tag": "brand:wikidata"
+    },
+    {
+     "id": "n10207153117",
+     "name": "Dr. Max",
+     "city": "Petroșani",
+     "tag": "brand:wikidata"
+    }
+   ]
+  },
+  "Q117706903": {
+   "rows": 3,
+   "records": [
+    {
+     "id": "n12998748526",
+     "name": "Подорожник",
+     "city": "",
+     "tag": "brand:wikidata"
+    },
+    {
+     "id": "n13470695993",
+     "name": "Подорожник",
+     "city": "",
+     "tag": "brand:wikidata"
+    },
+    {
+     "id": "n13513838343",
+     "name": "Подорожник",
+     "city": "",
+     "tag": "brand:wikidata"
+    }
+   ]
+  },
+  "Q5755230": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w87312970",
+     "name": "Curtea Supremă de Justiție",
+     "city": "",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q43113639": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "r14225591",
+     "name": "Palatul de Justiție",
+     "city": "Sibiu",
+     "tag": "wikidata"
+    }
+   ]
+  },
+  "Q18548695": {
+   "rows": 1,
+   "records": [
+    {
+     "id": "w122215694",
+     "name": "Tribunalul București",
+     "city": "București",
+     "tag": "wikidata"
+    }
+   ]
+  }
+ },
+ "aiPharmacies": [
+  {
+   "id": "n6579666188",
+   "name": "2 M Farm",
+   "city": ""
+  },
+  {
+   "id": "n6579663091",
+   "name": "2 Na Farm",
+   "city": ""
+  },
+  {
+   "id": "n5473353406",
+   "name": "21Iris",
+   "city": ""
+  },
+  {
+   "id": "n11257028029",
+   "name": "2M pharma",
+   "city": ""
+  },
+  {
+   "id": "n2637394531",
+   "name": "2NA Farm",
+   "city": "București"
+  },
+  {
+   "id": "n5044393847",
+   "name": "2NA Farm",
+   "city": "Eforie Nord"
+  },
+  {
+   "id": "n6579666191",
+   "name": "2na Farm",
+   "city": ""
+  },
+  {
+   "id": "n6579666195",
+   "name": "2na Farm",
+   "city": ""
+  }
+ ],
+ "cityProbe": {
+  "București": [
+   {
+    "id": "n12122718324",
+    "name": "Consiliul Național de Soluționare a Contestațiilor"
+   },
+   {
+    "id": "n3762010967",
+    "name": "Curtea Constituțională a României"
+   },
+   {
+    "id": "n125283804",
+    "name": "Curtea de Apel București"
+   }
+  ],
+  "Brașov": [
+   {
+    "id": "w272865863",
+    "name": "Curtea de Apel"
+   }
+  ],
+  "Constanța": [
+   {
+    "id": "w135726658",
+    "name": "Curtea de Apel Constanța"
+   },
+   {
+    "id": "r3071359",
+    "name": "Judecătoria Constanța"
+   },
+   {
+    "id": "w135726669",
+    "name": "Tribunalul Constanța"
+   }
+  ],
+  "Sighișoara": [
+   {
+    "id": "n8990242699",
+    "name": "Judecătoria Sighișoara"
+   }
+  ],
+  "Timișoara": [
+   {
+    "id": "n7057737502",
+    "name": "Judecătoria Timișoara"
+   },
+   {
+    "id": "n7057737504",
+    "name": "Parchetul de pe lângă Curtea de Apel Timișoara"
+   },
+   {
+    "id": "n13590984268",
+    "name": "Registratura Judecătoriei Timiș"
+   }
+  ],
+  "Sibiu": [
+   {
+    "id": "r14225591",
+    "name": "Palatul de Justiție"
+   }
+  ],
+  "Iași": [
+   {
+    "id": "w208480017",
+    "name": "Tribunalul Iași, Curtea de Apel Iași"
+   }
+  ]
+ }
+}

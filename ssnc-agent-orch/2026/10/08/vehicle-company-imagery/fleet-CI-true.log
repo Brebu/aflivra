@@ -1,0 +1,18 @@
+T2 fleet log — 2026-10-09 00:24–00:32 local (CI=true, Playwright's own webServer, port
+verified free before start, teardown by Playwright at exit)
+
+First run (23:55–00:06): 205 passed / 9 skipped / 1 failed — the failure was
+e2e/geo-drift-dialogs.spec.ts:119 "a cinema film dialog survives a same-locality
+position drift" (failed + retry, exit 1).
+Triage: the leg passed 6/6 in isolation immediately after (non-CI reuse, 16.0s) on the
+same tree. Builder-T1 was actively editing app/public-map.tsx, app/workspaces.css,
+app/places-workspace.tsx during the fleet window (shared-tree HMR mid-run — the same
+failure class Builder-D documented on 2026-10-08); no company-family leg failed and no
+file of mine feeds the cinema/map dialog surfaces.
+
+Second run (00:24–00:32, after a clean port window): **206 passed / 9 skipped /
+0 failed (7.7m)** — exit 0. The 9 skipped legs are the registered hardware-premise
+legs (CI-sim convention).
+
+tsc final: 0 errors · lint final: 0 errors / 115 warnings (before and after the fleets,
+identical pre-change baseline; zero added by Builder-T2's files).

@@ -9,9 +9,11 @@ import {useLocation,distanceKm,LocationControl,LocationCityPicker} from './locat
 import {snapshotJson} from './snapshot-store';import {MetadataFields} from './metadata-fields';import {ContactsPanel} from './contacts-panel';
 import {PublicMediaGallery} from './public-media';import {recordMedia,publicUrl,publicImageUrl} from '@/lib/live/media';
 import {publicContacts} from '@/lib/live/contacts';import {countNoun,countText,normalizeSearch,paginate} from '@/lib/live/query';
-import {placeFacts,readableHours,type PlaceIndex} from '@/lib/places-view';import {sourceText} from '@/lib/live/text';
-import {format,cityPositions} from './v2-model';import {dateText} from './live-data';import {ExportActions} from './export-actions';
+import {placeFacts,readableHours,imageryFor,imageryChip,imageryGalleryItem,type PlaceIndex,type ImageryRegister} from '@/lib/places-view';
+import {sourceText} from '@/lib/live/text';
+import {format,cityPositions,places as galleryPlaces} from './v2-model';import {dateText} from './live-data';import {ExportActions} from './export-actions';
 import {PublicMap} from './public-map';import illustrations from '@/public/media/category-illustrations.json';
+import {fetchWithServerRetry} from '@/lib/http-retry.mjs';
 import type {PlacesManifest as Manifest} from '@/lib/places-query';import {useSource} from './use-source';
 type City={name:string;lat:number;lon:number;type:string;county:string};
 /* Inventarul de locuri se citește o dată pe sesiune: fiecare montare a spațiului de
@@ -22,6 +24,19 @@ function loadPlacesManifest():Promise<Manifest>{
  placesManifestSession??=snapshotJson<Manifest>('/places/manifest.json').then(m=>{if(m.schema!=='aflivra-places-v2')throw Error('Inventarul locurilor nu are formatul așteptat.');return m}).catch(e=>{placesManifestSession=null;throw e});
  return placesManifestSession;
 }
+/* Registrul de imagini Wikidata/Commons se citește o dată pe sesiune, ca inventarul locurilor:
+   fiecare card de parc, școală, farmacie sau instanță refolosește aceeași promisiune, iar o
+   fila lipsă degradează onest la ilustrația AI etichetată — niciodată la o fotografie inventată. */
+let imagerySession:Promise<ImageryRegister|null>|null=null;
+function loadImageryRegister():Promise<ImageryRegister|null>{
+ imagerySession??=fetchWithServerRetry('/media/imagery-register.json').then(response=>response.json()).then((register:ImageryRegister)=>{if(!register||register.schema!=='aflivra-imagery-v1')throw Error('Registrul imaginilor nu are formatul așteptat.');return register}).catch(()=>{imagerySession=null;return null});
+ return imagerySession;
+}
+function useImageryRegister(){const [register,setRegister]=useState<ImageryRegister|null>(null);useEffect(()=>{let active=true;loadImageryRegister().then(register=>{if(active)setRegister(register)});return()=>{active=false}},[]);return register}
+/* Promovarea turisticăLOCALITĂȚII: o singură fotografie atestată per localitate, strict din
+   registrul galeriilor fotografiate (explorare + Wiki Loves Monuments) — niciodată legată
+   de altă sursă și niciodată prezentată drept fotografie a locului de pe card. */
+const galleryPlaceByCity=new Map(galleryPlaces.filter(place=>place.images.length>=1).map(place=>[place.city,place]));
 const names:Record<string,string>={local:'Servicii și locuri din localitate',sanatate:'Spitale, clinici și farmacii',cultura:'Muzee, teatre și obiective de vizitat',filme:'Cinematografe',educatie:'Școli și locuri de învățare',bani:'Bănci, bancomate și schimb valutar',firme:'Magazine, birouri și servicii',transport:'Stații, gări și servicii de transport',justitie:'Instanțe și servicii juridice',munca:'Ocupare și recrutare',mediu:'Natură și locuri în aer liber',energie:'Încărcare și infrastructură energetică',agricultura:'Piețe, ferme și servicii agricole',stiri:'Redacții și instituții media'};
 const categoryDescriptions:Record<string,string>={sanatate:'Găsește unitatea, adresa, contactele, programul publicat și specialitățile disponibile în surse.',cultura:'Explorează toate locurile din copia națională, cu program, contacte, acces și materialele publicate.',local:'Administrație, servicii medicale, școli, transport, cultură și servicii utile în jurul localității alese.'};
 // External Wikidata references are built from the exact Q-ids published in the record's
@@ -30,14 +45,17 @@ const categoryDescriptions:Record<string,string>={sanatate:'Găsește unitatea, 
 const wikidataTagLabels:[string,string][]=[['wikidata','Fișa locului pe Wikidata'],['brand:wikidata','Fișa brandului pe Wikidata'],['operator:wikidata','Fișa operatorului pe Wikidata'],['network:wikidata','Fișa rețelei pe Wikidata']];
 const wikidataLinks=(tags:Record<string,string>)=>wikidataTagLabels.map(([tag,label])=>{const qid=String(tags[tag]||'');return /^Q[1-9]\d{0,9}$/.test(qid)?{tag,label,qid,url:'https://www.wikidata.org/wiki/'+qid}:null}).filter((x):x is {tag:string;label:string;qid:string;url:string}=>!!x);
 function EntityDetail({entry,manifest,category}:{entry:PlaceIndex;manifest:Manifest;category:string}){
+ const imagery=useImageryRegister(),attested=imageryFor(imagery,entry.id);
  const [data,setData]=useState<any>(null),[error,setError]=useState(''),[revision,setRevision]=useState(0),[map,setMap]=useState(false);
  useEffect(()=>{const c=new AbortController();setError('');snapshotJson('/places/records/'+entry.chunk+'.json',manifest.chunks[entry.chunk],c.signal).then(d=>{const item=d.items.find((r:any)=>r.id===entry.id);if(!item)throw Error('Fișa nu a fost găsită în copia verificată.');setData(item)}).catch(e=>{if(e.name!=='AbortError')setError(e.message)});return()=>c.abort()},[entry.id,entry.chunk,manifest,revision]);
  const facts=data?placeFacts(data.tags,category):[],wikiLinks=data?wikidataLinks(data.tags):[];
+ const cityPlace=galleryPlaceByCity.get(entry.city||String(data?.tags?.['addr:city']||''));
  return <div className="entity-expanded">{error&&<div className="live-error"><p>{error}</p><Button variant="outline" onClick={()=>setRevision(n=>n+1)}><RefreshCw size={16}/>Reîncearcă</Button></div>}{!data&&!error&&<p role="status">Se încarcă fișa integrală…</p>}{data&&<>
   <ContactsPanel data={data.tags} title="Contactele publicate pentru acest loc"/>{data.tags.opening_hours&&<p>Program publicat: {readableHours(data.tags.opening_hours)}</p>}{data.tags.description&&<p className="entity-description">{sourceText(data.tags.description)}</p>}
-  <PublicMediaGallery items={recordMedia(data.tags,data.sourceUrl)} title={entry.name}/>
+  <PublicMediaGallery items={attested?[imageryGalleryItem(attested.asset),...recordMedia(data.tags,data.sourceUrl)]:recordMedia(data.tags,data.sourceUrl)} title={entry.name}/>
    {facts.length>0&&<dl className="entity-facts">{facts.map(f=><div key={f.label}><dt>{f.label}</dt><dd>{f.value}</dd></div>)}</dl>}
    {wikiLinks.length>0&&<div className="reader-links wikidata-links" data-testid="wikidata-links"><span className="small-muted">Referințe externe, construite din identificatorii exacți (Q…) publicați în sursă:</span>{wikiLinks.map(l=><a key={l.tag} href={l.url} target="_blank" rel="noreferrer">{l.label} · {l.qid}</a>)}<p className="small-muted">Legăturile se deschid la Wikidata, în afara aplicației; aplicația nu interoghează Wikidata.</p></div>}
+   {cityPlace&&<aside className="imagery-teaser" data-testid="imagery-teaser"><img src={'/media/'+cityPlace.images[0]+'.webp'} alt={cityPlace.name} loading="lazy" width={720} height={420}/><div><span className="kicker">PROMOVARE TURISTICĂ · {cityPlace.city}</span><strong>{cityPlace.name}</strong><p className="small-muted">O fotografie atestată din galeriile localității — {countNoun(cityPlace.images.length,'imagine cu autor și licență','imagini cu autori și licențe')} în registrul local. Nu este o fotografie a acestui loc.</p><a className="text-link" href={'#view=place&id='+encodeURIComponent(cityPlace.id)}>Vezi galeria fotografiată a localității</a></div></aside>}
   <div className="entity-detail-actions"><Button variant="outline" onClick={()=>setMap(v=>!v)} aria-expanded={map}><MapIcon size={17}/>{map?'Închide harta':'Vezi pe hartă aici'}</Button><ExportActions input={{title:entry.name,data,subtitle:entry.sourceUrl}} label="Descarcă fișa completă"/></div>
   {map&&<PublicMap points={[{id:entry.id,name:entry.name,lat:entry.lat,lon:entry.lon,description:entry.address}]} viewKey={entry.id}/>}
   {data.locationApproximate&&<p className="small-muted">Poziție aproximativă calculată din conturul cartografiat. Nu indică neapărat intrarea.</p>}
@@ -46,10 +64,14 @@ function EntityDetail({entry,manifest,category}:{entry:PlaceIndex;manifest:Manif
  </>}</div>;
 }
 const EntityCard=memo(function EntityCard({entry,category,manifest,distance}:{entry:PlaceIndex;category:string;manifest:Manifest;distance:number|null}){
- const [open,setOpen]=useState(false),[failed,setFailed]=useState(false);const art=illustrations.find(x=>x.id===category)||illustrations[0];
- const image=publicImageUrl(entry.image),contacts=publicContacts(entry),subtypes=entry.types.filter(x=>category==='local'||x.category===category).map(x=>x.label);
+ const [open,setOpen]=useState(false),[failed,setFailed]=useState(false),[attestedFailed,setAttestedFailed]=useState(false);
+ const art=illustrations.find(x=>x.id===category)||illustrations[0];
+ const imagery=useImageryRegister(),attested=imageryFor(imagery,entry.id);
+ const image=publicImageUrl(entry.image),showSourceImage=!!image&&!failed,showAttested=!showSourceImage&&!!attested&&!attestedFailed,showArtwork=!showSourceImage&&!showAttested;
+ const shownSource=image||null,shownFile=showAttested?attested!.asset.app_file:null;
+ const contacts=publicContacts(entry),subtypes=entry.types.filter(x=>category==='local'||x.category===category).map(x=>x.label);
  return <article className={'entity-card entity-model-'+category}>
-  <figure className="entity-card-image"><img src={image&&!failed?image:'/media/'+art.file} alt={image&&!failed?entry.name:art.caption} loading="lazy" width={720} height={420} onError={()=>setFailed(true)}/>{(!image||failed)&&<figcaption>{image&&failed?"Fotografia nu s-a încărcat · ilustrație AI":"Ilustrație reprezentativă · AI"}</figcaption>}</figure>
+  <figure className="entity-card-image"><img src={showSourceImage?shownSource!:showAttested?shownFile!:'/media/'+art.file} alt={showArtwork?art.caption:entry.name} loading="lazy" width={720} height={420} onError={()=>{if(showSourceImage)setFailed(true);else if(showAttested)setAttestedFailed(true)}}/>{showAttested&&attested&&<figcaption>{imageryChip(attested.asset)} · {attested.asset.license}</figcaption>}{showArtwork&&<figcaption>{(image||attested)?"Fotografia nu s-a încărcat · ilustrație AI":"Ilustrație reprezentativă · AI"}</figcaption>}</figure>
   <div className="entity-card-content">{entry.image&&!image&&publicUrl(entry.image)&&<a className="text-link" href={publicUrl(entry.image)!} target="_blank" rel="noreferrer">Galeria foto indicată de sursă</a>}<span className="kicker">{[...new Set(subtypes)].join(' · ')}</span><h3 title={sourceText(entry.name)}>{sourceText(entry.name)}</h3>
   {distance!==null&&<span className="distance-label"><MapPin size={15}/>{format(distance,1)} km · în linie dreaptă</span>}
   <div className="entity-essentials">{entry.address?<p><MapPin size={18}/><span title={entry.address}>{entry.address}</span></p>:<p className="small-muted"><MapPin size={18}/><span>Adresa nu este publicată. Poziția este disponibilă pe hartă.</span></p>}{entry.openingHours&&<p><Clock size={18}/><span title={readableHours(entry.openingHours)}>{readableHours(entry.openingHours)}</span></p>}

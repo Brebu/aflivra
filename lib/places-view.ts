@@ -1,5 +1,21 @@
 import {sourceText} from './live/text';
+import type {PublicMedia} from './live/media';
 export type PlaceIndex={id:string;name:string;categories:string[];types:{category:string;label:string}[];lat:number;lon:number;address:string;city:string;phone:string;email:string;website:string;openingHours:string;updatedAt:string;sourceUrl:string;chunk:string;search:string;image?:string};
+/* Registrul de imagini Wikidata/Commons: fotografiile entităților cu Q-id exact, descărcate
+   săptămânal de relaia GitHub și atestate cu autor, licență și sha256. Rolul „brand” este
+   onest: fotografia brandului lanțului, nu a farmaciei respective. */
+export type ImageryAsset={app_id:string;app_file:string;qid:string;claim:string;role:string;classes:string[];subject:string;title:string;author:string;license:string;license_url:string;source_page_url:string;bytes:number;sha256:string};
+export type ImageryRecordRow={a:string;c:string;t:string};
+export type ImageryRegister={schema:'aflivra-imagery-v1';generatedAt:string;source:string;classes:Record<string,{records:number;imaged:number}>;assets:ImageryAsset[];records:Record<string,ImageryRecordRow>};
+export function imageryFor(register:ImageryRegister|null,id:string):{asset:ImageryAsset;row:ImageryRecordRow}|null{
+ if(!register||!id)return null;
+ const row=register.records[id];
+ if(!row)return null;
+ const asset=register.assets.find(entry=>entry.app_id===row.a);
+ return asset?{asset,row}:null;
+}
+export function imageryChip(asset:ImageryAsset){return asset.role==='brand'?'Fotografie de brand · Wikidata/Commons':'Fotografie atestată local · Wikidata/Commons'}
+export function imageryGalleryItem(asset:ImageryAsset):PublicMedia{const brand=asset.role==='brand';return {kind:'image',url:asset.app_file,caption:asset.subject+(brand?' — fotografie de brand Wikidata':' — fotografie de entitate Wikidata'),sourceUrl:asset.source_page_url,credit:asset.author,license:asset.license,licenseUrl:asset.license_url}}
 const dayNames:Record<string,string>={Mo:'luni',Tu:'marți',We:'miercuri',Th:'joi',Fr:'vineri',Sa:'sâmbătă',Su:'duminică',PH:'sărbători legale',SH:'vacanțe școlare'};
 export function readableHours(value:string){return value==='24/7'?'Non-stop · 24 de ore, în fiecare zi':value.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su|PH|SH)\b/g,x=>dayNames[x]).replace(/\boff\b/g,'închis').replace(/\bopen\b/g,'deschis').replace(/;/g,' · ')}
 const readableValues:Record<string,string>={yes:'Da',no:'Nu',limited:'Acces limitat',designated:'Amenajat',public:'Public',private:'Privat',customers:'Pentru clienți',permissive:'Acces permis',general:'Medicină generală',general_practice:'Medicină de familie',dentistry:'Stomatologie',orthodontics:'Ortodonție',cardiology:'Cardiologie',gynaecology:'Ginecologie',paediatrics:'Pediatrie',radiology:'Radiologie',physiotherapy:'Fizioterapie',dermatology:'Dermatologie',ophthalmology:'Oftalmologie',emergency:'Urgențe',psychiatry:'Psihiatrie',neurology:'Neurologie',psychology:'Psihologie',surgery:'Chirurgie',laboratory:'Analize de laborator'};

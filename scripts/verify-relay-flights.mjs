@@ -51,7 +51,7 @@ assert.equal(Number(boardCap?.replace(/_/g,'')),relay.MAX_BODY_BYTES,'the relay 
 const coverageBoards=Number(seedRouteSource.match(/const COVERAGE_BOARDS=(\d+);/)?.[1]);
 assert.equal(coverageBoards,relay.ADSB_POINTS.length,'the seed route demands exactly the four coverage responses the relay fetches — no quiet cut quadrant');
 const workflow=await readFile(join(root,'.github/workflows','flights-refresh.yml'),'utf8');
-assert.ok(workflow.includes('cron: "0 5 * * 3"'),'the relay tour runs weekly, Wednesday 05:00 UTC — the snapshotted positions the reader serves between tours can sit for days and carry the snapshot-age label, never a numeric cadence promise');
+assert.ok(workflow.includes('cron: "35 1,7,13,19 * * *"'),'the relay tour runs four times a day at 01:35/07:35/13:35/19:35 UTC (repo public — Actions minutes unlimited; the aircraft snapshot the reader serves between tours always carries the snapshot-age label, never a numeric cadence promise)');
 assert.ok(workflow.includes('workflow_dispatch'),'the relay tour can be triggered manually');
 assert.ok(workflow.includes('node scripts/relay-flights.mjs'),'the tour runs the relay script');
 assert.ok(workflow.includes('AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}'),'the token comes from the GitHub secret shared with the AFIR and BIA relays');
