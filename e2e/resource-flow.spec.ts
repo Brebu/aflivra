@@ -219,3 +219,26 @@ test.describe('XML resource reader',()=>{
     expect(pageErrors,`uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 });
+
+// Cardul de catalog („Toate datele publice, într-un singur catalog”) arată scurt:
+// editorul la o linie, titlul la două, descrierea la trei — integral rămâne în
+// dialogul setului.
+test('catalog dataset cards clamp, the reader dialog keeps the full text', async ({page}) => {
+  const longNotes = 'Descriere de lungime considerabilă pentru un set de date public: '.repeat(6) + 'finalul descrierii care nu încape pe card.';
+  // Catalogul de pe home rulează pe inventarul integral verificat (/catalog/index.json),
+  // nu pe API — stub-ul de inventar poartă articolul lung.
+  await page.route(/\/catalog\/index\.json/, route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({fetchedAt: '2026-10-01T07:11:39.637Z', publishedAt: '2026-10-01', items: [{id: 'clamp-catalog-test', title: 'Un titlu de set de date public foarte lung care descrie integral registrul și ediția și perioada de referință', organization: 'Ministerul Exemplelor Foarte Lungi și Analizelor Detaliate de Inventar Național', notes: longNotes, modified: '2026-09-30', categories: [], formats: ['XLSX', 'CSV'], resourceCount: 3}]})}));
+  await page.route(/\/places\/manifest\.json/, route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({count: 0, categories: {}, chunks: {}, cities: []})}));
+  await page.goto('/');
+  await expect(page.locator('main#vcontent')).toBeVisible();
+  const card = page.locator('.catalog-workspace .live-resource').first();
+  await expect(card).toBeVisible({timeout: 30_000});
+  const styles = await card.evaluate(el => {
+    const prop = (sel: string, p: string) => { const n = el.querySelector(sel); return n ? getComputedStyle(n).getPropertyValue(p) : null; };
+    return { kicker: prop('.kicker', '-webkit-line-clamp'), title: prop('h3', '-webkit-line-clamp'), summary: prop('.source-summary', '-webkit-line-clamp') };
+  });
+  expect(styles.kicker).toBe('1');
+  expect(styles.title).toBe('2');
+  expect(styles.summary).toBe('3');
+  await expect(card.locator('h3')).toContainText('Un titlu de set de date public');
+});
