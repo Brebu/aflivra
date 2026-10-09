@@ -11,7 +11,7 @@ const devToken = (() => {
   return match[1].trim();
 })();
 
-const groupNames = ['live', 'weather', 'news', 'legislation', 'registers'];
+const groupNames = ['pulse', 'living', 'feeds', 'research', 'registers'];
 const seedBackedFamilies = ['transport', 'siruta', 'films', 'directory.health', 'directory.pharmacies', 'directory.hospitals', 'justice.notari', 'justice.experti-judiciari', 'justice.experti-tehnici', 'justice.traducatori', 'housing.anl', 'housing.ancpi', 'trains', 'law.consolidated.full', 'catalog.organizations-formats', 'resource.datastores'];
 const validSourceStatuses = new Set(['fresh', 'cached', 'stale', 'unavailable']);
 
@@ -38,7 +38,7 @@ test.describe('Refresh API', () => {
     expect(response.status()).toBe(400);
     const body = await response.json();
     expect(body.error).toContain('Grupul de surse „inexistent”');
-    expect(body.error).toContain('Grupuri valide: live, weather, news, legislation, registers.');
+    expect(body.error).toContain('Grupuri valide: pulse, living, feeds, research, registers.');
   });
 
   test('status with the dev token returns hoisted seedBacked families and stored per-source detail', async ({request}) => {
@@ -66,17 +66,17 @@ test.describe('Refresh API', () => {
     expect(typeof body.servedAt).toBe('string');
   });
 
-  test('a single small group sweep (weather) returns per-source statuses under the free-plan shape', async ({request}) => {
+  test('a single small group sweep (pulse) returns per-source statuses under the free-plan shape', async ({request}) => {
     test.setTimeout(120_000);
-    const response = await request.post('/api/refresh?source=weather', {headers: {authorization: `Bearer ${devToken}`}});
+    const response = await request.post('/api/refresh?source=pulse', {headers: {authorization: `Bearer ${devToken}`}});
     expect(response.status()).toBe(200);
     const body = await response.json();
     expect(Array.isArray(body.groups)).toBe(true);
     expect(body.groups.length).toBe(1);
     const group = body.groups[0];
-    expect(group.group).toBe('weather');
+    expect(group.group).toBe('pulse');
     expect(Array.isArray(group.sources)).toBe(true);
-    expect(group.sources.length).toBe(5);
+    expect(group.sources.length).toBe(4);
     for (const source of group.sources) {
       expect(validSourceStatuses.has(source.status), `invalid source status: ${source.status}`).toBe(true);
       expect(typeof source.key).toBe('string');
