@@ -90,7 +90,8 @@ test.describe('MCP endpoint', () => {
       if (LINK_CLASS.has(name) && !result.isError) {
         expect(result.content[0].type, `${name}: exportul binar deschide cu legătura de resursă`).toBe('resource_link');
         const link = new URL(result.content[0].uri);
-        expect(link.protocol, `${name}: legătura e absolută, utilizabilă direct`).toBe('https:');
+        expect(link.protocol, `${name}: legătura e absolută, utilizabilă direct`).toMatch(/^https?:$/);
+        expect(link.host, `${name}: legătura poartă originea cererii`).toBeTruthy();
         expect(link.pathname, `${name}: legătura țintește ruta exportului`).toBe('/api/resource-file');
         expect(result.content[0].mimeType, `${name}: MIME-ul XLSX real`).toContain('spreadsheetml');
         expect(result.structuredContent.kind, `${name}: plic binar`).toBe('binary-export');
