@@ -39,11 +39,26 @@ try{
  assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca'})).point.lat,geo.geographicLocalities.find(c=>c.name==='Cluj-Napoca').lat);
  // Extinderea țintită: satele pe care SIRUTA le poartă în mediul urban au punct
  // cartografiat; satele rurale rămân onest fără — nicio coordonată inventată.
- for(const name of ['Poiana Brașov','Pârâul Rece','Timișu de Jos','Timișu de Sus','Fișer','Tohanu Nou']){
-  const hit=geo.geographicLocalities.find(c=>c.name===name&&geo.countyName(c.county)==='Brașov');
-  assert.ok(hit&&Number.isFinite(hit.lat)&&Number.isFinite(hit.lon),`localitatea urbană componentă ${name} are punct cartografiat`);
+ for(const name of ['Poiana Brașov','Pârâul Rece','Timișu de Jos','Timișu de Sus','Fișer','Tohanu Nou','Săcele','Predeal']){
+  const hit=geo.geographicLocalities.filter(c=>geo.sameLocality(c.name,name)&&geo.countyName(c.county)==='Brașov');
+  assert.equal(hit.length,1,`localitatea ${name} are exact un rând în județ — fără dublete pe diacritice Ș/Ş`);
+  assert.ok(hit[0]&&Number.isFinite(hit[0].lat)&&Number.isFinite(hit[0].lon),`localitatea urbană ${name} are punct cartografiat`);
  }
+ // Perechea (nume, județ) e invariantul registrului: niciun județ real nu apare
+ // despicat pe diacritice vechi/noi, iar un nume urban dintr-un județ nu
+ // îndreptătățește satul omonim rural din altul (SOHODOL Brașov vs Gorj).
+ {
+  const seen=new Set();
+  for(const row of geo.geographicLocalities){
+   const key=geo.localityName(row.name)+'|'+geo.countyName(row.county);
+   assert.ok(!seen.has(key),`un singur rând per (localitate, județ): ${key}`);
+   seen.add(key);
+  }
+ }
+ assert.ok(!geo.geographicLocalities.some(c=>geo.sameLocality(c.name,'Sohodol')&&geo.countyName(c.county)==='Brașov'),'satul rural SOHODOL Brașov rămâne fără punct — perechea urbană e în Gorj');
+ assert.ok(geo.geographicLocalities.some(c=>geo.sameLocality(c.name,'Sohodol')&&geo.countyName(c.county)==='Gorj'),'SOHODOL urban din Gorj își păstrează punctul legitim');
  assert.ok(!geo.geographicLocalities.some(c=>c.name==='Bod'),'satul rural Bod rămâne onest fără punct cartografiat');
+ assert.ok(geo.municipalitySector('BUCUREŞTI SECTORUL 3')&&geo.municipalitySector('București Sectorul 6')&&!geo.municipalitySector('Brașov')&&!geo.municipalitySector('BUCUREŞTI'),'doar sectoarele Bucureștiului sunt marcate municipiu-centru');
  assert.equal(geo.readGeographicContext(new URLSearchParams({geoScope:'national',lat:'46.77',lon:'23.62'})).point,null);
  assert.equal(geo.readGeographicContext(new URLSearchParams({lat:'90.1',lon:'23.6'})),null);
  // The live-vehicle radius is a validated context parameter: absent keeps the 15 km

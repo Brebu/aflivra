@@ -48,7 +48,7 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'localities_search',
-    description:'Search Romanian localities (SIRUTA registry): official names, county, urban/rural classification. Municipalities, towns and SIRUTA-urban component villages carry the mapped lat/lon; rural villages honestly carry none. Use it to resolve a locality before weather, events or transport calls.',
+    description:'Search Romanian localities (SIRUTA registry): official names, county, urban/rural classification. Municipalities, towns and SIRUTA-urban component villages carry the mapped lat/lon, matched strictly through the name+county pair — never by name alone; rural villages and ambiguous matches honestly carry none. Every row with a point carries pointKind: "locality" (the locality own mapped center) or "municipality-center" (the municipality point — the six Bucharest sectors share it, declared as such). Use it to resolve a locality before weather, events or transport calls.',
     inputSchema:{type:'object',properties:{q:{type:'string',description:'Locality (part of) name'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
     build:args=>({path:'/api/localities',query:query([['q',str(args.q)],['page',num(args.page)]])}),
   },
@@ -67,7 +67,7 @@ export const TOOLS:ToolDef[]=[
   {
     name:'events_search',
     description:'Performing arts and public events across Romanian institutions (theatres, opera houses, event venues), searchable by text and locality, with dates, venues and details.',
-    inputSchema:{type:'object',properties:{q:{type:'string',description:'Free-text event query'},venue:{type:'string',description:'One validated venue calendar (e.g. "Odeon", "Opera Cluj") — exact venue names come from the registered venues registry'},locality:{type:'string',description:'Locality name'},county:{type:'string',description:'County name'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
+    inputSchema:{type:'object',properties:{q:{type:'string',description:'Non-empty free-text event query — an empty string is rejected at the MCP boundary'},venue:{type:'string',description:'One validated venue calendar (e.g. "Odeon", "Opera Cluj") — exact venue names come from the registered venues registry'},locality:{type:'string',description:'Locality name'},county:{type:'string',description:'County name'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
     build:args=>({path:'/api/events',query:query([['q',str(args.q)],['venue',str(args.venue)],['locality',str(args.locality)],['county',str(args.county)],['page',num(args.page)]])}),
   },
   {

@@ -10,11 +10,19 @@ packed=json.loads((root/'lib/live/seed-snapshots.json').read_text())['server']
 raw=gzip.decompress(base64.b64decode(packed['gzipBase64']))
 assert hashlib.sha256(raw).hexdigest()==packed['sha256']
 source=json.loads(raw)['siruta'];names={};urban_names={}
+# Județul se compară pliat: SIRUTA scrie diacriticele vechi (Ş-cedilla), OSM
+# diacriticele noi (Ș-comma) — pe string brut, „Brașov" și „Braşov" ar fi două
+# județe diferite și două rânduri pentru același județ real.
+def county_key(value):
+ return ' '.join(unicodedata.normalize('NFD',value).encode('ascii','ignore').decode().lower().replace('județul','').replace('judetul','').split())
 for item in source['data']['items']:
  name=fold(item['name']);county=item['county'].replace('JUDEŢUL ','').replace('JUDEȚUL ','').title()
  if name=='bucuresti':county='București'
  names.setdefault(name,set()).add(county)
  if item.get('environment')=='Urban':urban_names.setdefault(name,set()).add(county)
+# Mediul urban se filtrează pe PEREA (nume, județ): un nume urban într-un județ
+# nu îndreptătățește satul omonim rural din alt județ (SOHODOL Brașov vs Gorj).
+urban_pairs={(name,county_key(county)) for name,counties in urban_names.items() for county in counties}
 known={k:next(iter(v)) for k,v in names.items() if len(v)==1}
 urban_known={k:next(iter(v)) for k,v in urban_names.items() if len(v)==1}
 out=root/'public/data';out.mkdir(exist_ok=True)
@@ -24,17 +32,20 @@ cities=json.loads((root/'public/places/cities.json').read_text())['items']
 # Registrul cartografiat cuprinde municipiile și orașele, plus satele pe care SIRUTA
 # le poartă în mediul urban (componente ale unităților urbane) — restul satelor
 # rămân onest fără punct geografic, nu se inventează nicio coordonată.
-urban=[];seen=set()
+# Județul rândului: cel cartografiat de OSM, altfel rezolvat din SIRUTA — doar
+# la un nume unic; un nume ambiguu nu moștenește județul omonimului urban.
+best={};priority={'city':0,'town':1,'village':2,'hamlet':3}
 for city in cities:
  folded=fold(city['name'])
  core=city.get('type') in ['city','town']
  if city.get('type') not in ['city','town','village','hamlet']:continue
- if not core and folded not in urban_names:continue
- county=city.get('county') or known.get(folded) or urban_known.get(folded) or ''
- key=(folded,county)
- if key in seen:continue
- seen.add(key)
- urban.append({k:city[k] for k in ['name','lat','lon']}|{'county':county,'type':city['type']})
+ county=city.get('county') or known.get(folded) or ''
+ key=(folded,county_key(county))
+ if not core and key not in urban_pairs:continue
+ held=best.get(key)
+ if held and priority[held[1]['type']]<=priority[city['type']]:continue
+ best[key]=(county,city)
+urban=[{k:city[k] for k in ['name','lat','lon']}|{'county':county,'type':city['type']} for county,city in best.values()]
 (out/'geographic-localities.json').write_text(json.dumps({**proof,'items':urban},ensure_ascii=False,separators=(',',':'))+'\n')
 network=json.loads((root/'public/transit/network.json').read_text());manifest=json.loads((root/'public/transit/manifest.json').read_text())
 points=[(float(x['stop_lat']),float(x['stop_lon'])) for x in network['stops']]

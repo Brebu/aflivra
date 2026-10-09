@@ -70,7 +70,7 @@ Registrele naționale ca tabele: `schools` | `health` | `pharmacies` | `hospital
 ```
 
 ### `localities_search`
-Localitățile din SIRUTA: nume, județ, clasificare, mediu (urban/rural). Coordonatele cartografiate (lat/lon, centrul localității) au garantat municipiile, orașele și satele pe care SIRUTA le poartă în mediul urban — componentele unităților urbane — acolo unde registrul cartografiat le potrivește unic pe nume+județ; satele rurale și potrivirile ambigue rămân onest fără punct geografic. Folosește-o să rezolvi un nume înainte de vreme/evenimente/transport.
+Localitățile din SIRUTA: nume, județ, clasificare, mediu (urban/rural). Coordonatele cartografiate (lat/lon) au garantat municipiile, orașele și satele din mediul urban (componentele unităților urbane) — registrul cartografiat le potrivește strict pe perechea nume+județ, fără nicio potrivire pe nume global; satele rurale și potrivirile ambigue rămân onest fără punct. Rândul cu punct poartă și `pointKind`: `locality` — centrul cartografiat al localității — sau `municipality-center` — punctul municipiului, nu centrul unității proprii; sectoarele Bucureștiului primesc punctul municipiului București, declarat `municipality-center`. Folosește-o să rezolvi un nume înainte de vreme/evenimente/transport.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "localities_search", "arguments": {"q": "Câmpulung"}}}
 ```
@@ -88,7 +88,7 @@ Avertizările ANM active; fără avertizări, fluxul XML gol se servește onest 
 ```
 
 ### `events_search`
-Spectacole și concerte în calendarele publice validate (teatre, operă): textul, sala (`venue` — id-ul sau denumirea uzuală, ambele se rezolvă) și localitatea se aplică împreună; o căutare fără potriviri rămâne succes onest cu total 0.
+Spectacole și concerte în calendarele publice validate (teatre, operă): textul, sala (`venue` — id-ul sau denumirea uzuală, ambele se rezolvă) și localitatea se aplică împreună, iar `q` trebuie nevid — un `q` gol se respinge la granița MCP cu mesajul exact `Argument "q" must be a non-empty string.`; o căutare fără potriviri rămâne succes onest cu total 0.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "events_search", "arguments": {"q": "teatru", "locality": "București"}}}
 ```
