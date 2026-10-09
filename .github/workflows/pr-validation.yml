@@ -55,6 +55,7 @@ jobs:
           node scripts/verify-legal-refresh.mjs
           node scripts/verify-catalog.mjs
           node scripts/verify-snapshot-transport.mjs
+          node scripts/verify-trains-corpus.mjs
           node scripts/verify-refresh-sweep.mjs
           node scripts/verify-recency-policy.mjs
           node scripts/verify-enrichment-joins.mjs
@@ -76,7 +77,6 @@ jobs:
           node scripts/verify-relay-afir.mjs
           node scripts/verify-relay-bia.mjs
           node scripts/verify-relay-flights.mjs
-          node scripts/verify-relay-imagery.mjs
           node scripts/verify-relay-imagery.mjs
           node scripts/verify-court-links.mjs
           node scripts/verify-packed-seeds.mjs

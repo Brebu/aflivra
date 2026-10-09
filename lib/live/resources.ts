@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {publicUrl} from './media';
 import {env} from 'cloudflare:workers';
 import {getSource,SourceError} from './adapters';
-import {xmlTableRowSet} from './source-xml';
+import {xmlTableRowSet,isWordPackage,wordPackageText} from './source-xml';
 import {matchesQuery,paginate,compareValues} from './query';
 import type {Loader,Loaded,SourceState} from './types';
 import {savedResourceMetadata} from './catalog-metadata';
@@ -49,6 +49,7 @@ export function parseResource(bytes:Uint8Array,format:string,title?:string):Load
    // conținutul rămâne document integral, etichetat onest cu formatul lui.
    const table=xmlTableRowSet(text);
    if(table)sheets=[{name:table.name||title||'XML',columns:table.columns,rows:table.rows,total:table.rows.length,truncated:false}];
+   else if(isWordPackage(text))return{publishedAt:null,data:{kind:'text',text:wordPackageText(text),format:'XML, DOC',textComplete:false,sourceShape:'word-flat-opc',originalCharacters:text.length,xmlDocument:text}};
    else return{publishedAt:null,data:{kind:'text',text,format:'XML',textComplete:true}};
   }else return{publishedAt:null,data:{kind:'text',text,format:kind,textComplete:true}};
  }else throw new SourceError('Formatul '+kind+' nu are încă un cititor integrat. Metadatele rămân disponibile.');
@@ -73,7 +74,7 @@ export async function downloadResource(url:URL){
  let response:Response;for(let hop=0;;hop++){response=await fetchWithServerRetry(url,{redirect:'manual',signal:AbortSignal.timeout(25000),headers:{'User-Agent':'Aflivra/1.0 public-data-reader'}});if(![301,302,303,307,308].includes(response.status))break;const location=response.headers.get('location');if(!location||hop>=3)throw new SourceError('Redirecționarea fișierului nu a putut fi confirmată.');const next=new URL(location,url);if(next.protocol!=='https:'||next.username||next.password||!resourceHosts.has(next.hostname)||next.port&&next.port!=='443')throw new SourceError('Fișierul a fost mutat la un editor care trebuie conectat.');url=next}if(!response.ok)throw new SourceError('Fișierul public răspunde cu HTTP '+response.status+'.');if(Number(response.headers.get('content-length'))>25_000_000)throw new SourceError('Fișierul depășește capacitatea de 25 MB a importului. Documentul nu a fost scurtat.');
  const reader=response.body?.getReader();if(!reader)throw new SourceError('Fișierul nu are conținut.');const chunks:Uint8Array[]=[];let length=0;while(true){const {done,value}=await reader.read();if(done)break;length+=value.length;if(length>25_000_000){await reader.cancel();throw new SourceError('Fișierul depășește capacitatea de 25 MB a importului.')}chunks.push(value)}const bytes=new Uint8Array(length);let at=0;for(const chunk of chunks){bytes.set(chunk,at);at+=chunk.length}return bytes;
 }
-export const resourceLoader=(id:string):Loader=>({key:'resource:'+id,name:'Resursă publică · data.gov.ro',url:'https://data.gov.ro/api/3/action/resource_show?id='+id,version:'resource.complete-index.v7',ttl:86400,load:async()=>{
+export const resourceLoader=(id:string):Loader=>({key:'resource:'+id,name:'Resursă publică · data.gov.ro',url:'https://data.gov.ro/api/3/action/resource_show?id='+id,version:'resource.complete-index.v8',ttl:86400,load:async()=>{
  const snapshot=await savedResourceMetadata(id);let r:any,metadataNotice='';try{const meta=JSON.parse(await getSource('https://data.gov.ro/api/3/action/resource_show?id='+id,undefined,{timeoutMs:snapshot?3500:18000}));if(meta.success!==true||!meta.result?.url)throw new SourceError('Metadatele resursei nu sunt disponibile.');r=meta.result}catch(error){if(!snapshot)throw error;r=snapshot.resource;metadataNotice='Fișier citit folosind fișa din inventarul verificat; API-ul metadatelor nu a răspuns. Fișa a trecut verificarea SHA-256.'}
  const publishedAt=r.last_modified||r.created||null,title=String(r.name||id);
  if(r.datastore_active){try{const d=JSON.parse(await getSource('https://data.gov.ro/api/3/action/datastore_search?'+new URLSearchParams({resource_id:id,limit:'0'}),undefined,{timeoutMs:snapshot?3500:18000}));if(d.success!==true||!Array.isArray(d.result?.fields)||!Number.isInteger(d.result.total))throw new SourceError('Structura tabelului public nu este disponibilă.');return{publishedAt,data:{kind:'datastore',title,sourceUrl:r.url,columns:d.result.fields.map((f:any)=>String(f.id)),total:d.result.total,metadataNotice}}}catch{metadataNotice+=' Tabelul API nu a răspuns; verificăm fișierul publicat.'}}

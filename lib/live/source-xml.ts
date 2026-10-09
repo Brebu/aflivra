@@ -192,6 +192,20 @@ const scanRows=(raw:string,chosen:Dominance)=>{
   return rows;
 };
 /** Setul dominant de rânduri aplatizat în foaie, sau null când conținutul rămâne document. */
+// Pachetul Word 2003 (Flat OPC) nu se toarnă în conversație ca XML brut:
+// textul vizibil se extrage din partea /word/document.xml (rulurile fiecărui
+// paragraf), iar integralul rămâne documentul descărcabil pe ruta de fișier.
+export function isWordPackage(raw:string):boolean{
+ return /<pkg:package\b/i.test(raw)&&/pkg:name="\/word\/document\.xml"/.test(raw);
+}
+export function wordPackageText(raw:string):string{
+ const part=raw.match(/<pkg:part[^>]*pkg:name="\/word\/document\.xml"[^>]*>([\s\S]*?)<\/pkg:part>/)?.[1]||'';
+ const paragraphs=part.match(/<w:p\b[\s\S]*?<\/w:p>|<w:p\s*\/>/g)||[];
+ return paragraphs.map(paragraph=>{
+  const runs=paragraph.match(/<w:t(?:\s[^>]*)?>[\s\S]*?<\/w:t>/g)||[];
+  return runs.map(run=>fragmentText(run.replace(/^<w:t(?:\s[^>]*)?>/,'').replace(/<\/w:t>$/,''))).join('');
+ }).filter(line=>line.trim()).join('\n');
+}
 export function xmlTableRowSet(raw:string):XmlRowTable|null{
   if(/<!DOCTYPE|<!ENTITY/i.test(raw))throw new SourceError('Documentul XML conține declarații care nu sunt acceptate.');
   if(!raw.includes('<'))return null;

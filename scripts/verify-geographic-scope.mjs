@@ -37,6 +37,13 @@ try{
  for(const c of locations){assert.equal(geo.withLocalCounty({name:c.locality,...c.point}).county,c.county);const params=new URLSearchParams({geoScope:'context',locality:c.locality,county:c.county,lat:String(c.point.lat),lon:String(c.point.lon)});assert.deepEqual(geo.readGeographicContext(params),c)}
  assert.equal(geo.withLocalCounty({name:'Satu Mare',type:'city',lat:47.792,lon:22.886}).county,'Satu Mare');assert(!geo.withLocalCounty({name:'Florești',type:'village',lat:46.747,lon:23.49}).county);assert(!geo.registryMatchesLocation({'Localitate unitate':'SĂLCIOARA','Judet PJ':'IL'},geo.availableContext('Sălcioara',{lat:44.72,lon:25.54}),'schools'));
  assert.equal(geo.readGeographicContext(new URLSearchParams({locality:'Cluj-Napoca'})).point.lat,geo.geographicLocalities.find(c=>c.name==='Cluj-Napoca').lat);
+ // Extinderea țintită: satele pe care SIRUTA le poartă în mediul urban au punct
+ // cartografiat; satele rurale rămân onest fără — nicio coordonată inventată.
+ for(const name of ['Poiana Brașov','Pârâul Rece','Timișu de Jos','Timișu de Sus','Fișer','Tohanu Nou']){
+  const hit=geo.geographicLocalities.find(c=>c.name===name&&geo.countyName(c.county)==='Brașov');
+  assert.ok(hit&&Number.isFinite(hit.lat)&&Number.isFinite(hit.lon),`localitatea urbană componentă ${name} are punct cartografiat`);
+ }
+ assert.ok(!geo.geographicLocalities.some(c=>c.name==='Bod'),'satul rural Bod rămâne onest fără punct cartografiat');
  assert.equal(geo.readGeographicContext(new URLSearchParams({geoScope:'national',lat:'46.77',lon:'23.62'})).point,null);
  assert.equal(geo.readGeographicContext(new URLSearchParams({lat:'90.1',lon:'23.6'})),null);
  // The live-vehicle radius is a validated context parameter: absent keeps the 15 km

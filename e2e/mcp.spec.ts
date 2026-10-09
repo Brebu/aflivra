@@ -155,6 +155,10 @@ test.describe('MCP endpoint', () => {
     expect(legalArray.status(), 'array la rută: 400').toBe(400);
     const badSheet = await request.get('/api/resource-file', {params: {id: '1088e792-54f4-43ad-8e4c-9b351b82d31c', format: 'xlsx', sheet: '999'}});
     expect(badSheet.status(), 'foaia inexistentă la export: 400, nu workbook al altor foi').toBe(400);
+    const badCategory = await request.post('/api/mcp', {data: {jsonrpc: '2.0', id: 10, method: 'tools/call', params: {name: 'places_search', arguments: {q: 'București', category: 'comert'}}}});
+    const badCategoryBody = await badCategory.json();
+    expect(badCategoryBody.error.code, 'categoria inexistentă se respinge la graniță cu parametrul numit').toBe(-32602);
+    expect(badCategoryBody.error.message).toContain('category');
   });
 });
 
@@ -245,6 +249,16 @@ test.describe('semantic regressions', () => {
     expect(Date.parse(body.data.hourly[0].time) + 3600e3, 'bucketul servit e cel în curs/viitor, nu trecut').toBeGreaterThan(Date.now() - 3600e3);
   });
 
+  test('forensic_experts: persoanele distincte nu partajează _id-ul — marcajul „0 0" al sursei nu devine cheie', async ({request}) => {
+    const response = await request.get('/api/experts', {params: {kind: 'experti-judiciari', locality: 'București', county: 'București'}});
+    const body = await response.json();
+    const records = body.data?.records ?? [];
+    test.skip(!records.length, 'fără registru local');
+    const ids = records.map((record: {_id?: string}) => record._id);
+    expect(ids.every(Boolean), 'fiecare înregistrare are _id').toBe(true);
+    expect(new Set(ids).size, 'persoanele distincte au _id distincte').toBe(records.length);
+  });
+
   test('localities: localitățile urbane poartă coordonatele cartografiate', async ({request}) => {
     const response = await request.get('/api/localities', {params: {q: 'Brașov'}});
     const body = await response.json();
@@ -252,6 +266,11 @@ test.describe('semantic regressions', () => {
     test.skip(!items.length, 'fără registru SIRUTA local');
     const city = items.find((item: {name: string}) => item.name.toUpperCase().startsWith('BRA')) as {lat?: number; lon?: number};
     expect(Number.isFinite(city?.lat) && Number.isFinite(city?.lon), 'BRAȘOV urben are lat/lon').toBe(true);
+    const component = items.find((item: {name: string; lat?: number}) => /^TIMIȘU DE JOS$/i.test(item.name));
+    test.skip(!component, 'fără registrul SIRUTA complet local');
+    expect(Number.isFinite(component?.lat), 'satul component urban TIMIȘU DE JOS are punct cartografiat').toBe(true);
+    const rural = items.find((item: {name: string; lat?: number}) => /^BOD$/i.test(item.name));
+    if (rural) expect(rural.lat, 'satul rural BOD rămâne onest fără coordonate').toBeUndefined();
   });
 
   test('court_dosar_search: instanța se cere prin denumire sau id', async ({request}) => {
