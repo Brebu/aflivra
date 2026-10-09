@@ -89,7 +89,9 @@ test.describe('MCP endpoint', () => {
       expect(typeof result.isError, `${name}: isError declarat`).toBe('boolean');
       if (LINK_CLASS.has(name) && !result.isError) {
         expect(result.content[0].type, `${name}: exportul binar deschide cu legătura de resursă`).toBe('resource_link');
-        expect(result.content[0].uri, `${name}: legătura țintește ruta exportului`).toContain('/api/resource-file');
+        const link = new URL(result.content[0].uri);
+        expect(link.protocol, `${name}: legătura e absolută, utilizabilă direct`).toBe('https:');
+        expect(link.pathname, `${name}: legătura țintește ruta exportului`).toBe('/api/resource-file');
         expect(result.content[0].mimeType, `${name}: MIME-ul XLSX real`).toContain('spreadsheetml');
         expect(result.structuredContent.kind, `${name}: plic binar`).toBe('binary-export');
         expect(result.structuredContent.rows, `${name}: rândurile călătoresc în plic`).toBeGreaterThan(0);
@@ -103,6 +105,14 @@ test.describe('MCP endpoint', () => {
       } else {
         expect(result.content[0].type, `${name}: conținut text`).toBe('text');
         expect(result.content[0].text.length, `${name}: text neciudat`).toBeGreaterThan(2);
+      }
+      if (name === 'weather_forecast' && !result.isError && !Number.isFinite(ARGUMENTS[name].hours)) {
+        const forecast = result.structuredContent.data;
+        test.info().annotations.push({type: 'note', description: 'weather default window'});
+        expect((forecast.hourly as unknown[]).length, `${name}: implicit hours=48, nu 168`).toBe(48);
+        expect(forecast.hoursApplied, `${name}: fereastra aplicată se declară`).toBe(48);
+        expect(forecast.windowStart, `${name}: fereastra publică ora de început`).toBeTruthy();
+        expect(Date.parse(forecast.hourly[0].time) + 3600e3, `${name}: fereastra începe la ora curentă, nu la miezul nopții`).toBeGreaterThan(Date.now());
       }
       if (SEED_CLASS.has(name) && !result.isError) {
         expect(result.structuredContent.total ?? result.structuredContent.data.total, `${name}: registru seed cu total`).toBeGreaterThan(0);
@@ -214,8 +224,33 @@ test.describe('semantic regressions', () => {
     expect((ghost.departures as unknown[]).length, 'numărul inexistent întoarce panou gol, nu tot panoul').toBe(0);
     const all = await call({station: '10017', edition: 'all'});
     expect((all.departures as unknown[]).length, 'arhiva completă cuprinde cel puțin edițiile curente').toBeGreaterThanOrEqual((d.departures as unknown[]).length);
+    expect((all.editionContext.activeOperators as string[]).length, 'activeOperators rămân valabile la dată și în arhivă').toBe((d.editionContext.activeOperators as string[]).length);
+    expect((all.editionContext.includedOperators as string[]).length, 'includedOperators descriu arhiva întreagă').toBeGreaterThan((all.editionContext.activeOperators as string[]).length);
+    const archiveExpired = (all.operators as Array<{expired?: boolean}>).filter(operator => operator.expired);
+    expect(archiveExpired.length, 'edițiile istorice rămân expired în arhivă').toBeGreaterThan(0);
     const expired = (d.operators as Array<{expired?: boolean}>).filter(operator => operator.expired);
     expect(expired.length, 'edițiile expirate se semnalează distinct în sumar').toBeGreaterThan(0);
+    for (const row of d.arrivals as Array<{f: string}>) {
+      expect(row.f, 'sosirile nu includ trenuri care își încep ruta în gara panoului').not.toBe(d.station.name);
+    }
+  });
+
+  test('weather: fereastra orară curentă la hours explicit', async ({request}) => {
+    const one = await request.get('/api/weather', {params: {lat: '44.427', lon: '26.103', hours: '1'}});
+    const body = await one.json();
+    test.skip(!body.data?.hourly?.length, 'fără copie meteo local');
+    expect((body.data.hourly as unknown[]).length, 'hours=1: un singur rând').toBe(1);
+    expect(body.data.windowStart, 'windowStart publicat').toBeTruthy();
+    expect(Date.parse(body.data.hourly[0].time) + 3600e3, 'bucketul servit e cel în curs/viitor, nu trecut').toBeGreaterThan(Date.now() - 3600e3);
+  });
+
+  test('localities: localitățile urbane poartă coordonatele cartografiate', async ({request}) => {
+    const response = await request.get('/api/localities', {params: {q: 'Brașov'}});
+    const body = await response.json();
+    const items = body.data?.items ?? [];
+    test.skip(!items.length, 'fără registru SIRUTA local');
+    const city = items.find((item: {name: string}) => item.name.toUpperCase().startsWith('BRA')) as {lat?: number; lon?: number};
+    expect(Number.isFinite(city?.lat) && Number.isFinite(city?.lon), 'BRAȘOV urben are lat/lon').toBe(true);
   });
 
   test('court_dosar_search: instanța se cere prin denumire sau id', async ({request}) => {

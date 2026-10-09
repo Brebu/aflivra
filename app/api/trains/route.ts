@@ -19,8 +19,12 @@ export async function GET(request:Request){
  // operatorii a căror ediție e valabilă la data cerută; edițiile expirate rămân
  // citibile prin edition=all și sînt semnalate distinct în sumarul de operatori.
  const activeIds=edition==='all'?new Set(verifiedOperators.map(operator=>operator.id)):new Set(verifiedOperators.filter(operator=>operator.validFrom<=ymd&&operator.validTo>=ymd).map(operator=>operator.id));
- const summary=operatorSummary.map(operator=>({...operator,expired:edition==='current'&&!(operator.validFrom<=ymd&&operator.validTo>=ymd)}));
- const rowFilter=(row:{o:string})=>activeIds.has(row.o);
+ // `expired` descrie ediția față de data cerută, independent de mod: o ediție
+ // istorică rămâne expired și în arhivă; `activeOperators` ține doar edițiile
+ // valabile la data cerută, `includedOperators` pe toate cele incluse în răspuns.
+ const summary=operatorSummary.map(operator=>({...operator,expired:!(operator.validFrom<=ymd&&operator.validTo>=ymd)}));
+ const includedIds=new Set(verifiedOperators.map(operator=>operator.id));
+ const rowFilter=(row:{o:string})=>(edition==='all'?includedIds:activeIds).has(row.o);
  try{
   if(station!==null){
    const stations=await readTrainsStations(request.url);
@@ -33,13 +37,13 @@ export async function GET(request:Request){
    const boardQuery=q||null;
    const keep=(row:TrainBoardRow)=>rowFilter(row)&&(!boardQuery||foldTrainText(row.n).includes(foldTrainText(boardQuery))||foldTrainText(row.c).includes(foldTrainText(boardQuery)));
    const departures=board.departures.filter(keep),arrivals=board.arrivals.filter(keep);
-   const response={...envelope,status:'cached',data:{station:{code:found.code,name:found.name,operators:found.operators,trains:found.trains},departures,arrivals,operators:summary,editionContext:{date,edition,activeOperators:[...activeIds]},note,query:boardQuery},publishedAt:manifest.fetchedAt,lastSuccessAt:manifest.fetchedAt,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:86400};
+   const response={...envelope,status:'cached',data:{station:{code:found.code,name:found.name,operators:found.operators,trains:found.trains},departures,arrivals,operators:summary,editionContext:{date,edition,activeOperators:[...activeIds],includedOperators:[...(edition==='all'?includedIds:activeIds)]},note,query:boardQuery},publishedAt:manifest.fetchedAt,lastSuccessAt:manifest.fetchedAt,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:86400};
    return Response.json(response,{headers:{'Cache-Control':'no-store'}});
   }
   const stations=await readTrainsStations(request.url);
    const rows=searchTrainStations(stations,q).map(station=>edition==='current'?{...station,operators:station.operators.filter(operator=>activeIds.has(operator)),trains:station.trains}:station);
   const selection=paginate(rows,page,40);
-  return Response.json({...envelope,status:'cached',data:{...selection,operators:summary,editionContext:{date,edition,activeOperators:[...activeIds]},note,delayedEditions:operators.filter(operator=>operator.status!=='verified').map(operator=>operator.name+' ('+(operator.reason||'ediție indisponibilă')+')')},publishedAt:manifest.fetchedAt,lastSuccessAt:manifest.fetchedAt,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:86400},{headers:{'Cache-Control':'no-store'}});
+  return Response.json({...envelope,status:'cached',data:{...selection,operators:summary,editionContext:{date,edition,activeOperators:[...activeIds],includedOperators:[...(edition==='all'?includedIds:activeIds)]},note,delayedEditions:operators.filter(operator=>operator.status!=='verified').map(operator=>operator.name+' ('+(operator.reason||'ediție indisponibilă')+')')},publishedAt:manifest.fetchedAt,lastSuccessAt:manifest.fetchedAt,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:86400},{headers:{'Cache-Control':'no-store'}});
  }catch(error){
   return Response.json({...envelope,status:'unavailable',data:null,publishedAt:manifest.fetchedAt,lastSuccessAt:manifest.fetchedAt,lastAttemptAt:null,nextAttemptAt:null,error:error instanceof Error?error.message:'Orarul trenurilor nu poate fi citit acum.',ttlSeconds:86400},{headers:{'Cache-Control':'no-store'}});
  }

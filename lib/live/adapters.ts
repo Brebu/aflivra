@@ -109,7 +109,10 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
  }
  const ORG_CLASSES=new Set(['Q43229','Q4830453','Q783794','Q185337','Q134161','Q891723','Q6881511','Q2024418','Q1496010','Q9842','Q170640']);
  const isOrganization=(classes:string[])=>classes.some(cls=>ORG_CLASSES.has(cls));
- const all=order.slice(0,nameSearchLimit).map(id=>{const fact=facts.get(id),name=fact?.name||seed.get(id)||'';
+ const all=order.slice(0,nameSearchLimit).map(id=>{const fact=facts.get(id);
+  // Eticheta de căutare a registrului rămâne rezerva onestă: fără răspuns de
+  // detalii SPARQL sau fără etichetă ro/en, entitatea nu se servește drept Q-id gol.
+  const seeded=seed.get(id)||'',name=fact?.name&&!/^Q[1-9]\d{0,9}$/.test(fact.name)?fact.name:seeded;
   return name?{cui:fact?.cui??null,vat:fact?.vat??null,qid:id,name,websites:fact?.websites||[],org:isOrganization(fact?.classes||[]),sourceUrl:'https://www.wikidata.org/wiki/'+id}:null}).filter((item):item is NonNullable<typeof item>=>!!item);
  // Suprafața e o căutare de firme: entitățile care nu sunt organizații sau firme
  // (specii, comune, persoane omonime) și nu poartă identificator TVA citit în
@@ -123,7 +126,7 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
  const list=all.filter(item=>(item.cui||item.org)&&(item.cui||withoutCui++<nameSearchNoCuiLimit));
  return{publishedAt:null,data:{query:term,items:list,count:list.length,limited:all.length>list.length||all.length>=nameSearchLimit}};
 }
-export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v3',ttl:3600,load:async()=>{
+export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v4',ttl:3600,load:async()=>{
  if(term.length<2||term.length>100||!quoted)throw new SourceError('Termenul de căutat nu are lungimea acceptată.');
  const search=(language:string)=>getSource('https://www.wikidata.org/w/api.php?'+new URLSearchParams({action:'wbsearchentities',search:term,language,limit:String(nameSearchLimit),type:'item',format:'json'}));
  // Structura primei etichete se validează fail-fast — un răspuns nevalid al registrului
