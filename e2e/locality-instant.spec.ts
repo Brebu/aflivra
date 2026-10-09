@@ -244,4 +244,25 @@ test.describe('Footer honesty', () => {
     await expect(apk).toContainText('instala din acest browser');
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  test('the iOS app installs from Safari with Add to Home Screen, no App Store involved', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    await waitForClientReady(page);
+    await page.locator('.vfooter .footer-links').getByRole('button', {name: 'Ghidurile platformei'}).click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'about');
+    const ios = page.locator('.source-download-ios');
+    await expect(ios).toBeVisible();
+    // iOS installs a web app only through Safari's own gesture — the card must
+    // say so (Safari, Distribuie, Add to Home Screen), not pretend a file download.
+    await expect(ios).toContainText('Adaugă la ecranul de start');
+    await expect(ios).toContainText('Safari');
+    await expect(ios).toContainText('Distribuie');
+    // No store, no developer account — the honest same-site framing as Android.
+    await expect(ios).toContainText('fără App Store');
+    await expect(ios).toContainText('același site');
+    // The iOS card offers no fake download link: installation is the browser gesture.
+    await expect(ios.getByRole('link')).toHaveCount(0);
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });

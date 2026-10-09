@@ -2,6 +2,8 @@
 
 Aplicația e instalabilă azi, fără magazin și fără a conta Apple Developer:
 
+Pașii sunt afișați și în aplicație: **Despre → Ghidurile platformei → „Aplicația iOS · din Safari”** — cardul care spune gestul exact (Safari → Distribuie → Adaugă la ecranul de start), fără link fals de descărcare.
+
 1. Deschide `https://aflivra.brebu.workers.dev` în **Safari**.
 2. Butonul **Distribuie** (pătratul cu săgeata în sus) → **Adaugă la ecranul
    de start**.
