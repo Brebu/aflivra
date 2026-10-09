@@ -33,6 +33,24 @@ try{
  assert(apkBytes.length>1_000_000&&apkBytes.length<50_000_000,`The published APK must be a real signed bundle (got ${(apkBytes.length/1024/1024).toFixed(2)} MB).`);
  assert(apkBytes[0]===0x50&&apkBytes[1]===0x4b&&apkBytes[2]===0x03&&apkBytes[3]===0x04,'The published APK must start with the ZIP magic bytes (PK\\x03\\x04) — anything else is not an Android package.');
  console.log(`Published APK verified: aflivra.apk ${'('+(apkBytes.length/1024/1024).toFixed(2)+' MB)'}, ZIP package, linked from „Aplicația Android” in the About section.`);
+ // iOS-ul se instalează fără App Store doar prin gestul „Adaugă la ecranul de start” al
+ // Safari-ului — fără fișier descărcabil. Publicarea iOS e deci suprafața care face
+ // gestul posibil: pictograma apple-touch (180×180, legată în layout), manifestul în
+ // mod standalone și cardul din About care spune pașii reali (Safari · Distribuie ·
+ // Adaugă), fără link fals de descărcare.
+ assert(aboutSection.includes('source-download-ios'),'The About section must carry the iOS install card (source-download-ios).');
+ assert(aboutSection.includes('Adaugă la ecranul de start'),'The iOS card must name Safari’s own gesture: Adaugă la ecranul de start.');
+ assert(aboutSection.includes('Distribuie'),'The iOS card must name the Share button: Distribuie.');
+ const iosCardSrc=aboutSection.slice(aboutSection.indexOf('source-download-ios'));
+ assert(!/href="/.test(iosCardSrc.slice(0,iosCardSrc.indexOf('</article>'))),'The iOS card must not offer a download link — installation is Safari’s gesture, not a file.');
+ const touchIcon=await readFile(join(root,'public/apple-touch-icon.png'));
+ assert(touchIcon[0]===0x89&&touchIcon[1]===0x50,'apple-touch-icon.png must be a real PNG.');
+ assert(touchIcon.readUInt32BE(16)===180&&touchIcon.readUInt32BE(20)===180,`apple-touch-icon.png must be 180×180 for the iOS home screen (got ${touchIcon.readUInt32BE(16)}×${touchIcon.readUInt32BE(20)}).`);
+ const layout=await readFile(join(root,'app/layout.tsx'),'utf8');
+ assert(layout.includes('"/apple-touch-icon.png"'),'app/layout.tsx must link the apple-touch-icon so Safari picks it up for the home screen.');
+ const manifest=JSON.parse(await readFile(join(root,'public/manifest.webmanifest'),'utf8'));
+ assert.equal(manifest.display,'standalone','The web manifest must declare display standalone — the installed app opens full screen, without browser bars.');
+ console.log(`iOS publication verified: Safari Add to Home Surface — apple-touch-icon 180×180 linked in layout, manifest standalone, install card in „Ghidurile platformei” with the real steps.`);
  for(const name of ['location-context','geographic-scope','tabular-geography']){
   let source=await readFile(join(root,'lib',name+'.ts'),'utf8');for(const [binding,file] of [['countyLookup','public/data/locality-counties.json'],['urbanLocalities','public/data/geographic-localities.json']])source=source.replace("import "+binding+" from '@/"+file+"';",'const '+binding+'='+await readFile(join(root,file),'utf8')+';');source=source.replace("from './live/query'","from './query'");
   const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");await writeFile(join(temp,name+'.mjs'),js);
