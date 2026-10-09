@@ -208,7 +208,7 @@ export const TOOLS:ToolDef[]=[
     name:'law_document',
     description:'One consolidated Romanian act, verified against the official portal: title, consolidation date and shape summary (bibliography and character count, not the full text — a full act can reach 1.4 MB and does not fit a conversation). Reading a document through this tool registers it on the tracked-acts re-verification feed of the platform — the same registration the web reader performs.',
     inputSchema:{type:'object',properties:{exactTitle:{type:'string',description:'Exact act title from a law_search result',maxLength:1200},id:{type:'string',description:'Document id from the search result, if known'},selectedType:{type:'string',description:'Document type label, if the search result offered alternatives'},selectedNumber:{type:'string',description:'Act number, if the search result offered alternatives'},selectedDate:{type:'string',description:'Act date, if the search result offered alternatives'}},required:['exactTitle']},
-    build:args=>({path:'/api/legal',method:'POST',body:{kind:'law',full:true,summary:true,exactTitle:str(args.exactTitle),id:str(args.id),selectedType:str(args.selectedType),selectedNumber:str(args.selectedNumber),selectedDate:str(args.selectedDate)},query:{}}),
+    build:args=>({path:'/api/legal',method:'POST',body:{kind:'law',full:true,summary:true,title:str(args.exactTitle).slice(0,160),exactTitle:str(args.exactTitle),id:str(args.id),selectedType:str(args.selectedType),selectedNumber:str(args.selectedNumber),selectedDate:str(args.selectedDate)},query:{}}),
   },
   {
     name:'cinema_sites',
