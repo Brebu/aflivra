@@ -104,6 +104,7 @@ try{
   // enum invalid, tool necunoscut — toate -32602 cu mesaj explicabil.
   for (const [label,params] of [
     ['argument lipsă',{name:'company_profile',arguments:{}}],
+    ['șir gol la required string',{name:'events_search',arguments:{q:''}}],
     ['fără arguments',{name:'company_profile'}],
     ['arguments null',{name:'company_profile',arguments:null}],
     ['tip greșit',{name:'weather_forecast',arguments:{lat:'fourty-four',lon:26}}],
@@ -115,6 +116,8 @@ try{
     const response=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:7,method:'tools/call',params});
     assert.equal(response.body.error?.code,-32602,`${label} se respinge cu -32602`);
     assert.ok(typeof response.body.error?.message==='string'&&response.body.error.message.length>10,`${label} cu mesaj explicabil`);
+    if(label==='șir gol la required string')assert.equal(response.body.error?.message,'Argument "q" must be a non-empty string.','șirul gol la required string primește mesajul exact, nu „lipsă"');
+    if(label==='argument lipsă')assert.equal(response.body.error?.message,'Missing required argument "cui".','argumentul chiar lipsit rămâne „missing", despărțit de șirul gol');
   }
 
   // 8. POST-ul de corp ( căutarea de dosare ) ajunge la rută cu metoda corp:

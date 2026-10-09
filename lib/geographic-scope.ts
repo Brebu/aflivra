@@ -12,6 +12,7 @@ const countyCodes:Record<string,string>={AB:'Alba',AR:'Arad',AG:'Argeș',BC:'Bac
 export function countyName(value:unknown){const text=String(value??'').trim().replace(/^(?:CAS[-\s]*|municipiul\s+|jude[țţt]ul\s+|jude[țţt]\.?\s+|jud\.?\s+)/i,'');return countyCodes[text.toUpperCase()]||Object.values(countyCodes).find(c=>fold(c)===fold(text))||''}
 export function countyCode(value:unknown){const name=countyName(value);return Object.entries(countyCodes).find(([,v])=>v===name)?.[0]||''}
 export function localityName(value:unknown){return fold(value).replace(/^(?:municipiul|municipiu|orasul|oras|comuna|satul|sat|localitatea)\s+/,'').replace(/^bucuresti(?:\s+sector(?:ul)?\s*\d)?$/,'bucuresti')}
+export function municipalitySector(value:unknown){return /^bucuresti\s+sector(?:ul)?\s*\d$/i.test(fold(value))}
 export function sameLocality(a:unknown,b:unknown){const alias=(v:unknown)=>{const name=localityName(v);return name==='cluj'?'cluj napoca':name};return !!alias(a)&&alias(a)===alias(b)}
 export function withLocalCounty<T extends LocalCity>(city:T):T{const kind=(city as LocalCity&{type?:string}).type,county=countyName(city.county)||countyName((countyLookup.items as Record<string,string>)[localityName(city.name)])||(['city','town'].includes(kind||'')?countyName((countyLookup.urbanItems as Record<string,string>)[localityName(city.name)]):'');return county?{...city,county}:city}
 export const geographicLocalities:LocalCity[]=urbanLocalities.items;

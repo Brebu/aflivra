@@ -31,7 +31,9 @@ export function validateArguments(tool:(typeof TOOLS)[number],args:unknown):{ok:
   const input=args as Record<string,unknown>;
   for(const name of tool.inputSchema.required||[]){
     const value=input[name];
-    if(value===undefined||value===null||typeof value==='string'&&value.trim()==='')return {ok:false,message:`Missing required argument "${name}".`};
+    if(value===undefined||value===null)return {ok:false,message:`Missing required argument "${name}".`};
+    // Prezent dar gol nu e lipsă: mesajul cere exact ce se așteaptă — un șir nevid.
+    if(typeof value==='string'&&value.trim()==='')return {ok:false,message:`Argument "${name}" must be a non-empty string.`};
   }
   for(const [name,value] of Object.entries(input)){
     const schema=tool.inputSchema.properties[name];

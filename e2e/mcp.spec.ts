@@ -159,6 +159,10 @@ test.describe('MCP endpoint', () => {
     const badCategoryBody = await badCategory.json();
     expect(badCategoryBody.error.code, 'categoria inexistentă se respinge la graniță cu parametrul numit').toBe(-32602);
     expect(badCategoryBody.error.message).toContain('category');
+    const emptyQ = await request.post('/api/mcp', {data: {jsonrpc: '2.0', id: 11, method: 'tools/call', params: {name: 'events_search', arguments: {q: ''}}}});
+    const emptyQBody = await emptyQ.json();
+    expect(emptyQBody.error.code, 'q gol: -32602 cu mesajul exact, nu „lipsă"').toBe(-32602);
+    expect(emptyQBody.error.message).toBe('Argument "q" must be a non-empty string.');
   });
 });
 
@@ -198,7 +202,10 @@ test.describe('semantic regressions', () => {
     const zero = await call({q: 'zzzz_aflivra_audit_20261009', locality: 'Cluj-Napoca', county: 'Cluj'});
     expect(zero.isError, 'zero potriviri NU e eroare').toBe(false);
     expect(zero.structuredContent.data?.total ?? 0, 'total onest zero').toBe(0);
-    expect(zero.structuredContent.status, 'starea descrie sursele, nu cardinalitatea').not.toBe('unavailable');
+    // Contractul auditat (D06): zero potriviri rămâne succes onest cu total 0;
+    // eticheta de stare descrie sănătatea surselor (seara, o sală lentă poate
+    // degrada onest stilul) — nu cardinalitatea.
+    expect(zero.structuredContent.data, 'datele servite onest chiar la zero potriviri').not.toBeNull();
   });
 
   test('județul și camera se cer cu orice ortografie normală', async ({request}) => {
@@ -269,8 +276,19 @@ test.describe('semantic regressions', () => {
     const component = items.find((item: {name: string; lat?: number}) => /^TIMIȘU DE JOS$/i.test(item.name));
     test.skip(!component, 'fără registrul SIRUTA complet local');
     expect(Number.isFinite(component?.lat), 'satul component urban TIMIȘU DE JOS are punct cartografiat').toBe(true);
-    const rural = items.find((item: {name: string; lat?: number}) => /^BOD$/i.test(item.name));
-    if (rural) expect(rural.lat, 'satul rural BOD rămâne onest fără coordonate').toBeUndefined();
+    expect(component?.pointKind, 'rândul cu punct își declară felul: centrul localității').toBe('locality');
+    const sacele = items.find((item: {name: string; lat?: number}) => /^SĂCELE$/i.test(item.name));
+    if (sacele) {
+      expect(Number.isFinite(sacele?.lat), 'orașul SĂCELE își păstrează punctul — fără dublete pe diacritice Ș/Ş').toBe(true);
+      expect(sacele?.pointKind).toBe('locality');
+    }
+    const sector = items.find((item: {name: string; lat?: number; pointKind?: string}) => /SECTORUL \d/i.test(item.name) && Number.isFinite(item.lat));
+    if (sector) expect(sector.pointKind, 'sectorul Bucureștiului poartă punctul municipiului, declarat').toBe('municipality-center');
+    const rural = items.find((item: {name: string; lat?: number; pointKind?: string}) => /^BOD$/i.test(item.name));
+    if (rural) {
+      expect(rural.lat, 'satul rural BOD rămâne onest fără coordonate').toBeUndefined();
+      expect(rural.pointKind, 'fără punct, fără pointKind').toBeUndefined();
+    }
   });
 
   test('court_dosar_search: instanța se cere prin denumire sau id', async ({request}) => {
