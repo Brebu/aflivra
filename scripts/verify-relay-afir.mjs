@@ -22,7 +22,7 @@ const feedsSource=await readFile(join(root,'lib/live','feeds.ts'),'utf8');
 const afirLoaderUrl=feedsSource.match(/export const afirLoader[^\n]*?url:'([^']+)'/)?.[1];
 assert.equal(afirLoaderUrl,relay.AFIR_FEED_URL_DEFAULT,'the relay fetches exactly the URL the app afirLoader reads — same URL, same data');
 const workflow=await readFile(join(root,'.github/workflows','afir-refresh.yml'),'utf8');
-assert.ok(workflow.includes('cron: "30 2 * * *"'),'the relay tour runs daily at 02:30 UTC (repo public — Actions minutes unlimited; the press-releases feed only needs each day swept once per weekday, weekends honestly no-op)');
+assert.ok(workflow.includes('cron: "30 */2 * * *"'),'the relay tour runs every two hours (repo public — Actions minutes unlimited; the press-releases feed publishes intraday, so the near-real-time sweep covers the whole day, weekends honestly no-op)');
 assert.ok(workflow.includes('workflow_dispatch'),'the relay tour can be triggered manually');
 assert.ok(workflow.includes('node scripts/relay-afir.mjs'),'the tour runs the relay script');
 assert.ok(workflow.includes('AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}'),'the token comes from the GitHub secret');

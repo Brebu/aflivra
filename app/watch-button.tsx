@@ -34,7 +34,7 @@ export function WatchButton({kind,target,name,label}:{kind:WatchKind;target:stri
   };
   // Scopul se spune chiar la momentul colectării, pe butonul care o declanșează: ce se
   // salvează, pe unde și cum se șterge — restul e pe pagina de confidentialitate.
-  return <ControlHint text={watched?'Oprim verificarea și notificările pentru acest element.':'Verificăm sursa publică de mai multe ori pe zi și îți arătăm schimbările în „Ce s-a schimbat", fără cont. Se salvează referința elementului urmărit și un identificator anonim al dispozitivului — pe server, până le ștergi („Șterge-mi datele", în „Ce s-a schimbat").'}>
+  return <ControlHint text={watched?'Oprim verificarea și notificările pentru acest element.':'Verificăm sursa publică o dată pe oră și îți arătăm schimbările în „Ce s-a schimbat", fără cont. Se salvează referința elementului urmărit și un identificator anonim al dispozitivului — pe server, până le ștergi („Șterge-mi datele", în „Ce s-a schimbat").'}>
     <Button variant="outline" className="watch-button" aria-label={watched?ariaUnfollow(kind,name):ariaFollow(kind,name)} aria-pressed={watched} onClick={e=>{e.stopPropagation();void toggle()}}><Bell size={17} fill={watched?'currentColor':'none'}/>{text}</Button>
   </ControlHint>;
 }

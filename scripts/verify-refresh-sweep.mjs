@@ -9,17 +9,19 @@ import {createHash} from 'node:crypto';
 import ts from 'typescript';
 const root=resolve(import.meta.dirname,'..'),require=createRequire(import.meta.url);
 const map=JSON.parse(await readFile(join(root,'lib/live/refresh-groups.json'),'utf8'));
-assert.equal(map.groups.length,5,'The free plan allows at most five cron triggers');
-assert.ok(map.groups.length<=5);
-assert.deepEqual(map.groups.map(g=>g.name),['live','weather','news','legislation','registers']);
-assert.deepEqual(map.groups.map(g=>g.cron),['0 0 * * *','7 0 * * *','14 0 * * *','21 0 * * *','28 0,4,10,16 * * *']);
-// Declanșătorul registers poartă, pe lângă tura de dimineață de la 00:28 UTC, și turele de
-// urmărire de la 04:28/10:28/16:28 UTC — planul gratuit plafonează contul la cinci crons, deci
-// a șasea expresie ar împiedica publicarea; dispatch-ul pe oră separă cele două tururi.
+assert.equal(map.groups.length,5,'Cinci expresii cron acoperă cele cinci clase de prospețime — pulsa de 10 minute, viața de 20, fluxurile de 30, cercetarea orară și registrele cu urmărirea orară');
+assert.ok(map.groups.length<=12,'planul plătit permite 250; poarta ține sub 12');
+assert.deepEqual(map.groups.map(g=>g.name),['pulse','living','feeds','research','registers']);
+assert.deepEqual(map.groups.map(g=>g.cron),['*/10 * * * *','*/20 * * * *','*/30 * * * *','7 * * * *','28 * * * *'],);
+// Declanșatorul registers (oră cu 28) poartă tura de registre și tura de urmărire a
+// „Urmăritelor” — notificările ajung la cel mult o oră de la schimbare. Planul plătit
+// ($5/lună: 10M cereri și 30M CPU-ms incluse) acoperă cele ~312 invocații/zi de gigant
+// invizibil: fiecare tură sare peste sursele proaspete (TTL-ul e ritmul), deci costul real
+// e al aducerilor, nu al ticăitului.
 assert.equal(new Set(map.groups.map(g=>g.cron)).size,5,'Each cron expression maps to exactly one group');
 assert.equal(new Set(map.groups.map(g=>g.name)).size,5,'Each group maps to exactly one cron expression');
-const expectedMembers={live:['bnr','weather.anm','company.default','catalog.default'],weather:['weather.alerts','forecast.bucuresti','events.odeon','events.teatruldearta','cinema.bucuresti.today'],news:['feed.munca','feed.stiri','feed.sanatate','feed.educatie','feed.justitie'],legislation:['law.search.default','law.search.codcivil','lawyers.default','knowledge.company.default'],registers:['directory.schools.page0','catalog.category.bani','catalog.category.sanatate']};
-for(const group of map.groups){assert.deepEqual(group.members,expectedMembers[group.name],'The frozen group membership is the deploy contract');assert.ok(group.estimatedSubrequests<=40,'A free-plan invocation spends at most 50 subrequests; every group keeps a safety margin under 40');assert.ok(group.estimatedSubrequests>=group.members.length,'Every loader costs at least one subrequest')}
+const expectedMembers={pulse:['weather.anm','weather.alerts','forecast.bucuresti','bnr'],living:['cinema.bucuresti.today','events.odeon','events.teatruldearta'],feeds:['feed.munca','feed.stiri','feed.sanatate','feed.educatie','feed.justitie'],research:['company.default','catalog.default','knowledge.company.default','law.search.default','law.search.codcivil','lawyers.default'],registers:['directory.schools.page0','catalog.category.bani','catalog.category.sanatate']};
+for(const group of map.groups){assert.deepEqual(group.members,expectedMembers[group.name],'The frozen group membership is the deploy contract');assert.ok(group.estimatedSubrequests<=120,'planul plătit permite 1000 de subrequeste pe invocare; marja onestă rămâne sub 120');assert.ok(group.estimatedSubrequests>=group.members.length,'Every loader costs at least one subrequest')}
 assert.equal(new Set(map.groups.flatMap(g=>g.members)).size,21);
 for(const [list,label] of [[map.seedBacked,'seedBacked'],[map.onDemand,'onDemand'],[map.ghRelayed,'ghRelayed']]){assert.ok(Array.isArray(list)&&list.length>0,label+' families must be documented');for(const entry of list){assert.ok(entry.family&&entry.reason,label+' entries carry a family and a reason')}}
 const relayed=map.ghRelayed.map(entry=>entry.family);
@@ -59,44 +61,50 @@ const teatruldearta='<script type="application/ld+json">{"@context":"https://sch
 const fetchCalls={openMeteo:0,alerts:0,odeon:0,teatruldearta:0,cinema:0,other:0};
 try{
 globalThis.fetch=async(url)=>{const href=String(url);if(href.startsWith('https://api.open-meteo.com/')){fetchCalls.openMeteo++;return new Response(null,{status:503})}if(href.startsWith('https://www.meteoromania.ro/avertizari')){fetchCalls.alerts++;return new Response(avertizari,{headers:{'content-type':'application/xml'}})}if(href.startsWith('https://teatrul-odeon.ro/')){fetchCalls.odeon++;return new Response(odeon,{headers:{'content-type':'text/html'}})}if(href.startsWith('https://teatruldearta.ro/')){fetchCalls.teatruldearta++;return new Response(teatruldearta,{headers:{'content-type':'text/html'}})}if(href.includes('/data-api-service/v1/quickbook/')){fetchCalls.cinema++;return Response.json({body:{films:[],events:[]}})}fetchCalls.other++;return new Response(null,{status:404})};
-const first=await sweep.runGroup('weather');
-assert.equal(first.group,'weather');assert.equal(first.cron,'7 0 * * *');assert.equal(first.ok,4);assert.equal(first.failed,1);
-assert.deepEqual(first.sources.map(s=>s.key),['weather-alerts','forecast:44.43:26.1','events:odeon','events:teatruldearta','cinema:1824:'+today]);
-assert.deepEqual(first.sources.map(s=>s.status),['fresh','unavailable','fresh','fresh','fresh'],'One failing source never blocks the others');
+const first=await sweep.runGroup('pulse');
+assert.equal(first.group,'pulse');assert.equal(first.cron,'*/10 * * * *');assert.equal(first.ok,1);assert.equal(first.failed,3);
+assert.deepEqual(first.sources.map(s=>s.key),['weather','weather-alerts','forecast:44.43:26.1','bnr']);
+assert.deepEqual(first.sources.map(s=>s.status),['unavailable','fresh','unavailable','unavailable'],'One failing source never blocks the others');
 assert.ok(first.startedAt<=first.finishedAt);assert.ok(Date.parse(first.startedAt)>0);
-assert.ok(String(first.sources[1].error).includes('503'));assert.equal(first.sources[1].lastSuccessAt,null);
+assert.ok(String(first.sources[2].error).includes('503'));assert.equal(first.sources[2].lastSuccessAt,null);
+assert.ok(String(first.sources[3].error).includes('404'),'bnr cade onest în mock (404), fără să blocheze grupul');
 assert.equal(fetchCalls.openMeteo,3,'Three upstream 503 attempts, never multiplied by the sweep');
-assert.equal(fetchCalls.other,0,'runGroup invokes exactly the loaders of its own group');
 const row=(key)=>sqlite.prepare('SELECT * FROM source_cache WHERE key=?').get(key);
 const alertsRow=row('weather-alerts');assert.ok(alertsRow.data&&JSON.parse(alertsRow.data).empty===false);assert.ok(alertsRow.expires_at>Date.now());
 const forecastRow=row('forecast:44.43:26.1');assert.equal(forecastRow.data,null);assert.equal(forecastRow.failures,1);assert.ok(forecastRow.next_attempt_at>Date.now());assert.ok(String(forecastRow.error).includes('503'));
+const living=await sweep.runGroup('living');
+assert.equal(living.group,'living');assert.equal(living.cron,'*/20 * * * *');assert.equal(living.ok,3);assert.equal(living.failed,0);
+assert.deepEqual(living.sources.map(s=>s.key),['cinema:1824:'+today,'events:odeon','events:teatruldearta']);
+assert.deepEqual(living.sources.map(s=>s.status),['fresh','fresh','fresh']);
 assert.ok(row('events:odeon').data);assert.ok(row('events:teatruldearta').data);assert.ok(row('cinema:1824:'+today).data);
-const summary=row('sweep:group:weather');assert.equal(summary.adapter_version,'sweep.groups.v1');assert.equal(summary.last_attempt_at,first.startedAt);assert.equal(summary.last_success_at,first.finishedAt);
-const stored=JSON.parse(summary.data);assert.equal(stored.group,'weather');assert.equal(stored.cron,'7 0 * * *');assert.equal(stored.ok,4);assert.equal(stored.failed,1);
-assert.deepEqual(stored.sources.map(s=>s.status),['fresh','unavailable','fresh','fresh','fresh']);
+const summary=row('sweep:group:pulse');assert.equal(summary.adapter_version,'sweep.groups.v1');assert.equal(summary.last_attempt_at,first.startedAt);assert.equal(summary.last_success_at,first.finishedAt);
+const stored=JSON.parse(summary.data);assert.equal(stored.group,'pulse');assert.equal(stored.cron,'*/10 * * * *');assert.equal(stored.ok,1);assert.equal(stored.failed,3);
+assert.deepEqual(stored.sources.map(s=>s.status),['unavailable','fresh','unavailable','unavailable']);
 for(const source of stored.sources)assert.deepEqual(Object.keys(source).sort(),['error','key','lastSuccessAt','name','status']);
 assert.equal(sqlite.prepare("SELECT used FROM source_budget WHERE key='open-meteo'").get().used,1);
 assert.deepEqual(JSON.parse(JSON.stringify(first)),first);
 sqlite.prepare('UPDATE source_cache SET next_attempt_at=0 WHERE key=?').run('forecast:44.43:26.1');
 sqlite.prepare('INSERT OR REPLACE INTO source_budget (key,window_start,used) VALUES (?,?,?)').run('open-meteo',Math.floor(Date.now()/3600000)*3600000,400);
-const second=await sweep.runSweep('7 0 * * *');
-assert.equal(second.ok,4);assert.equal(second.failed,1);
-assert.deepEqual(second.sources.map(s=>s.status),['cached','unavailable','cached','cached','cached'],'Valid copies stay cached while the exhausted budget source stays unavailable');
-assert.ok(String(second.sources[1].error).includes('Limita temporar'),'The hourly budget is enforced by readSource and caps further upstream calls');
+const second=await sweep.runSweep('*/10 * * * *');
+assert.equal(second.ok,1);assert.equal(second.failed,3);
+assert.equal(second.sources[1].status,'cached','The fresh alert copy stays cached across the next pulse');
+assert.ok(String(second.sources[2].error).includes('Limita temporar'),'The hourly budget is enforced by readSource and caps further upstream calls');
 assert.equal(fetchCalls.openMeteo,3);assert.equal(fetchCalls.alerts,1);assert.equal(fetchCalls.odeon,1);assert.equal(fetchCalls.cinema,1);
-assert.equal(row('sweep:group:weather').last_success_at,second.finishedAt);assert.ok(Date.parse(second.finishedAt)>=Date.parse(first.finishedAt));
+assert.ok(fetchCalls.other>=2,' weather.anm și bnr se reîncearcă sau rămân în backoff onest, fără să multiplic e sursa');
+assert.equal(row('sweep:group:pulse').last_success_at,second.finishedAt);assert.ok(Date.parse(second.finishedAt)>=Date.parse(first.finishedAt));
 const deferred=[];
-const third=await sweep.refreshSweep({DB:db},{waitUntil:promise=>deferred.push(promise)},'weather');
-assert.equal(third.group,'weather');assert.equal(deferred.length,0,'waitForRefresh sweep reads never defer');
-assert.deepEqual(third.sources.map(s=>s.status),['cached','unavailable','cached','cached','cached']);
-const fourth=await sweep.refreshSweep({DB:db},null,'7 0 * * *');
-assert.equal(fourth.group,'weather');assert.equal(fourth.cron,'7 0 * * *');
+const third=await sweep.refreshSweep({DB:db},{waitUntil:promise=>deferred.push(promise)},'pulse');
+assert.equal(third.group,'pulse');assert.equal(deferred.length,0,'waitForRefresh sweep reads never defer');
+const fourth=await sweep.refreshSweep({DB:db},null,'*/10 * * * *');
+assert.equal(fourth.group,'pulse');assert.equal(fourth.cron,'*/10 * * * *');
 assert.equal(await sweep.runSweep('0 1 * * *'),null);
 assert.equal(await sweep.runGroup('nonexistent'),null);
 assert.equal(await sweep.refreshSweep({DB:db},null,'feed.despre.fluturi'),null);
 const events=warnings.map(text=>{try{return JSON.parse(text)}catch{return null}}).filter(Boolean);
 for(const event of ['sweep_unknown_cron','sweep_unknown_group','sweep_unknown_trigger'])assert.ok(events.some(entry=>entry.event===event),'An unknown trigger no-ops with a structured warn event: '+event);
 console.log('Mocked sweep verified: an isolated 503 source stays recorded without blocking its group, the open-meteo hourly budget caps further calls, and the sweep summary row lands in source_cache with per-source statuses.');
-console.log(JSON.stringify({result:'ok',groups:map.groups.length,members:20,relayed:relayed.join(','),swept:'weather',failing:'forecast:44.43:26.1',summaryRow:'sweep:group:weather',adapterVersion:'sweep.groups.v1',message:'Verificare trecută: cele cinci grupuri de reîmprospătare zilnică sunt complete, sub plafonul gratuit de 40 de subrequest-uri estimate per invocare, cu izolare per sursă, bugetul orar respectat și rândul de sinteză în source_cache.'}));
+console.log(JSON.stringify({result:'ok',groups:map.groups.length,members:21,relayed:relayed.join(','),swept:'pulse,living',failing:'forecast:44.43:26.1',summaryRow:'sweep:group:pulse',adapterVersion:'sweep.groups.v1',message:'Verificare trecută: pulsa de 10 minute izolează sursele căzute, viața de 20 servește curtata cinema+evenimente, bugetul orar respectat; invocările (~312/zi) stau invizibil în planul plătit de 5 USD ($10M cereri inclus).'}));
+console.log('Mocked sweep verified: an isolated 503 source stays recorded without blocking its group, the open-meteo hourly budget caps further calls, and the sweep summary row lands in source_cache with per-source statuses.');
+
 }finally{globalThis.fetch=originalFetch;console.warn=originalWarn}
 }finally{sqlite.close();delete globalThis.__aflivraTestEnv;delete globalThis.__aflivraResourceCopies;delete globalThis.__aflivraTestSeeds;await rm(temp,{recursive:true,force:true})}

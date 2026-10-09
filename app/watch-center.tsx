@@ -96,7 +96,7 @@ export function WatchCenter({onOpen}:{onOpen:(kind:WatchKind,ref:string,label:st
     </div>
   </div>
   {watch.error&&<div className="live-error" role="alert"><p>{watch.error}</p><Button onClick={()=>watch.refresh()}>Reîncearcă</Button></div>}
-  {watch.sweepState&&<div className="live-freshness watch-sweep" aria-label="Cadența verificării"><div><span className="source-chip">{watch.sweepState.lastOk?'Verificare automată':'Ultima verificare incompletă'}</span><strong>Verificăm de {watch.sweepState.runsPerDay} ori pe zi</strong></div><p>Orele verificării: {watch.sweepState.timesUtc} UTC · Ultima tură: {dateText(watch.sweepState.lastRunAt)}{watch.sweepState.lastEvents>0&&' · '+countText(watch.sweepState.lastEvents,'schimbare','schimbări')+' la ultima tură'}{watch.sweepState.lastOk?'':' · ultima tură nu a reușit complet; reluăm la următoarea oră'}</p></div>}
+  {watch.sweepState&&<div className="live-freshness watch-sweep" aria-label="Cadența verificării"><div><span className="source-chip">{watch.sweepState.lastOk?'Verificare automată':'Ultima verificare incompletă'}</span><strong>Verificăm orar</strong></div><p>Tura: la minutul 28 al fiecărei ore, UTC · Ultima tură: {dateText(watch.sweepState.lastRunAt)}{watch.sweepState.lastEvents>0&&' · '+countText(watch.sweepState.lastEvents,'schimbare','schimbări')+' la ultima tură'}{watch.sweepState.lastOk?'':' · ultima tură nu a reușit complet; reluăm la următoarea oră'}</p></div>}
   <PushSection/>
   {eventMiss&&<p className="source-warning" role="status">{eventMiss}</p>}
   <section className="watch-list" aria-label="Elementele urmărite">
@@ -118,7 +118,7 @@ export function WatchCenter({onOpen}:{onOpen:(kind:WatchKind,ref:string,label:st
           <p>{event.body}</p>
           <Button variant="outline" aria-label={watchOpenAria(event.kind,event.ref)} onClick={()=>onOpen(event.kind,event.ref,event.title)}>Deschide</Button>
         </article>)}</div>
-      </>:<div className="watch-empty"><BellOff size={28}/><h3>Nicio schimbare de la ultima verificare</h3><p>Verificăm sursele publice de mai multe ori pe zi; afișăm doar ce s-a schimbat efectiv.</p></div>}
+      </>:<div className="watch-empty"><BellOff size={28}/><h3>Nicio schimbare de la ultima verificare</h3><p>Verificăm sursele publice o dată pe oră; afișăm doar ce s-a schimbat efectiv.</p></div>}
     </>}
   </section>
   <Dialog open={purgeOpen} onOpenChange={setPurgeOpen}><DialogContent className="v2">

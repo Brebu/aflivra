@@ -16,7 +16,7 @@ const root=resolve(import.meta.dirname,'..'),require=createRequire(import.meta.u
 const groupsMap=JSON.parse(await readFile(join(root,'lib/live/refresh-groups.json'),'utf8'));
 const registersGroup=groupsMap.groups.find(group=>group.name==='registers');
 assert.ok(registersGroup,'grupul registers există înregistrat');
-assert.equal(registersGroup.cron,'28 0,4,10,16 * * *','declanșatorul registers poartă tura de dimineață (00:28 UTC) și cele trei ture de urmărire (04:28, 10:28, 16:28 UTC) — planul gratuit rămâne la maximum cinci crons, deci urmărirea călătorește pe declanșătorul existent, cu dispatch pe oră');
+assert.equal(registersGroup.cron,'28 * * * *','declanșatorul registers e orar la minutul 28: tura de registre și tura de urmărire călătoresc împreună, orar — notificările „Urmăritelor” ajung la cel mult o oră de la schimbare');
 assert.equal(new Set(groupsMap.groups.map(group=>group.cron)).size,groupsMap.groups.length);
 assert.equal(groupsMap.groups.length,5,'cele cinci crons ale planului gratuit rămân intacte');
 const temp=await mkdtemp(join(tmpdir(),'aflivra-watch-sweep-')),sqlite=new DatabaseSync(':memory:');
@@ -49,9 +49,9 @@ const watch=await import(pathToFileURL(join(temp,'watch-sweep.mjs')));
 console.log('Leg 1 — cron-ul și dispatch-ul turei de urmărire:');
 {
  assert.equal(watch.WATCH_SWEEP_CRON,registersGroup.cron,'cronul turei vine din registru, nu dintr-o constantă paralelă');
- assert.deepEqual(watch.watchSweepSchedule(),{runsPerDay:3,timesUtc:'04:28, 10:28, 16:28'},'eticheta onestă „verificăm de 3 ori pe zi” se derivă din cron, nu se scrie de mână');
+ assert.deepEqual(watch.watchSweepSchedule(),{runsPerDay:24,timesUtc:'oră: 00:28–23:28 UTC'},'eticheta onestă „verificăm orar” se derivează din cron, nu se scrie de mână');
  const at=(hour,minute)=>({cron:watch.WATCH_SWEEP_CRON,scheduledTime:Date.UTC(2026,9,7,hour,minute)});
- assert.equal(watch.runsWatchSweep(at(0,28)),false,'firingul de la ora 00 UTC rămâne tura registers, neatinstituită de urmărire');
+ assert.equal(watch.runsWatchSweep(at(0,28)),true,'firingul de la oră 00 UTC poartă și tura de urmărire — turele călătoresc împreună, orar');
  assert.equal(watch.runsWatchSweep(at(4,28)),true);assert.equal(watch.runsWatchSweep(at(10,28)),true);assert.equal(watch.runsWatchSweep(at(16,28)),true);
  assert.equal(watch.runsWatchSweep({cron:'0 0 * * *',scheduledTime:Date.UTC(2026,9,7,0,0)}),false,'celelalte cron-uri nu declanșează urmărirea');
  for(const [kind,ref,label] of [['dosar','12/3','număr scurt de dosar'],['firma','0427282','CUI cu zero în frunte'],['meteo','Atlantis','județ necunoscut'],['venue','teatrul-muncii','venue neînregistrat'],['act','https://www.edu.ro/act','act cu adresă străină'],['localitate','Nămolul de Mijloc','localitate necunoscută']])assert.ok(watch.watchRefError(kind,ref),label+' se respinge la graniță');
@@ -150,8 +150,8 @@ console.log('Leg 4 — schimbările reale produc exact un eveniment per urmărir
  assert.equal(sweepRow.adapter_version,'watch.sweep.v1');
  const stored=JSON.parse(sweepRow.data);assert.equal(stored.eventsEmitted,6);assert.ok(stored.finishedAt>=stored.startedAt);
  const shape=await watch.watchSweepPublicState(db);
- assert.equal(shape.runsPerDay,3);assert.equal(shape.timesUtc,'04:28, 10:28, 16:28');
- assert.equal(shape.lastRunAt,state.finishedAt);assert.equal(shape.lastEvents,6);assert.equal(shape.lastOk,true);assert.match(shape.note,/3 ori pe zi/);
+ assert.equal(shape.runsPerDay,24);assert.equal(shape.timesUtc,'oră: 00:28–23:28 UTC');
+ assert.equal(shape.lastRunAt,state.finishedAt);assert.equal(shape.lastEvents,6);assert.equal(shape.lastOk,true);assert.match(shape.note,/verificăm orar/);
 }
 console.log('  acord: firmă, localitate, dosar, act, venue și meteo — câte un eveniment fiecare, cu stare de tură onestă.');
 
