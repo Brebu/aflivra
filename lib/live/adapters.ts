@@ -54,33 +54,70 @@ export const weatherLoader:Loader={key:'weather',name:'Administrația Național�
 // publish no server-side query — ONRC's OD_FIRME (693 MB) and MFP's identification
 // exports (2×~435 MB) are integral files over every fetch cap, and mfinante's name
 // lookup page is retired — so the one honest upstream is the open-knowledge registry
-// the firm family already reads, searched through Wikidata's own indexed EntitySearch
-// service and restricted to entries carrying the Romanian VAT identifier (a plain
-// label-CONTAINS scan of every VAT holder exceeds the upstream time budget when the
-// endpoint has not cached the query — probe-measured). A row without a validated CUI
-// stays unlisted: it cannot reach a firm card, and a half link would be an invented
-// finding.
+// the firm family already reads, searched through Wikidata's own indexed entity
+// search and restricted to what the registry carries (a plain label-CONTAINS scan of
+// every VAT holder exceeds the upstream time budget when the endpoint has not cached
+// the query — probe-measured).
 const nameSearchLimit=50;
-export function parseCompanyNameSearch(raw:string,term:string):Loaded{
+// Căutarea pe nume citește registrul de cunoștințe în doi pași: căutarea de entități
+// (wbsearchentities — întâi eticheta română, apoi cea engleză, îmbinate pe înregistrare;
+// ordonarea rămâne a primei limbi) și fișa detaliată a entităților găsite (identificatorul
+// TVA și site-urile, într-o singură interogare VALUES). Căutarea prin EntitySearch-ul
+// SPARQL sărea firme de marcă găsite primele de API-ul direct (eMAG, Ursus — măsurat
+// 2026-10-09). Entitatea găsită pe nume, dar fără identificator TVA citit în registru,
+// rămâne listată cu marca onestă „fără CUI citit" — fără dosar inventat.
+function companyNameSearchIds(raw:string){
+ const order:string[]=[],seed=new Map<string,string>();
  let parsed:any;try{parsed=JSON.parse(raw)}catch{throw new SourceError('Structura Wikidata nu poate fi validată.')}
- const result=parsed;
- if(!Array.isArray(result.results?.bindings))throw new SourceError('Structura Wikidata nu poate fi validată.');
- const items=new Map<string,{cui:string;vat:string;qid:string;name:string;websites:string[];sourceUrl:string}>();
- for(const row of result.results.bindings){
-  const id=row.item?.value?.match(/^https?:\/\/www\.wikidata\.org\/entity\/(Q[1-9]\d{0,9})$/)?.[1];
-  if(!id)continue;
-  const vat=clean(row.vat?.value)||'';
-  // The joinable key is the same VAT identifier the firm card validates — without a
-  // usable CUI the row cannot be opened, so it is left out rather than listed half.
-  const cui=vat.replace(/^RO/i,'');
-  const label=clean(row.itemLabel?.value);
-  if(!/^[1-9]\d{1,9}$/.test(cui)||!label)continue;
-  let record=items.get(id);
-  if(!record){record={cui,vat,qid:id,name:label,websites:[],sourceUrl:row.item.value.replace('/entity/','/wiki/').replace('http:','https:')};items.set(id,record)}
-  const website=publicUrl(row.website?.value);
-  if(website&&!record.websites.includes(website))record.websites.push(website);
+ const entries=Array.isArray(parsed?.search)?parsed.search:null;
+ if(!entries)throw new SourceError('Structura Wikidata nu poate fi validată.')
+ for(const entry of entries){
+  const id=typeof entry?.id==='string'&&/^Q[1-9]\d{0,9}$/.test(entry.id)?entry.id:'';
+  if(!id||order.includes(id))continue;
+  order.push(id);seed.set(id,clean(entry.label)||'')
  }
- const list=[...items.values()];
+ return {order,seed};
+}
+export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,string>}[],detail:string,term:string):Loaded{
+ const order=parts.flatMap(part=>part.order).filter((id,index,all)=>all.indexOf(id)===index);
+ const seed=new Map<string,string>();
+ for(const part of parts)for(const [id,label] of part.seed)if(!seed.has(id))seed.set(id,label);
+ const facts=new Map<string,{cui:string|null;vat:string|null;name:string;websites:string[]}>();
+ if(order.length){
+  let parsedDetail:any;try{parsedDetail=JSON.parse(detail)}catch{throw new SourceError('Structura Wikidata nu poate fi validată.')}
+  const bindings=Array.isArray(parsedDetail?.results?.bindings)?parsedDetail.results.bindings:null;
+  if(!bindings)throw new SourceError('Structura Wikidata nu poate fi validată.');
+  for(const row of bindings){
+   const id=row.item?.value?.match(/^https?:\/\/www\.wikidata\.org\/entity\/(Q[1-9]\d{0,9})$/)?.[1];
+   if(!id)continue;
+   const vat=clean(row.vat?.value)||'';
+   // Cheia de îmbinare rămâne identificatorul TVA validat ca pe dosarul firmei — lipsă,
+   // rândul rămâne fără CUI (listat onest), nu eliminat: firma există în registrul de
+   // cunoștințe, doar identificatorul fiscal lipsește de la sursă.
+   const cui=/^[1-9]\d{1,9}$/.test(vat.replace(/^RO/i,''))?vat.replace(/^RO/i,''):null;
+   const label=clean(row.itemLabel?.value);
+   let record=facts.get(id);
+   if(!record){record={cui,vat:cui?vat:null,name:label||'',websites:[]};facts.set(id,record)}
+   else{if(!record.cui&&cui){record.cui=cui;record.vat=vat}if(label&&!record.name)record.name=label}
+   const website=publicUrl(row.website?.value);
+   if(website&&!record.websites.includes(website))record.websites.push(website)
+  }
+ }
+ const list=order.slice(0,nameSearchLimit).map(id=>{const fact=facts.get(id),name=fact?.name||seed.get(id)||'';
+  return name?{cui:fact?.cui??null,vat:fact?.vat??null,qid:id,name,websites:fact?.websites||[],sourceUrl:'https://www.wikidata.org/wiki/'+id}:null}).filter((item):item is NonNullable<typeof item>=>!!item);
  return{publishedAt:null,data:{query:term,items:list,count:list.length,limited:list.length>=nameSearchLimit}};
 }
-export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim();const quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://query.wikidata.org/',version:'wikidata.company-name.v1',ttl:3600,load:async()=>{if(term.length<2||term.length>100||!quoted)throw new SourceError('Termenul de căutat nu are lungimea acceptată.');const query='SELECT ?item ?itemLabel ?vat ?website WHERE { SERVICE wikibase:mwapi { bd:serviceParam wikibase:api "EntitySearch"; wikibase:endpoint "www.wikidata.org"; mwapi:search "'+quoted+'"; mwapi:language "ro"; mwapi:limit "'+nameSearchLimit+'". ?item wikibase:apiOutputItem mwapi:item. } ?item wdt:P3608 ?vat. OPTIONAL { ?item wdt:P856 ?website. } SERVICE wikibase:label { bd:serviceParam wikibase:language "ro,en". } }';return parseCompanyNameSearch(await getSource('https://query.wikidata.org/sparql?'+new URLSearchParams({query,format:'json'}),{headers:{Accept:'application/sparql-results+json'}}),term)}}};
+export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v2',ttl:3600,load:async()=>{
+ if(term.length<2||term.length>100||!quoted)throw new SourceError('Termenul de căutat nu are lungimea acceptată.');
+ const search=(language:string)=>getSource('https://www.wikidata.org/w/api.php?'+new URLSearchParams({action:'wbsearchentities',search:term,language,limit:String(nameSearchLimit),type:'item',format:'json'}));
+ // Structura primei etichete se validează fail-fast — un răspuns nevalid al registrului
+ // se respinge înainte de a cheltui bugetul de acces al celei de-a doua etichete.
+ const ro=companyNameSearchIds(await search('ro'));
+ // Eticheta engleză e best-effort: dacă nu răspunde sau nu se poate citi, căutarea
+ // servește tot potrivirile românești.
+ let en={order:[] as string[],seed:new Map<string,string>()};
+ try{en=companyNameSearchIds(await search('en'))}catch{}
+ const parts=[ro,en],order=parts.flatMap(part=>part.order).filter((id,index,all)=>all.indexOf(id)===index);
+ const query='SELECT ?item ?itemLabel ?vat ?website WHERE { VALUES ?item { '+order.slice(0,nameSearchLimit).map(id=>'wd:'+id).join(' ')+' } OPTIONAL { ?item wdt:P3608 ?vat. } OPTIONAL { ?item wdt:P856 ?website. } SERVICE wikibase:label { bd:serviceParam wikibase:language "ro,en". } }';
+ const detail=order.length?await getSource('https://query.wikidata.org/sparql?'+new URLSearchParams({query,format:'json'}),{headers:{Accept:'application/sparql-results+json'}}):'{"results":{"bindings":[]}}';
+ return parseCompanyNameSearch(parts,detail,term)}}};

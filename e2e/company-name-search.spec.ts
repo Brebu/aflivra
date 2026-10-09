@@ -42,19 +42,22 @@ test.describe('Company name search (Wikidata VAT registry)', () => {
     },
   });
 
-  // Status+data envelope of the name-search loader: items carry the validated CUI of
-  // firms whose Wikidata label matches — only rows with a Romanian VAT identifier
-  // resolve onward; a row without a usable CUI stays unlinked, never invented.
+  // Status+data envelope of the name-search loader: entity search reads ro then en
+  // (merged per entity), the VAT/site detail comes from the registry — a row with a
+  // validated CUI links onward; a row whose entity carries no registry VAT stays
+  // listed with an honest no-CUI marker, never an invented CUI (eMAG-class firms are
+  // found by name but publish no VAT identifier in the open-knowledge registry).
   const nameSearchState = () => ({
-    key: 'company-name:monitorul oficial', name: 'Wikidata · firme după nume', url: 'https://query.wikidata.org/', adapterVersion: 'wikidata.company-name.v1',
+    key: 'company-name:monitorul oficial', name: 'Wikidata · firme după nume', url: 'https://www.wikidata.org/', adapterVersion: 'wikidata.company-name.v2',
     status: 'fresh', publishedAt: null, lastSuccessAt: now(), lastAttemptAt: now(), nextAttemptAt: null, error: null, ttlSeconds: 3600,
     data: {
       query: 'monitorul oficial',
       items: [
         {cui: '427282', vat: 'RO427282', qid: 'Q2138580', name: 'REGIA AUTONOMA MONITORUL OFICIAL', websites: ['https://www.monitoruloficial.ro/'], sourceUrl: 'https://www.wikidata.org/wiki/Q2138580'},
         {cui: '45548304', vat: 'RO45548304', qid: 'Q99887766', name: 'MONITORUL OFICIAL DE VERIFICARE SRL', websites: [], sourceUrl: 'https://www.wikidata.org/wiki/Q99887766'},
+        {cui: null, vat: null, qid: 'Q23827008', name: 'eMAG', websites: ['https://www.emag.ro/'], sourceUrl: 'https://www.wikidata.org/wiki/Q23827008'},
       ],
-      count: 2, limited: false,
+      count: 3, limited: false,
     },
   });
 
@@ -86,12 +89,22 @@ test.describe('Company name search (Wikidata VAT registry)', () => {
     await expect(results.getByRole('heading', {level: 2, name: 'Firme găsite după nume'})).toBeVisible();
     // The coverage sentence states the honest source shape: the open-knowledge registry
     // behind the search and the national registry that cannot be queried by name at source.
-    await expect(results).toContainText('2 firme găsite');
+    await expect(results).toContainText('3 firme găsite');
     const first = results.locator('.company-name-result').first();
     await expect(first).toContainText('REGIA AUTONOMA MONITORUL OFICIAL');
     await expect(first).toContainText('CUI 427282');
+    // A found entity without a registry VAT stays listed, marked honest — no invented CUI,
+    // no dosar: the row is plain text, not a clickable button.
+    const noCui = results.locator('.company-name-no-cui');
+    await expect(noCui).toHaveCount(1);
+    await expect(noCui).toContainText('eMAG');
+    await expect(noCui).toContainText('fără CUI citit în registrul deschis');
+    await expect(noCui).toContainText('https://www.emag.ro/');
+    await expect(noCui.getByRole('button')).toHaveCount(0);
     await expect(results).toContainText('registrul deschis de cunoștințe');
     await expect(results).toContainText('fără interogare pe nume la sursă');
+    // The count sentence discloses the no-CUI rows instead of hiding them.
+    await expect(results).toContainText('Intrările fără CUI citit din registru rămân indicate');
   });
 
   test('clicking a result opens that firm card with the public registries tab', async ({page}) => {
