@@ -69,13 +69,13 @@ export const TOOLS:ToolDef[]=[
   {
     name:'cinema_program',
     description:'Cinema program (Cinema City Romania) by city and date: films, showtimes and details.',
-    inputSchema:{type:'object',properties:{locality:{type:'string',description:'City with a Cinema City venue, e.g. "București"'},county:{type:'string',description:'County of the city'},id:{type:'string',description:'Specific cinema id, if known'},date:{type:'string',description:'Program date, ISO YYYY-MM-DD'}},required:['locality']},
+    inputSchema:{type:'object',properties:{locality:{type:'string',description:'City with a Cinema City venue, e.g. "București"'},date:{type:'string',description:'Program date, ISO YYYY-MM-DD'},county:{type:'string',description:'County of the city'},id:{type:'string',description:'Specific cinema id, if known'}},required:['locality','date']},
     build:args=>({path:'/api/cinema',query:query([['locality',str(args.locality)],['county',str(args.county)],['id',str(args.id)],['date',str(args.date)]])}),
   },
   {
     name:'transport_positions',
-    description:'Live public transport (TPBI): vehicle positions on map lines, station arrival boards and network alerts, scoped to a Romanian county. Vehicles update continuously and carry line, route and heading.',
-    inputSchema:{type:'object',properties:{kind:{type:'string',enum:['vehicles','arrivals','alerts'],description:'What the route serves: live vehicles, arrivals board, or network alerts'},locality:{type:'string',description:'Locality inside the covered county'},county:{type:'string',description:'Covered county (e.g. "Bihor")'},route:{type:'string',description:'Line short name filter'},stop:{type:'string',description:'Stop id for the arrivals board'},page:{type:'number',description:'Zero-based result page (arrivals/alerts)'}},required:['county','kind']},
+    description:'Live public transport of the Bucharest–Ilfov regional network (TPBI): vehicle positions on map lines, station arrival boards and network alerts. Vehicles update continuously and carry line, route and heading.',
+    inputSchema:{type:'object',properties:{kind:{type:'string',enum:['vehicles','arrivals','alerts'],description:'What the route serves: live vehicles, arrivals board, or network alerts'},locality:{type:'string',description:'Locality inside the covered region (e.g. "București")'},county:{type:'string',description:'Covered region (TPBI: Bucharest–Ilfov)'},route:{type:'string',description:'Line short name filter'},stop:{type:'string',description:'Stop id for the arrivals board'},page:{type:'number',description:'Zero-based result page (arrivals/alerts)'}},required:['county','kind']},
     build:args=>({path:'/api/transport-live',query:query([['kind',pick(['vehicles','arrivals','alerts'],args.kind)],['county',str(args.county)],['locality',str(args.locality)],['route',str(args.route)],['stop',str(args.stop)],['page',num(args.page)]])}),
   },
   {
@@ -158,9 +158,9 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'forensic_experts',
-    description:'Romanian forensic experts registry (lager categories) by judet and specialty.',
-    inputSchema:{type:'object',properties:{kind:{type:'string',description:'Expertise category'},judet:{type:'string',description:'County (judet) name'},q:{type:'string',description:'Free-text filter'},page:{type:'number',description:'Zero-based result page'}},required:['kind','judet']},
-    build:args=>({path:'/api/experts',query:query([['kind',str(args.kind)],['judet',str(args.judet)],['q',str(args.q)],['page',num(args.page)]])}),
+    description:'Romanian justice registries: forensic experts (judicial, technical) and authorized translators, filtered by county, searchable.',
+    inputSchema:{type:'object',properties:{kind:{type:'string',enum:['experti-judiciari','experti-tehnici','traducatori'],description:'Which registry to read'},locality:{type:'string',description:'Locality — anchors the geographic context the registry requires'},judet:{type:'string',description:'County (judet) filter, e.g. "Bihor"'},q:{type:'string',description:'Free-text filter'},page:{type:'number',description:'Zero-based result page'}},required:['kind','locality']},
+    build:args=>({path:'/api/experts',query:query([['kind',pick(['experti-judiciari','experti-tehnici','traducatori'],args.kind)],['locality',str(args.locality)],['judet',str(args.judet)],['q',str(args.q)],['page',num(args.page)],['geoScope','context'],['county',str(args.judet)]])}),
   },
   {
     name:'notaries_registry',
