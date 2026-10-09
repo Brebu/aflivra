@@ -1,6 +1,6 @@
 # Unused-fields census — content-enrichment-ux (Wave A2, point 2 substrate)
 
-**Generated**: 2026-10-09T01:10:42.318Z by `scripts/audit-unused-fields.mjs` (offline, mechanical)
+**Generated**: 2026-10-09T01:38:09.893Z by `scripts/audit-unused-fields.mjs` (offline, mechanical)
 
 **Purpose**: the ordered gap-list that feeds Wave B — every field below is fetched from a public source but shown only inside the raw disclosure (or not kept at all). Each is a **candidate** for a typed, attributed display in Wave B — never an automatic promotion; joins happen only on validated keys (D4).
 

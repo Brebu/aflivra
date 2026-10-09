@@ -58,7 +58,7 @@ export const weatherLoader:Loader={key:'weather',name:'Administrația Național�
 // search and restricted to what the registry carries (a plain label-CONTAINS scan of
 // every VAT holder exceeds the upstream time budget when the endpoint has not cached
 // the query — probe-measured).
-const nameSearchLimit=50;
+const nameSearchLimit=50,nameSearchNoCuiLimit=5;
 // Căutarea pe nume citește registrul de cunoștințe în doi pași: căutarea de entități
 // (wbsearchentities — întâi eticheta română, apoi cea engleză, îmbinate pe înregistrare;
 // ordonarea rămâne a primei limbi) și fișa detaliată a entităților găsite (identificatorul
@@ -103,9 +103,16 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
    if(website&&!record.websites.includes(website))record.websites.push(website)
   }
  }
- const list=order.slice(0,nameSearchLimit).map(id=>{const fact=facts.get(id),name=fact?.name||seed.get(id)||'';
+ const all=order.slice(0,nameSearchLimit).map(id=>{const fact=facts.get(id),name=fact?.name||seed.get(id)||'';
   return name?{cui:fact?.cui??null,vat:fact?.vat??null,qid:id,name,websites:fact?.websites||[],sourceUrl:'https://www.wikidata.org/wiki/'+id}:null}).filter((item):item is NonNullable<typeof item>=>!!item);
- return{publishedAt:null,data:{query:term,items:list,count:list.length,limited:list.length>=nameSearchLimit}};
+ // Firmele cu CUI citit din registru se servesc toate — potriviri fiscale integrale.
+ // Potrivirile fără CUI sunt majoritar zgomot de rang (specii, comune, asociații
+ // omonime) și rămân listate doar în fruntea rangului sursei: primele 5, cu
+ // nota „Se afișează primele potriviri" — nu inventăm CUI-uri și nu ascundem ce
+ // există, doar mărginim ce se afișează.
+ let withoutCui=0;
+ const list=all.filter(item=>item.cui||withoutCui++<nameSearchNoCuiLimit);
+ return{publishedAt:null,data:{query:term,items:list,count:list.length,limited:all.length>list.length||all.length>=nameSearchLimit}};
 }
 export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v2',ttl:3600,load:async()=>{
  if(term.length<2||term.length>100||!quoted)throw new SourceError('Termenul de căutat nu are lungimea acceptată.');
