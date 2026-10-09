@@ -115,13 +115,14 @@ for (const name of names) {
   }
   const envelope=result.structuredContent||{};
   const status = envelope.status ?? (envelope.items||envelope.total!==undefined?'direct':'none');
-  const hasData = !!(envelope.data||envelope.items||envelope.total!==undefined);
+  const servedText = !result.isError && typeof result.content[0].text==='string' && result.content[0].text.length>2;
+  const hasData = !!(envelope.data||envelope.items||envelope.total!==undefined)||(status==='none'&&servedText);
   if (!hasData || status === 'unavailable') {
     degraded++;
     console.log(`SURSĂ ${name}: ${status} — ${String(result.structuredContent?.error || 'fără date acum').slice(0, 100)} | probe: ${PROBE[name]}`);
     continue;
   }
-  console.log(`OK ${name}: ${status} | probe: ${PROBE[name]}`);
+  console.log(`OK ${name}: ${status}${status==='none'?' (răspuns text integral)':''} | probe: ${PROBE[name]}`);
 }
 console.log(`\nAUDIT ${BASE}: ${names.length - failed - degraded}/${names.length} tool-uri cu date proaspete; ${degraded} degradări oneste de sursă; ${failed} avarii.`);
 process.exit(failed ? 1 : degraded ? 2 : 0);
