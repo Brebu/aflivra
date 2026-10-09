@@ -47,7 +47,14 @@ export type LawQuery={title:string;text:string;number:string;year:string;page:nu
 export const soapEnvelope=(body:string)=>'<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><s:Body>'+body+'</s:Body></s:Envelope>';
 async function soap(url:string,action:string,body:string){return getSource(url,{method:'POST',headers:{'Content-Type':'text/xml; charset=utf-8',SOAPAction:'"'+action+'"'},body:soapEnvelope(body)},{maxBytes:25_000_000,timeoutMs:25000})}
 export function lawRequest(query:LawQuery,token:string){const optional=(name:string,value:string)=>value?'<a:'+name+'>'+escapeXml(value)+'</a:'+name+'>':'<a:'+name+' i:nil="true"/>';return '<Search xmlns="http://tempuri.org/"><SearchModel xmlns:a="http://schemas.datacontract.org/2004/07/FreeWebService" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><a:NumarPagina>'+query.page+'</a:NumarPagina><a:RezultatePagina>'+(query.pageSize||LAW_PAGE_SIZE)+'</a:RezultatePagina>'+optional('SearchAn',query.year)+optional('SearchNumar',query.number)+optional('SearchText',query.text)+optional('SearchTitlu',query.title)+'</SearchModel><tokenKey>'+escapeXml(token)+'</tokenKey></Search>'}
-export const validCourtInstitution=(id:string)=>!id||courtInstitutions.items.some(c=>c.id===id);
+const foldCourt=(v:string)=>v.trim().toLowerCase().replace(/[^a-z0-9]+/g,'');
+export const courtInstitution=(input:string)=>{
+  const id=(input||'').trim();if(!id)return '';
+  const exact=courtInstitutions.items.find(c=>c.id===id);if(exact)return exact.id;
+  const folded=foldCourt(id);
+  return courtInstitutions.items.find(c=>foldCourt(c.label)===folded)?.id||'';
+};
+export const validCourtInstitution=(id:string)=>!id||!!courtInstitution(id);
 export type CourtOperation='CautareDosare'|'CautareDosare2';
 export function courtRequest(value:string|CourtQuery,operation:CourtOperation='CautareDosare'){const q=typeof value==='string'?{number:value,name:'',subject:'',institution:'',from:'',to:''}:value;const optional=(name:string,value:string)=>value?'<'+name+'>'+escapeXml(value)+'</'+name+'>':'<'+name+' i:nil="true"/>';return '<'+operation+' xmlns="portalquery.just.ro">'+optional('numarDosar',q.number)+optional('obiectDosar',q.subject)+optional('numeParte',q.name)+optional('institutie',q.institution)+optional('dataStart',q.from?q.from+'T00:00:00':'')+optional('dataStop',q.to?q.to+'T23:59:59':'')+(operation==='CautareDosare2'?optional('dataUltimaModificareStart','')+optional('dataUltimaModificareStop',''):'')+'</'+operation+'>'}
 export function relatedCodeTitle(act:any){if(!/^LEGE/i.test(act.type)||String(act.text||'').length>1000)return null;const text=String(act.text||'');if(/COD FISCAL\s+08\/09\/2015/i.test(text))return codeTopics[2].title;if(/COD PR CIVIL[AĂ]\s*(?:\(R\))?\s+01\/07\/2010/i.test(text))return codeTopics[3].title;return null}

@@ -11,9 +11,10 @@ export async function GET(request:Request){
   if(d?.kind!=='table'||d.complete!==true||!d.indexed&&d.copyVerified!==true)return Response.json({error:'Exportul integral este disponibil pentru tabelele importate și verificate integral.'},{status:409});
   try{
    if(p.get('format')==='xlsx'){
-    const sheets=[];for(let i=0;i<d.sheets.length;i++)sheets.push({name:d.sheets[i].name,columns:d.sheets[i].columns,rows:await resourceSheetRows(d,i)});
-    const bytes=createExcelExport(sheets,d.title);
-    return new Response(bytes as BodyInit,{headers:{'Content-Type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','Content-Disposition':fileDisposition(id,d.title,'xlsx',true),'Cache-Control':'private, max-age=60','X-Aflivra-Rows':String(sheets.reduce((total,s)=>total+s.rows.length,0)),'X-Aflivra-Sheets':String(sheets.length)}});
+    if(sheet>=d.sheets.length)return Response.json({error:'Foaie invalidă.'},{status:400});
+    const one={name:d.sheets[sheet].name,columns:d.sheets[sheet].columns,rows:await resourceSheetRows(d,sheet)};
+    const bytes=createExcelExport([one],d.title);
+    return new Response(bytes as BodyInit,{headers:{'Content-Type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','Content-Disposition':fileDisposition(id,d.title,'xlsx',true),'Cache-Control':'private, max-age=60','X-Aflivra-Rows':String(one.rows.length),'X-Aflivra-Sheets':'1'}});
    }
    const rows=await resourceSheetRows(d,sheet),columns=d.sheets[sheet].columns,encoder=new TextEncoder();let index=0;
    const stream=new ReadableStream<Uint8Array>({start(controller){controller.enqueue(encoder.encode('\uFEFF'+csvLine(columns)))},pull(controller){const next=rows.slice(index,index+200);index+=next.length;if(next.length)controller.enqueue(encoder.encode(next.map(csvLine).join('')));if(index>=rows.length)controller.close()}});

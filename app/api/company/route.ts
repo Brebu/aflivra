@@ -4,7 +4,7 @@ import {companyNameSearchLoader} from '@/lib/live/adapters';
 import {knowledgeLoader,combineCompany} from '@/lib/live/knowledge';
 export const dynamic='force-dynamic';
 export async function GET(request:Request){
- const params=new URL(request.url).searchParams,name=(params.get('name')||'').trim(),cui=params.get('cui')||'427282';
+ const params=new URL(request.url).searchParams,name=(params.get('name')||'').trim(),cui=(params.get('cui')||'').trim();
  // Name search reads only the open-knowledge registry — the official name registries
  // publish no server-side query (probe-settled 2026-10-08) — through its own loader,
  // so it never loads the ANAF family for a term that is not a CUI.

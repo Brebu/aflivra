@@ -6,7 +6,8 @@ export type EventVenueKind='jsonld'|'tribe-events-v1';
 // OSM record id — never name-matched at runtime.
 export type EventVenue={id:string;name:string;short:string;type:string;city:string;county:string;address?:string;latitude:number;longitude:number;url:string;kind:EventVenueKind;placeId?:string};
 export const eventVenues=venuesCatalog.items as EventVenue[];
-export function eventVenue(id:string){return eventVenues.find(venue=>venue.id===id)||null}
+const foldVenue=(v:unknown)=>String(v??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+export function eventVenue(id:string){const key=foldVenue(id);return eventVenues.find(venue=>venue.id===String(id).trim()||foldVenue(venue.short)===key||foldVenue(venue.name)===key)||null}
 const venueHost=(venue:EventVenue)=>new URL(venue.url).hostname.replace(/^www\./,'');
 const venueCalendar=(venue:EventVenue)=>venue.kind==='tribe-events-v1'?venue.url+'wp-json/tribe/events/v1/events?per_page=100&status=publish':venue.url;
 const publishedOn=(url:unknown,venue:EventVenue)=>{const link=publicUrl(url);if(!link)return '';return new URL(link).hostname.replace(/^www\./,'').endsWith(venueHost(venue))?link:''};

@@ -12,9 +12,14 @@ export async function GET(request:Request){
  if(!agency)return Response.json({key:'transport:tranzy:vehicles',name:'Tranzy · '+context.locality,url:tranzyAgenciesLoader.url,adapterVersion:'tranzy.vehicles.v1',status:'unavailable',data:null,publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:'Niciun operator Tranzy nu a fost identificat pentru '+context.locality+'. Fluxul altui oraș nu este interogat.',ttlSeconds:3600},{headers:{'Cache-Control':'no-store'}});
   const state=await readSource(tranzyVehiclesLoader(agency));
   if(state.data){const now=Date.now(),rows=(state.data.items as any[]).filter((r:any)=>(!context.point||nearbyRecord(r,context.point,context.radius))&&matchesQuery({...r,line:'Linia '+String(r.routeId),vehicle:r.vehicleName},q));
-  // O veche copie nu ascunde harta: poziția păstrată rămâne servită, iar vechimea
-  // (minutele de la ultima preluare validă) devine eticheta ce o însoțește.
-  const isLive=state.status!=='stale'&&now-Date.parse(state.data.observedAt||'')<120000,stalenessMinutes=isLive||!state.lastSuccessAt?null:Math.max(0,Math.round((now-Date.parse(state.lastSuccessAt))/60000));
-  state.data={...state.data,...paginate(rows,page,60),isLive,...(stalenessMinutes!==null?{stalenessMinutes}:{}),agency:agency.agency_name}}
+  // O veche copie nu ascunde harta: poziția păstrată rămâne servită. Vechimea
+  // OBSERVAȚIEI (de la momentul observat) e eticheta pozițiilor — separat de
+  // vechimea PRELUĂRII (de la ultima reușită), ca pozițiile vechi de luni să nu
+  // pară proaspete doar pentru că preluarea a reușit acum.
+  const observedAt=Date.parse(state.data.observedAt||''),isLive=state.status!=='stale'&&Number.isFinite(observedAt)&&now-observedAt<120000,
+   observationAgeSeconds=isLive||!Number.isFinite(observedAt)?null:Math.max(0,Math.floor((now-observedAt)/1000)),
+   fetchedAgeSeconds=isLive||!state.lastSuccessAt?null:Math.max(0,Math.floor((now-Date.parse(state.lastSuccessAt))/1000)),
+   stalenessMinutes=observationAgeSeconds===null?null:Math.round(observationAgeSeconds/60);
+  state.data={...state.data,...paginate(rows,page,60),isLive,...(stalenessMinutes!==null?{stalenessMinutes,observationAgeSeconds,fetchedAgeSeconds}:{}),agency:agency.agency_name}}
   return Response.json(state,{headers:{'Cache-Control':'no-store'}});
 }

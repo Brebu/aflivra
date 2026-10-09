@@ -10,7 +10,7 @@ export async function GET(request:Request){
  const state=await readSource(justiceLoader('notari'));
  if(state.data){
   const data=state.data,records=(data.records as Record<string,unknown>[])
-   .filter(record=>matchesQuery(record,q)&&(!chamber||String(record.CAMERA||'').trim()===chamber))
+   .filter(record=>matchesQuery(record,q)&&(!chamber||countyName(record.CAMERA)===countyName(chamber)))
    .filter(record=>!context.active||!!context.county&&countyName(record.JUDET)===context.county&&(String(record.LOCALITATE??'').trim()===''||sameLocality(record.LOCALITATE,context.locality)))
    .map(record=>({...record,_id:justiceRecordId('notari',record)}));
   const selection=paginate(records,page,20);

@@ -34,7 +34,7 @@ jobs:
           code=$?
           set -e
           if [ "$code" -eq 2 ]; then
-            echo "::warning::adsb.lol a răspuns cu eroare sau ruta a respins forma fluxului în această tură (relaia nu a livrat pozițiile tocmai atunci) — reîmprospătarea reia la următoarea tură programată, săptămânal."
+            echo "::warning::adsb.lol a răspuns cu eroare sau ruta a respins forma fluxului în această tură (relaia nu a livrat pozițiile tocmai atunci) — reîmprospătarea reia la următoarea tură programată, orară."
             exit 0
           fi
           exit "$code"

@@ -40,9 +40,17 @@ function parseMersTren(xml){
   const elements=[...body.matchAll(/<ElementTrasa\b([^>]*?)\/>/g)].map(m=>attrs(m[1]));
   if(!elements.length)continue;
   const finalCode=Number(trainBlock[2].match(/<Trasa\b[^>]*CodStatieFinala="(\d+)"/)?.[1]||elements.at(-1)?.CodStaDest||0);
+  // Destinația unui tren e capătul traseului, nu următoarea escală: denumirea
+  // stației finale se ridică din elementul care o atinge; la trenurile circulare
+  // (originea e și capăt), ultimul element o numește pe aceeași stație.
+  const finalName=elements.filter(e=>Number(e.CodStaDest)===finalCode&&e.DenStaDestinatie).at(-1)?.DenStaDestinatie||elements.filter(e=>e.DenStaDestinatie).at(-1)?.DenStaDestinatie||'';
   const stops=[];
   for(const e of elements){
    const origin=Number(e.CodStaOrigine);if(!origin||!e.DenStaOrigine)continue;
+   // Elementul cu originea egală cu destinația e markerul de capăt al Infofer
+   // (trenul își scrie gara terminală ca Nord→Nord): nu e o deplasare — nu
+   // fabricăm din el plecare sau sosire; capătul rămâne destinația traseului.
+   if(Number(e.CodStaDest)===origin)continue;
    stops.push({code:origin,name:e.DenStaOrigine,arrive:e.OraP,depart:e.OraS,tip:e.TipOprire||'',next:e.DenStaDestinatie||''});
    if(Number(e.CodStaDest)===finalCode&&e.DenStaDestinatie&&Number(e.CodStaDest)!==origin)stops.push({code:Number(e.CodStaDest),name:e.DenStaDestinatie,arrive:e.OraP,depart:e.OraS,tip:'T',next:''});
   }
@@ -50,10 +58,8 @@ function parseMersTren(xml){
   for(const stop of uniq){
    if(!stations.has(stop.code))stations.set(stop.code,{name:stop.name,departures:[],arrivals:[]});
    const station=stations.get(stop.code);
-   if(station.departures.length+station.arrivals.length<400){
-    if(stop.tip!=='T'&&stop.depart)station.departures.push({t:Number(stop.depart),n:String(train.Numar||''),c:train.CategorieTren||'',d:stop.next,z:calAttrs.Zile||'',zl:calAttrs.Zile?days(calAttrs.Zile):''});
-    if(stop.arrive&&(stop.tip==='T'||Number(stop.arrive)!==Number(stop.depart)))station.arrivals.push({t:Number(stop.arrive),n:String(train.Numar||''),c:train.CategorieTren||'',f:uniq[0]?.name||'',z:calAttrs.Zile||'',zl:calAttrs.Zile?days(calAttrs.Zile):''});
-   }
+   if(stop.tip!=='T'&&stop.depart)station.departures.push({t:Number(stop.depart),n:String(train.Numar||''),c:train.CategorieTren||'',d:String(finalName||stop.next),nx:stop.next,z:calAttrs.Zile||'',zl:calAttrs.Zile?days(calAttrs.Zile):''});
+   if(stop.arrive&&(stop.tip==='T'||Number(stop.arrive)!==Number(stop.depart)))station.arrivals.push({t:Number(stop.arrive),n:String(train.Numar||''),c:train.CategorieTren||'',f:uniq[0]?.name||'',z:calAttrs.Zile||'',zl:calAttrs.Zile?days(calAttrs.Zile):''});
   }
   trains.push(String(train.Numar||''));
  }

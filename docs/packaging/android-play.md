@@ -10,7 +10,7 @@ adresă**.
 ## Ce e publicat
 
 - `public/downloads/aflivra.apk` — pachetul semnat (`ro.aflivra.app`,
-  `versionName 1.0.0`, `versionCode 2`, targetSdk 36), semnat `CN=Aflivra`,
+  `versionName 1.1.0`, `versionCode 4`, targetSdk 36), semnat `CN=Aflivra`,
   alias `aflivra-upload`.
 - Link + note de instalare în **Despre → „Ghidurile platformei" →
   Aplicația Android**.

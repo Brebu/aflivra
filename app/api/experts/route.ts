@@ -14,7 +14,7 @@ export async function GET(request:Request){
  const state=await readSource(justiceLoader(kind));
  if(state.data){
   const data=state.data,records=(data.records as Record<string,unknown>[])
-   .filter(record=>matchesQuery(record,q)&&(!judet||String(record[countyColumn[kind]]||'').trim()===judet))
+   .filter(record=>matchesQuery(record,q)&&(!judet||countyName(record[countyColumn[kind]])===countyName(judet)))
    .filter(record=>!context.active||!!context.county&&countyName(record[countyColumn[kind]])===context.county)
    .map(record=>({...record,_id:justiceRecordId(kind,record)}));
   const selection=paginate(records,page,20);

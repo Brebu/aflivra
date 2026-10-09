@@ -57,8 +57,8 @@ console.log('Leg 1 — GET /api/watch fără date noi: 200 și cheia publică pu
  const payload=await noStore(response);
  assert.deepEqual(payload.watches,[]);
  assert.deepEqual(payload.kinds,['dosar','firma','localitate','act','venue','meteo']);
- assert.equal(payload.sweepState.runsPerDay,3);assert.equal(payload.sweepState.timesUtc,'04:28, 10:28, 16:28');
- assert.equal(payload.sweepState.lastRunAt,null);assert.equal(payload.sweepState.lastOk,null);assert.match(payload.sweepState.note,/3 ori pe zi/);
+ assert.equal(payload.sweepState.runsPerDay,24);assert.equal(payload.sweepState.timesUtc,'oră: 00:28–23:28 UTC');
+ assert.equal(payload.sweepState.lastRunAt,null);assert.equal(payload.sweepState.lastOk,null);assert.match(payload.sweepState.note,/verificăm orar/);
  assert.equal(payload.notification.vapidPublicKey,vapidPublic,'cheia publică VAPID se expune exact cum o cere pushManager.subscribe');
  await assertStore();
 }

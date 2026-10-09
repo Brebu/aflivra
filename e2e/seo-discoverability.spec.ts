@@ -116,7 +116,7 @@ test.describe('llms.txt for AI agents', () => {
     expect(text).toContain('llms-full.txt');
     // The honest refresh contract: worker-side daily crons + weekly relays.
     expect(text).toContain('zilnic');
-    expect(text).toContain('săptămânal');
+    expect(text).toContain('la fiecare două ore');
     // The MCP connector for AI consumers is part of the discoverable surface.
     expect(text).toContain('/api/mcp');
     expect(text).toContain('34 de tool-uri');

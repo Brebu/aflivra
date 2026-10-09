@@ -27,8 +27,8 @@ assert.equal(twa.name, 'Aflivra', 'numele aplicației');
 assert.equal(twa.launcherName, 'Aflivra', 'numele din lansator încapând sub ecranul de start');
 assert.equal(twa.themeColor, '#0071e3', 'themeColor = culoarea din manifestul web (brand, nu reinventată)');
 assert.equal(twa.startUrl, '/', 'startUrl = rădăcina aplicației');
-assert.equal(twa.appVersionName, '1.0.0', 'appVersionName semver, pornit la 1.0.0');
-assert.equal(twa.appVersionCode, 1, 'appVersionCode pornește la 1 și crește la fiecare upload');
+assert.equal(twa.appVersionName, '1.1.0', 'appVersionName semver');
+assert.equal(twa.appVersionCode, 4, 'appVersionCode aliniat cu APK-ul semnat (monoton: 1 publicat, 2, 3, 4)');
 assert.equal(twa.enableNotifications, true, 'notificările Web Push (iOS 16.4+/Android) fac parte din aplicație');
 assert.equal(twa.features?.locationDelegation?.enabled, true, 'locationDelegation — geolocația e capaibilitate de bază (Orașul tău/vremea)');
 

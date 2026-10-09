@@ -28,10 +28,10 @@
     "alias": ""
   },
   "shortcuts": [],
-  "appVersionName": "1.0.0",
-  "appVersionCode": 1,
+  "appVersionName": "1.1.0",
+  "appVersionCode": 4,
   "targetSdkVersion": 36,
-  "appVersion": "1.0.0",
+  "appVersion": "1.1.0",
   "splashScreenFadeOutDuration": 300,
   "minSdkVersion": 21
 }

@@ -34,7 +34,7 @@ try{
  console.log('LEG 1 — validated key predicates at the join call sites (mine and the parallel families)');
  // venue id — the events loader stamps it and every consumer resolves it through the registry.
  const eventsSource=await read('lib/live/events.ts');
- assert.ok(eventsSource.includes('venue=>venue.id===id'),'events.ts: the venue resolver matches the registry venue id exactly (eventVenue)');
+ assert.ok(eventsSource.includes('venue=>venue.id===String(id).trim()||foldVenue(venue.short)===key||foldVenue(venue.name)===key'),'events.ts: the venue resolver joins on the registry id or the folded registry name/short — never free-text similarity (eventVenue, D19)');
  assert.ok(eventsSource.includes('venue:venue.id'),'events.ts: parseEvents stamps the join key (venue:venue.id) on every calendar item');
  assert.ok((eventsSource.match(/venue:venue\.id/g)||[]).length>=2,'events.ts: both calendar parsers stamp the venue id key');
  const eventsApi=await read('app/api/events/route.ts');

@@ -30,6 +30,7 @@ try{
     if(call.path==='/api/company'&&call.query.name)return {ok:true,status:200,body:{status:'fresh',data:{items:[]}}};
     if(call.path==='/api/weather')return {ok:false,status:400,body:{error:'Alege coordonate geografice valide.'}};
     if(call.path==='/api/legal'&&call.method==='POST')return {ok:true,status:200,body:{status:'fresh',data:{kind:'court'}}};
+    if(call.path==='/api/resource-file'&&call.query.format==='xlsx')return {ok:true,status:200,body:{},binary:{url:'/api/resource-file?'+new URLSearchParams(call.query).toString(),mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',fileName:'Prețuri locale.xlsx',rows:4357,sheets:1}};
     return {ok:true,status:200,body:{status:'fresh',data:{}}};
   };
 
@@ -43,8 +44,21 @@ try{
   assert.equal(init.body.result.serverInfo.name,'aflivra','serverInfo cu numele platformei');
   assert.ok(init.body.result.instructions.length>50,'instrucțiunile descriu platforma pentru asistenți');
 
-  // 2. Notificările nu primesc răspuns (null), conform protocolului.
+  // 2. Notificările se decid după absența lui id, nu după nume: orice cerere
+  // fără id (inclusiv ping sau tools/call) nu primește răspuns și NU se execută;
+  // notifications/* purtând id rămâne o cerere și se respinge cu -32601.
   assert.equal((await server.handleRpc(callRoute,{jsonrpc:'2.0',method:'notifications/initialized'})).body,null,'notificarea initialized nu produce răspuns');
+  const silentPing=await server.handleRpc(callRoute,{jsonrpc:'2.0',method:'ping'});
+  assert.equal(silentPing.status,202,'ping fără id e notificare: 202');
+  assert.equal(silentPing.body,null,'ping fără id nu produce răspuns');
+  calls.length=0;
+  const silentCall=await server.handleRpc(callRoute,{jsonrpc:'2.0',method:'tools/call',params:{name:'localities_search',arguments:{q:'București'}}});
+  assert.equal(silentCall.status,202,'tools/call fără id e notificare: 202');
+  assert.equal(silentCall.body,null,'tools/call fără id nu produce răspuns');
+  assert.equal(calls.length,0,'tools/call fără id nu execută ruta');
+  const idNotification=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:21,method:'notifications/initialized'});
+  assert.equal(idNotification.status,200,'notifications/* cu id rămâne cerere');
+  assert.equal(idNotification.body.error?.code,-32601,'notifications/* cu id se respinge onest cu -32601');
 
   // 3. ping → empty result.
   assert.deepEqual((await server.handleRpc(callRoute,{jsonrpc:'2.0',id:3,method:'ping'})).body.result,{},'ping răspunde rezultat gol');
@@ -84,6 +98,8 @@ try{
   // enum invalid, tool necunoscut — toate -32602 cu mesaj explicabil.
   for (const [label,params] of [
     ['argument lipsă',{name:'company_profile',arguments:{}}],
+    ['fără arguments',{name:'company_profile'}],
+    ['arguments null',{name:'company_profile',arguments:null}],
     ['tip greșit',{name:'weather_forecast',arguments:{lat:'fourty-four',lon:26}}],
     ['argument necunoscut',{name:'localities_search',arguments:{q:'x',scheduler:'bypass'}}],
     ['enum invalid',{name:'weather_alerts',arguments:{geoScope:'global'}}],
@@ -95,10 +111,26 @@ try{
   }
 
   // 8. POST-ul de corp ( căutarea de dosare ) ajunge la rută cu metoda corp:
-  const court=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:8,method:'tools/call',params:{name:'court_dosar_search',arguments:{number:'6236/111/2017'}}});
+  const court=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:8,method:'tools/call',params:{name:'court_dosar_search',arguments:{number:'6236/111/2017',locality:'Oradea',county:'Bihor'}}});
   assert.equal(court.body.result.isError,false,'căutarea de dosare pornește ca apel de corp');
   const courtCall=calls.find(c=>c.path==='/api/legal'&&c.method==='POST');
   assert.ok(courtCall&&courtCall.body.number==='6236/111/2017','corpul apelului DOSAR poartă numărul dosarului');
+  assert.ok(courtCall&&courtCall.body.locality==='Oradea'&&courtCall.body.county==='Bihor','contextul geografic PROMIS de schemă călătorește în corpul cererii (D04)');
+
+  // 8b. Exportul binar prin seam: răspunsul pe Content-Type nebinary nu se
+  // decodifică ca text — tool-ul livrează resource_link cu MIME și numele
+  // fișierului, nota de descărcare și structuredContent cu legătura. Un client
+  // primește link-ul exportului XLSX, nu bytes stricate (D01).
+  const bin=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:20,method:'tools/call',params:{name:'dataset_export',arguments:{id:'ffc221f1-8cdf-4608-bf23-702d4ab2ee7d',format:'xlsx',sheet:0}}});
+  assert.equal(bin.body.result.isError,false,'exportul binar nu e eroare');
+  assert.equal(bin.body.result.content[0].type,'resource_link','conținutul principal e legătura de resursă');
+  assert.equal(bin.body.result.content[0].mimeType,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','legătura poartă MIME-ul real');
+  assert.ok(bin.body.result.content[0].uri.includes('/api/resource-file'),'legătura țintește ruta exportului');
+  assert.equal(bin.body.result.structuredContent.kind,'binary-export','structuredContent marchează exportul binar');
+  assert.equal(bin.body.result.structuredContent.rows,4357,'numărul de rânduri călătorește în plic');
+  const note=bin.body.result.content[1].text;
+  assert.ok(note.includes('Prețuri locale.xlsx')&&note.includes('/api/resource-file'),'nota de text descrie descărcarea onestă');
+  assert.ok(!note.includes('\uFFFD'),'niciun caracter de substituție în rezultatul binar');
 
   // 9. Metodă necunoscută → -32601.
   const unknownMethod=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:9,method:'resources/read'});
@@ -107,7 +139,11 @@ try{
   // 10. Lotul: răspunsuri numai pentru cererile care cer răspuns.
   const batch=await server.handleRpc(callRoute,[{jsonrpc:'2.0',id:10,method:'ping'},{jsonrpc:'2.0',method:'notifications/cancelled'},{jsonrpc:'2.0',id:11,method:'tools/list'}]);
   assert.ok(Array.isArray(batch.body),'lotul răspunde cu lot');
-  assert.deepEqual(batch.body.map(entry=>entry.id),[10,11],'notificările nu primesc răspuns în lot');
+  assert.deepEqual(batch.body.map(entry=>entry.id),[10,11],'notificările fără id nu primesc răspuns în lot');
+  calls.length=0;
+  const silentBatch=await server.handleRpc(callRoute,[{jsonrpc:'2.0',method:'tools/call',params:{name:'localities_search',arguments:{q:'x'}}},{jsonrpc:'2.0',id:12,method:'ping'}]);
+  assert.deepEqual((silentBatch.body||[]).map(entry=>entry.id),[12],'lotul execută doar cererile cu id');
+  assert.equal(calls.length,0,'notificarea tools/call din lot nu execută ruta');
   const emptyBatch=await server.handleRpc(callRoute,[]);
   assert.equal(emptyBatch.status,400,'lotul gol se respinge');
 
@@ -121,25 +157,25 @@ try{
     ['places_search',{q:'spital',category:'sanatate',contact:'phone',scope:'nearby',sort:'distance',lat:44.4,lon:26.1,radius:15,pageSize:20,page:0},{path:'/api/places',query:{q:'spital',category:'sanatate',contact:'phone',scope:'nearby',sort:'distance',lat:'44.4',lon:'26.1',radius:'15',pageSize:'20',page:'0',view:'cards'}}],
     ['directory_registry',{kind:'pharmacies',q:'farmacia',page:2},{path:'/api/directory',query:{kind:'pharmacies',q:'farmacia',page:'2',geoScope:'national'}}],
     ['localities_search',{q:'Câmpulung',page:1},{path:'/api/localities',query:{q:'Câmpulung',page:'1'}}],
-    ['weather_forecast',{lat:44.4,lon:26.1},{path:'/api/weather',query:{lat:'44.4',lon:'26.1'}}],
+    ['weather_forecast',{lat:44.4,lon:26.1,hours:48},{path:'/api/weather',query:{lat:'44.4',lon:'26.1',hours:'48'}}],
     ['weather_alerts',{geoScope:'national'},{path:'/api/weather',query:{kind:'alerts',geoScope:'national'}}],
     ['events_search',{q:'teatru',venue:'Odeon',locality:'București',county:'București',page:0},{path:'/api/events',query:{q:'teatru',venue:'Odeon',locality:'București',county:'București',page:'0'}}],
     ['cinema_sites',{}, {path:'/api/cinemas',query:{}}],
-    ['cinema_program',{locality:'București',county:'București',id:'1806',date:'2026-10-09'},{path:'/api/cinema',query:{locality:'București',county:'București',id:'1806',date:'2026-10-09'}}],
+    ['cinema_program',{locality:'București',county:'București',id:'1806',date:'2026-10-09'},{path:'/api/cinema',query:{locality:'București',county:'București',id:'1806',date:'2026-10-09',detail:'compact'}}],
     ['transport_network',{kind:'stops',q:'piața',lat:44.4,lon:26.1,locality:'București',county:'București',page:0},{path:'/api/transport',query:{kind:'stops',q:'piața',lat:'44.4',lon:'26.1',locality:'București',county:'București',geoScope:'context',page:'0'}}],
     ['transport_positions',{kind:'vehicles',county:'București',locality:'București',route:'33',page:0},{path:'/api/transport-live',query:{kind:'vehicles',county:'București',locality:'București',route:'33',page:'0'}}],
     ['tranzy_live',{locality:'Iași',county:'Iași',q:'b8',page:0},{path:'/api/tranzy-live',query:{locality:'Iași',county:'Iași',q:'b8',page:'0'}}],
     ['flights_status',{q:'W6',page:0},{path:'/api/flights',query:{q:'W6',page:'0'}}],
     ['flight_board',{airport:'henri-coanda',q:'W6'},{path:'/api/flight-board',query:{airport:'henri-coanda',q:'W6'}}],
-    ['trains_schedule',{station:'44678',q:'IR',page:0},{path:'/api/trains',query:{station:'44678',q:'IR',page:'0'}}],
+    ['trains_schedule',{station:'44678',q:'IR',date:'2026-10-09',edition:'all',page:0},{path:'/api/trains',query:{station:'44678',q:'IR',date:'2026-10-09',edition:'all',page:'0'}}],
     ['legal_acts',{cursor:'a'.repeat(64)},{path:'/api/legal',query:{cursor:'a'.repeat(64)}}],
-    ['court_dosar_search',{number:'6236/111/2017',institution:'Curtea de Apel București',locality:'București',county:'București'},{path:'/api/legal',method:'POST',body:{kind:'court',number:'6236/111/2017',name:'',subject:'',institution:'Curtea de Apel București',from:'',to:'',numberScope:'all'},query:{}}],
+    ['court_dosar_search',{number:'6236/111/2017',institution:'Curtea de Apel București',locality:'București',county:'București'},{path:'/api/legal',method:'POST',body:{kind:'court',number:'6236/111/2017',name:'',subject:'',institution:'Curtea de Apel București',from:'',to:'',numberScope:'all',locality:'București',county:'București'},query:{}}],
     ['law_search',{title:'codul',text:'',number:'287',year:'2009',page:0},{path:'/api/legal',method:'POST',body:{kind:'law',title:'codul',text:'',number:'287',year:'2009',page:0},query:{}}],
     ['law_document',{exactTitle:'LEGE nr. 287 din 2009',id:'x',selectedType:'lege',selectedNumber:'287',selectedDate:'2009'},{path:'/api/legal',method:'POST',body:{kind:'law',full:true,summary:true,title:'LEGE nr. 287 din 2009',exactTitle:'LEGE nr. 287 din 2009',id:'x',selectedType:'lege',selectedNumber:'287',selectedDate:'2009'},query:{}}],
     ['federated_search',{q:'buget',kind:'stiri',publisher:'ANOFM',sort:'recent',from:'2026-01-01',to:'2026-10-09',page:0},{path:'/api/domain',query:{q:'buget',kind:'stiri',publisher:'ANOFM',sort:'recent',from:'2026-01-01',to:'2026-10-09',page:'0',geoScope:'national'}}],
     ['news_feed',{kind:'munca',q:'şomeri',publisher:'ANOFM',sort:'recent',from:'2026-01-01',to:'2026-10-09',page:0},{path:'/api/domain',query:{kind:'munca',q:'şomeri',publisher:'ANOFM',sort:'recent',from:'2026-01-01',to:'2026-10-09',page:'0',geoScope:'national'}}],
     ['catalog_datasets',{q:'buget',organization:'minister',page:0},{path:'/api/catalog',query:{q:'buget',organization:'minister',page:'0'}}],
-    ['dataset_table',{id:'1088e792-54f4-43ad-8e4c-9b351b82d31c',sheet:1,page:0,q:'x',sort:2,desc:true},{path:'/api/resource',query:{id:'1088e792-54f4-43ad-8e4c-9b351b82d31c',sheet:'1',page:'0',q:'x',sort:'2',desc:'true'}}],
+    ['dataset_table',{id:'1088e792-54f4-43ad-8e4c-9b351b82d31c',sheet:1,page:0,q:'x',sort:2,desc:true},{path:'/api/resource',query:{id:'1088e792-54f4-43ad-8e4c-9b351b82d31c',sheet:'1',page:'0',q:'x',sort:'2',desc:'1'}}],
     ['dataset_export',{id:'1088e792-54f4-43ad-8e4c-9b351b82d31c',format:'xlsx',sheet:2},{path:'/api/resource-file',query:{id:'1088e792-54f4-43ad-8e4c-9b351b82d31c',format:'xlsx',sheet:'2',download:'1'}}],
     ['article_read',{url:'https://www.anofm.ro/anunt'},{path:'/api/content',query:{url:'https://www.anofm.ro/anunt'}}],
     ['film_detail',{id:'Q1084'},{path:'/api/content',query:{kind:'film',id:'Q1084'}}],
