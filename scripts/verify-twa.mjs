@@ -6,8 +6,8 @@ import {fileURLToPath} from 'node:url';
 // Poarta TWA (Android packaging, M1): tot ce trebuie să fie adevărat în repo
 // ca pasul 2 (console-side, M2) să fie doar „citește SHA-256 → înlocuiește
 // placeholder-ul → redeploy → closed test”. targetSdk 36 e mandatul Play
-// (31 aug 2026 aplicațiile noi), assetlinks-ul trebuie să fie complet
-// structural cu fingerprint placeholder, iar materialul de semnare nu
+// (31 aug 2026 aplicațiile noi), assetlinks-ul poartă fingerprintul real al certificatului
+// de semnare al APK-ului publicat pe site, iar materialul de semnare nu
 // există niciodată în repo — semnarea e Play App Signing, console-side.
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const TWA = join(ROOT, 'twa'), PUBLIC = join(ROOT, 'public');
@@ -53,11 +53,15 @@ for (const field of ['iconUrl', 'maskableIconUrl']) {
   assert.equal(readFileSync(iconPath).subarray(1, 4).toString('ascii'), 'PNG', `${field} este un PNG real`);
 }
 
-// 4. assetlinks.json: structura exactă Digital Asset Links — fingerprintul poate
-//    fi placeholder (trecerea 1), dar formatul trebuie complet, ca trecerea 2 să
-//    fie doar o înlocuire de valoare, fără nicio muncă de format.
+// 4. assetlinks.json: structura exactă Digital Asset Links cu fingerprintul REAL al
+//    certificatului de semnare al APK-ului publicat pe site (distribuția aleasă e
+//    instalarea directă de pe site, semnată cu cheia owner-ului — nu Play App Signing,
+//    deci fingerprintul se cunoaște din keystore-ul de semnare, nu dintr-o consolă).
+//    Poarta pănă valoarea exactă: o editare accidentală a fișierului sau o resemnare
+//    cu altă cheie se prinde aici, nu în telefonul utilizatorului.
+const UPLOAD_CERT_SHA256 = '9B:56:D9:6D:2F:BE:D7:BA:A1:1C:DD:67:56:FF:B4:D0:28:83:DC:ED:00:49:B2:F8:6B:D9:40:67:C3:E0:64:D1';
 const assetlinksPath = join(PUBLIC, '.well-known', 'assetlinks.json');
-assert.ok(existsSync(assetlinksPath), 'public/.well-known/assetlinks.json lipsește — TWA nu se poate verifica fără el (trecerea 1 cu placeholder)');
+assert.ok(existsSync(assetlinksPath), 'public/.well-known/assetlinks.json lipsește — TWA nu se poate verifica fără el');
 const assetlinks = JSON.parse(readFileSync(assetlinksPath, 'utf8'));
 assert.ok(Array.isArray(assetlinks) && assetlinks.length > 0, 'assetlinks.json este o listă de declarații nevidă');
 const statement = assetlinks[0];
@@ -66,7 +70,8 @@ for (const relation of REQUIRED_RELATIONS) assert.ok(statement.relation.includes
 assert.equal(statement.target.namespace, 'android_app', 'namespace android_app');
 assert.equal(statement.target.package_name, PACKAGE_ID, 'package_name = packageId din twa-manifest (o singură identitate)');
 assert.ok(Array.isArray(statement.target.sha256_cert_fingerprints) && statement.target.sha256_cert_fingerprints.length > 0, 'sha256_cert_fingerprints prezent');
-assert.ok(statement.target.sha256_cert_fingerprints.every(f => CERT_FINGERPRINT_RE.test(f)), 'fingerprintele sunt 32 de perechi hex separate prin „:” — placeholder-ul all-zero e permis, valoarea reală vine din Play Console la trecerea 2');
+assert.ok(statement.target.sha256_cert_fingerprints.every(f => CERT_FINGERPRINT_RE.test(f)), 'fingerprintele sunt 32 de perechi hex separate prin „:”');
+assert.ok(statement.target.sha256_cert_fingerprints.includes(UPLOAD_CERT_SHA256), `fingerprintul real al certificatului de semnare al APK-ului publicat (${UPLOAD_CERT_SHA256.slice(0,11)}…) lipsește din assetlinks — TWA-ul instalat de pe site nu se verifică fără el; o resemnare cu altă cheie actualizează explicit valoarea pin-ată aici`);
 
 // 5. Graphic-ul de magazin (Play listing): PNG real, exact 1024×500, sub 1 MB —
 //    cerința Play Console; randat din tokenii reali ai brandului.
@@ -109,4 +114,4 @@ for (const file of walk(TWA)) {
 }
 assert.ok(!twa.signingKey?.path, 'signingKey.path din twa-manifest rămâne gol — keystore-ul nu se consemnează în repo');
 
-console.log(`Poarta TWA a trecut: ${PACKAGE_ID} @ ${twa.appVersionName} (code ${twa.appVersionCode}), targetSdk ${twa.targetSdkVersion}, host ${twa.host}, assetlinks structural complet (${statement.target.sha256_cert_fingerprints[0] === '00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00' ? 'placeholder trecerea 1' : 'valoare reală'}), Bubblewrap fixat @${pin[1]}, feature graphic 1024×500 sub 1 MB (${(graphic.length / 1024).toFixed(0)} KB), fără material de semnare.`);
+console.log(`Poarta TWA a trecut: ${PACKAGE_ID} @ ${twa.appVersionName} (code ${twa.appVersionCode}), targetSdk ${twa.targetSdkVersion}, host ${twa.host}, assetlinks cu fingerprintul real al certificatului de semnare al APK-ului (${UPLOAD_CERT_SHA256.slice(0,11)}…), Bubblewrap fixat @${pin[1]}, feature graphic 1024×500 sub 1 MB (${(graphic.length / 1024).toFixed(0)} KB), fără material de semnare.`);

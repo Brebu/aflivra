@@ -224,4 +224,24 @@ test.describe('Footer honesty', () => {
     await expect(page.getByRole('heading', {level: 2, name: 'Ghidurile platformei'})).toBeVisible();
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  test('the Android app installs from the site: signed APK download with honest install notes', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    await waitForClientReady(page);
+    await page.locator('.vfooter .footer-links').getByRole('button', {name: 'Ghidurile platformei'}).click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'about');
+    const apk = page.locator('.source-download-app');
+    await expect(apk).toBeVisible();
+    // The download is the signed APK served from the site — no store account involved.
+    const link = apk.locator('a.text-link');
+    await expect(link).toHaveAttribute('href', '/downloads/aflivra.apk');
+    await expect(link).toHaveAttribute('download', 'aflivra.apk');
+    await expect(link).toHaveText(/Descarcă aplicația/i);
+    // The notes disclose what the app is (a shell of the same site) and the
+    // one-time Android permission to install from this browser.
+    await expect(apk).toContainText('același site');
+    await expect(apk).toContainText('instala din acest browser');
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });
