@@ -84,15 +84,17 @@ if (generated.status !== 0) {
   console.error(`bubblewrap init a eșuat (exit ${generated.status}) — vezi output-ul de mai sus; twa-manifest.json complet ar trebui să evite orice prompt.`);
   process.exit(1);
 }
-// Interviul de init suprascrie twa-manifest.json (inclusiv cheia generată acolo) — cheia
-// de upload a owner-ului se reafirmă DUPĂ init, iar cheia generată de interviu rămâne
-// orfană în build/, nefolosită la semnarea AAB-ului.
-if (uploadKeystore && uploadAlias) {
-  const afterInit = JSON.parse(readFileSync(join(BUILD, 'twa-manifest.json'), 'utf8'));
-  afterInit.signingKey = {path: uploadKeystore, alias: uploadAlias};
-  writeFileSync(join(BUILD, 'twa-manifest.json'), JSON.stringify(afterInit, null, 2));
-  console.log('Cheia de upload reafirmată după interviul de init (cheia generată de interviu rămâne nefolosită).');
-}
+// Interviul de init suprascrie twa-manifest.json cu default-urile lui — packageId
+// devine dev.workers.<host>.twa, versionName un contor — iar identitatea Android este
+// pe viață: packageId-ul nu se mai poate schimba după publicarea în Play. Manifestul
+// comis se reafirmă PESTĂ copia interviului: fiecare câmp comis câștigă, interviul
+// completează doar câmpurile de generator pe care comisul nu le declară
+// (splashScreenFadeOutDuration, minSdkVersion… — un câmp lipsă ajunge gol în
+// build.gradle și pică compilarea). Keystore-ul generat de interviu rămâne orfan.
+const asserted = {...JSON.parse(readFileSync(join(BUILD, 'twa-manifest.json'), 'utf8')), ...JSON.parse(readFileSync(MANIFEST, 'utf8'))};
+if (uploadKeystore && uploadAlias) asserted.signingKey = {path: uploadKeystore, alias: uploadAlias};
+writeFileSync(join(BUILD, 'twa-manifest.json'), JSON.stringify(asserted, null, 2));
+console.log(`Manifestul comis reafirmat peste interviu: identitate ${asserted.packageId} ${asserted.appVersionName} (code ${asserted.appVersionCode}), completat de interviu cu ${Object.keys(asserted).length - Object.keys(JSON.parse(readFileSync(MANIFEST, 'utf8'))).length} câmpuri de generator.`);
 
 // 3b. În Bubblewrap 1.25, init generează CONFIGUL (twa-manifest.json), nu proiectul
 //     Android — proiectul îl generează build, complet non-interactiv când parolele
@@ -113,6 +115,15 @@ if (!gradleFile) {
   process.exit(1);
 }
 const projectDir = join(gradleFile, '..', '..');
+
+// Identitatea generată trebuie să fie cea declarată — un șablon Bubblewrap schimbat
+// (sau un manifest netradus corect) nu are voie să publice alt packageId.
+const gradleIdentity = /applicationId\s+["']([^"']+)["']/.exec(readFileSync(gradleFile, 'utf8'))?.[1];
+if (gradleIdentity !== twa.packageId) {
+  console.error(`applicationId generat (${gradleIdentity ?? 'lipsă'}) ≠ packageId declarat (${twa.packageId}) — identitatea Play e pe viață; build-ul se oprește până manifestul și șablonul se potivesc.`);
+  process.exit(1);
+}
+console.log(`Identitate verificată: applicationId ${gradleIdentity}.`);
 
 // 5. Injecția SDK-ului declarat (36): compileSdk + targetSdk, dintr-o singură
 //    sursă — twa-manifest.json. Fiecare înlocuire e verificată post-fapt, ca
@@ -160,5 +171,31 @@ if (!aab || !statSync(aab).isFile() || statSync(aab).size < 1024) {
   process.exit(1);
 }
 const sha256 = createHash('sha256').update(readFileSync(aab)).digest('hex');
-console.log(`AAB nesignat: ${aab} (${(statSync(aab).size / 1024 / 1024).toFixed(2)} MB), SHA-256 ${sha256}.
-Încărcarea în Play Console (internal testing) semnează console-side prin Play App Signing — nicio cheie nu se generează și niciun keystore nu ajunge în repo (tw/build/ e ignorat de git).`);
+console.log(`AAB nesignat: ${aab} (${(statSync(aab).size / 1024 / 1024).toFixed(2)} MB), SHA-256 ${sha256}.`);
+
+// 9. Semnarea de upload (opțională, doar unde mediul e complet): jarsigner cu
+//    keystore-ul owner-ului — Play cere AAB semnat la încărcare, iar Play App
+//    Signing îl resemnează console-side cu cheia de aplicație. Parolele circulă
+//    exclusiv pe env (BUBBLEWRAP_KEYSTORE_PASSWORD / BUBBLEWRAP_KEY_PASSWORD),
+//    niciodată în repo.
+const jarsigner = [process.env.AFLIVRA_JARSIGNER, process.env.JAVA_HOME && join(process.env.JAVA_HOME, 'bin', 'jarsigner'), 'jarsigner', '/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home/bin/jarsigner'].filter(Boolean).find(p => existsSync(p) || spawnSync(p, ['-help'], {stdio: 'ignore'}).status === 0);
+const storePassword = process.env.BUBBLEWRAP_KEYSTORE_PASSWORD;
+if (uploadKeystore && uploadAlias && jarsigner && storePassword) {
+  const signedAab = join(BUILD, 'aflivra-upload-signed.aab');
+  copyFileSync(aab, signedAab);
+  const sign = run(jarsigner, ['-keystore', uploadKeystore, '-storepass', storePassword, '-keypass', process.env.BUBBLEWRAP_KEY_PASSWORD || storePassword, signedAab, uploadAlias], {stdio: 'pipe'});
+  if (sign.status !== 0) {
+    console.error(`jarsigner a eșuat (exit ${sign.status}).`);
+    process.exit(1);
+  }
+  const verify = spawnSync(jarsigner, ['-verify', signedAab], {encoding: 'utf8'});
+  if (verify.status !== 0 || !/jar verified/i.test(`${verify.stdout}${verify.stderr}`)) {
+    console.error('AAB-ul semnat nu trece jarsigner -verify — semnarea nu se livrează neverificată.');
+    process.exit(1);
+  }
+  console.log(`AAB semnat cu cheia de upload (CN=Aflivra, alias ${uploadAlias}), jarsigner -verify OK: ${signedAab}
+Play App Signing resemnează console-side după încărcare; tw/build/ e ignorat de git, deci keystore-ul nu ajunge în repo.`);
+} else {
+  console.log(`Semnarea de upload s-a sărit (lipsește keystore-ul pe env, jarsigner-ul sau parola) — AAB-ul nesignat rămâne pentru mediul complet.
+Play App Signing semnează console-side după încărcare; tw/build/ e ignorat de git.`);
+}
