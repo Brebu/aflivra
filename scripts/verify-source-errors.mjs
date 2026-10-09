@@ -1244,6 +1244,13 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
       assert.equal(rawDocument.status,200,label+': documentul integral se descarcă');
       assert((rawDocument.headers.get('content-type')||'').includes('application/xml'),label+': fișierul integral se servește ca XML');
       assert((await rawDocument.text()).includes('<pkg:package'),label+': integralul descărcat e pachetul complet');
+      // Rândul istoric/seed poartă XML-ul brut: livrarea onestă se aplică la
+      // servire, nu doar pe rândurile proaspete — outage-ul sursei nu regresează
+      // conversația la XML brut.
+      const legacyView=resourceModule.wordDocumentView({kind:'text',text:xmlWordPackageFixture(),format:'XML',textComplete:true});
+      assert(legacyView&&legacyView.sourceShape==='word-flat-opc'&&legacyView.textComplete===false,label+': rândul istoric cu XML brut se servește în forma onestă la citire');
+      assert(legacyView.text.includes('Plan anual de achizitii publice.')&&!legacyView.text.includes('pkg:package'),label+': extracția se aplică la servire, nu doar la primire');
+      assert(typeof legacyView.originalCharacters==='number'&&legacyView.originalCharacters>legacyView.text.length,label+': dimensiunea integralului se declară și pe forma istorică');
       assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
      else if(scenario==='format-office-theme'){
       assert.equal(payload.data.kind,'text',label+': foaia de stiluri Office rămâne document, nu tabel de „achiziții” cu rânduri de culori');

@@ -82,6 +82,19 @@ export const resourceLoader=(id:string):Loader=>({key:'resource:'+id,name:'Resur
  const mediaFormat=String(r.format||'').toUpperCase();if(/^(?:JPG|JPEG|PNG|WEBP|GIF|MP4|WEBM|OGV)$/.test(mediaFormat)){const mediaUrl=publicUrl(url.href);if(!mediaUrl)throw new SourceError('Materialul media nu are o adresă HTTPS utilizabilă.');return{publishedAt,data:{kind:'media',title,sourceUrl:url.href,media:[{kind:/MP4|WEBM|OGV/.test(mediaFormat)?'video':'image',url:mediaUrl,caption:title,sourceUrl:'https://data.gov.ro/dataset/'+String(r.package_id||'')}]}}}
  const parsed=parseResource(await downloadResource(url),String(r.format||url.pathname.split('.').at(-1)||''),title);const data=parsed.data.kind==='table'?await indexTable(id,parsed.data,publishedAt):parsed.data.binary||parsed.data.kind==='text'&&byteLength(parsed.data.text)>1_000_000?await indexDocument(id,parsed.data,publishedAt):parsed.data;return{publishedAt,data:{...data,title,sourceUrl:url.href,metadataNotice}};
 }});
+// Livrarea documentului Word e onestă indiferent de forma rândului: rândul
+// proaspât poartă deja extrasul și integralul pe xmlDocument, dar istoricul
+// sau seed-ul poartă XML-ul brut în text — extracția se aplică la servire, iar
+// integralul rămâne descărcabil pe ruta de fișier.
+export function wordDocumentView(data:any):any{
+ if(!data||data.kind!=='text')return null;
+ let raw=typeof data.xmlDocument==='string'?data.xmlDocument:null;
+ let text=typeof data.text==='string'?data.text:'';
+ if(!raw&&data.sourceShape!=='word-flat-opc'&&isWordPackage(text))raw=text;
+ if(!raw)return null;
+ if(data.sourceShape!=='word-flat-opc'||data.textComplete!==false)text=wordPackageText(raw);
+ return {...data,xmlDocument:undefined,text,sourceShape:'word-flat-opc',textComplete:false,format:/DOC/i.test(String(data.format||''))?data.format:'XML, DOC',originalCharacters:typeof data.originalCharacters==='number'?data.originalCharacters:raw.length};
+}
 export function selectResourceRows(rows:string[][],query:ResourceQuery){const found=rows.filter(r=>matchesQuery(r,query.q));if(query.sort>=0)found.sort((a,b)=>compareValues(a[query.sort],b[query.sort])*(query.desc?-1:1));return paginate(found,query.page,50)}
 export async function resourceSheetRows(d:any,sheetIndex:number){
  const sheet=d.sheets[sheetIndex];if(!sheet)throw new SourceError('Foaia solicitată nu există în acest set.');if(!d.indexed){if(d.complete===true&&sheet.rows?.length!==sheet.total)throw new SourceError('Copia nu conține toate rândurile verificate.');return sheet.rows as string[][]}const db=env.DB;if(!db)throw new SourceError('Copia persistentă nu poate fi citită acum.');let rows:string[][]=[];

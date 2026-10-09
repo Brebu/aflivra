@@ -7,8 +7,9 @@ export async function GET(request:Request){
  if(!/^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(id))return Response.json({error:'Identificator invalid.'},{status:400});
  const state=await readSource(resourceLoader(id)),d=state.data,download=p.get('download')==='1';
  if(p.get('format')==='xml'){
-  if(d?.kind!=='text'||d.sourceShape!=='word-flat-opc'||typeof d.xmlDocument!=='string')return Response.json({error:'Documentul XML integral nu este disponibil pentru această resursă.'},{status:503});
-  return new Response(d.xmlDocument,{headers:{'Content-Type':'application/xml','Content-Disposition':fileDisposition(id,d.title||'document','xml',download),'Cache-Control':'private, max-age=60','X-Aflivra-Characters':String(d.originalCharacters||d.xmlDocument.length)}});
+  const rawDocument=typeof d?.xmlDocument==='string'?d.xmlDocument:d?.kind==='text'&&d.sourceShape!=='word-flat-opc'&&typeof d.text==='string'&&d.text.includes('<pkg:package')?d.text:null;
+  if(!rawDocument)return Response.json({error:'Documentul XML integral nu este disponibil pentru această resursă.'},{status:503});
+  return new Response(rawDocument,{headers:{'Content-Type':'application/xml','Content-Disposition':fileDisposition(id,d.title||'document','xml',download),'Cache-Control':'private, max-age=60','X-Aflivra-Characters':String(d.originalCharacters||rawDocument.length)}});
  }
  if(p.get('format')==='csv'||p.get('format')==='xlsx'){
   const sheet=Number(p.get('sheet')||'0');if(!Number.isInteger(sheet)||sheet<0)return Response.json({error:'Foaie invalidă.'},{status:400});

@@ -104,9 +104,13 @@ test.describe('Mersul trenurilor (planned timetables, 9 operators)', () => {
     await expect(brasovRow).toBeVisible();
 
     await brasovRow.click();
-    await expect(workspace.getByRole('heading', {level: 3, name: 'Braşov'})).toBeVisible();
-    await expect(workspace.getByText(/\d+ de plecări planificate · \d+ de sosiri planificate/)).toBeVisible();
+    // Prima deschidere de panou plătește paginația rece a corpusului de mers
+    // (plăcile gz + edițiile operatorilor) — bugetul filei, ca la celelalte
+    // registre, nu pragul implicit de 15s.
+    await expect(workspace.getByRole('heading', {level: 3, name: 'Braşov'})).toBeVisible({timeout: 60_000});
+    await expect(workspace.getByText(/\d+ de plecări planificate · \d+ de sosiri planificate/)).toBeVisible({timeout: 120_000});
     const times = workspace.locator('.facts-table tbody tr td').first();
+    await expect(times, 'prima oră a panoului').toBeVisible({timeout: 120_000});
     await expect(times).toHaveText(/^\d{2}:\d{2}( \+1)?$/);
     // Every operator's published edition stays visible and linkable (some private
     // operators' newest official edition is years old — surfaced honestly, not hidden).

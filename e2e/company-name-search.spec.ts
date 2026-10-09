@@ -97,10 +97,12 @@ test.describe('Company name search (Wikidata VAT registry)', () => {
     // A found entity without a registry VAT stays listed, marked honest — no invented CUI,
     // no dosar: the row is plain text, not a clickable button.
     const noCui = results.locator('.company-name-no-cui');
-    await expect(noCui).toHaveCount(1);
-    await expect(noCui).toContainText('eMAG');
-    await expect(noCui).toContainText('fără CUI citit în registrul deschis');
-    await expect(noCui).toContainText('https://www.emag.ro/');
+    // Două entități fără CUI citit în registru — eMAG și internaționala omonimă
+    // — ambele rămân listate cu marcatorul onest, fără CUI inventat.
+    await expect(noCui).toHaveCount(2);
+    await expect(noCui.first()).toContainText('eMAG');
+    await expect(noCui.first()).toContainText('fără CUI citit în registrul deschis');
+    await expect(noCui.first()).toContainText('https://www.emag.ro/');
     await expect(noCui.getByRole('button')).toHaveCount(0);
     await expect(results).toContainText('registrul deschis de cunoștințe');
     await expect(results).toContainText('fără interogare pe nume la sursă');
