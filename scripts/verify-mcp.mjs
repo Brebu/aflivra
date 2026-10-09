@@ -157,7 +157,7 @@ try{
     ['places_search',{q:'spital',category:'sanatate',contact:'phone',scope:'nearby',sort:'distance',lat:44.4,lon:26.1,radius:15,pageSize:20,page:0},{path:'/api/places',query:{q:'spital',category:'sanatate',contact:'phone',scope:'nearby',sort:'distance',lat:'44.4',lon:'26.1',radius:'15',pageSize:'20',page:'0',view:'cards'}}],
     ['directory_registry',{kind:'pharmacies',q:'farmacia',page:2},{path:'/api/directory',query:{kind:'pharmacies',q:'farmacia',page:'2',geoScope:'national'}}],
     ['localities_search',{q:'Câmpulung',page:1},{path:'/api/localities',query:{q:'Câmpulung',page:'1'}}],
-    ['weather_forecast',{lat:44.4,lon:26.1,hours:48},{path:'/api/weather',query:{lat:'44.4',lon:'26.1',hours:'48'}}],
+    ['weather_forecast',{lat:44.4,lon:26.1},{path:'/api/weather',query:{lat:'44.4',lon:'26.1',hours:'48'}}],
     ['weather_alerts',{geoScope:'national'},{path:'/api/weather',query:{kind:'alerts',geoScope:'national'}}],
     ['events_search',{q:'teatru',venue:'Odeon',locality:'București',county:'București',page:0},{path:'/api/events',query:{q:'teatru',venue:'Odeon',locality:'București',county:'București',page:'0'}}],
     ['cinema_sites',{}, {path:'/api/cinemas',query:{}}],

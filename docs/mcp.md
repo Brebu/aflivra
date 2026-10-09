@@ -32,7 +32,7 @@ Aproape fiecare tool întoarce plicul sursă al platformei: `status` (`fresh` | 
 În MCP: răspunsul rutei vine în `structuredContent`, oglindit ca text în `content[0].text`.
 O eroare a rutei (400 cu mesaj românesc) = `isError: true` cu mesajul întreg — niciodată
 ascunsă. Excepție: exporturile binare (XLSX) nu vin ca text — deschid cu un `resource_link`
-cu MIME și numele fișierului, iar `structuredContent` poartă `url`-ul de descărcare; o
+cu MIME și numele fișierului, iar `structuredContent` poartă `url`-ul absolut de descărcare, utilizabil direct de client; o
 căutare validă fără potriviri (total 0) NU e `unavailable` — starea descrie sursele. Paginarea e `page` (de la 0) aproape peste tot; `legal_acts` e singura paginare
 pe cursor. Contextul geografic (`locality`/`county`, opțional `lat`/`lon`/`radius` 1–100)
 ancorează unele rute; `geoScope` poate fi `context` | `local` | `national`.
@@ -70,13 +70,13 @@ Registrele naționale ca tabele: `schools` | `health` | `pharmacies` | `hospital
 ```
 
 ### `localities_search`
-Localitățile din SIRUTA: nume, județ, clasificare, coordonate — folosește-o să rezolvi un nume înainte de vreme/evenimente/transport.
+Localitățile din SIRUTA: nume, județ, clasificare, mediu (urban/rural) — localitățile urbane poartă lat/lon (centrul cartografiat), cele rurale rămân onest fără punct geografic. Folosește-o să rezolvi un nume înainte de vreme/evenimente/transport.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "localities_search", "arguments": {"q": "Câmpulung"}}}
 ```
 
 ### `weather_forecast`
-Prognoza pe coordonate (open data): starea curentă plus fereastra orară `hours` (1–168, implicit 48) din copia completă.
+Prognoza pe coordonate (open data): starea curentă plus fereastra orară `hours` (1–168, implicit 48) din copia completă — fereastra începe la ora curentă (`windowStart` în răspuns), nu la începutul zilei sursei.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "weather_forecast", "arguments": {"lat": 44.427, "lon": 26.103}}}
 ```
@@ -136,7 +136,7 @@ Panoul aeroporturilor București: `henri-coanda` (OTP) sau `baneasa-aurel-vlaicu
 ```
 
 ### `trains_schedule`
-Trenurile CFR Infra: indicele de stații sau panoul unei stații (id numeric); cu stație, `q` filtrează pe numărul/categoria trenului, iar `date`+`edition` (`current` implicit, `all` arhiva) țin panoul la edițiile valabile — `d` e capătul real al traseului, `nx` următoarea escală.
+Trenurile CFR Infra: indicele de stații sau panoul unei stații (id numeric); cu stație, `q` filtrează pe numărul/categoria trenului, iar `date`+`edition` (`current` implicit, `all` arhiva) țin panoul la edițiile valabile — `d` e capătul real al traseului, `nx` următoarea escală. Sosirile exclud trenurile care își încep ruta în gara panoului (momente tehnice, nu sosiri comerciale; circularele care se întorc în gară rămân). `expired` se calculează de la data cerută, indiferent de mod; `activeOperators` conține doar edițiile valabile la dată, `includedOperators` pe toate cele incluse în răspuns.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "trains_schedule", "arguments": {}}}
 ```
@@ -172,7 +172,7 @@ Căutarea federată a platformei: anunțuri instituționale (`stiri` = toate fee
 ```
 
 ### `news_feed`
-Anunțurile oficiale: `stiri` (toate feeds-urile), sau un feed instituțional; filtre pe publisher, `sort` (`recent|oldest|title`), interval de date.
+Anunțurile oficiale: `stiri` (toate feeds-urile), sau un feed instituțional; filtre pe publisher, `sort` (`recent|oldest|title`), interval de date; `publishedAt` e un singur moment UTC, identic în feed și în fișa `article_read` a aceluiași articol.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "news_feed", "arguments": {"kind": "stiri", "q": "buget"}}}
 ```

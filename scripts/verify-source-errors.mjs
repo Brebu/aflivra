@@ -208,7 +208,7 @@ const families=[
    // proprii ale catalogului, iar celulele urmăresc stratul de tabel — rândul dominant,
    // atributele + copiii pe coloane cu punct, copiii repețiți enumerați, netabelabilul
    // rămas document, XXE respins înainte de aplatizare și variantele de format publicate.
-   {family:'resource/xml-table',routeName:'resource',route:'/api/resource?id='+xmlResourceUuid,host:'data.gov.ro',allowed:['data.gov.ro'],scenarios:['http500','http429','timeout','malformed','xxe','format-zip-shp','success','success-dots','success-repeats','success-document','success-two-lists','success-tie','success-sections','format-xslx','format-json-soap','format-office-theme','format-xml-dot'],key:()=>resourceModule.resourceLoader(xmlResourceUuid).key,loader:()=>resourceModule.resourceLoader(xmlResourceUuid)}];
+   {family:'resource/xml-table',routeName:'resource',route:'/api/resource?id='+xmlResourceUuid,host:'data.gov.ro',allowed:['data.gov.ro'],scenarios:['http500','http429','timeout','malformed','xxe','format-zip-shp','success','success-dots','success-repeats','success-document','success-two-lists','success-tie','success-sections','format-xslx','format-json-soap','format-office-theme','format-word-package','format-xml-dot'],key:()=>resourceModule.resourceLoader(xmlResourceUuid).key,loader:()=>resourceModule.resourceLoader(xmlResourceUuid)}];
 if(live){
  let routes=null;
  try{routes=await Promise.all(families.map(async family=>[family.family,await (async()=>{const init=family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};return fetch(base+family.route,{...init,signal:AbortSignal.timeout(60000)})})()]))}catch(error){console.error('Serverul local de dezvoltare nu răspunde la '+base+' — pornit cu „npm start” înainte de --live. Detaliu: '+error.message);process.exitCode=2}
@@ -371,7 +371,7 @@ if(live){
   const xmlTieFixture=()=>['<Registrul>',' <ListaA><Rand id="a"/><Rand id="b"/></ListaA>',' <ListaB><Element id="c"/><Element id="d"/></ListaB>','</Registrul>'].join('\n');
   const xmlSectionsFixture=()=>['<Registru>',' <Sectiune judet="Cluj"><Rand id="c1"/><Rand id="c2"/><Rand id="c3"/><Rand id="c4"/></Sectiune>',' <Sectiune judet="Ilfov"><Rand id="i1"/><Rand id="i2"/><Rand id="i3"/></Sectiune>',' <Alta><Rand id="solo"/></Alta>','</Registru>'].join('\n');
   const xmlXxeFixture=()=>'<!DOCTYPE Contracte [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><Contracte><Contract id="1"><Denumire>&xxe;</Denumire></Contract></Contracte>';
-  const resourceXmlFormats={success:'XML','success-dots':'XML','success-repeats':'XML','success-document':'XML','success-two-lists':'XML','success-tie':'XML','success-sections':'XML','xxe':'XML','format-xslx':'XSLX','format-json-soap':'JSON, SOAP, XML','format-xml-dot':'XML.','format-zip-shp':'ZIP, SHP','format-office-theme':'XML'};
+  const resourceXmlFormats={success:'XML','success-dots':'XML','success-repeats':'XML','success-document':'XML','success-two-lists':'XML','success-tie':'XML','success-sections':'XML','xxe':'XML','format-xslx':'XSLX','format-json-soap':'JSON, SOAP, XML','format-xml-dot':'XML.','format-zip-shp':'ZIP, SHP','format-office-theme':'XML','format-word-package':'XML, DOC'};
   // Fișa publicată la sursă poartă varianta de format așa cum o publică editorul; URL-ul rămâne
   // pe gazda agreată a catalogului, iar descărcarea servește conținutul fiecărei celule.
   const resourceXmlMeta=scenario=>({success:true,result:{name:'Contracte de verificare XML',url:'https://data.gov.ro/dataset/contracte-verificare/resource/export-de-verificare.xml',format:resourceXmlFormats[scenario]||'XML',last_modified:'2026-10-01T00:00:00'}});
@@ -387,10 +387,15 @@ if(live){
    if(scenario==='success-tie')return new TextEncoder().encode(xmlTieFixture());
    if(scenario==='success-sections')return new TextEncoder().encode(xmlSectionsFixture());
    if(scenario==='format-office-theme')return new TextEncoder().encode(xmlOfficeThemeFixture());
+   if(scenario==='format-word-package')return new TextEncoder().encode(xmlWordPackageFixture());
    return new TextEncoder().encode(xmlDocumentFixture())};
 
+ const xmlWordPackageFixture=()=>'<pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage"><pkg:part pkg:name="/word/document.xml" pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:p>Plan anual de achizitii publice.</w:p></w:body></w:document></pkg:part><pkg:part pkg:name="/word/theme/theme1.xml" pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml"><a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:themeElements><a:fmtScheme name="Custom"><a:fillStyleLst><a:gradFill><a:gsLst><a:gs pos="0"><a:schemeClr val="phClr"><a:tint val="95000"/></a:schemeClr></a:gs><a:gs pos="100000"><a:schemeClr val="phClr"><a:shade val="94000"/></a:schemeClr></a:gs></a:gsLst></a:gradFill></a:fillStyleLst></a:fmtScheme></a:themeElements></a:theme></pkg:part></pkg:package>';
  const xmlOfficeThemeFixture=()=>'<a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:themeElements><a:clrScheme name="Office"><a:dk1><a:srgbClr val="000000"/></a:dk1></a:clrScheme><a:fmtScheme name="Custom"><a:fillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:gradFill><a:gsLst><a:gs pos="0"><a:schemeClr val="phClr"><a:tint val="95000"/></a:schemeClr></a:gs><a:gs pos="100000"><a:schemeClr val="phClr"><a:shade val="94000"/></a:schemeClr></a:gs></a:gsLst></a:gradFill></a:fillStyleLst></a:fmtScheme></a:themeElements></a:theme>';
- const sirutaCsv=()=>{const rows=['SIRUTA;DENLOC;NIV;JUD;SIRSUP;CODP;MED','40;București;1;40;0;0;1'];for(let i=1;i<=1001;i++)rows.push(String(10000+i)+';Localitatea de verificare '+i+';3;40;40;'+String(100000+i).slice(-6)+';'+(i%2?'1':'2'));return rows.join('\r\n')};
+ // D11: versiunea v7 a cititorului de resurse invalidează toate rândurile
+// cache-uite cu forma veche (tabelul de stiluri Office servit din copia pre-fix).
+assert.equal(resourceModule.resourceLoader(xmlResourceUuid).version,'resource.complete-index.v7','versiunea resursei e v7 — copiile v6 se re-parsază la citire');
+const sirutaCsv=()=>{const rows=['SIRUTA;DENLOC;NIV;JUD;SIRSUP;CODP;MED','40;București;1;40;0;0;1'];for(let i=1;i<=1001;i++)rows.push(String(10000+i)+';Localitatea de verificare '+i+';3;40;40;'+String(100000+i).slice(-6)+';'+(i%2?'1':'2'));return rows.join('\r\n')};
  const ifepPage=()=>{const rights='Drept de concluzii la: Judecătorii, Tribunale, Curți de Apel';const card='<a href=\'LawyerFile.aspx?RecordId=fixture-1&Panel=public\'><p><span title="Ultima actualizare"><em>05-10-2026 12:12</em></span><span class="pop" data-html="true" data-content=\'<p>'+rights+'</p>\'><img src="level.gif"></span><span>Fișă</span></p><h4>Avocat definitiv <font>POPESCU Ana</font>, Baroul Cluj [inactiv]</h4><p>Sediu principal: Cluj-Napoca, Strada Exemplu nr. 3</p><p>0700 000 000</p></a>';
   return new Response('<html><body><span id="MainContent_PagerTop_lblRecords">Înregistrări 1–1 din 40000</span><span id="MainContent_PagerTop_lblPages">Pagina 1 din 2</span>'+card+'</body></html>',{headers:{'content-type':'text/html'}})};
  const afirPage=()=>new Response('<html><body>'+('<div class="card-body news-content"><h4><a href="/comunicate/anunt-public-de-verificare">Anunț public de verificare AFIR</a></h4><p class="item-date">06 octombrie 2026</p></div><div class="news-border"></div>').repeat(3)+'</body></html>',{headers:{'content-type':'text/html'}});
@@ -1190,6 +1195,11 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
       assert.equal(payload.data.sheets[0].name,'Contract',label+': rândul dominant al exportului XML');
       assert.equal(payload.data.sheets[0].columns.length,8,label+': coloanele aplatizate ale contractului');
       assert.deepEqual(payload.data.sheets[0].rows,[['1','FARM','activ','Furnizor public de verificare 1','10001','București','Str. Verificării 1','București'],['2','SPITAL','activ','Furnizor public de verificare 2','10002','Cluj-Napoca','Str. Verificării 2','Cluj'],['3','SPITAL','activ','Furnizor public de verificare 3','10003','București','Str. Verificării 3','București']],label+': rândurile servite integral');
+      assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     else if(scenario==='format-word-package'){
+      assert.equal(payload.data.kind,'text',label+': pachetul Word 2003 cu foaia de stiluri rămâne document, nu tabel de achiziții');
+      assert.equal(payload.data.format,'XML',label+': formatul pachetului, normalizat onest la cititor');
+      assert(payload.data.text.includes('Plan anual de achizitii publice.'),label+': textul documentului se păstrează integral');
       assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
      else if(scenario==='format-office-theme'){
       assert.equal(payload.data.kind,'text',label+': foaia de stiluri Office rămâne document, nu tabel de „achiziții” cu rânduri de culori');

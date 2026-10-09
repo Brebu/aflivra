@@ -44,22 +44,28 @@ function parseMersTren(xml){
   // stației finale se ridică din elementul care o atinge; la trenurile circulare
   // (originea e și capăt), ultimul element o numește pe aceeași stație.
   const finalName=elements.filter(e=>Number(e.CodStaDest)===finalCode&&e.DenStaDestinatie).at(-1)?.DenStaDestinatie||elements.filter(e=>e.DenStaDestinatie).at(-1)?.DenStaDestinatie||'';
+  // OraP e plecarea DIN stația de origine a elementului, OraS e sosirea LA
+  // destinația lui (ancorat pe StationareSecunde: OraP−OraS oprire = staționare
+  // reală). Fiecare element publică deci plecarea originii și sosirea destinației
+  // sale — o stație intermediară primește sosirea de pe elementul care sosește în
+  // ea și plecarea de pe elementul care pleacă din ea, iar gara de unde pornește
+  // trenul rămâne fără sosire fabricated (nu e sosire comercială).
   const stops=[];
   for(const e of elements){
    const origin=Number(e.CodStaOrigine);if(!origin||!e.DenStaOrigine)continue;
-   // Elementul cu originea egală cu destinația e markerul de capăt al Infofer
-   // (trenul își scrie gara terminală ca Nord→Nord): nu e o deplasare — nu
-   // fabricăm din el plecare sau sosire; capătul rămâne destinația traseului.
    if(Number(e.CodStaDest)===origin)continue;
-   stops.push({code:origin,name:e.DenStaOrigine,arrive:e.OraP,depart:e.OraS,tip:e.TipOprire||'',next:e.DenStaDestinatie||''});
-   if(Number(e.CodStaDest)===finalCode&&e.DenStaDestinatie&&Number(e.CodStaDest)!==origin)stops.push({code:Number(e.CodStaDest),name:e.DenStaDestinatie,arrive:e.OraP,depart:e.OraS,tip:'T',next:''});
+   if(e.OraP)stops.push({code:origin,name:e.DenStaOrigine,arrive:'',depart:e.OraP,tip:'P',next:e.DenStaDestinatie||''});
+   if(e.DenStaDestinatie){
+    const dest=Number(e.CodStaDest);
+    if(dest&&e.OraS&&(dest===finalCode&&dest!==origin||dest!==finalCode))stops.push({code:dest,name:e.DenStaDestinatie,arrive:e.OraS,depart:'',tip:dest===finalCode&&dest!==origin?'T':'',next:''});
+   }
   }
   const seen=new Set(),uniq=stops.filter(stop=>{const key=stop.code+':'+stop.depart+':'+stop.arrive;if(seen.has(key))return false;seen.add(key);return true});
   for(const stop of uniq){
    if(!stations.has(stop.code))stations.set(stop.code,{name:stop.name,departures:[],arrivals:[]});
    const station=stations.get(stop.code);
    if(stop.tip!=='T'&&stop.depart)station.departures.push({t:Number(stop.depart),n:String(train.Numar||''),c:train.CategorieTren||'',d:String(finalName||stop.next),nx:stop.next,z:calAttrs.Zile||'',zl:calAttrs.Zile?days(calAttrs.Zile):''});
-   if(stop.arrive&&(stop.tip==='T'||Number(stop.arrive)!==Number(stop.depart)))station.arrivals.push({t:Number(stop.arrive),n:String(train.Numar||''),c:train.CategorieTren||'',f:uniq[0]?.name||'',z:calAttrs.Zile||'',zl:calAttrs.Zile?days(calAttrs.Zile):''});
+   if(stop.arrive)station.arrivals.push({t:Number(stop.arrive),n:String(train.Numar||''),c:train.CategorieTren||'',f:uniq[0]?.name||'',z:calAttrs.Zile||'',zl:calAttrs.Zile?days(calAttrs.Zile):''});
   }
   trains.push(String(train.Numar||''));
  }

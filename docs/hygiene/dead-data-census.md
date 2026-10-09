@@ -1,6 +1,6 @@
 # Dead-data census — content-enrichment-ux (Wave A2)
 
-**Generated**: 2026-10-09T09:14:26.081Z by `scripts/audit-dead-data.mjs` (REPORT-ONLY — no deletion)
+**Generated**: 2026-10-09T11:38:46.885Z by `scripts/audit-dead-data.mjs` (REPORT-ONLY — no deletion)
 
 **Policy**: the D3 per-family recency table (ADVOCATE-REVIEW.md, accepted) — pinned code-side by `scripts/verify-recency-policy.mjs`. „Dead" = no-content / expired-source / irreversible-stale, **never age alone**, and age only where the table sets a horizon for that family.
 
@@ -31,7 +31,7 @@
 | stories (corpus) | exempt — literary corpus (D3: stories) | 233 | 0 | 0 | 0 | **CURAT — nicio acțiune** | 233 texte integrale verificate; eșecuri de preluare înregistrate la import: ; fișiere 233/233 |
 | transport/tpbi (corpus) | edition TTL governs (D3: transport network) | 201 | 0 | 0 | 0 | **CURAT — nicio acțiune** | 201 rute în manifest, 201 fișiere reale; numărătoarea pinned (181.537 locuri) se verifică în verify-sweep-inventory |
 | transport/trains (corpus) | edition-governed (D3: transport schedules) | 2363 | 0 | 0 | 0 | **CURAT — nicio acțiune** | 2 ediții cu valabilitate trecută rămân în corpus — re-importul se face pe ediție; shards 128/128 |
-| dev D1 cache (stare locală de dezvoltare) | expired-source rows per family (D3 machinery: last-good-copy, seu nocturn, lease 60s) | 134 | 0 | 0 | — | **CURAT — nicio acțiune** | rânduri de sarcină în eroare (fără copie): 8 — fiecare familie are propria poartă onestă și backoff; fragmente payload pensionate (curățare 48h): 0 din 77; copia dev nu certifică starea producției |
+| dev D1 cache (stare locală de dezvoltare) | expired-source rows per family (D3 machinery: last-good-copy, seu nocturn, lease 60s) | 263 | 0 | 0 | — | **CURAT — nicio acțiune** | rânduri de sarcină în eroare (fără copie): 24 — fiecare familie are propria poartă onestă și backoff; fragmente payload pensionate (curățare 48h): 0 din 146; copia dev nu certifică starea producției |
 
 ## Samples and error-state observations
 
@@ -44,7 +44,7 @@
 ### transport/trains (corpus)
 - samples: `[{"operator":"cfm","validTo":"20251213"},{"operator":"regiotrans","validTo":"20171209"}]`
 ### dev D1 cache (stare locală de dezvoltare)
-- rânduri/familie în eroare (dev D1, informational): `{"transport":"1/3","flights":"2/2","article":"2/2","lawyers":"2/4","housing":"1/2"}`
+- rânduri/familie în eroare (dev D1, informational): `{"transport":"1/3","flights":"2/2","article":"2/2","lawyers":"17/23","housing":"1/2","law":"1/4","law-portal":"1/1"}`
 
 ## Purge decision protocol
 

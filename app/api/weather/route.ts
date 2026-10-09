@@ -7,5 +7,14 @@ export async function GET(request:Request){const p=new URL(request.url).searchPa
  const forecastState=await readSource(forecastLoader(lat,lon),{waitForRefresh:true});
  // Proiecția pe ore (conversații, tool-uri) păstrează starea curentă și taie
  // fereastra orară cerută din copia completă — fără să scurteze datele în cache.
- if(hours!==null&&forecastState.data){const data=forecastState.data as {hourly?:unknown[]};return Response.json({...forecastState,data:{...forecastState.data,hourly:(Array.isArray(data.hourly)?data.hourly.slice(0,hours):data.hourly),hoursApplied:hours}},{headers:{'Cache-Control':'no-store'}})}
+ if(hours!==null&&forecastState.data){
+  // Fereastra orară PORNEȘTE de la bucketul orar în curs (ora curentă), nu de la
+  // începutul zilei sursei: o cerere de prognoză primește următoarele N ore
+  // utile, iar windowStart publică prima oră servită.
+  const data=forecastState.data as {hourly?:Array<{time?:string}>};
+  const rows=Array.isArray(data.hourly)?data.hourly:[];
+  const now=Date.now(),start=rows.findIndex(row=>{const stamp=Date.parse(String(row?.time||''));return Number.isFinite(stamp)&&stamp+3600000>now});
+  const windowStart=start>=0&&rows[start]?.time?String(rows[start].time):null;
+  const windowed=start>=0?rows.slice(start,start+hours):rows.slice(0,hours);
+  return Response.json({...forecastState,data:{...forecastState.data,hourly:windowed,hoursApplied:hours,...(windowStart?{windowStart}:{})}},{headers:{'Cache-Control':'no-store'}})}
  return Response.json(forecastState,{headers:{'Cache-Control':'no-store'}})}

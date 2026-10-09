@@ -43,7 +43,7 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'localities_search',
-    description:'Search Romanian localities (SIRUTA registry): official names, county, urban/rural classification, coordinates. Use it to resolve a locality name before weather, events or transport calls.',
+    description:'Search Romanian localities (SIRUTA registry): official names, county, urban/rural classification; urban localities carry lat/lon (the mapped center), rural ones honestly do not. Use it to resolve a locality before weather, events or transport calls.',
     inputSchema:{type:'object',properties:{q:{type:'string',description:'Locality (part of) name'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
     build:args=>({path:'/api/localities',query:query([['q',str(args.q)],['page',num(args.page)]])}),
   },
@@ -51,7 +51,7 @@ export const TOOLS:ToolDef[]=[
     name:'weather_forecast',
     description:'Current weather and short-term forecast for Romanian coordinates (open data, per-hour values).',
     inputSchema:{type:'object',properties:{lat:{type:'number',description:'Latitude, -90..90'},lon:{type:'number',description:'Longitude, -180..180'},hours:{type:'number',description:'Hourly forecast window to return, 1–168 hours (default 48) — the current conditions always carry'}},required:['lat','lon']},
-    build:args=>({path:'/api/weather',query:query([['lat',num(args.lat)],['lon',num(args.lon)],['hours',Number.isFinite(args.hours)?String(Math.min(168,Math.max(1,Math.floor(Number(args.hours))))):'']])}),
+    build:args=>({path:'/api/weather',query:query([['lat',num(args.lat)],['lon',num(args.lon)],['hours',Number.isFinite(args.hours)?String(Math.min(168,Math.max(1,Math.floor(Number(args.hours))))):'48']])}),
   },
   {
     name:'weather_alerts',

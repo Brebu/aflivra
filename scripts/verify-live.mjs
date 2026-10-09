@@ -45,6 +45,22 @@ r=E.parse(sys.argv[1]).getroot();ns={'p':'portalquery.just.ro'}
 print(json.dumps([{'number':d.findtext('p:numar',namespaces=ns),'court':d.findtext('p:institutie',namespaces=ns),'date':d.findtext('p:data',namespaces=ns),'dates':[h.findtext('p:data',namespaces=ns) for h in d.findall('p:sedinte/p:DosarSedinta',ns)]} for d in r.findall('.//p:Dosar',ns)]))`,path],{encoding:'utf8'}));assert.deepEqual(actual.items.map(d=>({number:d.number,court:d.court,date:d.date,dates:d.hearings.map(h=>h.date)})),expected);assert.equal(actual.hearingCount,expected.reduce((total,d)=>total+d.dates.length,0));console.log('Real official court response independently compared with ElementTree: every returned record, registration date and hearing survived parsing.');}
  console.log('Court regressions passed: distinct proceedings and hearing collections, exact duplicates only, direct-child dates, nil fields, namespaces, malformed XML and the raw 1,000-record boundary.');
  const registry=adapters.parseRegistry(JSON.stringify({found:[{date_generale:{cui:427282,denumire:'Firma test',telefon:'0123456789',forma_juridica:'RA'},inregistrare_scop_Tva:{scpTVA:false},stare_inactiv:{statusInactivi:false}}]}),'427282','2026-10-04');assert.equal(registry.phone,'0123456789');assert.equal(registry.vat,false);assert.equal(adapters.parseRegistry('{"found":[]}','427282','2026-10-04'),null);
+ // N05 — publishedAt un singur moment UTC: serviciul WordPress (date_gmt) e adevărul
+ // sursei; meta description:published_time a paginii aplică aceeași oră GMT cu
+ // fusul local lipit (probă TPBI 2026-10-08 15:08Z real vs 15:08+03:00 în meta).
+ // Loader-ul citește wp-json ÎNTÂI, pagina HTML rămâne rezerva.
+ {
+  const content=await import(pathToFileURL(join(dir,'content.mjs')));
+  const wpBody='[{"id":1,"link":"https://tpbi.ro/anunt-de-verificare/","title":{"rendered":"Anunț de verificare"},"content":{"rendered":"<p>Text integral de verificare.</p>","protected":false},"date_gmt":"2026-10-08T15:08:21"}]';
+  const wpLoaded=content.parseWordPress(wpBody,'https://tpbi.ro/anunt-de-verificare/');
+  assert.equal(wpLoaded.publishedAt,'2026-10-08T15:08:21Z','date_gmt+Z e momentul UTC publicat de sursă');
+  const htmlPage='<html><head><meta property="article:published_time" content="2026-10-08T15:08:21+03:00"></head><body><div class="entry-content"><p>Text integral de verificare.</p></div></body></html>';
+  const metaLoaded=content.parseArticlePage(htmlPage,'https://tpbi.ro/anunt-de-verificare/');
+  assert.equal(metaLoaded.publishedAt,'2026-10-08T12:08:21.000Z','meta cu fus lipit produce momentul GREȘIT — de aceea wp-json se citește întâi');
+  const loaderSource=await readFile(join(root,'lib/live/content.ts'),'utf8');
+  assert.ok(loaderSource.indexOf('/wp-json/wp/v2/posts')<loaderSource.indexOf('parseArticlePage(await getSource'),'loader-ul citește serviciul WordPress înaintea paginii HTML');
+  assert.match(loaderSource,/official\.article-body\.v4/,'versiunea v4 invalidează cache-ul cu publishedAt din meta');
+ }
  const rss='<rss><channel>'+[1,2].map(n=>'<item><title>Un titlu complet</title><link>https://example.test/article'+(n===2?'?utm_source=test':'')+'</link><pubDate>Sun, 04 Oct 2026 08:00:00 GMT</pubDate><content:encoded><![CDATA[<p>'+('Conținut. '.repeat(3500))+'</p>]]></content:encoded></item>').join('')+'</channel></rss>';const articles=feeds.parseFeed(rss).data.items;assert.equal(articles.length,1);assert(articles[0].content.length>24000);assert.equal(articles[0].textComplete,true);
  const cell='x'.repeat(1200);assert.equal(resources.parseResource(new TextEncoder().encode(JSON.stringify([{a:cell,b:0}])),'JSON').data.sheets[0].rows[0][0],cell);
  const courtXml=legal.soapEnvelope(legal.courtRequest('2710/62/2022')),courtXml2=legal.soapEnvelope(legal.courtRequest('2710/62/2022','CautareDosare2')),lawXml=legal.soapEnvelope(legal.lawRequest({title:'Codul muncii',text:'',number:'',year:'',page:1},'contract-test'));
