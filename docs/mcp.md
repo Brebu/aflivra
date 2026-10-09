@@ -46,7 +46,7 @@ ancorează unele rute; `geoScope` poate fi `context` | `local` | `national`.
 ## Tool-uri (34)
 
 ### `search_companies`
-Firme după nume, din registrul deschis de cunoștințe (etichete RO+EN îmbinate): doar entitățile cu clasă de organizație/firmă sau cu identificator TVA citit se listează ca firme — speciile și localitățile omonime nu apar; cele fără CUI rămân marcate onest „fără CUI citit”.
+Firme după nume, din registrul deschis de cunoștințe (etichete RO+EN îmbinate): doar entitățile cu clasă de organizație/firmă sau cu identificator TVA citit se listează ca firme — speciile și localitățile omonime nu apar; fiecare rând poartă `country` (țara entității, `null` onest când registrul nu o declară — organizațiile internaționale omonime se văd prin ea) și `matchNote` — motivul determinist al listării (identificator TVA citit sau doar potrivire de nume pe clasă de organizație). Cele fără CUI rămân marcate onest „fără CUI citit”: registrul de cunoștințe nu atribuie identitate fiscală românească.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "search_companies", "arguments": {"name": "Banca Transilvania"}}}
 ```
@@ -58,7 +58,7 @@ Dosarul fiscal complet pe CUI (ANAF): identitate, starea TVA, bilanțuri anuale,
 ```
 
 ### `places_search`
-Harta națională de locuri (inventarul OSM): spitale, farmacii, școli, muzee — după text, categorie, contact, centru+rază (1–100 km), sortare `name|recent|distance`.
+Harta națională de locuri (inventarul OSM): spitale, farmacii, școli, muzee — după text, categorie, contact, centru+rază (1–100 km), sortare `name|recent|distance`. Categoriile sunt exact cheile inventarului — `agricultura, bani, cultura, educatie, energie, filme, firme, justitie, local, mediu, munca, sanatate, stiri, transport` (`local` acoperă instituțiile publice și sportul/timpul liber) — iar o categorie necunoscută se respinge la granița MCP cu lista celor valide.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "places_search", "arguments": {"q": "spital", "lat": 44.427, "lon": 26.103, "radius": 10}}}
 ```
@@ -70,7 +70,7 @@ Registrele naționale ca tabele: `schools` | `health` | `pharmacies` | `hospital
 ```
 
 ### `localities_search`
-Localitățile din SIRUTA: nume, județ, clasificare, mediu (urban/rural) — localitățile urbane poartă lat/lon (centrul cartografiat), cele rurale rămân onest fără punct geografic. Folosește-o să rezolvi un nume înainte de vreme/evenimente/transport.
+Localitățile din SIRUTA: nume, județ, clasificare, mediu (urban/rural). Coordonatele cartografiate (lat/lon, centrul localității) au garantat municipiile, orașele și satele pe care SIRUTA le poartă în mediul urban — componentele unităților urbane — acolo unde registrul cartografiat le potrivește unic pe nume+județ; satele rurale și potrivirile ambigue rămân onest fără punct geografic. Folosește-o să rezolvi un nume înainte de vreme/evenimente/transport.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "localities_search", "arguments": {"q": "Câmpulung"}}}
 ```
@@ -184,13 +184,13 @@ Catalogul național de date deschise: seturi după titlu/organizație, cu resurs
 ```
 
 ### `dataset_table`
-Cititorul de tabele al platformei (CSV/XLSX/XML/JSON): foi, coloane, rânduri paginate — onest despre documentele netabelare.
+Cititorul de tabele al platformei (CSV/XLSX/XML/JSON): foi, coloane, rânduri paginate (într-un workbook cu mai multe foi, `sheet` selectează fișă cu fișă) — onest despre documentele netabelare. Documentele Office Word (pachetul „Flat OPC”) nu se toarnă ca XML brut: răspunsul servește textul vizibil extras din `word/document.xml` (`textComplete: false` onest, `originalCharacters` cu dimensiunea integralului), iar integralul rămâne un fișier descărcabil prin `data.file` (legătură absolută, `format=xml`).
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "dataset_table", "arguments": {"id": "1088e792-54f4-43ad-8e4c-9b351b82d31c", "sheet": 0, "page": 0}}}
 ```
 
 ### `dataset_export`
-Export integral al unui tabel importat și verificat: `csv` (text, citibil în conversație) sau `xlsx` (binar — rezultatul e o legătură `resource_link` cu numele fișierului și numărul de rânduri; `sheet` selectează foia în ambele formate); altfel ruta răspunde 409 onest.
+Export integral al unui tabel importat și verificat: `csv` (text, citibil în conversație) sau `xlsx` (binar — rezultatul e o legătură `resource_link` cu numele fișierului și numărul de rânduri; `sheet` selectează foia în ambele formate, fișă cu fișă într-un workbook cu mai multe foi); altfel ruta răspunde 409 onest. Descărcarea prin client programatic: Cloudflare respinge semnăturile de browser cunoscute ca bot (ex. Python-urllib primește HTTP 403/1010) — un client real (curl, node, browser) primește fișierul; legătura din `resource_link` e absolută, utilizabilă direct.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "dataset_export", "arguments": {"id": "1088e792-54f4-43ad-8e4c-9b351b82d31c"}}}
 ```
@@ -226,7 +226,7 @@ Tabloul național al avocaților (UNBR): căutare pe nume verificată (un panou 
 ```
 
 ### `forensic_experts`
-Registrele justiției: `experti-judiciari` | `experti-tehnici` | `traducatori`, pe județ — orice ortografie normală a județului rezolvă la același set; cere `locality` pentru contextul geografic.
+Registrele justiției: `experti-judiciari` | `experti-tehnici` | `traducatori`, pe județ — orice ortografie normală a județului rezolvă la același set; cere `locality` pentru contextul geografic. Fiecare înregistrare are un `_id` stabil care identifică persoana: numărul legitimției/autorizației când sursa îl publică real, altfel o cheie derivată deterministă (nume, județ, contact, specializare) — marcajele sursei („0 0”) nu devin niciodată cheie, deci persoanele distincte nu partajează `_id`.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "forensic_experts", "arguments": {"kind": "experti-judiciari", "locality": "Oradea", "judet": "Bihor"}}}
 ```

@@ -82,7 +82,7 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
  const order=parts.flatMap(part=>part.order).filter((id,index,all)=>all.indexOf(id)===index);
  const seed=new Map<string,string>();
  for(const part of parts)for(const [id,label] of part.seed)if(!seed.has(id))seed.set(id,label);
- const facts=new Map<string,{cui:string|null;vat:string|null;name:string;websites:string[];classes:string[]}>();
+ const facts=new Map<string,{cui:string|null;vat:string|null;name:string;websites:string[];classes:string[];country:string|null}>();
  if(order.length){
   let parsedDetail:any;try{parsedDetail=JSON.parse(detail)}catch{throw new SourceError('Structura Wikidata nu poate fi validată.')}
   const bindings=Array.isArray(parsedDetail?.results?.bindings)?parsedDetail.results.bindings:null;
@@ -97,7 +97,8 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
    const cui=/^[1-9]\d{1,9}$/.test(vat.replace(/^RO/i,''))?vat.replace(/^RO/i,''):null;
    const label=clean(row.itemLabel?.value);
    let record=facts.get(id);
-   if(!record){record={cui,vat:cui?vat:null,name:label||'',websites:[],classes:[]};facts.set(id,record)}
+   if(!record){record={cui,vat:cui?vat:null,name:label||'',websites:[],classes:[],country:clean(row.countryLabel?.value)||null};facts.set(id,record)}
+   else if(!record.country&&clean(row.countryLabel?.value))record.country=clean(row.countryLabel?.value)
    const seedClassName=String(row.class?.value||'').match(/^https?:\/\/www\.wikidata\.org\/entity\/(Q[1-9]\d{0,9})$/)?.[1];
    if(seedClassName&&!record.classes.includes(seedClassName))record.classes.push(seedClassName)
    else{if(!record.cui&&cui){record.cui=cui;record.vat=vat}if(label&&!record.name)record.name=label;
@@ -113,7 +114,8 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
   // Eticheta de căutare a registrului rămâne rezerva onestă: fără răspuns de
   // detalii SPARQL sau fără etichetă ro/en, entitatea nu se servește drept Q-id gol.
   const seeded=seed.get(id)||'',name=fact?.name&&!/^Q[1-9]\d{0,9}$/.test(fact.name)?fact.name:seeded;
-  return name?{cui:fact?.cui??null,vat:fact?.vat??null,qid:id,name,websites:fact?.websites||[],org:isOrganization(fact?.classes||[]),sourceUrl:'https://www.wikidata.org/wiki/'+id}:null}).filter((item):item is NonNullable<typeof item>=>!!item);
+     const matchNote=fact?.cui?'identificator TVA (P3608) citit în registrul deschis':'potrivire de nume pe clasă de organizație (P31), fără identificator fiscal românesc citit în registru';
+   return name?{cui:fact?.cui??null,vat:fact?.vat??null,qid:id,name,websites:fact?.websites||[],org:isOrganization(fact?.classes||[]),country:fact?.country??null,matchNote,sourceUrl:'https://www.wikidata.org/wiki/'+id}:null}).filter((item):item is NonNullable<typeof item>=>!!item);
  // Suprafața e o căutare de firme: entitățile care nu sunt organizații sau firme
  // (specii, comune, persoane omonime) și nu poartă identificator TVA citit în
  // registru rămân în afara listei — fără să li se inventeze vreun CUI.
@@ -126,7 +128,7 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
  const list=all.filter(item=>(item.cui||item.org)&&(item.cui||withoutCui++<nameSearchNoCuiLimit));
  return{publishedAt:null,data:{query:term,items:list,count:list.length,limited:all.length>list.length||all.length>=nameSearchLimit}};
 }
-export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v4',ttl:3600,load:async()=>{
+export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v5',ttl:3600,load:async()=>{
  if(term.length<2||term.length>100||!quoted)throw new SourceError('Termenul de căutat nu are lungimea acceptată.');
  const search=(language:string)=>getSource('https://www.wikidata.org/w/api.php?'+new URLSearchParams({action:'wbsearchentities',search:term,language,limit:String(nameSearchLimit),type:'item',format:'json'}));
  // Structura primei etichete se validează fail-fast — un răspuns nevalid al registrului
@@ -137,6 +139,6 @@ export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim
  let en={order:[] as string[],seed:new Map<string,string>()};
  try{en=companyNameSearchIds(await search('en'))}catch{}
  const parts=[ro,en],order=parts.flatMap(part=>part.order).filter((id,index,all)=>all.indexOf(id)===index);
- const query='SELECT ?item ?itemLabel ?vat ?website ?class WHERE { VALUES ?item { '+order.slice(0,nameSearchLimit).map(id=>'wd:'+id).join(' ')+' } OPTIONAL { ?item wdt:P3608 ?vat. } OPTIONAL { ?item wdt:P856 ?website. } OPTIONAL { ?item wdt:P31 ?class. } SERVICE wikibase:label { bd:serviceParam wikibase:language "ro,en". } }';
+ const query='SELECT ?item ?itemLabel ?vat ?website ?class ?countryLabel WHERE { VALUES ?item { '+order.slice(0,nameSearchLimit).map(id=>'wd:'+id).join(' ')+' } OPTIONAL { ?item wdt:P3608 ?vat. } OPTIONAL { ?item wdt:P856 ?website. } OPTIONAL { ?item wdt:P31 ?class. } OPTIONAL { ?item wdt:P17 ?country. } SERVICE wikibase:label { bd:serviceParam wikibase:language "ro,en". } }';
  const detail=order.length?await getSource('https://query.wikidata.org/sparql?'+new URLSearchParams({query,format:'json'}),{headers:{Accept:'application/sparql-results+json'}}):'{"results":{"bindings":[]}}';
  return parseCompanyNameSearch(parts,detail,term)}}};

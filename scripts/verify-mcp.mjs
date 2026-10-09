@@ -80,6 +80,12 @@ try{
     assert.equal(tool.inputSchema.type,'object',`tool-ul ${tool.name} declară un obiect de intrare`);
     for (const required of tool.inputSchema.required||[])assert.ok(tool.inputSchema.properties[required],`tool-ul ${tool.name} cere "${required}" declarat`);
   }
+  // Pin-ul categoriilor places: enum-ul din schemă rămâne exact cheile publice
+  // ale inventarului — o categorie documentată dar inexistentă (comert, administratie,
+  // sport) nu mai poate trece de poartă.
+  const placesTool=list.find(tool=>tool.name==='places_search');
+  const manifestCategories=Object.keys(JSON.parse(await readFile(resolve(root,'public/places/manifest.json'),'utf8')).indices).filter(key=>key!=='local-all');
+  assert.deepEqual(placesTool.inputSchema.properties.category.enum,manifestCategories,'enum-ul categoriilor places = cheile publice ale manifestului inventarului');
 
   // 5. Apelul cu succes: conținut text + structuredContent identic cu răspunsul
   // rutei, isError fals.
@@ -103,6 +109,7 @@ try{
     ['tip greșit',{name:'weather_forecast',arguments:{lat:'fourty-four',lon:26}}],
     ['argument necunoscut',{name:'localities_search',arguments:{q:'x',scheduler:'bypass'}}],
     ['enum invalid',{name:'weather_alerts',arguments:{geoScope:'global'}}],
+    ['categorie places documentată',{name:'places_search',arguments:{q:'București',category:'comert'}}],
     ['tool necunoscut',{name:'admin_wipe',arguments:{}}],
   ]) {
     const response=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:7,method:'tools/call',params});

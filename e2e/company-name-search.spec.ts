@@ -53,11 +53,12 @@ test.describe('Company name search (Wikidata VAT registry)', () => {
     data: {
       query: 'monitorul oficial',
       items: [
-        {cui: '427282', vat: 'RO427282', qid: 'Q2138580', name: 'REGIA AUTONOMA MONITORUL OFICIAL', websites: ['https://www.monitoruloficial.ro/'], sourceUrl: 'https://www.wikidata.org/wiki/Q2138580'},
-        {cui: '45548304', vat: 'RO45548304', qid: 'Q99887766', name: 'MONITORUL OFICIAL DE VERIFICARE SRL', websites: [], sourceUrl: 'https://www.wikidata.org/wiki/Q99887766'},
-        {cui: null, vat: null, qid: 'Q23827008', name: 'eMAG', websites: ['https://www.emag.ro/'], sourceUrl: 'https://www.wikidata.org/wiki/Q23827008'},
+        {cui: '427282', vat: 'RO427282', qid: 'Q2138580', name: 'REGIA AUTONOMA MONITORUL OFICIAL', websites: ['https://www.monitoruloficial.ro/'], country: 'România', matchNote: 'identificator TVA (P3608) citit în registrul deschis', sourceUrl: 'https://www.wikidata.org/wiki/Q2138580'},
+        {cui: '45548304', vat: 'RO45548304', qid: 'Q99887766', name: 'MONITORUL OFICIAL DE VERIFICARE SRL', websites: [], country: 'România', matchNote: 'identificator TVA (P3608) citit în registrul deschis', sourceUrl: 'https://www.wikidata.org/wiki/Q99887766'},
+        {cui: null, vat: null, qid: 'Q23827008', name: 'eMAG', websites: ['https://www.emag.ro/'], country: 'România', matchNote: 'potrivire de nume pe clasă de organizație (P31), fără identificator fiscal românesc citit în registru', sourceUrl: 'https://www.wikidata.org/wiki/Q23827008'},
+        {cui: null, vat: null, qid: 'Q3137194', name: 'EMAG Elektrizitäts-AG', websites: [], country: 'Germania', matchNote: 'potrivire de nume pe clasă de organizație (P31), fără identificator fiscal românesc citit în registru', sourceUrl: 'https://www.wikidata.org/wiki/Q3137194'},
       ],
-      count: 3, limited: false,
+      count: 4, limited: false,
     },
   });
 
@@ -89,7 +90,7 @@ test.describe('Company name search (Wikidata VAT registry)', () => {
     await expect(results.getByRole('heading', {level: 2, name: 'Firme găsite după nume'})).toBeVisible();
     // The coverage sentence states the honest source shape: the open-knowledge registry
     // behind the search and the national registry that cannot be queried by name at source.
-    await expect(results).toContainText('3 firme găsite');
+    await expect(results).toContainText('4 firme găsite');
     const first = results.locator('.company-name-result').first();
     await expect(first).toContainText('REGIA AUTONOMA MONITORUL OFICIAL');
     await expect(first).toContainText('CUI 427282');

@@ -75,8 +75,15 @@ export function justiceLoader(kind:JusticeRegistryKind):Loader{
   return parseJusticeRegistry(bytes.buffer as ArrayBuffer,kind,String(chosen.resource.name||''));
  }};
 }
+// Cheia trebuie să identifice o persoană, nu un câmp: marcajele sursei („0 0"
+// la legitimții) nu diferențiază pe nimeni, deci un număr devine cheie doar când
+// poartă cifre reale; altfel cheia derivă din tot ce separă două persoane.
+const plausibleRegistryNumber=(value:unknown)=>{
+ const text=String(value??'').trim();
+ return text&&/[1-9]/.test(text)?text:null;
+};
 export const justiceRecordId=(kind:JusticeRegistryKind,record:Record<string,unknown>):string=>{
- if(kind==='experti-judiciari'&&record.Legitimatie!==null&&record.Legitimatie!==undefined&&String(record.Legitimatie).trim())return String(record.Legitimatie).trim();
- if(kind==='traducatori'&&record['Nr Autorizatie']!==null&&record['Nr Autorizatie']!==undefined&&String(record['Nr Autorizatie']).trim())return String(record['Nr Autorizatie']).trim();
- return createHash('sha256').update(kind+JSON.stringify([record.NUME||record.Nume||record['Nume și prenume'],record.JUDET||record.Judet||record.Județul||record.CAMERA||record['Curte de Apel']])).digest('hex').slice(0,12);
+ const primary=kind==='experti-judiciari'?plausibleRegistryNumber(record.Legitimatie):kind==='traducatori'?plausibleRegistryNumber(record['Nr Autorizatie']):null;
+ if(primary)return primary;
+ return createHash('sha256').update(kind+JSON.stringify([record.NUME||record.Nume||record['Nume și prenume'],record.JUDET||record.Judet||record.Județul||record.CAMERA||record['Curte de Apel'],record.Telefon||record.telefon,record.Adresa||record.ADRESA_SEDIU||record['Adresa sediu'],record.Specializare,record.Email,record.Limbi])).digest('hex').slice(0,12);
 };

@@ -21,10 +21,19 @@ out=root/'public/data';out.mkdir(exist_ok=True)
 proof={'sourceUrl':'https://data.gov.ro/dataset/siruta_s1-2026','fetchedAt':source['fetchedAt']}
 (out/'locality-counties.json').write_text(json.dumps({**proof,'items':known,'urbanItems':urban_known},ensure_ascii=False,separators=(',',':'))+'\n')
 cities=json.loads((root/'public/places/cities.json').read_text())['items']
-urban=[]
+# Registrul cartografiat cuprinde municipiile și orașele, plus satele pe care SIRUTA
+# le poartă în mediul urban (componente ale unităților urbane) — restul satelor
+# rămân onest fără punct geografic, nu se inventează nicio coordonată.
+urban=[];seen=set()
 for city in cities:
- if city.get('type') not in ['city','town']:continue
- county=city.get('county') or known.get(fold(city['name'])) or urban_known.get(fold(city['name'])) or ''
+ folded=fold(city['name'])
+ core=city.get('type') in ['city','town']
+ if city.get('type') not in ['city','town','village','hamlet']:continue
+ if not core and folded not in urban_names:continue
+ county=city.get('county') or known.get(folded) or urban_known.get(folded) or ''
+ key=(folded,county)
+ if key in seen:continue
+ seen.add(key)
  urban.append({k:city[k] for k in ['name','lat','lon']}|{'county':county,'type':city['type']})
 (out/'geographic-localities.json').write_text(json.dumps({**proof,'items':urban},ensure_ascii=False,separators=(',',':'))+'\n')
 network=json.loads((root/'public/transit/network.json').read_text());manifest=json.loads((root/'public/transit/manifest.json').read_text())

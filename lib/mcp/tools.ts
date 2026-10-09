@@ -16,6 +16,11 @@ const num=(v:unknown)=>typeof v==='number'&&Number.isFinite(v)?String(v):'';
 const pick=(allowed:string[]|undefined,v:unknown)=>{const s=str(v);return !allowed||allowed.includes(s)?s:''};
 const query=(entries:[string,string][])=>Object.fromEntries(entries.filter(([,v])=>v!=='')) as Record<string,string>;
 
+// Categoriile publice ale inventarului național de locuri — exact cheiile
+// manifestului (public/places/manifest.json), fără aliasuri: o categorie
+// necunoscută se respinge la granița MCP cu -32602, parametrul numit.
+const PLACES_CATEGORIES=['agricultura','bani','cultura','educatie','energie','filme','firme','justitie','local','mediu','munca','sanatate','stiri','transport'];
+
 export const TOOLS:ToolDef[]=[
   {
     name:'search_companies',
@@ -32,8 +37,8 @@ export const TOOLS:ToolDef[]=[
   {
     name:'places_search',
     description:'Search live places on the interactive map: hospitals, pharmacies, schools, courts, museums and map POIs by name, category and location, with distances and contact details.',
-    inputSchema:{type:'object',properties:{q:{type:'string',description:'Free-text place query'},category:{type:'string',description:'Category filter, from the national inventory (e.g. sanatate, educatie, cultura, administratie, comert, transport, sport)'},contact:{type:'string',enum:['phone','email','website','address','openingHours'],description:'Only places carrying this contact detail'},scope:{type:'string',enum:['all','nearby'],description:'all = national match, nearby = only within the radius'},sort:{type:'string',enum:['name','recent','distance'],description:'Result ordering (distance needs lat/lon)'},lat:{type:'number',description:'Latitude of the search center'},lon:{type:'number',description:'Longitude of the search center'},radius:{type:'number',description:'Nearby radius in km, 1–100 (default 15)'},pageSize:{type:'number',description:'Results per page, 1–200 (default 18)'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
-    build:args=>({path:'/api/places',query:query([['q',str(args.q)],['category',str(args.category)],['contact',pick(['phone','email','website','address','openingHours'],args.contact)],['scope',pick(['all','nearby'],args.scope)],['sort',pick(['name','recent','distance'],args.sort)],['lat',num(args.lat)],['lon',num(args.lon)],['radius',num(args.radius)],['pageSize',num(args.pageSize)],['page',num(args.page)],['view','cards']])}),
+    inputSchema:{type:'object',properties:{q:{type:'string',description:'Free-text place query'},category:{type:'string',enum:PLACES_CATEGORIES,description:'Category filter: exact keys of the national inventory (agricultura, bani, cultura, educatie, energie, filme, firme, justitie, local, mediu, munca, sanatate, stiri, transport)'},contact:{type:'string',enum:['phone','email','website','address','openingHours'],description:'Only places carrying this contact detail'},scope:{type:'string',enum:['all','nearby'],description:'all = national match, nearby = only within the radius'},sort:{type:'string',enum:['name','recent','distance'],description:'Result ordering (distance needs lat/lon)'},lat:{type:'number',description:'Latitude of the search center'},lon:{type:'number',description:'Longitude of the search center'},radius:{type:'number',description:'Nearby radius in km, 1–100 (default 15)'},pageSize:{type:'number',description:'Results per page, 1–200 (default 18)'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
+    build:args=>({path:'/api/places',query:query([['q',str(args.q)],['category',pick(PLACES_CATEGORIES,args.category)],['contact',pick(['phone','email','website','address','openingHours'],args.contact)],['scope',pick(['all','nearby'],args.scope)],['sort',pick(['name','recent','distance'],args.sort)],['lat',num(args.lat)],['lon',num(args.lon)],['radius',num(args.radius)],['pageSize',num(args.pageSize)],['page',num(args.page)],['view','cards']])}),
   },
   {
     name:'directory_registry',
@@ -43,7 +48,7 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'localities_search',
-    description:'Search Romanian localities (SIRUTA registry): official names, county, urban/rural classification; urban localities carry lat/lon (the mapped center), rural ones honestly do not. Use it to resolve a locality before weather, events or transport calls.',
+    description:'Search Romanian localities (SIRUTA registry): official names, county, urban/rural classification. Municipalities, towns and SIRUTA-urban component villages carry the mapped lat/lon; rural villages honestly carry none. Use it to resolve a locality before weather, events or transport calls.',
     inputSchema:{type:'object',properties:{q:{type:'string',description:'Locality (part of) name'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
     build:args=>({path:'/api/localities',query:query([['q',str(args.q)],['page',num(args.page)]])}),
   },
