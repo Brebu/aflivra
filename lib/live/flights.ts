@@ -56,8 +56,8 @@ async function loadAdsbFlights():Promise<Loaded>{
    // Fluxul servește egress-ul rezidențial, dar respinge rețeaua Cloudflare Workers a
    // serverului cu 429/503 (clasa AFIR, dovedită de sonde): clasa se preia onest în
    // nota de intermediar, cu codul sursei păstrat — prospețimea o poartă tura externă
-   // de relaie, săptămânal, iar încărcătorul rămâne logica partajată.
-   if(e instanceof SourceError&&(e.diagnostic?.httpStatus===429||e.diagnostic?.httpStatus===503))throw new SourceError('Fluxul public adsb.lol a respins rețeaua serverului (HTTP '+e.diagnostic?.httpStatus+'). Pozițiile se reîmprospătează prin tura de intermediar extern, săptămânal; încearcă din nou peste puțin timp.',e.retryAfter,e.diagnostic);
+   // de relaie, orară, iar încărcătorul rămâne logica partajată.
+   if(e instanceof SourceError&&(e.diagnostic?.httpStatus===429||e.diagnostic?.httpStatus===503))throw new SourceError('Fluxul public adsb.lol a respins rețeaua serverului (HTTP '+e.diagnostic?.httpStatus+'). Pozițiile se reîmprospătează prin tura de intermediar extern, la fiecare oră; încearcă din nou peste puțin timp.',e.retryAfter,e.diagnostic);
    throw e;
   }
 }

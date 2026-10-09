@@ -13,7 +13,6 @@ export type ToolDef={
 
 const str=(v:unknown)=>typeof v==='string'?v.trim():'';
 const num=(v:unknown)=>typeof v==='number'&&Number.isFinite(v)?String(v):'';
-const bool=(v:unknown)=>typeof v==='boolean'?String(v):'';
 const pick=(allowed:string[]|undefined,v:unknown)=>{const s=str(v);return !allowed||allowed.includes(s)?s:''};
 const query=(entries:[string,string][])=>Object.fromEntries(entries.filter(([,v])=>v!=='')) as Record<string,string>;
 
@@ -39,8 +38,8 @@ export const TOOLS:ToolDef[]=[
   {
     name:'directory_registry',
     description:'National Romanian registries as searchable tables: schools, health units, pharmacies, hospitals. Rows carry the official registry fields with locality filters.',
-    inputSchema:{type:'object',properties:{kind:{type:'string',enum:['schools','health','pharmacies','hospitals'],description:'Which registry to read'},q:{type:'string',description:'Free-text row filter (name, locality)'},page:{type:'number',description:'Zero-based result page'}},required:['kind']},
-    build:args=>({path:'/api/directory',query:query([['kind',pick(['schools','health','pharmacies','hospitals'],args.kind)],['q',str(args.q)],['page',num(args.page)],['geoScope','national']])}),
+    inputSchema:{type:'object',properties:{kind:{type:'string',enum:['schools','health','pharmacies','hospitals'],description:'Which registry to read'},q:{type:'string',description:'Free-text row filter (name, text)'},locality:{type:'string',description:'Locality name — filters rows to the locality'},county:{type:'string',description:'County name — filters rows to the county'},geoScope:{type:'string',enum:['context','local','national'],description:'Geographic scope of the filter (default national)'},page:{type:'number',description:'Zero-based result page'}},required:['kind']},
+    build:args=>({path:'/api/directory',query:query([['kind',pick(['schools','health','pharmacies','hospitals'],args.kind)],['q',str(args.q)],['locality',str(args.locality)],['county',str(args.county)],['geoScope',pick(['context','local','national'],args.geoScope)||'national'],['page',num(args.page)]])}),
   },
   {
     name:'localities_search',
@@ -51,8 +50,8 @@ export const TOOLS:ToolDef[]=[
   {
     name:'weather_forecast',
     description:'Current weather and short-term forecast for Romanian coordinates (open data, per-hour values).',
-    inputSchema:{type:'object',properties:{lat:{type:'number',description:'Latitude, -90..90'},lon:{type:'number',description:'Longitude, -180..180'}},required:['lat','lon']},
-    build:args=>({path:'/api/weather',query:query([['lat',num(args.lat)],['lon',num(args.lon)]])}),
+    inputSchema:{type:'object',properties:{lat:{type:'number',description:'Latitude, -90..90'},lon:{type:'number',description:'Longitude, -180..180'},hours:{type:'number',description:'Hourly forecast window to return, 1–168 hours (default 48) — the current conditions always carry'}},required:['lat','lon']},
+    build:args=>({path:'/api/weather',query:query([['lat',num(args.lat)],['lon',num(args.lon)],['hours',Number.isFinite(args.hours)?String(Math.min(168,Math.max(1,Math.floor(Number(args.hours))))):'']])}),
   },
   {
     name:'weather_alerts',
@@ -69,8 +68,8 @@ export const TOOLS:ToolDef[]=[
   {
     name:'cinema_program',
     description:'Cinema program (Cinema City Romania) by city and date: films, showtimes and details.',
-    inputSchema:{type:'object',properties:{locality:{type:'string',description:'City with a Cinema City venue, e.g. "București"'},date:{type:'string',description:'Program date, ISO YYYY-MM-DD'},county:{type:'string',description:'County of the city'},id:{type:'string',description:'Specific cinema id, if known'}},required:['locality','date']},
-    build:args=>({path:'/api/cinema',query:query([['locality',str(args.locality)],['county',str(args.county)],['id',str(args.id)],['date',str(args.date)]])}),
+    inputSchema:{type:'object',properties:{locality:{type:'string',description:'City with a Cinema City venue, e.g. "București"'},date:{type:'string',description:'Program date, ISO YYYY-MM-DD'},county:{type:'string',description:'County of the city'},id:{type:'string',description:'Specific cinema id, if known'},detail:{type:'string',enum:['compact','full'],description:'compact = films and showtimes only, without the source\'s full body duplicated (default); full = everything the UI renders'}},required:['locality','date']},
+    build:args=>({path:'/api/cinema',query:query([['locality',str(args.locality)],['county',str(args.county)],['id',str(args.id)],['date',str(args.date)],['detail',pick(['compact','full'],args.detail)||'compact']])}),
   },
   {
     name:'transport_positions',
@@ -98,9 +97,9 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'trains_schedule',
-    description:'Romanian rail (CFR Infra) schedule: the full station board with train numbers, routes, times and operators; optionally filtered to one station by its numeric id.',
-    inputSchema:{type:'object',properties:{station:{type:'string',description:'Numeric station id (e.g. "44678"); omit it for the full station board with its ids'},q:{type:'string',description:'Optional train number filter'},page:{type:'number',description:'Zero-based result page'}},},
-    build:args=>({path:'/api/trains',query:query([['station',str(args.station)],['q',str(args.q)],['page',num(args.page)]])}),
+    description:'Romanian rail (CFR Infra) schedule: the full station board with train numbers, routes (true route terminus as destination), times and operators. With a station id the board is served for that station (q filters trains); editions are validated against the requested date — expired operator editions appear only with edition=all.',
+    inputSchema:{type:'object',properties:{station:{type:'string',description:'Numeric station id (e.g. "44678"); omit it for the full station board with its ids'},q:{type:'string',description:'With station: filters the board by train number or category; without station: searches stations by name'},date:{type:'string',description:'Circulation date, ISO YYYY-MM-DD (default today) — the edition must be valid on it'},edition:{type:'string',enum:['current','all'],description:'current = only editions valid on the date (default); all = include expired editions (archive)'},page:{type:'number',description:'Zero-based result page'}},},
+    build:args=>({path:'/api/trains',query:query([['station',str(args.station)],['q',str(args.q)],['date',(typeof args.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(args.date))?args.date:''],['edition',pick(['current','all'],args.edition)],['page',num(args.page)]])}),
   },
   {
     name:'legal_acts',
@@ -111,8 +110,8 @@ export const TOOLS:ToolDef[]=[
   {
     name:'court_dosar_search',
     description:'Search Romanian court files (portal.just.ro) by dosar number, party name, subject or institution, in a date range. Number format e.g. "6236/111/2017".',
-    inputSchema:{type:'object',properties:{number:{type:'string',description:'Dosar number (normalized, e.g. "6236/111/2017")'},name:{type:'string',description:'Party name, minimum 3 characters'},subject:{type:'string',description:'Subject text, up to 200 characters'},institution:{type:'string',description:'Court institution (e.g. "Curtea de Apel București")'},from:{type:'string',description:'From date, ISO YYYY-MM-DD'},to:{type:'string',description:'To date, ISO YYYY-MM-DD'},numberScope:{type:'string',enum:['all','filtered'],description:'Search the number across all sections or only the filtered one'},locality:{type:'string',description:'Locality — scopes institutions to the active zone'},county:{type:'string',description:'County — scopes institutions to the active zone'}},required:[]},
-    build:args=>({path:'/api/legal',method:'POST',body:{kind:'court',number:str(args.number),name:str(args.name),subject:str(args.subject),institution:str(args.institution),from:str(args.from),to:str(args.to),numberScope:pick(['all','filtered'],args.numberScope)||'all'},query:{}}),
+    inputSchema:{type:'object',properties:{number:{type:'string',description:'Dosar number (normalized, e.g. "6236/111/2017")'},name:{type:'string',description:'Party name, minimum 3 characters'},subject:{type:'string',description:'Subject text, up to 200 characters'},institution:{type:'string',description:'Court institution — registry id or its usual name, e.g. "TribunalulBIHOR" or "Tribunalul Bihor"; both resolve'},from:{type:'string',description:'From date, ISO YYYY-MM-DD'},to:{type:'string',description:'To date, ISO YYYY-MM-DD'},numberScope:{type:'string',enum:['all','filtered'],description:'Search the number across all sections or only the filtered one'},locality:{type:'string',description:'Locality — scopes institutions to the active zone'},county:{type:'string',description:'County — scopes institutions to the active zone'}},required:[]},
+    build:args=>({path:'/api/legal',method:'POST',body:{kind:'court',number:str(args.number),name:str(args.name),subject:str(args.subject),institution:str(args.institution),from:str(args.from),to:str(args.to),numberScope:pick(['all','filtered'],args.numberScope)||'all',locality:str(args.locality),county:str(args.county)},query:{}}),
   },
   {
     name:'federated_search',
@@ -130,12 +129,12 @@ export const TOOLS:ToolDef[]=[
     name:'dataset_table',
     description:'Read a published dataset file as a table (CSV, XLSX, XML with table layer, JSON): sheet list, columns, paginated rows and cell values — the platform reader, honest about non-tabular documents.',
     inputSchema:{type:'object',properties:{id:{type:'string',description:'Dataset resource id (uuid) from the catalog'},sheet:{type:'number',description:'Sheet index to read'},page:{type:'number',description:'Zero-based row page'},q:{type:'string',description:'Row filter'},sort:{type:'number',description:'Column index to sort by'},desc:{type:'boolean',description:'Sort descending'}},required:['id']},
-    build:args=>({path:'/api/resource',query:query([['id',str(args.id)],['sheet',num(args.sheet)],['page',num(args.page)],['q',str(args.q)],['sort',num(args.sort)],['desc',bool(args.desc)]])}),
+    build:args=>({path:'/api/resource',query:query([['id',str(args.id)],['sheet',num(args.sheet)],['page',num(args.page)],['q',str(args.q)],['sort',num(args.sort)],['desc',args.desc===true?'1':'']])}),
   },
   {
     name:'dataset_export',
-    description:'Export a fully-imported verified dataset table as CSV text (for direct reading by the assistant) or XLSX. Only tables imported and verified whole support the export — the route answers 409 honestly otherwise.',
-    inputSchema:{type:'object',properties:{id:{type:'string',description:'Dataset resource id (uuid)'},format:{type:'string',enum:['csv','xlsx'],description:'Export format: csv (text, readable in conversation) or xlsx'},sheet:{type:'number',description:'Sheet index to export (default 0)'}},required:['id']},
+    description:'Export a fully-imported verified dataset table as CSV text (for direct reading by the assistant) or XLSX. The XLSX is binary: the result carries a download resource link with MIME and file name, never the raw bytes as text. Only tables imported and verified whole support the export — the route answers 409 honestly otherwise.',
+    inputSchema:{type:'object',properties:{id:{type:'string',description:'Dataset resource id (uuid)'},format:{type:'string',enum:['csv','xlsx'],description:'Export format: csv (text, readable in conversation) or xlsx (binary, returned as a download link)'},sheet:{type:'number',description:'Sheet index to read/export (default 0) — selects one sheet in both formats'}},required:['id']},
     build:args=>({path:'/api/resource-file',query:query([['id',str(args.id)],['format',pick(['csv','xlsx'],args.format)||'csv'],['sheet',num(args.sheet)],['download','1']])}),
   },
   {
@@ -176,7 +175,7 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'ancpi_integrals',
-    description:'ANCPI (Cadastre) published integral registry files, listed by kind and period — the honest integral downloads.',
+    description:'ANCPI (Cadastre) monthly registered-mortgage dynamics for the latest published month in the dataset: totals, by property type and by county, with the period labeled. Market indicator — not individual property records or a file inventory.',
     inputSchema:{type:'object',properties:{}},
     build:()=>({path:'/api/ancpi',query:{}}),
   },

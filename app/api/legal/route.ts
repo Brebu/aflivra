@@ -1,5 +1,5 @@
 import {readSource} from '@/lib/live/cache';
-import {lawLoader,courtLoader,expandLawText,storedLawRecord,validCourtInstitution} from '@/lib/live/legal';
+import {lawLoader,courtLoader,expandLawText,storedLawRecord,validCourtInstitution,courtInstitution} from '@/lib/live/legal';
 import {resolveLawSelection} from '@/lib/live/legal-selection';
 import {legalToday,verifiedConsolidation} from '@/lib/live/legal-consolidation';
 import {rememberLaw,trackedLaws} from '@/lib/live/legal-registry';
@@ -13,13 +13,15 @@ export const dynamic='force-dynamic';
 export async function GET(request:Request){const cursor=new URL(request.url).searchParams.get('cursor')||'';if(cursor&&!/^[a-f0-9]{64}$/.test(cursor))return Response.json({error:'Cursor invalid.'},{status:400});try{return Response.json({...await trackedLaws(cursor),portalNextAttemptAt:await portalRetryAt()},{headers:{'Cache-Control':'no-store'}})}catch(e){console.warn(JSON.stringify({event:'legal_registry_read_failure',message:e instanceof Error?e.message:'Unknown error'}));return Response.json({error:'Lista actelor de reverificat nu este disponibilă acum.'},{status:503,headers:{'Cache-Control':'no-store'}})}}
 export async function POST(request:Request){
  let p:any;try{if(Number(request.headers.get('content-length')||0)>4096)throw Error();const raw=await request.text();if(raw.length>4096)throw Error();p=JSON.parse(raw)}catch{return Response.json({error:'Interogare invalidă.'},{status:400})}
+ if(typeof p!=='object'||p===null||Array.isArray(p))return Response.json({error:'Interogare invalidă.'},{status:400});
  const headers={'Cache-Control':'no-store'};
- if(p.kind==='court'){const input={number:normalizeCourtNumber(String(p.number||'')),name:String(p.name||'').trim(),subject:String(p.subject||'').trim(),institution:String(p.institution||'').trim(),from:String(p.from||''),to:String(p.to||'')};
+ if(p.kind==='court'){const input={number:normalizeCourtNumber(String(p.number||'')),name:String(p.name||'').trim(),subject:String(p.subject||'').trim(),institution:courtInstitution(String(p.institution||'')),from:String(p.from||''),to:String(p.to||'')};
   if(p.numberScope!==undefined&&!['all','filtered'].includes(p.numberScope))return Response.json({error:'Mod de căutare invalid.'},{status:400});
   const {query,followsNumber}=courtSearchPlan(input,p.numberScope||'all');
   const dateValid=(v:string)=>!v||/^\d{4}-\d{2}-\d{2}$/.test(v)&&Number.isFinite(Date.parse(v))&&new Date(v).toISOString().slice(0,10)===v;
-  if(query.number&&!/^\d{1,8}\/\d{1,5}\/\d{4}(?:\/[a-zA-Z0-9.]{1,20})?$/.test(query.number)||query.name&&query.name.length<3||query.name.length>160||query.subject.length>200||!validCourtInstitution(query.institution)||!dateValid(query.from)||!dateValid(query.to)||query.from&&query.to&&query.from>query.to||!query.number&&!query.name&&!query.subject)return Response.json({error:'Introdu numărul dosarului, numele părții (minimum 3 caractere) sau obiectul și verifică intervalul.'},{status:400});
-  const context=readGeographicContext(new URLSearchParams(Object.fromEntries(['geoScope','locality','county','lat','lon'].filter(k=>p[k]!==undefined&&p[k]!=='').map(k=>[k,String(p[k])]))));
+  if((p.institution||'').trim()&&!input.institution)return Response.json({error:'Alege o instanță din registrul instanțelor — denumirea sau id-ul din registrul național.'},{status:400});
+   if(query.number&&!/^\d{1,8}\/\d{1,5}\/\d{4}(?:\/[a-zA-Z0-9.]{1,20})?$/.test(query.number)||query.name&&query.name.length<3||query.name.length>160||query.subject.length>200||!dateValid(query.from)||!dateValid(query.to)||query.from&&query.to&&query.from>query.to||!query.number&&!query.name&&!query.subject)return Response.json({error:'Introdu numărul dosarului, numele părții (minimum 3 caractere) sau obiectul și verifică intervalul.'},{status:400});
+  const context=readGeographicContext(new URLSearchParams([['geoScope',String(p.geoScope||'')],['locality',String(p.locality||'')],['county',String(p.county||'')],['lat',String(p.lat||'')],['lon',String(p.lon||'')]].filter(([,v])=>v!=='')));
   if(!context||!followsNumber&&context.active&&!institutions.items.some(c=>c.id===query.institution&&matchesGeography(classifyGeography({title:c.label+' '+c.id.replace(/([a-z])([A-Z])/g,'$1 $2')}),context)))return Response.json({error:'Alege o instanță din zona activă sau selectează Toată România.'},{status:400});
   const state=await readSource(courtLoader(query));
   const items=state.data?(!followsNumber&&context.active?state.data.items.filter((r:any)=>r.court===query.institution):state.data.items):[];

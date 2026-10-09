@@ -55,6 +55,15 @@ const callRoute:RouteCaller=async call=>{
   if(!handler)return {ok:false,status:405,body:{error:'Method not supported for this route.'}};
   const request=call.method==='POST'?new Request(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(call.body||{})}):new Request(url);
   const response=await handler(request);
+  const contentType=response.headers.get('content-type')||'';
+  if(!contentType.startsWith('application/json')&&!contentType.startsWith('text/')){
+    // Binar (XLSX, PDF): conținutul nu se decodifică ca text — tool-ul primește
+    // o legătură de descărcare cu MIME și numele fișierului, niciodată bytes stricate.
+    const disposition=response.headers.get('content-disposition')||'';
+    const fileName=decodeURIComponent((disposition.match(/filename\*=UTF-8''([^;]+)/)||disposition.match(/filename="([^"]+)"/)||[])[1]||'export');
+    const url=call.path+(Object.keys(call.query).length?'?'+new URLSearchParams(call.query).toString():'');
+    return {ok:response.ok,status:response.status,body:{},binary:{url,mimeType:contentType,fileName,rows:Number(response.headers.get('x-aflivra-rows'))||null,sheets:Number(response.headers.get('x-aflivra-sheets'))||null}};
+  }
   const text=await response.text();
   let body:unknown=text;
   try{body=JSON.parse(text)}catch{}

@@ -206,6 +206,13 @@ export function xmlTableRowSet(raw:string):XmlRowTable|null{
   for(const row of rows)for(const [path,values] of row){if(!arity.has(path))order.push(path);if(values.length>(arity.get(path)||0))arity.set(path,values.length)}
   const columns:string[]=[];
   for(const path of order){const max=arity.get(path)||1;if(max<=1)columns.push(path);else for(let at=1;at<=max;at++)columns.push(path+'['+at+']')}
+  // Vocabularul de stil Office (DrawingML — gradientele și schemele de culoare)
+  // produce mulți frați repetați fără text terminal: în interiorul unui document
+  // Office, un câștigător fără nicio coloană de text rămâne document onest, nu
+  // un tabel „complet” de achiziții. Listele de date doar-cu-atribut (id-uri)
+  // rămân tabele — ele nu declară vocabularul de stil.
+  const officeStyles=/schemas\.openxmlformats\.org\/(?:drawingml|officeDocument|wordprocessingml)/i.test(raw);
+  if(officeStyles&&!columns.some(column=>!column.includes('@')))return null;
   if(!columns.length||columns.length>128)return null;
   return{name:chosen.name,columns,rows:rows.map(row=>columns.map(column=>{
     const at=column.lastIndexOf('[');

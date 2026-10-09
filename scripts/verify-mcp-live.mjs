@@ -91,6 +91,7 @@ const PROBE = {
 assert.deepEqual([...names].sort(), Object.keys(ARGUMENTS).sort(), 'auditul acoperă fiecare tool din pin — un tool fără probe însemnând un audit mincinos');
 
 let degraded = 0, failed = 0;
+const byStatus = {};
 for (const name of names) {
   const body = JSON.stringify({jsonrpc: '2.0', id: 1, method: 'tools/call', params: {name, arguments: ARGUMENTS[name]}});
   let response, parsed;
@@ -115,14 +116,19 @@ for (const name of names) {
   }
   const envelope=result.structuredContent||{};
   const status = envelope.status ?? (envelope.items||envelope.total!==undefined?'direct':'none');
-  const servedText = !result.isError && typeof result.content[0].text==='string' && result.content[0].text.length>2;
-  const hasData = !!(envelope.data||envelope.items||envelope.total!==undefined)||(status==='none'&&servedText);
+  const servedText = !result.isError && (result.content[0]?.type==='resource_link' || typeof result.content[0]?.text==='string' && result.content[0].text.length>2);
+  const hasData = !!(envelope.data||envelope.items||envelope.total!==undefined||envelope.kind==='binary-export')||(status==='none'&&servedText);
   if (!hasData || status === 'unavailable') {
     degraded++;
     console.log(`SURSĂ ${name}: ${status} — ${String(result.structuredContent?.error || 'fără date acum').slice(0, 100)} | probe: ${PROBE[name]}`);
     continue;
   }
+  // Prospețimea și disponibilitatea se numără separat: un plic în copie
+  // (cached) sau vechi (stale) are DATE DISPONIBILE, nu „date proaspete”.
+  byStatus[status==='none'?'direct':status]=(byStatus[status==='none'?'direct':status]||0)+1;
   console.log(`OK ${name}: ${status}${status==='none'?' (răspuns text integral)':''} | probe: ${PROBE[name]}`);
 }
-console.log(`\nAUDIT ${BASE}: ${names.length - failed - degraded}/${names.length} tool-uri cu date proaspete; ${degraded} degradări oneste de sursă; ${failed} avarii.`);
+const fresh=byStatus.fresh||0,cached=byStatus.cached||0,stale=byStatus.stale||0,directT=byStatus.direct||0;
+console.log(`\nAUDIT ${BASE}: ${names.length - failed - degraded}/${names.length} tool-uri cu date disponibile — ${fresh} proaspete, ${cached} în copie validă, ${stale} vechi (copie păstrată, sursa nu a reușit ultima tură), ${directT} răspunsuri directe; ${degraded} degradări oneste de sursă; ${failed} avarii.`);
+if(stale>0)console.log('NOTĂ: plicurile «stale» servesc ultima copie validă cu eroarea sursei etichetată — nu sunt date proaspete.');
 process.exit(failed ? 1 : degraded ? 2 : 0);

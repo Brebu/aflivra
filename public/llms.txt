@@ -24,7 +24,7 @@ Principalele instituții: BNR, ANM, ANAF, Ministerul Justiției (portalul instan
 ## Actualitate și reîmprospătare (onest)
 
 - Aplicația reîmprospătează automat, zilnic, cele mai multe surse (grupe de crons pe Worker; registrele de bază de mai multe ori pe zi); fiecare element arată data sursei și data ultimei verificări.
-- Fluxurile și panourile ale căror surse blochează rețeaua Cloudflare Workers (AFIR, panoul aeroporturilor București, stările aeronavelor adsb.lol) se reîmprospătează săptămânal prin ture de relaie exterioare (GitHub Actions), iar copia servită poartă eticheta onestă de vechime.
+- Fluxurile și panourile ale căror surse blochează rețeaua Cloudflare Workers (AFIR, panoul aeroporturilor București, stările aeronavelor adsb.lol) se reîmprospătează prin ture de relaie exterioare (GitHub Actions) — pozițiile aeronavelor orar, comunicatele AFIR la fiecare două ore, panoul aeroporturilor la fiecare patru — iar copia servită poartă eticheta onestă de vechime.
 - Când o sursă nu răspunde, aplicația servește ultima copie validă, marcată clar ca atale — nu inventează date și nu ascunde erorile.
 
 ## API public de date

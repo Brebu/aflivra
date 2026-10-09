@@ -31,7 +31,9 @@ Aproape fiecare tool întoarce plicul sursă al platformei: `status` (`fresh` | 
 `stale` | `unavailable`), `data`, `lastSuccessAt`/`lastAttemptAt`, `error` (română).
 În MCP: răspunsul rutei vine în `structuredContent`, oglindit ca text în `content[0].text`.
 O eroare a rutei (400 cu mesaj românesc) = `isError: true` cu mesajul întreg — niciodată
-ascunsă. Paginarea e `page` (de la 0) aproape peste tot; `legal_acts` e singura paginare
+ascunsă. Excepție: exporturile binare (XLSX) nu vin ca text — deschid cu un `resource_link`
+cu MIME și numele fișierului, iar `structuredContent` poartă `url`-ul de descărcare; o
+căutare validă fără potriviri (total 0) NU e `unavailable` — starea descrie sursele. Paginarea e `page` (de la 0) aproape peste tot; `legal_acts` e singura paginare
 pe cursor. Contextul geografic (`locality`/`county`, opțional `lat`/`lon`/`radius` 1–100)
 ancorează unele rute; `geoScope` poate fi `context` | `local` | `national`.
 
@@ -44,7 +46,7 @@ ancorează unele rute; `geoScope` poate fi `context` | `local` | `national`.
 ## Tool-uri (34)
 
 ### `search_companies`
-Firme după nume, din registrul deschis de cunoștințe (etichete RO+EN îmbinate cele cu identificator TVA expun CUI; celelalte sunt marcate onest „fără CUI citit").
+Firme după nume, din registrul deschis de cunoștințe (etichete RO+EN îmbinate): doar entitățile cu clasă de organizație/firmă sau cu identificator TVA citit se listează ca firme — speciile și localitățile omonime nu apar; cele fără CUI rămân marcate onest „fără CUI citit”.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "search_companies", "arguments": {"name": "Banca Transilvania"}}}
 ```
@@ -62,7 +64,7 @@ Harta națională de locuri (inventarul OSM): spitale, farmacii, școli, muzee �
 ```
 
 ### `directory_registry`
-Registrele naționale ca tabele: `schools` | `health` | `pharmacies` | `hospitals` — căutare text, paginat.
+Registrele naționale ca tabele: `schools` | `health` | `pharmacies` | `hospitals` — căutare text pe `q`, filtre geografice pe `locality`/`county`/`geoScope`, paginat.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "directory_registry", "arguments": {"kind": "pharmacies", "q": "farmacia"}}}
 ```
@@ -74,7 +76,7 @@ Localitățile din SIRUTA: nume, județ, clasificare, coordonate — folosește-
 ```
 
 ### `weather_forecast`
-Prognoza orășelui pe coordonate (open data): valori orare.
+Prognoza pe coordonate (open data): starea curentă plus fereastra orară `hours` (1–168, implicit 48) din copia completă.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "weather_forecast", "arguments": {"lat": 44.427, "lon": 26.103}}}
 ```
@@ -86,7 +88,7 @@ Avertizările ANM active; fără avertizări, fluxul XML gol se servește onest 
 ```
 
 ### `events_search`
-Spectacole și concerte în calendarele publice validate (teatre, operă); filtre pe sală (`venue`) și localitate.
+Spectacole și concerte în calendarele publice validate (teatre, operă): textul, sala (`venue` — id-ul sau denumirea uzuală, ambele se rezolvă) și localitatea se aplică împreună; o căutare fără potriviri rămâne succes onest cu total 0.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "events_search", "arguments": {"q": "teatru", "locality": "București"}}}
 ```
@@ -98,7 +100,7 @@ Locațiile operatorului de cinema: id, nume, oraș, adresă, coordonate — id-u
 ```
 
 ### `cinema_program`
-Programul de cinema pe o locație (id din `cinema_sites`) și o dată ISO `YYYY-MM-DD`.
+Programul de cinema pe o locație (id din `cinema_sites`) și o dată ISO `YYYY-MM-DD`; forma implicită e compactă (filme și proiecții, fără dublura corpului sursă) — `detail: "full"` readuce tot.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "cinema_program", "arguments": {"locality": "București", "county": "București", "id": "1806", "date": "2026-10-09"}}}
 ```
@@ -110,13 +112,13 @@ Rețeaua programată TPBI București–Ilfov (GTFS): `routes` sau `stops`, cu c�
 ```
 
 ### `transport_positions`
-Transportul live TPBI: `vehicles` (poziții cu linie), `arrivals` (panou pe stație, dă `stop`), `alerts`.
+Transportul live TPBI: `vehicles` (poziții cu linie; `route` primește numărul scurt, ex. `41`, sau id-ul), `arrivals` (panou pe stație, dă `stop`), `alerts`. Vechimea pozițiilor e a observației (`observationAgeSeconds`), separat de vechimea preluării (`fetchedAgeSeconds`).
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "transport_positions", "arguments": {"kind": "vehicles", "county": "București", "locality": "București"}}}
 ```
 
 ### `tranzy_live`
-Operatorii Tranzy open-data, live: Iași (SCTP), Cluj (CTP), Chișinău, Botoșani, Oradea. București nu e pe Tranzi azi — live-ul lui e TPBI.
+Operatorii Tranzy open-data, live: Iași (SCTP), Cluj (CTP), Chișinău, Botoșani, Oradea. București nu e pe Tranzi azi — live-ul lui e TPBI. Vechimea pozițiilor e a observației (`observationAgeSeconds`), separat de preluare (`fetchedAgeSeconds`).
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "tranzy_live", "arguments": {"locality": "Iași", "county": "Iași"}}}
 ```
@@ -134,7 +136,7 @@ Panoul aeroporturilor București: `henri-coanda` (OTP) sau `baneasa-aurel-vlaicu
 ```
 
 ### `trains_schedule`
-Trenurile CFR Infra: tabelul integral de stații/trenuri; opțional filtrat pe un id numeric de stație.
+Trenurile CFR Infra: indicele de stații sau panoul unei stații (id numeric); cu stație, `q` filtrează pe numărul/categoria trenului, iar `date`+`edition` (`current` implicit, `all` arhiva) țin panoul la edițiile valabile — `d` e capătul real al traseului, `nx` următoarea escală.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "trains_schedule", "arguments": {}}}
 ```
@@ -146,7 +148,7 @@ Actele aflate la reverificare pe platformă (legislatie.just.ro), paginare pe cu
 ```
 
 ### `court_dosar_search`
-Dosare judecătorești (portal.just): număr dosar (ex. `6236/111/2017`), parte, obiect, instanță, interval; filtrare pe zona activă.
+Dosare judecătorești (portal.just): număr dosar (ex. `6236/111/2017`), parte, obiect, instanță (id de registru sau denumirea uzuală — ambele se rezolvă), interval; `locality`/`county` ajung în cerere și ancorează instanțele zonei active.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "court_dosar_search", "arguments": {"number": "6236/111/2017"}}}
 ```
@@ -188,7 +190,7 @@ Cititorul de tabele al platformei (CSV/XLSX/XML/JSON): foi, coloane, rânduri pa
 ```
 
 ### `dataset_export`
-Export integral al unui tabel importat și verificat: `csv` (text, citibil în conversație) sau `xlsx`; altfel ruta răspunde 409 onest.
+Export integral al unui tabel importat și verificat: `csv` (text, citibil în conversație) sau `xlsx` (binar — rezultatul e o legătură `resource_link` cu numele fișierului și numărul de rânduri; `sheet` selectează foia în ambele formate); altfel ruta răspunde 409 onest.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "dataset_export", "arguments": {"id": "1088e792-54f4-43ad-8e4c-9b351b82d31c"}}}
 ```
@@ -218,19 +220,19 @@ Biblioteca de lucrări din domeniul public: id, titlu, categorie — poarta căt
 ```
 
 ### `lawyers_registry`
-Tabloul național al avocaților (UNBR): căutare pe nume, sortare `name|recent`, opțional baraj pe localitate.
+Tabloul național al avocaților (UNBR): căutare pe nume verificată (un panou fără termenul cerut nu se servește drept căutare), sortare `name|recent`; cu `locality`/`county`, baroul se aplică pe serverul sursei — totalul și paginarea descriu exact selecția.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "lawyers_registry", "arguments": {"q": "Popescu"}}}
 ```
 
 ### `forensic_experts`
-Registrele justiției: `experti-judiciari` | `experti-tehnici` | `traducatori`, pe județ; cere `locality` pentru contextul geografic.
+Registrele justiției: `experti-judiciari` | `experti-tehnici` | `traducatori`, pe județ — orice ortografie normală a județului rezolvă la același set; cere `locality` pentru contextul geografic.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "forensic_experts", "arguments": {"kind": "experti-judiciari", "locality": "Oradea", "judet": "Bihor"}}}
 ```
 
 ### `notaries_registry`
-Registrul notarilor publici (CECNJ), pe cameră.
+Registrul notarilor publici (CECNJ), pe cameră — camera se cere prin numele uzual al județului, cu orice ortografie normală.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "notaries_registry", "arguments": {"q": "popa"}}}
 ```
@@ -242,7 +244,7 @@ Registrul de locuințe ANL, pe județ.
 ```
 
 ### `ancpi_integrals`
-Fișierele integrale ANCPI (dinamica ipotecilor), listate pe fel și perioadă.
+Dinamica ipotecilor ANCPI pe luna cea mai recentă publicată în setul de date: totalul național, pe felul proprietății și pe județe, cu perioada etichetată (`monthLabel`). Indicator de piață — nu fișier de carte funciară și nu adrese individuale.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "ancpi_integrals", "arguments": {}}}
 ```

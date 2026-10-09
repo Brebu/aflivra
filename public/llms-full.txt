@@ -7,7 +7,7 @@
 - Router: single-page app cu hash (#view=…&id=…). Paginile statice crawlabile sunt /, /catalog, /confidentialitate, /termeni (vezi https://aflivra.brebu.workers.dev/sitemap.xml).
 - Fiecare element de date arată: sursa, licența, data publicării sursei și data ultimei verificări. Sursa oficială rămâne adevărul de referință; aplicația nu este consultanță juridică, fiscală sau de alt fel.
 - Când o sursă nu răspunde, se servește ultima copie validă, marcată onest ca atare.
-- Actualizare: crons pe Worker, zilnic pentru majoritatea surselor (registrele de bază de mai multe ori pe zi); fluxurile blocate pentru rețeaua Cloudflare Workers (AFIR, panoul aeroporturilor București, stările aeronavelor) se aduc săptămânal prin ture de relaie exterioare.
+- Actualizare: crons pe Worker, zilnic pentru majoritatea surselor (registrele de bază de mai multe ori pe zi); fluxurile blocate pentru rețeaua Cloudflare Workers (AFIR la fiecare două ore, panoul aeroporturilor București la fiecare patru ore, stările aeronavelor orar) se aduc prin ture de relaie exterioare.
 
 ## Domeniile (16 domenii, 51 de secțiuni de conținut)
 
@@ -27,7 +27,7 @@ Firme după CUI: date de identificare ANAF, TVA inactivi, indicatori din bilanț
 Calitatea aerului (RNMCA), date de evaluare primare validate, seisme (INFP), avertizări de mediu. Surse: RNMCA Calitatea Aerului API, INFP catalog seismic public.
 
 ### În mișcare (transport)
-Transport public: orare GTFS, poziții în timp real ale vehiculelor (TPBI București-Ilfov, Tranzy pentru operatorii locali), mersul trenurilor celor nouă operatori, InfoTrafic Poliția Română, stările aeronavelor în timp real (adsb.lol, cu acoperirea națională reunită) și panoul aeroporturilor București. Fluxurile în timp real au TTL de 30 de secunde; stările aeronavelor și panoul aeroporturilor se servesc din copia de relaie săptămânală, cu eticheta de vechime.
+Transport public: orare GTFS, poziții în timp real ale vehiculelor (TPBI București-Ilfov, Tranzy pentru operatorii locali), mersul trenurilor celor nouă operatori, InfoTrafic Poliția Română, stările aeronavelor în timp real (adsb.lol, cu acoperirea națională reunită) și panoul aeroporturilor București. Fluxurile în timp real au TTL de 30 de secunde; stările aeronavelor și panoul aeroporturilor se servesc din copia de relaie (orară, respectiv la fiecare patru ore), cu eticheta de vechime.
 
 ### Sănătate aproape (sanatate)
 Lista furnizorilor de servicii medicale, date statistice CNAS, nomenclatorul de medicamente ANMDMR. Surse: CNAS (furnizori, statistici), ANMDMR Nomenclator medicamente.
@@ -57,7 +57,7 @@ Cinemateca de filme românești (Wikidata), programele cinematografelor din Rom�
 Corpusul de povestiri și texte din Wikisource în limba română, cu dovada de text pe fiecare fișă. Sursă: Wikisource română.
 
 ### Știri & actualitate (stiri)
-Fluxurile ministerelor și ale agențiilor: AGERPRES, ministerul agriculturiei (AFIR date deschise, aduse prin relaie săptămânală), sănătate, educație, justiție, energie, transport. Surse: AGERPRES, afir.ro, fluxurile ministerelor.
+Fluxurile ministerelor și ale agențiilor: AGERPRES, ministerul agriculturiei (AFIR date deschise, aduse prin relaie la fiecare două ore), sănătate, educație, justiție, energie, transport. Surse: AGERPRES, afir.ro, fluxurile ministerelor.
 
 ## Urmăriri și notificări
 
