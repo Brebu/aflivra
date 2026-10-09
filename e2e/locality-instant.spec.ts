@@ -265,4 +265,26 @@ test.describe('Footer honesty', () => {
     await expect(ios.getByRole('link')).toHaveCount(0);
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
+
+  test('the browser PWA install card is honest about what the browser offers', async ({page}) => {
+    const pageErrors = collectPageErrors(page);
+    await page.goto('/');
+    await waitForClientReady(page);
+    await page.locator('.vfooter .footer-links').getByRole('button', {name: 'Ghidurile platformei'}).click();
+    await expect(page.locator('main#vcontent')).toHaveAttribute('data-view', 'about');
+    const pwa = page.locator('.source-download-pwa');
+    await expect(pwa).toBeVisible();
+    await expect(pwa).toContainText('PWA');
+    // Without a native install prompt (e.g. browsers that never fire beforeinstallprompt),
+    // the card still names the honest routes: the address-bar install in Chromium,
+    // the signed APK and the Safari gesture stay the fallbacks.
+    await expect(pwa).toContainText('Chrome');
+    // The manifest + service worker must be wired: installability is real, not claimed.
+    const wired = await page.evaluate(async () => ({
+      manifest: !!document.querySelector('link[rel="manifest"]'),
+      sw: !!(await navigator.serviceWorker.getRegistration()),
+    }));
+    expect(wired, 'install surface: manifest link + active service worker').toEqual({manifest: true, sw: true});
+    expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  });
 });

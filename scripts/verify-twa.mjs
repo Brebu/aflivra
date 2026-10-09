@@ -114,4 +114,21 @@ for (const file of walk(TWA)) {
 }
 assert.ok(!twa.signingKey?.path, 'signingKey.path din twa-manifest rămâne gol — keystore-ul nu se consemnează în repo');
 
-console.log(`Poarta TWA a trecut: ${PACKAGE_ID} @ ${twa.appVersionName} (code ${twa.appVersionCode}), targetSdk ${twa.targetSdkVersion}, host ${twa.host}, assetlinks cu fingerprintul real al certificatului de semnare al APK-ului (${UPLOAD_CERT_SHA256.slice(0,11)}…), Bubblewrap fixat @${pin[1]}, feature graphic 1024×500 sub 1 MB (${(graphic.length / 1024).toFixed(0)} KB), fără material de semnare.`);
+// 8. Instalarea PWA din browser (a treia rută de instalare, fără magazin): service
+//    worker cu fetch handler care NU atinge /api/ (datele live au propria disciplină
+//    de prospețime — service worker-ul nu pune cache invizibil peste ea), înregistrarea
+//    SW + captura promptului de instalare în boot și cardul onest din Despre (butonul
+//    apare doar când browserul oferă promptul). Manifestul (standalone + iconițe) e
+//    verificat la blocul 3.
+const sw = readFileSync(join(PUBLIC, 'sw.js'), 'utf8');
+assert.ok(sw.includes("addEventListener('fetch'"), 'service worker-ul trebuie să aibă fetch handler — fără el browserele nu oferă instalarea nativă');
+assert.ok(!sw.includes('/api/'), 'service worker-ul nu are voie să atingă /api/ — datele live își păstrează prospețimea declarată la sursă, nu un cache de browser');
+for (const icon of ['icon-192.png', 'icon-512.png']) assert.ok(existsSync(join(PUBLIC, icon)), `public/${icon} lipsește — iconițele declarate în manifest trebuie publicate`);
+const pageSource = readFileSync(join(ROOT, 'app', 'page.tsx'), 'utf8');
+assert.ok(pageSource.includes("navigator.serviceWorker.register('/sw.js')"), 'boot-ul aplicației trebuie să înregistreze /sw.js');
+assert.ok(pageSource.includes('captureInstallPrompt()'), 'boot-ul trebuie să captureze promptul nativ de instalare — beforeinstallprompt se declanșează o singură dată, la încărcare, înainte de a deschide Despre');
+const aboutPwaSource = readFileSync(join(ROOT, 'app', 'source-packages.tsx'), 'utf8');
+assert.ok(aboutPwaSource.includes('source-download-pwa'), 'Despre → Ghidurile platformei trebuie să poarte cardul PWA (a treia rută de instalare)');
+assert.ok(aboutPwaSource.includes('promptInstall()'), 'cardul PWA leagă butonul de promptul capturat — niciodată un buton mort');
+
+console.log(`Poarta TWA a trecut: ${PACKAGE_ID} @ ${twa.appVersionName} (code ${twa.appVersionCode}), targetSdk ${twa.targetSdkVersion}, host ${twa.host}, assetlinks cu fingerprintul real al certificatului de semnare al APK-ului (${UPLOAD_CERT_SHA256.slice(0,11)}…), Bubblewrap fixat @${pin[1]}, feature graphic 1024×500 sub 1 MB (${(graphic.length / 1024).toFixed(0)} KB), fără material de semnare, PWA: SW cu fetch fără /api/, înregistrare + prompt capturat + card în Despre.`);
