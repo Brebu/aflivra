@@ -16,7 +16,9 @@ import type {PushPayload} from './web-push';
 // Tura „Urmărește”: fiecare fel de urmărire își detectează schimbările reîmprospătând exact
 // familiile existente (fluxuri, ANM, ANAF, portalul instanțelor, Portal Legislativ, calendarele
 // instituțiilor), iar dosarele — singurele fără cache util între ture — se reverifică mărginit.
-// Planul gratuit rămâne la cele cinci crons: tura de urmărire călătorește pe declanșătorul
+// Declanșătorul registers e orar: tura de registre și tura de urmărire călătoresc împreună —
+// notificările „Urmăritelor” ajung la cel mult o oră de la schimbare, iar membrii cu TTL de
+// zi se sar onest la fiecare tick (ritmul rămâne al TTL-ului, nu al ticăitului).
 // grupului registers, cu dispatch pe oră (00 UTC = tura registers, celelalte ore = urmărire).
 export const WATCH_KINDS=['dosar','firma','localitate','act','venue','meteo'] as const;
 export type WatchKind=(typeof WATCH_KINDS)[number];
@@ -24,14 +26,12 @@ const groupList=(sweepGroupsMap as {groups:{name:string;cron:string}[]}).groups;
 const registersGroup=groupList.find(group=>group.name==='registers');
 if(!registersGroup)throw Error('Grupul registers lipsește din registrul de ture — declanșătorul urmăririi nu poate fi rezolvat.');
 const cronParts=registersGroup.cron.split(/\s+/);
-const cronHours=cronParts[1]?.split(',')??[];
-if(cronParts.length!==5||!/^\d+$/.test(cronParts[0]??'')||cronHours.length<2||!cronHours.includes('0')||cronHours.some(hour=>!/^\d+$/.test(hour)))
-  throw Error('Cronul registers nu poartă ture de urmărire — așteptam ora de dimineață plus orele de zi.');
+if(cronParts.length!==5||cronParts[0]!=='28'||cronParts[1]!=='*'||cronParts[2]!=='*'||cronParts[3]!=='*'||cronParts[4]!=='*')
+  throw Error('Cronul registers trebuie să fie orar la minutul 28 („28 * * * *”) — tura de registre și tura de urmărire călătoresc împreună, orar, cu notificările „Urmăritelor” la cel mult o oră de la schimbare.');
 export const WATCH_SWEEP_CRON=registersGroup.cron;
-const watchMinute=cronParts[0]!;
-export const WATCH_SWEEP_HOURS=cronHours.map(Number).filter(hour=>hour!==0).sort((a,b)=>a-b);
-export const watchSweepSchedule=()=>({runsPerDay:WATCH_SWEEP_HOURS.length,timesUtc:WATCH_SWEEP_HOURS.map(hour=>String(hour).padStart(2,'0')+':'+watchMinute).join(', ')});
-export const runsWatchSweep=(controller:{cron:string;scheduledTime:number|Date})=>controller.cron===WATCH_SWEEP_CRON&&new Date(controller.scheduledTime).getUTCHours()!==0;
+export const WATCH_SWEEP_HOURS=[...Array(24).keys()];
+export const watchSweepSchedule=()=>({runsPerDay:24,timesUtc:'oră: 00:28–23:28 UTC'});
+export const runsWatchSweep=(controller:{cron:string;scheduledTime:number|Date})=>controller.cron===WATCH_SWEEP_CRON;
 
 const INSTALL_PATTERN=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 export const validInstallId=(value:unknown):value is string=>typeof value==='string'&&INSTALL_PATTERN.test(value);
@@ -136,13 +136,12 @@ export async function purgeInstall(db:D1Database,installId:string){
 
 export type WatchSweepState={startedAt:string;finishedAt:string;itemsChecked:number;baselined:number;eventsEmitted:number;pushesSent:number;pushGone:number;pushFailed:number;pushDeferred:number;pushSkipped:number;budgetSkipped:number;retentionWatches:number;retentionEvents:number;degraded:number;failed:number;notes:string[];perKind:Record<string,{checked:number;events:number;skipped:number}>};
 export const WATCH_SWEEP_KEY='sweep:watch',WATCH_SWEEP_VERSION='watch.sweep.v1';
-const countNounRo=(n:number)=>n===1?'o dată':n+' ori';
 /** Starea publică a turei pentru eticheta onestă „verificăm de X ori pe zi”. */
 export async function watchSweepPublicState(db:D1Database|undefined=env.DB){
   const schedule=watchSweepSchedule();
   let last:WatchSweepState|null=null;
   if(db){const row=await db.prepare('SELECT data FROM source_cache WHERE key=?').bind(WATCH_SWEEP_KEY).first<{data:string|null}>();if(row?.data){try{last=JSON.parse(row.data)}catch{last=null}}}
-  return{runsPerDay:schedule.runsPerDay,timesUtc:schedule.timesUtc,lastRunAt:last?.finishedAt||null,lastEvents:last?.eventsEmitted??0,lastPushes:last?.pushesSent??0,lastOk:last?last.failed===0&&last.degraded===0:null,note:'verificăm de '+countNounRo(schedule.runsPerDay)+' pe zi'};
+  return{runsPerDay:schedule.runsPerDay,timesUtc:schedule.timesUtc,lastRunAt:last?.finishedAt||null,lastEvents:last?.eventsEmitted??0,lastPushes:last?.pushesSent??0,lastOk:last?last.failed===0&&last.degraded===0:null,note:'verificăm orar'};
 }
 type Budget={spent:number;cap:number;reserve(n:number):boolean};
 const makeBudget=(cap:number):Budget=>({spent:0,cap,reserve(n){if(n<=0)return true;if(this.spent+n>this.cap)return false;this.spent+=n;return true}});

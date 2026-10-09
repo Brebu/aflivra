@@ -38,7 +38,7 @@ const seedRouteSource=await readFile(join(root,'app/api/seed/bia','route.ts'),'u
 const boardCap=seedRouteSource.match(/const BOARD_CAP=([\d_]+);/)?.[1];
 assert.equal(Number(boardCap.replace(/_/g,'')),relay.MAX_BODY_BYTES,'the relay body cap matches the seed route board cap');
 const workflow=await readFile(join(root,'.github/workflows','bia-refresh.yml'),'utf8');
-assert.ok(workflow.includes('cron: "10 3 * * *"'),'the relay tour runs daily at 03:10 UTC, browser leg included (repo public — Actions minutes unlimited; the airport day boards change all day, so a daily morning sweep keeps the served board current)');
+assert.ok(workflow.includes('cron: "10 */4 * * *"'),'the relay tour runs every four hours, browser leg included (repo public — Actions minutes unlimited; the airport day boards change all day, a four-hour tour keeps the served board near current)');
 assert.ok(workflow.includes('workflow_dispatch'),'the relay tour can be triggered manually');
 assert.ok(workflow.includes('node scripts/relay-bia.mjs'),'the tour runs the relay script');
 assert.ok(workflow.includes('AFLIVRA_REFRESH_TOKEN: ${{ secrets.AFLIVRA_REFRESH_TOKEN }}'),'the token comes from the GitHub secret shared with the AFIR relay');

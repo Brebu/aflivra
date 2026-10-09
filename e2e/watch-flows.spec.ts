@@ -103,7 +103,7 @@ const watchRow = (kind: string, ref: string, over: Record<string, unknown> = {})
 });
 const watchListState = (over: Record<string, unknown> = {}) => ({
   watches: [],
-  sweepState: {runsPerDay: 3, timesUtc: '04:28, 10:28, 16:28', lastRunAt: now(), lastEvents: 0, lastPushes: 0, lastOk: true, note: 'verificăm de 3 ori pe zi'},
+  sweepState: {runsPerDay: 24, timesUtc: 'oră: 00:28–23:28 UTC', lastRunAt: now(), lastEvents: 0, lastPushes: 0, lastOk: true, note: 'verificăm orar'},
   notification: {vapidPublicKey: null},
   kinds: ['dosar', 'firma', 'localitate', 'act', 'venue', 'meteo'],
   ...over,
@@ -201,7 +201,7 @@ test.describe('Watch — „Urmărește" butoane pe suprafețe', () => {
     await expect(page.getByRole('heading', {level: 1, name: 'Ce s-a schimbat.'})).toBeVisible();
     await expect(page.locator('.watch-item', {hasText: '6236/111/2017'})).toBeVisible();
     // Honest sweep cadence from the backend sweep state.
-    await expect(page.locator('.watch-sweep')).toContainText('de 3 ori pe zi');
+    await expect(page.locator('.watch-sweep')).toContainText('Verificăm orar');
     expect(pageErrors, `uncaught page errors: ${pageErrors.join(' | ')}`).toEqual([]);
   });
 
@@ -322,8 +322,8 @@ test.describe('Watch — centru „Ce s-a schimbat"', () => {
     await openCenter(page);
     // Honest sweep cadence + times, rendered as UTC.
     const sweep = page.locator('.watch-sweep');
-    await expect(sweep).toContainText('de 3 ori pe zi');
-    await expect(sweep).toContainText('04:28, 10:28, 16:28');
+    await expect(sweep).toContainText('Verificăm orar');
+    await expect(sweep).toContainText('la minutul 28 al fiecărei ore');
     await expect(sweep).toContainText('UTC');
 
     // One row per watch, with the unseen counts that arrived with the last events (dosar: 2).

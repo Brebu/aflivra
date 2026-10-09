@@ -30,18 +30,20 @@ export default {
   },
   async scheduled(controller: ScheduledController, env: Cloudflare.Env, ctx: ExecutionContext) {
     return withLiveContext(ctx, async () => {
-      // Declanșătorul registers („28 0,4,10,16 * * *”) cară și tura de urmărire la orele de zi;
-      // firingul de la ora 00 UTC rămâne tura registers — planul gratuit plafonează contul la cinci crons.
+      // Declanșătorul registers („28 * * * *”) e orar: tura de registre și tura „Urmărește”
+      // călătoresc împreună pe fiecare tick orar — membrii cu TTL de zi se sar onest la cele
+      // mai multe tick-uri, iar „Urmăritelor” le livrăm notificările la cel mult o oră.
+      let ranWatch = false;
       if (runsWatchSweep(controller)) {
         const watch = await runWatchSweep(env.DB);
         if (watch) {
           console.log(JSON.stringify({ event: "watch_sweep_completed", itemsChecked: watch.itemsChecked, events: watch.eventsEmitted, pushes: watch.pushesSent, skipped: watch.budgetSkipped, degraded: watch.degraded, durationMs: Date.parse(watch.finishedAt) - Date.parse(watch.startedAt) }));
         }
-        return;
+        ranWatch = true;
       }
       const group = groupForCron(controller.cron);
       if (!group) {
-        console.warn(JSON.stringify({ event: "sweep_unknown_cron", cron: controller.cron }));
+        if (!ranWatch) console.warn(JSON.stringify({ event: "sweep_unknown_cron", cron: controller.cron }));
         return;
       }
       const result = await runGroup(group.name, env.DB);

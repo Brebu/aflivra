@@ -46,5 +46,5 @@ export function parseTribeEvents(raw:string,venue:EventVenue):Loaded{
  return {publishedAt:null,data:{venue,items:uniqueSorted(items),publishedTotal:Number.isFinite(Number(parsed?.total))?Number(parsed.total):items.length,sourceUrl:venue.url,note:'Program publicat de '+venue.name+' prin calendarul public al instituției (edițiile în limba română). Ore locale; spectacolele se pot modifica.'}};
 }
 const loaderVersions:Record<EventVenueKind,string>={'jsonld':'events.jsonld.v2','tribe-events-v1':'events.tribe-rest.v1'};
-export function eventsLoader(venue:EventVenue):Loader{return{key:'events:'+venue.id,name:venue.name+' · calendarul public',url:venue.url,version:loaderVersions[venue.kind],ttl:3600,load:async()=>(venue.kind==='tribe-events-v1'?parseTribeEvents:parseEvents)(await getSource(venueCalendar(venue),undefined,{maxBytes:8_000_000,timeoutMs:15000}),venue)}}
+export function eventsLoader(venue:EventVenue):Loader{return{key:'events:'+venue.id,name:venue.name+' · calendarul public',url:venue.url,version:loaderVersions[venue.kind],ttl:1800,load:async()=>(venue.kind==='tribe-events-v1'?parseTribeEvents:parseEvents)(await getSource(venueCalendar(venue),undefined,{maxBytes:8_000_000,timeoutMs:15000}),venue)}}
 export const odeonLoader:Loader=eventsLoader(eventVenue('odeon') as EventVenue);
