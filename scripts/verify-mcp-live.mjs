@@ -113,8 +113,9 @@ for (const name of names) {
     console.log(`EROARE ${name}: ${result.content[0].text.slice(0, 120)}`);
     continue;
   }
-  const status = result.structuredContent?.status;
-  const hasData = !!result.structuredContent?.data;
+  const envelope=result.structuredContent||{};
+  const status = envelope.status ?? (envelope.items||envelope.total!==undefined?'direct':'none');
+  const hasData = !!(envelope.data||envelope.items||envelope.total!==undefined);
   if (!hasData || status === 'unavailable') {
     degraded++;
     console.log(`SURSĂ ${name}: ${status} — ${String(result.structuredContent?.error || 'fără date acum').slice(0, 100)} | probe: ${PROBE[name]}`);
