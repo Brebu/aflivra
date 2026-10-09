@@ -23,6 +23,13 @@ const temp=await mkdtemp(join(tmpdir(),'aflivra-dev-schema-'));
 try{
   const config={name:'aflivra-dev-schema',compatibility_date:'2026-05-15',d1_databases:[{binding:'DB',database_name:'site-creator-d1',database_id:PLACEHOLDER_DATABASE_ID}]};
   await writeFile(join(temp,'wrangler.json'),JSON.stringify(config,null,2));
+  const present=runWrangler(['d1','execute','site-creator-d1','--config',join(temp,'wrangler.json'),'--local','--persist-to','.wrangler/state','--command',"SELECT name FROM sqlite_master WHERE type='table' AND name IN ("+requiredTables.map(t=>`'${t}'`).join(',')+") ORDER BY name --json"],{capture:true});
+  const foundSoFar=parseWranglerJson((present.stdout||'')+(present.stderr||''))?.[0]?.results?.map(r=>r.name)||[];
+  if(foundSoFar.length===requiredTables.length){
+    // Starea locală persistă între rulările locale (CI-ul are stat rece); schema deja
+    // aplicată se reutilizează — CREATE-urile din migrație nu sunt idempotente.
+    console.log('Schema D1 locală era deja aplicată: '+foundSoFar.join(', '));
+  }else{
   for(const statement of statements){
     const applied=runWrangler(['d1','execute','site-creator-d1','--config',join(temp,'wrangler.json'),'--local','--persist-to','.wrangler/state','--command',statement],{capture:true});
     const out=(applied.stdout||'')+(applied.stderr||'');
@@ -32,6 +39,7 @@ try{
   const found=parseWranglerJson((guard.stdout||'')+(guard.stderr||''))?.[0]?.results?.map(r=>r.name)||[];
   if(found.length!==requiredTables.length)throw new Error(`Tabelele așteptate nu există în D1 local: găsite ${found.join(',')||'niciuna'}`);
   console.log('Schema D1 locală aplicată: '+found.join(', '));
+  }
 }finally{await rm(temp,{recursive:true,force:true})}
 
 // Keep the binary referenced so a missing wrangler install fails loudly here, not mid-suite.
