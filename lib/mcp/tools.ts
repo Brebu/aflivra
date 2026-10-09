@@ -80,8 +80,8 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'tranzy_live',
-    description:'Real-time Bucharest public transport (Tranzy): live vehicle positions for buses, trams, trolleybuses and metro, searchable by line.',
-    inputSchema:{type:'object',properties:{locality:{type:'string',description:'Locality — "București" (the covered city)'},county:{type:'string',description:'County — "București"'},q:{type:'string',description:'Line filter, e.g. "33"'},page:{type:'number',description:'Zero-based result page'}},required:['locality']},
+    description:'Real-time public transport through the Tranzy open-data operators (Iași SCTP, Cluj CTP, Chișinău RTEC, Botoșani Eltrans, Oradea OTL). Bucharest has no Tranzy operator today — its live transport is the TPBI tool. Positions carry line, vehicle and heading.',
+    inputSchema:{type:'object',properties:{locality:{type:'string',description:'Covered city: "Iași", "Cluj-Napoca", "Oradea", "Botoșani" or "Chișinău"'},county:{type:'string',description:'County of the city'},q:{type:'string',description:'Line filter, e.g. "b8"'},page:{type:'number',description:'Zero-based result page'}},required:['locality']},
     build:args=>({path:'/api/tranzy-live',query:query([['kind','vehicles'],['locality',str(args.locality)],['county',str(args.county)],['q',str(args.q)],['page',num(args.page)]])}),
   },
   {
@@ -92,14 +92,14 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'flight_board',
-    description:'Airport arrivals/departures board for Romanian airports (Bucharest BANEASA + Otopeni), by airport code.',
-    inputSchema:{type:'object',properties:{airport:{type:'string',enum:['BANEASA','OTOPENI'],description:'Airport board to read'},q:{type:'string',description:'Optional flight number filter'}},required:['airport']},
-    build:args=>({path:'/api/flight-board',query:query([['airport',pick(['BANEASA','OTOPENI'],args.airport)],['q',str(args.q)]])}),
+    description:'Arrivals/departures board of the Bucharest airports: Henri Coandă (OTP) and Băneasa · Aurel Vlaicu (BBU).',
+    inputSchema:{type:'object',properties:{airport:{type:'string',enum:['henri-coanda','baneasa-aurel-vlaicu'],description:'Airport board: "henri-coanda" (OTP) or "baneasa-aurel-vlaicu" (BBU)'},q:{type:'string',description:'Optional flight number filter'}},required:['airport']},
+    build:args=>({path:'/api/flight-board',query:query([['airport',pick(['henri-coanda','baneasa-aurel-vlaicu'],args.airport)],['q',str(args.q)]])}),
   },
   {
     name:'trains_schedule',
-    description:'Romanian rail (CFR) train schedule by station: train numbers, routes, times, operator.',
-    inputSchema:{type:'object',properties:{station:{type:'string',description:'Station name, e.g. "București Nord"'},q:{type:'string',description:'Optional train number filter'},page:{type:'number',description:'Zero-based result page'}},required:['station']},
+    description:'Romanian rail (CFR Infra) schedule: the full station board with train numbers, routes, times and operators; optionally filtered to one station by its numeric id.',
+    inputSchema:{type:'object',properties:{station:{type:'string',description:'Numeric station id (e.g. "44678"); omit it for the full station board with its ids'},q:{type:'string',description:'Optional train number filter'},page:{type:'number',description:'Zero-based result page'}},},
     build:args=>({path:'/api/trains',query:query([['station',str(args.station)],['q',str(args.q)],['page',num(args.page)]])}),
   },
   {
@@ -116,9 +116,9 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'federated_search',
-    description:'The platform-wide federated search across public domains (news, films, agriculture, culture, justice data sets): one query, ranked results from every connected domain.',
-    inputSchema:{type:'object',properties:{q:{type:'string',description:'Free-text query'},kind:{type:'string',description:'Optional domain restriction (category name)'},from:{type:'string',description:'Optional from date filter ISO YYYY-MM-DD'},to:{type:'string',description:'Optional to date filter ISO YYYY-MM-DD'},page:{type:'number',description:'Zero-based result page'}},required:['q']},
-    build:args=>({path:'/api/domain',query:query([['q',str(args.q)],['kind',str(args.kind)],['from',str(args.from)],['to',str(args.to)],['page',num(args.page)],['geoScope','national']])}),
+    description:'The platform-wide federated search across public domains: official announcements, films, agriculture and the connected institutional feeds — one query, ranked results.',
+    inputSchema:{type:'object',properties:{q:{type:'string',description:'Free-text query'},kind:{type:'string',enum:['stiri','agricultura','filme'],description:'Which feed: stiri (all institutions merged), agricultura or filme'},from:{type:'string',description:'Optional from date filter ISO YYYY-MM-DD'},to:{type:'string',description:'Optional to date filter ISO YYYY-MM-DD'},page:{type:'number',description:'Zero-based result page'}},required:['q','kind']},
+    build:args=>({path:'/api/domain',query:query([['q',str(args.q)],['kind',pick(['stiri','agricultura','filme'],args.kind)],['from',str(args.from)],['to',str(args.to)],['page',num(args.page)],['geoScope','national']])}),
   },
   {
     name:'catalog_datasets',
@@ -140,9 +140,9 @@ export const TOOLS:ToolDef[]=[
   },
   {
     name:'news_feed',
-    description:'Romanian public news and thematic feeds (afir, agriculture, films): latest articles with links and dates.',
-    inputSchema:{type:'object',properties:{kind:{type:'string',enum:['stiri','agricultura','filme'],description:'Which feed to read'},url:{type:'string',description:'Optional article URL for one item'}},required:['kind']},
-    build:args=>({path:'/api/content',query:query([['kind',pick(['stiri','agricultura','filme'],args.kind)],['url',str(args.url)]])}),
+    description:'Official institutional announcements: all connected feeds merged (stiri) or one domain (agricultura, filme) — latest articles with links, dates and publishers.',
+    inputSchema:{type:'object',properties:{kind:{type:'string',enum:['stiri','agricultura','filme'],description:'Which feed: stiri (all institutions merged) or one domain'},q:{type:'string',description:'Free-text filter'},page:{type:'number',description:'Zero-based result page'}},required:['kind']},
+    build:args=>({path:'/api/domain',query:query([['kind',pick(['stiri','agricultura','filme'],args.kind)],['q',str(args.q)],['page',num(args.page)],['geoScope','national']])}),
   },
   {
     name:'story_read',
