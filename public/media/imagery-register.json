@@ -1,6 +1,6 @@
 {
   "schema": "aflivra-imagery-v1",
-  "generatedAt": "2026-10-08T21:56:13.980Z",
+  "generatedAt": "2026-10-09T06:14:51.701Z",
   "source": "Wikidata (P18/P158) · Wikimedia Commons",
   "classes": {
     "park": {
@@ -9,15 +9,15 @@
     },
     "school": {
       "records": 30,
-      "imaged": 13
+      "imaged": 19
     },
     "pharmacy": {
       "records": 1267,
-      "imaged": 447
+      "imaged": 449
     },
     "court": {
       "records": 9,
-      "imaged": 3
+      "imaged": 5
     }
   },
   "assets": [
@@ -1370,11 +1370,266 @@
       "sha256": "a2dc8cbfaf99c274c4f6c0f5dba54094dbe7b6b8061417ffe8592e6b7f93f1ae",
       "retrieval_date": "2026-10-08",
       "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12732152",
+      "app_file": "/media/wiki-q12732152.jpg",
+      "qid": "Q12732152",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Liceul Pedagogic „Carmen Sylva” din Timișoara",
+      "title": "Liceul Pedagogic Carmen Sylva Timisoara.jpg",
+      "original_title": "Liceul Pedagogic Carmen Sylva Timisoara.jpg",
+      "caption_ro": "Liceul Pedagogic „Carmen Sylva” din Timișoara · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Liceul_Pedagogic_Carmen_Sylva_Timisoara.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Liceul_Pedagogic_Carmen_Sylva_Timisoara.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Liceul%20Pedagogic%20Carmen%20Sylva%20Timisoara.jpg?width=800",
+      "author": "Turbojet",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Liceul Pedagogic Carmen Sylva Timisoara.jpg — Turbojet / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 589305,
+      "sha256": "58e4604055c32ab71a7aa610cc360c40d59da5333724447155e2622eae7d9dad",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q12732160",
+      "app_file": "/media/wiki-q12732160.jpg",
+      "qid": "Q12732160",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Liceul Teoretic „Bartók Béla” din Timișoara",
+      "title": "Timisoara, Liceul Bartok Bela.jpg",
+      "original_title": "Timisoara, Liceul Bartok Bela.jpg",
+      "caption_ro": "Liceul Teoretic „Bartók Béla” din Timișoara · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Timisoara,_Liceul_Bartok_Bela.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Timisoara,_Liceul_Bartok_Bela.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Timisoara%2C%20Liceul%20Bartok%20Bela.jpg?width=800",
+      "author": "László Székely",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Timisoara, Liceul Bartok Bela.jpg — László Székely / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 256015,
+      "sha256": "db82b8b4a07b16aaa0da53c05032cdb8495fc7e79ea1e3f81026ebe6e8a7345e",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18537034",
+      "app_file": "/media/wiki-q18537034.jpg",
+      "qid": "Q18537034",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național Ion Luca Caragiale",
+      "title": "Colegiul Național 'Ion Luca Caragiale', Str. Gheorghe Doja nr.98.JPG",
+      "original_title": "Colegiul Național 'Ion Luca Caragiale', Str. Gheorghe Doja nr.98.JPG",
+      "caption_ro": "Colegiul Național Ion Luca Caragiale · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Colegiul_Național_'Ion_Luca_Caragiale',_Str._Gheorghe_Doja_nr.98.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Colegiul_Național_'Ion_Luca_Caragiale',_Str._Gheorghe_Doja_nr.98.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Colegiul%20Na%C8%9Bional%20'Ion%20Luca%20Caragiale'%2C%20Str.%20Gheorghe%20Doja%20nr.98.JPG?width=800",
+      "author": "Razvan Socol",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Colegiul Național 'Ion Luca Caragiale', Str. Gheorghe Doja nr.98.JPG — Razvan Socol / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 182322,
+      "sha256": "4f5298a49c7a466f8f27f3778194df912b69e77eea0cf9fc1f7882a8d73deca3",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18539115",
+      "app_file": "/media/wiki-q18539115.jpg",
+      "qid": "Q18539115",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Colegiul Național „Cantemir Vodă” din București",
+      "title": "Liceul Dimitrie Cantemir pe Bd. Dacia nr. 117, Bucuresti (fatada).JPG",
+      "original_title": "Liceul Dimitrie Cantemir pe Bd. Dacia nr. 117, Bucuresti (fatada).JPG",
+      "caption_ro": "Colegiul Național „Cantemir Vodă” din București · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Liceul_Dimitrie_Cantemir_pe_Bd._Dacia_nr._117,_Bucuresti_(fatada).JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Liceul_Dimitrie_Cantemir_pe_Bd._Dacia_nr._117,_Bucuresti_(fatada).JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Liceul%20Dimitrie%20Cantemir%20pe%20Bd.%20Dacia%20nr.%20117%2C%20Bucuresti%20(fatada).JPG?width=800",
+      "author": "Britchi Mirela",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Liceul Dimitrie Cantemir pe Bd. Dacia nr. 117, Bucuresti (fatada).JPG — Britchi Mirela / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 259953,
+      "sha256": "b1f474e8093a6770bef17c8d1a299ddd1166c9cc8e8f9717abf597d087798f25",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18549424",
+      "app_file": "/media/wiki-q18549424.jpg",
+      "qid": "Q18549424",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Școala din deal din Sighișoara",
+      "title": "Scoala din deal din Sighisoara.JPG",
+      "original_title": "Scoala din deal din Sighisoara.JPG",
+      "caption_ro": "Școala din deal din Sighișoara · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Scoala_din_deal_din_Sighisoara.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Scoala_din_deal_din_Sighisoara.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Scoala%20din%20deal%20din%20Sighisoara.JPG?width=800",
+      "author": "Cezar Suceveanu",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Scoala din deal din Sighisoara.JPG — Cezar Suceveanu / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 273532,
+      "sha256": "a669de0df69e198c15fa2068bf44d88e14e508fbd5185a04e7d68f5d72675bcb",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q25466725",
+      "app_file": "/media/wiki-q25466725.jpg",
+      "qid": "Q25466725",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "school"
+      ],
+      "subject": "Palatul Episcopiei romano-catolice din Satu Mare",
+      "title": "Palatul Episcopiei romano-catolice.JPG",
+      "original_title": "Palatul Episcopiei romano-catolice.JPG",
+      "caption_ro": "Palatul Episcopiei romano-catolice din Satu Mare · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Palatul_Episcopiei_romano-catolice.JPG",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Palatul_Episcopiei_romano-catolice.JPG",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Palatul%20Episcopiei%20romano-catolice.JPG?width=800",
+      "author": "Gabriel Danea",
+      "license": "CC BY-SA 3.0 ro",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/ro/deed.en",
+      "attribution": "Palatul Episcopiei romano-catolice.JPG — Gabriel Danea / Wikimedia Commons / CC BY-SA 3.0 ro",
+      "bytes": 176283,
+      "sha256": "678c179b44a59c30da5d501f89fc8e928ee6f4e8422bdcde954d458dc7bd6bc8",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q630125",
+      "app_file": "/media/wiki-q630125.jpg",
+      "qid": "Q630125",
+      "claim": "P18",
+      "role": "brand",
+      "classes": [
+        "pharmacy"
+      ],
+      "subject": "Gedeon Richter",
+      "title": "Richter-Gedeon-Nyrt-P5010610.jpg",
+      "original_title": "Richter-Gedeon-Nyrt-P5010610.jpg",
+      "caption_ro": "Gedeon Richter · fotografie de brand Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Richter-Gedeon-Nyrt-P5010610.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Richter-Gedeon-Nyrt-P5010610.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Richter-Gedeon-Nyrt-P5010610.jpg?width=800",
+      "author": "The original uploader was Misibacsi at Hungarian Wikipedia.",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "attribution": "Richter-Gedeon-Nyrt-P5010610.jpg — The original uploader was Misibacsi at Hungarian Wikipedia. / Wikimedia Commons / CC BY-SA 3.0",
+      "bytes": 156926,
+      "sha256": "3b2b788b65204491cf5300a8297e3429e7d79e9c2642a60ad5a3c8f37b313712",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q2689639",
+      "app_file": "/media/wiki-q2689639.jpg",
+      "qid": "Q2689639",
+      "claim": "P18",
+      "role": "brand",
+      "classes": [
+        "pharmacy"
+      ],
+      "subject": "Carrefour Market",
+      "title": "Carrefour market fenestrelay.jpg",
+      "original_title": "Carrefour market fenestrelay.jpg",
+      "caption_ro": "Carrefour Market · fotografie de brand Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Carrefour_market_fenestrelay.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Carrefour_market_fenestrelay.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Carrefour%20market%20fenestrelay.jpg?width=800",
+      "author": "Nicolas18",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Carrefour market fenestrelay.jpg — Nicolas18 / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 53987,
+      "sha256": "94e6b8d8a7b498c588492b8026f6dc923a365d82e81ba08d06d0c43dd1d43e0c",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q18545122",
+      "app_file": "/media/wiki-q18545122.jpg",
+      "qid": "Q18545122",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "court"
+      ],
+      "subject": "Palatul de Justiție din Suceava",
+      "title": "Clădirea Palatului de Justiţie din Suceava.jpg",
+      "original_title": "Clădirea Palatului de Justiţie din Suceava.jpg",
+      "caption_ro": "Palatul de Justiție din Suceava · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Clădirea_Palatului_de_Justiţie_din_Suceava.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Clădirea_Palatului_de_Justiţie_din_Suceava.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cl%C4%83direa%20Palatului%20de%20Justi%C5%A3ie%20din%20Suceava.jpg?width=800",
+      "author": "Cezar Suceveanu",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "attribution": "Clădirea Palatului de Justiţie din Suceava.jpg — Cezar Suceveanu / Wikimedia Commons / CC BY 3.0",
+      "bytes": 244688,
+      "sha256": "3b9ccf96fab61b2563dcc8cc31a6ce961df8eb92a730e9fa573b5383951b0109",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
+    },
+    {
+      "app_id": "wiki-q133868099",
+      "app_file": "/media/wiki-q133868099.jpg",
+      "qid": "Q133868099",
+      "claim": "P18",
+      "role": "entity",
+      "classes": [
+        "court"
+      ],
+      "subject": "Regional Court - Vidin",
+      "title": "Районен съд Видин - Темида.jpg",
+      "original_title": "Районен съд Видин - Темида.jpg",
+      "caption_ro": "Regional Court - Vidin · fotografie de entitate Wikidata",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Районен_съд_Видин_-_Темида.jpg",
+      "original_image_url": "https://commons.wikimedia.org/wiki/File:Районен_съд_Видин_-_Темида.jpg",
+      "downloaded_image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/%D0%A0%D0%B0%D0%B9%D0%BE%D0%BD%D0%B5%D0%BD%20%D1%81%D1%8A%D0%B4%20%D0%92%D0%B8%D0%B4%D0%B8%D0%BD%20-%20%D0%A2%D0%B5%D0%BC%D0%B8%D0%B4%D0%B0.jpg?width=800",
+      "author": "Cyril S",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "attribution": "Районен съд Видин - Темида.jpg — Cyril S / Wikimedia Commons / CC BY-SA 4.0",
+      "bytes": 122134,
+      "sha256": "e2922ab4afa42ad2accc48fd44df9ebeae9e0ae678df4c912d8bd33bfb01aa45",
+      "retrieval_date": "2026-10-09",
+      "changes": "Miniatură Special:FilePath 800px; octeții descărcați se publică exact, fără re-encodare; licența originală se aplică."
     }
   ],
   "records": {
     "w43158975": {
       "a": "wiki-q12724348",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w883454204": {
+      "a": "wiki-q18537034",
       "c": "school",
       "t": "wikidata"
     },
@@ -1398,6 +1653,11 @@
       "c": "school",
       "t": "wikidata"
     },
+    "w515133710": {
+      "a": "wiki-q18539115",
+      "c": "school",
+      "t": "wikidata"
+    },
     "w172692818": {
       "a": "wiki-q5044392",
       "c": "school",
@@ -1410,6 +1670,11 @@
     },
     "w27621229": {
       "a": "wiki-q7851326",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w190269443": {
+      "a": "wiki-q12732152",
       "c": "school",
       "t": "wikidata"
     },
@@ -3643,6 +3908,11 @@
       "c": "pharmacy",
       "t": "brand:wikidata"
     },
+    "n4973273650": {
+      "a": "wiki-q2689639",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
     "w62743951": {
       "a": "wiki-q5612919",
       "c": "park",
@@ -3658,6 +3928,21 @@
       "c": "pharmacy",
       "t": "brand:wikidata"
     },
+    "n202965818": {
+      "a": "wiki-q18549424",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w1075076336": {
+      "a": "wiki-q25466725",
+      "c": "school",
+      "t": "wikidata"
+    },
+    "w443143988": {
+      "a": "wiki-q12732160",
+      "c": "school",
+      "t": "wikidata"
+    },
     "w301774676": {
       "a": "wiki-q12736100",
       "c": "park",
@@ -3665,6 +3950,11 @@
     },
     "r14225591": {
       "a": "wiki-q43113639",
+      "c": "court",
+      "t": "wikidata"
+    },
+    "r19176203": {
+      "a": "wiki-q18545122",
       "c": "court",
       "t": "wikidata"
     },
@@ -3848,6 +4138,11 @@
       "c": "pharmacy",
       "t": "brand:wikidata"
     },
+    "n2752792379": {
+      "a": "wiki-q630125",
+      "c": "pharmacy",
+      "t": "brand:wikidata"
+    },
     "n4729604289": {
       "a": "wiki-q56317371",
       "c": "pharmacy",
@@ -3872,6 +4167,11 @@
       "a": "wiki-q117706903",
       "c": "pharmacy",
       "t": "brand:wikidata"
+    },
+    "n14015568979": {
+      "a": "wiki-q133868099",
+      "c": "court",
+      "t": "wikidata"
     }
   }
 }
