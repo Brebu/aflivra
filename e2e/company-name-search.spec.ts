@@ -48,7 +48,7 @@ test.describe('Company name search (Wikidata VAT registry)', () => {
   // listed with an honest no-CUI marker, never an invented CUI (eMAG-class firms are
   // found by name but publish no VAT identifier in the open-knowledge registry).
   const nameSearchState = () => ({
-    key: 'company-name:monitorul oficial', name: 'Wikidata · firme după nume', url: 'https://www.wikidata.org/', adapterVersion: 'wikidata.company-name.v2',
+    key: 'company-name:monitorul oficial', name: 'Wikidata · firme după nume', url: 'https://www.wikidata.org/', adapterVersion: 'wikidata.company-name.v3',
     status: 'fresh', publishedAt: null, lastSuccessAt: now(), lastAttemptAt: now(), nextAttemptAt: null, error: null, ttlSeconds: 3600,
     data: {
       query: 'monitorul oficial',
