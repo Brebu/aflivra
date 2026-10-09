@@ -20,6 +20,19 @@ try{
  const deadLinks=[...new Set(listedGuides)].filter(file=>!diskGuides.includes(file)),unlistedGuides=diskGuides.filter(file=>!listedGuides.includes(file));
  assert.deepEqual({deadLinks,unlistedGuides},{deadLinks:[],unlistedGuides:[]},'Every guide listed in „Ghidurile platformei” must exist in public/downloads/ and every published guide PDF must be listed — deadLinks: listed but missing from public/downloads/; unlistedGuides: present in public/downloads/ but missing from the About section.');
  console.log(`Guide manifest verified: ${listedGuides.length} guide PDFs in „Ghidurile platformei” match public/downloads/ in both directions.`);
+ // APK-ul publicat pe site (instalarea directă, fără magazin): secțiunea „Aplicația
+ // Android” din About leagă exact public/downloads/aflivra.apk, fișierul există, e
+ // un pachet ZIP real (semnătura PK) cu dimensiunea pachetului semnat — și niciun
+ // alt .apk nu se publică nelistat.
+ const aboutSection=await readFile(join(root,'app/source-packages.tsx'),'utf8');
+ assert(aboutSection.includes('href="/downloads/aflivra.apk"'),'The About section must link the Android app at /downloads/aflivra.apk.');
+ assert(aboutSection.includes('download="aflivra.apk"'),'The APK link must carry the download attribute so browsers save it, not navigate it.');
+ const diskApks=(await readdir(join(root,'public/downloads'))).filter(name=>name.endsWith('.apk'));
+ assert.deepEqual(diskApks,['aflivra.apk'],'Only the published app APK may exist in public/downloads/ — every published APK is exactly aflivra.apk.');
+ const apkBytes=await readFile(join(root,'public/downloads/aflivra.apk'));
+ assert(apkBytes.length>1_000_000&&apkBytes.length<50_000_000,`The published APK must be a real signed bundle (got ${(apkBytes.length/1024/1024).toFixed(2)} MB).`);
+ assert(apkBytes[0]===0x50&&apkBytes[1]===0x4b&&apkBytes[2]===0x03&&apkBytes[3]===0x04,'The published APK must start with the ZIP magic bytes (PK\\x03\\x04) — anything else is not an Android package.');
+ console.log(`Published APK verified: aflivra.apk ${'('+(apkBytes.length/1024/1024).toFixed(2)+' MB)'}, ZIP package, linked from „Aplicația Android” in the About section.`);
  for(const name of ['location-context','geographic-scope','tabular-geography']){
   let source=await readFile(join(root,'lib',name+'.ts'),'utf8');for(const [binding,file] of [['countyLookup','public/data/locality-counties.json'],['urbanLocalities','public/data/geographic-localities.json']])source=source.replace("import "+binding+" from '@/"+file+"';",'const '+binding+'='+await readFile(join(root,file),'utf8')+';');source=source.replace("from './live/query'","from './query'");
   const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");await writeFile(join(temp,name+'.mjs'),js);

@@ -1,8 +1,15 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls", "delegate_permission/common.use_device_origin"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "ro.aflivra.app",
-    "sha256_cert_fingerprints": ["00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00"]
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.use_device_origin"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ro.aflivra.app",
+      "sha256_cert_fingerprints": [
+        "9B:56:D9:6D:2F:BE:D7:BA:A1:1C:DD:67:56:FF:B4:D0:28:83:DC:ED:00:49:B2:F8:6B:D9:40:67:C3:E0:64:D1"
+      ]
+    }
   }
-}]
+]
