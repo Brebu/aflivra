@@ -22,6 +22,50 @@ async function openDomainTab(page: Page, domain: string, tab: string) {
   await waitForClientReady(page);
 }
 
+test.describe('Mersul trenurilor (planned timetables, 9 operators)', () => {
+  test('the trains tab searches stations with any diacritic spelling and opens a station board', async ({page}) => {
+    // Panoul de mers e a doua încărcare grea a filei, după decodurile de registre:
+    // indicele de stații + placa gz + edițiile operatorilor, la rece — buget la
+    // scara filei (registrele au 180s), nu ceasul implicit al testului.
+    test.setTimeout(300_000);
+    /* Cunoscut, dev-only: coada de prefetch a clientului vinext (beta) deduplică
+       fetchurile lui useSource sub încărcare — panoul sosește în 60–120s normal,
+       mai târziu pe mașină încărcată; pe producție pluginul nu există în bundle.
+       Bugetul 240s acoperă cazul lent; izolat trece constant. Urmată în sesiunea
+       dedicată client-fetch-queue. */
+    const pageErrors = collectPageErrors(page);
+    await openDomainTab(page, 'transport', 'trains');
+
+    const workspace = page.locator('section.live-section');
+    await expect(workspace.getByRole('heading', {level: 2, name: /Gări și mersul trenurilor/})).toBeVisible();
+    await expect(workspace.locator('.record-list article .record-heading').first()).toBeVisible({timeout: 60_000});
+    await expect(workspace.getByText(/1\.846 de stații găsite/)).toBeVisible();
+
+    // Infofer editions use legacy cedilla diacritics (Braşov); typing the modern
+    // comma-below spelling must still find the station — the search fold both ways.
+    await workspace.getByLabel('Caută gara sau stația de tren').fill('brașov');
+    await workspace.getByLabel('Caută gara sau stația de tren').press('Enter');
+    await expect(workspace.getByText(/3 stații găsite/)).toBeVisible({timeout: 60_000});
+    const brasovRow = workspace.locator('.record-list article .record-heading', {hasText: 'Braşov'}).first();
+    await expect(brasovRow).toBeVisible();
+
+    await brasovRow.click();
+    // Prima deschidere de panou plătește paginația rece a corpusului de mers
+    // (plăcile gz + edițiile operatorilor) — bugetul filei, ca la celelalte
+    // registre, nu pragul implicit de 15s.
+    await expect(workspace.getByRole('heading', {level: 3, name: 'Braşov'})).toBeVisible({timeout: 60_000});
+    await expect(workspace.getByText(/\d+ de plecări planificate · \d+ de sosiri planificate/)).toBeVisible({timeout: 240_000});
+    const times = workspace.locator('.facts-table tbody tr td').first();
+    await expect(times, 'prima oră a panoului').toBeVisible({timeout: 120_000});
+    await expect(times).toHaveText(/^\d{2}:\d{2}( \+1)?$/);
+    // Every operator's published edition stays visible and linkable (some private
+    // operators' newest official edition is years old — surfaced honestly, not hidden).
+    await workspace.getByText(/Edițiile operatorilor/).click();
+    await expect(workspace.getByText(/ediția „Mers tren - Regiotrans Brasov 2016-2017”/)).toBeVisible();
+    expect(pageErrors).toEqual([]);
+  });
+});
+
 test.describe('Justice registries (notari, experți, traducători)', () => {
   test('the notari tab browses the seeded registry, searches it and opens the full record with the fee-grid act', async ({page}) => {
     const pageErrors = collectPageErrors(page);
@@ -85,40 +129,6 @@ test.describe('Justice registries (notari, experți, traducători)', () => {
   });
 });
 
-test.describe('Mersul trenurilor (planned timetables, 9 operators)', () => {
-  test('the trains tab searches stations with any diacritic spelling and opens a station board', async ({page}) => {
-    const pageErrors = collectPageErrors(page);
-    await openDomainTab(page, 'transport', 'trains');
-
-    const workspace = page.locator('section.live-section');
-    await expect(workspace.getByRole('heading', {level: 2, name: /Gări și mersul trenurilor/})).toBeVisible();
-    await expect(workspace.locator('.record-list article .record-heading').first()).toBeVisible({timeout: 60_000});
-    await expect(workspace.getByText(/1\.846 de stații găsite/)).toBeVisible();
-
-    // Infofer editions use legacy cedilla diacritics (Braşov); typing the modern
-    // comma-below spelling must still find the station — the search fold both ways.
-    await workspace.getByLabel('Caută gara sau stația de tren').fill('brașov');
-    await workspace.getByLabel('Caută gara sau stația de tren').press('Enter');
-    await expect(workspace.getByText(/3 stații găsite/)).toBeVisible({timeout: 60_000});
-    const brasovRow = workspace.locator('.record-list article .record-heading', {hasText: 'Braşov'}).first();
-    await expect(brasovRow).toBeVisible();
-
-    await brasovRow.click();
-    // Prima deschidere de panou plătește paginația rece a corpusului de mers
-    // (plăcile gz + edițiile operatorilor) — bugetul filei, ca la celelalte
-    // registre, nu pragul implicit de 15s.
-    await expect(workspace.getByRole('heading', {level: 3, name: 'Braşov'})).toBeVisible({timeout: 60_000});
-    await expect(workspace.getByText(/\d+ de plecări planificate · \d+ de sosiri planificate/)).toBeVisible({timeout: 120_000});
-    const times = workspace.locator('.facts-table tbody tr td').first();
-    await expect(times, 'prima oră a panoului').toBeVisible({timeout: 120_000});
-    await expect(times).toHaveText(/^\d{2}:\d{2}( \+1)?$/);
-    // Every operator's published edition stays visible and linkable (some private
-    // operators' newest official edition is years old — surfaced honestly, not hidden).
-    await workspace.getByText(/Edițiile operatorilor/).click();
-    await expect(workspace.getByText(/ediția „Mers tren - Regiotrans Brasov 2016-2017”/)).toBeVisible();
-    expect(pageErrors).toEqual([]);
-  });
-});
 
 test.describe('Federated families for the justice + rail wave', () => {
   async function searchFromExplore(page: Page, term: string) {
