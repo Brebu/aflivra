@@ -18,7 +18,7 @@ export async function GET(request:Request){
  // Edițiile guvernează orarul, nu vechimea copiei: panoul curent păstrează doar
  // operatorii a căror ediție e valabilă la data cerută; edițiile expirate rămân
  // citibile prin edition=all și sînt semnalate distinct în sumarul de operatori.
- const activeIds=edition==='all'?new Set(verifiedOperators.map(operator=>operator.id)):new Set(verifiedOperators.filter(operator=>operator.validFrom<=ymd&&operator.validTo>=ymd).map(operator=>operator.id));
+ const activeIds=new Set(verifiedOperators.filter(operator=>operator.validFrom<=ymd&&operator.validTo>=ymd).map(operator=>operator.id));
  // `expired` descrie ediția față de data cerută, independent de mod: o ediție
  // istorică rămâne expired și în arhivă; `activeOperators` ține doar edițiile
  // valabile la data cerută, `includedOperators` pe toate cele incluse în răspuns.
