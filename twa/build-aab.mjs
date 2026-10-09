@@ -79,18 +79,34 @@ const dlx = ['pnpm', 'dlx', `@bubblewrap/cli@${BUBBLEWRAP_VERSION}`];
 // init-ul Bubblewrap promptează interactiv (Domain, URL path, etc.) chiar și cu
 // twa-manifest.json complet — default-urile prompt-urilor sunt valorile din manifestul
 // nostru, deci un PTY care apasă Enter pe fiecare întrebare rezolvă non-interactiv.
-const expectInit = () => spawnSync('expect', ['-c',
-  `set timeout 1800; spawn corepack pnpm dlx @bubblewrap/cli@${BUBBLEWRAP_VERSION} init --manifest https://${HOST}/manifest.webmanifest --directory=${BUILD}; expect { -re {\? .*:} { send "\r"; exp_continue } eof { catch wait result; exit [lindex $result 3] } }`],
-  {stdio: 'inherit'});
-let generated = expectInit();
+let generated = spawnSync('python3', [join(ROOT, 'twa', 'pty-drive.py'), 'init', BUILD], {stdio: 'inherit'});
 if (generated.status !== 0) {
   console.error(`bubblewrap init a eșuat (exit ${generated.status}) — vezi output-ul de mai sus; twa-manifest.json complet ar trebui să evite orice prompt.`);
+  process.exit(1);
+}
+// Interviul de init suprascrie twa-manifest.json (inclusiv cheia generată acolo) — cheia
+// de upload a owner-ului se reafirmă DUPĂ init, iar cheia generată de interviu rămâne
+// orfană în build/, nefolosită la semnarea AAB-ului.
+if (uploadKeystore && uploadAlias) {
+  const afterInit = JSON.parse(readFileSync(join(BUILD, 'twa-manifest.json'), 'utf8'));
+  afterInit.signingKey = {path: uploadKeystore, alias: uploadAlias};
+  writeFileSync(join(BUILD, 'twa-manifest.json'), JSON.stringify(afterInit, null, 2));
+  console.log('Cheia de upload reafirmată după interviul de init (cheia generată de interviu rămâne nefolosită).');
+}
+
+// 3b. În Bubblewrap 1.25, init generează CONFIGUL (twa-manifest.json), nu proiectul
+//     Android — proiectul îl generează build, complet non-interactiv când parolele
+//     de semnare vin pe env (BUBBLEWRAP_KEYSTORE_PASSWORD / BUBBLEWRAP_KEY_PASSWORD).
+const built = spawnSync('python3', [join(ROOT, 'twa', 'pty-drive.py'), 'build', BUILD], {stdio: 'inherit'});
+
+if (built.status !== 0) {
+  console.error(`bubblewrap build a eșuat (exit ${built.status}).`);
   process.exit(1);
 }
 
 // 4. Proiectul generat: găsește app/build.gradle (nu hardcoda layout-ul
 //    șablonului — dar absent whole-hotel = eșec onest).
-const gradleFile = ['twa-android', 'android', 'app'].map(dir => join(BUILD, dir, 'app', 'build.gradle')).find(existsSync)
+const gradleFile = ['twa-android', 'android', 'app', '.'].map(dir => join(BUILD, dir, 'app', 'build.gradle')).find(existsSync)
   ?? readdirSync(BUILD, {withFileTypes: true}).filter(e => e.isDirectory()).map(e => join(BUILD, e.name, 'app', 'build.gradle')).find(existsSync);
 if (!gradleFile) {
   console.error('Proiectul Android generat nu conține app/build.gradle — layout-ul șablonului Bubblewrap s-a schimbat; ajustează twa/build-aab.mjs.');
