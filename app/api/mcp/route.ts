@@ -13,6 +13,7 @@ import * as weather from '../weather/route';
 import * as events from '../events/route';
 import * as cinema from '../cinema/route';
 import * as transportLive from '../transport-live/route';
+import * as transportNetwork from '../transport/route';
 import * as tranzyLive from '../tranzy-live/route';
 import * as flights from '../flights/route';
 import * as flightBoard from '../flight-board/route';
@@ -29,15 +30,17 @@ import * as experts from '../experts/route';
 import * as notaries from '../notaries/route';
 import * as anl from '../anl/route';
 import * as ancpi from '../ancpi/route';
+import * as cinemas from '../cinemas/route';
+import * as stories from '../stories/route';
 
 export const dynamic='force-dynamic';
 
 const ROUTES:Record<string,{GET?(request:Request):Promise<Response>;POST?(request:Request):Promise<Response>}>={
   '/api/company':company,'/api/places':places,'/api/directory':directory,'/api/localities':localities,'/api/weather':weather,
-  '/api/events':events,'/api/cinema':cinema,'/api/transport-live':transportLive,'/api/tranzy-live':tranzyLive,'/api/flights':flights,
+  '/api/events':events,'/api/cinema':cinema,'/api/transport':transportNetwork,'/api/transport-live':transportLive,'/api/tranzy-live':tranzyLive,'/api/flights':flights,
   '/api/flight-board':flightBoard,'/api/trains':trains,'/api/legal':legal,'/api/domain':domain,'/api/catalog':catalog,
   '/api/resource':resource,'/api/resource-file':resourceFile,'/api/content':content,'/api/story':story,'/api/lawyers':lawyers,
-  '/api/experts':experts,'/api/notaries':notaries,'/api/anl':anl,'/api/ancpi':ancpi,
+  '/api/experts':experts,'/api/notaries':notaries,'/api/anl':anl,'/api/ancpi':ancpi,'/api/cinemas':cinemas,'/api/stories':stories,
 };
 
 const CORS={

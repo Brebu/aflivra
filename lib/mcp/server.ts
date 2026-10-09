@@ -24,7 +24,7 @@ const isRpcRequest=(value:unknown):value is RpcRequest=>{
 
 const errorResponse=(id:string|number|null,code:number,message:string,data?:unknown):RpcResult=>({jsonrpc:'2.0',id,error:{code,message,...(data!==undefined?{data}:{})}});
 
-function validateArguments(tool:(typeof TOOLS)[number],args:unknown):{ok:true;args:Record<string,unknown>}|{ok:false;message:string}{
+export function validateArguments(tool:(typeof TOOLS)[number],args:unknown):{ok:true;args:Record<string,unknown>}|{ok:false;message:string}{
   if(args===undefined||args===null)return {ok:true,args:{}};
   if(typeof args!=='object'||Array.isArray(args))return {ok:false,message:'Tool arguments must be a JSON object.'};
   const input=args as Record<string,unknown>;
@@ -38,7 +38,8 @@ function validateArguments(tool:(typeof TOOLS)[number],args:unknown):{ok:true;ar
     const expected=schema.type;
     if(expected==='number'&&(typeof value!=='number'||!Number.isFinite(value)))return {ok:false,message:`Argument "${name}" must be a number.`};
     if(expected==='boolean'&&typeof value!=='boolean')return {ok:false,message:`Argument "${name}" must be a boolean.`};
-    if(expected==='string'&&(typeof value!=='string'||value.length>500))return {ok:false,message:`Argument "${name}" must be a string of at most 500 characters.`};
+    const maxLength=(schema as {maxLength?:number}).maxLength??500;
+    if(expected==='string'&&(typeof value!=='string'||value.length>maxLength))return {ok:false,message:`Argument "${name}" must be a string of at most ${maxLength} characters.`};
     if(schema.enum&&typeof value==='string'&&!schema.enum.includes(value))return {ok:false,message:`Argument "${name}" must be one of: ${schema.enum.join(', ')}.`};
   }
   return {ok:true,args:input};

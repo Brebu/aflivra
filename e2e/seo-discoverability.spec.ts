@@ -117,6 +117,9 @@ test.describe('llms.txt for AI agents', () => {
     // The honest refresh contract: worker-side daily crons + weekly relays.
     expect(text).toContain('zilnic');
     expect(text).toContain('săptămânal');
+    // The MCP connector for AI consumers is part of the discoverable surface.
+    expect(text).toContain('/api/mcp');
+    expect(text).toContain('34 de tool-uri');
   });
 
   test('llms-full.txt is the expanded per-domain guide covering all 16 domains', async ({request}) => {
