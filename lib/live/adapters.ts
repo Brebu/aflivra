@@ -114,7 +114,7 @@ export function parseCompanyNameSearch(parts:{order:string[];seed:Map<string,str
  const list=all.filter(item=>item.cui||withoutCui++<nameSearchNoCuiLimit);
  return{publishedAt:null,data:{query:term,items:list,count:list.length,limited:all.length>list.length||all.length>=nameSearchLimit}};
 }
-export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v2',ttl:3600,load:async()=>{
+export const companyNameSearchLoader=(name:string):Loader=>{const term=name.trim(),quoted=term.replace(/["\\]/g,'');return{key:'company-name:'+term.toLowerCase(),name:'Wikidata · firme după nume',url:'https://www.wikidata.org/',version:'wikidata.company-name.v3',ttl:3600,load:async()=>{
  if(term.length<2||term.length>100||!quoted)throw new SourceError('Termenul de căutat nu are lungimea acceptată.');
  const search=(language:string)=>getSource('https://www.wikidata.org/w/api.php?'+new URLSearchParams({action:'wbsearchentities',search:term,language,limit:String(nameSearchLimit),type:'item',format:'json'}));
  // Structura primei etichete se validează fail-fast — un răspuns nevalid al registrului
