@@ -3,7 +3,7 @@ import {gunzipSync} from 'fflate';
 // Logical snapshot paths and their original SHA-256 proofs remain unchanged.
 // Only the stored transport representation is compressed.
 export function snapshotAssetPath(path:string):string {
- const compressed=/^\/(?:places\/(?:records|indices|spatial)\/.+|transit\/routes\/.+|stories\/(?:texts\/.+|index)|catalog\/(?:datasets\/.+|index)|trains\/(?:stations|boards\/.+))\.json$/;
+ const compressed=/^\/(?:places\/(?:records|indices|spatial)\/.+|transit\/routes\/.+|stories\/(?:texts\/.+|index)|catalog\/(?:datasets\/.+|index)|trains\/(?:stations|boards\/.+)|situr\/(?:cazare|alimentatie|agentii)|amccrs\/buildings|eida\/seismic|lmi\/monuments-bucuresti)\.json$/;
  return compressed.test(path)?path+'.gz':path;
 }
 

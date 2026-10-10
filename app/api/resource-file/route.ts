@@ -14,9 +14,13 @@ export async function GET(request:Request){
  if(p.get('format')==='csv'||p.get('format')==='xlsx'){
   const sheet=Number(p.get('sheet')||'0');if(!Number.isInteger(sheet)||sheet<0)return Response.json({error:'Foaie invalidă.'},{status:400});
   if(d?.kind!=='table'||d.complete!==true||!d.indexed&&d.copyVerified!==true)return Response.json({error:'Exportul integral este disponibil pentru tabelele importate și verificate integral.'},{status:409});
+  // Intervalul foi se verifică o singură dată, înainte de alegerea formatului:
+  // aceeași foaie invalidă primește același 400 la CSV și la XLSX — nu lasă
+  // erorile de interval să pară avarii de integritate pe o ramură și cereri
+  // greșite pe alta.
+  if(sheet>=d.sheets.length)return Response.json({error:'Foaie invalidă.'},{status:400});
   try{
    if(p.get('format')==='xlsx'){
-    if(sheet>=d.sheets.length)return Response.json({error:'Foaie invalidă.'},{status:400});
     const one={name:d.sheets[sheet].name,columns:d.sheets[sheet].columns,rows:await resourceSheetRows(d,sheet)};
     const bytes=createExcelExport([one],d.title);
     return new Response(bytes as BodyInit,{headers:{'Content-Type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','Content-Disposition':fileDisposition(id,d.title,'xlsx',true),'Cache-Control':'private, max-age=60','X-Aflivra-Rows':String(one.rows.length),'X-Aflivra-Sheets':'1'}});

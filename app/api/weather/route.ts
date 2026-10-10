@@ -15,6 +15,10 @@ export async function GET(request:Request){const p=new URL(request.url).searchPa
   const rows=Array.isArray(data.hourly)?data.hourly:[];
   const now=Date.now(),start=rows.findIndex(row=>{const stamp=Date.parse(String(row?.time||''));return Number.isFinite(stamp)&&stamp+3600000>now});
   const windowStart=start>=0&&rows[start]?.time?String(rows[start].time):null;
-  const windowed=start>=0?rows.slice(start,start+hours):rows.slice(0,hours);
-  return Response.json({...forecastState,data:{...forecastState.data,hourly:windowed,hoursApplied:hours,...(windowStart?{windowStart}:{})}},{headers:{'Cache-Control':'no-store'}})}
+  // O copie complet expirată nu se livrează niciodată ca prognoză: fără niciun
+  // interval actual sau viitor, fereastra cerută rămâne goală, cu motivul
+  // declarat — trecutul nu se reîmbracă în „prognoză".
+  const windowed=start>=0?rows.slice(start,start+hours):[];
+  const hoursReturned=windowed.length,horizonEnd=rows.length&&rows[rows.length-1]?.time?String(rows[rows.length-1].time):null;
+  return Response.json({...forecastState,data:{...forecastState.data,hourly:windowed,hoursRequested:hours,hoursReturned,windowComplete:hoursReturned===hours,windowStart,horizonEnd,...(start<0?{warning:'forecast-horizon-expired'}:{})}},{headers:{'Cache-Control':'no-store'}})}
  return Response.json(forecastState,{headers:{'Cache-Control':'no-store'}})}

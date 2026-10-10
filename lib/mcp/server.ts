@@ -1,13 +1,17 @@
 // Aflivra MCP server — Streamable HTTP transport, JSON-RPC 2.0. The server is
-// stateless (no sessions): each POST carries a self-contained request or batch,
-// which is what Claude and ChatGPT connectors use for public read-only tools.
+// stateless (no sessions): each POST carries exactly one self-contained message
+// — batching was removed at protocol 2025-06-18, so arrays are rejected, not
+// silently executed as legacy batches.
 // Route calls arrive through an injected seam so the protocol layer verifies
 // offline, without the platform's data modules; the production route wires the
 // seam to the real GET handlers.
 import {TOOLS} from './tools';
 
 export const MCP_PROTOCOL_VERSION='2025-06-18';
-const SUPPORTED_PROTOCOL_VERSIONS=['2024-11-05','2025-03-26',MCP_PROTOCOL_VERSION];
+// The transport declares 2025-06-18 only: the POST route rejects any other
+// declared version with 400 before dispatch, and an omitted header defaults
+// to this version (stateless compatibility).
+export const SUPPORTED_PROTOCOL_VERSIONS=[MCP_PROTOCOL_VERSION];
 export const SERVER_INFO={name:'aflivra',version:'1.0.0',title:'Aflivra',websiteUrl:'https://aflivra.brebu.workers.dev/'};
 export const INSTRUCTIONS='Aflivra exposes Romanian public data: firm dossiers (ANAF, registries), live maps and transport, weather, flights, trains, events, legislation, justice registries, the open-data catalog with table readers, and public-domain stories. Data returns in Romanian with source provenance.';
 
@@ -38,11 +42,22 @@ export function validateArguments(tool:(typeof TOOLS)[number],args:unknown):{ok:
   for(const [name,value] of Object.entries(input)){
     const schema=tool.inputSchema.properties[name];
     if(!schema)return {ok:false,message:`Unknown argument "${name}".`};
+    if(typeof value==='number'&&schema.type==='integer'&&!Number.isInteger(value))return {ok:false,message:`Argument "${name}" must be an integer.`};
     const expected=schema.type;
     if(expected==='number'&&(typeof value!=='number'||!Number.isFinite(value)))return {ok:false,message:`Argument "${name}" must be a number.`};
     if(expected==='boolean'&&typeof value!=='boolean')return {ok:false,message:`Argument "${name}" must be a boolean.`};
     const maxLength=(schema as {maxLength?:number}).maxLength??500;
     if(expected==='string'&&(typeof value!=='string'||value.length>maxLength))return {ok:false,message:`Argument "${name}" must be a string of at most ${maxLength} characters.`};
+    // Limitările numerice se resping explicit la granită, cu motiv numit —
+    // valorile în afara limitelor nu se mai clamps-uiesc silențios în build.
+    if(typeof value==='number'){
+      const constraints=schema as {minimum?:number;maximum?:number};
+      if(expected==='integer'&&!Number.isInteger(value))return {ok:false,message:`Argument "${name}" must be an integer.`};
+      if(constraints.minimum!==undefined&&value<constraints.minimum)return {ok:false,message:`Argument "${name}" must be at least ${constraints.minimum}.`};
+      if(constraints.maximum!==undefined&&value>constraints.maximum)return {ok:false,message:`Argument "${name}" must be at most ${constraints.maximum}.`};
+    }
+    const minLength=(schema as {minLength?:number}).minLength;
+    if(typeof value==='string'&&minLength!==undefined&&value.trim().length<minLength)return {ok:false,message:`Argument "${name}" must be a string of at least ${minLength} characters.`};
     if(schema.enum&&typeof value==='string'&&!schema.enum.includes(value))return {ok:false,message:`Argument "${name}" must be one of: ${schema.enum.join(', ')}.`};
   }
   return {ok:true,args:input};
@@ -57,7 +72,7 @@ async function callTool(callRoute:RouteCaller,method:RpcRequest):Promise<RpcResu
   const target=tool.build(validated.args);
   try{
     const response=await callRoute(target);
-    if(response.binary){
+    if(response.binary&&response.ok){
       const binary=response.binary;
       const note=`Export binar: ${binary.fileName} — ${binary.rows} rânduri${binary.sheets?` pe ${binary.sheets} ${binary.sheets===1?'foaie':'foi'}`:''}. Descărcabil la ${binary.url} (tip ${binary.mimeType}); fișierul nu se citește ca text în conversație.`;
       return {jsonrpc:'2.0',id:method.id??null,result:{content:[{type:'resource_link',name:binary.fileName,uri:binary.url,mimeType:binary.mimeType},{type:'text',text:note}],structuredContent:{kind:'binary-export',...binary},isError:false}};
@@ -86,14 +101,7 @@ async function dispatch(callRoute:RouteCaller,method:RpcRequest):Promise<RpcResu
 }
 
 export async function handleRpc(callRoute:RouteCaller,body:unknown):Promise<{status:number;body:RpcResult|null|RpcResult[]|{jsonrpc:'2.0';id:null;error:{code:number;message:string}}}>{
-  if(Array.isArray(body)){
-    if(!body.length)return {status:400,body:{jsonrpc:'2.0',id:null,error:{code:-32600,message:'Empty batch.'}}};
-    const entries=body.map(entry=>isRpcRequest(entry)?entry:null);
-    if(entries.some(entry=>entry===null))return {status:400,body:{jsonrpc:'2.0',id:null,error:{code:-32600,message:'Batch entries must be JSON-RPC 2.0 requests.'}}};
-    const requests=(entries as RpcRequest[]).filter(entry=>entry.id!==undefined);
-    const responses=await Promise.all(requests.map(entry=>dispatch(callRoute,entry)));
-    return {status:200,body:responses.length?responses:null};
-  }
+  if(Array.isArray(body))return {status:400,body:{jsonrpc:'2.0',id:null,error:{code:-32600,message:'JSON-RPC batching is not supported at protocol version 2025-06-18; one POST carries exactly one message.'}}};
   if(!isRpcRequest(body))return {status:400,body:{jsonrpc:'2.0',id:null,error:{code:-32600,message:'Request must be a JSON-RPC 2.0 object.'}}};
   if(body.id===undefined)return {status:202,body:null};
   const response=await dispatch(callRoute,body);

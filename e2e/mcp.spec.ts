@@ -53,6 +53,13 @@ const ARGUMENTS: Record<string, Record<string, unknown>> = {
   forensic_experts: {kind: 'experti-judiciari', locality: 'Oradea', judet: 'Bihor'},
   notaries_registry: {q: 'popa'},
   anl_housing: {q: 'bloc'},
+  tourism_registry: {kind: 'cazare', county: 'Brașov'},
+  seismic_buildings: {q: 'Academiei'},
+  seismic_events: {from: '2023', to: '2023-12-31'},
+  historic_monuments: {q: 'Biserica'},
+  ins_series: {territory: 'Cluj'},
+  energy_offers: {county: 'București'},
+  power_system: {},
   ancpi_integrals: {},
 };
 
@@ -111,7 +118,9 @@ test.describe('MCP endpoint', () => {
         const forecast = result.structuredContent.data;
         test.info().annotations.push({type: 'note', description: 'weather default window'});
         expect((forecast.hourly as unknown[]).length, `${name}: implicit hours=48, nu 168`).toBe(48);
-        expect(forecast.hoursApplied, `${name}: fereastra aplicată se declară`).toBe(48);
+        expect(forecast.hoursRequested, `${name}: cererea de fereastră se declară`).toBe(48);
+        expect(forecast.hoursReturned, `${name}: fereastra aplicată se declară`).toBe(48);
+        expect(forecast.windowComplete, `${name}: fereastra completă se declară onest`).toBe(true);
         expect(forecast.windowStart, `${name}: fereastra publică ora de început`).toBeTruthy();
         expect(Date.parse(forecast.hourly[0].time) + 3600e3, `${name}: fereastra începe la ora curentă, nu la miezul nopții`).toBeGreaterThan(Date.now());
       }
@@ -145,6 +154,23 @@ test.describe('MCP endpoint', () => {
     const silent = await request.post('/api/mcp', {data: {jsonrpc: '2.0', method: 'tools/call', params: {name: 'localities_search', arguments: {q: 'București'}}}});
     expect(silent.status()).toBe(202);
     expect(await silent.text()).toBe('');
+    const unknownVersion = await request.post('/api/mcp', {headers: {'Mcp-Protocol-Version': '2099-01-01'}, data: {jsonrpc: '2.0', id: 30, method: 'ping'}});
+    expect(unknownVersion.status(), 'A24: versiunea nesuportată se respinge cu 400, nu se ecou').toBe(400);
+    expect((await unknownVersion.json()).error.message).toContain('Unsupported MCP-Protocol-Version');
+    expect(unknownVersion.headers()['mcp-protocol-version']).toBe('2025-06-18');
+    const noVersion = await request.post('/api/mcp', {data: {jsonrpc: '2.0', id: 31, method: 'ping'}});
+    expect(noVersion.status(), 'A24: headerul absent rămâne compatibil stateless').toBe(200);
+    expect(noVersion.headers()['mcp-protocol-version']).toBe('2025-06-18');
+    const batchRejected = await request.post('/api/mcp', {data: [{jsonrpc: '2.0', id: 32, method: 'ping'}, {jsonrpc: '2.0', id: 33, method: 'tools/list'}]});
+    expect(batchRejected.status(), 'A25: lotul se respinge la 2025-06-18').toBe(400);
+    expect((await batchRejected.json()).error.message).toContain('exactly one message');
+    const foreignOrigin = await request.post('/api/mcp', {headers: {Origin: 'https://untrusted.example'}, data: {jsonrpc: '2.0', id: 34, method: 'ping'}});
+    expect(foreignOrigin.status(), 'A26: originea străină se refuză').toBe(403);
+    const sameOrigin = await request.post('/api/mcp', {headers: {Origin: 'http://127.0.0.1:5173'}, data: {jsonrpc: '2.0', id: 35, method: 'ping'}});
+    expect(sameOrigin.status(), 'A26: originea proprie a aplicației rămâne acceptată').toBe(200);
+    expect(sameOrigin.headers()['access-control-allow-origin']).toBe('http://127.0.0.1:5173');
+    const unsignedClient = await request.post('/api/mcp', {data: {jsonrpc: '2.0', id: 36, method: 'ping'}});
+    expect(unsignedClient.status(), 'A26: clientul server-to-server fără Origin rămâne funcțional').toBe(200);
     const companyBoundary = await request.get('/api/company');
     expect(companyBoundary.status(), 'fără parametri, ruta firmei refuză: fără CUI implicit').toBe(400);
     const legalNull = await request.post('/api/legal', {data: null, headers: {'content-type': 'application/json'}});

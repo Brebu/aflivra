@@ -3,22 +3,25 @@
   {
    "name": "pulse",
    "cron": "*/10 * * * *",
-   "estimatedSubrequests": 32,
+   "estimatedSubrequests": 33,
    "members": [
     "weather.anm",
     "weather.alerts",
     "forecast.bucuresti",
-    "bnr"
+    "bnr",
+    "power.sen"
    ]
   },
   {
    "name": "living",
    "cron": "*/20 * * * *",
-   "estimatedSubrequests": 24,
+   "estimatedSubrequests": 26,
    "members": [
     "cinema.bucuresti.today",
     "events.odeon",
-    "events.teatruldearta"
+    "events.teatruldearta",
+    "posf.judete",
+    "posf.offers.bucuresti"
    ]
   },
   {
@@ -49,11 +52,12 @@
   {
    "name": "registers",
    "cron": "28 * * * *",
-   "estimatedSubrequests": 30,
+   "estimatedSubrequests": 31,
    "members": [
     "directory.schools.page0",
     "catalog.category.bani",
-    "catalog.category.sanatate"
+    "catalog.category.sanatate",
+    "ins.matrix.pop105a"
    ]
   }
  ],

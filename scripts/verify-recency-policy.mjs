@@ -17,23 +17,23 @@ const read=async(relative)=>(await readFile(join(root,relative),'utf8')).split('
 const rollingWindow=/(3\s*\*\s*)?365\.25\s*\*\s*86400000|getUTCFullYear\(\)\s*-\s*\d+|Date\.now\(\)\s*-\s*\d+\s*\*\s*86400000/;
 const cache=await read('lib/live/cache.ts');
 // Row 1 — CKAN dataset browsing: catalog seeds keep the 3-year modified window.
-pin(cache,'lib/live/cache.ts',15,'r.modified>=new Date(Date.now()-3*365.25*86400000).toISOString().slice(0,10)','D3 row „CKAN dataset browsing — modified >= 3y"');
+pin(cache,'lib/live/cache.ts',23,'r.modified>=new Date(Date.now()-3*365.25*86400000).toISOString().slice(0,10)','D3 row „CKAN dataset browsing — modified >= 3y"');
 // Row 2 — ANAF company history: the rolling merge keeps the last 3 fiscal years
 // (full existence is exempt; the rolling window is only the balance history).
 // The anchor moved 70 → 72 with the Wikidata host-budget lines this row keeps
 // sitting above the merge; the pinned content is unchanged.
-pin(cache,'lib/live/cache.ts',73,'h.year>=new Date().getUTCFullYear()-3','D3 row „ANAF company history — last 3 fiscal years"');
+pin(cache,'lib/live/cache.ts',91,'h.year>=new Date().getUTCFullYear()-3','D3 row „ANAF company history — last 3 fiscal years"');
 const directories=await read('lib/live/directories.ts');
 // Row 3 — CNAS/registry resource editions: latest edition within 3 years.
 pin(directories,'lib/live/directories.ts',11,'r.date>=new Date(Date.now()-3*365.25*86400000).toISOString().slice(0,10)','D3 row „CNAS resource editions — latest within 3y"');
 // Recency machinery — the nightly-boundary staleness reset that expires served
 // copies when their day rolls over in Bucharest, and the law consolidation
 // exemption from that reset (in-force acts verify per open, never by age).
-pin(cache,'lib/live/cache.ts',19,'const afterNightBoundary=()','D3 machinery — nightly boundary helper');
-pin(cache,'lib/live/cache.ts',19,'hourCycle:\'h23\'}).format(new Date()))>=3','D3 machinery — the 03:00 Bucharest night boundary');
-pin(cache,'lib/live/cache.ts',26,'afterNightBoundary()&&roDate(','D3 machinery — nightly staleness detection');
-pin(cache,'lib/live/cache.ts',27,'return Date.now()<(nightly?0:row.expires_at);','D3 machinery — nightly reset drops only the served copy, never the data');
-pin(cache,'lib/live/cache.ts',60,'(afterNightBoundary()||loader.key.startsWith(\'law:consolidated.v2:\'))','D3 row „Legislation — in-force regardless of year": consolidated texts are not age-cycled');
+pin(cache,'lib/live/cache.ts',28,'const afterNightBoundary=()','D3 machinery — nightly boundary helper');
+pin(cache,'lib/live/cache.ts',28,'hourCycle:\'h23\'}).format(new Date()))>=3','D3 machinery — the 03:00 Bucharest night boundary');
+pin(cache,'lib/live/cache.ts',35,'afterNightBoundary()&&roDate(','D3 machinery — nightly staleness detection');
+pin(cache,'lib/live/cache.ts',36,'return Date.now()<(nightly?0:row.expires_at);','D3 machinery — nightly reset drops only the served copy, never the data');
+pin(cache,'lib/live/cache.ts',73,'(afterNightBoundary()||loader.key.startsWith(\'law:consolidated.v2:\'))','D3 row „Legislation — in-force regardless of year": consolidated texts are not age-cycled');
 const noRollingWindow=async(file,label)=>{const text=(await readFile(join(root,file),'utf8'));assert.ok(!rollingWindow.test(text),label+' — the exempt family must not gain a rolling age window');return text};
 // Row 4 — legislation / legal acts: in-force semantics only. No year window in
 // the consolidation chain, and court dosare keep the full period.
@@ -60,4 +60,4 @@ await noRollingWindow('lib/live/housing.ts','D3 row „Housing registries"');
 const placesManifest=await readFile(join(root,'public/places/manifest.json'),'utf8');
 assert.ok(placesManifest.length>0,'D3 row „Places corpus — exempt": the geography corpus stays present (no age semantics)');
 console.log('Trecut: politica de prospețime pe familie rămâne fixată pe ancorele codificate — fereastra de 3 ani doar la catalog, istoric firme și ediții CNAS; legislația guvernată de actualitate, dosarele pe toată perioada; locurile, filmele, registrele profesionale, trenurile, povestirile și registrele imobiliare fără semantică de vârstă; evenimentele orientate spre viitor la afișare, nu prin ștergerea calendarului.');
-console.log(JSON.stringify({result:'ok',rows:7,anchors:['cache.ts:15','cache.ts:70','directories.ts:11','cache.ts:19/26/27/60','legal chain (no window)','domain route (no default window)','events display filter'],exemptReaders:['legal.ts','legal-consolidation.ts','justice.ts','lawyers.ts','feeds.ts','trains.ts','stories.ts','housing.ts','places corpus']}));
+console.log(JSON.stringify({result:'ok',rows:7,anchors:['cache.ts:23','cache.ts:91','directories.ts:11','cache.ts:28/35/36/73','legal chain (no window)','domain route (no default window)','events display filter'],exemptReaders:['legal.ts','legal-consolidation.ts','justice.ts','lawyers.ts','feeds.ts','trains.ts','stories.ts','housing.ts','places corpus']}));

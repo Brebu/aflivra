@@ -1,6 +1,6 @@
 import {getSource,SourceError} from './adapters';
 import type {Loader,Loaded} from './types';
-import {uniqueRecords} from './records';
+import {uniqueRecords,uniqueRecordsLatest} from './records';
 
 export type FlightItem={hex:string;callsign:string|null;registration:string|null;typeCode:string|null;lat:number;lon:number;track:number|null;trueHeading:number|null;altitudeFt:number|null;onGround:boolean;groundSpeedKt:number|null;verticalRateFpm:number|null;squawk:string|null;emergency:string|null;observedAt:string;details:unknown};
 
@@ -21,7 +21,7 @@ export function parseAdsbFlights(raw:string):Loaded{
  const stamp=Number(d.now),observedAt=Number.isFinite(stamp)&&stamp>1700000000000&&stamp<=Date.now()+300000?new Date(stamp).toISOString():null;
  if(!observedAt)throw new SourceError('Momentul fluxului adsb.lol nu este valid.');
  const items=d.ac.flatMap((row:any)=>{
-  const hex=String(row?.hex||'').trim(),lat=finite(row?.lat),lon=finite(row?.lon);
+  const hex=String(row?.hex||'').trim().toLowerCase(),lat=finite(row?.lat),lon=finite(row?.lon);
   if(!/^[0-9a-f]{6}$/i.test(hex)||lat===null||lon===null||lat<AIRSPACE.latMin||lat>AIRSPACE.latMax||lon<AIRSPACE.lonMin||lon>AIRSPACE.lonMax)return[];
   const onGround=row?.alt_baro==='ground',altitudeFt=onGround?null:finite(row?.alt_baro);
   const emergency=String(row?.emergency||'').trim();
@@ -35,12 +35,13 @@ export function parseAdsbFlights(raw:string):Loaded{
 // externă de relaie — aceeași dedublare pe Mode-S, același chenar național, același
 // moment al fluxului, ca să nu existe două adevăruri despre spațiul aerian.
 export function mergeAdsbBoards(boards:Loaded[]):Loaded{
- const merged=uniqueRecords<FlightItem>(boards.flatMap(board=>board.data.items),x=>x.hex);
- const latest=new Date(Math.max(...boards.map(board=>Date.parse(board.data.observedAt)))).toISOString();
+ const merged=uniqueRecordsLatest<FlightItem>(boards.flatMap(board=>board.data.items),x=>x.hex.toLowerCase(),x=>x.observedAt);
+ const moments=[...boards.map(board=>Date.parse(board.data.observedAt)),...boards.flatMap(board=>board.data.items).map(item=>Date.parse(item.observedAt))].filter(Number.isFinite);
+ const latest=new Date(Math.max(...(moments.length?moments:[0]))).toISOString();
  // Identitățile se reunesc și ele, ca pozițiile: patru răspunsuri identice rămân
  // un singur set de aeronave observate, nu patru.
  const entityCount=[...new Set(boards.flatMap(board=>board.data.hexes||[]))].length;
- return{publishedAt:latest,data:{...boards[0].data,items:merged,entityCount,observedAt:boards[0].data.observedAt}};
+ return{publishedAt:latest,data:{...boards[0].data,items:merged,entityCount,observedAt:latest,...(moments.length?{observedMinAt:new Date(Math.min(...moments)).toISOString(),observedMaxAt:latest}:{})}};
 }
 export const adsbFlightsLoader:Loader={key:'flights:adsb',name:'adsb.lol · ADS-B comunitar',url:'https://api.adsb.lol/v2/',version:'flights.adsb.ro.v1',ttl:60,load:loadAdsbFlights};
 async function loadAdsbFlights():Promise<Loaded>{

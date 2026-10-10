@@ -9,8 +9,16 @@ platformei, cu validarea și mesajele de eroare ale rutei — niciodată reinter
 
 - **Endpoint**: `https://aflivra.brebu.workers.dev/api/mcp`
 - **Transport**: Streamable HTTP — un singur endpoint `POST` (JSON-RPC 2.0), stateless,
-  fără sesiuni; `GET`/`DELETE` răspund onest 405. CORS deschis pentru conectori.
-- **Versiuni de protocol**: `2024-11-05`, `2025-03-26`, `2025-06-18` (negociate la `initialize`).
+  fără sesiuni; `GET`/`DELETE` răspund onest 405. Un `POST` = un singur mesaj JSON-RPC:
+  la 2025-06-18 loturile (array) se resping cu 400 — nu se execută parțial și nu se
+  pierde tăcerii nicio cerere validă.
+- **Versiuni de protocol**: `2025-06-18` singură. Un header `Mcp-Protocol-Version`
+  nesuportat se respinge cu 400 (mesajul numește versiunile suportate); headerul
+  lipsă înseamnă `2025-06-18`; headerul de răspuns poartă mereu versiunea efectivă,
+  niciodată ecoul șirului cerut.
+- **Origin**: validată la transport — originea proprie a aplicației (browser) și
+  clienții server-to-server fără `Origin` (conectorii MCP) trec; orice altă origine
+  primește 403 fără headere CORS.
 - **Autentificare**: niciuna — date publice, „fără cont", ca pe site. (Listarea publică în
   magazinele Claude/ChatGPT va cere OAuth — până atunci, conectorii custom funcționează.)
 
@@ -31,11 +39,21 @@ Aproape fiecare tool întoarce plicul sursă al platformei: `status` (`fresh` | 
 `stale` | `unavailable`), `data`, `lastSuccessAt`/`lastAttemptAt`, `error` (română).
 În MCP: răspunsul rutei vine în `structuredContent`, oglindit ca text în `content[0].text`.
 O eroare a rutei (400 cu mesaj românesc) = `isError: true` cu mesajul întreg — niciodată
-ascunsă. Excepție: exporturile binare (XLSX) nu vin ca text — deschid cu un `resource_link`
-cu MIME și numele fișierului, iar `structuredContent` poartă `url`-ul absolut de descărcare, utilizabil direct de client; o
+ascunsă. Excepție: exporturile binare reale (XLSX, PDF, XML de document) nu vin ca text —
+deschid cu un `resource_link` cu MIME și numele fișierului, iar `structuredContent` poartă
+`url`-ul absolut de descărcare, utilizabil direct de client; un răspuns eșuat de rută nu devine
+niciodată descărcare — rămâne `isError: true` cu codul și mesajul păstrate; CSV-ul rămâne
+text lizibil în conversație. O
 căutare validă fără potriviri (total 0) NU e `unavailable` — starea descrie sursele. Paginarea e `page` (de la 0) aproape peste tot; `legal_acts` e singura paginare
 pe cursor. Contextul geografic (`locality`/`county`, opțional `lat`/`lon`/`radius` 1–100)
 ancorează unele rute; `geoScope` poate fi `context` | `local` | `national`.
+
+Două limite oneste, valabile peste tot: **`fresh` înseamnă „preluarea a reușit acum", nu
+„ediția e cea mai nouă publicată"** — un registru descărcat azi poate servi ediția 2025
+aflată încă la sursă (ediția e etichetată în răspuns unde sursa o publică); iar la o sursă
+care nu a reușit ultima tură, plicul `stale`/`unavailable` poate purta și `errorDiagnostic`
+— diagnoza structurată, sanitizată, a eșecului (etapa, categoria, codul HTTP, încercările,
+pauza), fără chei sau corpuri de cerere, ca degradarea să fie analizabilă, nu doar văzută.
 
 ## Ce NU expune conectorul (deliberat)
 
@@ -43,10 +61,10 @@ ancorează unele rute; `geoScope` poate fi `context` | `local` | `national`.
 (administrativ), fișierele GTFS integrale (`transit-file` — mase de rânduri care nu încap
 într-o conversație) și diagnosticul UI `/api/live`. Toată suprafața publică de date e mai jos.
 
-## Tool-uri (34)
+## Tool-uri (41)
 
 ### `search_companies`
-Firme după nume, din registrul deschis de cunoștințe (etichete RO+EN îmbinate): doar entitățile cu clasă de organizație/firmă sau cu identificator TVA citit se listează ca firme — speciile și localitățile omonime nu apar; fiecare rând poartă `country` (țara entității, `null` onest când registrul nu o declară — organizațiile internaționale omonime se văd prin ea) și `matchNote` — motivul determinist al listării (identificator TVA citit sau doar potrivire de nume pe clasă de organizație). Cele fără CUI rămân marcate onest „fără CUI citit”: registrul de cunoștințe nu atribuie identitate fiscală românească.
+Firme după nume, din registrul deschis de cunoștințe (etichete RO+EN îmbinate): doar entitățile cu clasă de organizație/firmă sau cu identificator TVA citit se listează ca firme — speciile și localitățile omonime nu apar; fiecare rând poartă `country` (țara entității, `null` onest când registrul nu o declară — organizațiile internaționale omonime se văd prin ea) și `matchNote` — motivul determinist al listării (identificator TVA citit sau doar potrivire de nume pe clasă de organizație). Cele fără CUI rămân marcate onest „fără CUI citit”: registrul de cunoștințe nu atribuie identitate fiscală românească. Căutarea pe nume **nu e un registru complet al firmelor din România** — e descoperire prin etichete publice de cunoștințe; firmele omonime rămân separate, iar CUI-ul confirmat e exact cheia folosită de `company_profile` și de registrele asociate.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "search_companies", "arguments": {"name": "Banca Transilvania"}}}
 ```
@@ -58,7 +76,7 @@ Dosarul fiscal complet pe CUI (ANAF): identitate, starea TVA, bilanțuri anuale,
 ```
 
 ### `places_search`
-Harta națională de locuri (inventarul OSM): spitale, farmacii, școli, muzee — după text, categorie, contact, centru+rază (1–100 km), sortare `name|recent|distance`. Categoriile sunt exact cheile inventarului — `agricultura, bani, cultura, educatie, energie, filme, firme, justitie, local, mediu, munca, sanatate, stiri, transport` (`local` acoperă instituțiile publice și sportul/timpul liber) — iar o categorie necunoscută se respinge la granița MCP cu lista celor valide.
+Harta națională de locuri (inventarul OSM): spitale, farmacii, școli, muzee — după text, categorie, contact, centru+rază (1–100 km), sortare `name|recent|distance`. Categoriile sunt exact cheile inventarului — `agricultura, bani, cultura, educatie, energie, filme, firme, justitie, local, mediu, munca, sanatate, stiri, transport` (`local` acoperă instituțiile publice și sportul/timpul liber) — iar o categorie necunoscută se respinge la granița MCP cu lista celor valide. Rezultatele sunt obiecte OSM cartografiate, nu un recensământ certificat de instituții fizice: potrivirea e lexicală pe nume și etichete, lipsa adresei sau a orașului rămâne vizibilă, iar un hotel al cărui nume conține „restaurant" nu devine restaurant certificat.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "places_search", "arguments": {"q": "spital", "lat": 44.427, "lon": 26.103, "radius": 10}}}
 ```
@@ -76,7 +94,7 @@ Localitățile din SIRUTA: nume, județ, clasificare, mediu (urban/rural). Coord
 ```
 
 ### `weather_forecast`
-Prognoza pe coordonate (open data): starea curentă plus fereastra orară `hours` (1–168, implicit 48) din copia completă — fereastra începe la ora curentă (`windowStart` în răspuns), nu la începutul zilei sursei.
+Prognoza pe coordonate (open data): starea curentă plus fereastra orară `hours` (1–168, întregi, implicit 48) din copia completă — fereastra începe la ora curentă (`windowStart` în răspuns), nu la începutul zilei sursei. Metadatele ferestrei se declară onest: `hoursRequested`, `hoursReturned`, `windowComplete` (sursa pornește ziua la miezul nopții, deci 163 la o cerere de 168 e fereastră incompletă, nu eroare) și `horizonEnd` — orizontul real al copiei. O copie complet expirată nu se livrează niciodată ca prognoză: fereastra rămâne goală cu motivul `forecast-horizon-expired`. Contrazicerile interne ale sursei nu se repară: o zi cu totalul de precipitații sub componenta de ploaie (ambele confirmate în mm) primește `qualityFlags` cu numele contradicției și valorile originale rămân neschimbate.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "weather_forecast", "arguments": {"lat": 44.427, "lon": 26.103}}}
 ```
@@ -88,7 +106,7 @@ Avertizările ANM active; fără avertizări, fluxul XML gol se servește onest 
 ```
 
 ### `events_search`
-Spectacole și concerte în calendarele publice validate (teatre, operă): textul, sala (`venue` — id-ul sau denumirea uzuală, ambele se rezolvă) și localitatea se aplică împreună, iar `q` trebuie nevid — un `q` gol se respinge la granița MCP cu mesajul exact `Argument "q" must be a non-empty string.`; o căutare fără potriviri rămâne succes onest cu total 0.
+Spectacole și concerte în calendarele publice validate (teatre, operă): textul, sala și localitatea se aplică împreună, iar `q` trebuie nevid — un `q` gol se respinge la granița MCP cu mesajul exact `Argument "q" must be a non-empty string.`; o căutare fără potriviri rămâne succes onest cu total 0. `venue` primește id-ul, denumirea uzuală sau un **alias validat** al registrului („Teatrul de Artă București" rezolvă la „Teatrul de Artă"; lista completă de instituții și aliasuri o dă mesajul de 400 al rutei la un `venue` necunoscut); orele și prețurile se declară, nu se inventează: un spectacol publicat cu ziua, fără oră, poartă `timeKnown: false` (ora nu devine miezul nopții), iar `priceKnown` cere un preț publicat pozitiv — prețul zero nu se pretinde gratuit.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "events_search", "arguments": {"q": "teatru", "locality": "București"}}}
 ```
@@ -124,7 +142,7 @@ Operatorii Tranzy open-data, live: Iași (SCTP), Cluj (CTP), Chișinău, Botoșa
 ```
 
 ### `flights_status`
-Traficul aerian românesc (ADS-B comunitar): căutare pe indicativ.
+Traficul aerian românesc (ADS-B comunitar): căutare pe indicativ, înregistrare sau squawk. Fiecare aeronavă apare o singură dată pe adresa Mode-S normalizată (majuscule/minuscule nu dublează avionul), păstrând observația **cea mai recentă** primită pe ea — nu prima venită; `observedAt`, `publishedAt` și maximul observației sunt un singur moment, iar `observationTimeRange` (`min`/`max`) arată intervalul real al observațiilor reunite. Vechimea se declară ca la toate fluxurile de poziții: `observationAgeSeconds` (față de momentul observat) separat de `fetchedAgeSeconds` (față de ultima preluare reușită); `isLive` înseamnă observații sub două minute. Fluxul se reîmprospătează printr-o tură de intermediar extern orară — dacă tura nu a alergat, copia servește ultima observație disponibilă, etichetată onest, nu revendicată ca „acum".
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "flights_status", "arguments": {"q": "W6"}}}
 ```
@@ -154,7 +172,7 @@ Dosare judecătorești (portal.just): număr dosar (ex. `6236/111/2017`), parte,
 ```
 
 ### `law_search`
-Căutare în legislație: titlu, cuvinte din text, număr, an — paginat.
+Căutare în legislație: titlu, cuvinte din text, număr, an — paginat. `year` înseamnă anul din data intrării în vigoare (`DataVigoare`) purtat de act — nu anul emiterii sau al publicării, pe care serviciul nu le separă. Filtrul sursei nu e suficient singur: pagina intoarsă se filtrează local pe anul cerut (`filterVerification: "post-filtered"`), actele din alți ani se exclud numărate (`yearFilter.excludedMismatched`, `yearFilter.yearUnknownExcluded` — actele fără an deloc), iar `hasMore` rămâne la baza paginii **sursei** (`pageBasis: "source-page"`): pagina filtrată nu se pretinde niciodată total.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "law_search", "arguments": {"title": "codul civil"}}}
 ```
@@ -178,27 +196,69 @@ Anunțurile oficiale: `stiri` (toate feeds-urile), sau un feed instituțional; f
 ```
 
 ### `catalog_datasets`
-Catalogul național de date deschise: seturi după titlu/organizație, cu resursele din spate.
+Catalogul național de date deschise: seturi după titlu/organizație, cu resursele din spate. Clasificarea e canonică pe toate căile: `categories` cu etichete multiple (un set poate fi și `agricultura` și `cultura` dacă inventarul îl are acolo), identică între live, inventarul local și rezerva de cădere — fără aliasurile vechi care mutau agricultura în mediu; la cădere, fereastra deliberată de trei ani a rezervei se declară (`ageFilterApplied`, `totalBasis` cu `seedRows`/`afterAgeFilter`), iar totalul nu se pretinde altfel.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "catalog_datasets", "arguments": {"q": "buget"}}}
 ```
 
 ### `dataset_table`
-Cititorul de tabele al platformei (CSV/XLSX/XML/JSON): foi, coloane, rânduri paginate (într-un workbook cu mai multe foi, `sheet` selectează fișă cu fișă) — onest despre documentele netabelare. Documentele Office Word (pachetul „Flat OPC”) nu se toarnă ca XML brut: răspunsul servește textul vizibil extras din `word/document.xml` (`textComplete: false` onest, `originalCharacters` cu dimensiunea integralului), iar integralul rămâne un fișier descărcabil prin `data.file` (legătură absolută, `format=xml`).
+Cititorul de tabele al platformei (CSV/XLSX/XML/JSON): foi, coloane, rânduri paginate (într-un workbook cu mai multe foi, `sheet` selectează fișă cu fișă) — onest despre documentele netabelare. Documentele Office Word (pachetul „Flat OPC”) nu se toarnă ca XML brut: răspunsul servește textul vizibil extras din `word/document.xml` (`textComplete: false` onest, `originalCharacters` cu dimensiunea integralului), iar integralul rămâne un fișier descărcabil prin `data.file` (legătură absolută, `format=xml`). Foaia indexată poartă un `qualityProfile`: identificatori stabili de coloană (`columnId`) cu eticheta originală, coloanele cu etichetă dublă primesc `displayLabel` dezenambiguat („zona (1)" / „zona (2)"), iar valorile lipsă (`missingCount`) se numără separat de valorile zero (`zeroCount`) — lipsa nu e zero; rândurile identice repetate se semnalează (`exactDuplicateRows`), nu se șterg: normalizarea pentru analiză rămâne separată de export, care păstrează întotdeauna fișierul original al sursei. Coloanele monetare ale surselor fără monedă publicată rămân `currency: null` — unitatea nu se deduce din ordinul de mărime.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "dataset_table", "arguments": {"id": "1088e792-54f4-43ad-8e4c-9b351b82d31c", "sheet": 0, "page": 0}}}
 ```
 
 ### `dataset_export`
-Export integral al unui tabel importat și verificat: `csv` (text, citibil în conversație) sau `xlsx` (binar — rezultatul e o legătură `resource_link` cu numele fișierului și numărul de rânduri; `sheet` selectează foia în ambele formate, fișă cu fișă într-un workbook cu mai multe foi); altfel ruta răspunde 409 onest. Descărcarea prin client programatic: Cloudflare respinge semnăturile de browser cunoscute ca bot (ex. Python-urllib primește HTTP 403/1010) — un client real (curl, node, browser) primește fișierul; legătura din `resource_link` e absolută, utilizabilă direct.
+Export integral al unui tabel importat și verificat: `csv` (text, citibil în conversație) sau `xlsx` (binar — rezultatul e o legătură `resource_link` cu numele fișierului și numărul de rânduri; `sheet` selectează foia în ambele formate, fișă cu fișă într-un workbook cu mai multe foi); altfel ruta răspunde 409 onest, iar o foaie inexistentă primește același 400 la ambele formate — verificarea intervalului se face înainte de alegerea formatului, nu numai pe ramura binară. Descărcarea prin client programatic: Cloudflare respinge semnăturile de browser cunoscute ca bot (ex. Python-urllib primește HTTP 403/1010) — un client real (curl, node, browser) primește fișierul; legătura din `resource_link` e absolută, utilizabilă direct.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "dataset_export", "arguments": {"id": "1088e792-54f4-43ad-8e4c-9b351b82d31c"}}}
 ```
 
 ### `article_read`
-Textul integral al unei publicații oficiale, pe URL (izvoare instituționale: ANOFM, MAI, CNAS, MEC, MJ, energie, TPBI, AFIR, Poliția); atașamentele sunt listate, nu citite.
+Textul integral al unei publicații oficiale, pe URL (izvoare instituționale: ANOFM, MAI, CNAS, MEC — pagina oficială edu.ro cu corpul `edu-article__body`, data sursei din elementul `time` al articolului și fără blocurile de articole înrudite/acțiuni —, MJ, energie, TPBI, AFIR, Poliția); atașamentele sunt listate, nu citite. Când structura unei publicații nu are încă cititor, eroarea onestă numește asta — textul fluxului rămâne disponibil, iar integralul nu se promovează niciodată din sumar.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "article_read", "arguments": {"url": "https://www.anofm.ro/"}}}
+```
+
+### `tourism_registry`
+Registrele turistice clasificate SITUR (exporturi Excel oficiale): `cazare` (32.058 de înregistrări), `alimentatie` (9.063) și `agentii` (3.104 de licențe) — operator, număr de autorizație/certificat cu data emiterii, capacitate unde se publică, localitate/județ, CUI acolo unde registrul îl poartă (`cui: null` e lipsă onestă, numărată în `profile.cuiLipsa`). Registru de clasificare și licențiere — nu prețuri de camere, rezervări, grad de ocupare sau dovada funcționării în ziua cerută. `exportDate` (titlul exportului) și `pageDate` (pagina index) rămân date separate, fără uniformizare. Licență: neconfirmată.
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "tourism_registry", "arguments": {"kind": "cazare", "county": "Brașov"}}}
+```
+
+### `seismic_buildings`
+Registrul seismic AMCCRS al Bucureștiului („Lista Cladiri 2026"): adresa cu strada, numărul și sectorul, anul construirii, regimul de înălțime, numărul de apartamente, expertiza — cu ambele clase: textul original integral (48 de forme distincte la sursă) și clasa normalizată (`RsI|RsII|RsIII|RsIV|consolidata|urgenta|neincadrata|neclasificabila`; categoriile de urgență rămân distincte de clasele Rs). O adresă care nu apare în registru înseamnă „nu am găsit o înregistrare" — niciodată „clădire sigură"; registrul nu spune nimic cadastral sau juridic despre apartament. Acoperire: doar municipiul București. Licență: neconfirmată.
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "seismic_buildings", "arguments": {"q": "Academiei 1", "sector": "3"}}}
+```
+
+### `seismic_events`
+Istoricul seismic INFP/EIDA al României și împrejurimilor: cutremure resimțite de magnitudine ≥ 3 în dreptunghiul auditat 43–49°N / 20–30°E, pe ani comiși (rețeaua de stații RO se servește cu `kind: "stations"`). Istoric și infrastructură — nu avertizare de cutremur în timp real: răspunsurile 204 pe ferestrele recente au rămas inconcludente la audit, fereastra comisă se declară în fiecare răspuns, iar evenimentele din afara ei nu se pretind inexistente. Dreptunghiul nu definește exclusiv teritoriul României. Licențele rețelelor se păstrează separate; licență de reutilizare: neconfirmată.
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "seismic_events", "arguments": {"from": "2024", "minMagnitude": 4}}}
+```
+
+### `historic_monuments`
+Lista Monumentelor Istorice 2015 — secțiunea București, din PDF-ul oficial al Ministerului Culturii (Monitorul Oficial, Partea I, Nr. 113 bis/15.II.2016): cod LMI, denumire, localitate, adresă, datare și foliul tipărit al Monitorului (nu numărul de pagină al PDF-ului). Baza 2015 se declară: ordinele ministeriale ulterioare se obțin de la minister și nu sunt înglobate; semnalarea unei posibile apartenențe la patrimoniu nu e verdict juridic actual automat. Numerele extragerii se servesc ca numere, nu ca recensământ validat. Licență: neconfirmată.
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "historic_monuments", "arguments": {"q": "B-II-a-A-00188"}}}
+```
+
+### `ins_series`
+Seriile statistice oficiale INS TEMPO pe matricea validată `POP105A` (populația rezidentă la 1 ianuarie, pe județe și teritorii): ultimii trei ani publicați, cu unitatea („Numar persoane") și statutul fiecărei valori marcat tipografic de sursă după legenda oficială — îngroșat = revizuit, subliniat = provizoriu, ambele = semidefinitiv; „:" (date lipsă) și „c" (confidențiale) rămân goale marcate, niciodată zero. Id-urile de selecție se derivă din metadatele matricei la fiecare încărcare; alte matrici se resping onest până la validare separată. Localitățile nu fac parte din matricea validată. Intrarea CKAN a TEMPO e CC BY 4.0; întinderea ei asupra fluxului API direct rămâne de verificat.
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "ins_series", "arguments": {"territory": "Cluj"}}}
+```
+
+### `energy_offers`
+Comparatorul public POSF/ANRE de oferte de energie electrică pentru casnici: ofertele pe profilul de consum `consumptionMonthly` kWh/lună (implicit 200) în județul cerut — zona se rezolvă prin lista publicată de județe a POSF, nu hardcodat. Duplicatele integrale identice se deduplică onest (`duplicateIdenticalRows` servit); rândurile „prosumator" primesc flag, nu se elimină și nu se recomandă — prețul cel mai mic nu e o ofertă disponibilă oricui. Factura calculată de comparator (`valoare_factura_furnizor_fc`, cu `billBasisLei` ca bază de calcul declarată — ipoteză, nu factura utilizatorului), componentele de tarif și ferestrele de ofertare/licență rămân cum le publică sursa. Endpointul e clientul web public al comparatorului, nu un API cu contract de stabilitate verificat. Pagina ANRE care îl indică poartă o restricție de copiere fără acord scris; accesul anonim nu e dovadă de licență de reutilizare.
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "energy_offers", "arguments": {"county": "București"}}}
+```
+
+### `power_system`
+Observația live a sistemului energetic național (Transelectrica SEN): producție, consum și sold de schimb în MW, cu componentele de producție exact cum le publică sursa — reconcilierea completă a agregării nu e definită de contractul sursei și se declară în răspuns. `observedAt` parsează marcajul de timp al sursei (an cu două cifre) pe convenția declarată Europe/Bucharest, păstrând textul original alături; `observationAgeSeconds` măsoară observația, iar o vechime de 1–2 minute e normală la sursă, nu avarie. Soldul și puterea nu sunt tarife de energie sau cantități de facturat. Licență: neconfirmată.
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "power_system", "arguments": {}}}
 ```
 
 ### `film_detail`
@@ -208,7 +268,7 @@ Fișa Wikidata completă a unui film românesc pe Q-id; descoperă id-urile cu `
 ```
 
 ### `story_read`
-O lucrare din domeniul public (Wikisource RO), pe id descoperit cu `stories_list`.
+O lucrare din domeniul public (Wikisource RO), pe id descoperit cu `stories_list`. Corpul servit e corpul literar: navigația Wikisource (antetul dinamic cu „proiecte surori", subsolul printat de licență) e scoasă structural înainte de text — autorul, titlul, licența și capitolele rămân câmpuri separate ale fișei, iar proza păstrează ordinea paragrafelor sursei.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "story_read", "arguments": {"id": "11889"}}}
 ```
@@ -238,7 +298,7 @@ Registrul notarilor publici (CECNJ), pe cameră — camera se cere prin numele u
 ```
 
 ### `anl_housing`
-Registrul de locuințe ANL, pe județ.
+Registrul de locuințe ANL, pe județ. Fiecare amplasament are un `_id` stabil: hash-ul identității complet normalizate (județ + localitate + adresa întreagă, diacriticele pliate) — două adrese cu prefix comun dar localități diferite nu colizionează, variantele de diacritice ale aceluiași loc rămân un loc, iar anii de raportare nu intră în identitate (`_id`-ul nu se schimbă la actualizarea anuală; perioada servește separat).
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "anl_housing", "arguments": {"q": "bloc"}}}
 ```

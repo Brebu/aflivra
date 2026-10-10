@@ -230,7 +230,7 @@ try{
   console.log('LEG 3 — CKAN catalog: category coverage, dataset contract, raw keys confined to the labeled metadata dump');
   const categoriesModule=await compile('catalog-categories','lib/live/catalog-categories.ts');
   const validCategories=categoriesModule.catalogCategories.map(c=>c.id);
-  const remap={energie:'mediu',agricultura:'mediu',filme:'cultura',stiri:'justitie'};
+
   const inventory=JSON.parse(await readSnapshotFile(join(root,'public/catalog/index.json'),'utf8'));
   const catDist={},ids=new Set();let alte=0;
   for(const r of inventory.items){
@@ -295,11 +295,11 @@ try{
     if(typeof e.id!=='string'||!e.id||typeof e.title!=='string'||!e.title||typeof e.organization!=='string'||!e.organization||!Array.isArray(e.formats)||!Array.isArray(e.resources)||!Number.isInteger(e.resourceCount))bucket('ckan-seed-shape','fallback pool entries must carry the mapped dataset contract',e.id||'(no id)');
     if(Number(e.resourceCount)>((e.resources||[]).length))p2Overstated++;
     else if(Number(e.resourceCount)<((e.resources||[]).length))bucket('ckan-seed-count','payload may never exceed the declared CKAN resource count',e.id+' '+e.resourceCount+' < '+(e.resources||[]).length);
-    if(typeof e.category==='string'&&validCategories.includes(e.category))seedCats[e.category]=(seedCats[e.category]||0)+1;
-    else bucket('ckan-seed-shape','fallback pool category must map onto the 14 app categories',e.id+' '+e.category);
+    if(Array.isArray(e.categories)&&(e.categories.length===0||e.categories.every(c=>validCategories.includes(c))))for(const c of e.categories)seedCats[c]=(seedCats[c]||0)+1;
+    else bucket('ckan-seed-shape','fallback pool categories must be canonical app categories (empty = unclassified)',e.id+' ['+(e.categories||[])+']');
     if(typeof e.modified==='string'&&Number.isFinite(Date.parse(e.modified))){if(e.modified>=recentCutoff)seedRecent++}else bucket('ckan-seed-shape','modified must parse as a date',e.id);
   }
-  for(const c of validCategories)if(!seedCats[remap[c]||c])note('ckan-seed-category-empty:'+c,1);
+  for(const c of validCategories)if(!seedCats[c])note('ckan-seed-category-empty:'+c,1);
   if(seedPool.length&&!seedRecent)note('ckan-seed-recency-none',1);
   note('ckan-license-null',licenseNull);note('ckan-resource-last-modified-null',lastModifiedNull);note('ckan-resource-nameless',nameless);note('ckan-resource-formatless',formatless);note('ckan-resource-non-http',nonHttpUrls);note('ckan-resource-leading-dot-format',leadingDotFormats);note('ckan-seed-num-resources-overstated',p2Overstated);note('ckan-dataset-empty-resources',emptyResources);
   console.log('Catalog: '+inventory.items.length+' seturi în inventar, '+detailFiles+' fișiere detalii, '+ids.size+' id-uri unice; categorii acoperite: '+Object.keys(catDist).length+' din '+validCategories.length+' (alte: '+alte+'); cheile brute rămân în contractul etichetat; pool de rezervă: '+seedPool.length+' intrări ('+seedRecent+' recente, '+p2Overstated+' în clasa documentată num_resources > payload).');

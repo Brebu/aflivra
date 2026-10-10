@@ -101,16 +101,19 @@ try{
    'feed.agricultura':{harness:'verify-afir-relay.mjs',parity:'feeds/agricultura'},
   'directory.health':{parity:'directory/health'},'directory.pharmacies':{parity:'directory/pharmacies'},'directory.hospitals':{parity:'directory/hospitals'},
   'law.consolidated.full':{harness:'verify-legal-records.mjs'},
-  'catalog.organizations-formats':{harness:'verify-catalog.mjs'},'resource.datastores':{harness:'verify-downloads.mjs',parity:'resource/xml-table'},
+  'catalog.organizations-formats':{harness:'verify-catalog.mjs',parity:['catalog/ckan','catalog/agricultura-fallback']},'resource.datastores':{harness:'verify-downloads.mjs',parity:'resource/xml-table'},
    'transport.realtime':{parity:'transport/realtime'},'transport.tranzy':{parity:'transport/tranzy'},'transport.flights':{harness:'verify-relay-flights.mjs',parity:'flights/adsb'},'courts':{parity:'courts/portal.just'},'forecast':{parity:'weather/open-meteo'},
    'company-knowledge':{parity:['company/anaf','company/name-search']},
  'articles-stories-cinema':{parity:['stories/wikisource','cinema/cinemacity','feeds/agricultura']},
- 'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:['legal/law','legal/act-page']},
+ 'feeds.energie-transport':{parity:'feeds/stiri'},'datastore.pages':{parity:'directory/schools'},'law.search':{parity:['legal/law','legal/act-page','legal/year-filter']},
  'justice.notari':{parity:'justice/notari'},'justice.experti-judiciari':{parity:'justice/experti-judiciari'},
   'justice.experti-tehnici':{parity:'justice/experti-tehnici'},'justice.traducatori':{parity:'justice/traducatori'},
    'trains':{parity:'transport/trains'},'flights.bia':{parity:'flights/bia'},
    'events.venues':{parity:['events/operanationalacluj','events/search']},
-   'housing.anl':{parity:'housing/anl'},'housing.ancpi':{parity:'housing/ancpi'}};
+   'housing.anl':{parity:'housing/anl'},'housing.ancpi':{parity:'housing/ancpi'},
+   // Sursele noi (runda „surse românești"): membrii turelor au celulele VSE ale
+   // familiilor lor; corpusurile statice au poarta proprie de integritate.
+   'power.sen':{parity:'power/sen'},'posf.judete':{parity:'posf/offers'},'posf.offers.bucuresti':{parity:'posf/offers'},'ins.matrix.pop105a':{parity:'ins/tempo'}};
   const registryKeys=[...members,...groups.seedBacked.map(entry=>entry.family),...groups.onDemand.map(entry=>entry.family),...groups.ghRelayed.map(entry=>entry.family)];
  const uncovered=[];
  for(const key of new Set(registryKeys)){

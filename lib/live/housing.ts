@@ -1,3 +1,4 @@
+import {createHash} from 'node:crypto';
 import {getSource,SourceError} from './adapters';
 import {read,utils} from 'xlsx';
 import {downloadResource} from './resources';
@@ -136,6 +137,11 @@ export const ancpiLoader:Loader={key:'housing:ancpi',name:'ANCPI · dinamica ipo
 }};
 
 export const anlRecordId=(record:Record<string,unknown>):string=>{
- const yearKeys=Object.keys(record).filter(key=>/^(19|20)\d{2}$/.test(key)).sort();
- return 'anl-'+String(record['Judeţ']||'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-'+String(record['Amplasament']||'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,24)+(yearKeys.length?'-'+yearKeys[yearKeys.length-1]:'');
+ // Identitatea amplasamentului e perechea județ + localitate + adresă întreagă,
+ // pliată pe diacritice: doi amplasamente cu prefix comun de adresă dar localități
+ // diferite nu mai colizionează, variantele de diacritice ale aceluiași loc rămân
+ // un singur loc, iar anii de raportare nu fac parte din identitatea locului.
+ const fold=(v:unknown)=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+ const identity=[fold(record['Judeţ']),fold(record['Localitate']),fold(record['Amplasament'])].join('|');
+ return 'anl-'+createHash('sha256').update(identity).digest('hex').slice(0,16);
 };

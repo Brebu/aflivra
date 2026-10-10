@@ -12,8 +12,17 @@ import {matchesQuery,paginate} from './query';
 const seeds:Record<string,any>={...baseSeeds,...serverSeeds};
 let schoolRecords:any[]|null=null;
 function schoolSeed(key:string){const match=key.match(/^directory:schools:(.*):(\d+)$/),base=seeds['directory:schools'];if(!match||!base?.data?.records)return null;schoolRecords??=base.data.records.map((r:any)=>base.data.compact?Object.fromEntries(base.data.fields.map((field:string,i:number)=>[field,r[i]])):r);let query=match[1],context:any=null;try{const parsed=JSON.parse(query);if(parsed&&typeof parsed.q==='string'){query=parsed.q;context={...parsed,active:true,scope:'context'}}}catch{}const rows=schoolRecords!.filter(r=>matchesQuery(r,query)&&(!context||registryMatchesLocation(r,context,'schools'))),selection=paginate(rows,Number(match[2]),20);return{...base,data:{...base.data,...selection,items:undefined,records:selection.items,compact:false,paginated:true,pageSize:20,copyComplete:false,copyRecords:schoolRecords!.length,note:base.data.note+' Copia inițială verificată conține '+schoolRecords!.length+' înregistrări și câmpurile preluate atunci; nu este certificată ca registru integral. Se încearcă actualizarea API-ului.'}}}
-function getSeed(key:string){if(key.startsWith('resource:'))return validatedResourceCopy((resourceCopies as Record<string,any>)[key]);const school=schoolSeed(key);if(school)return school;if(key.startsWith('catalog:')){const m=key.match(/^catalog:(?:v2:)?([^:]*):(.*):(\d+)$/);if(m){const norm=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const category=({energie:'mediu',agricultura:'mediu',filme:'cultura',stiri:'justitie'} as Record<string,string>)[m[1]]||m[1];const rows=catalogSeed.filter(r=>(!category||r.category===category)&&(!m[2]||norm(r.title+' '+r.organization+' '+r.notes).includes(norm(m[2])))&&r.modified>=new Date(Date.now()-3*365.25*86400000).toISOString().slice(0,10));return{fetchedAt:'2026-10-04T07:11:39.637Z',publishedAt:rows[0]?.modified||null,data:{count:rows.length,results:rows.slice(Number(m[3])*24,Number(m[3])*24+24)}}}}return seeds[key]}
-export type Row={key:string;data:string|null;published_at:string|null;last_success_at:string|null;last_attempt_at:string|null;expires_at:number;next_attempt_at:number;failures:number;lock_until:number;error:string|null;adapter_version?:string};
+function getSeed(key:string){if(key.startsWith('resource:'))return validatedResourceCopy((resourceCopies as Record<string,any>)[key]);const school=schoolSeed(key);if(school)return school;if(key.startsWith('catalog:')){const m=key.match(/^catalog:(?:v2:)?([^:]*):(.*):(\d+)$/);if(m){
+   // Clasificarea de rezervă e inventarul verificat, cu categoriile multiple
+   // canonic — fără aliasuri care schimbă sensul categoriei cerute. Fereastra
+   // de trei ani rămâne politica de servire a fallback-ului, acum declarată
+   // onest în răspuns, cu baza totalului pe măsură.
+   const norm=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+   const category=m[1],text=m[2];
+   const seedRows=catalogSeed.filter(r=>!text||norm(r.title+' '+r.organization+' '+r.notes).includes(norm(text)));
+   const rows=seedRows.filter(r=>(!category||Array.isArray(r.categories)&&r.categories.includes(category))&&r.modified>=new Date(Date.now()-3*365.25*86400000).toISOString().slice(0,10));
+   return{fetchedAt:'2026-10-04T07:11:39.637Z',publishedAt:rows[0]?.modified||null,data:{count:rows.length,results:rows.slice(Number(m[3])*24,Number(m[3])*24+24),ageFilterApplied:true,totalBasis:{seedRows:seedRows.length,afterAgeFilter:rows.length}}}}}return seeds[key]}
+export type Row={key:string;data:string|null;published_at:string|null;last_success_at:string|null;last_attempt_at:string|null;expires_at:number;next_attempt_at:number;failures:number;lock_until:number;error:string|null;error_diagnostic?:string|null;adapter_version?:string};
 const iso=(n:number)=>n?new Date(n).toISOString():null;
 const roDate=(date:Date)=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Bucharest',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
 const afterNightBoundary=()=>Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Bucharest',hour:'2-digit',hourCycle:'h23'}).format(new Date()))>=3;
@@ -37,14 +46,18 @@ export async function publishLoaded(db:D1Database,loader:Loader,prior:Row|null,l
   // a previously validated payload with a narrower response.
   if(loaded.warning&&prior?.data)throw new SourceError(loaded.warning,retrySeconds);
   const stored=await storePayload(db,loader.key,loaded.data);
-  try{await db.prepare('UPDATE source_cache SET data=?,published_at=?,last_success_at=?,expires_at=?,next_attempt_at=?,failures=0,lock_until=0,error=?,adapter_version=? WHERE key=?').bind(stored.encoded,loaded.publishedAt,checked,loaded.warning?0:Date.now()+loader.ttl*1000,retrySeconds?Date.now()+retrySeconds*1000:0,loaded.warning||null,loader.version,loader.key).run()}
+  try{await db.prepare('UPDATE source_cache SET data=?,published_at=?,last_success_at=?,expires_at=?,next_attempt_at=?,failures=0,lock_until=0,error=?,error_diagnostic=null,adapter_version=? WHERE key=?').bind(stored.encoded,loaded.publishedAt,checked,loaded.warning?0:Date.now()+loader.ttl*1000,retrySeconds?Date.now()+retrySeconds*1000:0,loaded.warning||null,loader.version,loader.key).run()}
   catch(e){for(const key of stored.created)await db.prepare('DELETE FROM source_cache WHERE key=?').bind(key).run();throw e}
   try{await retireCopies(db,loader,prior,stored.encoded)}catch{/* Retention maintenance never invalidates a successfully published copy. */}
   return await view(loader,await db.prepare('SELECT * FROM source_cache WHERE key=?').bind(loader.key).first<Row>(),true);
 }
 async function view(loader:Loader,row:Row|null,fresh=false):Promise<SourceState>{
   const data=row?.data?await payload(env.DB!,row.data):null;
-  return{key:loader.key,name:loader.name,url:loader.url,adapterVersion:loader.version,status:!data?'unavailable':cachedCopyServes(row,loader.version)?fresh?'fresh':'cached':'stale',data,publishedAt:row?.published_at||null,lastSuccessAt:row?.last_success_at||null,lastAttemptAt:row?.last_attempt_at||null,nextAttemptAt:iso(row?.next_attempt_at||0),error:row?.error||null,ttlSeconds:loader.ttl};
+  let errorDiagnostic:import('./types').SourceState['errorDiagnostic']=null;
+  // Diagnoza structurată a sursei persistă separat de mesaj — categoria eșecului,
+  // codul HTTP, încercările — sanitizată, fără chei sau corpuri de cerere.
+  if(row?.error_diagnostic){try{errorDiagnostic=JSON.parse(row.error_diagnostic) as import('./types').SourceState['errorDiagnostic']}catch{errorDiagnostic=null}}
+  return{key:loader.key,name:loader.name,url:loader.url,adapterVersion:loader.version,status:!data?'unavailable':cachedCopyServes(row,loader.version)?fresh?'fresh':'cached':'stale',data,publishedAt:row?.published_at||null,lastSuccessAt:row?.last_success_at||null,lastAttemptAt:row?.last_attempt_at||null,nextAttemptAt:iso(row?.next_attempt_at||0),error:row?.error||null,errorDiagnostic,ttlSeconds:loader.ttl};
 }
 function fallback(loader:Loader,error:string):SourceState{const seed=getSeed(loader.key);return{key:loader.key,name:loader.name,url:loader.url,adapterVersion:loader.version,status:seed?'stale':'unavailable',data:seed?.data||null,publishedAt:seed?.publishedAt||null,lastSuccessAt:seed?.fetchedAt||null,lastAttemptAt:null,nextAttemptAt:null,error,ttlSeconds:loader.ttl}}
 async function budget(db:D1Database,key:string,limit:number){const windowStart=Math.floor(Date.now()/3600000)*3600000;const result=await db.prepare('INSERT INTO source_budget (key,window_start,used) VALUES (?,?,1) ON CONFLICT(key) DO UPDATE SET window_start=excluded.window_start, used=CASE WHEN source_budget.window_start=excluded.window_start THEN source_budget.used+1 ELSE 1 END WHERE source_budget.window_start<>excluded.window_start OR source_budget.used<? RETURNING used').bind(key,windowStart,limit).first();if(!result)throw new SourceError('Limita temporară de interogare a sursei a fost atinsă.',Math.ceil((windowStart+3600000-Date.now())/1000))}
@@ -69,11 +82,19 @@ export async function readSource(loader:Loader,options:{background?:boolean;wait
     if(loader.key.startsWith('forecast:'))await budget(db,'open-meteo',400);
    if(loader.key.startsWith('law:'))await budget(db,'legislation',120);
    if(loader.key.startsWith('court:'))await budget(db,'courts',60);
+   // Sursele noi (runda „surse românești"): TEMPO și POSF se interoghează cu zgârcenie
+   // (serii anuale, oferte pe zi), SEN e observație de minut — bugete separate, pe familie.
+   if(loader.key.startsWith('ins:'))await budget(db,'ins',60);
+   if(loader.key.startsWith('posf:'))await budget(db,'posf',60);
+   if(loader.key.startsWith('power:'))await budget(db,'transelectrica',120);
     if(loader.key.startsWith('catalog:')||loader.key.startsWith('resource:')||loader.key.startsWith('directory:schools')||loader.key.startsWith('justice:')||loader.key.startsWith('housing:'))await budget(db,'ckan',500);
     const loaded=await loader.load();if(loader.key.startsWith('company:')&&old?.data){const prior=JSON.parse(old.data),current=loaded.data;const years=new Map<number,any>((prior.history||[]).filter((h:any)=>h.year>=new Date().getUTCFullYear()-3).map((h:any)=>[h.year,h]));for(const h of current.history||[])years.set(h.year,h);current.history=[...years.values()].sort((a:any,b:any)=>a.year-b.year);const last=current.history.at(-1);if(last){current.year=last.year;current.indicators=last.entries;current.financialCaen=last.caen;loaded.publishedAt=String(last.year)}if(!current.queriedDate&&prior.queriedDate){for(const key of ['address','registration','currentCaen','vat','vatFrom','vatTo','inactive','phone','fax','postalCode','registrationState','legalForm','organizationForm','taxAuthority','registrationDate','registryDetails','publicRegistries'])current[key]=prior[key]??current[key];current.queriedDate=prior.queriedDate;current.warnings.push('Identitatea fiscală păstrează ultima verificare validă din '+prior.queriedDate+'.')}if(!current.caenLabel&&last?.caenLabel)current.caenLabel=last.caenLabel}
     return await publishLoaded(db,loader,old,loaded);
   }catch(e){const failures=(old?.failures||0)+1;const delay=Math.max(Math.min(60*2**Math.min(failures-1,6),3600),e instanceof SourceError?e.retryAfter:0);const error=e instanceof SourceError?e.message:'Sursa nu a putut fi verificată. Păstrăm ultima copie validă.';
-   await db.prepare('UPDATE source_cache SET failures=?,next_attempt_at=?,expires_at=0,lock_until=0,error=?,adapter_version=? WHERE key=?').bind(failures,Date.now()+delay*1000,error,loader.version,loader.key).run();
+   // A30: diagnoza structurată a sursei se persistă sanitizată, separat de mesaj —
+   // fără chei, fără headers de autorizare, fără corpuri de cerere sau răspuns.
+   const failed=e instanceof SourceError&&e.diagnostic?{sourceKey:loader.key,stage:'load' as const,category:e.diagnostic.category,...(e.diagnostic.httpStatus!==undefined?{httpStatus:e.diagnostic.httpStatus}:{}),...(e.diagnostic.attempts!==undefined?{attempts:e.diagnostic.attempts}:{}),...(e.diagnostic.server!==undefined&&e.diagnostic.server!==null?{server:e.diagnostic.server}:{}),...(e.diagnostic.rayId!==undefined&&e.diagnostic.rayId!==null?{rayId:e.diagnostic.rayId}:{}),retryAfterSeconds:delay,observedAt:new Date().toISOString()}:null;
+   await db.prepare('UPDATE source_cache SET failures=?,next_attempt_at=?,expires_at=0,lock_until=0,error=?,error_diagnostic=?,adapter_version=? WHERE key=?').bind(failures,Date.now()+delay*1000,error,failed?JSON.stringify(failed):null,loader.version,loader.key).run();
    return await view(loader,await db.prepare('SELECT * FROM source_cache WHERE key=?').bind(loader.key).first<Row>());
   }};
   const ctx=liveContext();if(ctx&&!options.waitForRefresh&&(old?.data||options.background)){ctx.waitUntil(refresh());return await view(loader,await db.prepare('SELECT * FROM source_cache WHERE key=?').bind(loader.key).first<Row>())}return await refresh();

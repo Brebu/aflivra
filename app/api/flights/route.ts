@@ -8,11 +8,14 @@ export async function GET(request:Request){
  const state=await readSource(adsbFlightsLoader);
  if(state.data){
   const now=Date.now(),rows=state.data.items.filter((r:any)=>matchesQuery({callsign:r.callsign,registration:r.registration,type:r.typeCode,squawk:r.squawk,hex:r.hex},q));
-  const isLive=state.status!=='stale'&&now-Date.parse(state.data.observedAt)<120000;
-  // Vechimea onestă a copiei reîmprospătate prin intermediar: minutele de la ultima
-  // preluare validă, alături de lista servită — niciodată revendicarea de „acum”.
-  const stalenessMinutes=isLive||!state.lastSuccessAt?null:Math.max(0,Math.round((now-Date.parse(state.lastSuccessAt))/60000));
-  state.data={...state.data,...paginate(rows,page,60),isLive,...(stalenessMinutes!==null?{stalenessMinutes}:{})};
+  // Contractul de vârste e comun fluxurilor de poziții: vechimea OBSERVAȚIEI
+  // (față de momentul observat) și vechimea PRELUĂRII (față de ultima reușită),
+  // distincte — poziții vechi nu par proaspete doar pentru că preluarea e nouă.
+  const isLive=state.status!=='stale'&&now-Date.parse(state.data.observedAt)<120000,
+   observationAgeSeconds=isLive?null:Math.max(0,Math.floor((now-Date.parse(state.data.observedAt))/1000)),
+   fetchedAgeSeconds=isLive||!state.lastSuccessAt?null:Math.max(0,Math.floor((now-Date.parse(state.lastSuccessAt))/1000)),
+   stalenessMinutes=observationAgeSeconds===null?null:Math.round(observationAgeSeconds/60);
+  state.data={...state.data,...paginate(rows,page,60),isLive,...(observationAgeSeconds!==null?{observationAgeSeconds,fetchedAgeSeconds,stalenessMinutes}:{}),...(state.data.observedMinAt?{observationTimeRange:{min:state.data.observedMinAt,max:state.data.observedMaxAt}}:{})};
  }
  return Response.json(state,{headers:{'Cache-Control':'no-store'}});
 }

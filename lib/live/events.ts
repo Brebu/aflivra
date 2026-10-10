@@ -4,10 +4,10 @@ export type EventVenueKind='jsonld'|'tribe-events-v1';
 // `address` and `placeId` are validated at registry-commit time — the address against
 // the institution's own published contact page, the placeId against the committed
 // OSM record id — never name-matched at runtime.
-export type EventVenue={id:string;name:string;short:string;type:string;city:string;county:string;address?:string;latitude:number;longitude:number;url:string;kind:EventVenueKind;placeId?:string};
+export type EventVenue={id:string;name:string;short:string;aliases?:string[];type:string;city:string;county:string;address?:string;latitude:number;longitude:number;url:string;kind:EventVenueKind;placeId?:string};
 export const eventVenues=venuesCatalog.items as EventVenue[];
 const foldVenue=(v:unknown)=>String(v??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
-export function eventVenue(id:string){const key=foldVenue(id);return eventVenues.find(venue=>venue.id===String(id).trim()||foldVenue(venue.short)===key||foldVenue(venue.name)===key)||null}
+export function eventVenue(id:string){const key=foldVenue(id);return eventVenues.find(venue=>venue.id===String(id).trim()||foldVenue(venue.short)===key||foldVenue(venue.name)===key||(venue.aliases||[]).some(alias=>foldVenue(alias)===key))||null}
 const venueHost=(venue:EventVenue)=>new URL(venue.url).hostname.replace(/^www\./,'');
 const venueCalendar=(venue:EventVenue)=>venue.kind==='tribe-events-v1'?venue.url+'wp-json/tribe/events/v1/events?per_page=100&status=publish':venue.url;
 const publishedOn=(url:unknown,venue:EventVenue)=>{const link=publicUrl(url);if(!link)return '';return new URL(link).hostname.replace(/^www\./,'').endsWith(venueHost(venue))?link:''};
@@ -25,7 +25,11 @@ export function parseEvents(raw:string,venue:EventVenue=eventVenue('odeon') as E
   for(const item of rows){if(!/Event/.test(String(item['@type']))||!item.name||!item.startDate)continue;const url=publishedOn(item.url,venue);if(!url)continue;const start=localStamp(item.startDate);if(!start)continue;
    const image=publishedOn(typeof item.image==='string'?item.image:item.image?.url,venue);
    const offers=Array.isArray(item.offers)?item.offers[0]:item.offers;
-   items.push({...item,id:String(item['@id']||url),title:sourceText(item.name),content:sourceText(item.description||''),start,end:localStamp(item.endDate||''),url,ticketUrl:publicUrl(offers?.url)||undefined,media:image?[{kind:'image',url:image,caption:sourceText(item.name),sourceUrl:url,credit:venue.name+' · materialul publicat de instituție'}]:[],sourceName:venue.name,venue:venue.id});
+   // Programul publicat cu ziua, fără oră: data se păstrează, ora rămâne neanunțată
+   // (timeKnown:false). Prețul zero nu dovedește gratuit — priceKnown cere preț pozitiv.
+   const dayOnly=typeof item.startDate==='string'&&!item.startDate.includes('T');
+   const publishedPrice=typeof offers?.price==='string'||typeof offers?.price==='number'?String(offers.price):null;
+   items.push({...item,id:String(item['@id']||url),title:sourceText(item.name),content:sourceText(item.description||''),start,end:localStamp(item.endDate||''),url,ticketUrl:publicUrl(offers?.url)||undefined,timeKnown:!dayOnly,...(publishedPrice!==null?{price:publishedPrice,priceCurrency:offers.priceCurrency||null,priceKnown:Number(publishedPrice)>0}:{}),media:image?[{kind:'image',url:image,caption:sourceText(item.name),sourceUrl:url,credit:venue.name+' · materialul publicat de instituție'}]:[],sourceName:venue.name,venue:venue.id});
    }
   }
  if(!items.length)throw new SourceError('Calendarul teatrului nu a transmis spectacole verificabile.');
@@ -40,8 +44,12 @@ export function parseTribeEvents(raw:string,venue:EventVenue):Loaded{
   // The institution publishes the same occurrence in both languages; the Romanian edition carries it, the /en/ edition repeats it.
   if(new URL(url).pathname.split('/').includes('en'))return null;
   const image=publishedOn(item.image?.url,venue);
+  // Apele la fel: data publicată fără oră rămâne fără oră; costul textual se
+  // păstrează, iar priceKnown cere un preț pozitiv publicat — zero nu e gratuit dovedit.
+  const dayOnlyTribe=typeof item.start_date==='string'&&!item.start_date.includes(' ');
+  const costText=typeof item.cost==='string'?item.cost.trim():'';
   const category=[item.categories].flat().filter(Boolean).map((entry:any)=>sourceText(entry.name)).find(Boolean);
-  return {...item,id:String(item.id||item.global_id||url),title:sourceText(item.title),content:sourceText(item.description||item.excerpt||''),start,end:localStamp(item.end_date||''),url,ticketUrl:publicUrl(item.website)||undefined,category,media:image?[{kind:'image',url:image,caption:sourceText(item.title),sourceUrl:url,credit:venue.name+' · materialul publicat de instituție'}]:[],sourceName:venue.name,venue:venue.id};
+  return {...item,id:String(item.id||item.global_id||url),title:sourceText(item.title),content:sourceText(item.description||item.excerpt||''),start,end:localStamp(item.end_date||''),url,ticketUrl:publicUrl(item.website)||undefined,timeKnown:!dayOnlyTribe,...(costText?{price:costText,priceCurrency:null,priceKnown:Number(costText.replace(/[^\d.]/g,''))>0}:{}),category,media:image?[{kind:'image',url:image,caption:sourceText(item.title),sourceUrl:url,credit:venue.name+' · materialul publicat de instituție'}]:[],sourceName:venue.name,venue:venue.id};
   }).filter((item:any)=>item);
  if(!items.length)throw new SourceError('Calendarul instituției nu a transmis spectacole verificabile.');
  return {publishedAt:null,data:{venue,items:uniqueSorted(items),publishedTotal:Number.isFinite(Number(parsed?.total))?Number(parsed.total):items.length,sourceUrl:venue.url,note:'Program publicat de '+venue.name+' prin calendarul public al instituției (edițiile în limba română). Ore locale; spectacolele se pot modifica.'}};

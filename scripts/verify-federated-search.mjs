@@ -30,7 +30,7 @@ try{
    .replace("from '@/lib/live/query'","from './query'")
    .replace("from '@/lib/dashboard-topics'","from './topics'"));
   const {federatedSearch,federatedCollect,federatedFamilies,federatedGroups,courtNumberTerm,validDomainTab,federatedRoute,venueForPlaceRecord}=federated;
-  const networkIds=['places','catalog','lawyers','directory-schools','directory-health','directory-pharmacies','directory-hospitals','stiri','agricultura','notaries','experts-judiciari','experts-tehnici','translators','trains','flights','events','anl-sites'];
+  const networkIds=['places','catalog','lawyers','directory-schools','directory-health','directory-pharmacies','directory-hospitals','stiri','agricultura','notaries','experts-judiciari','experts-tehnici','translators','trains','flights','events','anl-sites','energy-offers','power-system'];
  const eagerIds=['stories','gallery','cui','dosare'];
  const familyIds=[...networkIds,...eagerIds].sort();
 

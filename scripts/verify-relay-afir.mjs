@@ -32,7 +32,7 @@ const groups=JSON.parse(await readFile(join(root,'lib/live','refresh-groups.json
 const members=groups.groups.flatMap(group=>group.members);
 assert.deepEqual(groups.ghRelayed.map(entry=>entry.family),['feed.agricultura','transport.flights','flights.bia'],'AFIR, the Romanian airspace flight states and the BIA airport board are classified ghRelayed — each sits behind its own relay tour with its own runner');
 assert.ok(!members.includes('feed.agricultura'),'the relayed family left the cron sweep: the relay is the single writer of its freshness');
-assert.equal(groups.groups.find(group=>group.name==='registers').estimatedSubrequests,30,'the registers estimate dropped with the relayed member');
+assert.equal(groups.groups.find(group=>group.name==='registers').estimatedSubrequests,31,'the registers estimate covers its five members, including the TEMPO matrix (surse noi)');
 const routeHarness=await readFile(join(root,'scripts','verify-afir-relay.mjs'),'utf8');
 assert.ok(routeHarness.includes('stored')&&routeHarness.includes('failed'),'the route-side harness pins the stored/failed reply contract this runner consumes');
 

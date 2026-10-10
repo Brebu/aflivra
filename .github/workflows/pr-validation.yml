@@ -1,7 +1,37 @@
 name: pr-validation
 
+# Bateria offline rulează la fiecare PR pe main (doar căile care poartă cod,
+# scripturi, date-contract sau docs MCP — un PR de proză nu arde minute de CI)
+# și la fiecare push pe main după fuziune, ca gardă post-merge. Declanșarea
+# manuală rămâne pentru reluări țintite; auditul live rămâne separat/programat.
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'lib/**'
+      - 'e2e/**'
+      - 'scripts/**'
+      - 'drizzle/**'
+      - 'public/**'
+      - 'docs/mcp.md'
+      - '.github/workflows/pr-validation.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'lib/**'
+      - 'e2e/**'
+      - 'scripts/**'
+      - 'drizzle/**'
+      - 'public/**'
+      - 'docs/mcp.md'
+      - '.github/workflows/pr-validation.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
 
 permissions:
   contents: read
@@ -81,6 +111,7 @@ jobs:
           node scripts/verify-court-links.mjs
           node scripts/verify-packed-seeds.mjs
           node scripts/verify-twa.mjs
+          node scripts/verify-surse-noi-corpus.mjs
           node scripts/verify-mcp.mjs
           node scripts/verify-watch-sweep.mjs
           node scripts/verify-watch-api.mjs
