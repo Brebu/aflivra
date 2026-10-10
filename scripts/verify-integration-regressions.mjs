@@ -56,6 +56,31 @@ await group('workflow — N01 corpora-refresh real dirs, staged diff, changed ga
   const tops=['name','on','permissions','concurrency','jobs','env','defaults'];
   const offenders=source.split('\n').map((line,index)=>[index+1,line]).filter(([number,line])=>line&&!/^[\s#-]/.test(line)&&!tops.some(key=>line===key||line.startsWith(key+':')));
   assert.equal(offenders.length,0,workflowFile+': niciun conținut de bloc scurs la coloana zero (linii: '+offenders.map(([number])=>number).join(', ')+') — altfel GitHub nu mai poate parsa workflow-ul și tura de noapte moare tăcut');
+  // Shell-valid înainte de runtime: fiecare bloc `run: |` e script bash compus de
+  // GitHub abia la execuție, deci o eroare de sintaxă (un ghilimel ASCII care
+  // închide un șir „tipografic” a rămas nevăzută până la primul run cu schimbări).
+  // Neutralizăm expresiile `${{ … }}` înainte de bash -n — nu sunt shell.
+  const lines=source.split('\n');
+  for(let index=0;index<lines.length-1;index++){
+   if(!/^\s*run:\s*\|\s*$/.test(lines[index]))continue;
+   const indent=/^(\s*)/.exec(lines[index])?.[1].length;
+   const body=[];
+   for(let cursor=index+1;cursor<lines.length;cursor++){
+    const line=lines[cursor];
+    if(line.trim()===''||(line.length>=indent+2&&line.startsWith('\u0020'.repeat(indent+2))))body.push(line.slice(Math.min(indent+2,line.length)));
+    else break;
+   }
+   const step=lines.slice(Math.max(0,index-4),index+1).reverse().find(line=>/- name:/.test(line))||'(pas fără nume)';
+   const rendered=body.join('\n').replace(/\$\{\{[^}]*\}\}/g,'__GH_EXPR__');
+   const{spawnSync}=await import('node:child_process');
+   const os=await import('node:os'),path=await import('node:path'),fs=await import('node:fs');
+   const dir=fs.mkdtempSync(os.tmpdir()+'/wf-probe-');
+   const file=path.join(dir,'step.sh');
+   fs.writeFileSync(file,rendered);
+   const check=spawnSync('bash',['-n',file],{encoding:'utf8'});
+   fs.rmSync(dir,{recursive:true,force:true});
+   assert.equal(check.status,0,workflowFile+' · '+(step.trim()||'run block')+' — bash -n a respins scriptul pasului: '+(check.stderr||'').trim().slice(0,300));
+  }
  }
  assert.match(yml,/git add public\/situr public\/amccrs public\/eida public\/lmi public\/data\/snapshot-transport\.json/,'staging must use the real corpus directories');
  assert.match(yml,/git diff --cached --quiet/,'the quiet-day check must compare the staged tree, so new files register too');
