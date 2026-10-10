@@ -15,6 +15,15 @@ patterns = [
     "catalog/index.json",
     "trains/stations.json",
     "trains/boards/**/*.json",
+    # Sursele noi (runda „surse românești"): corpusurile statice comise de scripturile
+    # de import — registry-ul se reconstruiește la build, deci ele trebuie aici, altfel
+    # build-ul le șterge dovada.
+    "situr/cazare.json",
+    "situr/alimentatie.json",
+    "situr/agentii.json",
+    "amccrs/buildings.json",
+    "eida/seismic.json",
+    "lmi/monuments-bucuresti.json",
 ]
 paths = set()
 for pattern in patterns:
