@@ -76,7 +76,9 @@ export async function registerPrefix(files,prefix){
  registry.items=next;
  registry.originalBytes=registry.items.reduce((n,item)=>n+item.bytes,0);
  registry.storedBytes=registry.items.reduce((n,item)=>n+item.storedBytes,0);
- const candidate=JSON.stringify(registry)+'\n';
+ // Forma canonică e cea pe care o scrie pașul de build (fără newline final) — altfel
+ // importul și build-ul ar alternanta octetul, iar ziua liniștită nu ar mai fi byte-stabilă.
+ const candidate=JSON.stringify(registry);
  if(candidate!==rawText)await writeFile(registryPath,candidate);
 }
 
