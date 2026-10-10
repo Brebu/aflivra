@@ -61,6 +61,15 @@ pauza), fără chei sau corpuri de cerere, ca degradarea să fie analizabilă, n
 (administrativ), fișierele GTFS integrale (`transit-file` — mase de rânduri care nu încap
 într-o conversație) și diagnosticul UI `/api/live`. Toată suprafața publică de date e mai jos.
 
+## Paritate MCP ↔ UI
+
+Orice rută pe care o expune un tool MCP este accesibilă și prin interfața aplicației —
+workspace-ul „Registre oficiale" (meniul principal) suprafațează sursele românești,
+iar poarta `scripts/verify-mcp-ui-parity.mjs` (în CI) refuză orice tool viitor care
+ar ajunge în conector fără suprafață de interfață: rutele se extrag din propriile
+build-uri ale tool-urilor, iar echivalențele (snapshot-uri offline comune) se
+verifică mecanic, nu se declară.
+
 ## Tool-uri (41)
 
 ### `search_companies`
