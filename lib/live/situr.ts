@@ -2,9 +2,9 @@ import {createHash} from 'node:crypto';
 import {env} from 'cloudflare:workers';
 import {SourceError} from './adapters';
 import {snapshotAssetPath,decodeSnapshotBytes} from '../snapshot-transport';
-import {normalizeSearch,paginate} from './query';
+import {paginate} from './query';
 import {countyName} from '../geographic-scope';
-import {foldTrainText} from './trains'
+import {foldTrainText} from './trains';
 import proofs from '@/public/data/snapshot-transport.json';
 
 /*
@@ -76,16 +76,19 @@ export const siturRecord=(payload:SiturPayload,row:SiturRow)=>{
 export type SiturQuery={kind:SiturKind;q?:string;locality?:string;county?:string;page?:number};
 
 export async function readSitur(query:SiturQuery,base:string){
- const payload=await readSiturKind(query.kind,base);
- const records=payload.rows.map(row=>siturRecord(payload,row));
- const county=query.county?countyName(query.county):'';
- const term=foldTrainText(query.q||''),locality=foldTrainText(query.locality||'');
- const filtered=records.filter(record=>{
-  if(county&&foldTrainText(record.judet)!==normalizeSearch(county))return false;
-  if(locality&&!foldTrainText(record.localitate).includes(locality)&&!foldTrainText(record.componenta).includes(locality))return false;
-  if(term&&!foldTrainText(record.denumire+' '+record.operator+' '+record.localitate+' '+record.componenta+' '+record.judet+' '+(record.cui??'')).includes(term))return false;
-  return true;
- });
+  const payload=await readSiturKind(query.kind,base);
+  const records=payload.rows.map(row=>siturRecord(payload,row));
+  // Județul se canonicizează pe ambele părți ale comparației: „MUNICIPIUL
+  // BUCUREŞTI” înregistrat și „București” cerut sunt același județ — registrul
+  // folosește ambele forme de diacritice și prefixul de municipiu.
+  const county=query.county?countyName(query.county):'';
+  const term=foldTrainText(query.q||''),locality=foldTrainText(query.locality||'');
+  const filtered=records.filter(record=>{
+   if(county&&countyName(record.judet)!==county)return false;
+   if(locality&&!foldTrainText(record.localitate).includes(locality)&&!foldTrainText(record.componenta).includes(locality))return false;
+   if(term&&!foldTrainText(record.denumire+' '+record.operator+' '+record.localitate+' '+record.componenta+' '+record.judet+' '+(record.cui??'')).includes(term))return false;
+   return true;
+  });
  const page=paginate(filtered,query.page,20);
  return {
   sourceUrl:payload.sourceUrl,exportDate:payload.exportDate,pageDate:payload.pageDate,fetchedAt:payload.fetchedAt,license:payload.license,licenseNote:payload.licenseNote,

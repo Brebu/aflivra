@@ -1,4 +1,5 @@
 import {readSitur,SITUR_KINDS,type SiturKind} from '@/lib/live/situr';
+import {countyName} from '@/lib/geographic-scope';
 export const dynamic='force-dynamic';
 
 const envelopeBase={name:'Situr · registrele turistice clasificate',url:'https://se.situr.gov.ro/OpenData',adapterVersion:'situr.registries.v1',ttlSeconds:86400};
@@ -8,6 +9,9 @@ export async function GET(request:Request){
  const kindRaw=p.get('kind')||'',q=p.get('q')||'',locality=p.get('locality')||'',county=p.get('county')||'',page=Number(p.get('page')||0);
  if(!SITUR_KINDS.includes(kindRaw as SiturKind))return Response.json({error:'Argumentul "kind" trebuie să fie unul dintre: cazare, alimentatie, agentii.'},{status:400});
  if(q.length>200||locality.length>100||county.length>100||!Number.isInteger(page)||page<0||page>100000)return Response.json({error:'Filtre invalide.'},{status:400});
+ // Un județ explicit nerecunoscut se respinge: o cerere pe „Atlantis" nu se servește
+ // tăcut ca selecție națională, iar registrul nu are un județ cu alt nume.
+ if(county.trim()&&!countyName(county))return Response.json({error:'Argumentul "county" nu este un județ recunoscut al României.'},{status:400});
  const kind=kindRaw as SiturKind;
  try{
   const data=await readSitur({kind,q,locality,county,page},request.url);

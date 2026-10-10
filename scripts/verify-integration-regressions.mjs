@@ -121,6 +121,81 @@ await group('sen-route — D01/D06 contract al rutei /api/power',async()=>{
  delete globalThis.__regressionsReadSource;
 });
 
+await group('situr-county — D02 canonicizarea județului pe ambele părți, 387 la alimentație',async()=>{
+ const base='https://regressions.local/';
+ let corpusFetches=0;
+ globalThis.__regressionsEnv={};
+ globalThis.fetch=async url=>{const href=url instanceof Request?url.url:String(url);const m=href.match(/\/situr\/(cazare|alimentatie|agentii)\.json/);if(!m)return new Response(null,{status:404});corpusFetches++;return new Response(new Uint8Array(await readFile(join(root,'public/situr/'+m[1]+'.json.gz'))))};
+ const situr=await load('lib/live/situr.ts');
+ try{
+  for(const spelling of ['București','Bucuresti','MUNICIPIUL BUCUREŞTI','B']){
+   const result=await situr.readSitur({kind:'alimentatie',county:spelling},base);
+   assert.equal(result.total,387,'alimentatie București se selectează pentru orice variantă de scriere a județului: '+spelling);
+   assert.equal(result.filters.applied,true);
+  }
+  assert.equal((await situr.readSitur({kind:'alimentatie',county:'București',page:19},base)).items.length,387-19*20,'ultima pagină a selecției București rămâne 7 rânduri, paginarea se păstrează');
+  const shown=await situr.readSitur({kind:'alimentatie',county:'București'},base);
+  assert.match(shown.items[0].judet,/BUCURE[ȘŞ]TI/i,'județul original al rândului se păstrează în câmpul afișat, necanonicizat');
+  assert.ok(shown.items.every(item=>/BUCURE[ȘŞ]TI/i.test(item.judet)),'selecția nu strecoară rânduri din alt județ');
+  assert.equal((await situr.readSitur({kind:'alimentatie',county:'Brașov'},base)).total,607,'județ de control: Brașov');
+  assert.equal((await situr.readSitur({kind:'alimentatie',county:'Cluj'},base)).total,676,'județ de control: Cluj');
+  assert.equal((await situr.readSitur({kind:'alimentatie',county:'Ilfov'},base)).total,74,'județ de control: Ilfov');
+  assert.equal((await situr.readSitur({kind:'cazare',county:'București'},base)).total,2491,'registru de control: cazare București (rânduri de registru, nu firme distincte)');
+  assert.equal((await situr.readSitur({kind:'agentii',county:'București'},base)).total,893,'registru de control: agenții București');
+  const combined=await situr.readSitur({kind:'alimentatie',county:'București',locality:'bucuresti'},base);
+  assert.equal(combined.total,386,'filtrul de localitate nu rupe selecția canonicizată pe județ; singurul rând exclus (SAIDOUN) are localitatea vidă chiar în exportul oficial — gol de sursă, nu eroare de selecție');
+  const unknown=await situr.readSitur({kind:'alimentatie',county:'Atlantis'},base);
+  assert.equal(unknown.filters.county,'Atlantis','județul necunoscut nu se transformă tăcut în selecție națională la nivel de filtru — răspunsul rămâne onest despre cerere');
+  const before=corpusFetches;
+  const route=await load('app/api/tourism/route.ts');
+  const bad=new Request('https://regressions.local/api/tourism?kind=alimentatie&county=Atlantis');
+  const response=await route.GET(bad);
+  assert.equal(response.status,400,'un județ explicit nerecunoscut se respinge cu 400, nu se servește național');
+  assert.equal(corpusFetches,before,'județul invalid NU declanșează citirea corpusului');
+  const good=await route.GET(new Request('https://regressions.local/api/tourism?kind=alimentatie&county=MUNICIPIUL BUCUREŞTI'));
+  const body=await good.json();
+  assert.equal(good.status,200);assert.equal(body.data.total,387,'ruta integrală servește cele 387 de rânduri pe varianta cu prefix');
+ }finally{delete globalThis.fetch;delete globalThis.__regressionsEnv}
+});
+
+await group('lawyers-county — D04 county singur activează baroul în ddlCompany',async()=>{
+ const route=await load('app/api/lawyers/route.ts');
+ const {createHash}=await import('node:crypto');
+ const captured=[];let scenarioSource=null;
+ globalThis.__regressionsReadSource=async loader=>{captured.push(loader);return scenarioSource};
+ const keyOf=(q,page,sort,barCounty)=>'lawyers:'+createHash('sha256').update(JSON.stringify({q,page,sort,barCounty})).digest('hex');
+ const plumbed=extra=>({key:'lawyers:x',name:'IFEP',url:'https://www.ifep.ro/Justice/Lawyers',adapterVersion:'ifep.public-search.v2',storedAdapterVersion:'ifep.public-search.v2',status:'fresh',publishedAt:null,lastSuccessAt:new Date().toISOString(),lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:3600,...extra});
+ const item=(name,bar)=>({name,title:'Avocat definitiv '+name+', Baroul '+bar+' [activ]',paragraphs:['Sediu principal: București, Strada Exemplu nr. 3'],updatedAt:'05-10-2026 12:12'});
+ try{
+  scenarioSource=plumbed({data:{items:[item('POPESCU Ana','București')],total:285,page:0,pages:19,barScope:'București'}});
+  let response=await route.GET(new Request('https://r.local/api/lawyers?q=popescu&county=București'));
+  let body=await response.json();
+  assert.equal(response.status,200);
+  assert.equal(captured.at(-1).key,keyOf('popescu',0,'recent','București'),'county singur ajunge în cheia loaderului cu baroul canonic — formularul IFEP primește ddlCompany');
+  assert.equal(body.data.barScope,'București','sursa a aplicat baroul: totalul și paginarea descriu selecția locală');
+  assert.equal(body.data.note,undefined,'fără fallback când sursa suportă baroul');
+  response=await route.GET(new Request('https://r.local/api/lawyers?q=popescu&locality=București'));
+  body=await response.json();
+  assert.equal(captured.at(-1).key,keyOf('popescu',0,'recent','București'),'localitatea singură își păstrează ruta istorică prin baroul rezolvat din localitate');
+  assert.equal(body.data.total,285);
+  const upstreamBefore=captured.length;
+  response=await route.GET(new Request('https://r.local/api/lawyers?q=popescu&county=Atlantis'));
+  assert.equal(response.status,400,'județ explicit invalid → 400');
+  assert.equal(captured.length,upstreamBefore,'județul invalid nu declanșează niciun apel upstream');
+  scenarioSource=plumbed({data:{items:[item('POPESCU Ana','București')],total:542,page:0,pages:37}});
+  response=await route.GET(new Request('https://r.local/api/lawyers?q=popescu&county=București&geoScope=national'));
+  body=await response.json();
+  assert.equal(captured.at(-1).key,keyOf('popescu',0,'recent',''),'geoScope=national rămâne național explicit — baroul nu se aplică');
+  assert.equal(body.data.items.length,1);assert.equal(body.data.note,undefined);
+  scenarioSource=plumbed({data:{items:[item('POPESCU Ana','București'),item('POPESCU Mihai','Cluj')],total:542,page:0,pages:37}});
+  response=await route.GET(new Request('https://r.local/api/lawyers?q=popescu&county=București'));
+  body=await response.json();
+  assert.equal(body.data.sourceTotal,542,'fallback-ul păstrează totalul sursei naționale');
+  assert.equal(body.data.items.length,1,'fallback-ul filtrează pagina națională la potrivirile baroului');
+  assert.match(body.data.note,/baroul București/,'nota declară baroul neaplicat de sursă');
+ }finally{delete globalThis.__regressionsReadSource}
+});
+
 try{
  let failed=0;for(const g of groups)if(g.status==='fail'){failed++;console.error('  '+g.name+' :: '+g.message)}
  if(failed){console.error('verify-integration-regressions: '+failed+' of '+groups.length+' groups failed');process.exitCode=1}
