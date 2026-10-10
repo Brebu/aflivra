@@ -53,7 +53,10 @@ const ARGUMENTS = {
   transport_network: {kind: 'routes', locality: 'București', county: 'București'},
   transport_positions: {kind: 'vehicles', county: 'București', locality: 'București'},
   tranzy_live: {locality: 'Iași', county: 'Iași'},
-  flights_status: {q: 'W6'},
+  // Fără filtru q: fotografia de relaie conține aeronavele de acoperire națională,
+  // dar un anumit indicator poate fi legitim absent din cer (o căutare fără potriviri
+  // rămâne succes onest cu total 0 — nicidecum încălcare semantică).
+  flights_status: {},
   flight_board: {airport: 'henri-coanda'},
   trains_schedule: {},
   legal_acts: {},
