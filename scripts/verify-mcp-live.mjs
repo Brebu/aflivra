@@ -53,10 +53,10 @@ const ARGUMENTS = {
   transport_network: {kind: 'routes', locality: 'București', county: 'București'},
   transport_positions: {kind: 'vehicles', county: 'București', locality: 'București'},
   tranzy_live: {locality: 'Iași', county: 'Iași'},
-  // Fără filtru q: fotografia de relaie conține aeronavele de acoperire națională,
-  // dar un anumit indicator poate fi legitim absent din cer (o căutare fără potriviri
-  // rămâne succes onest cu total 0 — nicidecum încălcare semantică).
-  flights_status: {},
+  // Orice indicator cerut poate fi legitim absent din cer (o căutare fără potriviri
+  // rămâne succes onest cu total 0); integritatea fluxului o probează entityCount —
+  // fotografia completă de acoperire, independent de filtru.
+  flights_status: {q: 'W6'},
   flight_board: {airport: 'henri-coanda'},
   trains_schedule: {},
   legal_acts: {},
@@ -187,11 +187,12 @@ const PROBE = {
   },
   flights_status: (envelope) => {
     // Ruta servește plicul de stare cu data.items (ca toate sursele cache-uite);
-    // copia de relaie aeronavele tot acolo le poartă.
+    // entityCount e fotografia completă, q filtrează pe deasupra ei.
+    const data = dataOf(envelope);
     const items = itemsOf(envelope);
-    assert.ok(items.length >= 1, 'fluxul ADS-B servește aeronave');
-    for (const item of items.slice(0, 5)) assert.ok(/^[0-9a-f]{6}$/i.test(item.hex), 'hex-ul Mode-S e normalizat — fără majuscule dublate');
-    return `${items.length} aeronave`;
+    assert.ok(Number(data.entityCount) >= 1, 'fluxul ADS-B servește fotografia aeronavelor');
+    for (const item of items.slice(0, 5)) assert.ok(!item.hex || /^[0-9a-f]{6}$/i.test(item.hex), 'hex-ul Mode-S e normalizat — fără majuscule dublate');
+    return `${data.entityCount} aeronave în fotografie, ${items.length} pe filtrul cerut`;
   },
   flight_board: (envelope) => {
     const data = envelope.data ?? {};
