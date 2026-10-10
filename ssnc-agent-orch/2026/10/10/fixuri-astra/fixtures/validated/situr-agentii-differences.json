@@ -1,0 +1,68 @@
+[
+  {
+    "row": 2382,
+    "source": [
+      "3419",
+      "Licenta",
+      "17.03.2026",
+      "NEXT FLY S.R.L.",
+      "",
+      "NEXT FLY",
+      "53038626",
+      "STR. Tudor Vladimirescu  , BL. A10 , ET. PARTER",
+      "Mun. Moineşti",
+      "BACĂU",
+      "Intermediara",
+      "",
+      ""
+    ],
+    "baseline": [
+      "3419",
+      "Licenta",
+      "17.03.2026",
+      "NEXT FLY S.R.L.",
+      "",
+      "NEXT FLY",
+      "53038626",
+      "STR. Tudor Vladimirescu  , BL. A10 , ET. P",
+      "Mun. Moineşti",
+      "BACĂU",
+      "Intermediara",
+      "",
+      ""
+    ]
+  },
+  {
+    "row": 2383,
+    "source": [
+      "3419",
+      "Licenta",
+      "17.03.2026",
+      "NEXT FLY S.R.L.",
+      "",
+      "NEXT FLY",
+      "53038626",
+      "STR. Tudor Vladimirescu  , BL. A10 , ET. P",
+      "Mun. Moineşti",
+      "BACĂU",
+      "Intermediara",
+      "",
+      ""
+    ],
+    "baseline": [
+      "3419",
+      "Licenta",
+      "17.03.2026",
+      "NEXT FLY S.R.L.",
+      "",
+      "NEXT FLY",
+      "53038626",
+      "STR. Tudor Vladimirescu  , BL. A10 , ET. PARTER",
+      "Mun. Moineşti",
+      "BACĂU",
+      "Intermediara",
+      "",
+      ""
+    ]
+  }
+]

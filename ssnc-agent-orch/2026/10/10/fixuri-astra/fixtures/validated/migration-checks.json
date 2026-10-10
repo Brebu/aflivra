@@ -1,0 +1,8 @@
+{
+  "dryRunNoWrites": true,
+  "migrationAssetAndProofMatch": true,
+  "unrelatedProofPreserved": true,
+  "idempotentSecondRun": true,
+  "unknownInputRefusedWithoutWrites": true,
+  "testedOn": "temporary fixture repository, no production writes"
+}

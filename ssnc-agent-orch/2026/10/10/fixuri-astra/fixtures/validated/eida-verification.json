@@ -1,0 +1,87 @@
+{
+  "events": 1157,
+  "baselineEvents": 1157,
+  "eventIdsMatch": true,
+  "stableFieldMismatches": [],
+  "correctedFieldMismatches": [],
+  "rowsWithWrongSemanticFields": 1157,
+  "stations": 150,
+  "baselineStations": 151,
+  "headerRowsInBaseline": 1,
+  "stationRowsMatchAfterHeaderRemoved": true,
+  "yearStatus": [
+    {
+      "year": 2015,
+      "status": "validated_returned_rows",
+      "rows": 162,
+      "httpStatus": 200
+    },
+    {
+      "year": 2016,
+      "status": "validated_returned_rows",
+      "rows": 126,
+      "httpStatus": 200
+    },
+    {
+      "year": 2017,
+      "status": "validated_returned_rows",
+      "rows": 103,
+      "httpStatus": 200
+    },
+    {
+      "year": 2018,
+      "status": "validated_returned_rows",
+      "rows": 59,
+      "httpStatus": 200
+    },
+    {
+      "year": 2019,
+      "status": "validated_returned_rows",
+      "rows": 69,
+      "httpStatus": 200
+    },
+    {
+      "year": 2020,
+      "status": "validated_returned_rows",
+      "rows": 99,
+      "httpStatus": 200
+    },
+    {
+      "year": 2021,
+      "status": "validated_returned_rows",
+      "rows": 108,
+      "httpStatus": 200
+    },
+    {
+      "year": 2022,
+      "status": "validated_returned_rows",
+      "rows": 100,
+      "httpStatus": 200
+    },
+    {
+      "year": 2023,
+      "status": "validated_returned_rows",
+      "rows": 155,
+      "httpStatus": 200
+    },
+    {
+      "year": 2024,
+      "status": "validated_returned_rows",
+      "rows": 96,
+      "httpStatus": 200
+    },
+    {
+      "year": 2025,
+      "status": "validated_returned_rows",
+      "rows": 80,
+      "httpStatus": 200
+    },
+    {
+      "year": 2026,
+      "status": "inconclusive_204",
+      "rows": 0,
+      "httpStatus": 204
+    }
+  ],
+  "scope": "All returned M3+ events in the declared 43–49N / 20–30E annual queries; HTTP 204 in 2026 is inconclusive, not proof of no earthquakes."
+}

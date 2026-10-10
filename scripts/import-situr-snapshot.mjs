@@ -8,11 +8,22 @@
 // verified corpus. License of commercial reuse: unconfirmed — recorded in the corpus.
 // Run from the repo root: node scripts/import-situr-snapshot.mjs
 import {readFile,writeFile,mkdtemp,rm} from 'node:fs/promises';
+import {join} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import XLSX from 'xlsx';
-import {writeSnapshot,registerPrefix} from './snapshot-register.mjs';
+import {writeSnapshotIfChanged,registerPrefix} from './snapshot-register.mjs';
+import {validateFixtureManifest} from './lib/fixture-manifest.mjs';
 
 const UA='Aflivra-Integration-Evaluation/1.0';
+// Modul local (N01): --input-dir/--source-dir citește fixture-urile pachetului de probe
+// verificate (manifestul --manifest afirmă bytes+SHA-256, verificate înainte de import),
+// fără fetch — remedierile se dezvoltă și se verifică fără acces la site-urile instituțiilor.
+const argValue=flag=>{const i=process.argv.indexOf(flag);return i>=0&&i+1<process.argv.length?process.argv[i+1]:null};
+const inputDir=argValue('--input-dir')||argValue('--source-dir');
+const manifestPath=argValue('--manifest');
+if(inputDir&&!manifestPath)throw Error('Modul local --input-dir cere --manifest (pachetul de probe verificate, cu amprentele SHA-256).');
+const fixtures={cazare:'situr-cazare.xlsx',alimentatie:'situr-alimentatie.xlsx',agentii:'situr-agentii.xlsx'};
+if(inputDir)await validateFixtureManifest({manifestPath,inputDir,names:Object.values(fixtures)});
 const KINDS=[
  {kind:'cazare',type:'listaCazari',labels:['Tip unitate','Nume unitate','Tip categorie','Număr spații','Număr locuri','Alte detalii adresă','Tip localitate','Localitate componentă','Localitate','Județ','Email','Web','Tip Operator Economic','Operator Economic','Număr Înregistrare','Cod Unic Înregistrare','Număr autorizație','Dată emitere autorizație'],documentedRows:32058},
  {kind:'alimentatie',type:'listaAlimentatie',labels:['Tip structură','Denumirea unității','Categoria','Nr. locuri','Detalii adresă','Localitate/Sector','Județ','Tip Operator Economic','Operator Economic','Număr Ordine în Registrul Comerțului','Cod Unic Înregistrare','Număr certificat','Data emiterii'],documentedRows:9063},
@@ -34,11 +45,11 @@ const roDateFromText=text=>{const m=/(?:actualizat[ăa][^。\n]{0,40}?|ACTUALIZA
 const temp=await mkdtemp('/tmp/aflivra-situr-');
 const files=[];
 try{
- let pageDate=null;
- try{const page=await download('https://se.situr.gov.ro/OpenData/OpenDataMain');pageDate=roDateFromText(new TextDecoder().decode(page));}catch{pageDate=null}
- const fetchedAt=new Date().toISOString();
- for(const spec of KINDS){
-  const xlsxBytes=await download('https://se.situr.gov.ro/OpenData/ExportToExcel?type='+spec.type);
+  let pageDate=null;
+  if(!inputDir){try{const page=await download('https://se.situr.gov.ro/OpenData/OpenDataMain');pageDate=roDateFromText(new TextDecoder().decode(page));}catch{pageDate=null}}
+  const fetchedAt=new Date().toISOString();
+  for(const spec of KINDS){
+   const xlsxBytes=inputDir?new Uint8Array(await readFile(join(inputDir,fixtures[spec.kind]))):await download('https://se.situr.gov.ro/OpenData/ExportToExcel?type='+spec.type);
   const wb=XLSX.read(xlsxBytes,{dense:true});
   const ws=wb.Sheets[wb.SheetNames[0]];
   const rows=ws['!data']||[];
@@ -57,9 +68,9 @@ try{
   const payload={schema:'aflivra-situr-'+spec.kind+'-v1',kind:spec.kind,sourceUrl:'https://se.situr.gov.ro/OpenData/ExportToExcel?type='+spec.type,exportTitle:title,exportDate,pageDate,fetchedAt,license:null,
    licenseNote:'Registru oficial de clasificare/licențiere (se.situr.gov.ro); licența de reutilizare comercială neconfirmată la '+fetchedAt.slice(0,10)+' — sursă oficială, studiu și verificare personală.',
    columns:spec.labels,counts:{rows:dataRows.length,documentedRows:spec.documentedRows,missingCui,missingAddressDetail},rows:dataRows};
-  const bytes=await writeSnapshot(files,'/situr/'+spec.kind+'.json',payload);
-  console.log(spec.kind+': rows='+dataRows.length+' bytes='+bytes+' exportDate='+exportDate+' pageDate='+pageDate+' missingCui='+missingCui);
- }
+   const {bytes,skipped}=await writeSnapshotIfChanged(files,'/situr/'+spec.kind+'.json',payload,{contentKeys:['columns','rows','exportTitle','exportDate']});
+   console.log(spec.kind+': rows='+dataRows.length+' bytes='+bytes+' exportDate='+exportDate+' pageDate='+pageDate+' missingCui='+missingCui+(skipped?' skipped=quiet-day':''));
+  }
  await registerPrefix(files,'/situr/');
  console.log(JSON.stringify({result:'ok',files:files.map(f=>f.path),pageDate}));
 }finally{await rm(temp,{recursive:true,force:true})}

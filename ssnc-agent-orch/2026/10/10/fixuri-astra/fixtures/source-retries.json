@@ -1,0 +1,28 @@
+[
+  {
+    "file": "sources/situr-cazare.xlsx",
+    "url": "https://se.situr.gov.ro/OpenData/ExportToExcel?type=listaCazari",
+    "requestedAt": "2026-10-10T17:49:45.443630+00:00",
+    "exitCode": 28,
+    "httpStatus": 0,
+    "contentType": null,
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "completeDownload": false,
+    "seconds": 45.001954,
+    "error": "curl: (28) Operation timed out after 45001 milliseconds with 0 bytes received\n"
+  },
+  {
+    "file": "sources/situr-cazare.xlsx",
+    "url": "https://se.situr.gov.ro/OpenData/ExportToExcel?type=listaCazari",
+    "requestedAt": "2026-10-10T17:53:04.790520+00:00",
+    "exitCode": 0,
+    "httpStatus": 200,
+    "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "bytes": 3891958,
+    "sha256": "8e9a7500d53a501d86726976ab109c34b279c09fd5ec3592b2d9fc5c69ec2e84",
+    "completeDownload": true,
+    "seconds": 33.703312,
+    "error": ""
+  }
+]
