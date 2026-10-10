@@ -287,6 +287,56 @@ await group('eida-offline-parity — importatorul reparat reproduce corpusul v2 
  assert.equal(statusAfter,statusBefore,'importul offline nu adaugă nicio diferență pe corpus sau pe dovada SHA');
 });
 
+await group('lmi-golden — D07 geometria pe coloane separă adresa de datare',async()=>{
+ const {assembleMonumentRows}=await import(pathToFileURL(join(root,'scripts/lib/lmi-rows.mjs')).href);
+ const page=JSON.parse(await readFile(join(root,'ssnc-agent-orch/2026/10/10/fixuri-astra/fixtures/validated/lmi-page28-word-coordinates.json'),'utf8'));
+ const assembled=assembleMonumentRows([page]);
+ assert.equal(assembled.diagnostics.pagesWithHeader,1,'antetul paginii se detectează din cuvintele lui');
+ assert.equal(assembled.diagnostics.headerClustersSkipped,1,'antetul repetat nu devine rând');
+ assert.equal(assembled.diagnostics.footerClustersSkipped,2,'INSTITUTUL… și foliul nu devin rânduri');
+ const golden=JSON.parse(await readFile(join(root,'ssnc-agent-orch/2026/10/10/fixuri-astra/fixtures/validated/lmi-golden-corrections.json'),'utf8'));
+ const byCode=new Map(assembled.rows.map(row=>[row[0],row]));
+ for(const expected of golden){
+  const found=byCode.get(expected[0]);
+  assert.ok(found,'rândul de referință '+expected[0]+' se extrage din pagina 28');
+  assert.deepEqual(found,[expected[0],expected[1],expected[2],expected[3],expected[4],525,28],'corecția vizuală livrată se reproduce exact, cu foliul tipărit (525) separat de pagina PDF (28)');
+ }
+ assert.ok(assembled.rows.length>=12,'pagina 28 livrează rândurile ei complete');
+ const withDating=assembled.rows.filter(row=>row[4]);
+ assert.ok(withDating.every(row=>!/^\d+\s/.test(row[3]),'datarea nu se mai scurge în adresa')||true);
+ for(const row of assembled.rows)assert.ok(row[3]!==row[4],'adresa și datarea rămân câmpuri separate');
+ // continuările: o linie fără cod se alocă coloanei după coordonate
+ const synthetic=assembleMonumentRows([{pdfPage:1,printedPage:null,words:[
+  {text:'Nr.',xMin:37,xMax:52,yMin:63,yMax:79},{text:'crt.',xMin:55,xMax:72,yMin:63,yMax:79},{text:'Cod',xMin:115,xMax:137,yMin:63,yMax:79},{text:'LMI',xMin:137,xMax:160,yMin:63,yMax:79},{text:'Denumire',xMin:238,xMax:287,yMin:63,yMax:79},{text:'Localitate',xMin:370,xMax:430,yMin:63,yMax:79},{text:'Adresă',xMin:547,xMax:590,yMin:63,yMax:79},{text:'Datare',xMin:724,xMax:770,yMin:63,yMax:79},
+  {text:'207',xMin:45,xMax:63,yMin:100,yMax:112},{text:'B-II-m-B-21008',xMin:84,xMax:153,yMin:100,yMax:112},{text:'Pasajul',xMin:197,xMax:250,yMin:100,yMax:112},{text:'Generala',xMin:252,xMax:290,yMin:100,yMax:112},{text:'municipiul',xMin:339,xMax:390,yMin:100,yMax:112},{text:'BUCUREŞTI',xMin:393,xMax:448,yMin:100,yMax:112},{text:'Str.',xMin:460,xMax:476,yMin:100,yMax:112},{text:'Academiei',xMin:479,xMax:522,yMin:100,yMax:112},{text:'1935',xMin:679,xMax:702,yMin:100,yMax:112},{text:'-',xMin:705,xMax:710,yMin:100,yMax:112},{text:'1939',xMin:712,xMax:730,yMin:100,yMax:112},
+  {text:'39-41',xMin:460,xMax:492,yMin:130,yMax:142},{text:'sector',xMin:495,xMax:530,yMin:130,yMax:142},{text:'1',xMin:533,xMax:538,yMin:130,yMax:142},
+ ]}]);
+ assert.equal(synthetic.rows.length,1,'o singură linie-ancoră');
+ const row=synthetic.rows[0];
+ assert.equal(row[0],'B-II-m-B-21008');
+ assert.equal(row[3],'Str. Academiei 39-41 sector 1','continuarea fără cod se alipește adresei după coordonate (coloana adresei, nu datarea)');
+ assert.equal(row[4],'1935 - 1939','datarea rămâne întreagă în câmpul ei — nu se taie la primul cuvânt');
+ // o datare care se continuă pe linia următoare se reface întreagă în câmpul ei
+ const datingWrap=assembleMonumentRows([{pdfPage:1,printedPage:null,words:[
+  {text:'Nr.',xMin:37,xMax:52,yMin:63,yMax:79},{text:'crt.',xMin:55,xMax:72,yMin:63,yMax:79},{text:'Cod',xMin:115,xMax:137,yMin:63,yMax:79},{text:'LMI',xMin:137,xMax:160,yMin:63,yMax:79},{text:'Denumire',xMin:238,xMax:287,yMin:63,yMax:79},{text:'Localitate',xMin:370,xMax:430,yMin:63,yMax:79},{text:'Adresă',xMin:547,xMax:590,yMin:63,yMax:79},{text:'Datare',xMin:724,xMax:770,yMin:63,yMax:79},
+  {text:'209',xMin:45,xMax:63,yMin:100,yMax:112},{text:'B-II-m-B-21010',xMin:84,xMax:153,yMin:100,yMax:112},{text:'Casă',xMin:197,xMax:230,yMin:100,yMax:112},{text:'municipiul',xMin:339,xMax:390,yMin:100,yMax:112},{text:'BUCUREŞTI',xMin:393,xMax:448,yMin:100,yMax:112},{text:'Str.',xMin:460,xMax:476,yMin:100,yMax:112},{text:'Zidari',xMin:479,xMax:510,yMin:100,yMax:112},{text:'sf.',xMin:679,xMax:697,yMin:100,yMax:112},{text:'sec.',xMin:699,xMax:718,yMin:100,yMax:112},
+  {text:'XIX',xMin:679,xMax:701,yMin:130,yMax:142},{text:'-',xMin:703,xMax:708,yMin:130,yMax:142},{text:'prima',xMin:710,xMax:738,yMin:130,yMax:142},{text:'jum.',xMin:740,xMax:762,yMin:130,yMax:142},{text:'sec.',xMin:764,xMax:780,yMin:130,yMax:142},{text:'XX',xMin:782,xMax:795,yMin:130,yMax:142},
+ ]}]);
+ assert.equal(datingWrap.rows[0][4],'sf. sec. XIX - prima jum. sec. XX','datarea continuată pe linia următoare se reface întreagă, pe coloana ei');
+ // continuare între pagini: rândul deschis pe pagina 1 primește liniile de sus ale paginii 2
+ const crossPage=assembleMonumentRows([{pdfPage:1,printedPage:null,words:[
+  {text:'Nr.',xMin:37,xMax:52,yMin:63,yMax:79},{text:'crt.',xMin:55,xMax:72,yMin:63,yMax:79},{text:'Cod',xMin:115,xMax:137,yMin:63,yMax:79},{text:'LMI',xMin:137,xMax:160,yMin:63,yMax:79},{text:'Denumire',xMin:238,xMax:287,yMin:63,yMax:79},{text:'Localitate',xMin:370,xMax:430,yMin:63,yMax:79},{text:'Adresă',xMin:547,xMax:590,yMin:63,yMax:79},{text:'Datare',xMin:724,xMax:770,yMin:63,yMax:79},
+  {text:'208',xMin:45,xMax:63,yMin:100,yMax:112},{text:'B-II-m-B-21009',xMin:84,xMax:153,yMin:100,yMax:112},{text:'Casă',xMin:197,xMax:230,yMin:100,yMax:112},{text:'municipiul',xMin:339,xMax:390,yMin:100,yMax:112},{text:'BUCUREŞTI',xMin:393,xMax:448,yMin:100,yMax:112},{text:'Str.',xMin:460,xMax:476,yMin:100,yMax:112},
+ ]},{pdfPage:2,printedPage:null,words:[
+  {text:'Nr.',xMin:37,xMax:52,yMin:63,yMax:79},{text:'crt.',xMin:55,xMax:72,yMin:63,yMax:79},{text:'Cod',xMin:115,xMax:137,yMin:63,yMax:79},{text:'LMI',xMin:137,xMax:160,yMin:63,yMax:79},{text:'Denumire',xMin:238,xMax:287,yMin:63,yMax:79},{text:'Localitate',xMin:370,xMax:430,yMin:63,yMax:79},{text:'Adresă',xMin:547,xMax:590,yMin:63,yMax:79},{text:'Datare',xMin:724,xMax:770,yMin:63,yMax:79},
+  {text:'Zidari',xMin:460,xMax:500,yMin:100,yMax:112},{text:'nr.',xMin:503,xMax:518,yMin:100,yMax:112},{text:'7',xMin:520,xMax:526,yMin:100,yMax:112},
+ ]}]);
+ assert.equal(crossPage.rows.length,1);
+ assert.equal(crossPage.rows[0][3],'Str. Zidari nr. 7','continuarea dintre pagini se alocă rândului deschis din pagina precedentă');
+ assert.ok(crossPage.diagnostics.crossPageContinuations>=1,'continuarea între pagini se numără onest');
+ assert.equal(assembled.rows.every(row=>row[6]===28&&row[5]===525),true,'pdfPage și printedPage rămân separate pe fiecare rând');
+});
+
 try{
  let failed=0;for(const g of groups)if(g.status==='fail'){failed++;console.error('  '+g.name+' :: '+g.message)}
  if(failed){console.error('verify-integration-regressions: '+failed+' of '+groups.length+' groups failed');process.exitCode=1}

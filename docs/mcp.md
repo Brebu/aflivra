@@ -238,7 +238,7 @@ Istoricul seismic INFP/EIDA al României și împrejurimilor: cutremure resimți
 ```
 
 ### `historic_monuments`
-Lista Monumentelor Istorice 2015 — secțiunea București, din PDF-ul oficial al Ministerului Culturii (Monitorul Oficial, Partea I, Nr. 113 bis/15.II.2016): cod LMI, denumire, localitate, adresă, datare și foliul tipărit al Monitorului (nu numărul de pagină al PDF-ului). Baza 2015 se declară: ordinele ministeriale ulterioare se obțin de la minister și nu sunt înglobate; semnalarea unei posibile apartenențe la patrimoniu nu e verdict juridic actual automat. Numerele extragerii se servesc ca numere, nu ca recensământ validat. Licență: neconfirmată.
+Lista Monumentelor Istorice 2015 — secțiunea București, din PDF-ul oficial al Ministerului Culturii (Monitorul Oficial, Partea I, Nr. 113 bis/15.II.2016): cod LMI, denumire, localitate, adresă, datare, foliul tipărit al Monitorului (`folioMof`) și pagina PDF (`paginaPdf`), păstrate separate — foliul nu e indexul PDF-ului. Extracția e pe geometria tipărită a tabelului (v2): coloanele Adresă și Datare rămân separate, iar o datare continuată pe rândul următor se reface întreagă. Baza 2015 se declară: ordinele ministeriale ulterioare se obțin de la minister și nu sunt înglobate; semnalarea unei posibile apartenențe la patrimoniu nu e verdict juridic actual automat. Numerele extragerii se servesc ca numere, nu ca recensământ validat. Licență: neconfirmată.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "historic_monuments", "arguments": {"q": "B-II-a-A-00188"}}}
 ```

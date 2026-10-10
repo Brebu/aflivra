@@ -85,20 +85,35 @@ for(const event of eida.events){
 }
 proof('/eida/seismic.json');
 
-// LMI 2015 București: 2.651 rânduri cu coduri LMI distincte, folio tipărit,
-// baza 2015 declarată — numerele extragerii, nu recensământ validat.
+// LMI 2015 București: 2.651 de rânduri cu coduri LMI distincte, extras pe geometria
+// tipărită a tabelului (aflivra-lmi-bucuresti-v2). Fiecare rând poartă foliul tipărit
+// al Monitorului ȘI pagina PDF, separate; datarea nu se mai scurge în adrese — v1
+// îngropa textul datării în adresa a ~2.000 de rânduri și lăsa 1.715 de datări goale.
 const lmi=await readCorpus('/lmi/monuments-bucuresti');
-assert.equal(lmi.counts.rows,2651,'LMI: rândurile extrase la audit');
-assert.equal(lmi.counts.distinctCodes,2651,'LMI: codurile distincte în corpora nostr');
+assert.equal(lmi.schema,'aflivra-lmi-bucuresti-v2','LMI: corpusul v2, extras pe coloane');
+assert.equal(lmi.counts.rows,2651,'LMI: rândurile extrase');
+assert.equal(lmi.counts.distinctCodes,2651,'LMI: codurile distincte');
 assert.ok(lmi.publishedIn.includes('113 bis'),'LMI: publicarea în Monitorul Oficial declarată');
 assert.ok(lmi.updateNote.includes('2015'),'LMI: baza 2015 declarată, fără înglobarea ordinelor ulterioare');
+const lmiGolden=JSON.parse(await readFile(join(root,'ssnc-agent-orch/2026/10/10/fixuri-astra/fixtures/validated/lmi-golden-corrections.json'),'utf8'));
+const lmiByCode=new Map(lmi.rows.map(row=>[row[0],row]));
+for(const expected of lmiGolden){
+ const found=lmiByCode.get(expected[0]);
+ assert.ok(found,'LMI: rândul de referință vizuală '+expected[0]+' există în corpus');
+ assert.deepEqual(found.slice(0,6),expected,'LMI: rândul '+expected[0]+' reproduce corecția vizuală livrată, întreg');
+}
+const emptyDating=lmi.rows.filter(row=>!row[4]).length;
+assert.equal(emptyDating,337,'LMI: rândurile fără datare sunt cele reale (situri și monumente fără datări), nu 1.715 de datări pierdute în adrese');
 const codes=new Set();
 for(const row of lmi.rows){
  assert.ok(/^B-[IVX]+-[a-z]+-(?:A|B)-\d{2,6}(?:\.\d{1,3})?$/.test(row[0]),'LMI: codul are forma codului LMI');
  assert.ok(row[1]&&row[1].length>1,'LMI: denumirea monumentului prezentă');
  codes.add(row[0]);
- assert.ok(Number.isInteger(row[5])&&row[5]>=400&&row[5]<=740,'LMI: foliul Monitorului Oficial în intervalul tipărit');
+ assert.ok(Number.isInteger(row[5])&&row[5]>=490&&row[5]<=740,'LMI: foliul Monitorului Oficial în intervalul tipărit');
+ assert.ok(Number.isInteger(row[6])&&row[6]>=1&&row[6]<=233,'LMI: pagina PDF separată de foliu, în intervalul documentului');
+ assert.ok(row[5]!==row[6],'LMI: foliul tipărit nu este indexul PDF-ului');
+ assert.ok(row[3]!==row[4],'LMI: adresa nu este datarea');
 }
 assert.equal(codes.size,2651,'LMI: fiecare rând e un cod distinct');
 proof('/lmi/monuments-bucuresti.json');
-console.log('Trecut: corpusurile „surse românești” rămân integre — SITUR 32.058/9.063/3.104 cu lipsurile numărate, AMCCRS 2.798 cu cele 48 de forme păstrate integral și clasele normalizate exact cele auditate, EIDA cu istoricul M3+ în dreptunghiul declarat, LMI 2015 cu 2.651 de coduri pe foliul Monitorului Oficial.');
+console.log('Trecut: corpusurile „surse românești” rămân integre — SITUR 32.058/9.063/3.104 cu lipsurile numărate, AMCCRS 2.798 cu cele 48 de forme păstrate integral și clasele normalizate exact cele auditate, EIDA v2 cu 1.157 de evenimente pe câmpurile antetului și 150 de stații, LMI v2 cu 2.651 de coduri, cele 12 corecții vizuale întregi și datarea separată de adresă.');

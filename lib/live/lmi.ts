@@ -19,8 +19,8 @@ import proofs from '@/public/data/snapshot-transport.json';
 type Proof={path:string;file:string;bytes:number;sha256:string};
 const proofByPath=new Map((proofs as {items:Proof[]}).items.filter(item=>item.path.startsWith('/lmi/')).map(item=>[item.path,item]));
 
-export type MonumentRow=[code:string,name:string,locality:string,address:string,dating:string,printedPage:number];
-type LmiPayload={schema:string;sourceUrl:string;base:string;publishedIn:string;updateNote:string;pdfBytes:number;printedPageMax:number|null;fetchedAt:string;license:null;licenseNote:string;counts:{rows:number;distinctCodes:number;extractionNote:string};rows:MonumentRow[]};
+export type MonumentRow=[code:string,name:string,locality:string,address:string,dating:string,printedPage:number,pdfPage:number];
+type LmiPayload={schema:string;sourceUrl:string;base:string;publishedIn:string;updateNote:string;pdfBytes:number;printedPageMax:number|null;extractionDiagnostics?:Record<string,number>;fetchedAt:string;license:null;licenseNote:string;counts:{rows:number;distinctCodes:number;extractionNote:string};rows:MonumentRow[]};
 
 let corpus:{at:number;payload:LmiPayload}|null=null;
 
@@ -52,7 +52,7 @@ export async function readMonuments(query:LmiQuery,base:string){
   sourceUrl:payload.sourceUrl,base:payload.base,publishedIn:payload.publishedIn,updateNote:payload.updateNote,license:payload.license,licenseNote:payload.licenseNote,
   profile:{extractionNote:payload.counts.extractionNote,printedPageNote:'Fiecare rând poartă foliul tipărit al Monitorului Oficial, nu numărul de pagină al PDF-ului.'},
   filters:{q:query.q||'',applied:!!term},
-  ...page,
-  items:page.items.map(row=>({codLmi:row[0],denumire:row[1],localitate:row[2],adresa:row[3],datare:row[4],folioMof:row[5]})),
- };
+   ...page,
+   items:page.items.map(row=>({codLmi:row[0],denumire:row[1],localitate:row[2],adresa:row[3],datare:row[4],folioMof:row[5],paginaPdf:row[6]})),
+  };
 }
