@@ -58,12 +58,21 @@ for(const row of amccrs.rows){
 proof('/amccrs/buildings.json');
 
 // EIDA: rețeaua RO și istoricul M3+ — suma pe ani egalează totalul, ferestrele
-// declarate, niciun an trunchiat la limita serviciului.
+// declarate, niciun an trunchiat la limita serviciului. Corpusul e aflivra-eida-v2:
+// cele 150 de înregistrări de stație/perioadă (antetul FDSN nu e niciodată rând),
+// cele 1.157 de evenimente cu câmpurile sub cheile corecte — tipul chiar în
+// eventType, locația reală (vid sau nume) în eventLocationName, autorul magnitudinii
+// în magnitudeAuthor — și felia 2026 înregistrată inconcludentă (204 la sursă),
+// nu „fără cutremure”.
 const eida=await readCorpus('/eida/seismic');
-assert.ok(eida.counts.stations>=150,'EIDA: rețeaua RO (audit: 150 rânduri)');
-assert.ok(eida.counts.events>=1100,'EIDA: istoricul M3+ comis integral (audit: ~1.157)');
+assert.equal(eida.schema,'aflivra-eida-v2','EIDA: corpusul v2 după remedierea mapării pe antet');
+assert.equal(eida.counts.stations,150,'EIDA: rețeaua RO — 150 înregistrări stație/perioadă, fără antet');
+assert.equal(eida.counts.events,1157,'EIDA: istoricul M3+ comis integral (audit: 1.157)');
 assert.equal(eida.window.minMagnitude,3,'EIDA: baza de magnitudine 3 declarată');
 assert.deepEqual(eida.truncatedYears,[],'EIDA: niciun an tăiat la limita de 1000 a serviciului');
+const eidaCoverage2026=(eida.coverageByYear||[]).find(entry=>entry.year===2026);
+assert.ok(eidaCoverage2026&&String(eidaCoverage2026.status).includes('inconclusive'),'EIDA: felia 2026 rămâne înregistrată inconcludentă (204 la sursă)');
+assert.ok(eida.stations.every(station=>station.network!=='#Network'&&station.station.length>0),'EIDA: niciun antet servit drept stație');
 const byYear=eida.events.reduce((map,event)=>{const year=event.time.slice(0,4);map.set(year,(map.get(year)||0)+1);return map},new Map());
 for(const [year,count] of Object.entries(eida.counts.eventsByYear))assert.equal(byYear.get(year)||0,Number(count),'EIDA: anul '+year+' numărat onest în countsByYear');
 assert.equal([...byYear.values()].reduce((a,b)=>a+b,0),eida.counts.events,'EIDA: totalul declarat = suma anilor reali');
@@ -71,6 +80,8 @@ assert.equal(eida.events.length,eida.counts.events,'EIDA: rândurile fizice = to
 for(const event of eida.events){
  assert.ok(Number(event.latitude)>=43&&Number(event.latitude)<=49&&Number(event.longitude)>=20&&Number(event.longitude)<=30,'EIDA: evenimentul rămâne în dreptunghiul auditat');
  assert.ok(Number(event.magnitude)>=3,'EIDA: evenimentul respectă baza de magnitudine');
+ assert.ok(event.eventLocationName!==event.eventType,'EIDA: câmpul locației nu poartă artificial tipul evenimentului (v1 deplasa patru chei)');
+ assert.ok(event.eventType.length>0&&typeof event.magnitudeAuthor==='string','EIDA: tipul și autorul magnitudinii sub cheile lor');
 }
 proof('/eida/seismic.json');
 

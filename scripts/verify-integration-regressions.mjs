@@ -196,6 +196,97 @@ await group('lawyers-county — D04 county singur activează baroul în ddlCompa
  }finally{delete globalThis.__regressionsReadSource}
 });
 
+await group('eida-parser — D03 antetul oficial mapează câmpurile, D05 comentariile nu sunt stații',async()=>{
+ const {parseFdsnStations,parseFdsnEvents}=await import(pathToFileURL(join(root,'scripts/lib/fdsn-text.mjs')).href);
+ const readFixture=name=>readFile(join(root,'ssnc-agent-orch/2026/10/10/fixuri-astra/fixtures/sources',name),'utf8');
+ const stations=parseFdsnStations(await readFixture('eida-stations.txt'));
+ assert.equal(stations.rows.length,150,'150 înregistrări de stație/perioadă — antetul #(Network) nu se numără niciodată ca rând');
+ assert.ok(stations.rows.every(row=>row.network!=='#Network'&&row.station),'niciun rând cu network=#Network');
+ assert.deepEqual(stations.rows[0],{network:'RO',station:'AMRR',latitude:'44.6102',longitude:'27.3351',elevation:'86.0',siteName:'Amara',startTime:'2008-05-22T00:00:00',endTime:''},'prima stație a rețelei RO, cu antetul oficial');
+ assert.equal(stations.invalid.length,0);
+ const e2019=parseFdsnEvents(await readFixture('eida-events-2019.txt'));
+ assert.equal(e2019.rows.length,69,'felia 2019 are 69 de evenimente returnate (probele pachetului)');
+ assert.deepEqual({...e2019.rows[0],time:e2019.rows[0].time},e2019.rows[0]);
+ const first=e2019.rows[0];
+ assert.equal(first.magnitudeType,'ml','MagType → magnitudeType (v1 îl servea drept eventType)');
+ assert.equal(first.magnitude,'3.43');
+ assert.equal(first.magnitudeAuthor,'dbevproc','MagAuthor → magnitudeAuthor (v1 îl servea drept magnitudeType)');
+ assert.equal(first.eventLocationName,'','EventLocationName rămâne valoarea reală a sursei — vid aici, nu „earthquake"');
+ assert.equal(first.eventType,'earthquake','EventType → eventType (v1 îl servea drept eventLocationName)');
+ assert.ok(e2019.rows.every(row=>Number.isFinite(Number(row.magnitude))&&Number.isFinite(Number(row.latitude))&&Number.isFinite(Number(row.longitude))&&Number.isFinite(Number(row.depthKm))),'câmpurile numerice ale fiecărui eveniment rămân numerice');
+ assert.ok(e2019.rows.every(row=>row.eventLocationName!==row.eventType),'câmpul locației nu mai poartă artificial tipul evenimentului');
+ assert.throws(()=>parseFdsnEvents('#EventID|Time|Latitude|Different|Header\n'),/antet/i,'un antet schimbat oprește importul, nu parsează pe bandă mută');
+ const noisy=parseFdsnEvents('#EventID|Time|Latitude|Longitude|Depth/km|Author|Catalog|Contributor|ContributorID|MagType|Magnitude|MagAuthor|EventLocationName|EventType\n# un comentariu de serviciu\nq|2026-01-01T00:00:00|45|26|10|a|c|k|i|ml|3.1|dbevproc|unde|earthquake\n');
+ assert.equal(noisy.rows.length,1,'comentariile # nu devin rânduri, dar rândul valid trece');
+ assert.equal(noisy.invalid.length,0);
+ const broken=parseFdsnEvents('#EventID|Time|Latitude|Longitude|Depth/km|Author|Catalog|Contributor|ContributorID|MagType|Magnitude|MagAuthor|EventLocationName|EventType\nq|2026-01-01|45|26|10|a|c|k|i|ml|x|abc|unde|earthquake\n');
+ assert.equal(broken.rows.length,0);assert.equal(broken.invalid.length,1,'un rând cu magnitudine non-numerică se raportează explicit, nu se elimină tăcut');
+ let events=0;for(const year of [2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026]){const parsed=parseFdsnEvents(await readFixture('eida-events-'+year+'.txt'));assert.equal(parsed.invalid.length,0,'felia '+year+' nu are rânduri invalide');events+=parsed.rows.length}
+ assert.equal(events,1157,'toate feliile anuale verificate au împreună 1.157 de evenimente');
+});
+
+await group('eida-coverage — D11 acoperirea declarată pe intervale și felia inconcludentă',async()=>{
+ globalThis.__regressionsEnv={};
+ globalThis.fetch=async url=>{const href=url instanceof Request?url.url:String(url);if(href.includes('/eida/seismic.json'))return new Response(new Uint8Array(await readFile(join(root,'public/eida/seismic.json.gz'))));return new Response(null,{status:404})};
+ const route=await load('app/api/earthquakes/route.ts');
+ try{
+  const call=async qs=>{
+   const response=await route.GET(new Request('https://r.local/api/earthquakes?'+qs));
+   return {status:response.status,body:await response.json()};
+  };
+  let r=await call('kind=events&from=2019&to=2019');
+  assert.equal(r.status,200);
+  assert.equal(r.body.data.coverage.status,'full','un an validat, cerut întreg, e acoperire deplină pentru datele verificate');
+  assert.equal(r.body.data.coverage.inconclusiveYears.length,0);
+  assert.equal(r.body.data.total,69,'2019 servește cele 69 de evenimente ale feliei validate');
+  r=await call('kind=events&from=2014&to=2016');
+  assert.equal(r.body.data.coverage.status,'partial','intervalul depășește fereastra: parțial, cu intervalul efectiv declarat');
+  assert.deepEqual(r.body.data.coverage.effective,{from:'2015-01-01',to:'2016-12-31'});
+  assert.deepEqual(r.body.data.coverage.requested,{from:'2014-01-01',to:'2016-12-31'});
+  r=await call('kind=events&from=2030&to=2030');
+  assert.equal(r.status,200,'cererea validă în afara corpusului rămâne 200 — cu indicatorul explicit, nu zero tăcut');
+  assert.equal(r.body.data.coverage.status,'outside');
+  assert.equal(r.body.data.coverage.effective,null);
+  assert.equal(r.body.data.total,0);
+  assert.equal(r.body.data.coverage.outsideCoverage,true,'un consumator nu trebuie să deducă singur limita din metadate');
+  r=await call('kind=events&from=2026&to=2026');
+  assert.equal(r.body.data.coverage.status,'inconclusive','felia 2026 a răspuns 204 la sursă — inconcludent, nu „fără cutremure"');
+  assert.deepEqual(r.body.data.coverage.inconclusiveYears,[2026]);
+  r=await call('kind=events&from=2019&to=2026');
+  assert.equal(r.body.data.coverage.status,'partial','intervalul mixt e parțial, cu 2026 identificat separat');
+  assert.deepEqual(r.body.data.coverage.inconclusiveYears,[2026]);
+  r=await call('kind=events&minMagnitude=2');
+  assert.match(r.body.data.coverage.note||r.body.data.profile.note||'',/prag/i,'magnitudinile sub pragul corpusului nu se pretind acoperite');
+  assert.ok(r.body.data.items.every(item=>Number(item.magnitude)>=3),'pragul corpusului se păstrează la M≥3');
+  r=await call('kind=events&q=earthquake');
+  assert.ok(r.body.data.total>0,'căutarea după tipul real găsește evenimente — v1 ascundea „earthquake" în locație');
+  assert.ok(r.body.data.items.every(item=>item.eventLocationName!=='earthquake'),'câmpul locației nu mai poartă artificial tipul');
+  for(const bad of ['from=2026-13','from=2026-02-30','from=2026-3','to=2026-02-30','from=2026-01-02&to=2026-01-01','from=abc']){
+   const badCall=await call('kind=events&'+bad);
+   assert.equal(badCall.status,400,'prefix calendaristic imposibil sau inversat → 400: '+bad);
+  }
+  const stations=await call('kind=stations');
+  assert.equal(stations.body.data.total,150,'stațiile au propriul profil, fără moștenirea afirmațiilor despre evenimente');
+  assert.equal(stations.body.data.coverage,undefined,'profilul stațiilor nu moștenește acoperirea evenimentelor');
+ }finally{delete globalThis.fetch;delete globalThis.__regressionsEnv}
+});
+
+await group('eida-offline-parity — importatorul reparat reproduce corpusul v2 comis',async()=>{
+ // Cea mai puternică regresie posibilă: importatorul curent, pornit din sursele
+ // FDSN verificate ale pachetului, trebuie să producă exact corpusul comis (skipped
+ // = zi liniștită) — altfel parserul și corpusul au divorțat.
+ const fixturesDir=join(root,'ssnc-agent-orch/2026/10/10/fixuri-astra/fixtures');
+ const statusBefore=execFileSync('git',['status','--porcelain','public/eida','public/data/snapshot-transport.json'],{cwd:root,encoding:'utf8'});
+ const run=execFileSync('node',[join(root,'scripts/import-eida-snapshot.mjs'),'--input-dir',join(fixturesDir,'sources'),'--manifest',join(fixturesDir,'manifest.json')],{cwd:root,encoding:'utf8'});
+ const report=JSON.parse(run.trim().split('\n').at(-1));
+ assert.equal(report.result,'ok','importul offline din fixture-ele pachetului reușește');
+ assert.equal(report.stations,150,'150 înregistrări de stație/perioadă, fără antet');
+ assert.equal(report.events,1157,'1.157 de evenimente, câmpurile corecte');
+ assert.equal(report.skipped,true,'output-ul importatorului coincide semantic cu corpusul comis — nicio rescriere');
+ const statusAfter=execFileSync('git',['status','--porcelain','public/eida','public/data/snapshot-transport.json'],{cwd:root,encoding:'utf8'});
+ assert.equal(statusAfter,statusBefore,'importul offline nu adaugă nicio diferență pe corpus sau pe dovada SHA');
+});
+
 try{
  let failed=0;for(const g of groups)if(g.status==='fail'){failed++;console.error('  '+g.name+' :: '+g.message)}
  if(failed){console.error('verify-integration-regressions: '+failed+' of '+groups.length+' groups failed');process.exitCode=1}
