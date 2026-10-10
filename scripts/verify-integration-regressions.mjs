@@ -337,6 +337,85 @@ await group('lmi-golden — D07 geometria pe coloane separă adresa de datare',a
  assert.equal(assembled.rows.every(row=>row[6]===28&&row[5]===525),true,'pdfPage și printedPage rămân separate pe fiecare rând');
 });
 
+await group('cinema-date — D08 ziua imposibilă se respinge înainte de sursă',async()=>{
+ const route=await load('app/api/cinema/route.ts');
+ let upstream=0;
+ globalThis.__regressionsReadSource=async()=>{upstream++;return {key:'cinema:x',name:'Cinema',url:'https://x',adapterVersion:'v',status:'fresh',data:{films:[]},publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:60}};
+ try{
+  for(const bad of ['2026-02-30','2026-04-31','2025-02-29','2026-13-01','2026-1-01','30-02-2026']){
+   const response=await route.GET(new Request('https://r.local/api/cinema?id=1824&date='+bad));
+   assert.equal(response.status,400,'ziua imposibilă sau malformată se respinge calendaristic: '+bad);
+  }
+  assert.equal(upstream,0,'nicio zi imposibilă nu ajunge la sursă — zero apeluri upstream');
+  for(const good of ['2024-02-29','2026-10-11']){
+   const response=await route.GET(new Request('https://r.local/api/cinema?id=1824&date='+good));
+   assert.equal(response.status,200,'ziua reală pe calendar trece de validator: '+good);
+  }
+  assert.equal(upstream,2,'zilele reale au ajuns la sursă');
+ }finally{delete globalThis.__regressionsReadSource}
+});
+
+await group('resource-sheet — D09 foaia inexistentă e argument invalid, nu indisponibilitate',async()=>{
+ const route=await load('app/api/resource/route.ts');
+ const id='5d0f6d3c-9b6d-4d6b-b1aa-0f2b80000001';
+ const tableState={key:'resource:'+id,name:'Set tabelar',url:'https://x',adapterVersion:'v',storedAdapterVersion:'v',status:'cached',data:{kind:'table',complete:true,sheets:[{name:'Date',columns:['a','b'],rows:[['1','2']],total:1,truncated:false},{name:'Lista',columns:['c'],rows:[['3']],total:1,truncated:false}]},publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:3600};
+ const datastoreState={key:'resource:'+id,name:'Set datastore',url:'https://x',adapterVersion:'v',storedAdapterVersion:'v',status:'cached',data:{kind:'datastore',title:'Set',columns:['x'],total:1},publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:3600};
+ let mode='table';let pageLoads=0;
+ globalThis.__regressionsReadSource=async loader=>{if(String(loader.key).includes(':query:')){pageLoads++;return {key:loader.key,name:'Pagina datastore',url:'https://x',adapterVersion:'v',storedAdapterVersion:'v',status:'cached',data:{kind:'datastore',columns:['x'],total:1,items:[['v']],page:0,pages:1},publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:300}}
+  return mode==='table'?tableState:datastoreState};
+ try{
+  mode='table';
+  let response=await route.GET(new Request('https://r.local/api/resource?id='+id+'&sheet=999'));
+  assert.equal(response.status,400,'foaia 999 într-un set cu 2 foi e un argument invalid');
+  response=await route.GET(new Request('https://r.local/api/resource?id='+id+'&sheet=2'));
+  assert.equal(response.status,400,'indexul de după ultima foaie e invalid, nu indisponibilitate');
+  response=await route.GET(new Request('https://r.local/api/resource?id='+id+'&sheet=0'));
+  assert.equal(response.status,200,'aceeași resursă rămâne utilizabilă pe foaia reală imediat după cererea invalidă');
+  mode='datastore';
+  response=await route.GET(new Request('https://r.local/api/resource?id='+id+'&sheet=1'));
+  assert.equal(response.status,400,'setul datastore servește o singură foaie (0) — 1 e argument invalid');
+  assert.equal(pageLoads,0,'foaia invalidă nu declanșează citirea de pagini datastore');
+  response=await route.GET(new Request('https://r.local/api/resource?id='+id+'&sheet=0'));
+  assert.equal(response.status,200,'foaia 0 datastore se servește normal');
+  assert.equal(pageLoads,1,'exact o citire de pagină pentru foaia validă');
+ }finally{delete globalThis.__regressionsReadSource}
+});
+
+await group('venue-examples — D10 exemplele canonic trec resolverul și ruta reală',async()=>{
+ const eventsModule=await load('lib/live/events.ts');
+ const eventVenue=eventsModule.eventVenue;
+ assert.equal(eventVenue('odeon')?.id,'odeon','id-ul canonic al registrului rezolvă');
+ assert.equal(eventVenue('Odeon')?.id,'odeon','varianta „Odeon" a idului existent rezolvă prin compararea pliată a idului');
+ assert.equal(eventVenue('operacluj')?.id,'operacluj');
+ assert.equal(eventVenue('teatruldearta')?.id,'teatruldearta');
+ assert.equal(eventVenue('Opera Cluj')?.id,'operacluj','numele scurt rămâne valid, ca înainte');
+ assert.equal(eventVenue('Teatrul de Artă București')?.id,'teatruldearta','aliasul validat rămâne valid');
+ assert.equal(eventVenue('un loc care nu există'),null,'un venue necunoscut nu rezolvă — răspunsul rutei e 400');
+ const toolsSource=await readSource('lib/mcp/tools.ts');
+ const venueDescription=/venue:\{type:'string',description:'([^']+)'/.exec(toolsSource)?.[1]||'';
+ assert.ok(venueDescription.length>0,'descrierea parametrului venue există în schema tool-ului');
+ assert.ok(venueDescription.includes('"odeon"')||venueDescription.includes('„odeon"'),'exemplele din schemă folosesc id-uri canonice (odeon), nu denumiri nerezolvabile');
+ assert.ok(venueDescription.includes('"operacluj"')||venueDescription.includes('„operacluj"'));
+ const exampleTokens=[...venueDescription.matchAll(/[„"]([^”"]+)[”"]/g)].map(match=>match[1]);
+ for(const token of exampleTokens){
+  const resolved=eventVenue(token);
+  assert.ok(resolved,'exemplele din schema MCP trec resolverul real al registrului: '+token);
+ }
+ const docs=await readSource('docs/mcp.md');
+ assert.match(docs,/venue[^\n]*odeon|odeon[^\n]*venue/,'documentația MCP poartă exemplul canonic odeon lângă contractul venue');
+ const route=await load('app/api/events/route.ts');
+ let upstream=0;
+ globalThis.__regressionsReadSource=async()=>{upstream++;return {key:'events:x',name:'Evenimente',url:'https://x',adapterVersion:'v',status:'fresh',data:{items:[],total:0,pages:0},publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:600}};
+ try{
+  let response=await route.GET(new Request('https://r.local/api/events?q=teatru&venue=odeon'));
+  assert.equal(response.status,200,'venue canonic prin ruta reală');
+  response=await route.GET(new Request('https://r.local/api/events?q=teatru&venue=Odeon'));
+  assert.equal(response.status,200,'varianta idului existent trece ruta reală');
+  response=await route.GET(new Request('https://r.local/api/events?q=teatru&venue=Cinema'));
+  assert.equal(response.status,400,'venue necunoscut → 400, nu listă națională tăcută');
+ }finally{delete globalThis.__regressionsReadSource}
+});
+
 try{
  let failed=0;for(const g of groups)if(g.status==='fail'){failed++;console.error('  '+g.name+' :: '+g.message)}
  if(failed){console.error('verify-integration-regressions: '+failed+' of '+groups.length+' groups failed');process.exitCode=1}

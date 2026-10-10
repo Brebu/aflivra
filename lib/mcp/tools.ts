@@ -67,7 +67,7 @@ export const TOOLS:ToolDef[]=[
   {
     name:'events_search',
     description:'Performing arts and public events across Romanian institutions (theatres, opera houses, event venues), searchable by text and locality, with dates, venues and details.',
-    inputSchema:{type:'object',additionalProperties:false,properties:{q:{type:'string',description:'Non-empty free-text event query — an empty string is rejected at the MCP boundary'},venue:{type:'string',description:'One validated venue calendar (e.g. "Odeon", "Opera Cluj") — exact venue names come from the registered venues registry'},locality:{type:'string',description:'Locality name'},county:{type:'string',description:'County name'},page:{type:'integer',minimum:0,description:'Zero-based result page'}},required:['q']},
+    inputSchema:{type:'object',additionalProperties:false,properties:{q:{type:'string',description:'Non-empty free-text event query — an empty string is rejected at the MCP boundary'},venue:{type:'string',description:'One validated venue calendar, by canonical registry id ("odeon", "operacluj", "teatruldearta"), usual name, or validated alias — case variants of a canonical id resolve to the same id'},locality:{type:'string',description:'Locality name'},county:{type:'string',description:'County name'},page:{type:'integer',minimum:0,description:'Zero-based result page'}},required:['q']},
     build:args=>({path:'/api/events',query:query([['q',str(args.q)],['venue',str(args.venue)],['locality',str(args.locality)],['county',str(args.county)],['page',num(args.page)]])}),
   },
   {

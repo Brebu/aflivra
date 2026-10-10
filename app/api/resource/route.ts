@@ -2,7 +2,13 @@ import {readSource} from '@/lib/live/cache';
 import {resourceLoader,resourcePage,datastorePageLoader,expandDocument,wordDocumentView} from '@/lib/live/resources';
 import {readGeographicContext} from '@/lib/geographic-scope';
 export const dynamic='force-dynamic';
-export async function GET(request:Request){const p=new URL(request.url).searchParams,id=p.get('id')||'',q=p.get('q')||'',page=Number(p.get('page')||0),sheet=Number(p.get('sheet')||0),sort=Number(p.get('sort')??-1),geographicContext=readGeographicContext(p);if(!geographicContext||!/^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(id)||q.length>200||![page,sheet,sort].every(Number.isInteger)||page<0||page>100000||sheet<0||sheet>1000||sort< -1||sort>10000)return Response.json({error:'Parametrii resursei sunt invalizi.'},{status:400});const query={q,page,sheet,sort,desc:p.get('desc')==='1',geographicContext},state=await readSource(resourceLoader(id));try{
+export async function GET(request:Request){const p=new URL(request.url).searchParams,id=p.get('id')||'',q=p.get('q')||'',page=Number(p.get('page')||0),sheet=Number(p.get('sheet')||0),sort=Number(p.get('sort')??-1),geographicContext=readGeographicContext(p);if(!geographicContext||!/^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(id)||q.length>200||![page,sheet,sort].every(Number.isInteger)||page<0||page>100000||sheet<0||sheet>1000||sort< -1||sort>10000)return Response.json({error:'Parametrii resursei sunt invalizi.'},{status:400}); const query={q,page,sheet,sort,desc:p.get('desc')==='1',geographicContext},state=await readSource(resourceLoader(id));
+ // Un index de foaie care nu există în set este un argument invalid — se respinge cu
+ // 400 înainte de orice citire de pagini, distinct de o eroare de citire a sursei
+ // (care rămâne indisponibilitate onestă, nu vina cererii).
+ if(state.data?.kind==='table'&&query.sheet>=state.data.sheets.length)return Response.json({error:'Foaia solicitată (sheet='+query.sheet+') nu există — setul are '+state.data.sheets.length+' foi.'},{status:400});
+ if(state.data?.kind==='datastore'&&query.sheet!==0)return Response.json({error:'Setul datastore servește o singură foaie (0).',},{status:400});
+ try{
  // Pachetul Word Flat OPC: conversația servește textul extras, iar integralul
  // rămâne un fișier descărcabil pe ruta de export — nu un XML brut de sute de
  // mii de caractere duplicat în răspuns.
