@@ -183,7 +183,9 @@ const PROBE = {
     return `${items.length} vehicule Tranzy`;
   },
   flights_status: (envelope) => {
-    const items = envelope.items ?? [];
+    // Ruta servește plicul de stare cu data.items (ca toate sursele cache-uite);
+    // copia de relaie aeronavele tot acolo le poartă.
+    const items = itemsOf(envelope);
     assert.ok(items.length >= 1, 'fluxul ADS-B servește aeronave');
     for (const item of items.slice(0, 5)) assert.ok(/^[0-9a-f]{6}$/i.test(item.hex), 'hex-ul Mode-S e normalizat — fără majuscule dublate');
     return `${items.length} aeronave`;
@@ -298,8 +300,8 @@ const PROBE = {
   },
   ancpi_integrals: (envelope) => {
     const data = envelope.data ?? {};
-    assert.ok(Array.isArray(data.series ?? data.items ?? data.records), 'integrals ANCPI servește serii');
-    return 'integrals ANCPI';
+    assert.ok(Array.isArray(data.byType) && data.byType.length > 0 || Array.isArray(data.byCounty) && data.byCounty.length > 0, 'integrals ANCPI servește serii');
+    return 'integrals ANCPI: '+(data.monthLabel ?? 'luna publicată');
   },
   tourism_registry: (envelope) => {
     const data = dataOf(envelope);
