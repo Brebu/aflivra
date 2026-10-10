@@ -15,6 +15,7 @@ CREATE TABLE `source_cache` (
 	`failures` integer DEFAULT 0 NOT NULL,
 	`lock_until` integer DEFAULT 0 NOT NULL,
 	`error` text,
+	`error_diagnostic` text,
 	`adapter_version` text DEFAULT '' NOT NULL
 );
 --> statement-breakpoint

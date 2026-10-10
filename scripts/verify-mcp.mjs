@@ -28,7 +28,7 @@ try{
     calls.push(call);
     if(call.path==='/api/localities')return {ok:true,status:200,body:{status:'fresh',data:{items:[{name:'București',county:'București'}]}}};
     if(call.path==='/api/company'&&call.query.name)return {ok:true,status:200,body:{status:'fresh',data:{items:[]}}};
-    if(call.path==='/api/weather')return {ok:false,status:400,body:{error:'Alege coordonate geografice valide.'}};
+    if(call.path==='/api/weather')return call.query.lat==='999'?{ok:false,status:400,body:{error:'Alege coordonate geografice valide.'}}:{ok:true,status:200,body:{status:'fresh',data:{hourly:[{time:new Date().toISOString()}],hoursRequested:48,hoursReturned:1,windowComplete:false,windowStart:new Date().toISOString(),horizonEnd:new Date().toISOString()}}};
     if(call.path==='/api/legal'&&call.method==='POST')return {ok:true,status:200,body:{status:'fresh',data:{kind:'court'}}};
     if(call.path==='/api/resource-file'&&call.query.format==='xlsx')return {ok:true,status:200,body:{},binary:{url:'/api/resource-file?'+new URLSearchParams(call.query).toString(),mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',fileName:'Prețuri locale.xlsx',rows:4357,sheets:1}};
     return {ok:true,status:200,body:{status:'fresh',data:{}}};
@@ -38,9 +38,10 @@ try{
   // necunoscută revenind la a serverului.
   const init=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'verify',version:'0'}}});
   assert.equal(init.status,200,'initialize răspunde 200');
-  assert.equal(init.body.result.protocolVersion,'2025-03-26','versiunea clientului acceptată la negoțiere');
+  assert.equal(init.body.result.protocolVersion,server.MCP_PROTOCOL_VERSION,"A24: la 2025-06-18 se negociază singura versiune suportată — 2025-03-26 nu mai e acceptată");
   const initUnknown=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:2,method:'initialize',params:{protocolVersion:'1999-01-01',capabilities:{},clientInfo:{name:'verify',version:'0'}}});
   assert.equal(initUnknown.body.result.protocolVersion,server.MCP_PROTOCOL_VERSION,'versiunea necunoscută revine la a serverului');
+  assert.deepEqual(server.SUPPORTED_PROTOCOL_VERSIONS,['2025-06-18'],'A24: lista versiunilor suportate e 2025-06-18 singură — ruta o folosește la respingere');
   assert.equal(init.body.result.serverInfo.name,'aflivra','serverInfo cu numele platformei');
   assert.ok(init.body.result.instructions.length>50,'instrucțiunile descriu platforma pentru asistenți');
 
@@ -73,6 +74,7 @@ try{
     'tranzy_live','flights_status','flight_board','trains_schedule','legal_acts','court_dosar_search',
     'federated_search','catalog_datasets','dataset_table','dataset_export','news_feed','story_read',
     'lawyers_registry','forensic_experts','notaries_registry','anl_housing','ancpi_integrals',
+    'tourism_registry','seismic_buildings','seismic_events','historic_monuments','ins_series','energy_offers','power_system',
     'film_detail','article_read','transport_network','law_search','law_document','cinema_sites','stories_list',
   ],'lista de tool-uri rămâne pin-ată: orice schimbare de suprafață trece explicit prin poartă');
   for (const tool of list) {
@@ -146,16 +148,42 @@ try{
   const unknownMethod=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:9,method:'resources/read'});
   assert.equal(unknownMethod.body.error?.code,-32601,'metodele necunoscute se resping cu -32601');
 
-  // 10. Lotul: răspunsuri numai pentru cererile care cer răspuns.
-  const batch=await server.handleRpc(callRoute,[{jsonrpc:'2.0',id:10,method:'ping'},{jsonrpc:'2.0',method:'notifications/cancelled'},{jsonrpc:'2.0',id:11,method:'tools/list'}]);
-  assert.ok(Array.isArray(batch.body),'lotul răspunde cu lot');
-  assert.deepEqual(batch.body.map(entry=>entry.id),[10,11],'notificările fără id nu primesc răspuns în lot');
+  // 10. A25: la 2025-06-18 un POST = un singur mesaj — loturile se resping
+  // predictibil, valide, mixte sau goale, fără execuție parțială.
+  const batch=await server.handleRpc(callRoute,[{jsonrpc:'2.0',id:10,method:'ping'},{jsonrpc:'2.0',id:11,method:'tools/list'}]);
+  assert.equal(batch.status,400,'A25: lotul valid se respinge cu 400');
+  assert.equal(batch.body.error?.code,-32600,'A25: lotul e eroare de protocol, nu execuție');
+  assert.match(batch.body.error?.message||'',/one POST carries exactly one message/,'A25: mesajul numește contractul 2025-06-18');
   calls.length=0;
   const silentBatch=await server.handleRpc(callRoute,[{jsonrpc:'2.0',method:'tools/call',params:{name:'localities_search',arguments:{q:'x'}}},{jsonrpc:'2.0',id:12,method:'ping'}]);
-  assert.deepEqual((silentBatch.body||[]).map(entry=>entry.id),[12],'lotul execută doar cererile cu id');
-  assert.equal(calls.length,0,'notificarea tools/call din lot nu execută ruta');
+  assert.equal(silentBatch.status,400,'A25: lotul mixt (notificare + cerere) se respinge la fel — fără pierderea cererii valide prin tăcere');
+  assert.equal(calls.length,0,'A25: nicio rută nu se execută din lot');
   const emptyBatch=await server.handleRpc(callRoute,[]);
-  assert.equal(emptyBatch.status,400,'lotul gol se respinge');
+  assert.equal(emptyBatch.status,400,'A25: lotul gol se respinge');
+  const singleNotification=await server.handleRpc(callRoute,{jsonrpc:'2.0',method:'notifications/cancelled'});
+  assert.equal(singleNotification.status,202,'A25: notificarea single fără id rămâne acceptată onest');
+
+  // 10b. A19: valorile în afara limitelor se resping la granită cu motiv numit.
+  const halfHour=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:13,method:'tools/call',params:{name:'weather_forecast',arguments:{lat:44.4,lon:26.1,hours:0.5}}});
+  assert.equal(halfHour.body.error?.code,-32602,'A19: hours=0,5 se respinge cu -32602');
+  assert.equal(halfHour.body.error?.message,'Argument "hours" must be an integer.','A19: mesajul numește integralul cerut');
+  const negativePage=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:14,method:'tools/call',params:{name:'localities_search',arguments:{q:'x',page:-1}}});
+  assert.equal(negativePage.body.error?.code,-32602,'A19: page=-1 se respinge la granită');
+  assert.equal(negativePage.body.error?.message,'Argument "page" must be at least 0.','A19: mesajul numește minimul paginii');
+  const bigPageSize=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:15,method:'tools/call',params:{name:'places_search',arguments:{q:'spital',pageSize:201}}});
+  assert.equal(bigPageSize.body.error?.message,'Argument "pageSize" must be at most 200.','A19: mesajul numește maximul paginii');
+  const fracSheet=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:16,method:'tools/call',params:{name:'dataset_export',arguments:{id:'2f6a4c1e-8b3d-4e57-9c2a-6d1f0b8e7a3c',format:'csv',sheet:1.5}}});
+  assert.equal(fracSheet.body.error?.message,'Argument "sheet" must be an integer.','A19: foaia fracționară se respinge înainte de rută');
+  const intHours=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:17,method:'tools/call',params:{name:'weather_forecast',arguments:{lat:44.4,lon:26.1,hours:48}}});
+  assert.ok(intHours.body.result&&!intHours.body.result.isError,'A19: hours=48 întreg trece nerestricționat');
+
+  // 10c. A23: un binar de pe rută eșuată nu devine niciodată descărcare reușită.
+  const binaryFailure=await server.handleRpc(async()=>({ok:false,status:503,body:{error:'Exportul integral nu a trecut verificarea.'}}),{jsonrpc:'2.0',id:18,method:'tools/call',params:{name:'dataset_export',arguments:{id:'2f6a4c1e-8b3d-4e57-9c2a-6d1f0b8e7a3c',format:'xlsx'}}});
+  assert.equal(binaryFailure.body.result.isError,true,'A23: răspunsul eșuat cu octeți rămâne eroare onestă');
+  assert.ok(!binaryFailure.body.result.content.some(part=>part.type==='resource_link'),'A23: fără legătură de descărcare inventată pe eroare');
+  assert.match(binaryFailure.body.result.content[0].text,/nu a trecut verificarea/,'A23: mesajul erorii se păstrează');
+  const exportOk=await server.handleRpc(async()=>({ok:true,status:200,body:{},binary:{url:'https://aflivra.brebu.workers.dev/api/resource-file?id=x&format=xlsx',mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',fileName:'Export.xlsx',rows:4357,sheets:null}}),{jsonrpc:'2.0',id:19,method:'tools/call',params:{name:'dataset_export',arguments:{id:'2f6a4c1e-8b3d-4e57-9c2a-6d1f0b8e7a3c',format:'xlsx'}}});
+  assert.equal(exportOk.body.result.isError,false,'A23: exportul binar reușit rămâne succes cu legătură');
 
   
   // 11. Pinul de fire: fiecare tool, apelat prin seam, țintește exact ținta pin-ată —
@@ -196,6 +224,13 @@ try{
     ['notaries_registry',{chamber:'București',q:'popa',page:1},{path:'/api/notaries',query:{chamber:'București',q:'popa',page:'1'}}],
     ['anl_housing',{county:'Sibiu',q:'bloc',page:0},{path:'/api/anl',query:{county:'Sibiu',q:'bloc',page:'0'}}],
     ['ancpi_integrals',{}, {path:'/api/ancpi',query:{}}],
+    ['tourism_registry',{kind:'cazare',county:'Brașov',q:'hotel',locality:'Predeal',page:0},{path:'/api/tourism',query:{kind:'cazare',county:'Brașov',q:'hotel',locality:'Predeal',page:'0'}}],
+    ['seismic_buildings',{q:'Academiei 1',sector:'3',page:0},{path:'/api/seismic',query:{q:'Academiei 1',sector:'3',page:'0'}}],
+    ['seismic_events',{kind:'events',from:'2024',to:'2024-12-31',minMagnitude:4,q:'Vrancea',page:0},{path:'/api/earthquakes',query:{kind:'events',from:'2024',to:'2024-12-31',minMagnitude:'4',q:'Vrancea',page:'0'}}],
+    ['historic_monuments',{q:'B-II-a-A-00188',page:0},{path:'/api/monuments',query:{q:'B-II-a-A-00188',page:'0'}}],
+    ['ins_series',{territory:'Cluj'},{path:'/api/ins',query:{territory:'Cluj'}}],
+    ['energy_offers',{county:'București',consumptionMonthly:250,currentBillLei:300,q:'petrom',page:0},{path:'/api/energy-offers',query:{county:'București',consumptionMonthly:'250',currentBillLei:'300',q:'petrom',page:'0'}}],
+    ['power_system',{}, {path:'/api/power',query:{}}],
  ];
   assert.equal(WIRED.length, list.length, 'pinul de fire acoperă fiecare tool din registru');
   for (const [name, args, expected] of WIRED) {

@@ -11,7 +11,14 @@ import {knowledgeLoader} from './knowledge';
 import {directoryLoader} from './directories';
 import {odeonLoader,eventsLoader,eventVenue} from './events';
 import {cinemaLoader} from './cinema';
+import {senLoader} from './sen';
+import {posfJudeteLoader,posfOffersLoader,posfZoneFor} from './posf';
+import {tempoMetaLoader} from './tempo';
+// Zona POSF a unei ture de living: judet-ul publicat se rezolvă prin lista POSF (get-judete),
+// nu hardcodat — id_zona e al sursei.
+const posfZoneOffers=async(county:string)=>{const state=await readSource(posfJudeteLoader,{waitForRefresh:true});const zone=state.data?posfZoneFor(state.data.items,county):null;if(!zone)throw Error('Zona POSF nu a putut fi rezolvată din lista publicată.');return posfOffersLoader(zone,200,300)};
 import {defaultCity} from '../location-context';
+import {romanianDate} from './date';
 import sweepMap from './refresh-groups.json';
 import type {Loader} from './types';
 export type SweepSource={key:string;name:string;status:'fresh'|'cached'|'stale'|'unavailable';lastSuccessAt:string|null;error:string|null};
@@ -22,8 +29,8 @@ const groupMap:SweepGroupMap=sweepMap;
 // rămân sub plafon, iar familiile grele (GTFS, SIRUTA, registre XLSX, consolidări integrale) se servesc din
 // semințele verificate la construire — tura de noapte pre-împrospătează doar sursele ușoare, la cheia exactă
 // pe care o citește prima încărcare a aplicației.
-const todayIso=()=>new Date().toISOString().slice(0,10);
-const memberLoaders:Record<string,()=>Loader>={
+const todayIso=()=>romanianDate();
+const memberLoaders:Record<string,()=>Loader|Promise<Loader>>={
  'bnr':()=>bnrLoader,
  'weather.anm':()=>weatherLoader,
  'company.default':()=>companyLoader(),
@@ -44,9 +51,13 @@ const memberLoaders:Record<string,()=>Loader>={
  'knowledge.company.default':()=>knowledgeLoader('427282'),
  'directory.schools.page0':()=>directoryLoader('schools','',0),
  'catalog.category.bani':()=>catalogLoader('bani','',0),
- 'catalog.category.sanatate':()=>catalogLoader('sanatate','',0)};
+ 'catalog.category.sanatate':()=>catalogLoader('sanatate','',0),
+ 'power.sen':()=>senLoader,
+ 'posf.judete':()=>posfJudeteLoader,
+ 'posf.offers.bucuresti':()=>posfZoneOffers('București'),
+ 'ins.matrix.pop105a':()=>tempoMetaLoader};
 for(const group of groupMap.groups)for(const member of group.members)if(!memberLoaders[member])throw Error('Membru de reîmprospătare necunoscut: '+member);
-export const memberLoader=(member:string):Loader=>{const make=memberLoaders[member];if(!make)throw Error('Membru de reîmprospătare necunoscut: '+member);return make()};
+export const memberLoader=async(member:string):Promise<Loader>=>{const make=memberLoaders[member];if(!make)throw Error('Membru de reîmprospătare necunoscut: '+member);return await make()};
 export const listGroups=()=>groupMap.groups.map(group=>({name:group.name,cron:group.cron,members:[...group.members]}));
 export const listSeedBacked=()=>groupMap.seedBacked.map(entry=>({...entry}));
 export const listOnDemand=()=>groupMap.onDemand.map(entry=>({...entry}));
@@ -57,7 +68,7 @@ export async function runGroup(name:string,db:D1Database|undefined=env.DB):Promi
  const startedAt=new Date().toISOString(),sources:SweepSource[]=[];
  for(const member of group.members){
   // Izolare per sursă: o cădere sau o buget epuizată se înregistrează și tura continuă cu celelalte surse.
-  try{const state=await readSource(memberLoader(member),{waitForRefresh:true});sources.push({key:state.key,name:state.name,status:state.status,lastSuccessAt:state.lastSuccessAt,error:state.error})}
+  try{const state=await readSource(await memberLoader(member),{waitForRefresh:true});sources.push({key:state.key,name:state.name,status:state.status,lastSuccessAt:state.lastSuccessAt,error:state.error})}
   catch(e){sources.push({key:member,name:member,status:'unavailable',lastSuccessAt:null,error:e instanceof Error?e.message:'Sursa nu a putut fi verificată în această tură.'})}}
  const ok=sources.filter(source=>source.status==='fresh'||source.status==='cached').length;
  const result:SweepResult={group:name,cron:group.cron,startedAt,finishedAt:new Date().toISOString(),ok,failed:sources.length-ok,sources};

@@ -1,0 +1,4 @@
+# Descărcările brute de la surse (XLSX/PDF/JSON de MB) nu se comit: scripturile
+# de import le re-descarcă la fiecare tură, iar fixture-ele pin-ate SHA-256 pe care
+# le citesc porțile trăiesc în fixtures/.
+raw/

@@ -1,0 +1,86 @@
+name: corpora-refresh
+
+# Reîmprospătarea aproape în timp real a corpusurilor statice „surse românești”:
+# Cloudflare permite maximum 5 declanșări programate — toate ocupate de grupurile
+# Worker-ului (pulse/living/feeds/research/registers) — deci tura zilnică de corpus
+# rulează ca GitHub Action: descarcă exporturile oficiale (SITUR, AMCCRS, EIDA,
+# LMI), regenerează corpusurile, seacă porțile de integritate și deschide un PR cu
+# dovada SHA-256 — reîmprospătarea corpusului e o decizie revizuită, nu o
+# pushare directă. Sursele live (SEN/POSF/TEMPO) NU se ating aici: ele au rutele
+# proprii cu TTL în Worker.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: corpora-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    name: Regenerate static corpora (SITUR, AMCCRS, EIDA, LMI)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies (frozen lockfile)
+        run: corepack pnpm install --frozen-lockfile
+      - name: Install poppler-utils (LMI extraction uses pdftotext -layout)
+        run: sudo apt-get update -q && sudo apt-get install -y poppler-utils
+      - name: Branch for the refresh PR
+        run: git checkout -b corpora/refresh-$(date -u +%Y-%m-%d)
+      - name: Import SITUR registries (Excel exports; header detected by content)
+        run: node scripts/import-situr-snapshot.mjs
+      - name: Import AMCCRS register (nonce stays in this offline script, never the Worker)
+        run: node scripts/import-amccrs-snapshot.mjs
+      - name: Import EIDA seismic history (per-year slices under the service limit)
+        run: node scripts/import-eida-snapshot.mjs
+      - name: Import LMI 2015 Bucharest (official PDF; column anchors per audited parse)
+        run: node scripts/import-lmi-snapshot.mjs
+      - name: Integrity gate — counts, honest gaps, SHA-256 proofs
+        run: node scripts/verify-surse-noi-corpus.mjs
+      - name: Typecheck (the readers see the regenerated corpus through the same contracts)
+        run: corepack pnpm exec tsc --noEmit
+      - name: No corpus change (quiet day at the source)
+        if: success() && github.event_name == 'schedule'
+        run: |
+          if [ -z "$(git status --porcelain public/data/situr public/data/amccrs public/data/eida public/data/lmi public/data/snapshot-transport.json)" ]; then
+            echo "Sursele nu au publicat noutăți — zi liniștită, fără PR.";
+            echo "quiet=true" >> "$GITHUB_OUTPUT" || true;
+            exit 0;
+          fi
+        id: quiet
+      - name: Commit the regenerated corpora
+        run: |
+          git config user.name "aflivra-corpus-bot"
+          git config user.email "corpus-bot@users.noreply.github.com"
+          git add public/data/situr public/data/amccrs public/data/eida public/data/lmi public/data/snapshot-transport.json
+          git commit -m "corpus(surse-romanesti): reîmprospătare zilnică $(date -u +%Y-%m-%d) — SITUR/AMCCRS/EIDA/LMI" \
+            -m "AI: opencode/opus,sonnet
+          Human: Ciprian-Alexandru-Lucian Brebu
+
+          Co-authored-by: opencode <noreply@anthropic.com>
+          Co-authored-by: Ciprian-Alexandru-Lucian Brebu <dev@brebu.workers.dev>"
+      - name: Open the refresh PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+          gh pr create --title "Corpus „surse românești": reîmprospătare $(date -u +%Y-%m-%d)" \
+            --body "Reîmprospătarea zilnică programată a corpusurilor statice: SITUR (registrele turistice clasificate), AMCCRS (încadrarea seismică București), EIDA (istoricul seismic M3+) și LMI 2015 (monumente istorice București). Importurile rulează offline, cu porțile de integritate executate pe CI; nonce-ul AMCCRS trăiește doar în scriptul de import, nu în Worker. Sursele live (SEN/POSF/TEMPO) au rutele proprii în Worker și nu se ating aici.
+
+Baza de integritate: \`node scripts/verify-surse-noi-corpus.mjs\` (numerele pin-ate = cele auditate; o schimbare reală la sursă se vede în diff și se acceptă conștient).
+
+AI: opencode/opus,sonnet
+Human: Ciprian-Alexandru-Lucian Brebu" \
+            --base main --head "$BRANCH"

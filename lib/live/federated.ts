@@ -71,7 +71,7 @@ import {topicSections} from '@/lib/dashboard-topics';
 import {eventVenues} from './events';
 
 export type FederatedKind='place'|'company'|'lawyer'|'dataset'|'record'|'article'|'story'|'dosar'|'notary'|'station'|'flight'|'event';
-export type FederatedFamilyId='places'|'catalog'|'lawyers'|'directory-schools'|'directory-health'|'directory-pharmacies'|'directory-hospitals'|'stiri'|'agricultura'|'stories'|'gallery'|'cui'|'dosare'|'notaries'|'experts-judiciari'|'experts-tehnici'|'translators'|'trains'|'flights'|'events'|'anl-sites';
+export type FederatedFamilyId='places'|'catalog'|'lawyers'|'directory-schools'|'directory-health'|'directory-pharmacies'|'directory-hospitals'|'stiri'|'agricultura'|'stories'|'gallery'|'cui'|'dosare'|'notaries'|'experts-judiciari'|'experts-tehnici'|'translators'|'trains'|'flights'|'events'|'anl-sites'|'energy-offers'|'power-system';
 export type FederatedTarget={view:'place'|'company'|'domain'|'watch';domain?:string;tab?:string;id?:string;query?:string;sub?:string;courtNumber?:string};
 export type FederatedItem={family:FederatedFamilyId;category:string;subcategory?:string;id:string;title:string;subtitle?:string;snippet?:string;kind:FederatedKind;source:string;url?:string;target:FederatedTarget;crossLinks?:FederatedCrossLink[]};
 // A cross-entity link: discovery + deep-link between related entities of different
@@ -127,7 +127,14 @@ export const federatedFamilies:readonly FederatedFamilyDescriptor[]=[
   {id:'events',label:'Spectacole și concerte',source:'Calendarele publice ale instituțiilor',kind:'event',category:'cultura',maxChars:100,request:term=>'/api/events?'+new URLSearchParams({q:term,page:'0'})},
   // The ANL reception-site registry completes parity with the notaries registry family:
   // a national public register browsed through its own validated route.
-  {id:'anl-sites',label:'Amplasamente locuințe ANL',source:'data.gov.ro · ANL',kind:'record',category:'bani',maxChars:100,request:term=>'/api/anl?'+new URLSearchParams({q:term,page:'0'})}
+  {id:'anl-sites',label:'Amplasamente locuințe ANL',source:'data.gov.ro · ANL',kind:'record',category:'bani',maxChars:100,request:term=>'/api/anl?'+new URLSearchParams({q:term,page:'0'})},
+  // The POSF comparator reaches the Energie family as a searchable register: the offer
+  // title/furnizor text matches the term over the audited zone default (București),
+  // declared on the row — the family fan-out carries no county context of its own.
+  {id:'energy-offers',label:'Oferte energie electrică (comparatorul POSF)',source:'POSF / ANRE',kind:'record',category:'energie',maxChars:100,request:term=>'/api/energy-offers?'+new URLSearchParams({county:'București',q:term,page:'0'})},
+  // The live grid observation joins as its own one-row family: the row title is the
+  // natural system text, so a system/energy term reaches today's grid state.
+  {id:'power-system',label:'Sistemul energetic național (live)',source:'Transelectrica',kind:'record',category:'energie',maxChars:100,request:()=>'/api/power'}
  ];
 const descriptorById=new Map(federatedFamilies.map(f=>[f.id,f]));
 
@@ -220,6 +227,16 @@ function anlItem(record:Record<string,unknown>):FederatedItem{
   const county=text(record['Judeţ']),locality=text(record['Localitate']);
   return {family:'anl-sites',category:'bani',subcategory:'Amplasamente locuințe ANL',id:record._id!==undefined?String(record._id):title,title,subtitle:[locality,county].filter(Boolean).join(' · ')||undefined,kind:'record',source:'data.gov.ro · ANL',url:'https://data.gov.ro/dataset/04ab4208-d17f-4f9b-ba81-7778f373344d',target:{view:'domain',domain:'bani',tab:'imobiliare',query:title}};
  }
+function energyOfferItem(record:Record<string,unknown>):FederatedItem{
+  const title=text(record.denumire_oferta)||text(record.furnizor)||'Ofertă de energie electrică';
+  const furnizor=text(record.furnizor),pret=text(record.pret_final),unitate=text(record.unitate_masura);
+  return {family:'energy-offers',category:'energie',subcategory:'Oferte energie electrică · comparator POSF',id:text(record.id_oferta)||title,title,subtitle:[furnizor,pret&&unitate?pret+' '+unitate:pret].filter(Boolean).join(' · ')||undefined,kind:'record',source:'POSF / ANRE',url:text(record.oferta_pdf)||undefined,target:{view:'domain',domain:'energie',query:title}};
+ }
+function powerSystemItem(record:Record<string,unknown>):FederatedItem{
+  const prod=record.productionMW,cons=record.consumptionMW,sold=record.balanceSoldMW;
+  const title='Sistemul energetic național · '+(typeof prod==='number'?prod:'?')+' MW producție, '+(typeof cons==='number'?cons:'?')+' MW consum';
+  return {family:'power-system',category:'energie',subcategory:'Sistemul energetic · Transelectrica (live)',id:'power:sen',title,subtitle:[typeof sold==='number'?'sold '+sold+' MW':null,typeof record.observedAt==='string'&&record.observedAt?record.observedAt:null].filter(Boolean).join(' · ')||undefined,kind:'record',source:'Transelectrica',target:{view:'domain',domain:'energie',query:'sistemul energetic'}};
+ }
 function lawyerItem(record:Record<string,unknown>,term:string):FederatedItem{
  const name=text(record.name)||term||'Avocat în tablou';
  return {family:'lawyers',category:'justitie',subcategory:'Tabloul avocaților',id:String(record.id??name),title:name,subtitle:text(record.title),kind:'lawyer',source:'IFEP / UNBR',url:text(record.url),target:{view:'domain',domain:'justitie',tab:'lawyers',query:name}};
@@ -300,6 +317,15 @@ function mapFamily(family:FederatedFamilyId,data:Record<string,unknown>,term:str
     const rows=asObjects(data.records);
     if(!rows)return null;
     return {items:rows.slice(0,cap).map(anlItem),total:numberOr(data.total,rows.length)};
+   }
+   if(family==='energy-offers'){
+    const rows=asObjects(data.items);
+    if(!rows)return null;
+    return {items:rows.slice(0,cap).map(energyOfferItem),total:numberOr(data.total,rows.length)};
+   }
+   if(family==='power-system'){
+    if(!data||typeof data!=='object'||data.productionMW===undefined&&data.consumptionMW===undefined)return null;
+    return {items:[powerSystemItem(data as Record<string,unknown>)],total:1};
    }
    return null;
 }

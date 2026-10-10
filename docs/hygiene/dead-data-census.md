@@ -1,6 +1,6 @@
 # Dead-data census — content-enrichment-ux (Wave A2)
 
-**Generated**: 2026-10-09T11:38:46.885Z by `scripts/audit-dead-data.mjs` (REPORT-ONLY — no deletion)
+**Generated**: 2026-10-10T13:18:54.106Z by `scripts/audit-dead-data.mjs` (REPORT-ONLY — no deletion)
 
 **Policy**: the D3 per-family recency table (ADVOCATE-REVIEW.md, accepted) — pinned code-side by `scripts/verify-recency-policy.mjs`. „Dead" = no-content / expired-source / irreversible-stale, **never age alone**, and age only where the table sets a horizon for that family.
 
@@ -20,8 +20,8 @@
 | directory/pharmacies | latest edition within 3y (D3: CNAS editions) | 2284 | 0 | 0 | — | **CURAT — nicio acțiune** | stored edition period 31.03.2026; the loader re-picks the newest in-window edition at expiry |
 | directory/hospitals | latest edition within 3y (D3: CNAS editions) | 731 | 0 | 0 | — | **CURAT — nicio acțiune** | stored edition period 31.03.2026; the loader re-picks the newest in-window edition at expiry |
 | directory/schools | edition-governed (D3: directory seed) | 6000 | 0 | 0 | — | **CURAT — nicio acțiune** | paged datastore copy; records are re-verified per query, no age semantics on rows |
-| catalog/ckan (inventar stocat) | modified >= 3y la servire (D3: CKAN browsing; coded at cache.ts:15) | 1662 | 0 | 1 | — | **CURAT — nicio acțiune** | 1 rând pe muchia rulantă a ferestrei de 3 ani — fereastra se aplică dinamic la servire, rândurile ies singure; interogările live nu filtrează după an (disclosure-ul „metadate mai vechi" este cel înregistrat); serve-seed kit: 0 chei catalog în server seeds |
-| events/odeon (calendar stocat) | future-facing display (D3: events) | 19 | 0 | 0 | — | **CURAT — nicio acțiune** | 1 eveniment trecut rămâne în calendar — filtru de afișare, nu date moarte; calendarul rotunjește la următoarea preluare |
+| catalog/ckan (inventar stocat) | modified >= 3y la servire (D3: CKAN browsing; coded at cache.ts:15) | 5251 | 0 | 3438 | — | **CURAT — nicio acțiune** | 3438 rând pe muchia rulantă a ferestrei de 3 ani — fereastra se aplică dinamic la servire, rândurile ies singure; interogările live nu filtrează după an (disclosure-ul „metadate mai vechi" este cel înregistrat); serve-seed kit: 0 chei catalog în server seeds |
+| events/odeon (calendar stocat) | future-facing display (D3: events) | 19 | 0 | 0 | — | **CURAT — nicio acțiune** | 2  evenimente trecute rămân în calendar — filtru de afișare, nu date moarte; calendarul rotunjește la următoarea preluare |
 | feeds/filme (corpus) | exempt — all years by design (D3: films) | 1870 | 0 | 0 | — | **CURAT — nicio acțiune** | year span 1898–2026 is catalog breadth, not staleness |
 | localities/siruta | exempt — standing registry (D3: geography) | 13755 | 0 | 0 | — | **CURAT — nicio acțiune** |  |
 | justice/notari | exempt — standing (D3: professional registries) | 3096 | 0 | 0 | — | **CURAT — nicio acțiune** | loader already filters all-empty rows at parse |
@@ -31,20 +31,20 @@
 | stories (corpus) | exempt — literary corpus (D3: stories) | 233 | 0 | 0 | 0 | **CURAT — nicio acțiune** | 233 texte integrale verificate; eșecuri de preluare înregistrate la import: ; fișiere 233/233 |
 | transport/tpbi (corpus) | edition TTL governs (D3: transport network) | 201 | 0 | 0 | 0 | **CURAT — nicio acțiune** | 201 rute în manifest, 201 fișiere reale; numărătoarea pinned (181.537 locuri) se verifică în verify-sweep-inventory |
 | transport/trains (corpus) | edition-governed (D3: transport schedules) | 2363 | 0 | 0 | 0 | **CURAT — nicio acțiune** | 2 ediții cu valabilitate trecută rămân în corpus — re-importul se face pe ediție; shards 128/128 |
-| dev D1 cache (stare locală de dezvoltare) | expired-source rows per family (D3 machinery: last-good-copy, seu nocturn, lease 60s) | 263 | 0 | 0 | — | **CURAT — nicio acțiune** | rânduri de sarcină în eroare (fără copie): 24 — fiecare familie are propria poartă onestă și backoff; fragmente payload pensionate (curățare 48h): 0 din 146; copia dev nu certifică starea producției |
+| dev D1 cache (stare locală de dezvoltare) | expired-source rows per family (D3 machinery: last-good-copy, seu nocturn, lease 60s) | 118 | 0 | 0 | — | **CURAT — nicio acțiune** | rânduri de sarcină în eroare (fără copie): 27 — fiecare familie are propria poartă onestă și backoff; fragmente payload pensionate (curățare 48h): 0 din 0; copia dev nu certifică starea producției |
 
 ## Samples and error-state observations
 
 ### catalog/ckan (inventar stocat)
-- samples: `[{"modified":"2023-10-05","title":"Achiziții Poliția Locală Iași"}]`
+- samples: `[{"modified":"2016-09-07","title":"Statia RO0134A: Lista masuratorilor validate privi"},{"modified":"2016-09-05","title":"Statia RO010503, 'Poiana Stampei' : Lista masurato"},{"modified":"2016-09-12","title":"Statia RO0116A: Lista masuratorilor validate privi"}]`
 ### events/odeon (calendar stocat)
-- samples: `[{"start":"2026-10-05T19:00","title":"Viitorul președinte al României"}]`
+- samples: `[{"start":"2026-10-05T19:00","title":"Viitorul președinte al României"},{"start":"2026-10-09T19:00","title":"Soldatul de ciocolată   |   14 +"}]`
 ### feeds/filme (corpus)
 - samples: `[{"oldest":"1898","newest":"2026"}]`
 ### transport/trains (corpus)
 - samples: `[{"operator":"cfm","validTo":"20251213"},{"operator":"regiotrans","validTo":"20171209"}]`
 ### dev D1 cache (stare locală de dezvoltare)
-- rânduri/familie în eroare (dev D1, informational): `{"transport":"1/3","flights":"2/2","article":"2/2","lawyers":"17/23","housing":"1/2","law":"1/4","law-portal":"1/1"}`
+- rânduri/familie în eroare (dev D1, informational): `{"catalog":"22/22","forecast":"1/6","directory":"23/23","flights":"2/2","lawyers":"15/19","justice":"4/4","housing":"2/2","transport":"1/3","law":"1/4","law-portal":"1/1","siruta":"1/1","resource":"1/1","article":"2/2","posf":"1/1","power":"1/1"}`
 
 ## Purge decision protocol
 
