@@ -112,6 +112,10 @@ jobs:
           node scripts/verify-packed-seeds.mjs
           node scripts/verify-twa.mjs
           node scripts/verify-surse-noi-corpus.mjs
+          node scripts/verify-integration-regressions.mjs
+          node scripts/verify-mcp-ui-parity.mjs
+          node scripts/verify-lawyers.mjs
+          node scripts/verify-geographic-scope.mjs
           node scripts/verify-mcp.mjs
           node scripts/verify-watch-sweep.mjs
           node scripts/verify-watch-api.mjs

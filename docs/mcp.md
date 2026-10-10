@@ -61,6 +61,15 @@ pauza), fără chei sau corpuri de cerere, ca degradarea să fie analizabilă, n
 (administrativ), fișierele GTFS integrale (`transit-file` — mase de rânduri care nu încap
 într-o conversație) și diagnosticul UI `/api/live`. Toată suprafața publică de date e mai jos.
 
+## Paritate MCP ↔ UI
+
+Orice rută pe care o expune un tool MCP este accesibilă și prin interfața aplicației —
+workspace-ul „Registre oficiale" (meniul principal) suprafațează sursele românești,
+iar poarta `scripts/verify-mcp-ui-parity.mjs` (în CI) refuză orice tool viitor care
+ar ajunge în conector fără suprafață de interfață: rutele se extrag din propriile
+build-uri ale tool-urilor, iar echivalențele (snapshot-uri offline comune) se
+verifică mecanic, nu se declară.
+
 ## Tool-uri (41)
 
 ### `search_companies`
@@ -106,7 +115,7 @@ Avertizările ANM active; fără avertizări, fluxul XML gol se servește onest 
 ```
 
 ### `events_search`
-Spectacole și concerte în calendarele publice validate (teatre, operă): textul, sala și localitatea se aplică împreună, iar `q` trebuie nevid — un `q` gol se respinge la granița MCP cu mesajul exact `Argument "q" must be a non-empty string.`; o căutare fără potriviri rămâne succes onest cu total 0. `venue` primește id-ul, denumirea uzuală sau un **alias validat** al registrului („Teatrul de Artă București" rezolvă la „Teatrul de Artă"; lista completă de instituții și aliasuri o dă mesajul de 400 al rutei la un `venue` necunoscut); orele și prețurile se declară, nu se inventează: un spectacol publicat cu ziua, fără oră, poartă `timeKnown: false` (ora nu devine miezul nopții), iar `priceKnown` cere un preț publicat pozitiv — prețul zero nu se pretinde gratuit.
+Spectacole și concerte în calendarele publice validate (teatre, operă): textul, sala și localitatea se aplică împreună, iar `q` trebuie nevid — un `q` gol se respinge la granița MCP cu mesajul exact `Argument "q" must be a non-empty string.`; o căutare fără potriviri rămâne succes onest cu total 0. `venue` primește id-ul canonic al registrului („odeon", „operacluj", „teatruldearta" — formele de bază garantate, inclusiv variantele lor de scriere care se pliază pe același id), denumirea uzuală sau un **alias validat** („Teatrul de Artă București" rezolvă la „Teatrul de Artă"; lista completă de instituții și aliasuri o dă mesajul de 400 al rutei la un `venue` necunoscut); orele și prețurile se declară, nu se inventează: un spectacol publicat cu ziua, fără oră, poartă `timeKnown: false` (ora nu devine miezul nopții), iar `priceKnown` cere un preț publicat pozitiv — prețul zero nu se pretinde gratuit.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "events_search", "arguments": {"q": "teatru", "locality": "București"}}}
 ```
@@ -232,13 +241,13 @@ Registrul seismic AMCCRS al Bucureștiului („Lista Cladiri 2026"): adresa cu s
 ```
 
 ### `seismic_events`
-Istoricul seismic INFP/EIDA al României și împrejurimilor: cutremure resimțite de magnitudine ≥ 3 în dreptunghiul auditat 43–49°N / 20–30°E, pe ani comiși (rețeaua de stații RO se servește cu `kind: "stations"`). Istoric și infrastructură — nu avertizare de cutremur în timp real: răspunsurile 204 pe ferestrele recente au rămas inconcludente la audit, fereastra comisă se declară în fiecare răspuns, iar evenimentele din afara ei nu se pretind inexistente. Dreptunghiul nu definește exclusiv teritoriul României. Licențele rețelelor se păstrează separate; licență de reutilizare: neconfirmată.
+Istoricul seismic INFP/EIDA al României și împrejurimilor: cutremure resimțite de magnitudine ≥ 3 în dreptunghiul auditat 43–49°N / 20–30°E, pe ani comiși — 1.157 de evenimente cu câmpurile sub cheile antetului oficial (tipul evenimentului în `eventType`, locația reală în `eventLocationName`, autorul magnitudinii în `magnitudeAuthor`) și 150 de înregistrări de stație/perioadă ale rețelei RO (`kind: "stations"`, antetul FDSN nu se numără niciodată ca rând). Istoric și infrastructură — nu avertizare de cutremur în timp real. Fiecare răspuns de evenimente poartă contractul de acoperire `coverage`: `full` (intervalul cerut e acoperit de feliile anuale validate), `partial` (intervalul depășește fereastra comisă sau atinge felii inconcludente, identificate separat în `inconclusiveYears`), `outside` (în afara datelor verificate — niciodată o afirmație că nu au existat cutremure; `outsideCoverage: true`), `inconclusive` (feliile atinse au răspuns 204 la sursă — felia 2026 rămâne înregistrată inconcludentă). Magnitudinile sub pragul corpusului (3) nu se pretin niciodată acoperite. Prefixurile de interval trebuie să existe pe calendar (`2026-13`, `2026-02-30` sau `2026-3` se resping cu 400, la fel intervalul inversat), iar o cerere validă în afara ferestrei rămâne 200 cu acoperirea declarată. Dreptunghiul nu definește exclusiv teritoriul României. Licențele rețelelor se păstrează separate; licență de reutilizare: neconfirmată.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "seismic_events", "arguments": {"from": "2024", "minMagnitude": 4}}}
 ```
 
 ### `historic_monuments`
-Lista Monumentelor Istorice 2015 — secțiunea București, din PDF-ul oficial al Ministerului Culturii (Monitorul Oficial, Partea I, Nr. 113 bis/15.II.2016): cod LMI, denumire, localitate, adresă, datare și foliul tipărit al Monitorului (nu numărul de pagină al PDF-ului). Baza 2015 se declară: ordinele ministeriale ulterioare se obțin de la minister și nu sunt înglobate; semnalarea unei posibile apartenențe la patrimoniu nu e verdict juridic actual automat. Numerele extragerii se servesc ca numere, nu ca recensământ validat. Licență: neconfirmată.
+Lista Monumentelor Istorice 2015 — secțiunea București, din PDF-ul oficial al Ministerului Culturii (Monitorul Oficial, Partea I, Nr. 113 bis/15.II.2016): cod LMI, denumire, localitate, adresă, datare, foliul tipărit al Monitorului (`folioMof`) și pagina PDF (`paginaPdf`), păstrate separate — foliul nu e indexul PDF-ului. Extracția e pe geometria tipărită a tabelului (v2): coloanele Adresă și Datare rămân separate, iar o datare continuată pe rândul următor se reface întreagă. Baza 2015 se declară: ordinele ministeriale ulterioare se obțin de la minister și nu sunt înglobate; semnalarea unei posibile apartenențe la patrimoniu nu e verdict juridic actual automat. Numerele extragerii se servesc ca numere, nu ca recensământ validat. Licență: neconfirmată.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "historic_monuments", "arguments": {"q": "B-II-a-A-00188"}}}
 ```
@@ -256,7 +265,7 @@ Comparatorul public POSF/ANRE de oferte de energie electrică pentru casnici: of
 ```
 
 ### `power_system`
-Observația live a sistemului energetic național (Transelectrica SEN): producție, consum și sold de schimb în MW, cu componentele de producție exact cum le publică sursa — reconcilierea completă a agregării nu e definită de contractul sursei și se declară în răspuns. `observedAt` parsează marcajul de timp al sursei (an cu două cifre) pe convenția declarată Europe/Bucharest, păstrând textul original alături; `observationAgeSeconds` măsoară observația, iar o vechime de 1–2 minute e normală la sursă, nu avarie. Soldul și puterea nu sunt tarife de energie sau cantități de facturat. Licență: neconfirmată.
+Observația live a sistemului energetic național (Transelectrica SEN): producție, consum și sold de schimb în MW, cu componentele de producție exact cum le publică sursa — reconcilierea completă a agregării nu e definită de contractul sursei și se declară în răspuns (valorile negative publicate de sursă se servesc nemodificate). `observedAt` parsează marcajul de timp al sursei (an cu două cifre) cu candidaturile reale ale fusului românesc (UTC+2 iarna, UTC+3 vara), validate prin conversie inversă pe regulile Europe/Bucharest și declarate ca presupunere — sursa nu afirmă fusul; ora inexistentă la trecerea de primăvară și ora repetată la trecerea de toamnă rămân neconfirmate, cu motivul în `observedAtNote`. `observationAgeSeconds` măsoară observația, iar o vechime de 1–2 minute e normală la sursă, nu avarie; o vechime negativă nu se maschează la zero. Copiile persistente scrise de adaptorul v1 își recalifică ora din valoarea brută la servire (declarat în `observationTimeRevalidated`), fără a invalida puterile. Soldul și puterea nu sunt tarife de energie sau cantități de facturat. Licență: neconfirmată.
 ```json
 {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "power_system", "arguments": {}}}
 ```

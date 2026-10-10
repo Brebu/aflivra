@@ -5,6 +5,7 @@
 // exactly like the trains corpus does. Import scripts run offline (local or CI),
 // never inside the Worker.
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {gunzipSync} from 'node:zlib';
 import {gzipSync} from 'fflate';
 import {createHash} from 'node:crypto';
 
@@ -23,14 +24,62 @@ export async function writeSnapshot(files,path,payload,{gzip=true}={}){
  return bytes.length;
 }
 
+// A quiet day at the source must stay a quiet day in git: `fetchedAt` and its
+// license-stamp churn alone are download metadata, not content. The importer hashes
+// the content-bearing keys (rows kept whole — duplicates preserved, absorbed only in
+// the fingerprint's canonical order, so a registry that reshuffles its rows is not a
+// content change) and skips the rewrite when the committed corpus already carries the
+// same content under the same schema. The proof registered for a skipped file is the
+// committed one, so a partial refresh never drops a sibling's entry.
+const canonical=value=>{if(Array.isArray(value))return value.map(canonical).sort((a,b)=>a<b?-1:a>b?1:0);if(value&&typeof value==='object'){const out={};for(const key of Object.keys(value).sort())out[key]=canonical(value[key]);return out}return value};
+
+export function dataFingerprint(payload,contentKeys){
+ const data={};for(const key of contentKeys)data[key]=payload[key];
+ return sha256(new TextEncoder().encode(JSON.stringify(canonical(data))));
+}
+
+export async function committedPayload(path,{gzip=true}={}){
+ try{const stored=await readFile(new URL('public'+(gzip?path+'.gz':path),here));return JSON.parse(new TextDecoder().decode(gzip?gunzipSync(stored):stored))}catch{return null}
+}
+
+export async function committedProof(path){
+ try{const registry=JSON.parse(await readFile(new URL('public/data/snapshot-transport.json',here),'utf8'));return registry.items.find(item=>item.path===path)??null}catch{return null}
+}
+
+export async function writeSnapshotIfChanged(files,path,payload,{gzip=true,contentKeys=[]}={}){
+ const committed=await committedPayload(path,{gzip});
+ if(committed&&committed.schema===payload.schema&&dataFingerprint(committed,contentKeys)===dataFingerprint(payload,contentKeys)){
+  const proof=await committedProof(path);
+  if(proof){files.push(proof);return {bytes:proof.bytes,skipped:true}}
+ }
+ const bytes=await writeSnapshot(files,path,payload,{gzip});
+ return {bytes,skipped:false};
+}
+
 // Registers the proofs under a prefix, replacing any prior entries for that prefix
-// so a refresh never leaves stale proofs behind (the trains importer's model).
+// so a refresh never leaves stale proofs behind (the trains importer's model). The
+// registry's item order is the commit history of the corpus set — an unchanged entry
+// keeps its place, so a quiet day that skips every rewrite leaves the registry
+// byte-identical on disk.
 export async function registerPrefix(files,prefix){
- const registry=JSON.parse(await readFile(new URL('public/data/snapshot-transport.json',here),'utf8'));
- registry.items=registry.items.filter(item=>!item.path.startsWith(prefix));
- registry.items.push(...files);
+ const registryPath=new URL('public/data/snapshot-transport.json',here);
+ const rawText=await readFile(registryPath,'utf8');
+ const registry=JSON.parse(rawText);
+ const incoming=new Map(files.map(proof=>[proof.path,proof]));
+ const seen=new Set(),next=[];
+ for(const item of registry.items){
+  if(!item.path.startsWith(prefix)){next.push(item);continue}
+  const replacement=incoming.get(item.path);
+  if(replacement){next.push(replacement);seen.add(item.path)}
+ }
+ for(const [path,proof] of incoming)if(!seen.has(path)){next.push(proof);seen.add(path)}
+ registry.items=next;
  registry.originalBytes=registry.items.reduce((n,item)=>n+item.bytes,0);
- await writeFile(new URL('public/data/snapshot-transport.json',here),JSON.stringify(registry)+'\n');
+ registry.storedBytes=registry.items.reduce((n,item)=>n+item.storedBytes,0);
+ // Forma canonică e cea pe care o scrie pașul de build (fără newline final) — altfel
+ // importul și build-ul ar alternanta octetul, iar ziua liniștită nu ar mai fi byte-stabilă.
+ const candidate=JSON.stringify(registry);
+ if(candidate!==rawText)await writeFile(registryPath,candidate);
 }
 
 export const snapshotHere=here;

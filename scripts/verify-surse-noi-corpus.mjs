@@ -58,12 +58,21 @@ for(const row of amccrs.rows){
 proof('/amccrs/buildings.json');
 
 // EIDA: rețeaua RO și istoricul M3+ — suma pe ani egalează totalul, ferestrele
-// declarate, niciun an trunchiat la limita serviciului.
+// declarate, niciun an trunchiat la limita serviciului. Corpusul e aflivra-eida-v2:
+// cele 150 de înregistrări de stație/perioadă (antetul FDSN nu e niciodată rând),
+// cele 1.157 de evenimente cu câmpurile sub cheile corecte — tipul chiar în
+// eventType, locația reală (vid sau nume) în eventLocationName, autorul magnitudinii
+// în magnitudeAuthor — și felia 2026 înregistrată inconcludentă (204 la sursă),
+// nu „fără cutremure”.
 const eida=await readCorpus('/eida/seismic');
-assert.ok(eida.counts.stations>=150,'EIDA: rețeaua RO (audit: 150 rânduri)');
-assert.ok(eida.counts.events>=1100,'EIDA: istoricul M3+ comis integral (audit: ~1.157)');
+assert.equal(eida.schema,'aflivra-eida-v2','EIDA: corpusul v2 după remedierea mapării pe antet');
+assert.equal(eida.counts.stations,150,'EIDA: rețeaua RO — 150 înregistrări stație/perioadă, fără antet');
+assert.equal(eida.counts.events,1157,'EIDA: istoricul M3+ comis integral (audit: 1.157)');
 assert.equal(eida.window.minMagnitude,3,'EIDA: baza de magnitudine 3 declarată');
 assert.deepEqual(eida.truncatedYears,[],'EIDA: niciun an tăiat la limita de 1000 a serviciului');
+const eidaCoverage2026=(eida.coverageByYear||[]).find(entry=>entry.year===2026);
+assert.ok(eidaCoverage2026&&String(eidaCoverage2026.status).includes('inconclusive'),'EIDA: felia 2026 rămâne înregistrată inconcludentă (204 la sursă)');
+assert.ok(eida.stations.every(station=>station.network!=='#Network'&&station.station.length>0),'EIDA: niciun antet servit drept stație');
 const byYear=eida.events.reduce((map,event)=>{const year=event.time.slice(0,4);map.set(year,(map.get(year)||0)+1);return map},new Map());
 for(const [year,count] of Object.entries(eida.counts.eventsByYear))assert.equal(byYear.get(year)||0,Number(count),'EIDA: anul '+year+' numărat onest în countsByYear');
 assert.equal([...byYear.values()].reduce((a,b)=>a+b,0),eida.counts.events,'EIDA: totalul declarat = suma anilor reali');
@@ -71,23 +80,40 @@ assert.equal(eida.events.length,eida.counts.events,'EIDA: rândurile fizice = to
 for(const event of eida.events){
  assert.ok(Number(event.latitude)>=43&&Number(event.latitude)<=49&&Number(event.longitude)>=20&&Number(event.longitude)<=30,'EIDA: evenimentul rămâne în dreptunghiul auditat');
  assert.ok(Number(event.magnitude)>=3,'EIDA: evenimentul respectă baza de magnitudine');
+ assert.ok(event.eventLocationName!==event.eventType,'EIDA: câmpul locației nu poartă artificial tipul evenimentului (v1 deplasa patru chei)');
+ assert.ok(event.eventType.length>0&&typeof event.magnitudeAuthor==='string','EIDA: tipul și autorul magnitudinii sub cheile lor');
 }
 proof('/eida/seismic.json');
 
-// LMI 2015 București: 2.651 rânduri cu coduri LMI distincte, folio tipărit,
-// baza 2015 declarată — numerele extragerii, nu recensământ validat.
+// LMI 2015 București: 2.651 de rânduri cu coduri LMI distincte, extras pe geometria
+// tipărită a tabelului (aflivra-lmi-bucuresti-v2). Fiecare rând poartă foliul tipărit
+// al Monitorului ȘI pagina PDF, separate; datarea nu se mai scurge în adrese — v1
+// îngropa textul datării în adresa a ~2.000 de rânduri și lăsa 1.715 de datări goale.
 const lmi=await readCorpus('/lmi/monuments-bucuresti');
-assert.equal(lmi.counts.rows,2651,'LMI: rândurile extrase la audit');
-assert.equal(lmi.counts.distinctCodes,2651,'LMI: codurile distincte în corpora nostr');
+assert.equal(lmi.schema,'aflivra-lmi-bucuresti-v2','LMI: corpusul v2, extras pe coloane');
+assert.equal(lmi.counts.rows,2651,'LMI: rândurile extrase');
+assert.equal(lmi.counts.distinctCodes,2651,'LMI: codurile distincte');
 assert.ok(lmi.publishedIn.includes('113 bis'),'LMI: publicarea în Monitorul Oficial declarată');
 assert.ok(lmi.updateNote.includes('2015'),'LMI: baza 2015 declarată, fără înglobarea ordinelor ulterioare');
+const lmiGolden=JSON.parse(await readFile(join(root,'ssnc-agent-orch/2026/10/10/fixuri-astra/fixtures/validated/lmi-golden-corrections.json'),'utf8'));
+const lmiByCode=new Map(lmi.rows.map(row=>[row[0],row]));
+for(const expected of lmiGolden){
+ const found=lmiByCode.get(expected[0]);
+ assert.ok(found,'LMI: rândul de referință vizuală '+expected[0]+' există în corpus');
+ assert.deepEqual(found.slice(0,6),expected,'LMI: rândul '+expected[0]+' reproduce corecția vizuală livrată, întreg');
+}
+const emptyDating=lmi.rows.filter(row=>!row[4]).length;
+assert.equal(emptyDating,337,'LMI: rândurile fără datare sunt cele reale (situri și monumente fără datări), nu 1.715 de datări pierdute în adrese');
 const codes=new Set();
 for(const row of lmi.rows){
  assert.ok(/^B-[IVX]+-[a-z]+-(?:A|B)-\d{2,6}(?:\.\d{1,3})?$/.test(row[0]),'LMI: codul are forma codului LMI');
  assert.ok(row[1]&&row[1].length>1,'LMI: denumirea monumentului prezentă');
  codes.add(row[0]);
- assert.ok(Number.isInteger(row[5])&&row[5]>=400&&row[5]<=740,'LMI: foliul Monitorului Oficial în intervalul tipărit');
+ assert.ok(Number.isInteger(row[5])&&row[5]>=490&&row[5]<=740,'LMI: foliul Monitorului Oficial în intervalul tipărit');
+ assert.ok(Number.isInteger(row[6])&&row[6]>=1&&row[6]<=233,'LMI: pagina PDF separată de foliu, în intervalul documentului');
+ assert.ok(row[5]!==row[6],'LMI: foliul tipărit nu este indexul PDF-ului');
+ assert.ok(row[3]!==row[4],'LMI: adresa nu este datarea');
 }
 assert.equal(codes.size,2651,'LMI: fiecare rând e un cod distinct');
 proof('/lmi/monuments-bucuresti.json');
-console.log('Trecut: corpusurile „surse românești” rămân integre — SITUR 32.058/9.063/3.104 cu lipsurile numărate, AMCCRS 2.798 cu cele 48 de forme păstrate integral și clasele normalizate exact cele auditate, EIDA cu istoricul M3+ în dreptunghiul declarat, LMI 2015 cu 2.651 de coduri pe foliul Monitorului Oficial.');
+console.log('Trecut: corpusurile „surse românești” rămân integre — SITUR 32.058/9.063/3.104 cu lipsurile numărate, AMCCRS 2.798 cu cele 48 de forme păstrate integral și clasele normalizate exact cele auditate, EIDA v2 cu 1.157 de evenimente pe câmpurile antetului și 150 de stații, LMI v2 cu 2.651 de coduri, cele 12 corecții vizuale întregi și datarea separată de adresă.');

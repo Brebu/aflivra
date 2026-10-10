@@ -1,0 +1,1242 @@
+[
+  {
+    "auditCase": "tourism_cazare_bv",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "cazare",
+      "county": "Brașov"
+    },
+    "testedAt": "2026-10-10T15:55:54.117Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:cazare",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 3071,
+      "counts": {
+        "rows": 32058,
+        "documentedRows": 32058,
+        "missingCui": 7259,
+        "missingAddressDetail": 2443
+      },
+      "filters": {
+        "kind": "cazare",
+        "q": "",
+        "locality": "",
+        "county": "Brașov",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_food_buc",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "alimentatie",
+      "county": "București"
+    },
+    "testedAt": "2026-10-10T15:55:54.117Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:alimentatie",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 0,
+      "counts": {
+        "rows": 9063,
+        "documentedRows": 9063,
+        "missingCui": 23,
+        "missingAddressDetail": 1806
+      },
+      "filters": {
+        "kind": "alimentatie",
+        "q": "",
+        "locality": "",
+        "county": "București",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_agents_cluj",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "agentii",
+      "county": "Cluj"
+    },
+    "testedAt": "2026-10-10T15:55:54.117Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:agentii",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 166,
+      "counts": {
+        "rows": 3104,
+        "documentedRows": 3104,
+        "missingCui": 124,
+        "missingAddressDetail": 33
+      },
+      "filters": {
+        "kind": "agentii",
+        "q": "",
+        "locality": "",
+        "county": "Cluj",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "monuments_academiei",
+    "tool": "historic_monuments",
+    "arguments": {
+      "q": "Academiei"
+    },
+    "testedAt": "2026-10-10T15:55:54.117Z",
+    "isError": false,
+    "observed": {
+      "key": "lmi:bucuresti",
+      "status": "cached",
+      "adapterVersion": "lmi.monuments-2015.v1",
+      "error": null,
+      "total": 6,
+      "filters": {
+        "q": "Academiei",
+        "applied": true
+      },
+      "firstRow": {
+        "codLmi": "B-II-m-B-17930",
+        "denumire": "Imobil (PMB)",
+        "localitate": "municipiul BUCUREŞTI",
+        "adresa": "Str. Academiei 3-5 sector 1, Bd. Elisabeta sf. sec. XIX 15-19",
+        "datare": "",
+        "folioMof": 525
+      }
+    }
+  },
+  {
+    "auditCase": "power_initial",
+    "tool": "power_system",
+    "arguments": {},
+    "testedAt": "2026-10-10T15:55:54.117Z",
+    "isError": false,
+    "observed": {
+      "key": "power:sen",
+      "status": "unavailable",
+      "adapterVersion": "energy.power-system.v1",
+      "error": "Sursa a răspuns cu HTTP 404."
+    }
+  },
+  {
+    "auditCase": "seismic_events_2019",
+    "tool": "seismic_events",
+    "arguments": {
+      "kind": "events",
+      "from": "2019",
+      "to": "2019",
+      "minMagnitude": 4
+    },
+    "testedAt": "2026-10-10T15:55:54.117Z",
+    "isError": false,
+    "observed": {
+      "key": "eida:events",
+      "status": "cached",
+      "adapterVersion": "eida.seismic-history.v1",
+      "error": null,
+      "total": 11,
+      "filters": {
+        "kind": "events",
+        "from": "2019",
+        "to": "2019",
+        "minMagnitude": 4,
+        "applied": true
+      },
+      "window": {
+        "from": "2015-01-01",
+        "to": "2026-12-31",
+        "minMagnitude": 3,
+        "minLatitude": 43,
+        "maxLatitude": 49,
+        "minLongitude": 20,
+        "maxLongitude": 30,
+        "note": "Fereastra commit-ată; evenimentele în afara ei nu se pretind inexistente."
+      },
+      "firstSemanticRow": {
+        "eventIdentifier": "quakeml:apiv2.infp.ro/event/atlas2/2019281/98041730",
+        "eventType": "mw",
+        "magnitudeType": "dbmw",
+        "magnitudeAuthor": "",
+        "eventLocationName": "earthquake"
+      }
+    }
+  },
+  {
+    "auditCase": "seismic_stations",
+    "tool": "seismic_events",
+    "arguments": {
+      "kind": "stations"
+    },
+    "testedAt": "2026-10-10T15:55:54.117Z",
+    "isError": false,
+    "observed": {
+      "key": "eida:stations",
+      "status": "cached",
+      "adapterVersion": "eida.seismic-history.v1",
+      "error": null,
+      "total": 151,
+      "filters": {
+        "kind": "stations",
+        "q": "",
+        "applied": false
+      },
+      "window": {
+        "from": "2015-01-01",
+        "to": "2026-12-31",
+        "minMagnitude": 3,
+        "minLatitude": 43,
+        "maxLatitude": 49,
+        "minLongitude": 20,
+        "maxLongitude": 30,
+        "note": "Fereastra commit-ată; evenimentele în afara ei nu se pretind inexistente."
+      },
+      "firstSemanticRow": {
+        "network": "#Network",
+        "station": "Station"
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_food_buc_q",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "alimentatie",
+      "q": "BUCURE"
+    },
+    "testedAt": "2026-10-10T15:57:05.615Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:alimentatie",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 399,
+      "counts": {
+        "rows": 9063,
+        "documentedRows": 9063,
+        "missingCui": 23,
+        "missingAddressDetail": 1806
+      },
+      "filters": {
+        "kind": "alimentatie",
+        "q": "BUCURE",
+        "locality": "",
+        "county": "",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_cazare_bv_local",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "cazare",
+      "county": "Brașov",
+      "locality": "Brașov"
+    },
+    "testedAt": "2026-10-10T15:57:05.615Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:cazare",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 1301,
+      "counts": {
+        "rows": 32058,
+        "documentedRows": 32058,
+        "missingCui": 7259,
+        "missingAddressDetail": 2443
+      },
+      "filters": {
+        "kind": "cazare",
+        "q": "",
+        "locality": "Brașov",
+        "county": "Brașov",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "lawyers",
+    "tool": "lawyers_registry",
+    "arguments": {
+      "q": "Popescu",
+      "locality": "București",
+      "county": "București",
+      "sort": "name"
+    },
+    "testedAt": "2026-10-10T15:59:26.988Z",
+    "isError": false,
+    "observed": {
+      "key": "lawyers:943d353b371c59abc12ec618374d3c517c2919675cd917829c01e701b2df2918",
+      "status": "stale",
+      "adapterVersion": "ifep.public-search.v2",
+      "error": null,
+      "total": 285,
+      "barScope": "București",
+      "barTitlesInPage": [
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti"
+      ]
+    }
+  },
+  {
+    "auditCase": "events_odeon",
+    "tool": "events_search",
+    "arguments": {
+      "q": "spectacol",
+      "locality": "București",
+      "county": "București",
+      "venue": "Odeon"
+    },
+    "testedAt": "2026-10-10T15:59:26.988Z",
+    "isError": true,
+    "observed": {
+      "error": "Instituția nu este în registrul calendarelor publice valide. Calendarele validate: Teatrul Odeon (odeon), Opera Națională Română Cluj-Napoca (operacluj), Teatrul de Artă (teatruldearta)."
+    }
+  },
+  {
+    "auditCase": "table_siruta",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "dac903f0-32b5-489a-89e7-2c80d96cf68d"
+    },
+    "testedAt": "2026-10-10T16:03:39.742Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:dac903f0-32b5-489a-89e7-2c80d96cf68d",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a răspuns în timpul alocat."
+    }
+  },
+  {
+    "auditCase": "table_s2csv",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "ffc221f1-8cdf-4608-bf23-702d4ab2ee7d"
+    },
+    "testedAt": "2026-10-10T16:03:39.743Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a putut fi verificată. Păstrăm ultima copie validă."
+    }
+  },
+  {
+    "auditCase": "table_s2xlsx",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "4d9fbdb9-d858-40ea-bffa-f19f95f314fa"
+    },
+    "testedAt": "2026-10-10T16:03:39.743Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:4d9fbdb9-d858-40ea-bffa-f19f95f314fa",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a putut fi verificată. Păstrăm ultima copie validă."
+    }
+  },
+  {
+    "auditCase": "export_s2csv",
+    "tool": "dataset_export",
+    "arguments": {
+      "id": "ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "format": "csv"
+    },
+    "testedAt": "2026-10-10T16:03:39.743Z",
+    "isError": false,
+    "observed": {}
+  },
+  {
+    "auditCase": "export_s2xlsx",
+    "tool": "dataset_export",
+    "arguments": {
+      "id": "4d9fbdb9-d858-40ea-bffa-f19f95f314fa",
+      "format": "xlsx"
+    },
+    "testedAt": "2026-10-10T16:03:39.743Z",
+    "isError": false,
+    "observed": {}
+  },
+  {
+    "auditCase": "events_odeon_valid",
+    "tool": "events_search",
+    "arguments": {
+      "q": "spectacol",
+      "locality": "București",
+      "county": "București",
+      "venue": "odeon"
+    },
+    "testedAt": "2026-10-10T16:03:39.743Z",
+    "isError": false,
+    "observed": {
+      "key": "events:search",
+      "status": "cached",
+      "adapterVersion": "events.national.v1",
+      "error": null,
+      "total": 1
+    }
+  },
+  {
+    "auditCase": "cinema_compact",
+    "tool": "cinema_program",
+    "arguments": {
+      "locality": "București",
+      "county": "București",
+      "id": "1806",
+      "date": "2026-10-11",
+      "detail": "compact"
+    },
+    "testedAt": "2026-10-10T16:05:15.548Z",
+    "isError": false,
+    "observed": {
+      "key": "cinema:1806:2026-10-11",
+      "status": "cached",
+      "adapterVersion": "cinemacity.program-complete.v2",
+      "error": null
+    }
+  },
+  {
+    "auditCase": "cinema_full",
+    "tool": "cinema_program",
+    "arguments": {
+      "locality": "București",
+      "id": "1806",
+      "date": "2026-10-11",
+      "detail": "full"
+    },
+    "testedAt": "2026-10-10T16:05:15.548Z",
+    "isError": false,
+    "observed": {
+      "key": "cinema:1806:2026-10-11",
+      "status": "fresh",
+      "adapterVersion": "cinemacity.program-complete.v2",
+      "error": null
+    }
+  },
+  {
+    "auditCase": "events_opera",
+    "tool": "events_search",
+    "arguments": {
+      "q": "opera",
+      "locality": "Cluj-Napoca",
+      "county": "Cluj",
+      "venue": "operacluj"
+    },
+    "testedAt": "2026-10-10T16:05:15.548Z",
+    "isError": false,
+    "observed": {
+      "key": "events:search",
+      "status": "cached",
+      "adapterVersion": "events.national.v1",
+      "error": null,
+      "total": 26
+    }
+  },
+  {
+    "auditCase": "events_art",
+    "tool": "events_search",
+    "arguments": {
+      "q": "teatru",
+      "locality": "București",
+      "venue": "teatruldearta"
+    },
+    "testedAt": "2026-10-10T16:05:15.548Z",
+    "isError": false,
+    "observed": {
+      "key": "events:search",
+      "status": "cached",
+      "adapterVersion": "events.national.v1",
+      "error": null,
+      "total": 12
+    }
+  },
+  {
+    "auditCase": "tourism_cazare_cluj",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "cazare",
+      "county": "Cluj"
+    },
+    "testedAt": "2026-10-10T16:05:15.548Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:cazare",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 1541,
+      "counts": {
+        "rows": 32058,
+        "documentedRows": 32058,
+        "missingCui": 7259,
+        "missingAddressDetail": 2443
+      },
+      "filters": {
+        "kind": "cazare",
+        "q": "",
+        "locality": "",
+        "county": "Cluj",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_food_buc_mun",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "alimentatie",
+      "county": "Municipiul București"
+    },
+    "testedAt": "2026-10-10T16:05:15.548Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:alimentatie",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 0,
+      "counts": {
+        "rows": 9063,
+        "documentedRows": 9063,
+        "missingCui": 23,
+        "missingAddressDetail": 1806
+      },
+      "filters": {
+        "kind": "alimentatie",
+        "q": "",
+        "locality": "",
+        "county": "Municipiul București",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_food_all",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "alimentatie"
+    },
+    "testedAt": "2026-10-10T16:07:18.959Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:alimentatie",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 9063,
+      "counts": {
+        "rows": 9063,
+        "documentedRows": 9063,
+        "missingCui": 23,
+        "missingAddressDetail": 1806
+      },
+      "filters": {
+        "kind": "alimentatie",
+        "q": "",
+        "locality": "",
+        "county": "",
+        "applied": false
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_agents_bv",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "agentii",
+      "county": "Brașov"
+    },
+    "testedAt": "2026-10-10T16:07:18.959Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:agentii",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 177,
+      "counts": {
+        "rows": 3104,
+        "documentedRows": 3104,
+        "missingCui": 124,
+        "missingAddressDetail": 33
+      },
+      "filters": {
+        "kind": "agentii",
+        "q": "",
+        "locality": "",
+        "county": "Brașov",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "tourism_cazare_page1",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "cazare",
+      "county": "Brașov",
+      "locality": "Brașov",
+      "page": 1
+    },
+    "testedAt": "2026-10-10T16:07:18.959Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:cazare",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 1301,
+      "counts": {
+        "rows": 32058,
+        "documentedRows": 32058,
+        "missingCui": 7259,
+        "missingAddressDetail": 2443
+      },
+      "filters": {
+        "kind": "cazare",
+        "q": "",
+        "locality": "Brașov",
+        "county": "Brașov",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "power_retry",
+    "tool": "power_system",
+    "arguments": {},
+    "testedAt": "2026-10-10T16:09:05.127Z",
+    "isError": false,
+    "observed": {
+      "key": "power:sen",
+      "status": "unavailable",
+      "adapterVersion": "energy.power-system.v1",
+      "error": "Sursa a răspuns cu HTTP 404."
+    }
+  },
+  {
+    "auditCase": "tourism_alco",
+    "tool": "tourism_registry",
+    "arguments": {
+      "kind": "cazare",
+      "q": "46665452",
+      "county": "Brașov"
+    },
+    "testedAt": "2026-10-10T16:11:39.121Z",
+    "isError": false,
+    "observed": {
+      "key": "situr:cazare",
+      "status": "cached",
+      "adapterVersion": "situr.registries.v1",
+      "error": null,
+      "total": 10,
+      "counts": {
+        "rows": 32058,
+        "documentedRows": 32058,
+        "missingCui": 7259,
+        "missingAddressDetail": 2443
+      },
+      "filters": {
+        "kind": "cazare",
+        "q": "46665452",
+        "locality": "",
+        "county": "Brașov",
+        "applied": true
+      }
+    }
+  },
+  {
+    "auditCase": "monuments_exact35",
+    "tool": "historic_monuments",
+    "arguments": {
+      "q": "Academiei 3-5"
+    },
+    "testedAt": "2026-10-10T16:11:39.122Z",
+    "isError": false,
+    "observed": {
+      "key": "lmi:bucuresti",
+      "status": "cached",
+      "adapterVersion": "lmi.monuments-2015.v1",
+      "error": null,
+      "total": 1,
+      "filters": {
+        "q": "Academiei 3-5",
+        "applied": true
+      },
+      "firstRow": {
+        "codLmi": "B-II-m-B-17930",
+        "denumire": "Imobil (PMB)",
+        "localitate": "municipiul BUCUREŞTI",
+        "adresa": "Str. Academiei 3-5 sector 1, Bd. Elisabeta sf. sec. XIX 15-19",
+        "datare": "",
+        "folioMof": 525
+      }
+    }
+  },
+  {
+    "auditCase": "table_s2_page1",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "page": 1
+    },
+    "testedAt": "2026-10-10T16:13:53.329Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a putut fi verificată. Păstrăm ultima copie validă."
+    }
+  },
+  {
+    "auditCase": "table_s2_sorted",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "q": "apartament",
+      "sort": 6,
+      "desc": true
+    },
+    "testedAt": "2026-10-10T16:13:53.329Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a putut fi verificată. Păstrăm ultima copie validă."
+    }
+  },
+  {
+    "auditCase": "table_siruta_buc",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "dac903f0-32b5-489a-89e7-2c80d96cf68d",
+      "q": "BUCUREŞTI",
+      "sort": 0,
+      "desc": false
+    },
+    "testedAt": "2026-10-10T16:13:53.329Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:dac903f0-32b5-489a-89e7-2c80d96cf68d",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a răspuns în timpul alocat."
+    }
+  },
+  {
+    "auditCase": "table_s4",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "04ae7b62-c73a-4cde-9dd9-c270c93aa538"
+    },
+    "testedAt": "2026-10-10T16:13:53.329Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:04ae7b62-c73a-4cde-9dd9-c270c93aa538",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": null
+    }
+  },
+  {
+    "auditCase": "table_s6",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "d1704735-83e1-43bd-932c-faaf64aa1c0a"
+    },
+    "testedAt": "2026-10-10T16:13:53.329Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:d1704735-83e1-43bd-932c-faaf64aa1c0a:query:{\"q\":\"\",\"page\":0,\"sheet\":0,\"sort\":-1,\"desc\":false,\"geographicContext\":{\"locality\":\"\",\"county\":\"\",\"point\":null,\"active\":false,\"scope\":\"context\",\"radius\":15}}",
+      "status": "stale",
+      "adapterVersion": "ckan.datastore-pages.v1",
+      "error": null
+    }
+  },
+  {
+    "auditCase": "table_xml",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "1f4193a4-df71-4690-9a12-0ec6065055c6"
+    },
+    "testedAt": "2026-10-10T16:13:53.329Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:1f4193a4-df71-4690-9a12-0ec6065055c6",
+      "status": "unavailable",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a răspuns în timpul alocat."
+    }
+  },
+  {
+    "auditCase": "table_doc",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "23602d4a-66d9-4ec6-b4fa-3291975d9b7f"
+    },
+    "testedAt": "2026-10-10T16:13:53.329Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:23602d4a-66d9-4ec6-b4fa-3291975d9b7f",
+      "status": "unavailable",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a răspuns în timpul alocat."
+    }
+  },
+  {
+    "auditCase": "bad_dataset_sheet",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "sheet": 999
+    },
+    "testedAt": "2026-10-10T16:16:47.079Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "status": "unavailable",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Foaia solicitată nu există în acest set."
+    }
+  },
+  {
+    "auditCase": "bad_export_csv_sheet",
+    "tool": "dataset_export",
+    "arguments": {
+      "id": "ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "format": "csv",
+      "sheet": 999
+    },
+    "testedAt": "2026-10-10T16:16:47.079Z",
+    "isError": true,
+    "observed": {
+      "error": "Foaie invalidă."
+    }
+  },
+  {
+    "auditCase": "bad_export_xlsx_sheet",
+    "tool": "dataset_export",
+    "arguments": {
+      "id": "4d9fbdb9-d858-40ea-bffa-f19f95f314fa",
+      "format": "xlsx",
+      "sheet": 999
+    },
+    "testedAt": "2026-10-10T16:16:47.079Z",
+    "isError": true,
+    "observed": {
+      "error": "Foaie invalidă."
+    }
+  },
+  {
+    "auditCase": "bad_cinema_date",
+    "tool": "cinema_program",
+    "arguments": {
+      "locality": "București",
+      "id": "1806",
+      "date": "2026-02-30"
+    },
+    "testedAt": "2026-10-10T16:16:47.079Z",
+    "isError": false,
+    "observed": {
+      "key": "cinema:1806:2026-02-30",
+      "status": "unavailable",
+      "adapterVersion": "cinemacity.program-complete.v2",
+      "error": "Sursa a răspuns cu HTTP 400."
+    }
+  },
+  {
+    "auditCase": "bad_seismic_future",
+    "tool": "seismic_events",
+    "arguments": {
+      "kind": "events",
+      "from": "2030",
+      "to": "2030"
+    },
+    "testedAt": "2026-10-10T16:16:47.079Z",
+    "isError": false,
+    "observed": {
+      "key": "eida:events",
+      "status": "cached",
+      "adapterVersion": "eida.seismic-history.v1",
+      "error": null,
+      "total": 0,
+      "filters": {
+        "kind": "events",
+        "from": "2030",
+        "to": "2030",
+        "minMagnitude": 3,
+        "applied": true
+      },
+      "window": {
+        "from": "2015-01-01",
+        "to": "2026-12-31",
+        "minMagnitude": 3,
+        "minLatitude": 43,
+        "maxLatitude": 49,
+        "minLongitude": 20,
+        "maxLongitude": 30,
+        "note": "Fereastra commit-ată; evenimentele în afara ei nu se pretind inexistente."
+      }
+    }
+  },
+  {
+    "auditCase": "lawyers_recent",
+    "tool": "lawyers_registry",
+    "arguments": {
+      "q": "Popescu",
+      "county": "București",
+      "sort": "recent",
+      "page": 1
+    },
+    "testedAt": "2026-10-10T16:19:04.556Z",
+    "isError": false,
+    "observed": {
+      "key": "lawyers:3d21e390b0495e0f8978463bfc2070bd5ef4ee87f1f3272274d0536a1f2f0423",
+      "status": "cached",
+      "adapterVersion": "ifep.public-search.v2",
+      "error": null,
+      "total": 542,
+      "barTitlesInPage": [
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Timiş",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti"
+      ]
+    }
+  },
+  {
+    "auditCase": "table_s2_restore",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "sheet": 0
+    },
+    "testedAt": "2026-10-10T16:19:04.556Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:ffc221f1-8cdf-4608-bf23-702d4ab2ee7d",
+      "status": "stale",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a putut fi verificată. Păstrăm ultima copie validă."
+    }
+  },
+  {
+    "auditCase": "seismic_default",
+    "tool": "seismic_events",
+    "arguments": {},
+    "testedAt": "2026-10-10T16:19:04.556Z",
+    "isError": false,
+    "observed": {
+      "key": "eida:events",
+      "status": "cached",
+      "adapterVersion": "eida.seismic-history.v1",
+      "error": null,
+      "total": 1157,
+      "filters": {
+        "kind": "events",
+        "from": "",
+        "to": "",
+        "minMagnitude": 3,
+        "applied": false
+      },
+      "window": {
+        "from": "2015-01-01",
+        "to": "2026-12-31",
+        "minMagnitude": 3,
+        "minLatitude": 43,
+        "maxLatitude": 49,
+        "minLongitude": 20,
+        "maxLongitude": 30,
+        "note": "Fereastra commit-ată; evenimentele în afara ei nu se pretind inexistente."
+      },
+      "firstSemanticRow": {
+        "eventIdentifier": "quakeml:apiv2.infp.ro/event/atlas24/2025253/10130024",
+        "eventType": "ml",
+        "magnitudeType": "dbevproc",
+        "magnitudeAuthor": "",
+        "eventLocationName": "earthquake"
+      }
+    }
+  },
+  {
+    "auditCase": "monuments_default",
+    "tool": "historic_monuments",
+    "arguments": {},
+    "testedAt": "2026-10-10T16:19:04.556Z",
+    "isError": false,
+    "observed": {
+      "key": "lmi:bucuresti",
+      "status": "cached",
+      "adapterVersion": "lmi.monuments-2015.v1",
+      "error": null,
+      "total": 2651,
+      "filters": {
+        "q": "",
+        "applied": false
+      },
+      "firstRow": {
+        "codLmi": "B-I-s-B-17858",
+        "denumire": "Chitila - Aşezare",
+        "localitate": "municipiul BUCUREŞTI",
+        "adresa": "Cartierul Chitila, pe malul sudic al Lacului sec. VI - VII p. Chr. Chitila, la cca. 300 m V de str. Aeroportului; carou cadastral 1' - 0; UT şi SR(*)",
+        "datare": "",
+        "folioMof": 498
+      }
+    }
+  },
+  {
+    "auditCase": "table_gpkg",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "ae8e8f8a-ade9-4627-9779-c2611dbbee19"
+    },
+    "testedAt": "2026-10-10T16:21:52.256Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:ae8e8f8a-ade9-4627-9779-c2611dbbee19",
+      "status": "unavailable",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a răspuns în timpul alocat."
+    }
+  },
+  {
+    "auditCase": "table_seap",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "5bcff70e-a97d-494d-a028-ac031b431dae"
+    },
+    "testedAt": "2026-10-10T16:21:52.256Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:5bcff70e-a97d-494d-a028-ac031b431dae",
+      "status": "unavailable",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a răspuns în timpul alocat."
+    }
+  },
+  {
+    "auditCase": "export_seap_unverified",
+    "tool": "dataset_export",
+    "arguments": {
+      "id": "5bcff70e-a97d-494d-a028-ac031b431dae",
+      "format": "csv"
+    },
+    "testedAt": "2026-10-10T16:21:52.256Z",
+    "isError": true,
+    "observed": {
+      "error": "Exportul integral este disponibil pentru tabelele importate și verificate integral."
+    }
+  },
+  {
+    "auditCase": "table_schools",
+    "tool": "dataset_table",
+    "arguments": {
+      "id": "280d52b6-4c5e-489d-9b48-3dd8961f56e0"
+    },
+    "testedAt": "2026-10-10T16:21:52.256Z",
+    "isError": false,
+    "observed": {
+      "key": "resource:280d52b6-4c5e-489d-9b48-3dd8961f56e0",
+      "status": "unavailable",
+      "adapterVersion": "resource.complete-index.v8",
+      "error": "Sursa nu a răspuns în timpul alocat."
+    }
+  },
+  {
+    "auditCase": "monuments_page1",
+    "tool": "historic_monuments",
+    "arguments": {
+      "page": 1
+    },
+    "testedAt": "2026-10-10T16:21:52.256Z",
+    "isError": false,
+    "observed": {
+      "key": "lmi:bucuresti",
+      "status": "cached",
+      "adapterVersion": "lmi.monuments-2015.v1",
+      "error": null,
+      "total": 2651,
+      "filters": {
+        "q": "",
+        "applied": false
+      },
+      "firstRow": {
+        "codLmi": "B-I-s-B-17865",
+        "denumire": "Bucureştii Noi - Ştrand",
+        "localitate": "municipiul BUCUREŞTI",
+        "adresa": "Cartierul Bucureştii Noi, între malul sud- vestic al lacului Griviţa şi str. Fabrica de Cărămidă; carou cadastral 1' - 0; NM şi LK(*)",
+        "datare": "",
+        "folioMof": 500
+      }
+    }
+  },
+  {
+    "auditCase": "stations_buc",
+    "tool": "seismic_events",
+    "arguments": {
+      "kind": "stations",
+      "q": "Bucure"
+    },
+    "testedAt": "2026-10-10T16:21:52.256Z",
+    "isError": false,
+    "observed": {
+      "key": "eida:stations",
+      "status": "cached",
+      "adapterVersion": "eida.seismic-history.v1",
+      "error": null,
+      "total": 5,
+      "filters": {
+        "kind": "stations",
+        "q": "Bucure",
+        "applied": true
+      },
+      "window": {
+        "from": "2015-01-01",
+        "to": "2026-12-31",
+        "minMagnitude": 3,
+        "minLatitude": 43,
+        "maxLatitude": 49,
+        "minLongitude": 20,
+        "maxLongitude": 30,
+        "note": "Fereastra commit-ată; evenimentele în afara ei nu se pretind inexistente."
+      },
+      "firstSemanticRow": {
+        "network": "RO",
+        "station": "BAPR"
+      }
+    }
+  },
+  {
+    "auditCase": "lawyers_county_only",
+    "tool": "lawyers_registry",
+    "arguments": {
+      "q": "Popescu",
+      "county": "București",
+      "sort": "name"
+    },
+    "testedAt": "2026-10-10T16:25:02.132Z",
+    "isError": false,
+    "observed": {
+      "key": "lawyers:1739533dc9e0aa31060ec268e41e7f842f9aaba652ae9b324619f2e402ce0962",
+      "status": "fresh",
+      "adapterVersion": "ifep.public-search.v2",
+      "error": null,
+      "total": 542,
+      "barTitlesInPage": [
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Arad",
+        "Bucureşti",
+        "Olt",
+        "Bucureşti",
+        "Bucureşti",
+        "Timiş",
+        "Gorj",
+        "Gorj",
+        "Gorj",
+        "Bucureşti",
+        "Bucureşti"
+      ]
+    }
+  },
+  {
+    "auditCase": "lawyers_locality_only",
+    "tool": "lawyers_registry",
+    "arguments": {
+      "q": "Popescu",
+      "locality": "București",
+      "sort": "name"
+    },
+    "testedAt": "2026-10-10T16:25:02.132Z",
+    "isError": false,
+    "observed": {
+      "key": "lawyers:943d353b371c59abc12ec618374d3c517c2919675cd917829c01e701b2df2918",
+      "status": "cached",
+      "adapterVersion": "ifep.public-search.v2",
+      "error": null,
+      "total": 285,
+      "barScope": "București",
+      "barTitlesInPage": [
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti",
+        "Bucureşti"
+      ]
+    }
+  },
+  {
+    "auditCase": "events_general",
+    "tool": "events_search",
+    "arguments": {
+      "q": "concert",
+      "locality": "București",
+      "county": "București"
+    },
+    "testedAt": "2026-10-10T16:25:02.132Z",
+    "isError": false,
+    "observed": {
+      "key": "events:search",
+      "status": "cached",
+      "adapterVersion": "events.national.v1",
+      "error": null,
+      "total": 1
+    }
+  }
+]

@@ -1,0 +1,288 @@
+{
+  "base": "LMI 2015 București",
+  "baselineExtractedRows": 2651,
+  "officialPdfSha256": "fc258bcbb1bf1c71ceb1a48a61e485de0b3220f0506f1c9c0f3fca63bf46570e",
+  "matchesEarlierDownloadedOfficialPdf": true,
+  "pdfPages": 233,
+  "goldenRowsVisuallyChecked": 12,
+  "goldenRowsDifferentFromBaseline": 10,
+  "scope": "12 rows on PDF page 28 / printed folio 525 were checked against rendered official page; this is not complete semantic validation of all 2651 extracted rows.",
+  "goldens": [
+    {
+      "code": "B-II-s-B-17928",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-s-B-17928",
+        "Parcelarea Verzişori",
+        "municipiul BUCUREŞTI",
+        "Str. Verzișori",
+        "înc. sec. XIX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-s-B-17928",
+        "Parcelarea Verzişori",
+        "municipiul BUCUREŞTI",
+        "Str. Verzișori înc. sec. XIX",
+        "",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17929",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17929",
+        "Casa Nifon Mitropolitul",
+        "municipiul BUCUREŞTI",
+        "Str. 11 iunie 2 sector 4",
+        "sf. sec. XIX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17929",
+        "Casa Nifon Mitropolitul",
+        "municipiul BUCUREŞTI",
+        "Str. 11 iunie 2 sector 4 sf. sec. XIX",
+        "",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17930",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17930",
+        "Imobil (PMB)",
+        "municipiul BUCUREŞTI",
+        "Str. Academiei 3-5 sector 1, Bd. Elisabeta 15-19",
+        "sf. sec. XIX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17930",
+        "Imobil (PMB)",
+        "municipiul BUCUREŞTI",
+        "Str. Academiei 3-5 sector 1, Bd. Elisabeta sf. sec. XIX 15-19",
+        "",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-A-17931",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-A-17931",
+        "Biserica „Sf. Nicolae“ - Dintr-o zi",
+        "municipiul BUCUREŞTI",
+        "Str. Academiei 22 sector 1",
+        "1702, 1915",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-A-17931",
+        "Biserica „Sf. Nicolae“ - Dintr-o zi",
+        "municipiul BUCUREŞTI",
+        "Str. Academiei 22 sector 1 1702,",
+        "1915",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-21008",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-21008",
+        "Pasajul Generala",
+        "municipiul BUCUREŞTI",
+        "Str. Academiei 39-41 sector 1",
+        "1935 - 1939",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-21008",
+        "Pasajul Generala",
+        "municipiul BUCUREŞTI",
+        "Str. Academiei 39-41 sector 1 1935 -",
+        "1939",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17932",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17932",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Afluentului 30 sector 1",
+        "1900",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17932",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Afluentului 30 sector 1",
+        "1900",
+        525
+      ],
+      "matchesBaseline": true,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17933",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17933",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Albac 25 sector 1",
+        "prima jum. sec. XX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17933",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Albac 25 sector 1 prima jum. sec. XX",
+        "",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17939",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17939",
+        "Casa Gh. Cantacuzino",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 1-3 sector 1",
+        "1935",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17939",
+        "Casa Gh. Cantacuzino",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 1-3 sector 1",
+        "1935",
+        525
+      ],
+      "matchesBaseline": true,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17940",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17940",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 5 sector 1",
+        "sf. sec. XIX - prima jum. sec. XX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17940",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 5 sector 1 sf. sec. XIX - prima jum.",
+        "sec. XX",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17941",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17941",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 6 sector 1",
+        "sf. sec. XIX - prima jum. sec. XX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17941",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 6 sector 1 sf. sec. XIX - prima jum.",
+        "sec. XX",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17942",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17942",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 7 sector 1",
+        "sf. sec. XIX - prima jum. sec. XX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17942",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 7 sector 1 sf. sec. XIX - prima jum.",
+        "sec. XX",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    },
+    {
+      "code": "B-II-m-B-17943",
+      "pdfPage": 28,
+      "printedPage": 525,
+      "expectedRow": [
+        "B-II-m-B-17943",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 8 sector 1",
+        "sf. sec. XIX - prima jum. sec. XX",
+        525
+      ],
+      "baselineRow": [
+        "B-II-m-B-17943",
+        "Casă",
+        "municipiul BUCUREŞTI",
+        "Str. Alecsandri Vasile 8 sector 1 sf. sec. XIX - prima jum.",
+        "sec. XX",
+        525
+      ],
+      "matchesBaseline": false,
+      "visuallyReviewed": true
+    }
+  ]
+}

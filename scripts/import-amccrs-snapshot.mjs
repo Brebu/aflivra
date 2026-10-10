@@ -5,7 +5,7 @@
 // normalized form, and writes the corpus under public/data/amccrs/. The nonce's
 // lifetime is unknown and it stays in this offline script, never in the Worker.
 // Run from the repo root: node scripts/import-amccrs-snapshot.mjs
-import {writeSnapshot,registerPrefix} from './snapshot-register.mjs';
+import {writeSnapshotIfChanged,registerPrefix} from './snapshot-register.mjs';
 
 const UA='Aflivra-Integration-Evaluation/1.0';
 const PAGE_URL='https://amccrs-pmb.ro/lista-imobile-2/';
@@ -73,6 +73,6 @@ const payload={schema:'aflivra-amccrs-v1',sourceUrl:PAGE_URL,tableName:'Lista Cl
  columns,normalizationRule:'Textul original se păstrează integral; clasa normalizată urmează regula auditată (NEINCADRAT înainte de URGEN; RSIV→RSIII→RSII→RSI; categoriile de urgență rămân distincte de clasele Rs).',
  coverage:'Municipiul București',counts:{rows:rows.length,distinctIds:ids.size,distinctClassForms:Object.keys(classForms).length,normalizedClasses:normalized},
  rows};
-const bytes=await writeSnapshot(files,'/amccrs/buildings.json',payload);
+const {bytes,skipped}=await writeSnapshotIfChanged(files,'/amccrs/buildings.json',payload,{contentKeys:['columns','rows','pageUpdated']});
 await registerPrefix(files,'/amccrs/');
-console.log(JSON.stringify({result:'ok',rows:rows.length,classForms:Object.keys(classForms).length,normalized,pageUpdated,bytes}));
+console.log(JSON.stringify({result:'ok',rows:rows.length,classForms:Object.keys(classForms).length,normalized,pageUpdated,bytes,skipped}));

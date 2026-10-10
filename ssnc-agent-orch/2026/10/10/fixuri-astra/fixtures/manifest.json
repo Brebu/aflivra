@@ -1,0 +1,255 @@
+{
+  "schema": "aflivra-fix-evidence-v1",
+  "date": "2026-10-10",
+  "repository": "https://github.com/Brebu/aflivra",
+  "repositorySha": "12a12999d1f0f5762357c6156992fb2747c8cca9",
+  "files": [
+    {
+      "path": "Aflivra_Plan_Implementare_Fixuri_2026-10-10.md",
+      "bytes": 37449,
+      "sha256": "ba96027d7815c01d736f0f4f6ef713365fe0bff09b075403d4ba39d76d8cbec3"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4398,
+      "sha256": "81eb0bdb01e8e5a935339bee1364e4e4563b607a81b7f68f44c834c8f81d837f"
+    },
+    {
+      "path": "apply_eida_candidate.py",
+      "bytes": 3882,
+      "sha256": "00d9a353006d524190bfc80e5c861847437f00d42a4dd4c74dab52ec244e375b"
+    },
+    {
+      "path": "baseline/eida-seismic.json.gz",
+      "bytes": 54930,
+      "sha256": "84b13231b3915128570604be7db412ef030e372839c0c1b3a88740de2067effb"
+    },
+    {
+      "path": "baseline/lmi-monuments-bucuresti.json.gz",
+      "bytes": 51715,
+      "sha256": "3733be42b05cd93f14013ded59b9afabbe99cd8cc77aa04f97b0b10cfbbe492a"
+    },
+    {
+      "path": "baseline/situr-agentii.json.gz",
+      "bytes": 193793,
+      "sha256": "c0723cc6ead069fbe0655f0b8bcb5c192a3adf0dd617142749596353ac9a7e8f"
+    },
+    {
+      "path": "baseline/situr-alimentatie.json.gz",
+      "bytes": 368246,
+      "sha256": "74316fb7690be5af9982b535fdb195249883faa5c6661317abaf9001f25661ea"
+    },
+    {
+      "path": "baseline/situr-cazare.json.gz",
+      "bytes": 1807460,
+      "sha256": "fae87ddaff12b8c75a8fd489b5e1e88511749742d87fb374f6df7e3c18374324"
+    },
+    {
+      "path": "baseline/snapshot-transport-relevant.json",
+      "bytes": 1786,
+      "sha256": "2052a806deaf6e21ce3fe9a44500bb3e1b5be506137d211e7939c24d1b52e3b7"
+    },
+    {
+      "path": "candidates/eida-proof-candidate.json",
+      "bytes": 279,
+      "sha256": "de91520fcb8ecff234ac62f086a74504d5e7758de90bac515d7766230d706598"
+    },
+    {
+      "path": "candidates/eida-seismic-v2.json",
+      "bytes": 521986,
+      "sha256": "72f621f1a794a6bda496a3c8fe3e502b39bdc842287991a7e259d2f4554a2037"
+    },
+    {
+      "path": "candidates/eida-seismic-v2.json.gz",
+      "bytes": 50257,
+      "sha256": "ba64f551188fbc4ee32af38348f007723a0e547fadeaa541795fd4e0591c22d0"
+    },
+    {
+      "path": "source-probes.json",
+      "bytes": 10025,
+      "sha256": "6c1a6b161f37b21aca3b1160216966397e8a71afda0b0d1d2e656e1a01b9013f"
+    },
+    {
+      "path": "source-retries.json",
+      "bytes": 991,
+      "sha256": "dbf219e949eb8f58d68bb941239570900ef19ed35dcdeca6221a0f3cd0fe4799"
+    },
+    {
+      "path": "sources/eida-events-2015.txt",
+      "bytes": 32873,
+      "sha256": "094c25dfc0ccc90791b0ea3a66aa2574541d904c128c931fcd968922fdad03f6"
+    },
+    {
+      "path": "sources/eida-events-2016.txt",
+      "bytes": 25548,
+      "sha256": "86c39bc2781d22c4a4469894433727184d9d4b72677aa1e77107ec4cc30da00f"
+    },
+    {
+      "path": "sources/eida-events-2017.txt",
+      "bytes": 20925,
+      "sha256": "a688bd26b8d16cc5b8260fa857d9675fbef3356bf9afba8c6c8488593031d146"
+    },
+    {
+      "path": "sources/eida-events-2018.txt",
+      "bytes": 11964,
+      "sha256": "5e1b564bcb3164812fa9adf1d23499c9a96b8e1a9c8ac397d9edacdf9e2f5d3b"
+    },
+    {
+      "path": "sources/eida-events-2019.txt",
+      "bytes": 13979,
+      "sha256": "fe2debdc4480cdb8c2a878f831e7a9a82bac369928794e67d86c6745699e4254"
+    },
+    {
+      "path": "sources/eida-events-2020.txt",
+      "bytes": 20010,
+      "sha256": "749502ee2ebe0645de4b1dba744da6026e45ffb907896500b5b1562e1ec7f71c"
+    },
+    {
+      "path": "sources/eida-events-2021.txt",
+      "bytes": 21868,
+      "sha256": "75c6e02e7b87131f223dd6ed01b987ecd90a3215d55c2924079ffa735f522d7e"
+    },
+    {
+      "path": "sources/eida-events-2022.txt",
+      "bytes": 20242,
+      "sha256": "fc173adfd3d4012e0fa69c1859ac40a602299b356e6fe03088c51d50861e26b7"
+    },
+    {
+      "path": "sources/eida-events-2023.txt",
+      "bytes": 31455,
+      "sha256": "c9785d14984ad19252c517607d7c23726bf9ed2d44a88122b763a8a1f6fedcf5"
+    },
+    {
+      "path": "sources/eida-events-2024.txt",
+      "bytes": 19954,
+      "sha256": "02d6bdb2c68dea6efff64e3a41e076cd8f45ae6ed3c3777f328c02220ec61cdf"
+    },
+    {
+      "path": "sources/eida-events-2025.txt",
+      "bytes": 16662,
+      "sha256": "df190dc30bce5e4d56d96c58e55f5f6a12427c3817907618912cf04f8c7f77a2"
+    },
+    {
+      "path": "sources/eida-events-2026.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "sources/eida-stations.txt",
+      "bytes": 10101,
+      "sha256": "6b99477d5fb830e1ff50c629b7e8693e695478e5e60007d4482a206417115d0d"
+    },
+    {
+      "path": "sources/lmi-bucuresti-2015.pdf",
+      "bytes": 3181446,
+      "sha256": "fc258bcbb1bf1c71ceb1a48a61e485de0b3220f0506f1c9c0f3fca63bf46570e"
+    },
+    {
+      "path": "sources/sen-configured-404.html",
+      "bytes": 492,
+      "sha256": "964bd3b65ed793e45216a5dfbfd77f48964ccc4a15e2fd9f5a418bb75c8e2521"
+    },
+    {
+      "path": "sources/sen-current.json",
+      "bytes": 1013,
+      "sha256": "094e637fb8e53b3f248bfca7e6741f4bfccfdb3fd0f7e834cfa61bba4b14167b"
+    },
+    {
+      "path": "sources/situr-agentii.xlsx",
+      "bytes": 399692,
+      "sha256": "c46d9844ddaf38882e9fe21ee0465773b2e7b97c4c651d6a54ab2780246be743"
+    },
+    {
+      "path": "sources/situr-alimentatie.xlsx",
+      "bytes": 834614,
+      "sha256": "bd552d443cc79483f8b8d66ff36528ac36421f1e3946ce32b25e3738b5b0cc75"
+    },
+    {
+      "path": "sources/situr-cazare.xlsx",
+      "bytes": 3891958,
+      "sha256": "8e9a7500d53a501d86726976ab109c34b279c09fd5ec3592b2d9fc5c69ec2e84"
+    },
+    {
+      "path": "validated/corpora-pathspec-proof.json",
+      "bytes": 489,
+      "sha256": "d18a4cdfa708e2e3c76ce0b0f5adcb3bdd2951d112a9a7b92d8ffdf6f8e72b14"
+    },
+    {
+      "path": "validated/eida-verification.json",
+      "bytes": 1886,
+      "sha256": "db4b75aa72c99c45bc052777216f046b9565dc041fc0fda23d98122aec95ae21"
+    },
+    {
+      "path": "validated/lmi-golden-corrections.json",
+      "bytes": 1844,
+      "sha256": "ab8acc4cc4919d1d3f7bad3c05504958639021b6b3a62e6522a9fb8fcd37522f"
+    },
+    {
+      "path": "validated/lmi-page28-visual.png",
+      "bytes": 227450,
+      "sha256": "77e8109ee725a85f14c7a375d060963305739e378b2789af8ec17cf92653e6ba"
+    },
+    {
+      "path": "validated/lmi-page28-word-coordinates.json",
+      "bytes": 27085,
+      "sha256": "3938eebb62720a864081bc34747797e29a80e869ffa2ee7144213fb78ec45d5d"
+    },
+    {
+      "path": "validated/lmi-verification.json",
+      "bytes": 7164,
+      "sha256": "90b33082aadf817c7dda6482992c54385fa99917c5441a3b89ce6e0ebff0efb5"
+    },
+    {
+      "path": "validated/mcp-crosschecks.json",
+      "bytes": 32539,
+      "sha256": "cb108dda00f62ea39ea98a5196507bb1db3696d64eb575b600175d048dd32735"
+    },
+    {
+      "path": "validated/migration-checks.json",
+      "bytes": 246,
+      "sha256": "6662e52719941a927e5a1162f430c539c7634df71c51fbf0ce5999ce9bb144ee"
+    },
+    {
+      "path": "validated/prior-audit-reproductions.json",
+      "bytes": 31684,
+      "sha256": "0006edb7616f52120dd27cbcf638342637f724d9357a1493bef6c049bfa18a5b"
+    },
+    {
+      "path": "validated/sen-verification.json",
+      "bytes": 558,
+      "sha256": "bcb13ffe922b57b1cf1cd0aebf76698feff9bca9c241ffab06074540d6e70839"
+    },
+    {
+      "path": "validated/situr-agentii-differences.json",
+      "bytes": 1179,
+      "sha256": "fc414f9cf3a76341e7991e57f870fd992991a2f04a212d88887a73ca8af51ab5"
+    },
+    {
+      "path": "validated/situr-agentii.json",
+      "bytes": 689435,
+      "sha256": "8eb1dae49d781392131f2415dbd08555e0cea11d7b6d74d5b66e75b0e3507f9f"
+    },
+    {
+      "path": "validated/situr-alimentatie.json",
+      "bytes": 1960776,
+      "sha256": "5c3cbfcf68224527a096a31cf01fc6cac7f95a193e9ee4ceca33e7c06407f0a1"
+    },
+    {
+      "path": "validated/situr-cazare.json",
+      "bytes": 8587493,
+      "sha256": "54126660536243eac239b75e041f753f478cad9e8cbbc5d34306a07cc5a12a2d"
+    },
+    {
+      "path": "validated/situr-verification.json",
+      "bytes": 3959,
+      "sha256": "af5b16283a21023f550d939b2f5b601c19cc1a2ee49d9ba2be963d624c4aed25"
+    },
+    {
+      "path": "verify_offline.py",
+      "bytes": 4976,
+      "sha256": "cfcd2b47e1951888f3fc296be99d6d679ffe5f49a5f7867d9d0d81852d1724d3"
+    }
+  ],
+  "scope": "Official downloaded sources, verified normalized data, baseline fixtures, EIDA candidate and implementation plan. Not a full source-code checkout.",
+  "manifestSelfExcluded": true
+}

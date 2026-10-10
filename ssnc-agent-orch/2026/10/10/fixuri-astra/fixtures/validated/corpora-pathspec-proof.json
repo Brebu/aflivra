@@ -1,0 +1,14 @@
+{
+  "check": "corpora-refresh pathspec",
+  "wrong_paths_exit": 128,
+  "wrong_paths_error": "fatal: pathspec 'public/data/situr' did not match any files",
+  "correct_paths_exit": 0,
+  "staged": [
+    "public/amccrs/buildings.json.gz",
+    "public/data/snapshot-transport.json",
+    "public/eida/seismic.json.gz",
+    "public/lmi/monuments-bucuresti.json.gz",
+    "public/situr/alimentatie.json.gz"
+  ],
+  "scope": "repository-free temporary Git index, no action run and no source changed"
+}
