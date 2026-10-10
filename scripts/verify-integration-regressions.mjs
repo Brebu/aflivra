@@ -48,6 +48,15 @@ await group('dates — D08 calendar strictness, D11 prefix ranges',async()=>{
 
 await group('workflow — N01 corpora-refresh real dirs, staged diff, changed gating',async()=>{
  const yml=await readSource('.github/workflows/corpora-refresh.yml');
+ // Structura întâi: un bloc run: | scurs la coloana zero rupe fișierul YAML (run-ul
+ // GitHub eșuează fără niciun job, exact cum a prins auto-run-ul de push). Sub
+ // „jobs:", nimic nu are voie la coloana zero în afară de cheile top-level.
+ for(const workflowFile of ['.github/workflows/corpora-refresh.yml','.github/workflows/pr-validation.yml']){
+  const source=await readSource(workflowFile);
+  const tops=['name','on','permissions','concurrency','jobs','env','defaults'];
+  const offenders=source.split('\n').map((line,index)=>[index+1,line]).filter(([number,line])=>line&&!/^[\s#-]/.test(line)&&!tops.some(key=>line===key||line.startsWith(key+':')));
+  assert.equal(offenders.length,0,workflowFile+': niciun conținut de bloc scurs la coloana zero (linii: '+offenders.map(([number])=>number).join(', ')+') — altfel GitHub nu mai poate parsa workflow-ul și tura de noapte moare tăcut');
+ }
  assert.match(yml,/git add public\/situr public\/amccrs public\/eida public\/lmi public\/data\/snapshot-transport\.json/,'staging must use the real corpus directories');
  assert.match(yml,/git diff --cached --quiet/,'the quiet-day check must compare the staged tree, so new files register too');
  assert.match(yml,/changed=false/);assert.match(yml,/changed=true/),'the stage step must publish a changed output';

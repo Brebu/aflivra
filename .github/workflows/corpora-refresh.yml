@@ -91,8 +91,8 @@ jobs:
           gh pr create --title "Corpus „surse românești": reîmprospătare $(date -u +%Y-%m-%d)" \
             --body "Reîmprospătarea zilnică programată a corpusurilor statice: SITUR (registrele turistice clasificate), AMCCRS (încadrarea seismică București), EIDA (istoricul seismic M3+) și LMI 2015 (monumente istorice București). Importurile rulează offline, cu porțile de integritate executate pe CI; nonce-ul AMCCRS trăiește doar în scriptul de import, nu în Worker. Sursele live (SEN/POSF/TEMPO) au rutele proprii în Worker și nu se ating aici.
 
-Baza de integritate: \`node scripts/verify-surse-noi-corpus.mjs\` (numerele pin-ate = cele auditate; o schimbare reală la sursă se vede în diff și se acceptă conștient).
+            Baza de integritate: \`node scripts/verify-surse-noi-corpus.mjs\` (numerele pin-ate = cele auditate; o schimbare reală la sursă se vede în diff și se acceptă conștient).
 
-AI: opencode/opus,sonnet
-Human: Ciprian-Alexandru-Lucian Brebu" \
+            AI: opencode/opus,sonnet
+            Human: Ciprian-Alexandru-Lucian Brebu" \
             --base main --head "$BRANCH"
