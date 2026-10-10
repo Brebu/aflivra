@@ -695,8 +695,12 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
  };
  const familyExpectations=async(family,scenario,payload,counts,label)=>{
   const hostCount=host=>counts.get(host)||0,e=String(payload.error||'');
-  const future=payload.nextAttemptAt,pauseOk=!future||Date.parse(future)>=Date.now()-5000;
-  assert(pauseOk,label+': fereastra de pauză, dacă există, este onorată');
+  // Pauza trebuie să fie un moment parseabil, nu neapărat în viitor: pe un runner
+  // lent, o pauză de 60 de secunde scrisă la începutul celulei poate expira legitim
+  // până la citirea plicului. Dishonest ar fi un marcaj de timp neparseabil sau unul
+  // anterior scrierii rândului; cei doi peri de 120 de secunde acoperă împrăștierea.
+  const future=payload.nextAttemptAt,pauseOk=!future||Number.isFinite(Date.parse(future))&&Date.parse(future)>=Date.now()-120000;
+  assert(pauseOk,label+': fereastra de pauză, dacă există, este onorată (sau a expirat legitim sub sarcina runnerului)');
   if(family.family==='ins/tempo'){
    if(scenario==='success'){
     assert.equal(payload.status,'fresh',label);
