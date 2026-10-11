@@ -270,3 +270,18 @@ export const TOOLS:ToolDef[]=[
     build:args=>({path:'/api/stories',query:query([['page',num(args.page)]])}),
   },
 ];
+
+// Public directory review requires explicit safety hints on every MCP tool.
+// The public tools fetch/transform open Romanian information; law_document is
+// the sole exception because reading it also registers an act in the platform's
+// background re-verification feed (an additive, non-destructive write).
+const PUBLIC_STATEFUL_TOOLS = new Set(['law_document']);
+for (const tool of TOOLS) {
+  const readOnly = !PUBLIC_STATEFUL_TOOLS.has(tool.name);
+  tool.annotations = {
+    readOnlyHint: readOnly,
+    destructiveHint: false,
+    idempotentHint: readOnly,
+    openWorldHint: true,
+  };
+}
