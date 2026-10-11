@@ -92,11 +92,15 @@ function initialize(method:RpcRequest):RpcResult{
   return {jsonrpc:'2.0',id:method.id??null,result:{protocolVersion:negotiated,capabilities:{tools:{listChanged:false}},serverInfo:SERVER_INFO,instructions:INSTRUCTIONS}};
 }
 
+// Public data tools have no user-visible writes. Operator tools define their own
+// annotations, so never override their write/read semantics.
+const PUBLIC_TOOL_ANNOTATIONS={readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:true} as const;
+
 async function dispatch(callRoute:RouteCaller,method:RpcRequest,tools:ToolDef[]):Promise<RpcResult>{
   if(method.method==='initialize')return initialize(method);
   if(method.method==='ping')return {jsonrpc:'2.0',id:method.id??null,result:{}};
   if(method.method==='tools/list'){
-    return {jsonrpc:'2.0',id:method.id??null,result:{tools:tools.map(tool=>({name:tool.name,description:tool.description,inputSchema:tool.inputSchema,...(tool.annotations?{annotations:tool.annotations}:{})}))}};
+    return {jsonrpc:'2.0',id:method.id??null,result:{tools:tools.map(tool=>({name:tool.name,description:tool.description,inputSchema:tool.inputSchema,annotations:tool.annotations??PUBLIC_TOOL_ANNOTATIONS}))}};
   }
   if(method.method==='tools/call')return await callTool(callRoute,method,tools);
   return errorResponse(method.id??null,-32601,`Method "${method.method}" is not supported.`);
