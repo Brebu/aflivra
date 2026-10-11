@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {readFile,writeFile,mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join,resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import ts from 'typescript';
+const root=resolve(import.meta.dirname,'..'),temp=await mkdtemp(join(tmpdir(),'aflivra-corpora-dispatch-')),sqlite=new DatabaseSync(':memory:'),originalFetch=globalThis.fetch;
+sqlite.exec(await readFile(join(root,'drizzle/0000_thin_demogoblin.sql'),'utf8'));
+const db={prepare(sql){let args=[];const wrapper={bind(...values){args=values;return wrapper},async first(){return sqlite.prepare(sql).get(...args)||null}};return wrapper}};
+const env={DB:db,REFRESH_TOKEN:'fixture-operator',CORPORA_GITHUB_TOKEN:'fixture-github-secret'};globalThis.__corporaEnv=env;
+const compile=async(name,source)=>writeFile(join(temp,name+'.mjs'),ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText);
+try{
+ await compile('auth',await readFile(join(root,'lib/live/refresh-auth.ts'),'utf8'));
+ await compile('budget',await readFile(join(root,'lib/live/refresh-budget.ts'),'utf8'));
+ const source=(await readFile(join(root,'app/api/refresh/corpora/route.ts'),'utf8')).replace("import {env} from 'cloudflare:workers';",'const env=globalThis.__corporaEnv;').replace("from '@/lib/live/refresh-auth'","from './auth.mjs'").replace("from '@/lib/live/refresh-budget'","from './budget.mjs'");
+ await compile('route',source);const {POST}=await import(pathToFileURL(join(temp,'route.mjs')));
+ const request=(source='amccrs',authorization='Bearer fixture-operator')=>new Request('https://example.invalid/api/refresh/corpora?'+new URLSearchParams({source}),{method:'POST',headers:{authorization}});
+ let calls=0;globalThis.fetch=async(url,options)=>{calls++;assert.equal(url,'https://api.github.com/repos/Brebu/aflivra/actions/workflows/corpora-refresh.yml/dispatches');assert.deepEqual(JSON.parse(options.body),{ref:'main',inputs:{source:'amccrs'}});assert.equal(options.headers.Authorization,'Bearer fixture-github-secret');return new Response(null,{status:204})};
+ assert.equal((await POST(request('amccrs',''))).status,401);assert.equal((await POST(request('amccrs','Bearer wrong'))).status,401);
+ assert.equal((await POST(request('https://arbitrary.invalid/'))).status,400);assert.equal(calls,0,'Invalid and unauthorized inputs never invoke GitHub');
+ env.CORPORA_GITHUB_TOKEN='';assert.equal((await POST(request())).status,503);env.CORPORA_GITHUB_TOKEN='fixture-github-secret';
+ const accepted=await POST(request());assert.equal(accepted.status,202);const body=await accepted.json();assert.equal(body.accepted,true);assert.match(body.note,/PR-ului și deploy/);assert(!JSON.stringify(body).includes('fixture-github-secret'));
+ const paused=await POST(request());assert.equal(paused.status,429);assert.equal(paused.headers.get('Retry-After'),'60');assert.equal(calls,1,'The durable dispatch cooldown spans repeat requests');
+ sqlite.prepare('UPDATE source_cache SET next_attempt_at=0 WHERE key=?').run('source-gate:corpora-dispatch');
+ globalThis.fetch=async()=>{calls++;return new Response(null,{status:403})};const refused=await POST(request());assert.equal(refused.status,502);assert.equal((await refused.json()).upstreamStatus,403);
+ sqlite.prepare('UPDATE source_cache SET next_attempt_at=0 WHERE key=?').run('source-gate:corpora-dispatch');
+ globalThis.fetch=async()=>{calls++;throw new DOMException('Unknown dispatch outcome','TimeoutError')};const uncertain=await POST(request());assert.equal(uncertain.status,503);assert.match((await uncertain.json()).error,/Verifică lista/);assert.equal(calls,3,'Non-idempotent workflow dispatches are never retried automatically');
+ sqlite.prepare('UPDATE source_cache SET next_attempt_at=0 WHERE key=?').run('source-gate:corpora-dispatch');
+ await POST(request());assert.equal(calls,4);
+ sqlite.prepare('UPDATE source_cache SET next_attempt_at=0 WHERE key=?').run('source-gate:corpora-dispatch');
+ const exhausted=await POST(request());assert.equal(exhausted.status,429);assert.equal((await exhausted.json()).limit,4);assert.equal(calls,4,'The fifth dispatch cannot exceed the daily import budget, including uncertain outcomes');
+ console.log('Corpus dispatch verified: operator auth, fixed workflow/ref, source allowlist, missing configuration, atomic cooldown, upstream refusal, unknown timeout outcome and no secret disclosure. No real workflow was dispatched.');
+}finally{globalThis.fetch=originalFetch;delete globalThis.__corporaEnv;sqlite.close();await rm(temp,{recursive:true,force:true})}

@@ -57,9 +57,11 @@ pauza), fără chei sau corpuri de cerere, ca degradarea să fie analizabilă, n
 
 ## Ce NU expune conectorul (deliberat)
 
-„Urmărește" și abonamentele push (stare per instalație), `refresh`/`seed`/`resource-import`
+„Urmărește" și abonamentele push (stare per instalație), `seed`/`resource-import`
 (administrativ), fișierele GTFS integrale (`transit-file` — mase de rânduri care nu încap
 într-o conversație) și diagnosticul UI `/api/live`. Toată suprafața publică de date e mai jos.
+Actualizarea este disponibilă separat operatorilor autentificați prin cele trei tool-uri
+private documentate în [operațiuni MCP](mcp-operations.md); lista publică rămâne de 41 de tool-uri.
 
 ## Paritate MCP ↔ UI
 

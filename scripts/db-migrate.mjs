@@ -9,7 +9,7 @@ export const DIST_CONFIG='dist/server/wrangler.json';
 export const D1_DATABASE_NAME='aflivra';
 // Garda listează exact tabelele din fișierul de migrație: o declarație nou adăugată la un
 // fișier deja aplicat parțial trebuie văzută și de verificarea de după aplicare, nu doar de cea dinainte.
-const guardSql=(tables)=>`SELECT name FROM sqlite_master WHERE type='table' AND name IN (${tables.map(table=>`'${table}'`).join(',')}) ORDER BY name`;
+const guardSql=(tables,type='table')=>`SELECT name FROM sqlite_master WHERE type='${type}' AND name IN (${tables.map(table=>`'${table}'`).join(',')}) ORDER BY name`;
 const RUNBOOK='Rulează mai întâi `corepack pnpm exec wrangler login` (o singură dată), apoi `corepack pnpm exec wrangler d1 create aflivra`. / First run wrangler login once, then wrangler d1 create aflivra.';
 
 const wranglerEnv=()=>({...process.env,WRANGLER_SEND_METRICS:process.env.WRANGLER_SEND_METRICS||'false',WRANGLER_WRITE_LOGS:process.env.WRANGLER_WRITE_LOGS||'false'});
@@ -30,9 +30,9 @@ export function resolveDatabaseId(explicit){
 }
 
 const stripComments=(sql)=>sql.replace(/^--[^\n]*\n?/gm,'').trim();
-const migrationStatements=()=>{const statements=[];for(const file of MIGRATION_FILES())for(const chunk of readFileSync(join('drizzle',file),'utf8').split(/^--> statement-breakpoint.*$/m).map(s=>s.trim()).filter(Boolean)){const sql=stripComments(chunk);const create=/^CREATE TABLE `([A-Za-z0-9_]+)`/.exec(sql);if(create){statements.push({sql,file,table:create[1]});continue}const alter=/^ALTER TABLE `([A-Za-z0-9_]+)` ADD (?:COLUMN )?`([A-Za-z0-9_]+)`/.exec(sql);if(alter){statements.push({sql,file,table:alter[1],column:alter[2]});continue}throw new Error(`Declarație fără tabel recunoscut în ${file}.`)}return statements};
+export const migrationStatements=()=>{const statements=[];for(const file of MIGRATION_FILES())for(const chunk of readFileSync(join('drizzle',file),'utf8').split(/^--> statement-breakpoint.*$/m).map(s=>s.trim()).filter(Boolean)){const sql=stripComments(chunk);const create=/^CREATE TABLE(?: IF NOT EXISTS)? `([A-Za-z0-9_]+)`/.exec(sql);if(create){statements.push({sql,file,table:create[1]});continue}const alter=/^ALTER TABLE `([A-Za-z0-9_]+)` ADD (?:COLUMN )?`([A-Za-z0-9_]+)`/.exec(sql);if(alter){statements.push({sql,file,table:alter[1],column:alter[2]});continue}const index=/^CREATE (?:UNIQUE )?INDEX(?: IF NOT EXISTS)? `?([A-Za-z0-9_]+)`?\s+ON `?([A-Za-z0-9_]+)`?/i.exec(sql);if(index){statements.push({sql,file,index:index[1],table:index[2]});continue}throw new Error(`Declarație fără tabel recunoscut în ${file}.`)}return statements};
 
-const tablesFor=(baseArgs,tables)=>{const guard=runWrangler([...baseArgs,'--command',guardSql(tables),'--json'],{capture:true});if(guard.status!==0)throw new Error('Interogarea de gardă D1 a eșuat: '+(String(guard.stderr||'').trim().split('\n').filter(Boolean).pop()||'Exit '+(guard.status??'?')));const parsed=parseWranglerJson(guard.stdout),rows=(Array.isArray(parsed)?parsed[0]?.results:parsed?.result?.[0]?.results)||[];return new Set(rows.map(r=>r&&r.name).filter(Boolean))};
+const tablesFor=(baseArgs,tables,type='table')=>{const guard=runWrangler([...baseArgs,'--command',guardSql(tables,type),'--json'],{capture:true});if(guard.status!==0)throw new Error('Interogarea de gardă D1 a eșuat: '+(String(guard.stderr||'').trim().split('\n').filter(Boolean).pop()||'Exit '+(guard.status??'?')));const parsed=parseWranglerJson(guard.stdout),rows=(Array.isArray(parsed)?parsed[0]?.results:parsed?.result?.[0]?.results)||[];return new Set(rows.map(r=>r&&r.name).filter(Boolean))};
 const columnsCache=new Map();
 const columnsFor=(baseArgs,table)=>{if(columnsCache.has(table))return columnsCache.get(table);const guard=runWrangler([...baseArgs,'--command',`PRAGMA table_info(${table})`,'--json'],{capture:true});if(guard.status!==0)throw new Error('Interogarea de gardă a coloanelor D1 a eșuat: '+(String(guard.stderr||'').trim().split('\n').filter(Boolean).pop()||'Exit '+(guard.status??'?')));const parsed=parseWranglerJson(guard.stdout),rows=(Array.isArray(parsed)?parsed[0]?.results:parsed?.result?.[0]?.results)||[],columns=new Set(rows.map(r=>r&&r.name).filter(Boolean));columnsCache.set(table,columns);return columns};
 
@@ -41,17 +41,17 @@ const applyTo=(baseArgs,args,label)=>{const applied=runWrangler([...baseArgs,...
 export function migrateRemote(databaseId){return migrate(['d1','execute',D1_DATABASE_NAME,'--remote'],`remote (D1 ${D1_DATABASE_NAME}${databaseId?' '+databaseId:''})`)}
 export function migrateLocal(){return migrate(localExecuteArgs(),'local (.wrangler/state, id placeholder din build)')}
 
-function migrate(baseArgs,label){
-	const statements=migrationStatements(),tables=[...new Set(statements.map(statement=>statement.table))],existing=tablesFor(baseArgs,tables);
+export function migrate(baseArgs,label){
+	const statements=migrationStatements(),tables=[...new Set(statements.map(statement=>statement.table))],existing=tablesFor(baseArgs,tables),indexes=statements.filter(statement=>statement.index).map(statement=>statement.index),existingIndexes=indexes.length?tablesFor(baseArgs,indexes,'index'):new Set();
 	// CREATE-urile lipsă și ALTER-urile cu coloană lipsă se aplică fiecare cu
 	// garda ei: o bază veche primește ALTER-ul, o bază nouă îl sărește deja
 	// acoperit de CREATE — migrația rămâne idempotentă pe ambele.
-	const missing=statements.filter(statement=>statement.column?existing.has(statement.table)&&!columnsFor(baseArgs,statement.table).has(statement.column):!existing.has(statement.table));
+	const missing=statements.filter(statement=>statement.index?!existingIndexes.has(statement.index):statement.column?existing.has(statement.table)&&!columnsFor(baseArgs,statement.table).has(statement.column):!existing.has(statement.table));
 	if(missing.length===0){console.log(`Migrația ${label} este deja aplicată — nimic de făcut. Tabele: ${[...existing].sort().join(', ')}.`);return {applied:0}}
 	console.log(`Aplic migrația ${label}: lipsesc ${missing.map(statement=>statement.table+(statement.column?'.'+statement.column:'')).join(', ')}.`);
 	for(const statement of missing)applyTo(baseArgs,['--command',statement.sql],label);
 	for(const table of new Set(missing.filter(statement=>statement.column).map(statement=>statement.table)))columnsCache.delete(table);
-	const afterTables=tablesFor(baseArgs,tables),stillMissing=statements.filter(statement=>statement.column?!columnsFor(baseArgs,statement.table).has(statement.column):!afterTables.has(statement.table));
+	const afterTables=tablesFor(baseArgs,tables),afterIndexes=indexes.length?tablesFor(baseArgs,indexes,'index'):new Set(),stillMissing=statements.filter(statement=>statement.index?!afterIndexes.has(statement.index):statement.column?!columnsFor(baseArgs,statement.table).has(statement.column):!afterTables.has(statement.table));
 	if(stillMissing.length)throw new Error(`Migrația ${label} nu s-a aplicat complet: ${stillMissing.map(statement=>statement.table+(statement.column?'.'+statement.column:'')).join(', ')}.`);
 	console.log(`Migrația ${label} aplicată: ${statements.map(statement=>statement.table+(statement.column?'.'+statement.column:'')).join(', ')}.`);
 	return {applied:missing.length};

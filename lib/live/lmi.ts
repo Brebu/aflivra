@@ -49,7 +49,7 @@ export async function readMonuments(query:LmiQuery,base:string){
  const filtered=term?payload.rows.filter(row=>foldTrainText(row[0]+' '+row[1]+' '+row[3]).includes(term)):payload.rows;
  const page=paginate(filtered,query.page,20);
  return {
-  sourceUrl:payload.sourceUrl,base:payload.base,publishedIn:payload.publishedIn,updateNote:payload.updateNote,license:payload.license,licenseNote:payload.licenseNote,
+  sourceUrl:payload.sourceUrl,base:payload.base,publishedIn:payload.publishedIn,updateNote:payload.updateNote,license:payload.license,licenseNote:payload.licenseNote,fetchedAt:payload.fetchedAt,
   profile:{extractionNote:payload.counts.extractionNote,printedPageNote:'Fiecare rând poartă foliul tipărit al Monitorului Oficial, nu numărul de pagină al PDF-ului.'},
   filters:{q:query.q||'',applied:!!term},
    ...page,

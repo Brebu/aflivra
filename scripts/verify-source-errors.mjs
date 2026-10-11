@@ -17,7 +17,7 @@ import ts from 'typescript';
 // îmbătrânit peste TTL și accesul din worker a lovit egress-ul blocat — clasa cunoscută).
 const root=resolve(import.meta.dirname,'..'),require=createRequire(import.meta.url),live=process.argv.includes('--live'),base=process.env.AFLIVRA_VERIFY_SOURCE_BASE||'http://127.0.0.1:5173';
 const deployedArg=process.env.AFLIVRA_VERIFY_DEPLOYED_BASE,deployedBase=deployedArg===undefined?'https://aflivra.brebu.workers.dev':deployedArg;
-const todayIso=()=>new Date().toISOString().slice(0,10);
+const todayIso=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Bucharest'}).format(new Date());
 const temp=await mkdtemp(join(tmpdir(),'aflivra-source-errors-')),sqlite=live?null:new DatabaseSync(':memory:');
 if(!live)sqlite.exec(await readFile(join(root,'drizzle/0000_thin_demogoblin.sql'),'utf8'));
 const db=live?null:{prepare(sql){let args=[];const wrapper={bind(...values){for(const v of values)if(typeof v==='string'&&Buffer.byteLength(v)>2_000_000)throw Error('D1 row bound exceeded');args=values;return wrapper},async first(){return sqlite.prepare(sql).get(...args)||null},async all(){return{results:sqlite.prepare(sql).all(...args)}},async run(){const result=sqlite.prepare(sql).run(...args);return{meta:{changes:Number(result.changes)}}}};return wrapper},async batch(statements){const results=[];for(const statement of statements)results.push(await statement.run());return results}};
@@ -160,9 +160,9 @@ const ancpiTypes=['apartamente','cu constructii','fara constructii','agricol','n
 const ancpiXlsx=()=>{const XLSX=require('xlsx');const rows=[['JUDET','LUNA_RAPORTATA','TIP_PROPRIETATE','TIP_OPERATIUNE','NUMAR_IPOTECI']];
  for(const [ci,county] of anlCounties.entries())for(const [ti,type] of ancpiTypes.entries())rows.push([county,'31.01.2024',type,'Ipoteca înscrisă',(county==='BUCUREŞTI'?30:8)+((ci*5+ti*3)%20)]);
  const workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(rows),'ipoteci');return new Uint8Array(XLSX.write(workbook,{type:'buffer',bookType:'xlsx'}))};
-const ancpiBody=()=>({success:true,result:{resources:[{name:'Numarul imobilelor ipotecate in cartea funciara ianuarie 2024',url:'https://data.gov.ro/dataset/ancpi-ipoteci/resource/ipoteci-de-verificare-ianuarie-2024.xlsx',format:'XLSX',last_modified:'2024-02-05T00:00:00'}]}});
+const ancpiBody=()=>({success:true,result:{id:'fixture-ancpi-dataset',title:'Dinamica ipotecilor 2024',organization:{id:'fixture-ancpi-publisher',name:'ancpi'},resources:[{name:'Numarul imobilelor ipotecate in cartea funciara ianuarie 2024',url:'https://data.gov.ro/dataset/ancpi-ipoteci/resource/ipoteci-de-verificare-ianuarie-2024.xlsx',format:'XLSX',last_modified:'2024-02-05T00:00:00'}]}});
 const xmlResourceUuid='2f6a4c1e-8b3d-4e57-9c2a-6d1f0b8e7a3c';
-const families=[
+let families=[
  {family:'weather/open-meteo',routeName:'weather',route:'/api/weather?lat=44.43&lon=26.1',host:'api.open-meteo.com',allowed:['api.open-meteo.com'],scenarios:['http500','http429','timeout','malformed','success','expired-window'],scenarioRoutes:{'expired-window':'/api/weather?lat=44.43&lon=26.1&hours=48'},key:()=>weatherModule.forecastLoader(44.43,26.1).key,loader:()=>weatherModule.forecastLoader(44.43,26.1)},
   {family:'company/anaf',routeName:'company',route:'/api/company?cui=427282',host:'webservicesp.anaf.ro',allowed:['webservicesp.anaf.ro','query.wikidata.org','data.gov.ro'],key:()=>companyRegistriesModule.companyLoader('427282').key,loader:()=>companyRegistriesModule.companyLoader('427282')},
   // Căutarea firmei după nume (T2, sonda 2026-10-08): registrele oficiale de nume (ONRC
@@ -242,6 +242,14 @@ const families=[
    // atributele + copiii pe coloane cu punct, copiii repețiți enumerați, netabelabilul
    // rămas document, XXE respins înainte de aplatizare și variantele de format publicate.
    {family:'resource/xml-table',routeName:'resource',route:'/api/resource?id='+xmlResourceUuid,host:'data.gov.ro',allowed:['data.gov.ro'],scenarios:['http500','http429','timeout','malformed','xxe','format-zip-shp','success','success-dots','success-repeats','success-document','success-two-lists','success-tie','success-sections','format-xslx','format-xlsx-two-sheets','format-quality-columns','format-json-soap','format-office-theme','format-word-package','format-xml-dot'],key:()=>resourceModule.resourceLoader(xmlResourceUuid).key,loader:()=>resourceModule.resourceLoader(xmlResourceUuid)}];
+// Offline diagnostic selector; CI omits it and still runs every family.
+const familyAt=process.argv.indexOf('--family'),selectedFamily=familyAt>=0?process.argv[familyAt+1]:null;
+if(familyAt>=0){
+ if(live)throw Error('--family is an offline diagnostic selector only');
+ const chosen=families.filter(family=>family.family===selectedFamily);
+ if(!chosen.length)throw Error('Unknown --family');
+ families=chosen;
+}
 if(live){
  let routes=null;
  try{routes=await Promise.all(families.map(async family=>[family.family,await (async()=>{const init=family.method==='POST'?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(family.body)}:{};return fetch(base+family.route,{...init,signal:AbortSignal.timeout(60000)})})()]))}catch(error){console.error('Serverul local de dezvoltare nu răspunde la '+base+' — pornit cu „npm start” înainte de --live. Detaliu: '+error.message);process.exitCode=2}
@@ -297,6 +305,7 @@ if(live){
    .replace("import proofs from '@/public/data/snapshot-transport.json';",'const proofs='+await readFile(join(root,'public/data/snapshot-transport.json'),'utf8')+';')
    .replace("import institutions from '@/public/courts/institutions.json';",'const institutions='+await readFile(join(root,'public/courts/institutions.json'),'utf8')+';')
    .replace("import {env} from 'cloudflare:workers';",'const env=globalThis.__aflivraTestEnv;')
+   .replace("from '@/lib/static-freshness.mjs'","from '"+pathToFileURL(join(root,'lib/static-freshness.mjs')).href+"'")
    .replaceAll('@/lib/live/','./').replaceAll('@/lib/','./');
   let output=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText;
   output=output.replaceAll('@/lib/http-retry.mjs',httpRetry).replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
@@ -567,6 +576,7 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
    if(family.family==='directory/schools')return Response.json(schoolsBody());
     if(family.family==='flights/adsb')return adsbBody();
     if(family.family==='events/operanationalacluj'||family.family==='events/search'&&host==='operacluj.ro')return new Response(operaclujBody(),{headers:{'content-type':'application/json'}});
+    if(family.family==='housing/ancpi'&&href.includes('package_search'))return Response.json({success:true,result:{count:1,results:[ancpiBody().result]}});
     if(family.family==='housing/anl'||family.family==='housing/ancpi')return href.includes('package_show')?Response.json(family.family==='housing/anl'?anlBody():ancpiBody()):new Response(family.family==='housing/anl'?anlXlsx():ancpiXlsx(),{headers:{'content-type':'application/vnd.ms-excel'}});
    if(family.family.startsWith('directory/'))return href.includes('package_show')?Response.json(cnasBody(family.family)):new Response(cnasXlsx(),{headers:{'content-type':'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}});
   if(family.family==='localities/siruta')return href.includes('package_show')?Response.json(sirutaMeta()):new Response(sirutaCsv(),{headers:{'content-type':'text/csv'}});
@@ -1382,7 +1392,7 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
      assert.equal(payload.data.byCounty[0].county,'BUCUREŞTI',label+': județul cu cele mai multe ipoteci servește primul');
      assert.deepEqual(payload.data.byType.map(row=>row.name).sort(),[...ancpiTypes].sort(),label+': cele șase feluri de proprietate publicate se păstrează');
      assert.equal(payload.data.total,payload.data.byCounty.reduce((total,row)=>total+row.total,0),label+': totalul național se compune exact din județele raportate');
-     assert.equal(attempts,2,label+': metadatele și exportul, câte un acces')}
+     assert.equal(attempts,3,label+': datasetul de bază, descoperirea edițiilor și exportul selectat, câte un acces')}
     else if(scenario==='warm-http500'){
      assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
      assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
@@ -1576,7 +1586,7 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
   await runCell(family,'warm-http500');
  }
    console.log('Matricea de avarie a trecut: familiile din matricea generală trec HTTP 500 cu cele trei încercări epuizate, pauza 429, expirarea timpului, răspunsul nevalid și răspunsul de succes, familia Tranzy, poartă de mediu, parcurge celulele sondei ei de referință — fără cheia de acces nicio adresă nu se interoghează, cheia respinsă (HTTP 403) se raportează cu o singură încercare și pauză programată, operatorul neidentificat nu interoghează fluxul altui oraș, iar filtrele invalide sunt respinse cu 400 fără interogarea sursei —, familia avioanelor adsb.lol reunește cele patru cereri de acoperire în chenarul românesc fără dubluri și, suplimentată de intermediar, își parcurge celulele proprii — egress-ul respins (HTTP 429) se traduce onest în nota de tură de intermediar cu codul sursei păstrat, depunerea fără token, livrul scurt și panoul corupt se resping fără să publice nimic, iar după predarea celor patru panouri citirea servește pozițiile fără să reinterogheze sursa —, panoul BIA, preluat de relaie, își parcurge celulele proprii — fără copie predată testul de browser al sursei se raportează onest printr-o singură încercare, depunerea fără token și cu aeroport sau panou nevalid se respinge fără să publice nimic, iar după predarea reușită citirea servește panoul fără să reinterogheze sursa —, calendarul tribe-events al Operei Cluj servește ediția românească fără dublura EN și rândul fără oră, căutarea națională a spectacolelor reunește calendarele registrului — avaria unei instituții degradează onest reuniunea, copia validă servește sub 500, iar calendarul sănătos nu se reinteroghează —, căutarea firmei pe nume citește registrul deschis de cunoștințe pe ambele etichete de limbă — numele potrivit se servește cu CUI-ul din identificatorul TVA al sursei, dubla pe alte limbi rămâne o singură firmă, entitatea găsită pe nume fără TVA citit în registru rămâne listată fără CUI în fruntea rangului — toate potrivirile cu CUI se servesc, zgomotul fără CUI se mărginește la primele potriviri, numele prea scurt sau prea lung se respinge cu 400 fără interogarea sursei —, iar registrele imobiliare ANL și ANCPI servesc edițiile publicate cu seria pe ani care se compune exact în totalul național, respectiv luna raportată și cele șase feluri de proprietate, iar resursa publică XML citește exportul cu strat de tabel: rândul dominant aplatizează atributele și copiii în coloane cu drumuri pe trei niveluri, copiii repețiți se enumerează determinist, listele concurente aleg cea dominantă iar la ex-aequo documentul onest servește, netabelabilul rămâne document etichetat, declarațiile XXE se resping înainte de orice aplatizare, iar variantele de format publicate („XSLX", „JSON, SOAP, XML", „XML.") se normalizează la cititorul potrivit, cu „ZIP, SHP" rămas absență cititorului; ruta locală răspunde mereu 200 în afara celor 400 documentate, păstrează copia validă, prezintă codul HTTP al sursei în plicul de eroare și nu reinteroghează sursele servite corect.');
- console.log(JSON.stringify({result:'ok',mode:'mock',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
+ console.log(JSON.stringify({result:'ok',mode:'mock',selection:selectedFamily||'all',families:families.length,cells:cellCount,perFamily:families.map(family=>({family:family.family,cells:counters.filter(cell=>cell.family===family.family).length}))}));
  }
 escapes.length=0;process.off('unhandledRejection',recordEscape);process.off('uncaughtExceptionMonitor',recordEscape);}
 finally{delete globalThis.__aflivraTestEnv;delete globalThis.__aflivraResourceCopies;if(!live)sqlite.close();await rm(temp,{recursive:true,force:true})}

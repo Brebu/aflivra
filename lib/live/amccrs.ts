@@ -60,7 +60,7 @@ export async function readAmccrsBuildings(query:AmccrsQuery,base:string){
  const page=paginate(matched,query.page,20);
  return {
   sourceUrl:payload.sourceUrl,tableName:payload.tableName,pageUpdated:payload.pageUpdated,license:payload.license,licenseNote:payload.licenseNote,
-  coverage:payload.coverage,
+  coverage:payload.coverage,fetchedAt:payload.fetchedAt,
   classes:payload.counts.normalizedClasses,
   normalizationRule:payload.normalizationRule,
   profile:{distinctClassFormsText:payload.counts.distinctClassForms,acoperire:'doar municipiul București'},

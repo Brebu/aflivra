@@ -7,6 +7,7 @@ export type ToolQuery={path:string;query:Record<string,string>;method?:'POST';bo
 export type ToolDef={
   name:string;
   description:string;
+  annotations?:{readOnlyHint:boolean;destructiveHint:boolean;idempotentHint:boolean;openWorldHint:boolean};
   inputSchema:{type:'object';additionalProperties?:false;properties:Record<string,{type:'string'|'integer'|'number'|'boolean'|string[]|number[];description:string;enum?:string[];items?:{type:string};required?:never;maxLength?:number;minLength?:number;minimum?:number;maximum?:number}>;required?:string[]};
   build:(args:Record<string,unknown>)=>ToolQuery;
 };

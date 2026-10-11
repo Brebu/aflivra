@@ -1,4 +1,5 @@
 import {readAmccrsBuildings} from '@/lib/live/amccrs';
+import {staticFreshness} from '@/lib/static-freshness.mjs';
 export const dynamic='force-dynamic';
 
 const envelopeBase={name:'AMCCRS · încadrarea seismică a clădirilor din București',url:'https://amccrs-pmb.ro/lista-imobile-2/',adapterVersion:'amccrs.seismic-buildings.v1',ttlSeconds:86400};
@@ -10,7 +11,7 @@ export async function GET(request:Request){
  if(q.length>200||sector&&!/^[1-6]$/.test(sector)||!Number.isInteger(page)||page<0||page>100000)return Response.json({error:'Filtre invalide.'},{status:400});
  try{
   const data=await readAmccrsBuildings({q,sector:sector||undefined,page},request.url);
-  return Response.json({...envelopeBase,key:'amccrs:buildings',status:'cached',data,publishedAt:data.pageUpdated,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:86400},{headers:{'Cache-Control':'no-store'}});
+  return Response.json({...envelopeBase,key:'amccrs:buildings',data,publishedAt:data.pageUpdated,lastAttemptAt:null,nextAttemptAt:null,...staticFreshness(data.fetchedAt)},{headers:{'Cache-Control':'no-store'}});
  }catch(error){
   return Response.json({...envelopeBase,key:'amccrs:buildings',status:'unavailable',data:null,publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:error instanceof Error?error.message:'Registrul seismic nu poate fi citit acum.',ttlSeconds:86400},{headers:{'Cache-Control':'no-store'}});
  }

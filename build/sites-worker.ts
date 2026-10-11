@@ -4,6 +4,7 @@ import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
 import {groupForCron, runGroup} from "../lib/live/refresh-sweep";
 import {runsWatchSweep, runWatchSweep} from "../lib/live/watch-sweep";
+import {drainRefreshJobs,processRefreshJob,type RefreshMessage} from "../lib/live/refresh-jobs";
 
 export default {
   fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
@@ -30,6 +31,8 @@ export default {
   },
   async scheduled(controller: ScheduledController, env: Cloudflare.Env, ctx: ExecutionContext) {
     return withLiveContext(ctx, async () => {
+      // The D1 outbox survives HTTP waitUntil cancellation or queue dispatch failure.
+      if(env.DB)try{await drainRefreshJobs(env.DB)}catch{console.warn(JSON.stringify({event:'refresh_jobs_recovery_failed'}))}
       // Declanșătorul registers („28 * * * *”) e orar: tura de registre și tura „Urmărește”
       // călătoresc împreună pe fiecare tick orar — membrii cu TTL de zi se sar onest la cele
       // mai multe tick-uri, iar „Urmăritelor” le livrăm notificările la cel mult o oră.
@@ -50,6 +53,21 @@ export default {
       if (result) {
         console.log(JSON.stringify({ event: "sweep_completed", group: result.group, ok: result.ok, failed: result.failed, durationMs: Date.parse(result.finishedAt) - Date.parse(result.startedAt) }));
       }
+    });
+  },
+  async queue(batch:MessageBatch<RefreshMessage>,env:Cloudflare.Env,ctx:ExecutionContext){
+    return withLiveContext(ctx,async()=>{
+      let cursor=0;
+      await Promise.all(Array.from({length:Math.min(3,batch.messages.length)},async()=>{
+        while(cursor<batch.messages.length){const message=batch.messages[cursor++];
+          if(!message.body||typeof message.body.jobId!=='string'||!/^[\da-f-]{36}$/i.test(message.body.jobId)){message.ack();continue}
+          if(!env.DB){message.retry({delaySeconds:60});continue}
+          try{const result=await processRefreshJob(env.DB,message.body.jobId);
+            if(result.retryAt)message.retry({delaySeconds:Math.max(1,Math.min(43200,Math.ceil((result.retryAt-Date.now())/1000)))});
+            else message.ack();
+          }catch{message.retry({delaySeconds:60})}
+        }
+      }));
     });
   },
 };

@@ -1,5 +1,6 @@
 import {readSitur,SITUR_KINDS,type SiturKind} from '@/lib/live/situr';
 import {countyName} from '@/lib/geographic-scope';
+import {staticFreshness} from '@/lib/static-freshness.mjs';
 export const dynamic='force-dynamic';
 
 const envelopeBase={name:'Situr · registrele turistice clasificate',url:'https://se.situr.gov.ro/OpenData',adapterVersion:'situr.registries.v1',ttlSeconds:86400};
@@ -15,7 +16,7 @@ export async function GET(request:Request){
  const kind=kindRaw as SiturKind;
  try{
   const data=await readSitur({kind,q,locality,county,page},request.url);
-  return Response.json({...envelopeBase,key:'situr:'+kind,status:'cached',data,publishedAt:data.exportDate,lastSuccessAt:data.fetchedAt.slice(0,10),lastAttemptAt:null,nextAttemptAt:null,error:null,ttlSeconds:86400},{headers:{'Cache-Control':'no-store'}});
+  return Response.json({...envelopeBase,key:'situr:'+kind,data,publishedAt:data.exportDate,lastAttemptAt:null,nextAttemptAt:null,...staticFreshness(data.fetchedAt)},{headers:{'Cache-Control':'no-store'}});
  }catch(error){
   return Response.json({...envelopeBase,key:'situr:'+kind,status:'unavailable',data:null,publishedAt:null,lastSuccessAt:null,lastAttemptAt:null,nextAttemptAt:null,error:error instanceof Error?error.message:'Registrul turistic nu poate fi citit acum.',ttlSeconds:86400},{headers:{'Cache-Control':'no-store'}});
  }

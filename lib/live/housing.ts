@@ -22,7 +22,12 @@ const months:Record<string,number>={ianuarie:1,februarie:2,martie:3,aprilie:4,ma
 const monthNames=['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'];
 const scoreEdition=(name:string)=>{const dotted=name.match(/(\d{2})\.(\d{2})\.(20\d{2})/);if(dotted)return Number(dotted[3])+Number(dotted[2])/100+Number(dotted[1])/10000;const romanian=name.match(/(\d{1,2})\s+([a-zăâșțîşţ]+)\s+(20\d{2})/i);const month=romanian&&months[romanian[2].toLowerCase()];return romanian&&month?Number(romanian[3])+month/100+Number(romanian[1])/10000:0};
 const scoreYear=(name:string)=>{const dotted=scoreEdition(name);if(dotted)return dotted;const year=name.match(/(20\d{2})/);return year?Number(year[1]):0};
-const scoreAncpiMonth=(name:string)=>{const romanian=name.match(/([a-zăâșțîşţ]+)\s+(20\d{2})/i);const month=romanian&&months[romanian[1].toLowerCase()];return romanian&&month?Number(romanian[2])+month/100:0};
+export const scoreAncpiMonth=(name:string)=>{
+ const dotted=name.match(/\b(\d{1,2})\.(\d{1,2})\.(20\d{2})\b/),iso=name.match(/\b(20\d{2})-(\d{2})(?:-(\d{2}))?\b/),romanian=name.toLowerCase().match(/\b(ianuarie|februarie|martie|aprilie|mai|iunie|iulie|august|septembrie|octombrie|noiembrie|decembrie)\s+(20\d{2})\b/);
+ const year=dotted?Number(dotted[3]):iso?Number(iso[1]):romanian?Number(romanian[2]):0,month=dotted?Number(dotted[2]):iso?Number(iso[2]):romanian?months[romanian[1]]:0,day=dotted?Number(dotted[1]):iso?.[3]?Number(iso[3]):1;
+ if(!year||month<1||month>12||day<1||day>new Date(Date.UTC(year,month,0)).getUTCDate())return 0;
+ return year*100+month;
+};
 
 function workbookRows(bytes:ArrayBuffer):unknown[][]{
  const book=read(bytes,{type:'array',cellDates:false,raw:false});
@@ -126,14 +131,23 @@ export const anlLoader:Loader={key:'housing:anl',name:'ANL · locuințe pentru t
  return {...loaded,publishedAt:loaded.publishedAt||chosen.resource.last_modified||null};
 }};
 
-export const ancpiLoader:Loader={key:'housing:ancpi',name:'ANCPI · dinamica ipotecilor',url:'https://data.gov.ro/dataset/'+ancpiDataset,version:'housing.ancpi-mortgages.v1',ttl:86400,load:async()=>{
+export const ancpiLoader:Loader={key:'housing:ancpi',name:'ANCPI · dinamica ipotecilor',url:'https://data.gov.ro/dataset/'+ancpiDataset,version:'housing.ancpi-mortgages.v2',ttl:86400,load:async()=>{
  const meta=JSON.parse(await getSource('https://data.gov.ro/api/3/action/package_show?id='+ancpiDataset));
- const candidates=(meta.result?.resources||[]).filter((resource:any)=>/ipotec/i.test(String(resource.name||''))&&/xlsx/i.test(String(resource.format||''))).map((resource:any)=>({resource,score:scoreAncpiMonth(String(resource.name||''))})).sort((a:{score:number},b:{score:number})=>b.score-a.score);
+ const organization=meta.result?.organization?.name;
+ if(meta.success!==true||!organization)throw new SourceError('Editorul raportului ANCPI nu a putut fi verificat.');
+ // Annual datasets change IDs; discover their resources through the verified publisher.
+ const search=JSON.parse(await getSource('https://data.gov.ro/api/3/action/package_search?'+new URLSearchParams({q:'ipotec*',fq:'organization:"'+String(organization).replace(/["\\]/g,'')+'"',rows:'100',sort:'metadata_modified desc'})));
+ if(search.success!==true||!Array.isArray(search.result?.results)||!Number.isInteger(search.result?.count)||search.result.count<0||search.result.count>100||search.result.results.length!==search.result.count)throw new SourceError('Descoperirea edițiilor ANCPI nu a putut fi verificată integral.');
+ const datasets=[meta.result,...search.result.results.filter((dataset:any)=>((meta.result.organization.id&&dataset.organization?.id===meta.result.organization.id)||dataset.organization?.name===organization)&&/dinamica.*ipotec/i.test(String(dataset.title||'')))];
+ const candidates=datasets.flatMap((dataset:any)=>(dataset.resources||[]).filter((resource:any)=>/ipotec/i.test(String(resource.name||''))&&/xlsx/i.test(String(resource.format||''))).map((resource:any)=>({resource,dataset,score:scoreAncpiMonth(String(resource.name||''))}))).filter((item:{score:number})=>item.score>0).sort((a:{score:number},b:{score:number})=>b.score-a.score);
  const chosen=candidates[0];
  if(!chosen||new URL(chosen.resource.url).origin!=='https://data.gov.ro')throw new SourceError('Raportul lunar ANCPI nu este disponibil.');
  const bytes=await downloadResource(new URL(chosen.resource.url));
  const loaded=parseAncpiMortgages(bytes.buffer as ArrayBuffer);
- return {...loaded,publishedAt:chosen.resource.last_modified||null};
+ const actualMonth=scoreAncpiMonth(loaded.data.monthText);
+ if(!actualMonth||actualMonth!==chosen.score)throw new SourceError('Luna din fișierul ANCPI diferă de ediția din catalog.');
+ const referenceMonth=String(Math.floor(actualMonth/100))+'-'+String(actualMonth%100).padStart(2,'0');
+ return {...loaded,publishedAt:referenceMonth+'-01',data:{...loaded.data,referenceMonth,catalogModifiedAt:chosen.resource.last_modified||null,sourceUrl:chosen.resource.url,datasetId:chosen.dataset.id,discovery:{complete:true,datasets:search.result.count,checkedAt:new Date().toISOString()},note:loaded.data.note+' Ultima ediție găsită în catalog: '+loaded.data.monthLabel+'; o verificare reușită nu schimbă perioada de referință.'}};
 }};
 
 export const anlRecordId=(record:Record<string,unknown>):string=>{
