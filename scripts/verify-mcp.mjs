@@ -78,6 +78,7 @@ try{
     'film_detail','article_read','transport_network','law_search','law_document','cinema_sites','stories_list',
   ],'lista de tool-uri rămâne pin-ată: orice schimbare de suprafață trece explicit prin poartă');
   for (const tool of list) {
+    assert.deepEqual(tool.annotations,{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:true},`public MCP tool ${tool.name} advertises accurate read-only safety hints`);
     assert.ok(tool.description.length>40,`tool-ul ${tool.name} are descrierea pentru asistenți`);
     assert.equal(tool.inputSchema.type,'object',`tool-ul ${tool.name} declară un obiect de intrare`);
     for (const required of tool.inputSchema.required||[])assert.ok(tool.inputSchema.properties[required],`tool-ul ${tool.name} cere "${required}" declarat`);
