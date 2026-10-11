@@ -1,0 +1,28 @@
+name: production-smoke
+on:
+  push:
+    branches: [smoke/aflivra-report-20261011]
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify deployed Aflivra routes, assets and MCP
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          const base='https://aflivra.brebu.workers.dev';
+          async function get(path){const r=await fetch(base+path,{headers:{'User-Agent':'Mozilla/5.0 Aflivra-validation'},signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,path);return r;}
+          const health=await (await get('/api/sources-health')).json();
+          assert.equal(health.coverage.scheduledMembers,32);assert.equal(health.summary.total,43);assert.equal(health.sources.length,43);
+          const response=await fetch(base+'/api/mcp',{method:'POST',headers:{'Content-Type':'application/json','User-Agent':'Mozilla/5.0 Aflivra-validation'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/list',params:{}}),signal:AbortSignal.timeout(30000)});assert.equal(response.status,200);const list=await response.json();assert.equal(list.result.tools.length,42);assert(list.result.tools.some(t=>t.name==='sources_health'));
+          const sources=await (await get('/sources')).text();assert(sources.includes('Surse')||sources.includes('surse'));
+          await get('/');const font=await (await get('/fonts/Inter-Regular.ttf')).arrayBuffer();assert(font.byteLength>10000);
+          await get('/_next/static/chunks/business-report-pdf-CBxz-exW.js');
+          console.log(JSON.stringify({result:'ok',mcpTools:42,scheduledMembers:32,health:health.summary,jobs:health.jobs,routes:['/','/sources','/api/sources-health'],pdfAssets:true}));
+          JS
