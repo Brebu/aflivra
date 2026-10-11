@@ -21,6 +21,7 @@ jobs:
           const health=await (await get('/api/sources-health')).json();
           assert.equal(health.coverage.scheduledMembers,32);assert.equal(health.summary.total,43);assert.equal(health.sources.length,43);
           const response=await fetch(base+'/api/mcp',{method:'POST',headers:{'Content-Type':'application/json','User-Agent':'Mozilla/5.0 Aflivra-validation'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/list',params:{}}),signal:AbortSignal.timeout(30000)});assert.equal(response.status,200);const list=await response.json();assert.equal(list.result.tools.length,42);assert(list.result.tools.some(t=>t.name==='sources_health'));
+          const healthCall=await fetch(base+'/api/mcp',{method:'POST',headers:{'Content-Type':'application/json','User-Agent':'Mozilla/5.0 Aflivra-validation'},body:JSON.stringify({jsonrpc:'2.0',id:2,method:'tools/call',params:{name:'sources_health',arguments:{}}}),signal:AbortSignal.timeout(30000)});assert.equal(healthCall.status,200);const called=await healthCall.json();assert(!called.error);assert.equal(called.result.structuredContent.summary.total,43);console.log(JSON.stringify({tool:'sources_health',status:'ok',data:called.result.structuredContent}));
           const sources=await (await get('/sources')).text();assert(sources.includes('Surse')||sources.includes('surse'));
           await get('/');const font=await (await get('/fonts/Inter-Regular.ttf')).arrayBuffer();assert(font.byteLength>10000);
           await get('/_next/static/chunks/business-report-pdf-CBxz-exW.js');
