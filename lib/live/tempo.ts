@@ -83,9 +83,7 @@ export const insSeriesLoader=(meta:TempoMeta,territory:TempoOption,years:TempoOp
  if(totals.some(option=>!option)||!territoryDim||!years.length||!unit)throw new SourceError('Matricea TEMPO nu expune selecțiile cerute.');
  const arr=[[totals[0]],[totals[1]],[totals[2]],[territory],years,[unit]];
  return {key:'ins:'+MATRIX+':'+foldTempo(territory.label),name:'INS TEMPO · '+meta.matrixName.slice(0,80),url:TEMPO_BASE+'/matrix/'+MATRIX,version:'ins.tempo-pop105a.v1',ttl:86400,load:async()=>{
-  const response=await fetch(TEMPO_BASE+'/matrix/'+MATRIX,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({language:'ro',arr,matrixName:meta.matrixName,matrixDetails:meta.details})});
-  if(!response.ok)throw new SourceError('Interogarea TEMPO a eșuat (HTTP '+response.status+').');
-  const payload=await response.json() as {resultTable?:string};
+  const payload=JSON.parse(await getSource(TEMPO_BASE+'/matrix/'+MATRIX,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({language:'ro',arr,matrixName:meta.matrixName,matrixDetails:meta.details})})) as {resultTable?:string};
   if(!payload.resultTable)throw new SourceError('Interogarea TEMPO nu a întors tabelul de rezultate.');
   const values=parseResultTable(payload.resultTable,years.map(option=>option.label.trim()),territory.label.trim());
   return {data:{

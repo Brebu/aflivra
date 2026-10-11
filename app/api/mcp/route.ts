@@ -3,8 +3,8 @@
 // callRoute seam to the real GET/POST handlers: no data logic lives here, only
 // the mapping from tool paths to route modules. Origins are validated per the
 // 2025-06-18 transport: same-origin browsers and Origin-less server-to-server
-// clients pass, any other origin is refused; no auth in this turn — public
-// read-only data, OAuth wiring for the marketplaces lands later.
+// clients pass, any other origin is refused. Public data remains readable;
+// private refresh tools require the operator's REFRESH_TOKEN bearer on each request.
 import {handleRpc,MCP_PROTOCOL_VERSION,SUPPORTED_PROTOCOL_VERSIONS,type RouteCaller} from '@/lib/mcp/server';
 import * as company from '../company/route';
 import * as places from '../places/route';
@@ -40,6 +40,11 @@ import * as energyOffers from '../energy-offers/route';
 import * as power from '../power/route';
 import * as cinemas from '../cinemas/route';
 import * as stories from '../stories/route';
+import * as refresh from '../refresh/route';
+import * as refreshStatus from '../refresh/status/route';
+import * as refreshCorpora from '../refresh/corpora/route';
+import {env} from 'cloudflare:workers';
+import {refreshAuthorized} from '@/lib/live/refresh-auth';
 
 export const dynamic='force-dynamic';
 
@@ -50,6 +55,8 @@ const ROUTES:Record<string,{GET?(request:Request):Promise<Response>;POST?(reques
   '/api/resource':resource,'/api/resource-file':resourceFile,'/api/content':content,'/api/story':story,'/api/lawyers':lawyers,
   '/api/experts':experts,'/api/notaries':notaries,'/api/anl':anl,'/api/ancpi':ancpi,'/api/cinemas':cinemas,'/api/stories':stories,
   '/api/tourism':tourism,'/api/seismic':seismic,'/api/earthquakes':earthquakes,'/api/monuments':monuments,'/api/ins':ins,'/api/energy-offers':energyOffers,'/api/power':power,
+  '/api/refresh':refresh,'/api/refresh/status':refreshStatus,
+  '/api/refresh/corpora':refreshCorpora,
 };
 
 // Originea acceptată e originea proprie a aplicației; clienții server-to-server
@@ -64,13 +71,15 @@ const cors=(origin:string|null)=>({
 // în conversație — descrierea tool-ului cere text lizibil la csv, nu legătură.
 const EXPORT_MIME=/^(application\/vnd\.openxmlformats|application\/pdf|application\/xml)/;
 
-const makeCallRoute=(origin:string):RouteCaller=>async call=>{
+const makeCallRoute=(origin:string,operatorAuthorization?:string):RouteCaller=>async call=>{
   const routeModule=ROUTES[call.path];
   if(!routeModule)return {ok:false,status:404,body:{error:'Unknown route.'}};
   const url=new URL(call.path+'?'+new URLSearchParams(call.query),origin+'/');
   const handler=call.method==='POST'?routeModule.POST:routeModule.GET;
   if(!handler)return {ok:false,status:405,body:{error:'Method not supported for this route.'}};
-  const request=call.method==='POST'?new Request(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(call.body||{})}):new Request(url);
+  const headers=new Headers({'content-type':'application/json'});
+  if(operatorAuthorization&&['/api/refresh','/api/refresh/status','/api/refresh/corpora'].includes(call.path))headers.set('authorization',operatorAuthorization);
+  const request=call.method==='POST'?new Request(url,{method:'POST',headers,body:JSON.stringify(call.body||{})}):new Request(url,{headers});
   const response=await handler(request);
   const contentType=response.headers.get('content-type')||'';
   if(response.ok&&EXPORT_MIME.test(contentType)){
@@ -107,7 +116,8 @@ export async function POST(request:Request){
   if(declared!==null&&!SUPPORTED_PROTOCOL_VERSIONS.includes(declared))return rpcError(400,-32001,`Unsupported MCP-Protocol-Version "${declared}"; supported: ${SUPPORTED_PROTOCOL_VERSIONS.join(', ')}.`,origin);
   let body:unknown;
   try{body=await request.json()}catch{return rpcError(400,-32700,'Parse error: the body must be JSON.',origin)}
-  const handled=await handleRpc(makeCallRoute(url.origin),body);
+  const authorization=request.headers.get('authorization'),operator=refreshAuthorized(env.REFRESH_TOKEN,authorization);
+  const handled=await handleRpc(makeCallRoute(url.origin,operator?authorization!:undefined),body,{operator});
   const headers={...cors(origin),'Mcp-Protocol-Version':MCP_PROTOCOL_VERSION};
   if(handled.body===null)return new Response(null,{status:handled.status,headers});
   return Response.json(handled.body,{status:handled.status,headers});

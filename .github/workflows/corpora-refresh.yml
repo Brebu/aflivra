@@ -1,15 +1,21 @@
 name: corpora-refresh
 
-# Reîmprospătarea aproape în timp real a corpusurilor statice „surse românești”:
+# Import zilnic sau declanșat manual al corpusurilor statice „surse românești”:
 # Cloudflare permite maximum 5 declanșări programate — toate ocupate de grupurile
 # Worker-ului (pulse/living/feeds/research/registers) — deci tura zilnică de corpus
 # rulează ca GitHub Action: descarcă exporturile oficiale (SITUR, AMCCRS, EIDA,
-# LMI), regenerează corpusurile, seacă porțile de integritate și deschide un PR cu
+# LMI), regenerează corpusurile, trece porțile de integritate și deschide un PR cu
 # dovada SHA-256 — reîmprospătarea corpusului e o decizie revizuită, nu o
 # pushare directă. Sursele live (SEN/POSF/TEMPO) NU se ating aici: ele au rutele
 # proprii cu TTL în Worker.
 on:
   workflow_dispatch:
+    inputs:
+      source:
+        description: Corpus to import
+        type: choice
+        default: all
+        options: [all, situr, amccrs, eida, lmi]
   schedule:
     - cron: '17 3 * * *'
 
@@ -19,13 +25,15 @@ permissions:
 
 concurrency:
   group: corpora-refresh
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   refresh:
     name: Regenerate static corpora (SITUR, AMCCRS, EIDA, LMI)
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      CORPUS_SOURCE: ${{ inputs.source || 'all' }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -40,15 +48,30 @@ jobs:
       - name: Branch for the refresh PR
         run: git checkout -b corpora/refresh-$(date -u +%Y-%m-%d)
       - name: Import SITUR registries (Excel exports; header detected by content)
+        if: env.CORPUS_SOURCE == 'all' || env.CORPUS_SOURCE == 'situr'
         run: node scripts/import-situr-snapshot.mjs
       - name: Import AMCCRS register (nonce stays in this offline script, never the Worker)
+        if: env.CORPUS_SOURCE == 'all' || env.CORPUS_SOURCE == 'amccrs'
         run: node scripts/import-amccrs-snapshot.mjs
       - name: Import EIDA seismic history (per-year slices under the service limit)
+        if: env.CORPUS_SOURCE == 'all' || env.CORPUS_SOURCE == 'eida'
         run: node scripts/import-eida-snapshot.mjs
       - name: Import LMI 2015 Bucharest (official PDF; column anchors per audited parse)
+        if: env.CORPUS_SOURCE == 'all' || env.CORPUS_SOURCE == 'lmi'
         run: node scripts/import-lmi-snapshot.mjs
       - name: Integrity gate — counts, honest gaps, SHA-256 proofs
-        run: node scripts/verify-surse-noi-corpus.mjs
+        run: node scripts/verify-corpus-refresh.mjs --base-ref HEAD
+      - name: Preserve validated imports for review, including a blocked PR step
+        uses: actions/upload-artifact@v4
+        with:
+          name: corpora-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            public/situr
+            public/amccrs
+            public/eida
+            public/lmi
+            public/data/snapshot-transport.json
+          retention-days: 14
       - name: Typecheck (the readers see the regenerated corpus through the same contracts)
         run: corepack pnpm exec tsc --noEmit
       - name: Stage the regenerated corpora (real corpus dirs + transport proofs)
@@ -81,18 +104,26 @@ jobs:
       - name: Open (or reuse) the refresh PR
         if: steps.stage.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.CORPORA_PR_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           BRANCH="corpora/refresh-$(date -u +%Y-%m-%d)"
           if [ "$(gh pr list --head "$BRANCH" --state open --json number --jq 'length')" != "0" ]; then
             echo "Există deja un PR deschis pe $BRANCH (rerulare) — branch-ul forțat la reședință îl actualizează, nu se deschide altul."
             exit 0
           fi
-          gh pr create --title "Corpus „surse românești”: reîmprospătare $(date -u +%Y-%m-%d)" \
-            --body "Reîmprospătarea zilnică programată a corpusurilor statice: SITUR (registrele turistice clasificate), AMCCRS (încadrarea seismică București), EIDA (istoricul seismic M3+) și LMI 2015 (monumente istorice București). Importurile rulează offline, cu porțile de integritate executate pe CI; nonce-ul AMCCRS trăiește doar în scriptul de import, nu în Worker. Sursele live (SEN/POSF/TEMPO) au rutele proprii în Worker și nu se ating aici.
+          CORPORA_BODY_FILE="$RUNNER_TEMP/corpora-refresh-body.md"
+          printf 'Corpusuri cerute: `%s`.\n\n' "$CORPUS_SOURCE" > "$CORPORA_BODY_FILE"
+          cat >> "$CORPORA_BODY_FILE" <<'BODY'
+          Importurile selectate descarcă datele oficiale și regenerează copia statică. Sursele disponibile sunt SITUR, AMCCRS, EIDA și LMI 2015 București. SEN/POSF/TEMPO au rutele proprii în Worker.
 
-            Baza de integritate: \`node scripts/verify-surse-noi-corpus.mjs\` (numerele pin-ate = cele auditate; o schimbare reală la sursă se vede în diff și se acceptă conștient).
+          Validare: `node scripts/verify-corpus-refresh.mjs --base-ref HEAD` — numărătorile, lipsurile, clasele, acoperirea și SHA-256 sunt verificate; pierderile de peste 10% opresc importul. Artifact-ul păstrează corpusurile validate pentru revizuire.
 
-            AI: opencode/opus,sonnet
-            Human: Ciprian-Alexandru-Lucian Brebu" \
-            --base main --head "$BRANCH"
+          Datele din aplicație se schimbă după validarea și integrarea acestui PR, apoi deploy. Un import reușit nu certifică singur actualizarea producției.
+          BODY
+          gh pr create --title "Corpus: reîmprospătare $(date -u +%Y-%m-%d) ($CORPUS_SOURCE)" \
+            --body-file "$CORPORA_BODY_FILE" --base main --head "$BRANCH"
+      - name: Explain a blocked publishing step
+        if: failure() && steps.stage.outputs.changed == 'true'
+        run: |
+          echo 'Importurile validate sunt păstrate în artifact. Verifică eroarea pasului de publicare: politica repository-ului poate interzice crearea PR-urilor cu GITHUB_TOKEN.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Activează Allow GitHub Actions to create and approve pull requests sau configurează CORPORA_PR_TOKEN cu acces la acest repository. Acest run eșuat nu certifică o actualizare în producție.' >> "$GITHUB_STEP_SUMMARY"

@@ -23,7 +23,14 @@ async function main(){
 		if(!crons.groups.length){console.error(`${GROUPS_PATH} nu are niciun grup — un deploy ar dezarma toate crons. Populează groups și rulează din nou.`);process.exit(1)}
 	}
 	printPlan(config,crons,resolved.id,resolved.source);
-	const copy={...config,name:WORKER_NAME,d1_databases:[{...config.d1_databases[0],database_name:WORKER_NAME,database_id:resolved.id||config.d1_databases[0].database_id}],triggers:crons.missing?config.triggers:{crons:crons.groups.map(g=>g.cron)}};
+	const queueName=process.env.AFLIVRA_REFRESH_QUEUE_NAME||'';
+	if(queueName&&!/^[a-zA-Z0-9_-]{1,63}$/.test(queueName))throw new Error('AFLIVRA_REFRESH_QUEUE_NAME invalid.');
+	// Keep room for existing parsers, while bounding one invocation below the 30 s default.
+	const cpuMs=Number(process.env.AFLIVRA_WORKER_CPU_MS||10000);
+	if(!Number.isInteger(cpuMs)||cpuMs<1000||cpuMs>10000)throw new Error('AFLIVRA_WORKER_CPU_MS trebuie să fie un întreg între 1000 și 10000 pentru profilul de 5 USD.');
+	const copy={...config,name:WORKER_NAME,limits:{...config.limits,cpu_ms:cpuMs},observability:{enabled:true,head_sampling_rate:0.1,logs:{enabled:true,head_sampling_rate:0.1,invocation_logs:true}},d1_databases:[{...config.d1_databases[0],database_name:WORKER_NAME,database_id:resolved.id||config.d1_databases[0].database_id}],triggers:crons.missing?config.triggers:{crons:crons.groups.map(g=>g.cron)},...(queueName?{queues:{producers:[{binding:'REFRESH_QUEUE',queue:queueName}],consumers:[{queue:queueName,max_batch_size:3,max_batch_timeout:1,max_concurrency:1,max_retries:3}]}}:{})};
+	console.log(`Profil cost: CPU maximum ${cpuMs} ms/invocație, logs eșantionate 10%, 20 trigger-uri de surse/zi și 4 de corpus/zi. Cotele incluse trebuie urmărite; acesta nu este un plafon de facturare Cloudflare.`);
+	console.log(`Actualizări: ${queueName?'Cloudflare Queue '+queueName+' (creată înainte de deploy)':'D1 outbox + recuperare cron; setează AFLIVRA_REFRESH_QUEUE_NAME pentru execuție rapidă în fundal'}.`);
 	writeFileSync(DEPLOY_COPY,JSON.stringify(copy));
 	console.log(`Configurația patch-uită scrisă: ${DEPLOY_COPY}${resolved.id?'':' (database_id rămâne PLACEHOLDER — exclusiv pentru dry-run)'}.`);
 	if(crons.missing){console.log('Dry-run fără validare wrangler: lista cron lipsește (vezi planul de mai sus — run fără --dry-run ar fi blocat).');process.exit(0)}

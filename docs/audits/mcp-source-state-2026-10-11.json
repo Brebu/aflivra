@@ -1,0 +1,142 @@
+{
+  "environment": "Deployed Aflivra read-only MCP; unmodified production code",
+  "note": "Readings capture retrieval/cache state, not certification that every publisher has its newest edition. Source payloads omitted.",
+  "results": [
+    {
+      "label": "INS București",
+      "key": "ins:POP105A:municipiul bucuresti",
+      "name": "INS TEMPO · Populatia rezidenta la 1 ianuarie pe grupe de varsta si varste, sexe si medii de",
+      "url": "http://statistici.insse.ro:8077/tempo-ins/matrix/POP105A",
+      "adapterVersion": "ins.tempo-pop105a.v1",
+      "storedAdapterVersion": "ins.tempo-pop105a.v1",
+      "status": "cached",
+      "publishedAt": null,
+      "lastSuccessAt": "2026-10-11T02:31:45.973Z",
+      "lastAttemptAt": "2026-10-11T02:31:44.252Z",
+      "nextAttemptAt": null,
+      "error": null,
+      "errorDiagnostic": null,
+      "ttlSeconds": 86400,
+      "dataSummary": {
+        "keys": [
+          "matrix",
+          "territory",
+          "territoryLabel",
+          "reference",
+          "unit",
+          "values",
+          "ultimaActualizare",
+          "selectionNote",
+          "statusNote",
+          "limitsNote"
+        ]
+      }
+    },
+    {
+      "label": "ANCPI",
+      "key": "housing:ancpi",
+      "name": "ANCPI · dinamica ipotecilor",
+      "url": "https://data.gov.ro/dataset/62410f25-a155-40fd-9aa9-ae54bdc96f42",
+      "adapterVersion": "housing.ancpi-mortgages.v1",
+      "storedAdapterVersion": "housing.ancpi-mortgages.v1",
+      "status": "stale",
+      "publishedAt": "2024-02-21T14:55:08.640261",
+      "lastSuccessAt": "2026-10-09T00:40:37.136Z",
+      "lastAttemptAt": "2026-10-11T05:45:47.475Z",
+      "nextAttemptAt": "2026-10-11T05:20:12.173Z",
+      "error": "Sursa a răspuns cu HTTP 526.",
+      "errorDiagnostic": {
+        "sourceKey": "housing:ancpi",
+        "stage": "load",
+        "category": "http",
+        "httpStatus": 526,
+        "attempts": 3,
+        "server": "cloudflare",
+        "rayId": "a48b3b2a7c890f1d-ORD",
+        "retryAfterSeconds": 1920,
+        "observedAt": "2026-10-11T04:48:12.173Z"
+      },
+      "ttlSeconds": 86400,
+      "dataSummary": {
+        "keys": [
+          "title",
+          "monthLabel",
+          "monthText",
+          "operations",
+          "publisher",
+          "note",
+          "byType",
+          "byCounty",
+          "countyCount",
+          "total",
+          "totalByOperation",
+          "categories"
+        ],
+        "total": 19023
+      }
+    },
+    {
+      "label": "TPBI arrivals",
+      "key": "transport:realtime:arrivals",
+      "name": "TPBI · estimări de sosire",
+      "url": "https://gtfs.tpbi.ro/regional/",
+      "adapterVersion": "gtfs.realtime.v1",
+      "storedAdapterVersion": "gtfs.realtime.v1",
+      "status": "stale",
+      "publishedAt": "2026-10-11T05:14:03.000Z",
+      "lastSuccessAt": "2026-10-11T05:14:06.207Z",
+      "lastAttemptAt": "2026-10-11T05:45:39.064Z",
+      "nextAttemptAt": null,
+      "error": null,
+      "errorDiagnostic": null,
+      "ttlSeconds": 30,
+      "dataSummary": {
+        "keys": [
+          "kind",
+          "observedAt",
+          "items",
+          "entityCount",
+          "header",
+          "note",
+          "total",
+          "page",
+          "pageSize",
+          "pages",
+          "isLive",
+          "stalenessMinutes",
+          "stalenessSeconds",
+          "observationAgeSeconds",
+          "fetchedAgeSeconds"
+        ],
+        "total": 698,
+        "isLive": false,
+        "observedAt": "2026-10-11T05:14:03.000Z"
+      }
+    },
+    {
+      "label": "CKAN ipotec",
+      "key": "catalog:v2::ipotec:0",
+      "name": "Catalogul național de date deschise",
+      "url": "https://data.gov.ro/api/3/action/package_search?q=%28ipotec%29&rows=24&start=0&sort=metadata_modified+desc&facet.field=%5B%22organization%22%2C%22res_format%22%5D&facet.limit=500",
+      "adapterVersion": "ckan.all-datasets.v4",
+      "storedAdapterVersion": "",
+      "status": "stale",
+      "publishedAt": "2024-02-27T14:45:22.496551",
+      "lastSuccessAt": "2026-10-04T07:11:39.637Z",
+      "lastAttemptAt": "2026-10-11T06:07:23.303Z",
+      "nextAttemptAt": null,
+      "error": null,
+      "errorDiagnostic": null,
+      "ttlSeconds": 3600,
+      "dataSummary": {
+        "keys": [
+          "count",
+          "results",
+          "ageFilterApplied",
+          "totalBasis"
+        ],
+        "total": 3
+      }
+    }
+  ]
+}

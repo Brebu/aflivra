@@ -6,6 +6,8 @@
 // offline, without the platform's data modules; the production route wires the
 // seam to the real GET handlers.
 import {TOOLS} from './tools';
+import {OPERATOR_TOOLS} from './operator-tools';
+import type {ToolDef} from './tools';
 
 export const MCP_PROTOCOL_VERSION='2025-06-18';
 // The transport declares 2025-06-18 only: the POST route rejects any other
@@ -63,9 +65,9 @@ export function validateArguments(tool:(typeof TOOLS)[number],args:unknown):{ok:
   return {ok:true,args:input};
 }
 
-async function callTool(callRoute:RouteCaller,method:RpcRequest):Promise<RpcResult>{
+async function callTool(callRoute:RouteCaller,method:RpcRequest,tools:ToolDef[]):Promise<RpcResult>{
   const name=(method.params?.name as string)||'';
-  const tool=TOOLS.find(tool=>tool.name===name);
+  const tool=tools.find(tool=>tool.name===name);
   if(!tool)return errorResponse(method.id??null,-32602,`Unknown tool "${name}".`);
   const validated=validateArguments(tool,method.params?.arguments);
   if(!validated.ok)return errorResponse(method.id??null,-32602,validated.message);
@@ -90,20 +92,20 @@ function initialize(method:RpcRequest):RpcResult{
   return {jsonrpc:'2.0',id:method.id??null,result:{protocolVersion:negotiated,capabilities:{tools:{listChanged:false}},serverInfo:SERVER_INFO,instructions:INSTRUCTIONS}};
 }
 
-async function dispatch(callRoute:RouteCaller,method:RpcRequest):Promise<RpcResult>{
+async function dispatch(callRoute:RouteCaller,method:RpcRequest,tools:ToolDef[]):Promise<RpcResult>{
   if(method.method==='initialize')return initialize(method);
   if(method.method==='ping')return {jsonrpc:'2.0',id:method.id??null,result:{}};
   if(method.method==='tools/list'){
-    return {jsonrpc:'2.0',id:method.id??null,result:{tools:TOOLS.map(tool=>({name:tool.name,description:tool.description,inputSchema:tool.inputSchema}))}};
+    return {jsonrpc:'2.0',id:method.id??null,result:{tools:tools.map(tool=>({name:tool.name,description:tool.description,inputSchema:tool.inputSchema,...(tool.annotations?{annotations:tool.annotations}:{})}))}};
   }
-  if(method.method==='tools/call')return await callTool(callRoute,method);
+  if(method.method==='tools/call')return await callTool(callRoute,method,tools);
   return errorResponse(method.id??null,-32601,`Method "${method.method}" is not supported.`);
 }
 
-export async function handleRpc(callRoute:RouteCaller,body:unknown):Promise<{status:number;body:RpcResult|null|RpcResult[]|{jsonrpc:'2.0';id:null;error:{code:number;message:string}}}>{
+export async function handleRpc(callRoute:RouteCaller,body:unknown,options:{operator?:boolean}={}):Promise<{status:number;body:RpcResult|null|RpcResult[]|{jsonrpc:'2.0';id:null;error:{code:number;message:string}}}>{
   if(Array.isArray(body))return {status:400,body:{jsonrpc:'2.0',id:null,error:{code:-32600,message:'JSON-RPC batching is not supported at protocol version 2025-06-18; one POST carries exactly one message.'}}};
   if(!isRpcRequest(body))return {status:400,body:{jsonrpc:'2.0',id:null,error:{code:-32600,message:'Request must be a JSON-RPC 2.0 object.'}}};
   if(body.id===undefined)return {status:202,body:null};
-  const response=await dispatch(callRoute,body);
+  const response=await dispatch(callRoute,body,options.operator?[...TOOLS,...OPERATOR_TOOLS]:TOOLS);
   return {status:200,body:response};
 }

@@ -1,7 +1,15 @@
-import {sqliteTable,text,integer,unique} from 'drizzle-orm/sqlite-core';
+import {sqliteTable,text,integer,unique,index,uniqueIndex,check} from 'drizzle-orm/sqlite-core';
+import {sql} from 'drizzle-orm';
 export const sourceCache=sqliteTable('source_cache',{
- key:text('key').primaryKey(),data:text('data'),publishedAt:text('published_at'),lastSuccessAt:text('last_success_at'),lastAttemptAt:text('last_attempt_at'),expiresAt:integer('expires_at').notNull().default(0),nextAttemptAt:integer('next_attempt_at').notNull().default(0),failures:integer('failures').notNull().default(0),lockUntil:integer('lock_until').notNull().default(0),error:text('error'),adapterVersion:text('adapter_version').notNull().default('')
+ key:text('key').primaryKey(),data:text('data'),publishedAt:text('published_at'),lastSuccessAt:text('last_success_at'),lastAttemptAt:text('last_attempt_at'),expiresAt:integer('expires_at').notNull().default(0),nextAttemptAt:integer('next_attempt_at').notNull().default(0),failures:integer('failures').notNull().default(0),lockUntil:integer('lock_until').notNull().default(0),error:text('error'),errorDiagnostic:text('error_diagnostic'),adapterVersion:text('adapter_version').notNull().default('')
 });
+export const sourceRefreshJobs=sqliteTable('source_refresh_jobs',{
+ id:text('id').primaryKey(),member:text('member').notNull(),force:integer('force').notNull().default(0),status:text('status').notNull().default('queued'),requestedAt:text('requested_at').notNull(),finishedAt:text('finished_at'),nextAttemptAt:integer('next_attempt_at').notNull().default(0),lockUntil:integer('lock_until').notNull().default(0),attempts:integer('attempts').notNull().default(0),result:text('result')
+},table=>[
+ uniqueIndex('source_refresh_jobs_active_member').on(table.member).where(sql`${table.status} IN ('queued','running')`),
+ index('source_refresh_jobs_due').on(table.status,table.nextAttemptAt,table.lockUntil),
+ check('source_refresh_jobs_status',sql`${table.status} IN ('queued','running','completed','failed')`)
+]);
 export const sourceBudget=sqliteTable('source_budget',{key:text('key').primaryKey(),windowStart:integer('window_start').notNull(),used:integer('used').notNull()});
 export const watchItems=sqliteTable('watch_items',{
  id:text('id').primaryKey(),installId:text('install_id').notNull(),kind:text('kind').notNull(),ref:text('ref').notNull(),label:text('label'),createdAt:text('created_at').notNull(),

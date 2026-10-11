@@ -14,7 +14,7 @@ import ts from 'typescript';
 const root=resolve(import.meta.dirname,'..');
 const temp=await mkdtemp(join(tmpdir(),'aflivra-mcp-'));
 try{
-  for (const name of ['tools','server']) {
+  for (const name of ['tools','operator-tools','server']) {
     const source=await readFile(join(root,'lib/mcp',name+'.ts'),'utf8');
     const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ES2022}}).outputText.replace(/from '(\.\/[^']+)'/g,(_,p)=>"from '"+p+".mjs'");
     await writeFile(join(temp,name+'.mjs'),js);
@@ -244,13 +244,16 @@ try{
   // pin-ată în lista de excluderi cu motivul — o rută nouă e o decizie de suprafață,
   // nu o schimbare silențioasă (regula inversă a bugetului de bundle).
   const mcpRouteSource = await readFile(join(root,'app/api/mcp/route.ts'),'utf8');
-    const wiredPaths = [...mcpRouteSource.matchAll(/'(\/api\/[a-z-]+)':\w+/g)].map(m=>m[1]);
+    const wiredPaths = [...mcpRouteSource.matchAll(/'(\/api\/[a-z/-]+)':\w+/g)].map(m=>m[1]);
   const EXCLUDED_WITH_REASON={
     '/api/content':null,
   };
   delete EXCLUDED_WITH_REASON['/api/content']; // citit de article_read și film_detail
   const pinnedPaths=[...new Set(WIRED.map(([, , target])=>target.path))];
-  const unToolked=wiredPaths.filter(path=>!pinnedPaths.includes(path));
+  const operatorTools=(await import(pathToFileURL(join(temp,'operator-tools.mjs')))).OPERATOR_TOOLS;
+  const operatorPaths=operatorTools.map(tool=>tool.build({}).path);
+  assert.deepEqual(operatorPaths,['/api/refresh/corpora','/api/refresh','/api/refresh/status'],'Private routes are covered only by the authenticated operator registry');
+  const unToolked=wiredPaths.filter(path=>!pinnedPaths.includes(path)&&!operatorPaths.includes(path));
   assert.deepEqual(unToolked, [], 'orice rută wire-uită fără tool e o decizie pin-ată explicit: '+unToolked.join(', ')+' — adaugă tool-ul sau exclude-o cu motiv, prin poartă');
   const unknownTools=pinnedPaths.filter(path=>!wiredPaths.includes(path));
   assert.deepEqual(unknownTools, [], 'tool-urile țintesc doar rute wire-uite în endpoint: '+unknownTools.join(', '));
@@ -317,5 +320,16 @@ const storiesJsonExpected=JSON.stringify(storiesDerived,null,1)+'\n';
 assert.equal(storiesJsonCurrent,storiesJsonExpected,'public/stories/listing.json trebuie regenerat din index.json.gz (rulează poarta — ea rescrie fișierul la fiecare trecere verde)');
 await writeFile(join(root,'public/stories/listing.json'),storiesJsonExpected);
 
-console.log(`Poarta MCP a trecut: protocol JSON-RPC stateless, ${list.length} tool-uri pin-ate (drift prin poartă), apeluri cu succes și eroare onestă de la rută, validare la graniță, loturi`);
+  const operatorList=(await server.handleRpc(callRoute,{jsonrpc:'2.0',id:101,method:'tools/list'},{operator:true})).body.result.tools;
+  assert.deepEqual(operatorList.slice(list.length).map(tool=>tool.name),['refresh_corpora','refresh_sources','refresh_status']);
+  assert.equal(operatorList.at(-2).annotations.readOnlyHint,false,'Refresh changes cache/job state');
+  assert.equal(operatorList.at(-1).annotations.readOnlyHint,true);
+  calls.length=0;
+  const unauthorized=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:102,method:'tools/call',params:{name:'refresh_sources',arguments:{group:'pulse'}}});
+  assert.equal(unauthorized.body.error.code,-32602);assert.equal(calls.length,0,'An anonymous client cannot invoke operator routes');
+  await server.handleRpc(callRoute,{jsonrpc:'2.0',id:103,method:'tools/call',params:{name:'refresh_sources',arguments:{group:'pulse',force:true}}},{operator:true});
+  assert.deepEqual(calls[0],{path:'/api/refresh',method:'POST',query:{async:'true',source:'pulse',force:'true'}});
+  const invalidOperator=await server.handleRpc(callRoute,{jsonrpc:'2.0',id:104,method:'tools/call',params:{name:'refresh_sources',arguments:{url:'https://arbitrary.test'}}},{operator:true});
+  assert.equal(invalidOperator.body.error.code,-32602,'Operator refresh has no arbitrary upstream URL escape');
+  console.log(`Poarta MCP a trecut: protocol JSON-RPC stateless, ${list.length} tool-uri publice + 3 operator-only, argumente validate și limite de autorizare.`);
 }finally{await rm(temp,{recursive:true,force:true})}

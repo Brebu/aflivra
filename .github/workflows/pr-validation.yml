@@ -14,8 +14,13 @@ on:
       - 'e2e/**'
       - 'scripts/**'
       - 'drizzle/**'
+      - 'db/**'
+      - 'build/**'
+      - 'cloudflare-env.d.ts'
       - 'public/**'
       - 'docs/mcp.md'
+      - 'docs/mcp-operations.md'
+      - '.github/workflows/corpora-refresh.yml'
       - '.github/workflows/pr-validation.yml'
       - 'package.json'
       - 'pnpm-lock.yaml'
@@ -27,8 +32,13 @@ on:
       - 'e2e/**'
       - 'scripts/**'
       - 'drizzle/**'
+      - 'db/**'
+      - 'build/**'
+      - 'cloudflare-env.d.ts'
       - 'public/**'
       - 'docs/mcp.md'
+      - 'docs/mcp-operations.md'
+      - '.github/workflows/corpora-refresh.yml'
       - '.github/workflows/pr-validation.yml'
       - 'package.json'
       - 'pnpm-lock.yaml'
@@ -81,6 +91,9 @@ jobs:
           set -e
           node scripts/verify-live.mjs
           node scripts/verify-cache.mjs
+          node scripts/verify-http-retry.mjs
+          node scripts/verify-refresh-jobs.mjs
+          node scripts/verify-corpora-dispatch.mjs
           node scripts/verify-export-formats.mjs
           node scripts/verify-legal-refresh.mjs
           node scripts/verify-catalog.mjs
@@ -111,7 +124,9 @@ jobs:
           node scripts/verify-court-links.mjs
           node scripts/verify-packed-seeds.mjs
           node scripts/verify-twa.mjs
-          node scripts/verify-surse-noi-corpus.mjs
+          node scripts/verify-corpus-refresh.mjs
+          node scripts/verify-corpus-integrity.mjs
+          node scripts/verify-housing-editions.mjs
           node scripts/verify-integration-regressions.mjs
           node scripts/verify-mcp-ui-parity.mjs
           node scripts/verify-lawyers.mjs
@@ -150,6 +165,10 @@ jobs:
           STATUS="$(git status --porcelain)"
           if [ -n "$STATUS" ]; then echo "$STATUS"; exit 1; fi
       - name: Deploy dry-run (patched config passes wrangler deploy --dry-run)
+        run: node scripts/deploy.mjs --dry-run
+      - name: Deploy dry-run with the refresh Queue binding
+        env:
+          AFLIVRA_REFRESH_QUEUE_NAME: aflivra-source-refresh
         run: node scripts/deploy.mjs --dry-run
       - name: Local D1 migration (run 1)
         run: node scripts/db-migrate.mjs --local

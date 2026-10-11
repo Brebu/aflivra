@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import {createReadStream} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {readFile,writeFile,mkdtemp,rm} from 'node:fs/promises';
+import {readFile,writeFile,mkdtemp,rm,mkdir} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {gzipSync,gunzipSync} from 'fflate';
 import ts from 'typescript';
 
-const root=resolve(import.meta.dirname,'..'),temp=await mkdtemp(join(root,'.sites-runtime/seed-qa-'));
+const root=resolve(import.meta.dirname,'..');
+await mkdir(join(root,'.sites-runtime'),{recursive:true});
+const temp=await mkdtemp(join(root,'.sites-runtime/seed-qa-'));
 const digest=async file=>{const hash=createHash('sha256');let bytes=0;for await (const chunk of createReadStream(file)){bytes+=chunk.length;hash.update(chunk)}return{bytes,sha256:hash.digest('hex')}};
 try {
   const packed=JSON.parse(await readFile(join(root,'lib/live/seed-snapshots.json'),'utf8'));

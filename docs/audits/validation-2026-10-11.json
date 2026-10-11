@@ -1,0 +1,627 @@
+{
+  "verifiedAt": "2026-10-11T06:28:24.943116+00:00",
+  "environment": "Local Linux audit; Node 24.19.0 and pnpm 11.25.0. This is not deployed production or completed GitHub CI.",
+  "scriptCount": 47,
+  "passed": 47,
+  "checks": [
+    {
+      "script": "scripts/verify-live.mjs",
+      "exitCode": 0,
+      "durationSeconds": 4.83
+    },
+    {
+      "script": "scripts/verify-cache.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.87
+    },
+    {
+      "script": "scripts/verify-http-retry.mjs",
+      "exitCode": 0,
+      "durationSeconds": 16.87
+    },
+    {
+      "script": "scripts/verify-refresh-jobs.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.37
+    },
+    {
+      "script": "scripts/verify-corpora-dispatch.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.31
+    },
+    {
+      "script": "scripts/verify-export-formats.mjs",
+      "exitCode": 0,
+      "durationSeconds": 45.57
+    },
+    {
+      "script": "scripts/verify-legal-refresh.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.22
+    },
+    {
+      "script": "scripts/verify-catalog.mjs",
+      "exitCode": 0,
+      "durationSeconds": 1.47
+    },
+    {
+      "script": "scripts/verify-snapshot-transport.mjs",
+      "exitCode": 0,
+      "durationSeconds": 7.73
+    },
+    {
+      "script": "scripts/verify-trains-corpus.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.26
+    },
+    {
+      "script": "scripts/verify-refresh-sweep.mjs",
+      "exitCode": 0,
+      "durationSeconds": 4.78
+    },
+    {
+      "script": "scripts/verify-recency-policy.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.06
+    },
+    {
+      "script": "scripts/verify-enrichment-joins.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.11
+    },
+    {
+      "script": "scripts/verify-ro-text.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.37
+    },
+    {
+      "script": "scripts/verify-source-errors.mjs",
+      "exitCode": 0,
+      "durationSeconds": 343.2,
+      "matrix": {
+        "result": "ok",
+        "mode": "mock",
+        "selection": "all",
+        "families": 40,
+        "cells": 258,
+        "perFamily": [
+          {
+            "family": "weather/open-meteo",
+            "cells": 7
+          },
+          {
+            "family": "company/anaf",
+            "cells": 6
+          },
+          {
+            "family": "company/name-search",
+            "cells": 7
+          },
+          {
+            "family": "courts/portal.just",
+            "cells": 6
+          },
+          {
+            "family": "feeds/stiri",
+            "cells": 6
+          },
+          {
+            "family": "catalog/ckan",
+            "cells": 6
+          },
+          {
+            "family": "catalog/agricultura-fallback",
+            "cells": 5
+          },
+          {
+            "family": "transport/tpbi",
+            "cells": 6
+          },
+          {
+            "family": "directory/schools",
+            "cells": 6
+          },
+          {
+            "family": "directory/health",
+            "cells": 6
+          },
+          {
+            "family": "directory/pharmacies",
+            "cells": 6
+          },
+          {
+            "family": "directory/hospitals",
+            "cells": 6
+          },
+          {
+            "family": "localities/siruta",
+            "cells": 6
+          },
+          {
+            "family": "lawyers/ifep",
+            "cells": 6
+          },
+          {
+            "family": "legal/law",
+            "cells": 6
+          },
+          {
+            "family": "legal/act-page",
+            "cells": 6
+          },
+          {
+            "family": "legal/year-filter",
+            "cells": 6
+          },
+          {
+            "family": "feeds/agricultura",
+            "cells": 6
+          },
+          {
+            "family": "feeds/filme",
+            "cells": 6
+          },
+          {
+            "family": "events/odeon",
+            "cells": 6
+          },
+          {
+            "family": "cinema/cinemacity",
+            "cells": 6
+          },
+          {
+            "family": "stories/wikisource",
+            "cells": 6
+          },
+          {
+            "family": "transport/realtime",
+            "cells": 6
+          },
+          {
+            "family": "justice/notari",
+            "cells": 6
+          },
+          {
+            "family": "justice/experti-judiciari",
+            "cells": 6
+          },
+          {
+            "family": "justice/experti-tehnici",
+            "cells": 6
+          },
+          {
+            "family": "justice/traducatori",
+            "cells": 6
+          },
+          {
+            "family": "ins/tempo",
+            "cells": 3
+          },
+          {
+            "family": "posf/offers",
+            "cells": 4
+          },
+          {
+            "family": "power/sen",
+            "cells": 3
+          },
+          {
+            "family": "transport/trains",
+            "cells": 6
+          },
+          {
+            "family": "transport/tranzy",
+            "cells": 8
+          },
+          {
+            "family": "flights/adsb",
+            "cells": 11
+          },
+          {
+            "family": "flights/bia",
+            "cells": 8
+          },
+          {
+            "family": "events/search",
+            "cells": 7
+          },
+          {
+            "family": "events/operanationalacluj",
+            "cells": 6
+          },
+          {
+            "family": "events/teatruldearta",
+            "cells": 6
+          },
+          {
+            "family": "housing/anl",
+            "cells": 6
+          },
+          {
+            "family": "housing/ancpi",
+            "cells": 6
+          },
+          {
+            "family": "resource/xml-table",
+            "cells": 21
+          }
+        ]
+      }
+    },
+    {
+      "script": "scripts/verify-sweep-inventory.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.32
+    },
+    {
+      "script": "scripts/verify-model-contracts.mjs",
+      "exitCode": 0,
+      "durationSeconds": 11.25
+    },
+    {
+      "script": "scripts/verify-federated-search.mjs",
+      "exitCode": 0,
+      "durationSeconds": 1.82
+    },
+    {
+      "script": "scripts/verify-exploration-media.mjs",
+      "exitCode": 0,
+      "durationSeconds": 2.58
+    },
+    {
+      "script": "scripts/verify-media-budget.mjs",
+      "exitCode": 0,
+      "durationSeconds": 1.12
+    },
+    {
+      "script": "scripts/verify-indexnow.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.06
+    },
+    {
+      "script": "scripts/verify-legal-records.mjs",
+      "exitCode": 0,
+      "durationSeconds": 1.33
+    },
+    {
+      "script": "scripts/verify-expanded.mjs",
+      "exitCode": 0,
+      "durationSeconds": 6.49
+    },
+    {
+      "script": "scripts/audit-controls.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.47
+    },
+    {
+      "script": "scripts/audit-dead-data.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.52
+    },
+    {
+      "script": "scripts/audit-unused-fields.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.27
+    },
+    {
+      "script": "scripts/verify-css-keyframes.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.11
+    },
+    {
+      "script": "scripts/verify-afir-relay.mjs",
+      "exitCode": 0,
+      "durationSeconds": 1.32
+    },
+    {
+      "script": "scripts/verify-relay-afir.mjs",
+      "exitCode": 0,
+      "durationSeconds": 19.37
+    },
+    {
+      "script": "scripts/verify-relay-bia.mjs",
+      "exitCode": 0,
+      "durationSeconds": 19.42
+    },
+    {
+      "script": "scripts/verify-relay-flights.mjs",
+      "exitCode": 0,
+      "durationSeconds": 57.13
+    },
+    {
+      "script": "scripts/verify-relay-imagery.mjs",
+      "exitCode": 0,
+      "durationSeconds": 4.58
+    },
+    {
+      "script": "scripts/verify-court-links.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.67
+    },
+    {
+      "script": "scripts/verify-packed-seeds.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.67
+    },
+    {
+      "script": "scripts/verify-twa.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.06
+    },
+    {
+      "script": "scripts/verify-corpus-refresh.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.21
+    },
+    {
+      "script": "scripts/verify-corpus-integrity.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.52
+    },
+    {
+      "script": "scripts/verify-housing-editions.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.52
+    },
+    {
+      "script": "scripts/verify-integration-regressions.mjs",
+      "exitCode": 0,
+      "durationSeconds": 4.28
+    },
+    {
+      "script": "scripts/verify-mcp-ui-parity.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.16
+    },
+    {
+      "script": "scripts/verify-lawyers.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.63
+    },
+    {
+      "script": "scripts/verify-geographic-scope.mjs",
+      "exitCode": 0,
+      "durationSeconds": 9.69
+    },
+    {
+      "script": "scripts/verify-mcp.mjs",
+      "exitCode": 0,
+      "durationSeconds": 0.47
+    },
+    {
+      "script": "scripts/verify-watch-sweep.mjs",
+      "exitCode": 0,
+      "durationSeconds": 1.32
+    },
+    {
+      "script": "scripts/verify-watch-api.mjs",
+      "exitCode": 0,
+      "durationSeconds": 1.22
+    },
+    {
+      "script": "scripts/verify-legal-pdf.mjs",
+      "exitCode": 0,
+      "durationSeconds": 11.24
+    },
+    {
+      "script": "scripts/verify-downloads.mjs",
+      "exitCode": 0
+    }
+  ],
+  "sourceFaultMatrix": {
+    "result": "ok",
+    "mode": "mock",
+    "selection": "all",
+    "families": 40,
+    "cells": 258,
+    "perFamily": [
+      {
+        "family": "weather/open-meteo",
+        "cells": 7
+      },
+      {
+        "family": "company/anaf",
+        "cells": 6
+      },
+      {
+        "family": "company/name-search",
+        "cells": 7
+      },
+      {
+        "family": "courts/portal.just",
+        "cells": 6
+      },
+      {
+        "family": "feeds/stiri",
+        "cells": 6
+      },
+      {
+        "family": "catalog/ckan",
+        "cells": 6
+      },
+      {
+        "family": "catalog/agricultura-fallback",
+        "cells": 5
+      },
+      {
+        "family": "transport/tpbi",
+        "cells": 6
+      },
+      {
+        "family": "directory/schools",
+        "cells": 6
+      },
+      {
+        "family": "directory/health",
+        "cells": 6
+      },
+      {
+        "family": "directory/pharmacies",
+        "cells": 6
+      },
+      {
+        "family": "directory/hospitals",
+        "cells": 6
+      },
+      {
+        "family": "localities/siruta",
+        "cells": 6
+      },
+      {
+        "family": "lawyers/ifep",
+        "cells": 6
+      },
+      {
+        "family": "legal/law",
+        "cells": 6
+      },
+      {
+        "family": "legal/act-page",
+        "cells": 6
+      },
+      {
+        "family": "legal/year-filter",
+        "cells": 6
+      },
+      {
+        "family": "feeds/agricultura",
+        "cells": 6
+      },
+      {
+        "family": "feeds/filme",
+        "cells": 6
+      },
+      {
+        "family": "events/odeon",
+        "cells": 6
+      },
+      {
+        "family": "cinema/cinemacity",
+        "cells": 6
+      },
+      {
+        "family": "stories/wikisource",
+        "cells": 6
+      },
+      {
+        "family": "transport/realtime",
+        "cells": 6
+      },
+      {
+        "family": "justice/notari",
+        "cells": 6
+      },
+      {
+        "family": "justice/experti-judiciari",
+        "cells": 6
+      },
+      {
+        "family": "justice/experti-tehnici",
+        "cells": 6
+      },
+      {
+        "family": "justice/traducatori",
+        "cells": 6
+      },
+      {
+        "family": "ins/tempo",
+        "cells": 3
+      },
+      {
+        "family": "posf/offers",
+        "cells": 4
+      },
+      {
+        "family": "power/sen",
+        "cells": 3
+      },
+      {
+        "family": "transport/trains",
+        "cells": 6
+      },
+      {
+        "family": "transport/tranzy",
+        "cells": 8
+      },
+      {
+        "family": "flights/adsb",
+        "cells": 11
+      },
+      {
+        "family": "flights/bia",
+        "cells": 8
+      },
+      {
+        "family": "events/search",
+        "cells": 7
+      },
+      {
+        "family": "events/operanationalacluj",
+        "cells": 6
+      },
+      {
+        "family": "events/teatruldearta",
+        "cells": 6
+      },
+      {
+        "family": "housing/anl",
+        "cells": 6
+      },
+      {
+        "family": "housing/ancpi",
+        "cells": 6
+      },
+      {
+        "family": "resource/xml-table",
+        "cells": 21
+      }
+    ]
+  },
+  "additionalChecks": {
+    "typecheck": "passed",
+    "lint": {
+      "errors": 0,
+      "warnings": 115
+    },
+    "productionBuild": "passed",
+    "deployDryRunWithoutQueue": "passed",
+    "deployDryRunWithQueue": "passed",
+    "localD1MigrationRepeated": "passed",
+    "drizzleGenerateAgainstFinalSnapshot": "no schema changes",
+    "gitDiffCheck": "passed"
+  },
+  "e2e": {
+    "files": [
+      "e2e/mcp.spec.ts",
+      "e2e/refresh-api.spec.ts",
+      "e2e/refresh-operator.spec.ts"
+    ],
+    "passed": 18,
+    "skipped": 2,
+    "failed": 0,
+    "skippedCases": [
+      "Hourly weather window: no local forecast copy",
+      "Urban locality coordinates: no complete local SIRUTA registry"
+    ],
+    "note": "The 41 public tools were called through the real MCP endpoint; upstream-dependent cases validate envelopes, not data freshness."
+  },
+  "browserCoverageLimit": "Playwright Chromium was absent; the BIA verifier recorded its browser-leg skip. API request specs ran without a browser. The full UI e2e suite was not executed locally.",
+  "budgetFollowup": {
+    "verifiedAt": "2026-10-11T06:48:01.035724+00:00",
+    "checks": [
+      "verify-refresh-jobs: 25 concurrent clients, exactly 20 admitted; UTC reset; separate four-import limit",
+      "verify-corpora-dispatch: fifth real-route mock dispatch denied before GitHub call",
+      "verify-mcp",
+      "verify-indexnow",
+      "TypeScript",
+      "production build",
+      "lint: 0 errors, 115 warnings",
+      "deploy dry-run without Queue",
+      "deploy dry-run with Queue",
+      "Playwright selected API suites: 18 passed, 2 skipped; real HTTP/MCP exhaustion returns 429",
+      "CPU setting above 10000 rejected before deployment",
+      "generated deploy configuration asserts CPU/log sampling/Queue batch/retry limits"
+    ],
+    "note": "Source fault matrix was already passed in full; unchanged source adapters were not re-run after adding administrative quotas. Private operational evidence is delivered separately."
+  }
+}
