@@ -68,6 +68,22 @@ const ARGUMENTS: Record<string, Record<string, unknown>> = {
 const PINNED_NAMES: string[] = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), '..', 'scripts', 'verify-mcp-names.json'), 'utf8'));
 
 test.describe('MCP endpoint', () => {
+  test('public tools declare directory safety annotations accurately', async ({request}) => {
+    const response = await request.post('/api/mcp', {data: {jsonrpc: '2.0', id: 201, method: 'tools/list'}});
+    expect(response.status()).toBe(200);
+    const catalog = (await response.json()).result.tools as Array<{name: string; annotations?: {
+      readOnlyHint: boolean; openWorldHint: boolean; destructiveHint: boolean; idempotentHint?: boolean;
+    }}>;
+    expect(catalog.length).toBe(PINNED_NAMES.length);
+    for (const tool of catalog) {
+      expect(tool.annotations, `annotations for ${tool.name}`).toBeDefined();
+      expect(typeof tool.annotations?.readOnlyHint).toBe('boolean');
+      expect(tool.annotations?.destructiveHint).toBe(false);
+      expect(tool.annotations?.openWorldHint).toBe(true);
+      expect(tool.annotations?.readOnlyHint, tool.name).toBe(tool.name !== 'law_document');
+    }
+  });
+
   test('initialize → notifications → tools/list, protocol-honest', async ({request}) => {
     const init = await request.post('/api/mcp', {data: {jsonrpc: '2.0', id: 1, method: 'initialize', params: {protocolVersion: '2025-06-18', capabilities: {}, clientInfo: {name: 'e2e', version: '0'}}}});
     expect(init.status()).toBe(200);
