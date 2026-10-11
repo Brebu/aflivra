@@ -25,7 +25,7 @@ try{
  assert.deepEqual([...sections].sort(),[...domainIds].sort(),' fiecare domeniu are secțiunile lui în topicSections');
  let sectionCount=0;
   for(const domain of domainIds)sectionCount+=topicSections[domain].length;
-  assert.equal(sectionCount,51,'inventarul de admin: 51 de secțiuni pe domenii');
+  assert.equal(sectionCount,53,'inventarul de admin: 53 de secțiuni, inclusiv rapoartele Firme și Bani');
  for(const domain of domainIds)for(const section of topicSections[domain]){
   assert(section.id&&section.label,'fiecare secțiune are id și etichetă');
   assert.notEqual(section.id,'data','data este tab-ul automat, nu o secțiune declarată');
@@ -93,7 +93,7 @@ try{
   'company.default':{parity:'company/anaf'},'knowledge.company.default':{parity:'company/anaf'},
   'catalog.default':{parity:'catalog/ckan'},'catalog.category.bani':{parity:'catalog/ckan'},'catalog.category.sanatate':{parity:'catalog/ckan'},
   'forecast.bucuresti':{parity:'weather/open-meteo'},'events.odeon':{parity:'events/odeon'},'events.teatruldearta':{parity:'events/teatruldearta'},'cinema.bucuresti.today':{parity:'cinema/cinemacity'},
-   'feed.munca':{parity:'feeds/stiri'},'feed.stiri':{parity:'feeds/stiri'},'feed.sanatate':{parity:'feeds/stiri'},'feed.educatie':{parity:'feeds/stiri'},'feed.justitie':{parity:'feeds/stiri'},
+   'feed.munca':{parity:'feeds/stiri'},'feed.stiri':{parity:'feeds/stiri'},'feed.sanatate':{parity:'feeds/stiri'},'feed.educatie':{parity:'feeds/stiri'},'feed.justitie':{parity:'feeds/stiri'},'feed.energie':{parity:'feeds/stiri'},'feed.transport':{parity:'feeds/stiri'},
    'law.search.default':{parity:'legal/law'},'law.search.codcivil':{parity:'legal/law'},'lawyers.default':{parity:'lawyers/ifep'},'directory.schools.page0':{parity:'directory/schools'}};
   const familyCoverage={
    ...Object.fromEntries(members.map(member=>[member,coverage[member]])),

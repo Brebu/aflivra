@@ -20,7 +20,7 @@ const partial={...fixture,key:'fixture:court-partial',ttl:300,load:async()=>({pu
  assert.equal(failed.errorDiagnostic.category,'http');
  assert.equal(failed.errorDiagnostic.httpStatus,503,'A30: codul HTTP se păstrează în diagnoză');
  assert.equal(failed.errorDiagnostic.attempts,3,'A30: numărul de încercări se păstrează');
- assert.equal(failed.errorDiagnostic.retryAfterSeconds,60,'A30: pauza aplicată (backoff compus, minimum 60s la primul eșec) se păstrează în diagnoză');
+ assert.ok(failed.errorDiagnostic.retryAfterSeconds>=60&&failed.errorDiagnostic.retryAfterSeconds<=72,'A30: pauza aplicată include jitter de cel mult 20%, fără a coborî sub 60s');
  assert.ok(failed.errorDiagnostic.observedAt);
  assert.ok(!JSON.stringify(failed.errorDiagnostic).includes('cheie=secreta'),'A30: diagnoza nu duce parametri de cerere — sanitizată');
  const storedDiagnostic=JSON.parse(sqlite.prepare('SELECT error_diagnostic FROM source_cache WHERE key=?').get(diagnostic.key).error_diagnostic||'{}');

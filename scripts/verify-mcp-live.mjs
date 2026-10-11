@@ -40,6 +40,7 @@ try {
   const {romanianDate} = await import(pathToFileURL(join(tempDir, 'date.mjs')).href);
 
 const ARGUMENTS = {
+  sources_health: {},
   search_companies: {name: 'Banca Transilvania'},
   company_profile: {cui: '427282'},
   places_search: {q: 'spital', lat: 44.427, lon: 26.103, radius: 10},
@@ -99,6 +100,11 @@ const dataOf = (envelope) => envelope.data ?? envelope;
 const totalOf = (envelope) => envelope.total ?? envelope.data?.total;
 
 const PROBE = {
+  sources_health: (envelope) => {
+    assert.ok(Array.isArray(envelope.sources)&&envelope.sources.length>0,'Health returns configured source metadata');
+    assert.equal(envelope.summary.total,envelope.sources.length,'Health totals agree');
+    assert.ok(envelope.sources.every(source=>['cached','stale','unavailable'].includes(source.status)),'Health never invents fresh fetches');
+  },
   search_companies: (envelope) => {
     const items = itemsOf(envelope);
     assert.ok(Array.isArray(items) && items.length > 0, 'căutarea pe nume servește potriviri');

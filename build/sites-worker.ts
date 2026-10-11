@@ -32,7 +32,7 @@ export default {
   async scheduled(controller: ScheduledController, env: Cloudflare.Env, ctx: ExecutionContext) {
     return withLiveContext(ctx, async () => {
       // The D1 outbox survives HTTP waitUntil cancellation or queue dispatch failure.
-      if(env.DB)try{await drainRefreshJobs(env.DB)}catch{console.warn(JSON.stringify({event:'refresh_jobs_recovery_failed'}))}
+      if(env.DB)try{await drainRefreshJobs(env.DB,12,90000)}catch{console.warn(JSON.stringify({event:'refresh_jobs_recovery_failed'}))}
       // Declanșătorul registers („28 * * * *”) e orar: tura de registre și tura „Urmărește”
       // călătoresc împreună pe fiecare tick orar — membrii cu TTL de zi se sar onest la cele
       // mai multe tick-uri, iar „Urmăritelor” le livrăm notificările la cel mult o oră.

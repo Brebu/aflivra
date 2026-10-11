@@ -14,6 +14,7 @@ import {cinemaLoader} from './cinema';
 import {senLoader} from './sen';
 import {posfJudeteLoader,posfOffersLoader,posfZoneFor} from './posf';
 import {tempoMetaLoader} from './tempo';
+import {anlLoader,ancpiLoader} from './housing';
 // Zona POSF a unei ture de living: judet-ul publicat se rezolvă prin lista POSF (get-judete),
 // nu hardcodat — id_zona e al sursei.
 const posfZoneOffers=async(county:string)=>{const state=await readSource(posfJudeteLoader,{waitForRefresh:true});const zone=state.data?posfZoneFor(state.data.items,county):null;if(!zone)throw Error('Zona POSF nu a putut fi rezolvată din lista publicată.');return posfOffersLoader(zone,200,300)};
@@ -25,10 +26,9 @@ export type SweepSource={key:string;name:string;status:'fresh'|'cached'|'stale'|
 export type SweepResult={group:string;cron:string;startedAt:string;finishedAt:string;ok:number;failed:number;sources:SweepSource[]};
 type SweepGroupMap={groups:{name:string;cron:string;estimatedSubrequests:number;members:string[]}[];seedBacked:{family:string;reason:string}[];onDemand:{family:string;reason:string}[]};
 const groupMap:SweepGroupMap=sweepMap;
-// Planul gratuit limitează o invocare programată la 50 de subrequest-uri; grupurile din refresh-groups.json
-// rămân sub plafon, iar familiile grele (GTFS, SIRUTA, registre XLSX, consolidări integrale) se servesc din
-// semințele verificate la construire — tura de noapte pre-împrospătează doar sursele ușoare, la cheia exactă
-// pe care o citește prima încărcare a aplicației.
+// Cinci grupuri reutilizează TTL-urile, lease-urile și pauzele surselor.
+// Profilul plătit de bază păstrează estimările sub 120 subrequest-uri / tură;
+// inventarele mari rămân în copiile verificate, iar sursele la cerere nu sunt enumerate.
 const todayIso=()=>romanianDate();
 const memberLoaders:Record<string,()=>Loader|Promise<Loader>>={
  'bnr':()=>bnrLoader,
@@ -45,6 +45,13 @@ const memberLoaders:Record<string,()=>Loader|Promise<Loader>>={
  'feed.sanatate':()=>feedLoader('sanatate'),
  'feed.educatie':()=>feedLoader('educatie'),
  'feed.justitie':()=>feedLoader('justitie'),
+ 'feed.energie':()=>feedLoader('energie'),
+ 'feed.transport':()=>feedLoader('transport'),
+ 'housing.anl':()=>anlLoader,
+ 'housing.ancpi':()=>ancpiLoader,
+ 'directory.health':()=>directoryLoader('health'),
+ 'directory.pharmacies':()=>directoryLoader('pharmacies'),
+ 'directory.hospitals':()=>directoryLoader('hospitals'),
  'law.search.default':()=>lawLoader({title:'',text:'',number:'',year:'',page:0}),
  'law.search.codcivil':()=>lawLoader({title:codeTopics[0].title,text:'',number:'',year:'',page:0}),
  'lawyers.default':()=>lawyerLoader('',0,'recent'),
