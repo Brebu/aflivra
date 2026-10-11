@@ -2,10 +2,11 @@ import {readGeographicContext,nearbyRecord} from '@/lib/geographic-scope';
 import {readSource} from '@/lib/live/cache';
 import {tranzyAgenciesLoader,tranzyVehiclesLoader,tranzyResolveAgency} from '@/lib/live/transit-realtime';
 import {matchesQuery,paginate} from '@/lib/live/query';
+import {observedItems,observationAge} from '@/lib/live/observation';
 export const dynamic='force-dynamic';
 export async function GET(request:Request){
  const p=new URL(request.url).searchParams,q=p.get('q')||'',page=Number(p.get('page')||0),context=readGeographicContext(p);
- if(!context||!context.active||!context.locality||q.length>200||!Number.isInteger(page)||page<0||page>100000)return Response.json({error:'Filtre invalide.'},{status:400});
+ if(!context||!context.active||!context.locality||q.length>200||!Number.isInteger(page)||page<0||page>100000||p.has('includeStale')&&!['true','false'].includes(p.get('includeStale')!))return Response.json({error:'Filtre invalide.'},{status:400});
  const agenciesState=await readSource(tranzyAgenciesLoader);
  if(!agenciesState.data)return Response.json(agenciesState,{headers:{'Cache-Control':'no-store'}});
  const agency=tranzyResolveAgency(agenciesState.data.agencies||[],context.locality);
@@ -16,10 +17,10 @@ export async function GET(request:Request){
   // OBSERVAȚIEI (de la momentul observat) e eticheta pozițiilor — separat de
   // vechimea PRELUĂRII (de la ultima reușită), ca pozițiile vechi de luni să nu
   // pară proaspete doar pentru că preluarea a reușit acum.
-  const observedAt=Date.parse(state.data.observedAt||''),isLive=state.status!=='stale'&&Number.isFinite(observedAt)&&now-observedAt<120000,
-   observationAgeSeconds=isLive||!Number.isFinite(observedAt)?null:Math.max(0,Math.floor((now-observedAt)/1000)),
-   fetchedAgeSeconds=isLive||!state.lastSuccessAt?null:Math.max(0,Math.floor((now-Date.parse(state.lastSuccessAt))/1000)),
+  const positions=observedItems(rows,p.get('includeStale')==='true',now),isLive=state.status!=='stale'&&positions.liveCount>0,
+   observationAgeSeconds=observationAge(state.data.observedAt,now),
+   fetchedAgeSeconds=observationAge(state.lastSuccessAt,now),
    stalenessMinutes=observationAgeSeconds===null?null:Math.round(observationAgeSeconds/60);
-  state.data={...state.data,...paginate(rows,page,60),isLive,...(stalenessMinutes!==null?{stalenessMinutes,observationAgeSeconds,fetchedAgeSeconds}:{}),agency:agency.agency_name}}
+  state.data={...state.data,...positions,...paginate(positions.items,page,60),isLive,stalenessMinutes,observationAgeSeconds,fetchedAgeSeconds,agency:agency.agency_name}}
   return Response.json(state,{headers:{'Cache-Control':'no-store'}});
 }

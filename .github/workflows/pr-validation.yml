@@ -51,6 +51,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  report-pdf:
+    name: Geographic PDF report download
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: corepack pnpm install --frozen-lockfile
+      - run: cp .dev.vars.example .dev.vars
+      - run: corepack pnpm exec playwright install chromium --with-deps
+      - run: node scripts/dev-d1-schema.mjs
+      - run: corepack pnpm test:e2e e2e/business-report.spec.ts
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: business-report-test-results
+          path: test-results/
+          retention-days: 7
+
   lint-typecheck:
     name: Lint & typecheck
     runs-on: ubuntu-latest
@@ -93,6 +116,8 @@ jobs:
           node scripts/verify-cache.mjs
           node scripts/verify-http-retry.mjs
           node scripts/verify-refresh-jobs.mjs
+          node scripts/verify-observation-health.mjs
+          node scripts/verify-business-report.mjs
           node scripts/verify-corpora-dispatch.mjs
           node scripts/verify-export-formats.mjs
           node scripts/verify-legal-refresh.mjs

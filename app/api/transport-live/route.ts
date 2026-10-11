@@ -3,6 +3,7 @@ import {transitCovers,outsideTransitCoverage} from '@/lib/transit-location';
 import {readSource} from '@/lib/live/cache';
 import {realtimeLoader,type RealtimeKind} from '@/lib/live/transit-realtime';
 import {matchesQuery,paginate} from '@/lib/live/query';
+import {observedItems,observationAge} from '@/lib/live/observation';
 import transit from '@/public/transit/manifest.json';import network from '@/public/transit/network.json';
 const routeNames=new Map(network.routes.map(r=>[r.id,'Linia '+r.name+' '+r.longName+' '+r.operator])),stopNames=new Map(network.stops.map(s=>[s.stop_id,s.stop_name]));
 // Filtrul de linie se cere prin numărul scurt al liniei (ex. „41”) — numărul se
@@ -11,7 +12,7 @@ const routeIdSet=(filter:string|null)=>!filter?null:new Set(network.routes.filte
 export const dynamic='force-dynamic';
 export async function GET(request:Request){
  const p=new URL(request.url).searchParams,kind=(p.get('kind')||'vehicles') as RealtimeKind,route=p.get('route')||'',stop=p.get('stop')||'',q=p.get('q')||'',page=Number(p.get('page')||0),context=readGeographicContext(p);
- if(!context||!['vehicles','arrivals','alerts'].includes(kind)||route.length>100||stop.length>100||q.length>200||!Number.isInteger(page)||page<0||page>100000)return Response.json({error:'Filtre invalide.'},{status:400});
+ if(!context||!['vehicles','arrivals','alerts'].includes(kind)||route.length>100||stop.length>100||q.length>200||!Number.isInteger(page)||page<0||page>100000||p.has('includeStale')&&!['true','false'].includes(p.get('includeStale')!))return Response.json({error:'Filtre invalide.'},{status:400});
  if(context.active&&(!context.point||!transitCovers(context.point)))return Response.json(outsideTransitCoverage(context.locality||'poziția aleasă'));
   const wantedRoutes=routeIdSet(route||null);
   const point=context.point,nearStops=new Set(point?network.stops.filter(s=>nearbyRecord({lat:Number(s.stop_lat),lon:Number(s.stop_lon)},point,context.radius)).map(s=>s.stop_id):[]),nearRoutes=new Set(point?network.stops.filter(s=>nearStops.has(s.stop_id)).flatMap(s=>s.routes):[]);
@@ -21,11 +22,12 @@ export async function GET(request:Request){
   // OBSERVAȚIEI (secundele de la momentul observat) e eticheta pozițiilor — separat
   // de vechimea PRELUĂRII (de la ultima reușită a sursei), ca pozițiile vechi de
   // luni să nu pară proaspete doar pentru că preluarea a reușit acum.
-  const isLive=state.status!=='stale'&&now-Date.parse(state.data.observedAt)<120000,
-   observationAgeSeconds=isLive?null:Math.max(0,Math.floor((now-Date.parse(state.data.observedAt))/1000)),
-   fetchedAgeSeconds=isLive||!state.lastSuccessAt?null:Math.max(0,Math.floor((now-Date.parse(state.lastSuccessAt))/1000)),
+  const positions=kind==='alerts'?null:observedItems(active,p.get('includeStale')==='true',now),
+   observationAgeSeconds=observationAge(state.data.observedAt,now),
+   isLive=state.status!=='stale'&&(positions?positions.liveCount>0:observationAgeSeconds!==null&&observationAgeSeconds<120),
+   fetchedAgeSeconds=observationAge(state.lastSuccessAt,now),
    stalenessSeconds=observationAgeSeconds,
    stalenessMinutes=observationAgeSeconds===null?null:Math.round(observationAgeSeconds/60);
-  state.data={...state.data,...paginate(active,page,60),isLive,...(stalenessMinutes!==null?{stalenessMinutes,stalenessSeconds,observationAgeSeconds,fetchedAgeSeconds}:{}),...(route&&wantedRoutes&&kind!=='alerts'?{routeFilter:{requested:route,ResolvedCount:[...wantedRoutes].length,lineLabel:routeNames.get([...wantedRoutes][0])||null}}:{})};}
+  state.data={...state.data,...positions,...paginate(positions?.items||active,page,60),isLive,stalenessMinutes,stalenessSeconds,observationAgeSeconds,fetchedAgeSeconds,...(route&&wantedRoutes&&kind!=='alerts'?{routeFilter:{requested:route,ResolvedCount:[...wantedRoutes].length,lineLabel:routeNames.get([...wantedRoutes][0])||null}}:{})};}
   return Response.json(state,{headers:{'Cache-Control':'no-store'}});
 }

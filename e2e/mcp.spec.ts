@@ -20,6 +20,7 @@ const LINK_CLASS = new Set(['dataset_export']);
 
 // Representative arguments per tool — the same shape the docs catalog documents.
 const ARGUMENTS: Record<string, Record<string, unknown>> = {
+  sources_health: {},
   search_companies: {name: 'Banca Transilvania'},
   company_profile: {cui: '427282'},
   places_search: {q: 'spital', lat: 44.427, lon: 26.103},

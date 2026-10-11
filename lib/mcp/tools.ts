@@ -24,6 +24,12 @@ const PLACES_CATEGORIES=['agricultura','bani','cultura','educatie','energie','fi
 
 export const TOOLS:ToolDef[]=[
   {
+    name:'sources_health',
+    description:'Read source health without triggering refreshes: configured public sources, last successful fetch, publication and observation timestamps, stale/unavailable copies, HTTP error categories, expired leases, overdue retries and aggregate queued jobs. Covers configured members and named transit/flight feeds, with explicit separate static/relayed/on-demand coverage; does not certify every possible query.',
+    inputSchema:{type:'object',additionalProperties:false,properties:{}},
+    build:()=>({path:'/api/sources-health',query:{}}),
+  },
+  {
     name:'search_companies',
     description:'Search Romanian companies by name through the open-knowledge registry (Wikidata, Romanian and English labels merged). Matches carrying a Romanian VAT identifier expose their CUI (fiscal identity) for the full profile; matches without one are listed honestly as such.',
     inputSchema:{type:'object',additionalProperties:false,properties:{name:{type:'string',description:'Company (part of) name, at least 2 characters, e.g. "eMAG", "Dedeman", "Banca Transilvania"'}},required:['name']},
@@ -80,20 +86,20 @@ export const TOOLS:ToolDef[]=[
   {
     name:'transport_positions',
     description:'Live public transport of the Bucharest–Ilfov regional network (TPBI): vehicle positions on map lines, station arrival boards and network alerts. Vehicles update continuously and carry line, route and heading.',
-    inputSchema:{type:'object',additionalProperties:false,properties:{kind:{type:'string',enum:['vehicles','arrivals','alerts'],description:'What the route serves: live vehicles, arrivals board, or network alerts'},locality:{type:'string',description:'Locality inside the covered region (e.g. "București")'},county:{type:'string',description:'Covered region (TPBI: Bucharest–Ilfov)'},route:{type:'string',description:'Line short name filter'},stop:{type:'string',description:'Stop id for the arrivals board'},page:{type:'integer',minimum:0,description:'Zero-based result page (arrivals/alerts)'}},required:['county','kind']},
-    build:args=>({path:'/api/transport-live',query:query([['kind',pick(['vehicles','arrivals','alerts'],args.kind)],['county',str(args.county)],['locality',str(args.locality)],['route',str(args.route)],['stop',str(args.stop)],['page',num(args.page)]])}),
+    inputSchema:{type:'object',additionalProperties:false,properties:{kind:{type:'string',enum:['vehicles','arrivals','alerts'],description:'What the route serves: live vehicles, arrivals board, or network alerts'},locality:{type:'string',description:'Locality inside the covered region (e.g. "București")'},county:{type:'string',description:'Covered region (TPBI: Bucharest–Ilfov)'},route:{type:'string',description:'Line short name filter'},stop:{type:'string',description:'Stop id for the arrivals board'},includeStale:{type:'boolean',description:'Include older observations for historical inspection; default false. Every returned position carries its own observation age and isLive flag.'},page:{type:'integer',minimum:0,description:'Zero-based result page (arrivals/alerts)'}},required:['county','kind']},
+    build:args=>({path:'/api/transport-live',query:query([['kind',pick(['vehicles','arrivals','alerts'],args.kind)],['county',str(args.county)],['locality',str(args.locality)],['route',str(args.route)],['stop',str(args.stop)],['page',num(args.page)],['includeStale',args.includeStale===true?'true':'']])}),
   },
   {
     name:'tranzy_live',
     description:'Real-time public transport through the Tranzy open-data operators (Iași SCTP, Cluj CTP, Chișinău RTEC, Botoșani Eltrans, Oradea OTL). Bucharest has no Tranzy operator today — its live transport is the TPBI tool. Positions carry line, vehicle and heading.',
-    inputSchema:{type:'object',additionalProperties:false,properties:{locality:{type:'string',description:'Covered city: "Iași", "Cluj-Napoca", "Oradea", "Botoșani" or "Chișinău"'},county:{type:'string',description:'County of the city'},q:{type:'string',description:'Line filter, e.g. "b8"'},page:{type:'integer',minimum:0,description:'Zero-based result page'}},required:['locality']},
-    build:args=>({path:'/api/tranzy-live',query:query([['locality',str(args.locality)],['county',str(args.county)],['q',str(args.q)],['page',num(args.page)]])}),
+    inputSchema:{type:'object',additionalProperties:false,properties:{locality:{type:'string',description:'Covered city: "Iași", "Cluj-Napoca", "Oradea", "Botoșani" or "Chișinău"'},county:{type:'string',description:'County of the city'},q:{type:'string',description:'Line filter, e.g. "b8"'},includeStale:{type:'boolean',description:'Include older observations for historical inspection; default false. Every returned position carries its own observation age and isLive flag.'},page:{type:'integer',minimum:0,description:'Zero-based result page'}},required:['locality']},
+    build:args=>({path:'/api/tranzy-live',query:query([['locality',str(args.locality)],['county',str(args.county)],['q',str(args.q)],['page',num(args.page)],['includeStale',args.includeStale===true?'true':'']])}),
   },
   {
     name:'flights_status',
-    description:'Romanian air traffic status (live positions summary) with flight queries.',
-    inputSchema:{type:'object',additionalProperties:false,properties:{q:{type:'string',description:'Flight query (callsign, registration)'},page:{type:'integer',minimum:0,description:'Zero-based result page'}},required:['q']},
-    build:args=>({path:'/api/flights',query:query([['q',str(args.q)],['page',num(args.page)]])}),
+    description:'Romanian air traffic positions, filtered by observation age under 120 seconds by default. includeStale returns older copies explicitly marked with their age.',
+    inputSchema:{type:'object',additionalProperties:false,properties:{q:{type:'string',description:'Flight query (callsign, registration)'},includeStale:{type:'boolean',description:'Include older observations, individually marked with age and isLive.'},page:{type:'integer',minimum:0,description:'Zero-based result page'}},required:['q']},
+    build:args=>({path:'/api/flights',query:query([['q',str(args.q)],['page',num(args.page)],['includeStale',args.includeStale===true?'true':'']])}),
   },
   {
     name:'flight_board',
@@ -282,6 +288,6 @@ for (const tool of TOOLS) {
     readOnlyHint: readOnly,
     destructiveHint: false,
     idempotentHint: readOnly,
-    openWorldHint: true,
+    openWorldHint: tool.name!=='sources_health',
   };
 }

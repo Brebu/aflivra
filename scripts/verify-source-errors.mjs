@@ -45,7 +45,7 @@ const liveSeeds=await readFile(join(root,'lib/live/seed.json'),'utf8');
 // A09: celulele fallback-ului de catalog citesc seed-ul real derivat din inven-
 // tar — pe el se clasifică rezerva, pe el se probeară fereastra și categoría.
 const catalogSeedSource=await readFile(join(root,'lib/live/catalog-seed.json'),'utf8');
-for(const name of ['records','date','sen','posf','tempo','eida','lmi','situr','amccrs','text','media','query','source-xml','source-html','catalog-categories','catalog-metadata','adapters','company-registries','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','transit-realtime','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge','lawyers','directories','justice','trains','flights','housing','resources','resource-download','events','cinema','stories','content']){
+for(const name of ['records','date','sen','posf','tempo','eida','lmi','situr','amccrs','text','media','query','source-xml','source-html','catalog-categories','catalog-metadata','adapters','company-registries','feeds','request-context','resource-copy','cache','weather-gate','forecast','weather','transport','transit-realtime','observation','legal-consolidation','legal-portal','legal-registry','court-references','legal-selection','legal','knowledge','lawyers','directories','justice','trains','flights','housing','resources','resource-download','events','cinema','stories','content']){
  let source=await readFile(join(root,'lib/live',name+'.ts'),'utf8');
  source=source
   .replace("from '../court-history'","from './court-history'").replace("from '../court-query'","from './court-query'")
@@ -124,7 +124,9 @@ const biaBoardBody=()=>JSON.stringify([
  {flightNumber:'OS 899',airline:{RO:'Tarom',EN:'TAROM'},Direction:'A',origin:'Viena',destination:'București',scheduledTime:'08:10',status:'Întârziat'},
  {flightNumber:'W6 3189',airline:{RO:'Wizz Air',EN:'Wizz Air'},direction:'D',origin:'București',destination:'Londra Luton',scheduledTime:'09:15',status:'Programat'},
  {origin:'Fără număr de zbor',destination:'București',direction:'A'},
- {flightNumber:'QR 000',origin:'neprecizat'}]);
+ {flightNumber:'QR 000',origin:'neprecizat',destination:'neprecizat'},
+ {flightNumber:'W4 3001',origin:'Milano',airlineNameRO:'Wizz Air Malta',scheduledTime:'11:00',statusName:'Programat',boardingGate:'12'},
+ {flightNumber:'RO 3002',destination:'Cluj',airlineNameRO:'Tarom',scheduledTime:'12:00',statusName:'Programat',boardingGate:'14'}]);
 const biaChallenge=()=>new Response('<!DOCTYPE html><html><head><title>Just a moment...</title></head></html>',{status:403,headers:{'content-type':'text/html','cf-mitigated':'challenge'}});
 // Calendarul tribe-events-v1 al Operei Cluj oglindește răspunsul real capturat în sesiunea
 // wave2-live-romania/fixtures/operacluj-tribe-events-v1.txt: events[] cu id/global_id, url pe
@@ -1083,7 +1085,7 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
    const at=path=>tranzyCalls?tranzyCalls.filter(call=>call.path===path).length:0;
    if(scenario==='success'){
     assert.equal(payload.status,'fresh',label+': stare proaspătă — primit: '+payload.status+', eroare: '+payload.error);
-    assert.equal(payload.data.items.length,3,label+': pozițiile utilizabile servite (valabil + păstrat + fără viteză)');
+    assert.equal(payload.data.items.length,2,label+': se servesc numai observații curente; pozițiile vechi sunt numărate separat');assert.equal(payload.data.staleCount,1);
     assert.equal(payload.data.entityCount,5,label+': numărul publicat de rânduri se păstrează');
     assert.equal(payload.data.agency,'CTP Cluj-Napoca SA',label+': operatorul localizat este numit');
     assert.equal(payload.data.isLive,true,label+': fluxul marcat live');
@@ -1097,7 +1099,7 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
     assert.equal(first.wheelchairAccessible,'WHEELCHAIR_ACCESSIBLE',label+': accesibilitatea publicată se păstrează');
     assert.match(first.observedAt,/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/,label+': momentul poziției, UTC ISO');
     assert.equal(first.details.label,'Tramvaiul 101',label+': detaliile publicate rămân la îndemână');
-    assert(payload.data.items.some(item=>item.id==='tz-stale'),label+': poziția mai veche se păstrează (isLive o marchează separat)');
+    assert(!payload.data.items.some(item=>item.id==='tz-stale'),label+': poziția veche nu se prezintă ca poziție curentă');
     assert.equal(at('/agency'),1,label+': un singur acces la lista operatorilor');
     assert.equal(at('/vehicles'),1,label+': un singur acces la fluxul operatorului');
     assert(tranzyCalls.every(call=>call.headers['X-API-KEY']==='stub-key-de-verificare'),label+': cheia merge doar în antet, spre familia permisă');
@@ -1105,7 +1107,7 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
    else if(scenario==='warm-http500'){
     assert.equal(payload.status,'stale',label+': copia validă servește sub 500');
     assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
-    assert.equal(payload.data.items.length,3,label+': pozițiile din copia validă se păstrează');
+    assert.equal(payload.data.items.length,2,label+': observațiile încă recente din copia validă se păstrează');
     assert.equal(at('/vehicles'),3,label+': cele trei încercări asupra fluxului se epuizează');
     assert.equal(at('/agency'),0,label+': operatorul servit corect nu se reinteroghează')}
    else if(scenario==='nokey'){
@@ -1154,7 +1156,7 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
     assert.ok(payload.data.observedMinAt&&payload.data.observedMaxAt,'A05: intervalul min/max al observațiilor se expune');
     assert.equal(payload.data.entityCount,4,label+': cele patru cereri de acoperire se reunesc fără dubluri');
     assert.equal(payload.data.isLive,true,label+': fluxul marcat live');
-    assert.equal(payload.data.stalenessMinutes,undefined,label+': fluxul viu nu poartă vechime');
+    assert.equal(payload.data.stalenessMinutes,0,label+': momentul observației se declară și când fluxul este viu');
     const airborne=payload.data.items.find(x=>x.hex==='481f55');
     assert.equal(airborne.callsign,'W6XYZ',label+': indicativul se curăță de spațiile sursei');
     assert.equal(airborne.registration,'HA-LMN',label+': imatricularea se păstrează');
@@ -1275,13 +1277,13 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
     const confirmation=await delivered.json();
     assert.equal(confirmation.result,'ok',label+': rezultatul predării');
     assert.equal(confirmation.airport,'henri-coanda',label+': aeroportul predat');
-    assert.equal(confirmation.arrivals,2,label+': sosirile numărate onest');
-    assert.equal(confirmation.departures,1,label+': plecările numărate onest');
+    assert.equal(confirmation.arrivals,3,label+': sosirile includ forma oficială fără sens explicit, cu origin exclusiv');
+    assert.equal(confirmation.departures,2,label+': plecările includ forma oficială cu destination exclusiv');
     assert.equal(confirmation.dropped,2,label+': rândurile fără câmpuri complete se numără, nu se inventează');
     const served=await boardState();
     assert.ok(['fresh','cached'].includes(served.status),label+': după predare copia servește — primit: '+served.status);
-    assert.equal(served.data.arrivals.length,2,label+': sosirile servite integral');
-    assert.equal(served.data.departures.length,1,label+': plecările servite integral');
+    assert.equal(served.data.arrivals.length,3,label+': sosirile servite integral');
+    assert.equal(served.data.departures.length,2,label+': plecările servite integral');
     const first=served.data.arrivals[0];
     assert.equal(first.flightNumber,'W6 3187',label+': numărul zborului se păstrează');
     assert.equal(first.airline,'Wizz Air',label+': operatorul cu denumirea românească se alege din obiectul sursei');
@@ -1290,12 +1292,15 @@ const odeonPage=()=>new Response('<html><head><script type="application/ld+json"
     assert.equal(first.status,'Aterizat',label+': starea publicată se păstrează');
     assert.equal(first.gate,'04',label+': poarta publicată se păstrează');
     assert.equal(served.data.arrivals[1].flightNumber,'OS 899',label+': denumirea de familie a câmpului de sens se acceptă tolerante');
+    assert.equal(served.data.arrivals[2].airline,'Wizz Air Malta',label+': denumirea RO din forma FDS se păstrează');
+    assert.equal(served.data.arrivals[2].gate,'12',label+': boardingGate din forma FDS se păstrează');
+    assert.equal(served.data.arrivals[2].status,'Programat',label+': statusName din forma FDS se păstrează');
     assert.equal(attempts,1,label+': după predare citirea nu reinteroghează sursa blocată')}
     else if(scenario==='warm-http500'){
      assert.equal(payload.status,'stale',label+': copia predată servește sub 500');
      assert.match(e,/HTTP 500/,label+': codul sursei în plicul de eroare');
-     assert.equal(payload.data.arrivals.length,2,label+': panoul din copia validă se păstrează');
-     assert.equal(payload.data.departures.length,1,label+': plecările din copia validă se păstrează');
+     assert.equal(payload.data.arrivals.length,3,label+': panoul din copia validă se păstrează');
+     assert.equal(payload.data.departures.length,2,label+': plecările din copia validă se păstrează');
      assert.equal(attempts,3,label+': cele trei încercări la sursa blocată se epuizează')}}
    if(family.family==='events/operanationalacluj'){
     const attempts=hostCount('operacluj.ro');

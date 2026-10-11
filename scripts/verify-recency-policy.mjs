@@ -30,10 +30,10 @@ pin(directories,'lib/live/directories.ts','r.date>=new Date(Date.now()-3*365.25*
 // Recency machinery — the nightly-boundary staleness reset that expires served
 // copies when their day rolls over in Bucharest, and the law consolidation
 // exemption from that reset (in-force acts verify per open, never by age).
-pin(cache,'lib/live/cache.ts','const afterNightBoundary=()','D3 machinery — nightly boundary helper');
-pin(cache,'lib/live/cache.ts','hourCycle:\'h23\'}).format(new Date()))>=3','D3 machinery — the 03:00 Bucharest night boundary');
-pin(cache,'lib/live/cache.ts','afterNightBoundary()&&roDate(','D3 machinery — nightly staleness detection');
-pin(cache,'lib/live/cache.ts','return Date.now()<(nightly?0:row.expires_at);','D3 machinery — nightly reset drops only the served copy, never the data');
+pin(cache,'lib/live/cache.ts','const afterNightBoundary=(date=new Date())','D3 machinery — nightly boundary helper');
+pin(cache,'lib/live/cache.ts','hourCycle:\'h23\'}).format(date))>=3','D3 machinery — the 03:00 Bucharest night boundary');
+pin(cache,'lib/live/cache.ts','afterNightBoundary(new Date(now))&&roDate(','D3 machinery — nightly staleness detection');
+pin(cache,'lib/live/cache.ts','return now<(nightly?0:row.expires_at);','D3 machinery — nightly reset drops only the served copy, never the data');
 pin(cache,'lib/live/cache.ts','(afterNightBoundary()||loader.key.startsWith(\'law:consolidated.v2:\'))','D3 row „Legislation — in-force regardless of year": consolidated texts are not age-cycled');
 const noRollingWindow=async(file,label)=>{const text=(await readFile(join(root,file),'utf8'));assert.ok(!rollingWindow.test(text),label+' — the exempt family must not gain a rolling age window');return text};
 // Row 4 — legislation / legal acts: in-force semantics only. No year window in

@@ -69,6 +69,7 @@ try{
   const list=(await server.handleRpc(callRoute,{jsonrpc:'2.0',id:4,method:'tools/list'})).body.result.tools;
   const names=list.map(tool=>tool.name);
   assert.deepEqual(names,[
+    'sources_health',
     'search_companies','company_profile','places_search','directory_registry','localities_search',
     'weather_forecast','weather_alerts','events_search','cinema_program','transport_positions',
     'tranzy_live','flights_status','flight_board','trains_schedule','legal_acts','court_dosar_search',
@@ -78,7 +79,8 @@ try{
     'film_detail','article_read','transport_network','law_search','law_document','cinema_sites','stories_list',
   ],'lista de tool-uri rămâne pin-ată: orice schimbare de suprafață trece explicit prin poartă');
   for (const tool of list) {
-    assert.deepEqual(tool.annotations,{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:true},`public MCP tool ${tool.name} advertises accurate read-only safety hints`);
+    const readOnly=tool.name!=='law_document';
+    assert.deepEqual(tool.annotations,{readOnlyHint:readOnly,destructiveHint:false,idempotentHint:readOnly,openWorldHint:tool.name!=='sources_health'},`public MCP tool ${tool.name} advertises accurate safety hints`);
     assert.ok(tool.description.length>40,`tool-ul ${tool.name} are descrierea pentru asistenți`);
     assert.equal(tool.inputSchema.type,'object',`tool-ul ${tool.name} declară un obiect de intrare`);
     for (const required of tool.inputSchema.required||[])assert.ok(tool.inputSchema.properties[required],`tool-ul ${tool.name} cere "${required}" declarat`);
@@ -191,6 +193,7 @@ try{
   // poarta de drift pentru fiecare build(), nu doar pentru un eșantion. Orice fel de
   // parametru, cale sau corp care se schimbă se prinde aici, literat.
   const WIRED=[
+    ['sources_health',{}, {path:'/api/sources-health',query:{}}],
     ['search_companies',{name:'alfa'},{path:'/api/company',query:{name:'alfa'}}],
     ['company_profile',{cui:'427282'},{path:'/api/company',query:{cui:'427282'}}],
     ['places_search',{q:'spital',category:'sanatate',contact:'phone',scope:'nearby',sort:'distance',lat:44.4,lon:26.1,radius:15,pageSize:20,page:0},{path:'/api/places',query:{q:'spital',category:'sanatate',contact:'phone',scope:'nearby',sort:'distance',lat:'44.4',lon:'26.1',radius:'15',pageSize:'20',page:'0',view:'cards'}}],

@@ -61,7 +61,7 @@ pauza), fără chei sau corpuri de cerere, ca degradarea să fie analizabilă, n
 (administrativ), fișierele GTFS integrale (`transit-file` — mase de rânduri care nu încap
 într-o conversație) și diagnosticul UI `/api/live`. Toată suprafața publică de date e mai jos.
 Actualizarea este disponibilă separat operatorilor autentificați prin cele trei tool-uri
-private documentate în [operațiuni MCP](mcp-operations.md); lista publică rămâne de 41 de tool-uri.
+private documentate în [operațiuni MCP](mcp-operations.md); lista publică este de 42 de tool-uri.
 
 ## Paritate MCP ↔ UI
 
@@ -72,7 +72,16 @@ ar ajunge în conector fără suprafață de interfață: rutele se extrag din p
 build-uri ale tool-urilor, iar echivalențele (snapshot-uri offline comune) se
 verifică mecanic, nu se declară.
 
-## Tool-uri (41)
+## Tool-uri (42)
+
+Fluxurile de poziții (`transport_positions`, `tranzy_live`, `flights_status`) returnează implicit numai observațiile sub 120 secunde. `includeStale: true` include copiile vechi, marcate per rând cu vârsta și `isLive`; totalurile curente și vechi sunt separate. Preluarea recentă nu transformă o observație veche într-o poziție curentă.
+
+### `sources_health`
+Diagnostic public fără descărcări sau actualizări: membri configurați, starea copiilor, ultima preluare validă, data publicației și observației, categoria erorii/HTTP, lease expirat, retry restant și numărul agregat de joburi. Acoperirea statică, externă și la cerere este declarată separat. Pagina `/sources` prezintă aceeași informație.
+
+```json
+{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"sources_health","arguments":{}}}
+```
 
 ### `search_companies`
 Firme după nume, din registrul deschis de cunoștințe (etichete RO+EN îmbinate): doar entitățile cu clasă de organizație/firmă sau cu identificator TVA citit se listează ca firme — speciile și localitățile omonime nu apar; fiecare rând poartă `country` (țara entității, `null` onest când registrul nu o declară — organizațiile internaționale omonime se văd prin ea) și `matchNote` — motivul determinist al listării (identificator TVA citit sau doar potrivire de nume pe clasă de organizație). Cele fără CUI rămân marcate onest „fără CUI citit”: registrul de cunoștințe nu atribuie identitate fiscală românească. Căutarea pe nume **nu e un registru complet al firmelor din România** — e descoperire prin etichete publice de cunoștințe; firmele omonime rămân separate, iar CUI-ul confirmat e exact cheia folosită de `company_profile` și de registrele asociate.

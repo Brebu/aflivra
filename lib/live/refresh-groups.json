@@ -27,13 +27,15 @@
   {
    "name": "feeds",
    "cron": "*/30 * * * *",
-   "estimatedSubrequests": 35,
+   "estimatedSubrequests": 49,
    "members": [
     "feed.munca",
     "feed.stiri",
     "feed.sanatate",
     "feed.educatie",
-    "feed.justitie"
+    "feed.justitie",
+    "feed.energie",
+    "feed.transport"
    ]
   },
   {
@@ -52,12 +54,17 @@
   {
    "name": "registers",
    "cron": "28 * * * *",
-   "estimatedSubrequests": 31,
+   "estimatedSubrequests": 61,
    "members": [
     "directory.schools.page0",
     "catalog.category.bani",
     "catalog.category.sanatate",
-    "ins.matrix.pop105a"
+    "ins.matrix.pop105a",
+    "housing.anl",
+    "housing.ancpi",
+    "directory.health",
+    "directory.pharmacies",
+    "directory.hospitals"
    ]
   }
  ],
@@ -68,7 +75,7 @@
   },
   {
    "family": "transport.flights",
-   "reason": "Fluxul public adsb.lol servește egress-ul rezidențial, dar respinge rețeaua Cloudflare Workers a serverului cu 429/503; tura de intermediar extern, săptămânal, citește aceleași patru cereri fixe de acoperire națională și le predă rutei /api/seed/flights, iar cititorul servește copia cu eticheta onestă de vechime."
+   "reason": "Fluxul public adsb.lol poate respinge Cloudflare Workers cu 429/503; tura externă orară citește patru cereri fixe de acoperire națională și le predă rutei /api/seed/flights. Datele sunt etichetate după momentul observației."
   },
   {
    "family": "flights.bia",
@@ -90,15 +97,15 @@
   },
   {
    "family": "directory.health",
-   "reason": "Registrul clinicilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."
+   "reason": "Registrul clinicilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare. Membru programat în registers: se încearcă actualizarea la expirarea TTL-ului, cu lease și backoff."
   },
   {
    "family": "directory.pharmacies",
-   "reason": "Registrul farmaciilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."
+   "reason": "Registrul farmaciilor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare. Membru programat în registers: se încearcă actualizarea la expirarea TTL-ului, cu lease și backoff."
   },
   {
    "family": "directory.hospitals",
-   "reason": "Registrul spitalelor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare."
+   "reason": "Registrul spitalelor CNAS se distribuie ca fișier XLSX voluminos, verificat integral la încărcare. Membru programat în registers: se încearcă actualizarea la expirarea TTL-ului, cu lease și backoff."
   },
   {
    "family": "justice.notari",
@@ -118,11 +125,11 @@
   },
   {
    "family": "housing.anl",
-   "reason": "Lista amplasamentelor ANL se distribuie ca fișier XLS voluminos; se verifică integral la prima cerere și se servește din copia persistentă, fără o copie inclusă în aplicație."
+   "reason": "Lista ANL se distribuie ca XLS și se păstrează în copia persistentă după verificare. Grupul registers reîncearcă actualizarea la expirare, cu lease și backoff."
   },
   {
    "family": "housing.ancpi",
-   "reason": "Raportul lunar ANCPI se distribuie ca fișier XLSX; se verifică la prima cerere și se servește din copia persistentă."
+   "reason": "Raportul lunar ANCPI se păstrează în copia persistentă. Grupul registers reîncearcă actualizarea la expirare; preluarea nu schimbă luna raportată."
   },
   {
    "family": "trains",
@@ -169,10 +176,6 @@
   {
    "family": "events.venues",
    "reason": "Calendarele publice ale instituțiilor din registrul spectacolelor se verifică la cerere pentru instituția aleasă, fiecare cu un TTL de o oră; tura de dimineață pre-împrospătează doar instituția implicită din București, iar căutarea națională reunește calendarele validate."
-  },
-  {
-   "family": "feeds.energie-transport",
-   "reason": "Fluxurile ministerelor de energie și transport se verifică la cerere."
   },
   {
    "family": "datastore.pages",

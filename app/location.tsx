@@ -114,8 +114,8 @@ function currentEntry(index:CityIndex,city:LocalCity):CityIndexEntry|undefined{
  const name=normalizeSearch(city.name);
  return index.items.find(entry=>entry.nameFolded===name&&Math.abs(entry.city.lat-city.lat)<0.05&&Math.abs(entry.city.lon-city.lon)<0.05)||index.items.find(entry=>entry.nameFolded===name);
 }
-export function LocationCityPicker(){
-  const geo=useLocation(),id=useId(),cityLabel=cityLabelOf(geo.city),[draft,setDraft]=useState(cityLabel),[open,setOpen]=useState(false),[active,setActive]=useState(0);
+export function LocationCityPicker({value,onSelect}:{value?:LocalCity;onSelect?:(city:LocalCity)=>void}={}){
+  const geo=useLocation(),selectedCity=value||geo.city,id=useId(),cityLabel=cityLabelOf(selectedCity),[draft,setDraft]=useState(cityLabel),[open,setOpen]=useState(false),[active,setActive]=useState(0);
   /* Doar eticheta localității resincronizează câmpul — un fix de poziție care nu schimbă
      localitatea rezolvată nu mai șterge ce tastează utilizatorul. */
   useEffect(()=>setDraft(cityLabel),[cityLabel]);
@@ -124,9 +124,9 @@ export function LocationCityPicker(){
   /* Lista se ridică pe valoarea amânată: tasta răspunde instant, scanarea rămâne în afara ei. */
   const deferredQuery=useDeferredValue(query);
   const ranked=useMemo(()=>rankSuggestions(index,deferredQuery),[index,deferredQuery]);
-  const current=useMemo(()=>currentEntry(index,geo.city),[index,geo.city]);
+  const current=useMemo(()=>currentEntry(index,selectedCity),[index,selectedCity]);
   const rows=deferredQuery?ranked:(current?[current]:[]);
-  function apply(city?:LocalCity){const target=city??chosen;if(!target||!target.name?.trim()||!validPoint(target))return;geo.selectCity(target);setDraft(cityLabelOf(target))}
+  function apply(city?:LocalCity){const target=city??chosen;if(!target||!target.name?.trim()||!validPoint(target))return;(onSelect||geo.selectCity)(target);setDraft(cityLabelOf(target))}
   function choose(entry:CityIndexEntry){apply(entry.city);setOpen(false)}
   function activate(next:number){setActive(Math.max(0,Math.min(next,rows.length-1)))}
   const inputHandlers:{onFocus:React.FocusEventHandler<HTMLInputElement>;onChange:React.ChangeEventHandler<HTMLInputElement>;onKeyDown:React.KeyboardEventHandler<HTMLInputElement>}={
@@ -141,7 +141,7 @@ export function LocationCityPicker(){
   };
   return <div className="location-city-picker"><label htmlFor={id}>Localitate</label><div className="location-city-input"><Input id={id} list={id+'-options'} role="combobox" aria-expanded={open&&rows.length>0} aria-controls={id+'-list'} aria-autocomplete="list" aria-activedescendant={open&&rows[active]?id+'-option-'+active:undefined} value={draft} onChange={inputHandlers.onChange} onKeyDown={inputHandlers.onKeyDown} onFocus={inputHandlers.onFocus} placeholder="Caută o localitate" autoComplete="off"/><Button type="button" variant="outline" onClick={()=>apply()} disabled={!chosen}>Aplică localitatea</Button></div><datalist id={id+'-options'}>{ranked.map(item=><option key={item.label+':'+item.city.lat} value={item.label}/>)}</datalist>
     {open&&rows.length>0&&<ul id={id+'-list'} role="listbox" aria-label="Sugestii de localități" data-query={deferredQuery} className="location-suggestions">{rows.map((item,i)=><li key={item.label+':'+item.city.lat} id={id+'-option-'+i} role="option" aria-selected={i===active} className={'location-suggestion'+(current&&item===current?' current':'')} onClick={()=>choose(item)}><span><strong>{item.city.name}</strong><small>{item.label!==item.city.name?item.label+' · ':''}{item.typeLabel}{current&&item===current?' · localitatea activă':''}</small></span><MapPin size={15}/></li>)}</ul>}
-    <small>Alege din listă și aplică localitatea. Vremea și datele locale se actualizează automat.</small>
-    <div className="location-watch-row"><WatchButton kind="localitate" target={geo.city.name} name={geo.city.name}/></div></div>;
+    <small>{onSelect?'Alege din listă și aplică localitatea pentru raport.':'Alege din listă și aplică localitatea. Vremea și datele locale se actualizează automat.'}</small>
+    {!onSelect&&<div className="location-watch-row"><WatchButton kind="localitate" target={geo.city.name} name={geo.city.name}/></div>}</div>;
 }
 export function LocationControl({onManual,compact=false}:{onManual?:()=>void;compact?:boolean}){const l=useLocation();return <div className={'location-control '+(compact?'compact':'')}><Button variant="outline" onClick={l.request} disabled={l.busy}><LocateFixed size={17}/>{l.busy?'Localizare…':l.position?'Actualizează poziția':'Folosește locația mea'}</Button>{!compact&&<><p role="status">{l.label}{l.position?` · precizie aproximativă ${Math.round(l.position.accuracy)} m. Poziția și datele locale se actualizează automat.`:'. Contextul local se aplică datelor care au informații geografic.'}</p>{l.hasLocal&&<button className="text-link" onClick={l.clear}>{l.position?'Oprește localizarea · revino la România':'Revino la România · București implicit'}</button>}{onManual&&<button className="text-link" onClick={onManual}><MapPin size={15}/>Alege localitatea manual</button>}</>}{l.error&&<p role="status">{l.error}</p>}</div>}

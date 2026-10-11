@@ -43,6 +43,7 @@ import * as stories from '../stories/route';
 import * as refresh from '../refresh/route';
 import * as refreshStatus from '../refresh/status/route';
 import * as refreshCorpora from '../refresh/corpora/route';
+import * as sourcesHealth from '../sources-health/route';
 import {env} from 'cloudflare:workers';
 import {refreshAuthorized} from '@/lib/live/refresh-auth';
 
@@ -57,6 +58,7 @@ const ROUTES:Record<string,{GET?(request:Request):Promise<Response>;POST?(reques
   '/api/tourism':tourism,'/api/seismic':seismic,'/api/earthquakes':earthquakes,'/api/monuments':monuments,'/api/ins':ins,'/api/energy-offers':energyOffers,'/api/power':power,
   '/api/refresh':refresh,'/api/refresh/status':refreshStatus,
   '/api/refresh/corpora':refreshCorpora,
+  '/api/sources-health':sourcesHealth,
 };
 
 // Originea acceptată e originea proprie a aplicației; clienții server-to-server

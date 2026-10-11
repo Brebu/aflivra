@@ -70,9 +70,14 @@ export async function processRefreshJob(db:D1Database,id?:string,resolveLoader:(
   return {claimed:true,retryAt:null};
  }
 }
-export async function drainRefreshJobs(db:D1Database,limit=3){
- // Three requests in flight, including the opportunistic HTTP background run.
- const results=await Promise.all(Array.from({length:Math.max(0,Math.min(3,limit))},()=>processRefreshJob(db)));
+export async function drainRefreshJobs(db:D1Database,limit=3,budgetMs=20000){
+ // HTTP runs one wave; cron may drain more waves while retaining concurrency 3.
+ const results:Awaited<ReturnType<typeof processRefreshJob>>[]=[],deadline=Date.now()+budgetMs;
+ const capped=Math.max(0,Math.min(30,Math.floor(limit)));
+ while(results.length<capped&&Date.now()<deadline){
+  const wave=await Promise.all(Array.from({length:Math.min(3,capped-results.length)},()=>processRefreshJob(db)));
+  results.push(...wave);if(!wave.some(result=>result.claimed))break;
+ }
  await db.prepare("DELETE FROM source_refresh_jobs WHERE status IN ('completed','failed') AND finished_at<?").bind(new Date(Date.now()-7*86400000).toISOString()).run();
  return results;
 }
